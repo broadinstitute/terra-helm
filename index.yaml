@@ -1,0 +1,41 @@
+apiVersion: v1
+entries:
+  terra-kernel:
+  - apiVersion: v2
+    created: "2020-02-04T19:21:34.7730682Z"
+    description: A Helm chart to deploy terra kernel components
+    digest: 477e9911ecc9ecef32162f6b1e3a76b7dc73bd23838f1ab0a5c05daae199c574
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-kernel
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-kernel-0.0.1/terra-kernel-0.0.1.tgz
+    version: 0.0.1
+  terra-kernel-psps:
+  - apiVersion: v2
+    created: "2020-02-04T19:21:34.8917519Z"
+    description: A Helm chart to deploy terra kernel pod security policies
+    digest: b338623a15f0475e428ac8ebfd9d531dcb56f1662e058790b0242525c42268ad
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-kernel-psps
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-kernel-psps-0.0.1/terra-kernel-psps-0.0.1.tgz
+    version: 0.0.1
+generated: "2020-02-04T19:21:34.5335397Z"
