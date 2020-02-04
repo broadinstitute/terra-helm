@@ -1,0 +1,9 @@
+dependencies:
+- name: terra-kernel-psps
+  repository: https://broadinstitute.github.io/terra-helm/
+  version: 0.0.1
+- name: cockroachdb
+  repository: https://gmalkov.github.io/charts/
+  version: 3.0.3
+digest: sha256:168f3d724a0248877d771530797562d360ec5e002484ed6319372dfc12d82565
+generated: "2020-02-04T14:24:07.081696-05:00"
