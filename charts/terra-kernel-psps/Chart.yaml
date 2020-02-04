@@ -1,0 +1,21 @@
+---
+apiVersion: v2
+name: terra-kernel-psps
+description: A Helm chart to deploy terra kernel pod security policies
+
+type: application
+
+version: 0.0.1
+
+keywords:
+- dsp
+- broadinstitute
+- kernel
+- terra
+
+maintainers:
+- email: gmalkov@broadinstitute.org
+  name: Greg Malkov
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts

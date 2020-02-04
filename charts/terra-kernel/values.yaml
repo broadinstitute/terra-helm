@@ -1,0 +1,15 @@
+cockroachdb:
+  tls:
+    enabled: true
+    serviceAccount:
+      name: cockroachdb-service-account
+  service:
+    ports:
+      internal:
+        name: cockroach
+    discovery:
+      labels:
+        type: discovery
+    public:
+      labels:
+        type: public

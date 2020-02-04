@@ -1,0 +1,29 @@
+---
+apiVersion: v2
+name: terra-kernel
+description: A Helm chart to deploy terra kernel components
+
+type: application
+
+version: 0.0.1
+
+keywords:
+- dsp
+- broadinstitute
+- kernel
+- terra
+
+maintainers:
+- email: gmalkov@broadinstitute.org
+  name: Greg Malkov
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+
+dependencies:
+- name: terra-kernel-psps
+  version: 0.0.1
+  repository: https://broadinstitute.github.io/terra-helm/
+- name: cockroachdb
+  version: 3.0.3
+  repository: https://gmalkov.github.io/charts/

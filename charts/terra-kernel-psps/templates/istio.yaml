@@ -1,0 +1,74 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: istio-psp
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+  namespace: {{ .Values.namespaces.istio }}
+  labels:
+    name: podsecuritypolicy
+    helm.sh/chart: {{ template "terra-kernel-psps.chart" . }}
+    app.kubernetes.io/name: {{ template "terra-kernel-psps.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+spec:
+  privileged: true
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+  - '*'
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+  volumes:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: istio-clusterrole
+  namespace: {{ .Values.namespaces.istio }}
+rules:
+- apiGroups: ["extensions"]
+  resources: ["podsecuritypolicies"]
+  resourceNames: ["istio-psp"]
+  verbs: ["use"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: istio-rolebinding
+  namespace: {{ .Values.namespaces.istio }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: istio-clusterrole
+subjects:
+  {{- $root := . -}}
+  {{- range .Values.serviceAccounts.istio }}
+  - kind: ServiceAccount
+    name: {{ . }}
+    namespace: {{ $root.Values.namespaces.istio }}
+  {{- end }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: crdb-stateful-service-entry
+spec:
+  hosts:
+  - {{ .Release.Name }}-cockroachdb-public.default.svc.cluster.local
+  - "*.{{ .Release.Name }}-cockroachdb.default.svc.cluster.local"
+  location: MESH_INTERNAL
+  ports:
+  - number: 26257
+    name: crdbheadless1
+    protocol: TCP
+  - number: 8080
+    name: crdbheadless2
+    protocol: HTTP
+  resolution: NONE
