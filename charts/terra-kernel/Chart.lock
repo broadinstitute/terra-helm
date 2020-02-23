@@ -5,5 +5,8 @@ dependencies:
 - name: cockroachdb
   repository: https://gmalkov.github.io/charts/
   version: 3.0.3
-digest: sha256:168f3d724a0248877d771530797562d360ec5e002484ed6319372dfc12d82565
-generated: "2020-02-04T14:24:07.081696-05:00"
+- name: install-secrets-manager
+  repository: https://broadinstitute.github.io/datarepo-helm/
+  version: 0.0.4
+digest: sha256:a69948752bb5b454f1862b01409afe637a83d1b8f9fb9e9c59e2745293a3a3e6
+generated: "2020-02-23T15:50:28.38499-05:00"
