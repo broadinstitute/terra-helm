@@ -2,6 +2,24 @@ apiVersion: v1
 entries:
   terra-kernel:
   - apiVersion: v2
+    created: "2020-02-25T15:41:30.8213391Z"
+    description: A Helm chart to deploy terra kernel components
+    digest: 5fc794b3a618d412646f99139417094c2d6210bf59bd855875d8af90aa8c23fd
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-kernel
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-kernel-0.0.2/terra-kernel-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
     created: "2020-02-04T19:21:34.7730682Z"
     description: A Helm chart to deploy terra kernel components
     digest: 477e9911ecc9ecef32162f6b1e3a76b7dc73bd23838f1ab0a5c05daae199c574
