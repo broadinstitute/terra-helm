@@ -21,6 +21,6 @@ sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
 
 dependencies:
-  - name: prometheus
-    version: 2.16.0
+  - name: prometheus-operator
+    version: 8.10.0
     repository: https://kubernetes-charts.storage.googleapis.com/
