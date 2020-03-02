@@ -1,0 +1,21 @@
+---
+apiVersion: v2
+name: terra-monitoring-namespace
+description: a helm chart to provision a namespace to contain monitoring infrastructure
+
+type: application
+
+version: 0.0.0
+
+keywords:
+  - dsp 
+  - terra
+  - monitoring
+  - namespace
+
+maintainers:
+  - email: mflinn@broadinstitute.org
+    name: Michael Flinn
+
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
