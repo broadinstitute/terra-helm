@@ -2,6 +2,8 @@
 
 This is a fork of the stable/promtheus-operator chart managed by broad institute. In addition to installing the prometheus operator resourses it also configures the stackdriver sidecar for the prometheus server for exporting metrics to a stackdriver workspace. 
 
+Before installing this chart make sure to edit the contents of stackdriver-configs.yaml with the appropriate values for your cluster and stackdriver workspace.
+
 Because of an issue with the prometheus-operator chart not installing crd's correctly use the provided install.sh script in the root directory for installing this chart.
 
 # prometheus-operator
