@@ -1,0 +1,5 @@
+stackdriverSidecar:
+  image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.7.3
+  gcpProjectId: dsp-tools-k8s
+  region: us-central1
+  clusterName: terra-stackdriver-k8s
