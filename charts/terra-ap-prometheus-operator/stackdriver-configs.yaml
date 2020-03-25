@@ -1,0 +1,6 @@
+stackdriverSidecar:
+  image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.7.3
+  #  this must be the id of the project that hosts the stackdriver workspace you'd like to send metrics to.
+  gcpProjectId: YOUR_GCP_PROJECT_ID
+  region: YOUR_GCP_REGION
+  clusterName: YOUR_CLUSTER_NAME

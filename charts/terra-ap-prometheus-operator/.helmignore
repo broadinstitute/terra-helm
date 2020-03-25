@@ -24,4 +24,4 @@ OWNERS
 hack/
 ci/
 prometheus-operator-*.tgz
-test.yaml
+stackdriver-configs.yaml

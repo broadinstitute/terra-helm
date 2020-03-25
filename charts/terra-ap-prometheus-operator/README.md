@@ -1,3 +1,9 @@
+# Broad Institute AP-devops prometheus-operator chart
+
+This is a fork of the stable/promtheus-operator chart managed by broad institute. In addition to installing the prometheus operator resourses it also configures the stackdriver sidecar for the prometheus server for exporting metrics to a stackdriver workspace. 
+
+Because of an issue with the prometheus-operator chart not installing crd's correctly use the provided install.sh script in the root directory for installing this chart.
+
 # prometheus-operator
 
 Installs [prometheus-operator](https://github.com/coreos/prometheus-operator) to create/configure/manage Prometheus clusters atop Kubernetes. This chart includes multiple components and is suitable for a variety of use-cases.
