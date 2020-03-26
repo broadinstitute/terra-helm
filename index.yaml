@@ -58,6 +58,25 @@ entries:
     version: 0.0.1
   terra-monitoring-namespace:
   - apiVersion: v2
+    created: "2020-03-26T13:14:28.175362915Z"
+    description: a helm chart to provision a namespace to contain monitoring infrastructure
+    digest: 82fd6127698d524bd1e2ad1712527bed45e7e4549c77356635804be29e31bef0
+    keywords:
+    - dsp
+    - terra
+    - monitoring
+    - namespace
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: terra-monitoring-namespace
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-monitoring-namespace-0.0.1/terra-monitoring-namespace-0.0.1.tgz
+    version: 0.0.1
+  - apiVersion: v2
     created: "2020-03-25T16:46:29.054994933Z"
     description: a helm chart to provision a namespace to contain monitoring infrastructure
     digest: 1f70e2385caedf39f164a710f5de66bbea2a841a3cbaf2091c9d3b1e58b4fa56
@@ -77,6 +96,29 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-monitoring-namespace-0.0.0/terra-monitoring-namespace-0.0.0.tgz
     version: 0.0.0
   terra-stackdriver:
+  - apiVersion: v2
+    created: "2020-03-26T13:14:28.29955061Z"
+    dependencies:
+    - name: prometheus-operator
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 8.10.0
+    description: a helm chart to deploy monitoring infrastructure
+    digest: 9d9cd7f5e265fa0156f05c436acc9d4f528f9d7e755aaabf523c2b48cf7a7699
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - monitoring
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: terra-stackdriver
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.1/terra-stackdriver-0.0.1.tgz
+    version: 0.0.1
   - apiVersion: v2
     created: "2020-03-25T16:46:29.197458569Z"
     dependencies:
