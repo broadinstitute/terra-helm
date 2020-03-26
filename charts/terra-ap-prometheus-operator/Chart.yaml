@@ -5,7 +5,7 @@ engine: gotpl
 maintainers:
   - name: mflinn-broad
     email: mflinn@broad-institute.org
-name: terr-ap-prometheus-operator
+name: terra-ap-prometheus-operator
 sources:
   - https://github.com/coreos/kube-prometheus
   - https://github.com/coreos/prometheus-operator

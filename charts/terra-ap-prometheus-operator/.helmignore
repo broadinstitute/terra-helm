@@ -25,3 +25,4 @@ hack/
 ci/
 prometheus-operator-*.tgz
 monitoring-configs.yaml
+install.sh
