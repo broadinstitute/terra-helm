@@ -5,7 +5,7 @@ description: a helm chart to provision a namespace to contain monitoring infrast
 
 type: application
 
-version: 0.0.0
+version: 0.0.1
 
 keywords:
   - dsp 
