@@ -1,0 +1,27 @@
+
+---
+apiVersion: v2
+name: terra-stackdriver
+description: a helm chart to deploy monitoring infrastructure
+
+type: application
+
+version: 0.0.0
+
+keywords:
+  - dsp
+  - broad
+  - terra
+  - monitoring
+
+maintainers:
+  - email: mflinn@broadinstitute.org
+    name: Michael Flinn
+
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+
+dependencies:
+  - name: prometheus-operator
+    version: 8.10.0
+    repository: https://kubernetes-charts.storage.googleapis.com/
