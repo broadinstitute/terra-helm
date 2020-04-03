@@ -19,6 +19,7 @@ rules:
 # they're grabbed from https://github.com/prometheus/prometheus/blob/master/documentation/examples/rbac-setup.yml
 - apiGroups: [""]
   resources:
+  - namespaces  
   - nodes
   - nodes/proxy
   - services
