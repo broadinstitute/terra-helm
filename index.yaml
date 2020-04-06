@@ -3,6 +3,42 @@ entries:
   terra-ap-prometheus-operator:
   - apiVersion: v1
     appVersion: 0.36.0
+    created: "2020-04-06T14:06:29.182622037Z"
+    dependencies:
+    - condition: kubeStateMetrics.enabled
+      name: kube-state-metrics
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 2.6.*
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 1.8.*
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 5.0.*
+    description: Broad institute version of prometheus-operator stable chart. Configures
+      stackdriver exporter sidecar in addition to installing prometheus resources
+    digest: 052ad4d02b19f655477970dd9a5944d10ac512ecff9148794fc20e01606838c7
+    home: https://github.com/coreos/prometheus-operator
+    icon: https://raw.githubusercontent.com/prometheus/prometheus.github.io/master/assets/prometheus_logo-cb55bb5c346.png
+    keywords:
+    - operator
+    - prometheus
+    - stackdriver
+    maintainers:
+    - email: mflinn@broad-institute.org
+      name: mflinn-broad
+    name: terra-ap-prometheus-operator
+    sources:
+    - https://github.com/coreos/kube-prometheus
+    - https://github.com/coreos/prometheus-operator
+    - https://coreos.com/operators/prometheus
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-ap-prometheus-operator-0.0.5/terra-ap-prometheus-operator-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v1
+    appVersion: 0.36.0
     created: "2020-04-03T14:49:00.666487854Z"
     dependencies:
     - condition: kubeStateMetrics.enabled
