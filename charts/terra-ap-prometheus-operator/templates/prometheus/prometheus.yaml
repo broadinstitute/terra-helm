@@ -227,6 +227,7 @@ spec:
         - --prometheus.wal-directory=prometheus/wal
         - --stackdriver.kubernetes.location={{ required "A valid gcp region is required." .Values.stackdriverSidecar.region }}
         - --stackdriver.kubernetes.cluster-name={{ required "A valid GKE cluster name is required" .Values.stackdriverSidecar.clusterName }}
+        - --log.level=debug
         #- \"--stackdriver.generic.location=us-central1\"
         #- \"--stackdriver.generic.namespace=terra-stackdriver-k8s\"
       ports:
