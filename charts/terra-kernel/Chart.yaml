@@ -5,7 +5,7 @@ description: A Helm chart to deploy terra kernel components
 
 type: application
 
-version: 0.0.2
+version: 0.0.3
 
 keywords:
 - dsp
@@ -24,11 +24,10 @@ dependencies:
 - name: terra-kernel-psps
   version: 0.0.1
   repository: https://broadinstitute.github.io/terra-helm/
-- name: cockroachdb
-  condition: cockroachdb.enabled
-  version: 3.0.3
-  repository: https://gmalkov.github.io/charts/
 - name: install-secrets-manager
   condition: install-secrets-manager.enabled
   version: 0.0.4
   repository: https://broadinstitute.github.io/datarepo-helm/
+- name: terra-kernel-networking
+  version: 0.0.0
+  repository: https://broadinstitute.github.io/terra-helm/
