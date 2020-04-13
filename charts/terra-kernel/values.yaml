@@ -1,15 +1,15 @@
-cockroachdb:
-  tls:
-    enabled: true
-    serviceAccount:
-      name: cockroachdb-service-account
-  service:
-    ports:
-      internal:
-        name: cockroach
-    discovery:
-      labels:
-        type: discovery
-    public:
-      labels:
-        type: public
+# Manual steps:
+#  - clone https://github.com/tuenti/secrets-manager, run:
+#      kubectl apply -f crd.yaml
+#  - kubectl create secret generic secret-manager-approle --from-literal=role-id=*** --from-literal=secret-id=***
+install-secrets-manager:
+  enabled: true
+  vaultLocation: https://clotho.broadinstitute.org:8200
+  vaultVersion: kv1
+  serviceAccount:
+    create: true
+  rbac:
+    create: true
+  existingSecret: secret-manager-approle
+  existingRoleIdKey: role-id
+  existingSecretIdKey: secret-id
