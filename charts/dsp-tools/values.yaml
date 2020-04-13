@@ -1,0 +1,18 @@
+github:
+  user: broadbot
+vcsSecretName: atlantis-github-creds
+googleServiceAccountSecrets:
+- name: atlantis-sa
+  secretName: atlantis-sa
+orgWhitelist: 'github.com/broadinstitute/*,github.com/databiosphere/*'
+extraManifests:
+  - apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: basic-ingress
+    spec:
+      path: /atlantis
+      backend:
+        serviceName: atlantis
+        servicePort: 8080
+fullnameOverride: atlantis

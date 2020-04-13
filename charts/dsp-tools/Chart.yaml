@@ -1,0 +1,26 @@
+---
+apiVersion: v2
+name: dsp-tools
+description: A Helm chart to configure the DSP tools cluster
+
+type: application
+
+version: 0.0.0
+
+keywords:
+- dsp
+- broadinstitute
+- devops
+- tools
+
+maintainers:
+- email: gmalkov@broadinstitute.org
+  name: Greg Malkov
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+
+dependencies:
+- name: atlantis
+  version: 3.11.0
+  repository: https://kubernetes-charts.storage.googleapis.com/
