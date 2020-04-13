@@ -1,5 +1,29 @@
 apiVersion: v1
 entries:
+  dsp-tools:
+  - apiVersion: v2
+    created: "2020-04-13T17:51:59.153100473Z"
+    dependencies:
+    - name: atlantis
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 3.11.0
+    description: A Helm chart to configure the DSP tools cluster
+    digest: 28ff1ae379388857e5b8741c55ef9f5a13d8ed0d2d2a24e712e3ee14e4870e68
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - tools
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: dsp-tools
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-tools-0.0.0/dsp-tools-0.0.0.tgz
+    version: 0.0.0
   terra-ap-prometheus-operator:
   - apiVersion: v1
     appVersion: 0.36.0
