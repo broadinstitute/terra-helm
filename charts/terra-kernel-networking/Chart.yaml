@@ -1,0 +1,22 @@
+---
+apiVersion: v2
+name: terra-kernel-networking
+description: A Helm chart to configure cluster-wide networking for Terra clusters
+
+type: application
+
+version: 0.0.0
+
+keywords:
+- dsp
+- broadinstitute
+- kernel
+- terra
+- networking
+
+maintainers:
+- email: gmalkov@broadinstitute.org
+  name: Greg Malkov
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
