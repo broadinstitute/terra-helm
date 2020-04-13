@@ -279,6 +279,36 @@ entries:
     version: 0.0.2
   terra-kernel:
   - apiVersion: v2
+    created: "2020-04-13T18:04:39.711747303Z"
+    dependencies:
+    - name: terra-kernel-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.4
+    - name: terra-kernel-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.0
+    description: A Helm chart to deploy terra kernel components
+    digest: 883d09b03b8dbc9bedcaa670df0557508c4cd60866da1d39aa329e1ba18ca0c8
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-kernel
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-kernel-0.0.3/terra-kernel-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
     created: "2020-02-25T15:41:30.8213391Z"
     description: A Helm chart to deploy terra kernel components
     digest: 5fc794b3a618d412646f99139417094c2d6210bf59bd855875d8af90aa8c23fd
