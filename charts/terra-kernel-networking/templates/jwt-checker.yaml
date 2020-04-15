@@ -1,0 +1,17 @@
+# Coreapp policy for JWT Verification
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "jwt-example"
+spec:
+  targets:
+    - name: kernel-service-poc-service
+    - name: istio-ingressgateway
+  peers:
+    - mtls:
+        mode: PERMISSIVE
+  origins:
+    - jwt:
+        issuer: "https://kernel.integ.envs.broadinstitute.org/"
+        jwksUri: "https://kernel.integ.envs.broadinstitute.org/.well-known/jwks.json"
+  principalBinding: USE_ORIGIN
