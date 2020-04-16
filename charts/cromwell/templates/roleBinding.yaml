@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cromwell-sa-binding
+subjects:
+- kind: ServiceAccount
+  name: cromwell-sa
+roleRef:
+  kind: Role
+  name: pod-runner
+  apiGroup: rbac.authorization.k8s.io

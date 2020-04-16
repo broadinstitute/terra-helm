@@ -1,0 +1,12 @@
+common:
+  imageTag: latest
+reader:
+  name: cromwell1-reader
+  replicas: 3
+  serviceIP: X.X.X.X
+runner:
+  name: cromwell1-runner
+  replicas: 3
+summarizer:
+  name: cromwell1-summarizer
+  replicas: 0
