@@ -1,0 +1,139 @@
+{{/* Generate a Cromwell deployment */}}
+{{- define "cromwell.deployment" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .replicas }}
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      serviceAccountName: cromwell-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - app
+        - sqlproxy
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ .name }}-app-ctmpls
+      - name: proxy-ctmpls
+        secret:
+          secretName: {{ .name }}-proxy-ctmpls
+      - name: sqlproxy-ctmpls
+        secret:
+          secretName: {{ .name }}-sqlproxy-ctmpls
+      - name: cromwell-gc-logs
+        emptyDir: {}
+      - name: cromwell-newrelic-jar
+        emptyDir: {}
+      containers:
+      - name: app
+        image: "broadinstitute/cromwell:{{ .imageTag }}"
+        resources:
+          requests:
+            cpu: 7
+            memory: 40Gi
+          limits:
+            memory: 50Gi
+        envFrom:
+        - secretRef:
+            name: {{ .name }}-app-env
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /etc/cromwell.conf
+          subPath: cromwell.conf
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/cromwell-account.json
+          subPath: cromwell-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/cromwell-carbonite-account.json
+          subPath: cromwell-carbonite-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /var/log/gc
+          name: cromwell-gc-logs
+        - mountPath: /etc/newrelic/newrelic.jar
+          subPath: newrelic.jar
+          name: cromwell-newrelic-jar
+        - mountPath: /etc/newrelic/newrelic.yml
+          subPath: newrelic-v4.yml
+          name: app-ctmpls
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /engine/latest/version
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 3
+      - name: proxy
+        image: broadinstitute/openidc-proxy:modsecurity_2_9_2
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        envFrom:
+        - secretRef:
+            name: {{ .name }}-proxy-env
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: server.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-enabled/site.conf
+          subPath: site.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/conf-enabled/mpm_event.conf
+          subPath: mpm_event.conf
+          name: proxy-ctmpls
+          readOnly: true
+      - name: sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_2018117
+        envFrom:
+        - secretRef:
+            name: {{ .name }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
+      initContainers: # TODO make an image that contains this jar
+      - name: download-newrelic-jar
+        image: alpine:3.11.5
+        command: ["wget", "-O", "/cromwell-newrelic-jar/newrelic.jar", "https://storage.googleapis.com/firecloud-newrelic/newrelic-agent-5.1.0.jar"]
+        volumeMounts:
+        - mountPath: /cromwell-newrelic-jar
+          name: cromwell-newrelic-jar
+{{- end }}
