@@ -1,5 +1,14 @@
 apiVersion: v1
 entries:
+  cromwell:
+  - apiVersion: v2
+    created: "2020-04-16T17:07:41.581115393Z"
+    description: A Helm chart for Cromwell
+    digest: 1af706ba2881fae023d01c2970b3b0adac3fa6388b042c84b3fe5e45bd8d6c77
+    name: cromwell
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.0.1/cromwell-0.0.1.tgz
+    version: 0.0.1
   dsp-tools:
   - apiVersion: v2
     created: "2020-04-13T17:51:59.153100473Z"
@@ -277,6 +286,16 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-ap-prometheus-operator-0.0.2/terra-ap-prometheus-operator-0.0.2.tgz
     version: 0.0.2
+  terra-env:
+  - apiVersion: v2
+    created: "2020-04-16T17:07:41.842067494Z"
+    description: An umbrella chart for creating Terra environments
+    digest: fee3402fd59a2733cde29de09fad5fc137b4ec816f8440a94986711be1a53983
+    name: terra-env
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-env-0.0.1/terra-env-0.0.1.tgz
+    version: 0.0.1
   terra-kernel:
   - apiVersion: v2
     created: "2020-04-13T18:04:39.711747303Z"
