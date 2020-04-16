@@ -5,8 +5,8 @@ version: 0.0.1
 description: An umbrella chart for creating Terra environments
 type: application
 
-dependencies:
-- name: cromwell
-  version: 0.0.1
-  condition: cromwell.enabled
-  repository: https://broadinstitute.github.io/terra-helm
+#dependencies:
+#- name: cromwell
+#  version: 0.0.1
+#  condition: cromwell.enabled
+#  repository: https://broadinstitute.github.io/terra-helm
