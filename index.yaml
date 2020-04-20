@@ -304,6 +304,20 @@ entries:
     version: 0.0.2
   terra-env:
   - apiVersion: v2
+    created: "2020-04-20T20:52:39.137899133Z"
+    dependencies:
+    - condition: cromwell.enabled
+      name: cromwell
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.0.3
+    description: An umbrella chart for creating Terra environments
+    digest: 3376575765c077b59e9bc86128ab83ebbb95e65045ec632c316e7d3458a5d6ca
+    name: terra-env
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-env-0.0.4/terra-env-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
     created: "2020-04-16T17:18:14.069426089Z"
     dependencies:
     - condition: cromwell.enabled
