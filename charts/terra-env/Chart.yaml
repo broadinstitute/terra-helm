@@ -1,12 +1,12 @@
 apiVersion: v2
 name: terra-env
-version: 0.0.3
+version: 0.0.4
 
 description: An umbrella chart for creating Terra environments
 type: application
 
 dependencies:
 - name: cromwell
-  version: 0.0.1
+  version: 0.0.3
   condition: cromwell.enabled
   repository: https://broadinstitute.github.io/terra-helm
