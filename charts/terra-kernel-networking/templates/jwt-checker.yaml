@@ -3,10 +3,11 @@ apiVersion: "authentication.istio.io/v1alpha1"
 kind: "Policy"
 metadata:
   name: "jwt-example"
+  namespace: yyu
 spec:
   targets:
-    - name: kernel-service-poc-service
-    - name: istio-ingressgateway
+  - name: icedemo-service
+  - name: kernel-service-poc-service
   peers:
     - mtls:
         mode: PERMISSIVE
