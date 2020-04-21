@@ -12,6 +12,8 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 spec:
   privileged: false
+  allowedCapabilities:
+    - 'NET_ADMIN'
   seLinux:
     rule: RunAsAny
   supplementalGroups:
