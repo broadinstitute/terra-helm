@@ -5,8 +5,8 @@ metadata:
   namespace: {{ .Values.namespaces.istio }}
   labels:
     name: istiogateway
-    helm.sh/chart: {{ template "terra-kernel-networking.chart" . }}
-    app.kubernetes.io/name: {{ template "terra-kernel-networking.name" . }}
+    helm.sh/chart: {{ template "terra-cluster-networking.chart" . }}
+    app.kubernetes.io/name: {{ template "terra-cluster-networking.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 spec:
