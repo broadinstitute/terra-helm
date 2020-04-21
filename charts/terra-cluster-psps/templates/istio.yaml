@@ -4,11 +4,10 @@ metadata:
   name: istio-psp
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
-  namespace: {{ .Values.namespaces.istio }}
   labels:
     name: podsecuritypolicy
-    helm.sh/chart: {{ template "terra-kernel-psps.chart" . }}
-    app.kubernetes.io/name: {{ template "terra-kernel-psps.name" . }}
+    helm.sh/chart: {{ template "terra-cluster-psps.chart" . }}
+    app.kubernetes.io/name: {{ template "terra-cluster-psps.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 spec:
@@ -32,6 +31,12 @@ kind: ClusterRole
 metadata:
   name: istio-clusterrole
   namespace: {{ .Values.namespaces.istio }}
+  labels:
+    name: clusterrole
+    helm.sh/chart: {{ template "terra-cluster-psps.chart" . }}
+    app.kubernetes.io/name: {{ template "terra-cluster-psps.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 rules:
 - apiGroups: ["extensions"]
   resources: ["podsecuritypolicies"]
@@ -43,6 +48,12 @@ kind: ClusterRoleBinding
 metadata:
   name: istio-rolebinding
   namespace: {{ .Values.namespaces.istio }}
+  labels:
+    name: clusterrolebinding
+    helm.sh/chart: {{ template "terra-cluster-psps.chart" . }}
+    app.kubernetes.io/name: {{ template "terra-cluster-psps.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -54,21 +65,3 @@ subjects:
     name: {{ . }}
     namespace: {{ $root.Values.namespaces.istio }}
   {{- end }}
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: crdb-stateful-service-entry
-spec:
-  hosts:
-  - {{ .Release.Name }}-cockroachdb-public.default.svc.cluster.local
-  - "*.{{ .Release.Name }}-cockroachdb.default.svc.cluster.local"
-  location: MESH_INTERNAL
-  ports:
-  - number: 26257
-    name: crdbheadless1
-    protocol: TCP
-  - number: 8080
-    name: crdbheadless2
-    protocol: HTTP
-  resolution: NONE
