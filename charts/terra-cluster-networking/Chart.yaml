@@ -1,17 +1,18 @@
 ---
 apiVersion: v2
-name: terra-kernel-psps
-description: A Helm chart to deploy terra kernel pod security policies
+name: terra-cluster-networking
+description: A Helm chart to configure cluster-wide networking for Terra clusters
 
 type: application
 
-version: 0.0.1
+version: 0.0.0
 
 keywords:
 - dsp
 - broadinstitute
 - kernel
 - terra
+- networking
 
 maintainers:
 - email: gmalkov@broadinstitute.org
