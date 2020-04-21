@@ -333,6 +333,27 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.0.0/terra-cluster-0.0.0.tgz
     version: 0.0.0
+  terra-cluster-networking:
+  - apiVersion: v2
+    created: "2020-04-21T20:27:40.785585419Z"
+    description: A Helm chart to configure cluster-wide networking for Terra clusters
+    digest: 91fbad7a1ffd86a06f01ddc6d6b5da448d107f62e711bc8f82bc590274d2edee
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    - networking
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster-networking
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-networking-0.0.1/terra-cluster-networking-0.0.1.tgz
+    version: 0.0.1
   terra-cluster-psps:
   - apiVersion: v2
     created: "2020-04-21T20:24:57.916068278Z"
