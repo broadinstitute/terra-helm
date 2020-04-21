@@ -1,7 +1,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: sam-psp
+  name: terra-default-psp
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
   labels:
