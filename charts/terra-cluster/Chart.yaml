@@ -1,11 +1,11 @@
 ---
 apiVersion: v2
-name: terra-kernel
-description: A Helm chart to deploy terra kernel components
+name: terra-cluster
+description: A Helm chart to configure a k8s cluster for Terra
 
 type: application
 
-version: 0.0.3
+version: 0.0.0
 
 keywords:
 - dsp
