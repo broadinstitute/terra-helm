@@ -302,6 +302,37 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-ap-prometheus-operator-0.0.2/terra-ap-prometheus-operator-0.0.2.tgz
     version: 0.0.2
+  terra-cluster:
+  - apiVersion: v2
+    created: "2020-04-21T14:03:52.887841378Z"
+    dependencies:
+    - name: terra-kernel-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.4
+    - name: terra-kernel-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.0
+    description: A Helm chart to configure a k8s cluster for Terra
+    digest: 5bea04f56fb11ab8f5aa32e745719086b002844aa2b7ab34f7b51634dca5611c
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.0.0/terra-cluster-0.0.0.tgz
+    version: 0.0.0
   terra-env:
   - apiVersion: v2
     created: "2020-04-20T20:52:39.137899133Z"
