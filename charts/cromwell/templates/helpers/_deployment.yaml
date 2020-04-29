@@ -1,5 +1,9 @@
 {{/* Generate a Cromwell deployment */}}
 {{- define "cromwell.deployment" }}
+{{- /*
+Reader ctmpls are prefixed "cromwell1-frontend" because the instance type is technically frontend
+*/ -}}
+{{- $ctmplNamePrefix := .name | replace "reader" "frontend" -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -32,13 +36,13 @@ spec:
       volumes:
       - name: app-ctmpls
         secret:
-          secretName: {{ .name }}-app-ctmpls
+          secretName: {{ $ctmplNamePrefix }}-app-ctmpls
       - name: proxy-ctmpls
         secret:
-          secretName: {{ .name }}-proxy-ctmpls
+          secretName: {{ $ctmplNamePrefix }}-proxy-ctmpls
       - name: sqlproxy-ctmpls
         secret:
-          secretName: {{ .name }}-sqlproxy-ctmpls
+          secretName: {{ $ctmplNamePrefix }}-sqlproxy-ctmpls
       - name: cromwell-gc-logs
         emptyDir: {}
       - name: cromwell-newrelic-jar
@@ -54,7 +58,7 @@ spec:
             memory: 50Gi
         envFrom:
         - secretRef:
-            name: {{ .name }}-app-env
+            name: {{ $ctmplNamePrefix }}-app-env
         env:
         # Make node, pod name accessible to app as env vars
         - name: K8S_NODE_NAME
@@ -104,7 +108,7 @@ spec:
           - containerPort: 8888
         envFrom:
         - secretRef:
-            name: {{ .name }}-proxy-env
+            name: {{ $ctmplNamePrefix }}-proxy-env
         volumeMounts:
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
@@ -130,7 +134,7 @@ spec:
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:
         - secretRef:
-            name: {{ .name }}-sqlproxy-env
+            name: {{ $ctmplNamePrefix }}-sqlproxy-env
         volumeMounts:
         - mountPath: /etc/sqlproxy-service-account.json
           subPath: sqlproxy-service-account.json

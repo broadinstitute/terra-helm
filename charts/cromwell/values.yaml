@@ -9,4 +9,4 @@ runner:
   replicas: 3
 summarizer:
   name: cromwell1-summarizer
-  replicas: 0
+  replicas: 1
