@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kernel-service-poc-service-role
+  labels:
+    helm.sh/chart: {{ template "poc.chart" . }}
+    app.kubernetes.io/name: {{ template "poc.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+rules:
+- apiGroups: ['policy']
+  resources: ['podsecuritypolicies']
+  verbs:     ['use']
+  resourceNames:
+  - terra-default-psp
+- apiGroups: ['']
+  resources: ['secrets']
+  verbs: ['get', 'create']

@@ -1,0 +1,18 @@
+apiVersion: v2
+name: poc
+version: 0.0.0
+
+description: Chart for a POC Terra app
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+
+maintainers:
+- email: gmalkov@broadinstitute.org
+  name: Greg Malkov
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts

@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kernel-service-poc-vservice
+  labels:
+    helm.sh/chart: {{ template "poc.chart" . }}
+    app.kubernetes.io/name: {{ template "poc.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - template-gateway.default.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        prefix: /{{ .Release.Namespace }}-kernel-service-poc
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: kernel-service-poc-service.{{ Release.Namespace }}.svc.cluster.local

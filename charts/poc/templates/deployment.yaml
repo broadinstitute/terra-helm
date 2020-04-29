@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kernel-service-poc-deployment
+  labels:
+    helm.sh/chart: {{ template "poc.chart" . }}
+    app.kubernetes.io/name: {{ template "poc.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: kernel-service-poc-service
+      labels:
+        version: v1
+    spec:
+      serviceAccountName: kernel-service-poc-service-sa
+      containers:
+      - name: kernel-service-poc
+        image: gcr.io/terra-kernel-k8s/kernel-service-poc:0.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: poc-postgres-db-creds
+              key: username
+        - name: DATABASE_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: poc-postgres-db-creds
+              key: password
+        - name: DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: poc-postgres-db-creds
+              key: db
+      - name: cloudsql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        env:
+        - name: SQL_INSTANCE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: poc-cloudsql-postgres-instance-name
+              key: name
+        command: ["/cloud_sql_proxy",
+                  "-instances=terra-kernel-k8s:us-central1:$(SQL_INSTANCE_NAME)=tcp:5432",
+                  "-credential_file=/secrets/sa/service-account.json"]
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: sa-creds
+          mountPath: /secrets/sa
+          readOnly: true
+      volumes:
+        - name: sa-creds
+          secret:
+            secretName: poc-sa
+
