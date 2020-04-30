@@ -1,0 +1,15 @@
+apiVersion: v2
+name: poc
+version: 0.0.0
+appVersion: 0.13.0
+
+description: Chart for a POC Terra app
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts

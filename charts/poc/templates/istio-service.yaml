@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kernel-service-poc-vservice
+  {{- template "poc.labels" }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - template-gateway.default.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        prefix: /{{ .Release.Namespace }}-kernel-service-poc
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: kernel-service-poc-service.{{ Release.Namespace }}.svc.cluster.local
