@@ -2,11 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: kernel-service-poc-service-role-binding
-  labels:
-    helm.sh/chart: {{ template "poc.chart" . }}
-    app.kubernetes.io/name: {{ template "poc.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+  {{- template "poc.labels" }}
 roleRef:
   kind: Role
   name: kernel-service-poc-service-role

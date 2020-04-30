@@ -2,11 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kernel-service-poc-deployment
-  labels:
-    helm.sh/chart: {{ template "poc.chart" . }}
-    app.kubernetes.io/name: {{ template "poc.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+  {{- template "poc.labels" }}
 spec:
   replicas: 1
   template:
@@ -18,7 +14,7 @@ spec:
       serviceAccountName: kernel-service-poc-service-sa
       containers:
       - name: kernel-service-poc
-        image: gcr.io/terra-kernel-k8s/kernel-service-poc:0.0.0
+        image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -60,4 +56,3 @@ spec:
         - name: sa-creds
           secret:
             secretName: poc-sa
-

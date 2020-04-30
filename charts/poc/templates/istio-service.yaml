@@ -2,11 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: kernel-service-poc-vservice
-  labels:
-    helm.sh/chart: {{ template "poc.chart" . }}
-    app.kubernetes.io/name: {{ template "poc.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+  {{- template "poc.labels" }}
 spec:
   hosts:
   - "*"
