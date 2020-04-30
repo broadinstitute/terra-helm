@@ -1,6 +1,6 @@
 apiVersion: v2
 name: poc
-version: 0.0.1
+version: 0.0.2
 appVersion: 0.13.0
 
 description: Chart for a POC Terra app
