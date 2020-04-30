@@ -72,6 +72,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-tools-0.0.0/dsp-tools-0.0.0.tgz
     version: 0.0.0
+  poc:
+  - apiVersion: v2
+    appVersion: 0.13.0
+    created: "2020-04-30T17:09:48.325684777Z"
+    description: Chart for a POC Terra app
+    digest: b3140fc2f4d819213b28462db68e2c5a86dee2936c778c075fcfcd6d9ed75959
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.0/poc-0.0.0.tgz
+    version: 0.0.0
   terra-ap-prometheus-operator:
   - apiVersion: v1
     appVersion: 0.36.0
