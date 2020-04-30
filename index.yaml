@@ -75,6 +75,22 @@ entries:
   poc:
   - apiVersion: v2
     appVersion: 0.13.0
+    created: "2020-04-30T18:06:48.939699912Z"
+    description: Chart for a POC Terra app
+    digest: 84d7215fe858ab5115b91df0c3b9fc5bce29b15c751669618c3e0afeed350048
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.3/poc-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 0.13.0
     created: "2020-04-30T17:41:34.600969732Z"
     description: Chart for a POC Terra app
     digest: 70448f44c064c89fb903f61a7241518973557bf4f3dea6579a46f3a9b66bd590
