@@ -5,11 +5,14 @@ metadata:
   {{- template "poc.labels" }}
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: kernel-service-poc
   template:
     metadata:
       name: kernel-service-poc-service
       labels:
-        version: v1
+        app: kernel-service-poc
     spec:
       serviceAccountName: kernel-service-poc-service-sa
       containers:
