@@ -1,2 +1,4 @@
 cromwell:
   enabled: true
+poc:
+  enabled: false
