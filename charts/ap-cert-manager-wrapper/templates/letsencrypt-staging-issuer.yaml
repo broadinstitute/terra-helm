@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+  namespace: {{ .Release.Namespace }}
+spec:
+  acme:
+    email: {{ .Values.issuerAccountEmail }}
+    # URL for let's-encrypt-staging
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: {{ .Release.Name }}-letsencrypt-staging-creds
+    solvers:
+    # {} Means this all certificate requests will use this dns challenge solver
+    - selector: {}
+      dns01:
+        clouddns:
+          # Id for project that handles dns provisioning
+          project: {{ .Values.dnsProject.id }}
+          #used to access dns-solver service-account in GCP
+          serviceAccountSecretRef:
+            name: {{ .Values.dns-project.service-account.sercretName }}
+            key: {{ .Values.dns-project.service-account.sercretKey }}

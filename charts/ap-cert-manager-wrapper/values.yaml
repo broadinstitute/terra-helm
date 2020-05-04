@@ -5,3 +5,16 @@ cert-manager:
   # 
   extraArgs:
   - --enable-certificate-owner-ref=true
+
+# Email that will be used to register issuer with lets encrypt
+# Will receive communications from lets encrypt here
+issuerAccountEmail: ap-devops@broadinstitute.org
+dnsProject:
+  # Id for the GCP project that will host your cloud DNS resources
+  id: "" 
+  serviceAccount:
+    # name of the k8s secret that will hold projects SA credentials 
+    secretName: ""
+    # The key pair in above secret that contains SA credentials 
+    secretKey: ""
+ 
