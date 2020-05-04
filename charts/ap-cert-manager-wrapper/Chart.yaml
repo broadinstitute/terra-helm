@@ -1,0 +1,18 @@
+apiVersion: v2
+name: ap-cert-manager-wrapper
+version: 0.0.1
+
+description: Installs cert-manager, configures psps and creates Let's encrypt cluster issuers
+type: application
+
+maintainers:
+- name: Michael Flinn
+  email: mflinn@broadinstitute.org
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+
+dependencies:
+- name: cert-manager
+  version: v0.14.1
+  repository: https://charts.jetstack.io

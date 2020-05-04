@@ -1,0 +1,7 @@
+# Values passed to official cert-manager chart
+cert-manager:
+  global:
+    enabled: true
+  # 
+  extraArgs:
+  - --enable-certificate-owner-ref=true
