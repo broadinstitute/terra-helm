@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: sam-role
+  {{- template "sam.labels" }}
+rules:
+  - apiGroups: ['policy']
+    resources: ['podsecuritypolicies']
+    verbs:     ['use']
+    resourceNames:
+      - terra-default-psp
+  - apiGroups: ['']
+    resources: ['secrets']
+    verbs: ['get', 'create']

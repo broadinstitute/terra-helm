@@ -1,0 +1,5 @@
+image:
+  repository: openidentityplatform/opendj
+  # Override the image tag to deploy by setting this variable.
+  # If no value is set, the chart's appVersion will be used.
+  # tag: latest

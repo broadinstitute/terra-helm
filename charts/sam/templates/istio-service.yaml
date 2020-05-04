@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sam-vservice
+  {{- template "sam.labels" }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - template-gateway.default.svc.cluster.local
+  http:
+    - match:
+        - uri:
+            prefix: /{{ .Release.Namespace }}-sam
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            port:
+              number: 8080
+            host: sam.{{ .Release.Namespace }}.svc.cluster.local

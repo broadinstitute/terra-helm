@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: opendj
+  labels:
+    app: opendj
+    {{- template "opendj.labels" }}
+spec:
+  serviceName: opendj
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opendj
+  template:
+    metadata:
+      labels:
+        app: opendj
+    spec:
+      serviceAccountName: opendj-sa
+      securityContext:
+        # The OpenDJ process runs as a non-root user (1001) in its container. We need to make sure
+        # that the mounted volume is writeable for that user.
+        fsGroup: 1001
+      containers:
+      - name: opendj
+        image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 1389
+          protocol: TCP
+        - containerPort: 1636
+          protocol: TCP
+        - containerPort: 4444
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        env:
+        - name: BASE_DN
+          # This value should be replaced by environment.
+          value: "dc=dsde-my-environment,dc=broadinstitute,dc=org"
+        - name: ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: opendj-password
+              key: password
+        volumeMounts:
+        - name: opendj-data
+          mountPath: /opt/opendj/data
+  volumeClaimTemplates:
+  - metadata:
+      name: opendj-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
