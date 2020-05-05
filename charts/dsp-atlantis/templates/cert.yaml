@@ -4,4 +4,4 @@ metadata:
   name: atlantis-cert
   labels:
     {{- template "dsp-atlantis.labels" }}
-spec: {{ .Values.cert | nindent 2 }}
+spec: {{ .Values.cert }}
