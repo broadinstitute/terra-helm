@@ -1,5 +1,5 @@
 {{- $terraEnv := .Values.environment }}
-{{- /* Save . so it can be accessed inside the range */ -}}
+{{- /* Save root so it can be accessed inside the range */ -}}
 {{- $root := . -}}
 {{- range $terraApp, $configOverrides := .Values.apps -}}
 {{- $appConfigs := merge $root.Values.private.appDefaults $configOverrides -}}
@@ -12,19 +12,21 @@ metadata:
     app: {{ $terraApp }} # These labels are used as selectors in the UI
     env: {{ $terraEnv }}
 spec:
-  project: {{ include "terra-argocd-apps.projectName" $root }}
+  project: {{ include "terra-env-argocd.projectName" $root }}
   destination:
-    namespace: {{ include "terra-argocd-apps.destinationNamespace" $root }}
-    server: {{ include "terra-argocd-apps.clusterAddress" $root }}
+    namespace: {{ include "terra-env-argocd.destinationNamespace" $root }}
+    server: {{ include "terra-env-argocd.clusterAddress" $root }}
   source:
-    repoURL: {{ $appConfigs.helmfileRepo }}
+    repoURL: {{ $root.Values.helmfileRepo }}
     path: .
     plugin:
       name: helmfile-template
       env:
-        ENVIRONMENT: {{ $terraEnv }}
-        SELECTOR: name={{ $terraApp }}
-{{- if $appConfigs.legacyConfigsEnabled -}}
+      - name: ENV
+        value: {{ $terraEnv }}
+      - name: SELECTOR
+        value: name={{ $terraApp }}
+{{- if $appConfigs.legacyConfigsEnabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -34,22 +36,21 @@ metadata:
     app: {{ $terraApp }} # These labels are used as selectors in the UI
     env: {{ $terraEnv }}
 spec:
-  project: {{ include "terra-argocd-apps.projectName" $root }}
+  project: {{ include "terra-env-argocd.projectName" $root }}
   destination:
-    namespace: {{ include "terra-argocd-apps.destinationNamespace" $root }}
-    server: {{ include "terra-argocd-apps.clusterAddress" $root }}
+    namespace: {{ include "terra-env-argocd.destinationNamespace" $root }}
+    server: {{ include "terra-env-argocd.clusterAddress" $root }}
   source:
-    repoURL: {{ $appConfigs.legacyConfigsRepo }}
-    targetRevision: {{ $appConfigs.legacyConfigsRepoRef }}
+    repoURL: {{ $root.Values.legacyConfigsRepo }}
+    targetRevision: {{ $root.Values.legacyConfigsRepoRef }}
     path: .
     plugin:
       name: legacy-firecloud-develop
-      {{- $defaultEnvVars := dict "ENV" $terraEnv "APP_NAME" -}}
-      {{- $appConfigs.legacyConfigsEnvVar -}}
       env:
-        ENV: {{ $terraEnv }}
-        APP_NAME: {{ $terraApp }}
-
-        {{ }}
+      {{- $envVars := merge $appConfigs.legacyConfigsEnvVars (dict "ENV" $terraEnv "APP_NAME" $terraApp) -}}
+      {{- range $name, $value := $envVars }}
+      - name: {{ $name }}
+        value: {{ $value }}
+      {{- end -}}
 {{- end -}}
 {{- end -}}

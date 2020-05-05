@@ -3,27 +3,31 @@
 #
 # Internal values -- these should NOT be overridden.
 private:
-  clusters:
+  clusters: # Mapping of named terra clsuters w/ their addresses
     terra-dev: https://35.238.186.116
-    terra-integration: https://34.70.205.77
   appDefaults:
     enabled: false # Whether to create an Application for this app in the given environment.
-    helmfileRepo: https://github.com/broadinstitute/terra-helm-values # Where the helm values should be pulled from
-    legacyConfigsEnabled: false # Whether to create a second Application for syncing configs from firecloud-develop
-    legacyConfigsRepo: https://github.com/broadinstitute/firecloud-develop
-    legacyConfigsRepoRef: dev # Track dev branch by default
-    legacyConfigsEnvVars:
-      # ENV: my-env # this value defaults terraEnv but can be overridden
-      # APP_NAME: my-app-name # this value defaults to app name but can be overridden
+    legacyConfigsEnabled: false # Whether to create a second Application for syncing configs from firecloud-develop git repo
+    legacyConfigsEnvVars: # Environment variables passed to the render process
+      # APP_NAME - defaults to the terra app name, eg. cromwell
+      # ENV - defaults to the terra environment, eg. dev
       RUN_CONTEXT: live  # configure.rb run context
       INSTANCE_TYPES: "" # comma-separated list of instance types to render. If empty, no INSTANCE_TYPE supplied to configure.rb
 
-#
-# These values can and should be overridden on a per-environment basis
-environment: null # The Terra environment. Helmfile sets this, so it shouldn't need to be overridden in values files.
-cluster: null   # Required - cluster to deploy to. Should refer to a key in "clusters" value, above
+# These values can be overridden a per-environment basis.
+# The Terra environment. Helmfile sets this, so it shouldn't need to be overridden in values files.
+environment: null
+# Required - GKE cluster to deploy to. Eg. https://35.238.186.116
+clusterAddress: null
+# Terra's helmfile repo
+helmfileRepo: https://github.com/broadinstitute/terra-helmfile-poc # Where helm values should be pulled from
+# Terra's old firecloud-develop repo
+legacyConfigsRepo: https://github.com/broadinstitute/firecloud-develop
+legacyConfigsRepoRef: dev #firecloud-develop branch to pull configs from
+
+# A list of Terra apps to generate ArgoCD applications for.
 apps:
   cromwell:
-    legacyConfigsEnabled: true
+    legacyConfigsEnabled: true # Create a second app to sync cromwell configs from firecloud-develop
     legacyConfigsEnvVars:
       INSTANCE_TYPES: "cromwell1-frontend,cromwell1-runner,cromwell1-summarizer" # comma-separated list of instance types to render
