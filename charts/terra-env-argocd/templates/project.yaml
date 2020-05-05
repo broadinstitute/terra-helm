@@ -1,0 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Project
+metadata:
+  name: {{ include "terra-argocd-apps.projectName" . }}
+spec:
+  description: "Applications for Terra {{ .Values.terraEnv }} environment"
+  destinations:
+  - namespace: {{ include "terra-argocd-apps.destinationNamespace" . }}
+    server: {{ include "terra-argocd-apps.clusterAddress" . }}
+  sourceRepos: '*'

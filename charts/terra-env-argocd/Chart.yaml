@@ -1,0 +1,5 @@
+apiVersion: v2
+name: terra-argocd-apps
+description: A Helm chart for generating ArgoCD apps for Terra
+type: application
+version: 0.0.1

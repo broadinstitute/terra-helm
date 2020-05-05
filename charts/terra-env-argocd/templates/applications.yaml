@@ -1,0 +1,55 @@
+{{- $terraEnv := .Values.environment }}
+{{- /* Save . so it can be accessed inside the range */ -}}
+{{- $root := . -}}
+{{- range $terraApp, $configOverrides := .Values.apps -}}
+{{- $appConfigs := merge $root.Values.private.appDefaults $configOverrides -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $terraApp }}-{{ $terraEnv }}
+  labels:
+    app: {{ $terraApp }} # These labels are used as selectors in the UI
+    env: {{ $terraEnv }}
+spec:
+  project: {{ include "terra-argocd-apps.projectName" $root }}
+  destination:
+    namespace: {{ include "terra-argocd-apps.destinationNamespace" $root }}
+    server: {{ include "terra-argocd-apps.clusterAddress" $root }}
+  source:
+    repoURL: {{ $appConfigs.helmfileRepo }}
+    path: .
+    plugin:
+      name: helmfile-template
+      env:
+        ENVIRONMENT: {{ $terraEnv }}
+        SELECTOR: name={{ $terraApp }}
+{{- if $appConfigs.legacyConfigsEnabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $terraApp }}-configs-{{ $terraEnv }}
+  labels:
+    app: {{ $terraApp }} # These labels are used as selectors in the UI
+    env: {{ $terraEnv }}
+spec:
+  project: {{ include "terra-argocd-apps.projectName" $root }}
+  destination:
+    namespace: {{ include "terra-argocd-apps.destinationNamespace" $root }}
+    server: {{ include "terra-argocd-apps.clusterAddress" $root }}
+  source:
+    repoURL: {{ $appConfigs.legacyConfigsRepo }}
+    targetRevision: {{ $appConfigs.legacyConfigsRepoRef }}
+    path: .
+    plugin:
+      name: legacy-firecloud-develop
+      {{- $defaultEnvVars := dict "ENV" $terraEnv "APP_NAME" -}}
+      {{- $appConfigs.legacyConfigsEnvVar -}}
+      env:
+        ENV: {{ $terraEnv }}
+        APP_NAME: {{ $terraApp }}
+
+        {{ }}
+{{- end -}}
+{{- end -}}
