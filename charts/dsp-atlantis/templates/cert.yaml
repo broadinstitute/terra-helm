@@ -2,4 +2,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: atlantis-cert
+  labels:
+    {{- template "dsp-atlantis.labels" }}
 spec: {{ .Values.cert | nindent 2 }}

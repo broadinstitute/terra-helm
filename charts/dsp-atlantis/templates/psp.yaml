@@ -2,6 +2,8 @@ apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: atlantis-psp
+  labels:
+    {{- template "dsp-atlantis.labels" }}
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
 spec:
