@@ -3,14 +3,11 @@ cert:
   secretName: atlantis-cert
   duration: 2160h # 3 months
   renewBefore: 360h # Renew cert 15 days before exp
-  organization:
-  - broad-institute
-  dnsNames:
-    - atlantis.dsp-devops.broadinstitute.org
-  issuerRef:
-    name: letsencrypt-staging
-    kind: ClusterIssuer
-    group: cert-manager.io
+  organization: broad-institute
+  dnsName: atlantis.dsp-devops.broadinstitute.org
+  issuerName: letsencrypt-staging
+  issuerKind: ClusterIssuer
+  issuerGroup: cert-manager.io
 atlantis:
   fullnameOverride: atlantis
   serviceAccount:
