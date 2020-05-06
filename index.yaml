@@ -429,6 +429,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-ap-prometheus-operator-0.0.2/terra-ap-prometheus-operator-0.0.2.tgz
     version: 0.0.2
+  terra-argocd-app:
+  - apiVersion: v2
+    created: "2020-05-06T20:47:57.80152703Z"
+    description: A Helm chart for generating ArgoCD resources for a Terra app in an
+      environment
+    digest: 934910a3ea8c05b35741f012c209d51140b51738c4922223fbabb0c624532a77
+    name: terra-argocd-app
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.0.1/terra-argocd-app-0.0.1.tgz
+    version: 0.0.1
+  terra-argocd-apps:
+  - apiVersion: v2
+    created: "2020-05-06T20:47:57.912963739Z"
+    description: A Helm chart for generating environment-wide ArgoCD resources for
+      Terra environments
+    digest: 2d6e529ebf9836dbc96bfa48e323fd4abf6755436e95e993dd0d0bb87efd248b
+    name: terra-argocd-apps
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-apps-0.0.1/terra-argocd-apps-0.0.1.tgz
+    version: 0.0.1
+  terra-argocd-templates:
+  - apiVersion: v2
+    created: "2020-05-06T20:47:58.004957929Z"
+    description: ArgoCD templates
+    digest: 59acffd4c29d0e661768e5d8d4651baeb9ac2e66fa1452c6c04eb51d1a3849da
+    name: terra-argocd-templates
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-templates-0.0.1/terra-argocd-templates-0.0.1.tgz
+    version: 0.0.1
   terra-cluster:
   - apiVersion: v2
     created: "2020-04-21T21:50:49.418381362Z"
