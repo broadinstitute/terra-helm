@@ -7,6 +7,7 @@ metadata:
   labels:
     app: {{ .app }} # These labels are used as selectors in the UI
     env: {{ .environment }}
+    cluster: {{ .cluster }}
 spec:
   project: {{ include "terra-argocd.projectName" . }}
   destination:
@@ -31,6 +32,7 @@ metadata:
   labels:
     app: {{ .app }} # These labels are used as selectors in the UI
     env: {{ .environment }}
+    cluster: {{ .cluster }}
 spec:
   project: {{ include "terra-argocd.projectName" . }}
   destination:

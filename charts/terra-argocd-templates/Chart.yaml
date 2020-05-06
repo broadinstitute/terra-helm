@@ -2,4 +2,4 @@ apiVersion: v2
 name: terra-argocd-templates
 description: ArgoCD templates
 type: library
-version: 0.0.1
+version: 0.0.2
