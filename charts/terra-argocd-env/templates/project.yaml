@@ -1,0 +1,1 @@
+{{ include "terra-argocd.project" .Values }}

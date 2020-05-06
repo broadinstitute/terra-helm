@@ -1,0 +1,9 @@
+apiVersion: v2
+name: terra-argocd-apps
+description: A Helm chart for generating environment-wide ArgoCD resources for Terra environments
+type: application
+version: 0.0.1
+#dependencies:
+#- name: terra-argocd-templates
+#  version: 0.0.1
+#  repository: https://broadinstitute.github.io/terra-helm
