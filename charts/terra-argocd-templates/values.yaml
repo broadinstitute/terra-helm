@@ -1,0 +1,6 @@
+#
+# Internal values -- these should NOT be overridden.
+private:
+  clusters: # Mapping of named terra clusters w/ their addresses
+    terra-dev: https://35.238.186.116
+    terra-integration: https://34.70.205.77

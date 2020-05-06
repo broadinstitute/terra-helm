@@ -1,0 +1,23 @@
+# Default values for terra-argocd-app
+
+# The Terra environment
+environment: null
+
+# Required - GKE cluster to deploy to.
+clusterAddress: null
+
+# Name of the application to render for. Eg. `cromwell`
+app: null
+
+# Terra's helmfile repo
+helmfileRepo: https://github.com/broadinstitute/terra-helmfile-poc
+
+# Whether to create a separate application to sync values from firecloud-develop
+legacyConfigsEnabled: false
+legacyConfigsRepo: https://github.com/broadinstitute/firecloud-develop
+legacyConfigsRepoRef: dev # branch to pull configs from
+legacyConfigsInstanceTypes: [] # Instance types - passed in via INSTANCE_TYPES env var
+legacyConfigsEnv: # Additional environment variables to pass in
+  # APP_NAME - defaults to the terra app name, eg. cromwell
+  # ENV - defaults to the terra environment, eg. dev
+  RUN_CONTEXT: live  # configure.rb run context

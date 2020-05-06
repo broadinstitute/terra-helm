@@ -1,0 +1,7 @@
+# Default values for terra-argocd-apps
+
+# Required - The Terra environment to deploy to
+environment: null
+
+# Required - The address of the GKE cluster where the environment lives
+clusterAddress: null
