@@ -16,6 +16,12 @@ cluster: null
 # Name of the application to render for. Eg. `cromwell`
 app: null
 
+# If an ArgoCD Application is deleted,
+# purge deployed resources as well. Eg. if the `cromwell-dev`
+# app is deleted, delete all the deployed Cromwell pods/secrets/etc from
+# the dev cluster 
+purgeDeployedResourcesOnDelete: false
+
 # Terra's helmfile repo
 helmfileRepo: https://github.com/broadinstitute/terra-helmfile
 

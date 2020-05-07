@@ -8,6 +8,10 @@ metadata:
     app: {{ .app }} # These labels are used as selectors in the UI
     env: {{ .environment }}
     cluster: {{ .cluster }}
+  {{- if .purgeDeployedResourcesOnDelete }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{- end }}
 spec:
   project: {{ include "terra-argocd.projectName" . }}
   destination:
