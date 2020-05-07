@@ -431,6 +431,20 @@ entries:
     version: 0.0.2
   terra-argocd-app:
   - apiVersion: v2
+    created: "2020-05-07T11:21:27.001405293Z"
+    dependencies:
+    - name: terra-argocd-templates
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.0.3
+    description: A Helm chart for generating ArgoCD resources for a Terra app in an
+      environment
+    digest: eb59bc0b28eb669b4e78d3e4be9584f24191b6a8bb88922bcdd603d4e86e9724
+    name: terra-argocd-app
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.0.5/terra-argocd-app-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
     created: "2020-05-07T10:25:47.21641871Z"
     dependencies:
     - name: terra-argocd-templates
@@ -508,6 +522,20 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-apps-0.0.1/terra-argocd-apps-0.0.1.tgz
     version: 0.0.1
   terra-argocd-env:
+  - apiVersion: v2
+    created: "2020-05-07T11:21:27.089952299Z"
+    dependencies:
+    - name: terra-argocd-templates
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.0.3
+    description: A Helm chart for generating environment-wide ArgoCD resources for
+      Terra environments
+    digest: d37498d686bd65cc2e87cf81fd4bbb934ce336e80c52fe2ad028f2039935be9d
+    name: terra-argocd-env
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-env-0.0.4/terra-argocd-env-0.0.4.tgz
+    version: 0.0.4
   - apiVersion: v2
     created: "2020-05-06T21:32:32.457484449Z"
     dependencies:
