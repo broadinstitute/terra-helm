@@ -17,7 +17,7 @@ cluster: null
 app: null
 
 # Terra's helmfile repo
-helmfileRepo: https://github.com/broadinstitute/terra-helmfile-poc
+helmfileRepo: https://github.com/broadinstitute/terra-helmfile
 
 # Whether to create a separate application to sync values from firecloud-develop
 legacyConfigsEnabled: false
