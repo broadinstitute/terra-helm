@@ -1,9 +1,8 @@
 {{- define "terra-argocd.app" -}}
-{{- required "A valid app name is required " .app -}}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .app }}-{{ .environment }}
+  name: {{ required "A valid app name is required" .app }}-{{ required "A valid environment is required" .environment }}
   labels:
     app: {{ .app }} # These labels are used as selectors in the UI
     env: {{ .environment }}
