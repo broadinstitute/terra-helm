@@ -17,6 +17,14 @@ entries:
     version: 0.0.1
   cromwell:
   - apiVersion: v2
+    created: "2020-05-07T15:33:55.525661606Z"
+    description: A Helm chart for Cromwell
+    digest: 2fb3f5a65e79193be26155f5b20d672e8bd62e3f644b46ec2291077b7d86dadb
+    name: cromwell
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.0.5/cromwell-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
     created: "2020-04-29T14:25:53.94128737Z"
     description: A Helm chart for Cromwell
     digest: b33b9e11ff25c16fe9e639186ab193a42ca10ed40afc4aa0f1bd40a3cbefeec8
