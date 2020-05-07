@@ -566,6 +566,15 @@ entries:
     version: 0.0.2
   terra-argocd-templates:
   - apiVersion: v2
+    created: "2020-05-07T11:41:49.890500221Z"
+    description: ArgoCD templates
+    digest: df0800fb97a74ee8bb00c6af1d0d91972dac25d41e92125076da0adf39498d7a
+    name: terra-argocd-templates
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-templates-0.0.4/terra-argocd-templates-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
     created: "2020-05-07T11:19:19.274135439Z"
     description: ArgoCD templates
     digest: 081f8f5fe425989a8b2eeeb799ff8cb741973929406e4d1668d899b359699a17
