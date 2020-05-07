@@ -4,6 +4,7 @@ reader:
   name: cromwell1-reader
   replicas: 3
   serviceIP: X.X.X.X
+  loadBalancerSourceRanges: null
 runner:
   name: cromwell1-runner
   replicas: 3

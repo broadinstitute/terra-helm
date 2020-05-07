@@ -11,3 +11,9 @@ spec:
     targetPort: 443
   type: LoadBalancer
   loadBalancerIP: {{ .Values.reader.serviceIP }}
+{{- if not (empty .Values.reader.loadBalancerSourceRanges) }}
+  loadBalancerSourceRanges:
+  {{- range $cidr := .Values.reader.loadBalancerSourceRanges }}
+  - {{ $cidr }}
+  {{- end -}}
+{{- end }}
