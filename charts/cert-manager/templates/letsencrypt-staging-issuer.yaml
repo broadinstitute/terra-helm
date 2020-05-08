@@ -3,6 +3,7 @@ kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
   namespace: {{ .Release.Namespace }}
+  {{- template "cert-manager.labels" }}
 spec:
   acme:
     email: {{ .Values.issuerAccountEmail }}

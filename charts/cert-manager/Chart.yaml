@@ -2,6 +2,12 @@ apiVersion: v2
 name: ap-cert-manager-wrapper
 version: 0.0.1
 
+keywords:
+- dsp
+- broadinstitute
+- devops
+- tools
+
 description: Installs cert-manager, configures psps and creates Let's encrypt cluster issuers
 type: application
 
