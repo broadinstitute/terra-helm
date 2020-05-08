@@ -7,11 +7,11 @@ spec:
   hosts:
     - "*"
   gateways:
-    - template-gateway.default.svc.cluster.local
+    - {{ .Values.gateway.name }}.{{ .Values.gateway.namespace }}.svc.cluster.local
   http:
     - match:
         - uri:
-            prefix: /{{ .Release.Namespace }}-sam
+            prefix: /{{ .Values.global.terraEnv }}-sam
       rewrite:
         uri: /
       route:
