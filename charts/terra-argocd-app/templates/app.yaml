@@ -1,0 +1,29 @@
+{{- with .Values -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ required "A valid app name is required" .app }}-{{ required "A valid environment is required" .environment }}
+  labels:
+    app: {{ .app }} # These labels are used as selectors in the UI
+    env: {{ .environment }}
+    cluster: {{ .cluster }}
+  {{- if .purgeDeployedResourcesOnDelete }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  project: {{ include "terra-argocd.projectName" . }}
+  destination:
+    namespace: {{ include "terra-argocd.destinationNamespace" . }}
+    server: {{ include "terra-argocd.clusterAddress" . }}
+  source:
+    repoURL: {{ .helmfileRepo }}
+    path: .
+    plugin:
+      name: helmfile
+      env:
+      - name: HELMFILE_ENV
+        value: {{ .environment }}
+      - name: HELMFILE_SELECTOR
+        value: group=terra,app={{ .app }}
+{{- end -}}
