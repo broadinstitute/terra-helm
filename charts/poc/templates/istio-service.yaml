@@ -11,7 +11,7 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /{{ .Release.Namespace }}-kernel-service-poc
+        prefix: /{{ .Values.global.terraEnv }}-kernel-service-poc
     rewrite:
       uri: /
     route:

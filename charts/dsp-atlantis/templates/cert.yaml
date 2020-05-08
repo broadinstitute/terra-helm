@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: atlantis-cert
+  labels:
+    {{- template "dsp-atlantis.labels" }}
+spec:
+  secretName: {{ .Values.cert.secretName }}
+  duration: {{ .Values.cert.duration }}
+  renewBefore: {{ .Values.cert.renewBefore }}
+  organization:
+  - {{ .Values.cert.organization }}
+  dnsNames:
+    - {{ .Values.cert.dnsName }}
+  issuerRef:
+    name: {{ .Values.cert.issuerName }}
+    kind: {{ .Values.cert.issuerKind }}
+    group: {{ .Values.cert.issuerGroup }}

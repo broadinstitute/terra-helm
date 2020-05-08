@@ -3,3 +3,7 @@ image:
   # Override the image tag to deploy by setting this variable.
   # If no value is set, the chart's appVersion will be used.
   # tag: latest
+vault:
+  enabled: true
+  # pathPrefix is required if enabled is true
+  # pathPrefix: secret/dsde/terra/kernel/integration

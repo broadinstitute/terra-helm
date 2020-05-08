@@ -1,0 +1,14 @@
+# Default values for terra-argocd-apps
+# A map of named Terra clusters.
+# eg.
+# clusters:
+#   terra-dev: "https://35.238.186.116"
+clusters: {}
+
+# The Terra environment this project is for. Eg. `dev`
+environment: null
+
+# Required - GKE cluster to deploy to.
+# Eg. `terra-dev`
+# Must correspond with a key in `clusters` map
+cluster: null

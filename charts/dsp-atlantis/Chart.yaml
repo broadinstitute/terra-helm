@@ -1,0 +1,19 @@
+apiVersion: v2
+name: dsp-atlantis
+version: 0.0.1
+
+description: Chart for DSP Atlantis deployment
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- atlantis
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+
+dependencies:
+- name: atlantis
+  version: 3.11.0
+  repository: https://kubernetes-charts.storage.googleapis.com/
