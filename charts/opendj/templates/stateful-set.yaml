@@ -38,7 +38,7 @@ spec:
         env:
         - name: BASE_DN
           # This value should be replaced by environment.
-          value: "dc=dsde-my-environment,dc=broadinstitute,dc=org"
+          value: "dc=dsde-{{ .Values.global.terraEnv }},dc=broadinstitute,dc=org"
         - name: ROOT_PASSWORD
           valueFrom:
             secretKeyRef:

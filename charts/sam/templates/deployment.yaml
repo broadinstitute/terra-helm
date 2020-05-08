@@ -5,7 +5,7 @@ metadata:
   {{- template "sam.labels" }}
 spec:
   # TODO consider changing the replicas number or always overlaying it for different environments.
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: sam
@@ -37,7 +37,6 @@ spec:
                 -Dcom.sun.jndi.ldap.connect.pool.protocol=ssl -Dcom.sun.jndi.ldap.connect.pool.maxsize=100
           volumeMounts:
             - name: sam-configs
-              # TODO need to change rendered sam.conf references to add sam-configs subdir.
               mountPath: /etc/sam-configs
               readOnly: true
         - name: sam-sqlproxy

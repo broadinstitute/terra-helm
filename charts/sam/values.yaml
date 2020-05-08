@@ -6,3 +6,4 @@ image:
 gateway:
   name: template-gateway
   namespace: default
+replicas: 1
