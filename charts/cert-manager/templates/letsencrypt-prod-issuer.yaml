@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: {{ .Release.Name }}-letsencrypt-prod
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- template "certManager.labels" . }}
+spec:
+  acme:
+    email: {{ .Values.issuerAccountEmail }}
+   
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: {{ .Release.Name }}-letsencrypt-prod-creds
+    solvers:
+    # {} Means this all certificate requests will use this dns challenge solver
+    - selector: {}
+      dns01:
+        clouddns:
+          # Id for project that handles dns provisioning
+          project: {{ .Values.dnsProject.id }}
+          #used to access dns-solver service-account in GCP
+          serviceAccountSecretRef:
+            name: {{ .Values.dnsProject.serviceAccount.secretName }}
+            key: {{ .Values.dnsProject.serviceAccount.secretKey }}

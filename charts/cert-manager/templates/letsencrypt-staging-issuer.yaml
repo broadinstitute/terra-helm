@@ -1,9 +1,10 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-staging
+  name: {{ .Release.Name }}-letsencrypt-staging
   namespace: {{ .Release.Namespace }}
-  {{- template "cert-manager.labels" }}
+  labels:
+    {{- template "certManager.labels" . }}
 spec:
   acme:
     email: {{ .Values.issuerAccountEmail }}
@@ -20,5 +21,5 @@ spec:
           project: {{ .Values.dnsProject.id }}
           #used to access dns-solver service-account in GCP
           serviceAccountSecretRef:
-            name: {{ .Values.dns-project.service-account.sercretName }}
-            key: {{ .Values.dns-project.service-account.sercretKey }}
+            name: {{ .Values.dnsProject.serviceAccount.secretName }}
+            key: {{ .Values.dnsProject.serviceAccount.secretKey }}

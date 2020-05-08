@@ -12,10 +12,10 @@ cert-manager:
 issuerAccountEmail: ap-devops@broadinstitute.org
 dnsProject:
   # Id for the GCP project that will host your cloud DNS resources
-  id: "" 
+  id: dsp-devops
   serviceAccount:
     # name of the k8s secret that will hold projects SA credentials 
-    secretName: ""
+    secretName: something
     # The key pair in above secret that contains SA credentials 
-    secretKey: ""
+    secretKey: sa-key.json
  

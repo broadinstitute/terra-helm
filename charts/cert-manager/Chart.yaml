@@ -1,6 +1,6 @@
 apiVersion: v2
-name: ap-cert-manager-wrapper
-version: 0.0.1
+name: dsp-cert-manager
+version: 0.0.0
 
 keywords:
 - dsp
