@@ -1,0 +1,8 @@
+image:
+  repository: openidentityplatform/opendj
+  # Override the image tag to deploy by setting this variable.
+  # If no value is set, the chart's appVersion will be used.
+  # tag: latest
+# Uncomment below to define custom BASE_DN. Defaults to:
+#  dc=dsde-{{ .Values.global.terraEnv }},dc=broadinstitute,dc=org
+# baseDn:
