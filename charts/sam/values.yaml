@@ -3,7 +3,8 @@ image:
   # Override the image tag to deploy by setting this variable.
   # If no value is set, the chart's appVersion will be used.
   # tag: latest
-gateway:
+# Istio gateway that will be used for ingress
+istioGateway:
   name: template-gateway
   namespace: default
 replicas: 1

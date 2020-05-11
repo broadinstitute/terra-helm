@@ -7,7 +7,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - {{ .Values.gateway.name }}.{{ .Values.gateway.namespace }}.svc.cluster.local
+    - {{ .Values.istioGateway.name }}.{{ .Values.istioGateway.namespace }}.svc.cluster.local
   http:
     - match:
         - uri:

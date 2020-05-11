@@ -37,8 +37,7 @@ spec:
         terminationMessagePolicy: File
         env:
         - name: BASE_DN
-          # This value should be replaced by environment.
-          value: "dc=dsde-{{ .Values.global.terraEnv }},dc=broadinstitute,dc=org"
+          value: {{- template "opendj.baseDn" | quote }}
         - name: ROOT_PASSWORD
           valueFrom:
             secretKeyRef:

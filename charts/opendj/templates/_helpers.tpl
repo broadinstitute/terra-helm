@@ -9,3 +9,14 @@ Create labels to use for resources in this chart
     app.kubernetes.io/component: opendj
     app.kubernetes.io/part-of: terra
 {{- end }}
+
+{{/*
+Define base domain
+*/}}
+{{ define "opendj.baseDn" -}}
+  {{- if .Values.baseDn -}}
+    dc=dsde-{{ .Values.global.terraEnv }},dc=broadinstitute,dc=org
+  {{- else -}}
+    {{ .Values.baseDn }}
+  {{- end -}}
+{{- end }}
