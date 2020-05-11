@@ -1,9 +1,14 @@
-{{/* Generate a Cromwell deployment */}}
-{{- define "cromwell.deployment" }}
-{{- /*
-Reader ctmpls are prefixed "cromwell1-frontend" because the instance type is technically frontend
+{{- /* Generate a Cromwell deployment
+Required keys:
+  .name     # Name of the service. Eg "cromwell1-reader"
+  .replicas # Number of replicas
+  .imageTag # Tag of the docker image
+
+Optional keys:
+  .legacyResourcePrefix # Prefix to use when referencing legacy firecloud-develop resources. Defaults to .name
 */ -}}
-{{- $ctmplNamePrefix := .name | replace "reader" "frontend" -}}
+{{- define "cromwell.deployment" -}}
+{{- $legacyResourcePrefix := .legacyResourcePrefix | default .name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,13 +41,13 @@ spec:
       volumes:
       - name: app-ctmpls
         secret:
-          secretName: {{ $ctmplNamePrefix }}-app-ctmpls
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       - name: proxy-ctmpls
         secret:
-          secretName: {{ $ctmplNamePrefix }}-proxy-ctmpls
+          secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
       - name: sqlproxy-ctmpls
         secret:
-          secretName: {{ $ctmplNamePrefix }}-sqlproxy-ctmpls
+          secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: cromwell-gc-logs
         emptyDir: {}
       - name: cromwell-newrelic-jar
@@ -58,7 +63,7 @@ spec:
             memory: 50Gi
         envFrom:
         - secretRef:
-            name: {{ $ctmplNamePrefix }}-app-env
+            name: {{ $legacyResourcePrefix }}-app-env
         env:
         # Make node, pod name accessible to app as env vars
         - name: K8S_NODE_NAME
@@ -108,7 +113,7 @@ spec:
           - containerPort: 8888
         envFrom:
         - secretRef:
-            name: {{ $ctmplNamePrefix }}-proxy-env
+            name: {{ $legacyResourcePrefix }}-proxy-env
         volumeMounts:
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
@@ -134,7 +139,7 @@ spec:
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:
         - secretRef:
-            name: {{ $ctmplNamePrefix }}-sqlproxy-env
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
         volumeMounts:
         - mountPath: /etc/sqlproxy-service-account.json
           subPath: sqlproxy-service-account.json
