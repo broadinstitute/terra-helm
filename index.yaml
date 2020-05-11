@@ -127,6 +127,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-tools-0.0.0/dsp-tools-0.0.0.tgz
     version: 0.0.0
+  opendj:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-05-11T14:25:21.14630496Z"
+    description: Chart for OpenDJ, used by Sam, the Terra IAM application
+    digest: b9f57451859f3164b21963ab86cc7642f848f34ff17d32d6360c34ffd375797b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - opendj
+    name: opendj
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.0/opendj-0.0.0.tgz
+    version: 0.0.0
   poc:
   - apiVersion: v2
     appVersion: 0.13.0
@@ -223,6 +241,25 @@ entries:
     type: application
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.0/poc-0.0.0.tgz
+    version: 0.0.0
+  sam:
+  - apiVersion: v2
+    appVersion: develop
+    created: "2020-05-11T14:25:21.234712717Z"
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: 368f2849008d618a965d9468e648e52ba252dd6f99c424d2e818727a7c81e5d7
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.0.0/sam-0.0.0.tgz
     version: 0.0.0
   terra-ap-prometheus-operator:
   - apiVersion: v1
