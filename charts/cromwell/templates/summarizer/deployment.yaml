@@ -1,1 +1,0 @@
-{{- include "cromwell.deployment" (merge .Values.summarizer .Values.common) }}

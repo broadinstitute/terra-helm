@@ -1,10 +1,21 @@
-common:
-  imageTag: latest
-reader:
-  name: cromwell1-reader
-  replicas: 3
-  serviceIP: X.X.X.X
-  loadBalancerSourceRanges:
+# What version of Cromwell to deploy
+appVersion: latest
+
+# Cromwell has 4 deployments:
+# - reader      - serves requests from other apps
+# - runner      - background - runs batch jobs
+# - summarizer  - background - summarizes job results
+# - legacy      - legacy all-in-one Cromwell (also serves requests from other apps)
+
+# Default settings for all deployments
+deploymentDefaults:
+  name: null     # Set separately in each deployment. Eg. "cromwell1-reader"
+  imageTag: null # Defaults to appVersion
+  replicas: 0    # Number of replicas
+  expose: false  # Whether to create a LoadBalancer service for this deployment
+  serviceName: null  # What to call the service
+  serviceIP: x.x.x.x # Static IP to use for the Service
+  serviceWhitelist: # What source IPs to whitelist for access to the service
     broadIPs: # Always allow requests from broad office/VPN addresses
     - 69.173.112.0/21
     - 69.173.127.232/29
@@ -19,10 +30,30 @@ reader:
     - 69.173.96.0/20
     - 69.173.64.0/19
     - 69.173.127.192/27
+# What prefix to use to refer to secrets rendered from firecloud-develop. Defaults to `name`
+# legacyResourcePrefix: null
+
+# Settings for the reader deployment
+reader:
+  name: cromwell1-reader
+  replicas: 3
+  expose: true
+  serviceName: cromwell1
   legacyResourcePrefix: cromwell1-frontend
+
+# Settings for the runner deployment
 runner:
   name: cromwell1-runner
   replicas: 3
+
+# Settings for the summarizer deployment
 summarizer:
   name: cromwell1-summarizer
   replicas: 1
+
+# Settings for the legacy cromwell2 deploymnet
+legacy:
+  name: cromwell2
+  replicas: 0
+  expose: true
+  serviceName: cromwell2

@@ -1,18 +1,14 @@
-{{- /* Generate a Cromwell deployment
-Required keys:
-  .name     # Name of the service. Eg "cromwell1-reader"
-  .replicas # Number of replicas
-  .imageTag # Tag of the docker image
-
-Optional keys:
-  .legacyResourcePrefix # Prefix to use when referencing legacy firecloud-develop resources. Defaults to .name
-*/ -}}
+{{- /* Generate a Cromwell deployment */ -}}
 {{- define "cromwell.deployment" -}}
-{{- $legacyResourcePrefix := .legacyResourcePrefix | default .name -}}
+{{- $settings := .DeploymentSettings -}}
+{{- $imageTag := $settings.imageTag | default .Values.appVersion -}}
+{{- $legacyResourcePrefix := $settings.legacyResourcePrefix | default $settings.name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .name }}
+  name: {{ $settings.name }}
+  labels:
+{{ include "cromwell.labels" . | indent 4 }}
 spec:
   revisionHistoryLimit: 0 # Cromwell is resource-intensive
   strategy:
@@ -20,14 +16,14 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ .replicas }}
+  replicas: {{ $settings.replicas }}
   selector:
     matchLabels:
-      app: {{ .name }}
+      deployment: {{ $settings.name }}
   template:
     metadata:
       labels:
-        app: {{ .name }}
+        deployment: {{ $settings.name }}
     spec:
       serviceAccountName: cromwell-sa
       # Containers are configured to talk to each other by name
@@ -54,7 +50,7 @@ spec:
         emptyDir: {}
       containers:
       - name: app
-        image: "broadinstitute/cromwell:{{ .imageTag }}"
+        image: "broadinstitute/cromwell:{{ $imageTag }}"
         resources:
           requests:
             cpu: 7
@@ -152,4 +148,4 @@ spec:
         volumeMounts:
         - mountPath: /cromwell-newrelic-jar
           name: cromwell-newrelic-jar
-{{- end }}
+{{- end -}}
