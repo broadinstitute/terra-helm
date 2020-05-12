@@ -148,8 +148,4 @@ spec:
         volumeMounts:
         - mountPath: /cromwell-newrelic-jar
           name: cromwell-newrelic-jar
-{{- if $settings.expose }}
----
-
-{{- end -}}
 {{- end -}}
