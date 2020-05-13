@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kernel-service-poc-deployment
-  {{- template "poc.labels" }}
+  labels:
+    {{- template "poc.labels" }}
 spec:
   replicas: 1
   selector:
