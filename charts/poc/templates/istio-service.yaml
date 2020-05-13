@@ -2,7 +2,8 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: kernel-service-poc-vservice
-  {{- template "poc.labels" }}
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 spec:
   hosts:
   - "*"

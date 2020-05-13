@@ -1,8 +1,7 @@
 {{/*
 Create labels to use for resources in this chart
 */}}
-{{- define "poc.labels" }}
-  labels:
+{{- define "poc.labels" -}}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app.kubernetes.io/name: {{ .Chart.Name }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
