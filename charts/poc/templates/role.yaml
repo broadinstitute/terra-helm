@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: kernel-service-poc-service-role
   labels:
-    {{- template "poc.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']

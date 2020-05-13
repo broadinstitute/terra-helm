@@ -3,7 +3,7 @@ kind: RoleBinding
 metadata:
   name: kernel-service-poc-service-role-binding
   labels:
-    {{- template "poc.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 roleRef:
   kind: Role
   name: kernel-service-poc-service-role
