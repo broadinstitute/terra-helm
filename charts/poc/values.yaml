@@ -14,3 +14,6 @@ vault:
   enabled: true
   # pathPrefix is required if enabled is true
   # pathPrefix: secret/dsde/terra/kernel/integration
+
+# Should be set to true when deploying locally with Skaffold
+devDeploy: false
