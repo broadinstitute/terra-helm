@@ -9,6 +9,7 @@ imageConfig:
   # Override the image tag to deploy by setting this variable.
   # If no value is set, the chart's appVersion value will be used.
   # tag: latest
+  imagePullPolicy: Always
 vault:
   enabled: true
   # pathPrefix is required if enabled is true
