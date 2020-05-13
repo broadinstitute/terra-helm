@@ -17,7 +17,11 @@ spec:
       serviceAccountName: kernel-service-poc-service-sa
       containers:
       - name: kernel-service-poc
-        image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+        image: "{{- if .Values.image -}}
+            {{ .Values.image }}
+          {{- else -}}
+            {{ .Values.imageConfig.repository }}:{{ default .Values.AppVersion .Values.imageConfig.tag }}
+          {{- end }}"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

@@ -1,7 +1,13 @@
-image:
+# image is used for local Skaffold deploys
+# image: gcr.io/terra-kernel-k8s/kernel-service-poc
+
+# appVerion is set by Helmfile
+# appVersion: 0.0.0
+
+imageConfig:
   repository: gcr.io/terra-kernel-k8s/kernel-service-poc
   # Override the image tag to deploy by setting this variable.
-  # If no value is set, the chart's appVersion will be used.
+  # If no value is set, the chart's appVersion value will be used.
   # tag: latest
 vault:
   enabled: true
