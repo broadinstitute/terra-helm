@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kernel-service-poc-deployment
   labels:
-    {{- template "poc.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 spec:
   replicas: 1
   selector:

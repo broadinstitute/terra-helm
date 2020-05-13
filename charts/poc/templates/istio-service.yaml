@@ -3,7 +3,7 @@ kind: VirtualService
 metadata:
   name: kernel-service-poc-vservice
   labels:
-    {{- template "poc.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 spec:
   hosts:
   - "*"
