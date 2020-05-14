@@ -21,7 +21,7 @@ spec:
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
-            {{ .Values.imageConfig.repository }}:{{ default .Values.AppVersion .Values.imageConfig.tag }}
+            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
         ports:
