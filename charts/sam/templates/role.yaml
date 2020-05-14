@@ -2,7 +2,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: sam-role
-  {{- template "sam.labels" }}
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "sam.labels" }}{{ end }}
 rules:
   - apiGroups: ['policy']
     resources: ['podsecuritypolicies']

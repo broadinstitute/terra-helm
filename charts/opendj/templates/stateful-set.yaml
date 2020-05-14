@@ -4,10 +4,10 @@ metadata:
   name: opendj
   labels:
     app: opendj
-    {{- template "opendj.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "opendj.labels" }}{{ end }}
 spec:
   serviceName: opendj
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: opendj
@@ -23,7 +23,11 @@ spec:
         fsGroup: 1001
       containers:
       - name: opendj
-        image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+        image: "{{- if .Values.image -}}
+            {{ .Values.image }}
+          {{- else -}}
+            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+          {{- end }}"
         imagePullPolicy: Always
         ports:
         - containerPort: 1389

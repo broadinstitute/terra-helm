@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: opendj-role
   labels:
-    {{- template "opendj.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "opendj.labels" }}{{ end }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
@@ -19,7 +19,7 @@ kind: RoleBinding
 metadata:
   name: opendj-role-binding
   labels:
-    {{- template "opendj.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "opendj.labels" }}{{ end }}
 roleRef:
   kind: Role
   name: opendj-role
@@ -33,4 +33,4 @@ kind: ServiceAccount
 metadata:
   name: opendj-sa
   labels:
-    {{- template "opendj.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "opendj.labels" }}{{ end }}
