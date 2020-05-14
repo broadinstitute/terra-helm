@@ -1,13 +1,14 @@
-{{/* Generate a Cromwell deployment */}}
-{{- define "cromwell.deployment" }}
-{{- /*
-Reader ctmpls are prefixed "cromwell1-frontend" because the instance type is technically frontend
-*/ -}}
-{{- $ctmplNamePrefix := .name | replace "reader" "frontend" -}}
+{{- /* Generate a Cromwell deployment */ -}}
+{{- define "cromwell.deployment" -}}
+{{- $settings := .DeploymentSettings -}}
+{{- $imageTag := $settings.imageTag | default .Values.appVersion -}}
+{{- $legacyResourcePrefix := $settings.legacyResourcePrefix | default $settings.name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .name }}
+  name: {{ $settings.name }}
+  labels:
+{{ include "cromwell.labels" . | indent 4 }}
 spec:
   revisionHistoryLimit: 0 # Cromwell is resource-intensive
   strategy:
@@ -15,14 +16,14 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ .replicas }}
+  replicas: {{ $settings.replicas }}
   selector:
     matchLabels:
-      app: {{ .name }}
+      deployment: {{ $settings.name }}
   template:
     metadata:
       labels:
-        app: {{ .name }}
+        deployment: {{ $settings.name }}
     spec:
       serviceAccountName: cromwell-sa
       # Containers are configured to talk to each other by name
@@ -36,20 +37,20 @@ spec:
       volumes:
       - name: app-ctmpls
         secret:
-          secretName: {{ $ctmplNamePrefix }}-app-ctmpls
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       - name: proxy-ctmpls
         secret:
-          secretName: {{ $ctmplNamePrefix }}-proxy-ctmpls
+          secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
       - name: sqlproxy-ctmpls
         secret:
-          secretName: {{ $ctmplNamePrefix }}-sqlproxy-ctmpls
+          secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: cromwell-gc-logs
         emptyDir: {}
       - name: cromwell-newrelic-jar
         emptyDir: {}
       containers:
       - name: app
-        image: "broadinstitute/cromwell:{{ .imageTag }}"
+        image: "broadinstitute/cromwell:{{ $imageTag }}"
         resources:
           requests:
             cpu: 7
@@ -58,7 +59,7 @@ spec:
             memory: 50Gi
         envFrom:
         - secretRef:
-            name: {{ $ctmplNamePrefix }}-app-env
+            name: {{ $legacyResourcePrefix }}-app-env
         env:
         # Make node, pod name accessible to app as env vars
         - name: K8S_NODE_NAME
@@ -108,7 +109,7 @@ spec:
           - containerPort: 8888
         envFrom:
         - secretRef:
-            name: {{ $ctmplNamePrefix }}-proxy-env
+            name: {{ $legacyResourcePrefix }}-proxy-env
         volumeMounts:
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
@@ -134,7 +135,7 @@ spec:
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:
         - secretRef:
-            name: {{ $ctmplNamePrefix }}-sqlproxy-env
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
         volumeMounts:
         - mountPath: /etc/sqlproxy-service-account.json
           subPath: sqlproxy-service-account.json
@@ -147,4 +148,4 @@ spec:
         volumeMounts:
         - mountPath: /cromwell-newrelic-jar
           name: cromwell-newrelic-jar
-{{- end }}
+{{- end -}}

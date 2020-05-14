@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kernel-service-poc-deployment
-  {{- template "poc.labels" }}
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -17,8 +18,12 @@ spec:
       serviceAccountName: kernel-service-poc-service-sa
       containers:
       - name: kernel-service-poc
-        image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
-        imagePullPolicy: Always
+        image: "{{- if .Values.image -}}
+            {{ .Values.image }}
+          {{- else -}}
+            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+          {{- end }}"
+        imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
         ports:
         - containerPort: 8080
         env:
