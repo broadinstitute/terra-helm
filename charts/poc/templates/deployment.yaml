@@ -5,7 +5,7 @@ metadata:
   labels:
     {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: kernel-service-poc

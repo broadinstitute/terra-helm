@@ -1,10 +1,19 @@
-image:
+# image is used for local Skaffold deploys
+# image: gcr.io/terra-kernel-k8s/sam
+
+# appVerion is set by Helmfile
+# appVersion: 0.0.0
+
+imageConfig:
   repository: gcr.io/broad-dsp-gcr-public/sam
   # Override the image tag to deploy by setting this variable.
-  # If no value is set, the chart's appVersion will be used.
+  # If no value is set, the chart's appVersion value will be used.
   # tag: latest
-# Istio gateway that will be used for ingress
-istioGateway:
-  name: template-gateway
-  namespace: default
+  imagePullPolicy: Always
 replicas: 1
+ingress:
+  istioGatewayName: template-gateway
+  istioGatewayNamespace: default
+
+# Should be set to true when deploying locally with Skaffold
+devDeploy: false

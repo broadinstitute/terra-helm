@@ -8,7 +8,7 @@ spec:
   hosts:
   - "*"
   gateways:
-  - template-gateway.default.svc.cluster.local
+  - {{ .Values.ingress.istioGatewayName }}.{{ .Values.ingress.istioGatewayNamespace }}.svc.cluster.local
   http:
   - match:
     - uri:

@@ -1,7 +1,6 @@
 apiVersion: v2
 name: opendj
-version: 0.0.0
-appVersion: latest
+version: 0.0.1
 
 description: Chart for OpenDJ, used by Sam, the Terra IAM application
 type: application

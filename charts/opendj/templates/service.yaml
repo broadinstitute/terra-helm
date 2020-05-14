@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: opendj
-    {{- template "opendj.labels" }}
+    {{ if not .Values.devDeploy }}{{ template "opendj.labels" }}{{ end }}
   name: opendj
 spec:
   clusterIP: None
