@@ -145,6 +145,22 @@ entries:
     version: 0.0.0
   opendj:
   - apiVersion: v2
+    created: "2020-05-14T18:22:22.017475585Z"
+    description: Chart for OpenDJ, used by Sam, the Terra IAM application
+    digest: 87f9b20891ddfc99a7626619a226f7e4bf43c9b92176b1051438724eb3c5ce6c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - opendj
+    name: opendj
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.1/opendj-0.0.1.tgz
+    version: 0.0.1
+  - apiVersion: v2
     appVersion: latest
     created: "2020-05-11T14:25:21.14630496Z"
     description: Chart for OpenDJ, used by Sam, the Terra IAM application
@@ -162,6 +178,21 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.0/opendj-0.0.0.tgz
     version: 0.0.0
   poc:
+  - apiVersion: v2
+    created: "2020-05-14T18:22:22.112535504Z"
+    description: Chart for a POC Terra app
+    digest: 5aca213c05e6afc36babb944705bbc78cbf24585904f6d39136b678e8e9ae156
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.8/poc-0.0.8.tgz
+    version: 0.0.8
   - apiVersion: v2
     created: "2020-05-14T16:30:11.736589173Z"
     description: Chart for a POC Terra app
@@ -289,6 +320,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.0/poc-0.0.0.tgz
     version: 0.0.0
   sam:
+  - apiVersion: v2
+    appVersion: develop
+    created: "2020-05-14T18:22:22.302526042Z"
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: 6bb4d11c3af6ae649356ebef4edb1057516a2cf40b5098714c6bb82d8d5a4523
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.0.1/sam-0.0.1.tgz
+    version: 0.0.1
   - apiVersion: v2
     appVersion: develop
     created: "2020-05-11T14:25:21.234712717Z"
