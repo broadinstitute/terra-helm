@@ -17,6 +17,14 @@ entries:
     version: 0.0.1
   cromwell:
   - apiVersion: v2
+    created: "2020-05-14T14:14:03.351280494Z"
+    description: A Helm chart for Cromwell
+    digest: e48e53d481b3d83496f164916995b9c5e640f9bc163704f1237821d21392fe49
+    name: cromwell
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.1.1/cromwell-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2020-05-12T16:23:56.117384017Z"
     description: A Helm chart for Cromwell
     digest: 5f84423e07a26f2fa26d9aa1153fef292909a087630c2518534e92ac9399a1f8
@@ -154,6 +162,21 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.0/opendj-0.0.0.tgz
     version: 0.0.0
   poc:
+  - apiVersion: v2
+    created: "2020-05-14T14:14:03.443463899Z"
+    description: Chart for a POC Terra app
+    digest: 9d73cdf69f68dd84ac152281b8eeeced91b9b26ace50cecec9b1c085561052a7
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.6/poc-0.0.6.tgz
+    version: 0.0.6
   - apiVersion: v2
     appVersion: 0.13.0
     created: "2020-05-07T19:20:05.489446177Z"
