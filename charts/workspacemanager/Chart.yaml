@@ -1,0 +1,16 @@
+apiVersion: v2
+name: workspacemanager
+version: 0.0.0
+
+description: Chart for Terra Workspace Manager
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+- workspacemanager
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+- https://github.com/DataBiosphere/terra-workspace-manager

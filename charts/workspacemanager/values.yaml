@@ -1,0 +1,24 @@
+# image is used for local Skaffold deploys
+# image: gcr.io/terra-kernel-k8s/terra-workspace-manager
+
+# appVerion is set by Helmfile
+# appVersion: 0.0.0
+
+imageConfig:
+  repository: gcr.io/terra-kernel-k8s/terra-workspace-manager
+  # Override the image tag to deploy by setting this variable.
+  # If no value is set, the chart's appVersion value will be used.
+  # tag: latest
+  imagePullPolicy: Always
+vault:
+  enabled: true
+  # pathPrefix is required if Vault secret sync is enabled
+  # pathPrefix: secret/dsde/terra/kernel/integration
+ingress:
+  istioGatewayName: template-gateway
+  istioGatewayNamespace: default
+
+samAddress: https://sam.dsde-dev.broadinstitute.org/
+
+# Should be set to true when deploying locally with Skaffold
+devDeploy: false
