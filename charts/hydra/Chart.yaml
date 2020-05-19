@@ -1,0 +1,16 @@
+apiVersion: v2
+name: hydra
+version: 0.0.0
+
+description: Chart for the Hydra deployment used by Identity Concentrator in Terra
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+- hydra
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+- https://github.com/DataBiosphere/healthcare-federated-access-services

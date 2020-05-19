@@ -1,0 +1,16 @@
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: hydra-service
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "hydra.labels" }}{{ end }}
+spec:
+  selector:
+    app: "hydra"
+  ports:
+  - name: "http"
+    port: 4444
+    targetPort: 4444
+  - name: "admin"
+    port: 4445
+    targetPort: 4445
