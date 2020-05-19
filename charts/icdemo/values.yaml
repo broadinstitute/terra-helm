@@ -11,10 +11,6 @@ imageConfig:
   # tag: latest
   imagePullPolicy: Always
 replicas: 1
-vault:
-  enabled: true
-  # pathPrefix is required if Vault secret sync is enabled
-  # pathPrefix: secret/dsde/terra/kernel/integration
 ingress:
   istioGatewayName: template-gateway
   istioGatewayNamespace: default
