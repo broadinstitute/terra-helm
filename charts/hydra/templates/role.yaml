@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: hydra-service-role
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "hydra.labels" }}{{ end }}
+rules:
+- apiGroups: ['policy']
+  resources: ['podsecuritypolicies']
+  verbs:     ['use']
+  resourceNames:
+  - terra-default-psp
+- apiGroups: ['']
+  resources: ['secrets']
+  verbs: ['get', 'create']

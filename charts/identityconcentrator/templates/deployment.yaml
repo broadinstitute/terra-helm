@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ic-deployment
+  labels:
+    app: ic
+    {{ if not .Values.devDeploy }}{{ template "identityconcentrator.labels" }}{{ end }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: ic
+  template:
+    metadata:
+      name: ic-service
+      labels:
+        app: ic
+    spec:
+      serviceAccountName: ic-sa
+      containers:
+        - name: ic
+          image: "{{- if .Values.image -}}
+              {{ .Values.image }}
+            {{- else -}}
+              {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+            {{- end }}"
+          imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ACCESS_TOKEN_LIFESPAN
+              value: 15m
+            - name: DOMAIN
+              value: {{ required "A valid .Values.domain entry required!" .Values.domain }}
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /secrets/sa/service-account.json
+            - name: SERVICE_NAME
+              value: ic
+            - name: PROJECT
+              value: {{ required "A valid .Values.project entry required!" .Values.project }}
+            - name: TYPE
+              value: ic
+            - name: HYDRA_INTERNAL
+              value: hydra-ic-service.{{ .Release.Namespace }}.svc.cluster.local
+            - name: STORAGE
+              value: datastore
+          volumeMounts:
+            - name: sa-creds
+              mountPath: /secrets/sa
+              readOnly: true
+      volumes:
+        - name: sa-creds
+          secret:
+            secretName: ic-sa

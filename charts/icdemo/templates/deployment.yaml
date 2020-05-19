@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icdemo-deployment
+  labels:
+    app: icdemo
+    {{ if not .Values.devDeploy }}{{ template "icdemo.labels" }}{{ end }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: icdemo
+  template:
+    metadata:
+      name: icdemo-service
+      labels:
+        app: icdemo
+    spec:
+      serviceAccountName: ic-sa
+      containers:
+        - name: icdemo
+          image: "{{- if .Values.image -}}
+              {{ .Values.image }}
+            {{- else -}}
+              {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+            {{- end }}"
+          imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: URL
+              value: https://{{ required "A valid .Values.domain entry required!" .Values.domain }}
+            - name: PROJECT
+              value: {{ required "A valid .Values.project entry required!" .Values.project }}
+            - name: TYPE
+              value: icdemo

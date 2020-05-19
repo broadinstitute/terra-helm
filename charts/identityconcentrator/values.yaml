@@ -1,0 +1,26 @@
+# image is used for local/Skaffold deploys
+# image: gcr.io/terra-kernel-k8s/hcls-fa-gke-ic
+
+# appVerion is set by Helmfile
+# appVersion: 0.0.0
+
+imageConfig:
+  repository: gcr.io/terra-kernel-k8s/hcls-fa-gke-ic
+  # Override the image tag to deploy by setting this variable.
+  # If no value is set, the chart's appVersion value will be used.
+  # tag: latest
+  imagePullPolicy: Always
+vault:
+  enabled: true
+  # pathPrefix is required if Vault secret sync is enabled
+  # pathPrefix: secret/dsde/terra/kernel/integration
+ingress:
+  istioGatewayName: template-gateway
+  istioGatewayNamespace: default
+
+# Required values
+# domain: kernel.integ.envs.broadinstitute.org
+# project: terra-kernel-k8s
+
+# Should be set to true when deploying locally
+devDeploy: false
