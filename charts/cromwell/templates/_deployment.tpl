@@ -51,6 +51,8 @@ spec:
       containers:
       - name: app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
+        command: ["/bin/bash"]
+        args: ["-c", "java ${JAVA_OPTS} -Dsystem.cromwell_id=gke-${K8S_POD_NAME} -jar /app/cromwell.jar ${CROMWELL_ARGS} ${*}", "--"]
         resources:
           requests:
             cpu: 7
