@@ -52,8 +52,8 @@ summarizer:
   replicas: 1
 
 # Settings for the legacy cromwell2 deploymnet
-legacy:
+standalone:
   name: cromwell2
-  replicas: 0
+  replicas: 1
   expose: true
   serviceName: cromwell2

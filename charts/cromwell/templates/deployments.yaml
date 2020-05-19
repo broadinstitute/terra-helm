@@ -6,7 +6,7 @@
   Generate Deployment and Service definitions for deployment type.
 */ -}}
 {{- $defaults := $.Values.deploymentDefaults -}}
-{{- range $deploymentType := (list "reader" "runner" "summarizer") }}
+{{- range $deploymentType := (list "reader" "runner" "summarizer" "standalone") }}
 {{- $overrides := (index $.Values $deploymentType) | deepCopy -}}
 {{- $settings := $defaults | merge $overrides -}}
 {{- $templateScope := $ | merge (dict "DeploymentSettings" $settings) }}
