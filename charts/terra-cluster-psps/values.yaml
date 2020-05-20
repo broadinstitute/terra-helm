@@ -4,7 +4,6 @@ namespaces:
   kubeStateMetrics: default
 
 serviceAccounts:
-  cockroachdb: cockroachdb-service-account
   istio:
     - istio-citadel-service-account
     - istio-galley-service-account
