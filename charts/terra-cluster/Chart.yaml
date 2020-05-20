@@ -5,7 +5,7 @@ description: A Helm chart to configure a k8s cluster for Terra
 
 type: application
 
-version: 0.1.0
+version: 0.1.1
 
 keywords:
 - dsp
@@ -22,7 +22,7 @@ sources:
 
 dependencies:
 - name: terra-cluster-psps
-  version: 0.0.2
+  version: 0.0.4
   repository: https://broadinstitute.github.io/terra-helm/
 - name: install-secrets-manager
   condition: install-secrets-manager.enabled
