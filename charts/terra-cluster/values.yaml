@@ -13,3 +13,25 @@ install-secrets-manager:
   existingSecret: secret-manager-approle
   existingRoleIdKey: role-id
   existingSecretIdKey: secret-id
+terra-cluster-networking:
+  namespaces:
+    istio: istio-system
+  gateway:
+    name: template-gateway
+terra-cluster-psps:
+  namespaces:
+    cockroachdb: default
+    istio: istio-system
+    kubeStateMetrics: default
+  serviceAccounts:
+    cockroachdb: cockroachdb-service-account
+    istio:
+    - istio-citadel-service-account
+    - istio-galley-service-account
+    - istio-ingressgateway-service-account
+    - istio-mixer-service-account
+    - istio-multi
+    - istio-pilot-service-account
+    - istio-security-post-install-account
+    - istio-sidecar-injector-service-account
+    - promsd
