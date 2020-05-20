@@ -17,7 +17,7 @@ terra-cluster-networking:
   namespaces:
     istio: istio-system
   gateway:
-    name: template-gateway
+    name: default-istio-gateway
 terra-cluster-psps:
   namespaces:
     cockroachdb: default
