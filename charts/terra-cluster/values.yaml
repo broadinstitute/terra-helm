@@ -20,7 +20,6 @@ terra-cluster-networking:
     name: default-istio-gateway
 terra-cluster-psps:
   namespaces:
-    cockroachdb: default
     istio: istio-system
     kubeStateMetrics: default
   serviceAccounts:
