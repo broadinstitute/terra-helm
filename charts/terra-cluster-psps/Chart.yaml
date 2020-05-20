@@ -5,7 +5,7 @@ description: A Helm chart to deploy terra kernel pod security policies
 
 type: application
 
-version: 0.0.3
+version: 0.0.4
 
 keywords:
 - dsp

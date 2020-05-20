@@ -1,5 +1,4 @@
 namespaces:
-  cockroachdb: default
   istio: istio-system
   kubeStateMetrics: default
 
