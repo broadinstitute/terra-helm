@@ -5,7 +5,7 @@ description: A Helm chart to configure a k8s cluster for Terra
 
 type: application
 
-version: 0.1.1
+version: 0.1.2
 
 keywords:
 - dsp
@@ -26,7 +26,7 @@ dependencies:
   repository: https://broadinstitute.github.io/terra-helm/
 - name: install-secrets-manager
   condition: install-secrets-manager.enabled
-  version: 0.0.4
+  version: 0.0.6
   repository: https://broadinstitute.github.io/datarepo-helm/
 - name: terra-cluster-networking
   version: 0.0.1

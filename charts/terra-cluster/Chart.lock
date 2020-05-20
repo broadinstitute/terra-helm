@@ -4,9 +4,9 @@ dependencies:
   version: 0.0.4
 - name: install-secrets-manager
   repository: https://broadinstitute.github.io/datarepo-helm/
-  version: 0.0.4
+  version: 0.0.6
 - name: terra-cluster-networking
   repository: https://broadinstitute.github.io/terra-helm/
   version: 0.0.1
-digest: sha256:6a410c930a18eebc0ea43c3828b0a82cf9880865f5e1c88e682f7b8daa6547d5
-generated: "2020-05-20T12:23:54.231076-04:00"
+digest: sha256:2ec68b061b01306155b2a6e3682ff73a48791d283756ae02a4f8a78495550151
+generated: "2020-05-20T14:01:20.636896-04:00"
