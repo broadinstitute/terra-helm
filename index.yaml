@@ -1298,6 +1298,23 @@ entries:
     version: 0.0.0
   workspacemanager:
   - apiVersion: v2
+    created: "2020-05-21T19:40:21.530179512Z"
+    description: Chart for Terra Workspace Manager
+    digest: e778ed570bbf66f006a6cb0a0be69d0a51eed81662f4d639f543e67290fb50a2
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.0.1/workspacemanager-0.0.1.tgz
+    version: 0.0.1
+  - apiVersion: v2
     created: "2020-05-15T15:10:19.595990383Z"
     description: Chart for Terra Workspace Manager
     digest: 09cbe83ccc1a4bceb69b1ea726fc90d7aab425bfb081964725d3612209bfd943
