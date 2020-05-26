@@ -41,7 +41,7 @@ spec:
             - name: TYPE
               value: ic
             - name: HYDRA_INTERNAL
-              value: hydra-ic-service.{{ .Release.Namespace }}.svc.cluster.local
+              value: hydra-service.{{ .Release.Namespace }}.svc.cluster.local
             - name: STORAGE
               value: datastore
           volumeMounts:
