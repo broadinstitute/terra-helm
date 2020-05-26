@@ -12,7 +12,7 @@ spec:
       app: hydra
   template:
     metadata:
-      name: hydra-service
+      name: hydra-ic-service
       labels:
         app: hydra
     spec:
