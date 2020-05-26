@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: ic
+  name: icdemo
   labels:
     {{ if not .Values.devDeploy }}{{ template "icdemo.labels" }}{{ end }}
 spec:
