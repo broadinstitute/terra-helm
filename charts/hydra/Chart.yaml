@@ -1,6 +1,6 @@
 apiVersion: v2
 name: hydra
-version: 0.0.0
+version: 0.0.1
 
 description: Chart for the Hydra deployment used by Identity Concentrator in Terra
 type: application
