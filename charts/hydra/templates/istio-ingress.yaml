@@ -27,4 +27,4 @@ spec:
     - destination:
         port:
           number: 4444
-        host: hydra-service.{{ .Release.Namespace }}.svc.cluster.local
+        host: hydra-ic-service.{{ .Release.Namespace }}.svc.cluster.local
