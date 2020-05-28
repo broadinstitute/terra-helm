@@ -13,7 +13,7 @@ imageConfig:
 replicas: 1
 ingress:
   istioGatewayName: template-gateway
-  istioGatewayNamespace: default
+  istioGatewayNamespace: istio-system
 
 # Required values
 # domain: kernel.integ.envs.broadinstitute.org
