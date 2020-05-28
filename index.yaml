@@ -1133,6 +1133,25 @@ entries:
     version: 0.0.1
   terra-cluster-psps:
   - apiVersion: v2
+    created: "2020-05-28T15:33:05.662515333Z"
+    description: A Helm chart to deploy terra kernel pod security policies
+    digest: 83bc47dc402423dea6b4a6e5718e35f2594b2da77da4baae85d5964649e651f9
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster-psps
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-psps-0.0.5/terra-cluster-psps-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
     created: "2020-05-20T16:22:17.624032863Z"
     description: A Helm chart to deploy terra kernel pod security policies
     digest: 82c2ae17170e277b835709ac264172f0603a3670ba6cf1b6b1f6baa0714c0a50
