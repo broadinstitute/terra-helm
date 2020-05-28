@@ -170,6 +170,23 @@ entries:
     version: 0.0.0
   hydra:
   - apiVersion: v2
+    created: "2020-05-28T20:36:10.008250822Z"
+    description: Chart for the Hydra deployment used by Identity Concentrator in Terra
+    digest: 4524da2444b10fa9dac9ea14479eac2d7b906c55aa987b1c0d04bf926546c6fb
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - hydra
+    name: hydra
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/hydra-0.0.3/hydra-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
     created: "2020-05-26T19:12:00.092735882Z"
     description: Chart for the Hydra deployment used by Identity Concentrator in Terra
     digest: f318f7579ac41e71552ea56fdbdebb0c459f8262aeac2e586554bd60a8c60aa0
@@ -222,6 +239,24 @@ entries:
     version: 0.0.0
   icdemo:
   - apiVersion: v2
+    created: "2020-05-28T20:36:10.168229537Z"
+    description: Chart for the Identity Concentrator demo/test
+    digest: 751ab12b9e3c9a9b01f699300205c2761b3ea0c0598d89566011a80b29dcc50a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - identityconcentrator
+    - demo
+    name: icdemo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/icdemo-0.0.2/icdemo-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
     created: "2020-05-26T17:02:19.162440376Z"
     description: Chart for the Identity Concentrator demo/test
     digest: 5cc4fb4663795850467230f3ca21dd49c08c941f53d8f425ff9cd3c6fe2961c0
@@ -258,6 +293,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/icdemo-0.0.0/icdemo-0.0.0.tgz
     version: 0.0.0
   identityconcentrator:
+  - apiVersion: v2
+    created: "2020-05-28T20:36:10.256929569Z"
+    description: Chart for the Identity Concentrator deployment used by Terra
+    digest: 154e985712ac70b72958942b6a4d42f3302b3eea8c2d898551a30f05f635833d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - identityconcentrator
+    name: identityconcentrator
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/identityconcentrator-0.0.3/identityconcentrator-0.0.3.tgz
+    version: 0.0.3
   - apiVersion: v2
     created: "2020-05-26T19:12:00.189257616Z"
     description: Chart for the Identity Concentrator deployment used by Terra
@@ -344,6 +396,21 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.0/opendj-0.0.0.tgz
     version: 0.0.0
   poc:
+  - apiVersion: v2
+    created: "2020-05-28T20:36:10.359795072Z"
+    description: Chart for a POC Terra app
+    digest: 3ab545f99ea5f6e274ff57c654ec65e736cbca198aef25bee1234a76731276fa
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.9/poc-0.0.9.tgz
+    version: 0.0.9
   - apiVersion: v2
     created: "2020-05-14T18:22:22.112535504Z"
     description: Chart for a POC Terra app
@@ -486,6 +553,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.0/poc-0.0.0.tgz
     version: 0.0.0
   sam:
+  - apiVersion: v2
+    appVersion: develop
+    created: "2020-05-28T20:36:10.464728289Z"
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: c93f8850a74fba692fe0a42c86a9dcd126480934cf81359a6b5c0aff20e473b5
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.0.2/sam-0.0.2.tgz
+    version: 0.0.2
   - apiVersion: v2
     appVersion: develop
     created: "2020-05-14T18:22:22.302526042Z"
@@ -1432,6 +1517,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   workspacemanager:
+  - apiVersion: v2
+    created: "2020-05-28T20:36:10.587415972Z"
+    description: Chart for Terra Workspace Manager
+    digest: 3565bd3caf83a965267f7bc82da55c5391f439dd5379e41446825fc238d0e505
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.0.2/workspacemanager-0.0.2.tgz
+    version: 0.0.2
   - apiVersion: v2
     created: "2020-05-21T19:40:21.530179512Z"
     description: Chart for Terra Workspace Manager
