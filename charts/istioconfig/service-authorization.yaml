@@ -4,11 +4,12 @@ apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: "poc-access"
+  namespace: terra-yyu
 spec:
   selector:
     matchLabels:
-      app: kernel-service-poc-service
+      app: kernel-service-poc
   rules:
     - from:
         - source:
-            principals: ["cluster.local/ns/{{ .Release.Namespace }}/sa/ic-service"]
+            # principals: ["cluster.local/ns/{{ .Release.Namespace }}/sa/ic-service"]
