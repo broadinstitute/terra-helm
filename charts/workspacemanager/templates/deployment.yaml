@@ -62,13 +62,23 @@ spec:
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
+        - name: SQL_INSTANCE_PROJECT
+          valueFrom:
+            secretKeyRef:
+              name: workspace-cloudsql-postgres-instance
+              key: project
+        - name: SQL_INSTANCE_REGION
+          valueFrom:
+            secretKeyRef:
+              name: workspace-cloudsql-postgres-instance
+              key: region
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: workspace-cloudsql-postgres-instance-name
+              name: workspace-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
-                  "-instances=terra-kernel-k8s:us-central1:$(SQL_INSTANCE_NAME)=tcp:5432",
+                  "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
                   "-credential_file=/secrets/cloudsql/service-account.json"]
         securityContext:
           runAsUser: 2  # non-root user
