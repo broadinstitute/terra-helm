@@ -1,0 +1,5 @@
+namespaces:
+  istio: istio-system
+
+gateway:
+  name: template-gateway

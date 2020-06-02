@@ -1,0 +1,22 @@
+---
+apiVersion: v2
+name: terra-istio-config
+description: A Helm chart to steup istio configs
+
+type: application
+
+version: 0.0.1
+
+keywords:
+- dsp
+- broadinstitute
+- kernel
+- terra
+- istio
+
+maintainers:
+- email: yyu@broadinstitute.org
+  name: Yonghao Yu
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
