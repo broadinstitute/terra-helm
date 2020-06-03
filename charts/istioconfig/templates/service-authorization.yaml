@@ -12,6 +12,7 @@ spec:
     - from:
         - source:
             principals:
+              {{- $root := . -}}
               {{- range .Values.kernelServicePocAccess }}
-              - "cluster.local/ns/{{ .Release.Namespace }}/sa/{{ . }}"
+                - "cluster.local/ns/{{ $root.Release.Namespace }}/sa/{{ . }}"
               {{- end }}
