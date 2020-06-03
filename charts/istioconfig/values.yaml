@@ -1,5 +1,3 @@
-namespaces:
-  istio: istio-system
-
-gateway:
-  name: template-gateway
+kernelServicePocAccess:
+  ic-sa
+  icdemo-sa

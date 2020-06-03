@@ -4,7 +4,6 @@ apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: "poc-access"
-  namespace: terra-yyu
 spec:
   selector:
     matchLabels:
@@ -12,4 +11,5 @@ spec:
   rules:
     - from:
         - source:
-            # principals: ["cluster.local/ns/{{ .Release.Namespace }}/sa/ic-service"]
+            {{ range .Values.kernelServicePocAcces }}
+            principals: {{- join ","  ["cluster.local/ns/{{ .Release.Namespace }}/sa/{{ . }}}"]

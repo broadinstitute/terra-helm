@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-name: terra-istio-config
+name: istioconfig
 description: A Helm chart to steup istio configs
 
 type: application
