@@ -361,6 +361,27 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/identityconcentrator-0.0.0/identityconcentrator-0.0.0.tgz
     version: 0.0.0
+  istioconfig:
+  - apiVersion: v2
+    created: "2020-06-03T18:20:10.515337881Z"
+    description: A Helm chart to setup Istio configs
+    digest: 17f5283bed739f83c934df34125f758453712e25119a6976ebac76a7cff5a35d
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    - istio
+    maintainers:
+    - email: yyu@broadinstitute.org
+      name: Yonghao Yu
+    name: istioconfig
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/istioconfig-0.0.1/istioconfig-0.0.1.tgz
+    version: 0.0.1
   opendj:
   - apiVersion: v2
     created: "2020-05-14T18:22:22.017475585Z"
