@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: terra-workspace-manager-service-role-binding
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+roleRef:
+  kind: Role
+  name: terra-workspace-manager-service-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+# Authorize specific service accounts:
+- kind: ServiceAccount
+  name: terra-workspace-manager-service-sa

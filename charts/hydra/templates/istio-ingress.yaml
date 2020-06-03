@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hydra
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "hydra.labels" }}{{ end }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+  - {{ .Values.ingress.istioGatewayName }}.{{ .Values.ingress.istioGatewayNamespace }}.svc.cluster.local
+  http:
+  - match:
+      - uri:
+          prefix: /oauth2/auth
+      - uri:
+          prefix: /oauth2/fallbacks
+      - uri:
+          prefix: /oauth2/revoke
+      - uri:
+          prefix: /oauth2/sessions/logout
+      - uri:
+          prefix: /.well-known
+      - uri:
+          prefix: /userinfo
+    route:
+    - destination:
+        port:
+          number: 4444
+        host: hydra-ic-service.{{ .Release.Namespace }}.svc.cluster.local

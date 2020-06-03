@@ -1,0 +1,21 @@
+{{- /*
+  Build deployments map, where deployment type keys a map of deployment settings.
+*/ -}}
+
+{{- /*
+  Generate Deployment and Service definitions for deployment type.
+*/ -}}
+{{- $defaults := $.Values.deploymentDefaults -}}
+{{- range $deploymentType := (list "reader" "runner" "summarizer" "standalone") }}
+{{- $overrides := (index $.Values $deploymentType) | deepCopy -}}
+{{- $settings := $defaults | merge $overrides -}}
+{{- $templateScope := $ | merge (dict "DeploymentSettings" $settings) }}
+---
+# Cromwell {{ $deploymentType }} deployment
+{{ template "cromwell.deployment" (merge (dict "DeploymentSettings" $settings) $) }}
+{{- if $settings.expose }}
+---
+# Cromwell {{ $deploymentType }} service
+{{ template "cromwell.service" (merge (dict "DeploymentSettings" $settings) $) }}
+{{- end -}}
+{{- end -}}

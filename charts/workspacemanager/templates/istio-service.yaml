@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: terra-workspace-manager-vservice
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - {{ .Values.ingress.istioGatewayName }}.{{ .Values.ingress.istioGatewayNamespace }}.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        prefix: /{{ .Values.global.terraEnv }}-terra-workspace-manager
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: terra-workspace-manager-service.{{ .Release.Namespace }}.svc.cluster.local

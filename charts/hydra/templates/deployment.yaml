@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hydra-deployment
+  labels:
+    app: hydra
+    {{ if not .Values.devDeploy }}{{ template "hydra.labels" }}{{ end }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: hydra
+  template:
+    metadata:
+      name: hydra-ic-service
+      labels:
+        app: hydra
+    spec:
+      serviceAccountName: hydra-sa
+      containers:
+        - name: hydra
+          image: "{{- if .Values.image -}}
+              {{ .Values.image }}
+            {{- else -}}
+              {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+            {{- end }}"
+          imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+          ports:
+            - containerPort: 4444
+            - containerPort: 4445
+          env:
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name:  hydra-postgres-db-creds
+                  key: username
+            - name: DATABASE_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hydra-postgres-db-creds
+                  key: password
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: hydra-postgres-db-creds
+                  key: db
+            - name: URL
+              value: https://{{ required "A valid .Values.domain entry required!" .Values.domain }}
+            - name: DSN
+              value: postgres://$(DATABASE_USER):$(DATABASE_USER_PASSWORD)@127.0.0.1:5432/$(DATABASE_NAME)?sslmode=disable
+          readinessProbe:
+            httpGet:
+              port: 4444
+              path: /health/ready
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.16
+          env:
+            - name: SQL_INSTANCE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: hydra-cloudsql-postgres-instance-name
+                  key: name
+          command: ["/cloud_sql_proxy",
+                    "-instances=terra-kernel-k8s:us-central1:$(SQL_INSTANCE_NAME)=tcp:5432",
+                    "-credential_file=/secrets/sa/service-account.json"]
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
+          volumeMounts:
+          - name: sa-creds
+            mountPath: /secrets/sa
+            readOnly: true
+      volumes:
+        - name: sa-creds
+          secret:
+            secretName: hydra-sa

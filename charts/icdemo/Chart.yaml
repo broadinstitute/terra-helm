@@ -1,0 +1,17 @@
+apiVersion: v2
+name: icdemo
+version: 0.0.2
+
+description: Chart for the Identity Concentrator demo/test
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+- identityconcentrator
+- demo
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+- https://github.com/DataBiosphere/healthcare-federated-access-services

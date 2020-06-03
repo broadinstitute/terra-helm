@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: icdemo
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "icdemo.labels" }}{{ end }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+  - {{ .Values.ingress.istioGatewayName }}.{{ .Values.ingress.istioGatewayNamespace }}.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        prefix: /test
+    - uri:
+        prefix: /static
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: icdemo-service.{{ .Release.Namespace }}.svc.cluster.local

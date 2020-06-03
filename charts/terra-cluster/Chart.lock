@@ -1,12 +1,12 @@
 dependencies:
 - name: terra-cluster-psps
   repository: https://broadinstitute.github.io/terra-helm/
-  version: 0.0.2
+  version: 0.0.4
 - name: install-secrets-manager
   repository: https://broadinstitute.github.io/datarepo-helm/
-  version: 0.0.4
+  version: 0.0.6
 - name: terra-cluster-networking
   repository: https://broadinstitute.github.io/terra-helm/
   version: 0.0.1
-digest: sha256:52c30930c8f49db7bbca308ae2bf2b5d4fabf26c3b92b450700da2688b46d8de
-generated: "2020-04-21T16:29:10.534147-04:00"
+digest: sha256:2ec68b061b01306155b2a6e3682ff73a48791d283756ae02a4f8a78495550151
+generated: "2020-05-20T14:01:20.636896-04:00"

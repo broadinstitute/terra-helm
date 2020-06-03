@@ -1,0 +1,14 @@
+# policy for JWT Verification. All services listed in targets field would require JWT token
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "jwt-example"
+spec:
+  targets:
+    - name: kernel-service-poc-service
+  peers:
+    - mtls:
+        mode: PERMISSIVE
+  origins:
+    - jwt:
+        issuer: "https://kernel.integ.envs.broadinstitute.org/"
