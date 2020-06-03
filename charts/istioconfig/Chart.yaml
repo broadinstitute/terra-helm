@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
 name: istioconfig
-description: A Helm chart to steup istio configs
+description: A Helm chart to setup Istio configs
 
 type: application
 
