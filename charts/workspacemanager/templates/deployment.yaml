@@ -24,7 +24,7 @@ spec:
             {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
-        {{^ if .Values.enableProxy }}
+        {{- if not .Values.enableProxy }}
         ports:
         - containerPort: 8080
         {{- end}}
