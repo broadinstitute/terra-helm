@@ -7,4 +7,4 @@ metadata:
 spec:
   domains:
   - {{ .Values.ingress.domainName }}
-  {{- end }}
+{{- end }}

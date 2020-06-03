@@ -5,4 +5,4 @@ metadata:
   name: oidc-backend-config
 spec:
   timeoutSec: {{ .Values.ingress.timeoutSec }}
-  {{- end }}
+{{- end }}
