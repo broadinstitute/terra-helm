@@ -1,4 +1,4 @@
-# Sample AuthZ Policy for future istio.
+# Sample AuthZ Policy for using Istio
 # Block traffic for kernel-service-poc
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
