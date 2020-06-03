@@ -1,0 +1,8 @@
+{{- if .Values.enableProxy }}
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: oidc-backend-config
+spec:
+  timeoutSec: {{ .Values.ingress.timeoutSec }}
+  {{- end }}

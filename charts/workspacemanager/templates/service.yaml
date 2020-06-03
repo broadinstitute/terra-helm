@@ -5,8 +5,19 @@ metadata:
   labels:
     {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
 spec:
+  {{- if .Values.enableProxy}}
+  type: {{ .Values.service.type }}
+  selector:
+    component: {{ include "oidc-proxy.fullname" . }}
+  ports:
+  - protocol: TCP
+    name: http
+    port: 8080
+    targetPort: 8080
+  {{- else }}
   ports:
   - name: "http"
     port: 8080
   selector:
     app: "terra-workspace-manager"
+  {{- end}}

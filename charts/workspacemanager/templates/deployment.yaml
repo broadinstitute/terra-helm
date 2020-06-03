@@ -24,8 +24,10 @@ spec:
             {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+        {{^ if .Values.enableProxy }}
         ports:
         - containerPort: 8080
+        {{- end}}
         env:
         - name: DATABASE_USER
           valueFrom:
@@ -87,7 +89,41 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
+      {{- if .Values.enableProxy }}
+      - name: oidc-proxy
+        image: "{{ .Values.proxy-image.repository }}:{{ .Values.proxy-image.version }}"
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          initialDelaySeconds: 35
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+          volumeMounts:
+          - mountPath: /etc/apache2/sites-available/site.conf
+            name: siteconf
+            subPath: site.conf
+      {{- end }}
       volumes:
         - name: cloudsql-sa-creds
           secret:
             secretName: workspace-sa
+        {{- if .Values.enableProxy }}
+        - name: siteconf
+          configMap:
+            name: terra-workspace-manager-proxy-configmap
+            items:
+            - key: siteconf
+              path: site.conf
+        {{- end }}
