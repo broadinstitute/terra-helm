@@ -3,7 +3,7 @@ cert-manager:
   global:
     podSecurityPolicy:
       enabled: true
-  # 
+    
   extraArgs:
   - --enable-certificate-owner-ref=true
 

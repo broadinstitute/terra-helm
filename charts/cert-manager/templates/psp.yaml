@@ -1,0 +1,20 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata: 
+  name: cert-manager-psp
+  labels:
+    {{- template "certManager.labels" . }}
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+spec:
+  privileged: false
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+  volumes:
+  - '*'
