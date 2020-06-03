@@ -1,0 +1,18 @@
+# Sample AuthZ Policy for using Istio
+# Block traffic for kernel-service-poc
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: "poc-access"
+spec:
+  selector:
+    matchLabels:
+      app: kernel-service-poc
+  rules:
+    - from:
+        - source:
+            principals:
+              {{- $root := . -}}
+              {{- range .Values.kernelServicePocAccess }}
+                - "cluster.local/ns/{{ $root.Release.Namespace }}/sa/{{ . }}"
+              {{- end }}
