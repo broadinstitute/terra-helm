@@ -11,5 +11,7 @@ spec:
   rules:
     - from:
         - source:
-            {{ range .Values.kernelServicePocAcces }}
-            principals: {{- join ","  ["cluster.local/ns/{{ .Release.Namespace }}/sa/{{ . }}}"]
+            principals:
+              {{- range .Values.kernelServicePocAccess }}
+              - "cluster.local/ns/{{ .Release.Namespace }}/sa/{{ . }}"
+              {{- end }}
