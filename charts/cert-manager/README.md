@@ -33,14 +33,12 @@ metadata:
   namespace: example-service
 spec:
   secretName: example-cert-secret
-  organization:
-  - broad-institute
+  renewBefore: 360h # Renew cert 15 days before exp
   dnsNames:
     - example.envs.broadinstitute.org
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-    group: cert-manager.io
 ```
 
 **Considerations**
