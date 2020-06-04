@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: 
+  name: {{ .Release.Name }}-ClusterRole
+  labels:
+    {{- template "certManager.labels" . }}
+rules:
+- apiGroups: ["extensions"]
+  resources: ["podsecuritypolicies"]
+  resourceNames: ["cert-manager-psp"]
+  verbs: ["use"]
+
+
