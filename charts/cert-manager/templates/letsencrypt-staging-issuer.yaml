@@ -2,12 +2,11 @@ apiVersion: certmanager.k8s.io/v1alpha1
 kind: ClusterIssuer
 metadata:
   name: {{ .Release.Name }}-letsencrypt-staging
-  namespace: {{ .Release.Namespace }}
   labels:
     {{- template "certManager.labels" . }}
 spec:
   acme:
-    email: {{ .Values.issuerAccountEmail }}
+    email: {{ required "A valid email that will be used to register a letsencrypt account for this isuser" .Values.issuerAccountEmail }}
     # URL for let's-encrypt-staging
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
@@ -18,8 +17,8 @@ spec:
       dns01:
         clouddns:
           # Id for project that handles dns provisioning
-          project: {{ .Values.dnsProject.id }}
+          project: {{ required "A GCP project id is required for .Values.dnsProject.id " .Values.dnsProject.id }}
           #used to access dns-solver service-account in GCP
           serviceAccountSecretRef:
-            name: {{ .Values.dnsProject.serviceAccount.secretName }}
-            key: {{ .Values.dnsProject.serviceAccount.secretKey }}
+            name: {{ required "A valid .Values.dnsProject.serviceAccount.secretName value is required" .Values.dnsProject.serviceAccount.secretName }}
+            key: {{ required "A valid .Values.dnsProject.serviceAccount.secretKey is required" .Values.dnsProject.serviceAccount.secretKey }}

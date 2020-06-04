@@ -26,7 +26,7 @@ For comprehensive details on the fields available to a Certificate resources ple
 
 An example of a more common usage Certificate resources is:
 ```
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
   name: example-cert
