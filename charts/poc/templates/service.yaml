@@ -1,12 +1,22 @@
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "kernel-service-poc-service"
+  name: kernel-service-poc-service
   labels:
     {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
 spec:
   ports:
-  - name: "http"
+  - name: http
     port: 8080
   selector:
-    app: "kernel-service-poc"
+    app: kernel-service-poc
+  type: LoadBalancer
+  loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
+  loadBalancerSourceRanges:
+  {{- if (.Values.serviceWhitelist) -}}
+    {{- range $nick, $cidrs := $settings.serviceWhitelist }}
+      {{- range $cidr := $cidrs }}
+        - {{ $cidr }}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
