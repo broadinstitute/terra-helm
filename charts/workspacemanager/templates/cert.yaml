@@ -10,7 +10,6 @@ spec:
   renewBefore: {{ .Values.certManager.renewBefore }}
   dnsNames:
     - "{{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}"
-    - "{{ .Chart.Name }}.{{ .Release.Namespace }}.svc.cluster.local"
   issuerRef:
     name: {{ .Values.certManager.issuerName }}
     kind: {{ .Values.certManager.issuerKind }}
