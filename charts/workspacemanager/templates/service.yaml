@@ -1,23 +1,23 @@
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "terra-workspace-manager-service"
+  name: terra-workspace-manager-service
   labels:
     {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
 spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
   {{- if .Values.enableProxy}}
-  type: {{ .Values.service.type }}
   selector:
     component: {{ include "oidc-proxy.fullname" . }}
   ports:
-  - protocol: TCP
-    name: http
+  - name: http
+    protocol: TCP
     port: 8080
-    targetPort: 8080
   {{- else }}
   ports:
-  - name: "http"
+  - name: http
     port: 8080
   selector:
-    app: "terra-workspace-manager"
+    app: terra-workspace-manager
   {{- end}}
