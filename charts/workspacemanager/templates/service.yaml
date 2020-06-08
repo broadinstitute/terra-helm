@@ -13,7 +13,7 @@ spec:
   type: LoadBalancer
   loadBalancerIP: {{ .Values.serviceIP }}
   {{- if (.Values.serviceWhitelist) -}}
-    {{- range $nick, $cidrs := $settings.serviceWhitelist }}
+    {{- range $nick, $cidrs := .Values.serviceWhitelist }}
       {{- range $cidr := $cidrs }}
         - {{ $cidr }}
       {{- end -}}
