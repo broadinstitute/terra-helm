@@ -15,12 +15,11 @@ vault:
   enabled: true
   # pathPrefix is required if Vault secret sync is enabled
   # pathPrefix: secret/dsde/terra/kernel/integration
-ingress:
-  istioGatewayName: template-gateway
-  istioGatewayNamespace: istio-system
-  domainName: ""
-  timeoutSec: 600
+
 samAddress: https://sam.dsde-dev.broadinstitute.org/
+
+# External IP of the service. Required.
+# serviceIP: $.$.$.$
 
 certManager:
   enabled: false

@@ -6,7 +6,7 @@ metadata:
     {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
 spec:
   type: LoadBalancer
-  loadBalancerIP: {{ .Values.serviceIP }}
+  loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
   {{- if .Values.enableProxy}}
   selector:
     component: {{ include "oidc-proxy.fullname" . }}
