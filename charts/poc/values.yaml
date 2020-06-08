@@ -10,20 +10,14 @@ imageConfig:
   # If no value is set, the chart's appVersion value will be used.
   # tag: latest
   imagePullPolicy: Always
-
 replicas: 1
-
 vault:
   enabled: true
   # pathPrefix is required if Vault secret sync is enabled
   # pathPrefix: secret/dsde/terra/kernel/integration
-
-# External IP of the service. Required.
-# serviceIP: $.$.$.$
-
-# What source IPs to whitelist for access to the service. If undefined all IPs allowed.
-# serviceWhitelist:
-# - $.$.$.$/$
+ingress:
+  istioGatewayName: template-gateway
+  istioGatewayNamespace: istio-system
 
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false
