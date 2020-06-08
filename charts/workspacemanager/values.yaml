@@ -18,7 +18,8 @@ vault:
 ingress:
   istioGatewayName: template-gateway
   istioGatewayNamespace: istio-system
-
+  domainName: ""
+  timeoutSec: 600
 samAddress: https://sam.dsde-dev.broadinstitute.org/
 
 certManager:
@@ -31,3 +32,9 @@ certManager:
 
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false
+
+enableProxy: true
+
+proxy-image:
+  repository: broadinstitute/openidc-proxy
+  version: bernick_tcell

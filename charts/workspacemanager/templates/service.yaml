@@ -5,17 +5,19 @@ metadata:
   labels:
     {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
 spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ .Values.serviceIP }}
+  {{- if .Values.enableProxy}}
+  selector:
+    component: {{ include "oidc-proxy.fullname" . }}
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+  {{- else }}
   ports:
   - name: http
     port: 8080
   selector:
     app: terra-workspace-manager
-  type: LoadBalancer
-  loadBalancerIP: {{ .Values.serviceIP }}
-  {{- if (.Values.serviceWhitelist) -}}
-    {{- range $nick, $cidrs := .Values.serviceWhitelist }}
-      {{- range $cidr := $cidrs }}
-        - {{ $cidr }}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
+  {{- end}}

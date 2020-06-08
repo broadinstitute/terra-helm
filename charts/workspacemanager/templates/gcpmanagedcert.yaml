@@ -1,0 +1,10 @@
+{{- if .Values.ingress.domainName }}
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: terra-workspace-manager-gcpmanagedcert
+spec:
+  domains:
+  - {{ .Values.ingress.domainName }}
+{{- end }}
