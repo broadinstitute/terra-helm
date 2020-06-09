@@ -25,5 +25,5 @@ spec:
       - name: HELMFILE_ENV
         value: {{ .environment }}
       - name: HELMFILE_SELECTOR
-        value: group=terra,app={{ .app }}
+        value: type=terra,scope=app,app={{ .app }}
 {{- end -}}
