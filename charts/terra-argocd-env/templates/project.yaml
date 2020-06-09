@@ -7,7 +7,7 @@ spec:
   description: "Applications for Terra {{ .environment }} environment"
   destinations:
   - namespace: {{ include "terra-argocd.destinationNamespace" . }}
-    server: {{ include "terra-argocd.clusterAddress" . }}
+    server: {{ .clusterAddress }}
   sourceRepos:
   - "*"
 {{- end -}}

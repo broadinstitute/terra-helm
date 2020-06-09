@@ -1,17 +1,12 @@
 # Default values for terra-argocd-app
-# A map of named Terra clusters.
-# eg.
-# clusters:
-#   terra-dev: "https://35.238.186.116"
-clusters: {}
+# The name of the cluster that is being deployed to. Eg. terra-dev
+clusterName: null
+
+# The address of the cluster that is being deployed to. Eg. "https://35.238.186.116"
+clusterAddress: null
 
 # The Terra environment the app belongs to
 environment: null
-
-# Required - GKE cluster to deploy to.
-# Eg. `terra-dev`
-# Must correspond with a key in `clusters` map
-cluster: null
 
 # Name of the application to render for. Eg. `cromwell`
 app: null
@@ -19,7 +14,7 @@ app: null
 # If an ArgoCD Application is deleted,
 # purge deployed resources as well. Eg. if the `cromwell-dev`
 # app is deleted, delete all the deployed Cromwell pods/secrets/etc from
-# the dev cluster 
+# the dev cluster
 purgeDeployedResourcesOnDelete: false
 
 # Terra's helmfile repo

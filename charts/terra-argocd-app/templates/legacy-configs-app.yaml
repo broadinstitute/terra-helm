@@ -7,7 +7,7 @@ metadata:
   labels:
     app: {{ .app }} # These labels are used as selectors in the UI
     env: {{ .environment }}
-    cluster: {{ .cluster }}
+    cluster: {{ .clusterName }}
   {{- if .purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -16,7 +16,7 @@ spec:
   project: {{ include "terra-argocd.projectName" . }}
   destination:
     namespace: {{ include "terra-argocd.destinationNamespace" . }}
-    server: {{ include "terra-argocd.clusterAddress" . }}
+    server: {{ .clusterAddress }}
   source:
     repoURL: {{ .legacyConfigsRepo }}
     targetRevision: {{ .legacyConfigsRepoRef }}
