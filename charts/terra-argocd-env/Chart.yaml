@@ -2,7 +2,7 @@ apiVersion: v2
 name: terra-argocd-env
 description: A Helm chart for generating environment-wide ArgoCD resources for Terra environments
 type: application
-version: 0.0.5
+version: 0.0.6
 dependencies:
 - name: terra-argocd-templates
   version: 0.0.4
