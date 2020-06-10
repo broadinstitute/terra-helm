@@ -26,7 +26,7 @@ certManager:
   duration: 2160h0m0s # 3 months
   renewBefore: 360h0m0s # Renew cert 15 days before exp
   dnsSuffix: integ.envs.broadinstitute.org
-  issuerName: letsencrypt-prod
+  issuerName: cert-manager-letsencrypt-prod
   issuerKind: ClusterIssuer
 
 # Should be set to true when deploying locally with Skaffold
@@ -37,3 +37,4 @@ enableProxy: true
 proxy-image:
   repository: broadinstitute/openidc-proxy
   version: bernick_tcell
+  logLevel: debug

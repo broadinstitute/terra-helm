@@ -7,7 +7,7 @@ metadata:
 data:
   siteconf: |-
     ServerAdmin ${SERVER_ADMIN}
-    ServerName ${SERVER_NAME}
+    ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}
     ServerTokens ProductOnly
     TraceEnable off
 
@@ -16,7 +16,8 @@ data:
     SetEnvIf X-Forwarded-For "^.*\..*\..*\..*" forwarded
     CustomLog "/dev/stdout" combined env=!forwarded
     CustomLog "/dev/stdout" proxy env=forwarded
-    LogLevel ${LOG_LEVEL}
+
+    LogLevel {{ .Values.proxyImage.logLevel }}
 
     Header unset X-Frame-Options
     Header always set X-Frame-Options SAMEORIGIN
@@ -25,49 +26,53 @@ data:
     OIDCOAuthTokenIntrospectionInterval 60
 
     <VirtualHost _default_:${HTTPD_PORT}>
+      ErrorLog /dev/stdout
+      CustomLog "/dev/stdout" combined
+      Redirect / https://{{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}/
+    </VirtualHost>
+
+    <VirtualHost _default_:${SSL_HTTPD_PORT}>
         ServerAdmin ${SERVER_ADMIN}
-        ServerName ${SERVER_NAME}
-        ErrorLog /dev/stdout
-        CustomLog "/dev/stdout" combined
-        RewriteEngine On
-        RewriteCond  %{HTTP:X-Forwarded-Proto} !https
-        RewriteCond %{REQUEST_URI}  !^/(version|status) [NC]
+        ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}
+
+        SSLEngine On
+        SSLProxyEngine On
+        SSLCertificateFile /etc/ssl/certs/server.crt
+        SSLCertificateKeyFile /etc/ssl/private/server.key
 
         ErrorLog /dev/stdout
         CustomLog "/dev/stdout" combined
 
         <Location ${PROXY_PATH}>
-            RewriteCond %{REQUEST_METHOD} OPTIONS
-            RewriteRule ^(.*)$ $1 [R=204,L]
+          RewriteCond %{REQUEST_METHOD} OPTIONS
+          RewriteRule ^(.*)$ $1 [R=204,L]
 
-            <Limit OPTIONS>
-                Require all granted
-            </Limit>
+          <Limit OPTIONS>
+              Require all granted
+          </Limit>
 
-            ${AUTH_TYPE}
-            ${AUTH_REQUIRE}
+          ${AUTH_TYPE}
+          ${AUTH_REQUIRE}
 
-            ProxyPass ${PROXY_URL}
-            ProxyPassReverse ${PROXY_URL}
-
-            ${FILTER}
+          ProxyPass http://localhost:8080/
+          ProxyPassReverse http://localhost:8080/
         </Location>
 
         <Location ${PROXY_PATH2}>
-            RewriteEngine On
-            RewriteCond %{REQUEST_METHOD} OPTIONS
-            RewriteRule ^(.*)$ $1 [R=204,L]
+          RewriteEngine On
+          RewriteCond %{REQUEST_METHOD} OPTIONS
+          RewriteRule ^(.*)$ $1 [R=204,L]
 
-            <Limit OPTIONS>
-                Require all granted
-            </Limit>
+          <Limit OPTIONS>
+              Require all granted
+          </Limit>
 
-            ${AUTH_TYPE2}
-            ${AUTH_REQUIRE2}
+          ${AUTH_TYPE2}
+          ${AUTH_REQUIRE2}
 
-            ProxyPass ${PROXY_URL2}
-            ProxyPassReverse ${PROXY_URL2}
+          ProxyPass http://localhost:8080/api
+          ProxyPassReverse http://localhost:8080/api
 
-            ${FILTER2}
+          AddOutputFilterByType DEFLATE application/json text/plain text/html application/javascript application/x-javascript
         </Location>
     </VirtualHost>

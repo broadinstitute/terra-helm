@@ -91,29 +91,22 @@ spec:
           readOnly: true
       {{- if .Values.enableProxy }}
       - name: oidc-proxy
-        image: "{{ .Values.proxy-image.repository }}:{{ .Values.proxy-image.version }}"
+        image: "{{ .Values.proxyImage.repository }}:{{ .Values.proxyImage.version }}"
         ports:
-        - containerPort: 8080
-        readinessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          initialDelaySeconds: 35
-          periodSeconds: 10
-          timeoutSeconds: 10
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          initialDelaySeconds: 45
-          periodSeconds: 10
-          timeoutSeconds: 10
-          failureThreshold: 3
-          volumeMounts:
-          - mountPath: /etc/apache2/sites-available/site.conf
-            name: siteconf
-            subPath: site.conf
+        - containerPort: 443
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/apache2/sites-available/site.conf
+          name: siteconf
+          subPath: site.conf
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: tls.crt
+          name: cert
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: tls.key
+          name: cert
+          readOnly: true
       {{- end }}
       volumes:
         - name: cloudsql-sa-creds
@@ -126,4 +119,7 @@ spec:
             items:
             - key: siteconf
               path: site.conf
+        - name: cert
+          secret:
+            secretName: {{ .Chart.Name }}-cert-secret
         {{- end }}
