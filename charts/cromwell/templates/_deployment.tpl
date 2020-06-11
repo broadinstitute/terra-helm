@@ -46,8 +46,6 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: cromwell-gc-logs
         emptyDir: {}
-      - name: cromwell-newrelic-jar
-        emptyDir: {}
       containers:
       - name: app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
@@ -87,13 +85,6 @@ spec:
           readOnly: true
         - mountPath: /var/log/gc
           name: cromwell-gc-logs
-        - mountPath: /etc/newrelic/newrelic.jar
-          subPath: newrelic.jar
-          name: cromwell-newrelic-jar
-        - mountPath: /etc/newrelic/newrelic.yml
-          subPath: newrelic-v4.yml
-          name: app-ctmpls
-          readOnly: true
         readinessProbe:
           httpGet:
             path: /engine/latest/version
@@ -143,11 +134,4 @@ spec:
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
           readOnly: true
-      initContainers: # TODO make an image that contains this jar
-      - name: download-newrelic-jar
-        image: alpine:3.11.5
-        command: ["wget", "-O", "/cromwell-newrelic-jar/newrelic.jar", "https://storage.googleapis.com/firecloud-newrelic/newrelic-agent-5.1.0.jar"]
-        volumeMounts:
-        - mountPath: /cromwell-newrelic-jar
-          name: cromwell-newrelic-jar
 {{- end -}}
