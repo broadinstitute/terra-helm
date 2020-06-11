@@ -34,7 +34,7 @@ devDeploy: false
 
 enableProxy: true
 
-proxy-image:
+proxyImage:
   repository: broadinstitute/openidc-proxy
   version: bernick_tcell
   logLevel: debug
