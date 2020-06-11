@@ -9,7 +9,7 @@ spec:
   secretName: {{ .Chart.Name }}-cert-secret
   renewBefore: {{ .Values.certManager.renewBefore }}
   dnsNames:
-  - "{{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}"
+  - "{{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.certManager.dnsSuffix }}"
   issuerRef:
     name: {{ .Values.certManager.issuerName }}
     kind: {{ .Values.certManager.issuerKind }}
