@@ -5,9 +5,9 @@ metadata:
   labels:
     {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
 data:
-  siteconf: |-
+  apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}
-    ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}
+    ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.certManager.dnsSuffix }}
     ServerTokens ProductOnly
     TraceEnable off
 
@@ -28,12 +28,12 @@ data:
     <VirtualHost _default_:${HTTPD_PORT}>
       ErrorLog /dev/stdout
       CustomLog "/dev/stdout" combined
-      Redirect / https://{{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}/
+      Redirect / https://{{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.certManager.dnsSuffix }}/
     </VirtualHost>
 
     <VirtualHost _default_:${SSL_HTTPD_PORT}>
         ServerAdmin ${SERVER_ADMIN}
-        ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}
+        ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.certManager.dnsSuffix }}
 
         SSLEngine On
         SSLProxyEngine On

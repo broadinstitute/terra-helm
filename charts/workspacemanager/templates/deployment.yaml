@@ -96,9 +96,9 @@ spec:
         - containerPort: 443
         - containerPort: 80
         volumeMounts:
-        - mountPath: /etc/apache2/sites-available/site.conf
-          name: siteconf
-          subPath: site.conf
+        - mountPath: /etc/apache2/httpd.conf
+          name: apache-httpd-proxy-config
+          subPath: workspace-manager-proxy.conf
         - mountPath: /etc/ssl/certs/server.crt
           subPath: tls.crt
           name: cert
@@ -113,12 +113,12 @@ spec:
           secret:
             secretName: workspace-sa
         {{- if .Values.enableProxy }}
-        - name: siteconf
+        - name: apache-httpd-proxy-config
           configMap:
             name: terra-workspace-manager-proxy-configmap
             items:
-            - key: siteconf
-              path: site.conf
+            - key: apache-httpd-proxy-config
+              path: workspace-manager-proxy.conf
         - name: cert
           secret:
             secretName: {{ .Chart.Name }}-cert-secret
