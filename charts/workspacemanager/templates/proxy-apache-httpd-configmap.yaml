@@ -7,7 +7,7 @@ metadata:
 data:
   apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}
-    ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.certManager.dnsSuffix }}
+    ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}
     ServerTokens ProductOnly
     TraceEnable off
 
@@ -28,12 +28,12 @@ data:
     <VirtualHost _default_:${HTTPD_PORT}>
       ErrorLog /dev/stdout
       CustomLog "/dev/stdout" combined
-      Redirect / https://{{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.certManager.dnsSuffix }}/
+      Redirect / https://{{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}/
     </VirtualHost>
 
     <VirtualHost _default_:${SSL_HTTPD_PORT}>
         ServerAdmin ${SERVER_ADMIN}
-        ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.certManager.dnsSuffix }}
+        ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}
 
         SSLEngine On
         SSLProxyEngine On
