@@ -7,7 +7,7 @@ metadata:
 data:
   siteconf: |-
     ServerAdmin ${SERVER_ADMIN}
-    ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}
+    ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.dnsSuffix }}
     ServerTokens ProductOnly
     TraceEnable off
 
@@ -28,12 +28,12 @@ data:
     <VirtualHost _default_:${HTTPD_PORT}>
       ErrorLog /dev/stdout
       CustomLog "/dev/stdout" combined
-      Redirect / https://{{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}/
+      Redirect / https://{{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.dnsSuffix }}/
     </VirtualHost>
 
     <VirtualHost _default_:${SSL_HTTPD_PORT}>
         ServerAdmin ${SERVER_ADMIN}
-        ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.certManager.dnsSuffix }}
+        ServerName {{ .Chart.Name }}.{{ .Release.Namespace }}.{{ .Values.dnsSuffix }}
 
         SSLEngine On
         SSLProxyEngine On

@@ -21,13 +21,15 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # External IP of the service. Required.
 # serviceIP: $.$.$.$
 
+# DNS/TLS Values
+dnsSuffix: integ.envs.broadinstitute.org
 certManager:
   enabled: false
   duration: 2160h0m0s # 3 months
   renewBefore: 360h0m0s # Renew cert 15 days before exp
-  dnsSuffix: integ.envs.broadinstitute.org
   issuerName: cert-manager-letsencrypt-prod
   issuerKind: ClusterIssuer
+# TODO: add option to sync cert from Vault
 
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false
