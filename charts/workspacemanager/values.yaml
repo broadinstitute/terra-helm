@@ -25,7 +25,7 @@ certManager:
   enabled: false
   duration: 2160h0m0s # 3 months
   renewBefore: 360h0m0s # Renew cert 15 days before exp
-  dnsSuffix: integration.envs.broadinstitute.org
+  dnsSuffix: inte.envs.broadinstitute.org
   issuerName: cert-manager-letsencrypt-prod
   issuerKind: ClusterIssuer
 
