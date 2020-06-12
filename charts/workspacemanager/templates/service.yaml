@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: terra-workspace-manager-service
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+    {{ template "workspacemanager.labels" . }}
 spec:
   type: LoadBalancer
   loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}

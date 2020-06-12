@@ -3,11 +3,11 @@ kind: ConfigMap
 metadata:
   name: terra-workspace-manager-proxy-configmap
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+    {{ template "workspacemanager.labels" . }}
 data:
   apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}
-    ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}
+    ServerName {{ template "workspacemanager.fqdn" . }}
     ServerTokens ProductOnly
     TraceEnable off
 
@@ -28,12 +28,12 @@ data:
     <VirtualHost _default_:${HTTPD_PORT}>
       ErrorLog /dev/stdout
       CustomLog "/dev/stdout" combined
-      Redirect / https://{{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}/
+      Redirect / https://{{ template "workspacemanager.fqdn" . }}/
     </VirtualHost>
 
     <VirtualHost _default_:${SSL_HTTPD_PORT}>
         ServerAdmin ${SERVER_ADMIN}
-        ServerName {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}
+        ServerName {{ template "workspacemanager.fqdn" . }}
 
         SSLEngine On
         SSLProxyEngine On

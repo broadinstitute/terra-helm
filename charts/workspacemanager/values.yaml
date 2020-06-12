@@ -22,6 +22,7 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # serviceIP: $.$.$.$
 
 # DNS/TLS Values
+serviceHostname: workspace
 dnsSuffix: integ.envs.broadinstitute.org
 certManager:
   enabled: false
@@ -30,9 +31,6 @@ certManager:
   issuerName: cert-manager-letsencrypt-prod
   issuerKind: ClusterIssuer
 # TODO: add option to sync cert from Vault
-
-# Should be set to true when deploying locally with Skaffold
-devDeploy: false
 
 enableProxy: true
 
