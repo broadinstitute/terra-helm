@@ -22,6 +22,7 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # serviceIP: $.$.$.$
 
 # DNS/TLS Values
+serviceHostname: workspace
 dnsSuffix: integ.envs.broadinstitute.org
 certManager:
   enabled: false
@@ -33,9 +34,6 @@ vaultCert:
   enabled: false
   path: secret/dsde/firecloud/dev/common/server.crt
   
-
-# Should be set to true when deploying locally with Skaffold
-devDeploy: false
 
 enableProxy: true
 
