@@ -6,11 +6,30 @@ metadata:
   labels:
     {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
 spec:
-  secretName: {{ .Chart.Name }}-cert-secret
+  secretName: {{ .Chart.Name }}-cert
   renewBefore: {{ .Values.certManager.renewBefore }}
   dnsNames:
   - "{{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}"
   issuerRef:
     name: {{ .Values.certManager.issuerName }}
     kind: {{ .Values.certManager.issuerKind }}
+{{ else -}}
+apiVersion: secrets-manager.tuenti.io/v1alpha1
+kind: SecretDefinition
+metadata:
+  name: secretdefinition-workspace-cert
+  labels:
+    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+spec:
+  name: {{ .Chart.Name }}-cert
+  keysMap:
+    db:
+      path: {{ .Values.vault.pathPrefix }}/workspace/postgres/db-creds
+      key: db
+    username:
+      path: {{ .Values.vault.pathPrefix }}/workspace/postgres/db-creds
+      key: username
+    password:
+      path: {{ .Values.vault.pathPrefix }}/workspace/postgres/db-creds
+      key: password
 {{ end -}}

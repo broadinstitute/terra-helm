@@ -29,7 +29,10 @@ certManager:
   renewBefore: 360h0m0s # Renew cert 15 days before exp
   issuerName: cert-manager-letsencrypt-prod
   issuerKind: ClusterIssuer
-# TODO: add option to sync cert from Vault
+vaultCert:
+  enabled: false
+  path: secret/dsde/firecloud/dev/common/server.crt
+  
 
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false

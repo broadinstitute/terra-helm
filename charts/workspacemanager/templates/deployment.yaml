@@ -121,5 +121,5 @@ spec:
               path: site.conf
         - name: cert
           secret:
-            secretName: {{ .Chart.Name }}-cert-secret
+            secretName: {{ .Chart.Name }}-cert
         {{- end }}
