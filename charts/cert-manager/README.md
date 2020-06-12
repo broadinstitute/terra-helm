@@ -37,7 +37,7 @@ spec:
   dnsNames:
     - example.envs.broadinstitute.org
   issuerRef:
-    name: letsencrypt-prod
+    name: cert-manager-letsencrypt-prod
     kind: ClusterIssuer
 ```
 
