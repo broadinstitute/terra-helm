@@ -96,7 +96,7 @@ spec:
         - containerPort: 443
         - containerPort: 80
         volumeMounts:
-        - mountPath: /etc/apache2/httpd.conf
+        - mountPath: /etc/apache2/sites-available/site.conf
           name: apache-httpd-proxy-config
           subPath: workspace-manager-proxy.conf
         - mountPath: /etc/ssl/certs/server.crt
