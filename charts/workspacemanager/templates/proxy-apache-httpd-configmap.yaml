@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: terra-workspace-manager-proxy-configmap
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" . }}{{ end }}
+    {{ template "workspacemanager.labels" . }}
 data:
   apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}

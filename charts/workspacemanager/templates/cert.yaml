@@ -4,7 +4,7 @@ kind: Certificate
 metadata:
   name: {{ .Chart.Name }}-cert
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" . }}{{ end }}
+    {{ template "workspacemanager.labels" . }}
 spec:
   secretName: {{ .Chart.Name }}-cert-secret
   renewBefore: {{ .Values.certManager.renewBefore }}

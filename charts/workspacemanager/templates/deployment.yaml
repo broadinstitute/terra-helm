@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: terra-workspace-manager-deployment
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" . }}{{ end }}
+    {{ template "workspacemanager.labels" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:

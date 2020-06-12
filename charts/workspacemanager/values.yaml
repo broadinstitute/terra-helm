@@ -32,9 +32,6 @@ certManager:
   issuerKind: ClusterIssuer
 # TODO: add option to sync cert from Vault
 
-# Should be set to true when deploying locally with Skaffold
-devDeploy: false
-
 enableProxy: true
 
 proxyImage:
