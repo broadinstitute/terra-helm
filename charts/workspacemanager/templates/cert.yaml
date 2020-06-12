@@ -4,12 +4,12 @@ kind: Certificate
 metadata:
   name: {{ .Chart.Name }}-cert
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" . }}{{ end }}
 spec:
   secretName: {{ .Chart.Name }}-cert-secret
   renewBefore: {{ .Values.certManager.renewBefore }}
   dnsNames:
-  - {{ .Chart.Name }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}
+  - {{ template "workspacemanager.fqdn" . }}
   issuerRef:
     name: {{ .Values.certManager.issuerName }}
     kind: {{ .Values.certManager.issuerKind }}

@@ -3,7 +3,7 @@ kind: RoleBinding
 metadata:
   name: terra-workspace-manager-service-role-binding
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" . }}{{ end }}
 roleRef:
   kind: Role
   name: terra-workspace-manager-service-role

@@ -9,3 +9,10 @@ Create labels to use for resources in this chart
     app.kubernetes.io/component: workspacemanager
     app.kubernetes.io/part-of: terra
 {{- end }}
+
+{{/*
+FQDN template
+*/}}
+{{- define "workspacemanager.fqdn" -}}
+    {{ .Values.serviceHostname }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}
+{{- end }}

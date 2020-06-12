@@ -22,6 +22,7 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # serviceIP: $.$.$.$
 
 # DNS/TLS Values
+serviceHostname: workspace
 dnsSuffix: integ.envs.broadinstitute.org
 certManager:
   enabled: false
