@@ -24,6 +24,7 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # DNS/TLS Values
 domain:
   hostname: workspace
+  # If namespaceEnv is set to true, an extra level of namespacing will be added between the hostname and suffix.
   namespaceEnv: true
   suffix: integ.envs.broadinstitute.org
 # Either certManager or vaultCert must be enabled to ensure a certificate secret exists:
