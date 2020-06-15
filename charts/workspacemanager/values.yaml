@@ -24,16 +24,22 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # DNS/TLS Values
 serviceHostname: workspace
 dnsSuffix: integ.envs.broadinstitute.org
+# Either certManager or vaultCert must be enabled to ensure a certificate secret exists:
 certManager:
-  enabled: false
+  enabled: false # Enable to create certificate secret with cert-manager
   duration: 2160h0m0s # 3 months
   renewBefore: 360h0m0s # Renew cert 15 days before exp
   issuerName: cert-manager-letsencrypt-prod
   issuerKind: ClusterIssuer
 vaultCert:
-  enabled: false
-  path: secret/dsde/firecloud/dev/common/server.crt
-  
+  enabled: false # Enable to sync certificate secret from Vault with secrets-manager
+# Values below are required if vaultCert is enabled:
+# cert:
+#   path: [Vault path to cert]
+#   secretKey: [key of cert secret]
+# key:
+#   path: [Vault path to key]
+#   secretKey: [key of key secret]
 
 enableProxy: true
 
