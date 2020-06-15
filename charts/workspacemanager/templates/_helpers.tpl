@@ -14,5 +14,9 @@ Create labels to use for resources in this chart
 FQDN template
 */}}
 {{- define "workspacemanager.fqdn" -}}
-    {{ .Values.serviceHostname }}.{{ .Values.global.terraEnv }}.{{ .Values.dnsSuffix }}
+    {{ .Values.domain.hostname -}}
+    {{ if .Values.domain.namespaceEnv -}}
+    	.{{.Values.global.terraEnv -}}
+    {{ end -}}
+    .{{ .Values.domain.suffix }}
 {{- end }}

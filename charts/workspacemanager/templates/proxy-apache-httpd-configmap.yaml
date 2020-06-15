@@ -39,6 +39,9 @@ data:
         SSLProxyEngine On
         SSLCertificateFile /etc/ssl/certs/server.crt
         SSLCertificateKeyFile /etc/ssl/private/server.key
+        {{ if .Values.vaultCert.enabled -}}
+          SSLCertificateChainFile /etc/ssl/certs/ca-bundle.crt
+        {{- end }}
 
         ErrorLog /dev/stdout
         CustomLog "/dev/stdout" combined

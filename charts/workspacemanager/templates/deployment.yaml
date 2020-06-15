@@ -107,6 +107,12 @@ spec:
           subPath: tls.key
           name: cert
           readOnly: true
+        {{- if .Values.vaultCert.enabled}}
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: cert
+          readOnly: true
+        {{- end }}
       {{- end }}
       volumes:
         - name: cloudsql-sa-creds
@@ -121,5 +127,5 @@ spec:
               path: workspace-manager-proxy.conf
         - name: cert
           secret:
-            secretName: {{ .Chart.Name }}-cert-secret
+            secretName: {{ .Chart.Name }}-cert
         {{- end }}
