@@ -40,6 +40,9 @@ vaultCert:
 # key:
 #   path: [Vault path to key]
 #   secretKey: [key of key secret]
+# chain:
+#   path: [Vault path to chain]
+#   secretKey: [key of chain secret]
 
 enableProxy: true
 
