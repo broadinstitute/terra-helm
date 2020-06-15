@@ -163,6 +163,30 @@ entries:
     version: 0.0.0
   dsp-cert-manager:
   - apiVersion: v2
+    created: "2020-06-15T15:50:36.201257276Z"
+    dependencies:
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v0.10.1
+    description: Installs cert-manager, configures psps and creates Let's encrypt
+      cluster issuers
+    digest: 8c9590d0a482e8ff9b2ea960587d8588a8074c54755fabb7361ea758d43c974b
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - tools
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: dsp-cert-manager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-0.0.1/dsp-cert-manager-0.0.1.tgz
+    version: 0.0.1
+  - apiVersion: v2
     created: "2020-06-04T20:03:23.821156448Z"
     dependencies:
     - name: cert-manager
@@ -1176,6 +1200,37 @@ entries:
     version: 0.0.1
   terra-cluster:
   - apiVersion: v2
+    created: "2020-06-15T15:50:36.319210931Z"
+    dependencies:
+    - name: terra-cluster-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.5
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.6
+    - condition: terra-cluster-networking.enabled
+      name: terra-cluster-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    description: A Helm chart to configure a k8s cluster for Terra
+    digest: 2b8f76a4e2d17185ab1ac197109f1435b7824d41ebf37678a1c5cf798ccfdf10
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.1.4/terra-cluster-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     created: "2020-05-28T15:38:50.473014Z"
     dependencies:
     - name: terra-cluster-psps
@@ -1617,6 +1672,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   workspacemanager:
+  - apiVersion: v2
+    created: "2020-06-15T15:50:36.41039361Z"
+    description: Chart for Terra Workspace Manager
+    digest: 4378773dec6352d3e43d4b587a83dc60d0f28a9043486180fcff4c91042e1e5d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.1.0/workspacemanager-0.1.0.tgz
+    version: 0.1.0
   - apiVersion: v2
     created: "2020-05-29T18:15:57.297248809Z"
     description: Chart for Terra Workspace Manager
