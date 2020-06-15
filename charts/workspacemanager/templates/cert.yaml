@@ -1,0 +1,16 @@
+{{- if .Values.certManager.enabled }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: {{ .Chart.Name }}-cert
+  labels:
+    {{ template "workspacemanager.labels" . }}
+spec:
+  secretName: {{ .Chart.Name }}-cert-secret
+  renewBefore: {{ .Values.certManager.renewBefore }}
+  dnsNames:
+  - {{ template "workspacemanager.fqdn" . }}
+  issuerRef:
+    name: {{ .Values.certManager.issuerName }}
+    kind: {{ .Values.certManager.issuerKind }}
+{{ end -}}

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: terra-workspace-manager-deployment
   labels:
-    {{ if not .Values.devDeploy }}{{ template "workspacemanager.labels" }}{{ end }}
+    {{ template "workspacemanager.labels" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -24,8 +24,10 @@ spec:
             {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+        {{- if not .Values.enableProxy }}
         ports:
         - containerPort: 8080
+        {{- end}}
         env:
         - name: DATABASE_USER
           valueFrom:
@@ -87,7 +89,37 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
+      {{- if .Values.enableProxy }}
+      - name: oidc-proxy
+        image: "{{ .Values.proxyImage.repository }}:{{ .Values.proxyImage.version }}"
+        ports:
+        - containerPort: 443
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/apache2/sites-available/site.conf
+          name: apache-httpd-proxy-config
+          subPath: workspace-manager-proxy.conf
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: tls.crt
+          name: cert
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: tls.key
+          name: cert
+          readOnly: true
+      {{- end }}
       volumes:
         - name: cloudsql-sa-creds
           secret:
             secretName: workspace-sa
+        {{- if .Values.enableProxy }}
+        - name: apache-httpd-proxy-config
+          configMap:
+            name: terra-workspace-manager-proxy-configmap
+            items:
+            - key: apache-httpd-proxy-config
+              path: workspace-manager-proxy.conf
+        - name: cert
+          secret:
+            secretName: {{ .Chart.Name }}-cert-secret
+        {{- end }}
