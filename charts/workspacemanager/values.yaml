@@ -22,8 +22,10 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # serviceIP: $.$.$.$
 
 # DNS/TLS Values
-serviceHostname: workspace
-dnsSuffix: integ.envs.broadinstitute.org
+domain:
+  hostname: workspace
+  namespaceEnv: true
+  suffix: integ.envs.broadinstitute.org
 # Either certManager or vaultCert must be enabled to ensure a certificate secret exists:
 certManager:
   enabled: false # Enable to create certificate secret with cert-manager
