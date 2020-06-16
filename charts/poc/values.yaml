@@ -15,9 +15,39 @@ vault:
   enabled: true
   # pathPrefix is required if Vault secret sync is enabled
   # pathPrefix: secret/dsde/terra/kernel/integration
-ingress:
-  istioGatewayName: template-gateway
-  istioGatewayNamespace: istio-system
 
-# Should be set to true when deploying locally with Skaffold
-devDeploy: false
+# External IP of the service. Required.
+# serviceIP: $.$.$.$
+
+# DNS/TLS Values
+domain:
+  hostname: poc
+  # If namespaceEnv is set to true, an extra level of namespacing will be added between the hostname and suffix.
+  namespaceEnv: true
+  suffix: integ.envs.broadinstitute.org
+# Either certManager or vaultCert must be enabled to ensure a certificate secret exists:
+certManager:
+  enabled: false # Enable to create certificate secret with cert-manager
+  duration: 2160h0m0s # 3 months
+  renewBefore: 360h0m0s # Renew cert 15 days before exp
+  issuerName: cert-manager-letsencrypt-prod
+  issuerKind: ClusterIssuer
+vaultCert:
+  enabled: false # Enable to sync certificate secret from Vault with secrets-manager
+# Values below are required if vaultCert is enabled:
+# cert:
+#   path: [Vault path to cert]
+#   secretKey: [key of cert secret]
+# key:
+#   path: [Vault path to key]
+#   secretKey: [key of key secret]
+# chain:
+#   path: [Vault path to chain]
+#   secretKey: [key of chain secret]
+
+enableProxy: true
+
+proxyImage:
+  repository: broadinstitute/openidc-proxy
+  version: bernick_tcell
+  logLevel: debug
