@@ -58,7 +58,7 @@ spec:
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Chart.Name }}-cloudsql-postgres-instance-name
+              name: {{ .Chart.Name }}-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
                   "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
