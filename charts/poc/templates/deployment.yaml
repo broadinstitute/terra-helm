@@ -102,5 +102,5 @@ spec:
               path: {{ .Chart.Name }}-proxy.conf
         - name: cert
           secret:
-            secretName: {{ .Chart.Name }}-cert-secret
+            secretName: {{ .Chart.Name }}-cert
         {{- end }}
