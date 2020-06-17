@@ -1,3 +1,4 @@
+{{- if .Values.proxy.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -17,7 +18,7 @@ data:
     CustomLog "/dev/stdout" combined env=!forwarded
     CustomLog "/dev/stdout" proxy env=forwarded
 
-    LogLevel {{ .Values.proxyImage.logLevel }}
+    LogLevel {{ .Values.proxy.logLevel }}
 
     Header unset X-Frame-Options
     Header always set X-Frame-Options SAMEORIGIN
@@ -79,3 +80,4 @@ data:
           AddOutputFilterByType DEFLATE application/json text/plain text/html application/javascript application/x-javascript
         </Location>
     </VirtualHost>
+{{- end }}
