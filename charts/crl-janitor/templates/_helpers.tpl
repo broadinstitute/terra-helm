@@ -13,7 +13,7 @@ Create labels to use for resources in this chart
 {{/*
 FQDN template
 */}}
-{{- define "workspacemanager.fqdn" -}}
+{{- define "crl-janitor.fqdn" -}}
     {{ .Values.domain.hostname -}}
     {{ if .Values.domain.namespaceEnv -}}
     	.{{.Values.global.terraEnv -}}
