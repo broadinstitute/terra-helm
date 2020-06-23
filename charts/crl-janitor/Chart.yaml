@@ -1,0 +1,16 @@
+apiVersion: v2
+name: crl-janitor
+version: 0.1.1
+
+description: Chart for Cloud Resource Manager Janitor
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+- crl-janitor
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+- https://github.com/DataBiosphere/crl-janitor

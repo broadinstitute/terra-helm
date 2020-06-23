@@ -1,0 +1,36 @@
+# image is used for local Skaffold deploys
+# image: gcr.io/terra-kernel-k8s/terra-workspace-manager
+
+# appVerion is set by Helmfile
+# appVersion: 0.0.0
+
+imageConfig:
+  repository: gcr.io/terra-kernel-k8s/crl-janitor
+  # Override the image tag to deploy by setting this variable.
+  # If no value is set, the chart's appVersion value will be used.
+  # tag: latest
+  imagePullPolicy: Always
+replicas: 1
+vault:
+  enabled: true
+  # pathPrefix is required if Vault secret sync is enabled
+  # pathPrefix: secret/dsde/terra/kernel/integration
+
+# External IP of the service. Required.
+# serviceIP: $.$.$.$
+
+# DNS/TLS Values
+domain:
+  hostname: crl-janitor
+  # If namespaceEnv is set to true, an extra level of namespacing will be added between the hostname and suffix.
+  namespaceEnv: true
+  suffix: integ.envs.broadinstitute.org
+# Either certManager or vaultCert must be enabled to ensure a certificate secret exists:
+certManager:
+  enabled: false # Enable to create certificate secret with cert-manager
+  duration: 2160h0m0s # 3 months
+  renewBefore: 360h0m0s # Renew cert 15 days before exp
+  issuerName: cert-manager-letsencrypt-prod
+  issuerKind: ClusterIssuer
+vaultCert:
+  enabled: false # Enable to sync certificate secret from Vault with secrets-manager
