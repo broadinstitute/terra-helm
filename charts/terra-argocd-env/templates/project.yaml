@@ -12,7 +12,7 @@ spec:
   sourceRepos:
   - "*"
   roles:
-  - description: Edit privileges for all applications in terra-staging
+  - description: Edit privileges for all applications in {{ $projectName }}
     name: edit
     policies:
     - p, proj:{{ $projectName }}:edit, applications, *, {{ $projectName }}/*, allow
