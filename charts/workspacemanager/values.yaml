@@ -1,3 +1,12 @@
+# Global values used by this chart
+global:
+  # A map of addresses in the form
+  # {
+  #   "nickname": ["x.x.x.x/y", "x.x.x.x/y"]
+  # }
+  # Addresses given here will be merged with serviceAllowedAddresses, below
+  trustedAddresses: {}
+
 # image is used for local Skaffold deploys
 # image: gcr.io/terra-kernel-k8s/terra-workspace-manager
 
