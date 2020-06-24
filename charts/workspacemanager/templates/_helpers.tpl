@@ -20,3 +20,21 @@ FQDN template
     {{ end -}}
     .{{ .Values.domain.suffix }}
 {{- end }}
+
+{{/*
+Service firewall
+*/}}
+{{- define "workspacemanager.servicefirewall" -}}
+  {{- $trustedIPs := .Values.global.trustedIPs | default dict -}}
+  {{- $allowedAddresses := merge .Values.serviceAllowedAddresses $trustedIPs -}}
+  {{- if $allowedAddresses | empty -}}
+    {{- fail "Please specify at least one allowed address" -}}
+  {{- end -}}
+
+  {{- range $nickname, $cidrs := $allowedAddresses }}
+  # {{ $nickname }}
+  {{- range $cidr := $cidrs }}
+  - {{ $cidr }}
+  {{- end -}}
+  {{- end -}}
+{{- end }}
