@@ -25,8 +25,8 @@ FQDN template
 Service firewall
 */}}
 {{- define "workspacemanager.servicefirewall" -}}
-  {{- $trustedIPs := .Values.global.trustedIPs | default dict -}}
-  {{- $allowedAddresses := merge .Values.serviceAllowedAddresses $trustedIPs -}}
+  {{- $trustedAddresses := .Values.global.trustedAddresses | default dict -}}
+  {{- $allowedAddresses := merge .Values.serviceAllowedAddresses $trustedAddresses -}}
   {{- if $allowedAddresses | empty -}}
     {{- fail "Please specify at least one allowed address" -}}
   {{- end -}}
