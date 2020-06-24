@@ -1,8 +1,9 @@
 {{- with .Values -}}
+{{- $projectName := include "terra-argocd.projectName" . -}}
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: {{ include "terra-argocd.projectName" . }}
+  name: {{ $projectName }}
 spec:
   description: "Applications for Terra {{ .environment }} environment"
   destinations:
@@ -10,4 +11,16 @@ spec:
     server: {{ .clusterAddress }}
   sourceRepos:
   - "*"
+  roles:
+  - description: Edit privileges for all applications in terra-staging
+    name: edit
+    policies:
+    - p, proj:{{ $projectName }}:edit, applications, *, {{ $projectName }}/*, allow
+    groups:
+    - local-suitable
+    - broadinstitute:Workbench Admins
+{{- if not .requireSuitable }}
+    - local-notsuitable
+    - broadinstitute:DSDE Engineering
+{{- end }}
 {{- end -}}
