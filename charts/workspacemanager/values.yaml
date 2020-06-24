@@ -21,6 +21,15 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # External IP of the service. Required.
 # serviceIP: $.$.$.$
 
+# Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses
+serviceFirewallEnabled: false
+
+# A map of addresses in the form
+# {
+#   "nickname": ["x.x.x.x/y", "x.x.x.x/y"]
+# }
+serviceAllowedAddresses: {}
+
 # DNS/TLS Values
 domain:
   hostname: workspace
