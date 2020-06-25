@@ -15,6 +15,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ap-argocd-preinstall-0.0.1/ap-argocd-preinstall-0.0.1.tgz
     version: 0.0.1
+  crljanitor:
+  - apiVersion: v2
+    created: "2020-06-25T15:25:37.081353491Z"
+    description: Chart for Cloud Resource Manager Janitor
+    digest: 447ae5aed06004361e51769e27ad242939dc0de182e5ba082a9c9385835d994a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/crl-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.1.0/crljanitor-0.1.0.tgz
+    version: 0.1.0
   cromwell:
   - apiVersion: v2
     created: "2020-06-11T21:46:44.952996009Z"
