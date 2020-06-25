@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: terra-crl-janitor-service
   labels:
-    {{ template "crl-janitor.labels" . }}
+    {{ template "crljanitor.labels" . }}
 spec:
   type: LoadBalancer
   loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}

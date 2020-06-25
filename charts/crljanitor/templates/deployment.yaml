@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: terra-crl-janitor-deployment
   labels:
-    {{ template "crl-janitor.labels" . }}
+    {{ template "crljanitor.labels" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:

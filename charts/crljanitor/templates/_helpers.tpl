@@ -1,7 +1,7 @@
 {{/*
 Create labels to use for resources in this chart
 */}}
-{{- define "crl-janitor.labels" -}}
+{{- define "crljanitor.labels" -}}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app.kubernetes.io/name: {{ .Chart.Name }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
@@ -13,7 +13,7 @@ Create labels to use for resources in this chart
 {{/*
 FQDN template
 */}}
-{{- define "crl-janitor.fqdn" -}}
+{{- define "crljanitor.fqdn" -}}
     {{ .Values.domain.hostname -}}
     {{ if .Values.domain.namespaceEnv -}}
     	.{{.Values.global.terraEnv -}}

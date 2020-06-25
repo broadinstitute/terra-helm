@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: terra-crl-janitor-service-role
   labels:
-    {{ template "crl-janitor.labels" . }}
+    {{ template "crljanitor.labels" . }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']

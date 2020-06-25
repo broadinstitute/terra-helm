@@ -3,7 +3,7 @@ kind: RoleBinding
 metadata:
   name: terra-crl-janitor-service-role-binding
   labels:
-    {{ template "crl-janitor.labels" . }}
+    {{ template "crljanitor.labels" . }}
 roleRef:
   kind: Role
   name: terra-crl-janitor-service-role
