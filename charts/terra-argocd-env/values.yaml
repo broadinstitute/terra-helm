@@ -7,3 +7,6 @@ clusterAddress: null
 
 # The Terra environment this project is for. Eg. `dev`
 environment: null
+
+# Whether this environment requires a user to be suitable to make changes.
+requireSuitable: false

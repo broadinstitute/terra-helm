@@ -1,14 +1,16 @@
 apiVersion: v2
-name: poc
+name: crljanitor
 version: 0.1.0
 
-description: Chart for a POC Terra app
+description: Chart for Cloud Resource Manager Janitor
 type: application
 
 keywords:
 - dsp
 - broadinstitute
 - terra
+- crl-janitor
 
 sources:
 - https://github.com/broadinstitute/terra-helm/tree/master/charts
+- https://github.com/DataBiosphere/crl-janitor

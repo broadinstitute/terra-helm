@@ -7,6 +7,10 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
+  {{- if .Values.serviceFirewallEnabled }}
+  loadBalancerSourceRanges:
+  {{- template "workspacemanager.servicefirewall" . }}
+  {{- end }}
   selector:
     app: terra-workspace-manager
   {{- if .Values.proxy.enabled }}

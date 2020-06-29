@@ -1,3 +1,15 @@
+# Global values used by this chart
+global:
+  # global.trustedAddresses -- (object) A map of addresses that will be merged with serviceAllowedAddresses
+  # Example:
+  # {
+  #   "nickname": ["x.x.x.x/y", "x.x.x.x/y"]
+  # }
+  trustedAddresses: {}
+  # global.terraEnv -- (string) Terget Terra environment name. Required.
+  # @default -- Is set by Helmfile on deploy
+  terraEnv:
+
 # image -- (string) Used for local Skaffold deploys
 # @default -- Is set by Skaffold on local deploys
 image:
@@ -30,6 +42,12 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
+
+# serviceFirewallEnabled -- Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses
+serviceFirewallEnabled: false
+
+# serviceAllowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+serviceAllowedAddresses: {}
 
 # DNS/TLS Values
 domain:
