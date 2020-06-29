@@ -1,10 +1,6 @@
 # Global values used by this chart
 global:
-  # global.trustedAddresses -- (object) A map of addresses that will be merged with serviceAllowedAddresses
-  # Example:
-  # {
-  #   "nickname": ["x.x.x.x/y", "x.x.x.x/y"]
-  # }
+  # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   trustedAddresses: {}
   # global.terraEnv -- (string) Terget Terra environment name. Required.
   # @default -- Is set by Helmfile on deploy
@@ -17,11 +13,6 @@ image:
 # appVersion -- (string) Workspace Manager image version/tag. Required unless using `image`.
 # @default -- Is set by Helmfile on deploy
 appVersion:
-
-global:
-  # global.terraEnv -- (string) Terget Terra environment name. Required.
-  # @default -- Is set by Helmfile on deploy
-  terraEnv:
 
 imageConfig:
   # imageConfig.repository -- Image repository

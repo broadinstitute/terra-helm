@@ -19,6 +19,7 @@ Chart for Terra Workspace Manager
 | domain.namespaceEnv | bool | `true` | If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix |
 | domain.suffix | string | `"integ.envs.broadinstitute.org"` | Domain suffix |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
+| global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-workspace-manager"` | Image repository |
@@ -29,6 +30,8 @@ Chart for Terra Workspace Manager
 | proxy.logLevel | string | `"debug"` | Proxy log level |
 | replicas | int | `1` |  |
 | samAddress | string | `"https://sam.dsde-dev.broadinstitute.org/"` | Address of SAM instance this deploy will talk to |
+| serviceAllowedAddresses | object | `{}` | A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
+| serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceIP | string | `nil` | External IP of the service. Required. |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
