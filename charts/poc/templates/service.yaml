@@ -1,12 +1,24 @@
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "kernel-service-poc-service"
+  name: {{ .Chart.Name }}-service
   labels:
-    {{ if not .Values.devDeploy }}{{ template "poc.labels" }}{{ end }}
+    {{ template "poc.labels" . }}
 spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
+  selector:
+    app: {{ .Chart.Name }}
+  {{- if .Values.enableProxy }}
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+  - name: https
+    protocol: TCP
+    port: 443
+  {{- else }}
   ports:
   - name: "http"
     port: 8080
-  selector:
-    app: "kernel-service-poc"
+  {{- end }}
