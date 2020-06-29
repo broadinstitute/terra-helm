@@ -26,4 +26,8 @@ spec:
         value: {{ .environment }}
       - name: HELMFILE_SELECTOR
         value: group=terra,app={{ .app }}
+{{- if .syncPolicy }}
+    syncPolicy:
+{{ .syncPolicy | toYaml | indent 6 }}
+{{- end }}
 {{- end -}}
