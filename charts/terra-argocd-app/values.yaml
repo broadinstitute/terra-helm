@@ -11,6 +11,11 @@ environment: null
 # Name of the application to render for. Eg. `cromwell`
 app: null
 
+# Optional: Sync policy for the app.
+# See https://argoproj.github.io/argo-cd/user-guide/auto_sync/
+# Default to no sync policy (manual)
+syncPolicy: null
+
 # If an ArgoCD Application is deleted,
 # purge deployed resources as well. Eg. if the `cromwell-dev`
 # app is deleted, delete all the deployed Cromwell pods/secrets/etc from
