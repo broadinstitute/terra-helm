@@ -8,6 +8,25 @@ certManager:
   issuerName: cert-manager-letsencrypt-prod
   issuerKind: ClusterIssuer
 
+vaultCert:
+  # vaultCert.enabled -- Enable to sync certificate secret from Vault with secrets-manager
+  enabled: true
+  cert:
+    # vaultCert.cert.path -- (string) Path to secret containing .crt
+    path: secret/dsde/firecloud/dev/common/server.crt
+    # vaultCert.cert.secretKey -- (string) Key in secret containing .crt
+    secretKey: value
+  key:
+    # vaultCert.key.path -- (string) Path to secret containing .key
+    path: secret/dsde/firecloud/dev/common/server.key
+    # vaultCert.key.secretKey -- (string) Key in secret containing .key
+    secretKey: value
+  chain:
+    # vaultCert.chain.path -- (string) Path to secret containing intermediate .crt
+    path: secret/common/ca-bundle.crt
+    # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
+    secretKey: chain
+
 
 # Promethues-Operator values
 prometheus-operator:
@@ -20,12 +39,16 @@ prometheus-operator:
       enabled: true
       annotations:
         kubernetes.io/ingress.global-static-ip-name: terra-dev-prometheus-ip
+        kubernetes.io/ingress.allow-http: "false"
 
       hosts:
         - prometheus.dsde-dev.broadinstitute.org
 
       paths:
         - /*
+
+      tls:
+        - secretName: terra-prometheus-cert
 
     service:
       annotations:

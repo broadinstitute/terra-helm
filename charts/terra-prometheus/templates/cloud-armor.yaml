@@ -2,6 +2,8 @@ apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: prometheus-cloud-armor
+  labels:
+    {{ template "prometheus.labels" . }}
 spec:
     securityPolicy:
       name: broad-cloud-armor
