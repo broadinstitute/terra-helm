@@ -6,10 +6,10 @@ prometheus-operator:
               image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.7.5
               imagePullPolicy: Always
               args: 
-                - --stackdriver.project-id=dsp-tools-k8s
+                - --stackdriver.project-id=broad-dsde-dev
                 - --prometheus.wal-directory=prometheus/wal
                 - --stackdriver.kubernetes.location=us-central1-a
-                - --stackdriver.kubernetes.cluster-name=dsp-tools
+                - --stackdriver.kubernetes.cluster-name=terra-dev
                 #- \"--stackdriver.generic.location=us-central1\"
                 #- \"--stackdriver.generic.namespace=terra-stackdriver-k8s\"
               ports:

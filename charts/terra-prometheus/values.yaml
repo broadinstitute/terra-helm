@@ -1,3 +1,13 @@
+certManager:
+  # Use cert manager for ingress tls
+  enabled: false
+  # How long before expiration to renew certificate
+  renewBefore: 720h # 30 days before exp
+
+  # Default lets-encypt certificates 
+  issuerName: cert-manager-letsencrypt-prod
+  issuerKind: ClusterIssuer
+
 
 # Promethues-Operator values
 prometheus-operator:
@@ -5,8 +15,26 @@ prometheus-operator:
   prometheusOperator:
     createCustomResource: false
 
-  # prometheus:
-  #   prometheusSpec:
+  prometheus:
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.global-static-ip-name: terra-dev-prometheus-ip
+
+      hosts:
+        - prometheus.dsde-dev.broadinstitute.org
+
+      paths:
+        - /*
+
+    service:
+      annotations:
+        cloud.google.com/backend-config: '{"ports": {"9090": "prometheus-cloud-armor"}}'
+      type: NodePort
+
+
+    prometheusSpec:
+      externalUrl: http://prometheus.dsde-dev.broadinstitute.org
   #     containers:
   #       # - name: stackdriver-exporter
   #       #   image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.7.5
