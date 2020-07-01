@@ -12,7 +12,7 @@ Current chart version is `0.1.1`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| appVersion | string | Is set by Helmfile on deploy | Workspace Manager image version/tag. Required unless using `image`. |
+| appVersion | string | Is set by Helmfile on deploy | Service image version/tag. Required unless using `image`. |
 | certManager.duration | string | `"2160h0m0s"` | Certificate duration. Defaults to 3 months. |
 | certManager.enabled | bool | `false` | Enable to create certificate secret with cert-manager |
 | certManager.issuerKind | string | `"ClusterIssuer"` |  |
