@@ -1,0 +1,83 @@
+{{- if .Values.proxy.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: terra-workspace-manager-proxy-configmap
+  labels:
+    {{ template "crljanitor.labels" . }}
+data:
+  apache-httpd-proxy-config: |-
+    ServerAdmin ${SERVER_ADMIN}
+    ServerName {{ template "crljanitor.fqdn" . }}
+    ServerTokens ProductOnly
+    TraceEnable off
+
+    LogFormat "%h %l %u \"%{OIDC_CLAIM_email}i\" \"%{X-App-ID}i\" [%{%FT%T}t.%{msec_frac}t%{%z}t] %D %X \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+    LogFormat "%{X-Forwarded-For}i %l %u \"%{OIDC_CLAIM_email}i\" \"%{X-App-ID}i\" [%{%FT%T}t.%{msec_frac}t%{%z}t] %D %X \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" proxy
+    SetEnvIf X-Forwarded-For "^.*\..*\..*\..*" forwarded
+    CustomLog "/dev/stdout" combined env=!forwarded
+    CustomLog "/dev/stdout" proxy env=forwarded
+
+    LogLevel {{ .Values.proxy.logLevel }}
+
+    Header unset X-Frame-Options
+    Header always set X-Frame-Options SAMEORIGIN
+
+    ProxyTimeout ${PROXY_TIMEOUT}
+    OIDCOAuthTokenIntrospectionInterval 60
+
+    <VirtualHost _default_:${HTTPD_PORT}>
+      ErrorLog /dev/stdout
+      CustomLog "/dev/stdout" combined
+      Redirect / https://{{ template "crljanitor.fqdn" . }}/
+    </VirtualHost>
+
+    <VirtualHost _default_:${SSL_HTTPD_PORT}>
+        ServerAdmin ${SERVER_ADMIN}
+        ServerName {{ template "crljanitor.fqdn" . }}
+
+        SSLEngine On
+        SSLProxyEngine On
+        SSLCertificateFile /etc/ssl/certs/server.crt
+        SSLCertificateKeyFile /etc/ssl/private/server.key
+        {{ if .Values.vaultCert.enabled -}}
+          SSLCertificateChainFile /etc/ssl/certs/ca-bundle.crt
+        {{- end }}
+
+        ErrorLog /dev/stdout
+        CustomLog "/dev/stdout" combined
+
+        <Location ${PROXY_PATH}>
+          RewriteCond %{REQUEST_METHOD} OPTIONS
+          RewriteRule ^(.*)$ $1 [R=204,L]
+
+          <Limit OPTIONS>
+              Require all granted
+          </Limit>
+
+          ${AUTH_TYPE}
+          ${AUTH_REQUIRE}
+
+          ProxyPass http://localhost:8080/
+          ProxyPassReverse http://localhost:8080/
+        </Location>
+
+        <Location ${PROXY_PATH2}>
+          RewriteEngine On
+          RewriteCond %{REQUEST_METHOD} OPTIONS
+          RewriteRule ^(.*)$ $1 [R=204,L]
+
+          <Limit OPTIONS>
+              Require all granted
+          </Limit>
+
+          ${AUTH_TYPE2}
+          ${AUTH_REQUIRE2}
+
+          ProxyPass http://localhost:8080/api
+          ProxyPassReverse http://localhost:8080/api
+
+          AddOutputFilterByType DEFLATE application/json text/plain text/html application/javascript application/x-javascript
+        </Location>
+    </VirtualHost>
+{{- end }}
