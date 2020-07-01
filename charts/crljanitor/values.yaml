@@ -10,7 +10,7 @@ global:
 # @default -- Is set by Skaffold on local deploys
 image:
 
-# appVersion -- (string) Workspace Manager image version/tag. Required unless using `image`.
+# appVersion -- (string) Service image version/tag. Required unless using `image`.
 # @default -- Is set by Helmfile on deploy
 appVersion:
 
