@@ -1,64 +1,32 @@
 # What version of Cromwell to deploy
 global:
+  # What version of the application to deploy
   applicationVersion: latest
+  # A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  trustedAddresses: {}
 
-# Cromwell has 4 deployments:
-# - reader      - serves requests from other apps
-# - runner      - background - runs batch jobs
-# - summarizer  - background - summarizes job results
-# - legacy      - legacy all-in-one Cromwell (also serves requests from other apps)
-
-# Default settings for all Cromwell deployments
+# Cromwell is can be run in multiple deployments; this key contains default
+# settings for all deployments configured under the `deployments` key
+#
 deploymentDefaults:
+  enabled: true  # Whether a declared deployment is enabled. If false, no resources will be created
   name: null     # Set separately in each deployment. Eg. "cromwell1-reader"
   imageTag: null # Defaults to global.applicationVersion
   replicas: 0    # Number of replicas
-  expose: false  # Whether to create a LoadBalancer service for this deployment
+  expose: false  # Whether to create a service for this deployment
   serviceName: null  # What to call the service
-  serviceIP: x.x.x.x # Static IP to use for the Service
-  serviceWhitelist: # What source IPs to whitelist for access to the service
-    broadIPs: # Always allow requests from broad office/VPN addresses
-    - 69.173.112.0/21
-    - 69.173.127.232/29
-    - 69.173.127.128/26
-    - 69.173.127.0/25
-    - 69.173.127.240/28
-    - 69.173.127.224/30
-    - 69.173.127.230/31
-    - 69.173.120.0/22
-    - 69.173.127.228/32
-    - 69.173.126.0/24
-    - 69.173.96.0/20
-    - 69.173.64.0/19
-    - 69.173.127.192/27
-# What prefix to use to refer to secrets rendered from firecloud-develop. Defaults to `name`
-# legacyResourcePrefix: null
+  serviceIP: null    # Static IP to use for the Service. If set, service will be of type LoadBalancer
+  serviceAllowedAddresses: {} # What source IPs to whitelist for access to the service
+  # legacyResourcePrefix: null # What prefix to use to refer to secrets rendered from firecloud-develop. Defaults to `name`
 
 # A map of Cromwell deployments. In Terra's production environment,
 # Cromwell is deployed as 4 separate services with different configurations.
 #
+# Here, we configure it as a single standalone deployment, similar to how a
+# developer might run Cromwell.
 deployments:
-  # Settings for the reader deployment
-  reader:
-    name: cromwell1-reader
-    replicas: 3
-    expose: true
-    serviceName: cromwell1
-    legacyResourcePrefix: cromwell1-frontend
-
-  # Settings for the runner deployment
-  runner:
-    name: cromwell1-runner
-    replicas: 3
-
-  # Settings for the summarizer deployment
-  summarizer:
-    name: cromwell1-summarizer
-    replicas: 1
-
-  # Settings for the legacy cromwell2 deploymnet
-  legacy:
-    name: cromwell2
+  standalone:
+    name: cromwell
     replicas: 1
     expose: true
-    serviceName: cromwell2
+    serviceName: cromwell
