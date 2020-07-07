@@ -1,6 +1,6 @@
 {{- /* Generate a Cromwell deployment */ -}}
 {{- define "cromwell.deployment" -}}
-{{- $settings := .DeploymentSettings -}}
+{{- $settings := ._deploymentSettings -}}
 {{- $imageTag := $settings.imageTag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := $settings.legacyResourcePrefix | default $settings.name -}}
 apiVersion: apps/v1

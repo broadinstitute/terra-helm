@@ -1,6 +1,6 @@
 {{- /* Generate a Cromwell service */ -}}
 {{- define "cromwell.service" -}}
-{{- $settings := .DeploymentSettings -}}
+{{- $settings := ._deploymentSettings -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -16,9 +16,12 @@ spec:
     targetPort: 443
   type: LoadBalancer
   loadBalancerIP: {{ $settings.serviceIP }}
-  {{- if not (empty $settings.serviceAllowedAddresses) }}
+  {{- $globalAllowed := $.Values.global.trustedAddresses | deepCopy -}}
+  {{- $serviceAllowed := $settings.serviceAllowedAddresses | deepCopy -}}
+  {{- $allAllowed := mergeOverwrite $globalAllowed $serviceAllowed -}}
+  {{- if not (empty $allAllowed) }}
   loadBalancerSourceRanges:
-  {{- range $nick, $cidrs := $settings.serviceAllowedAddresses }}
+  {{- range $nick, $cidrs := $allAllowed }}
   # {{ $nick }}
   {{- range $cidr := $cidrs }}
   - {{ $cidr }}
