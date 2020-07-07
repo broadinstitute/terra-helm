@@ -14,8 +14,10 @@ spec:
   - protocol: TCP
     port: 443
     targetPort: 443
+  {{- if $settings.serviceIP }}
   type: LoadBalancer
   loadBalancerIP: {{ $settings.serviceIP }}
+  {{- end }}
   {{- $globalAllowed := $.Values.global.trustedAddresses | deepCopy -}}
   {{- $serviceAllowed := $settings.serviceAllowedAddresses | deepCopy -}}
   {{- $allAllowed := mergeOverwrite $globalAllowed $serviceAllowed -}}
