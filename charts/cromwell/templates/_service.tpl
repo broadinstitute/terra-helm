@@ -16,9 +16,9 @@ spec:
     targetPort: 443
   type: LoadBalancer
   loadBalancerIP: {{ $settings.serviceIP }}
-  {{- if not (empty $settings.serviceWhitelist) }}
+  {{- if not (empty $settings.serviceAllowedAddresses) }}
   loadBalancerSourceRanges:
-  {{- range $nick, $cidrs := $settings.serviceWhitelist }}
+  {{- range $nick, $cidrs := $settings.serviceAllowedAddresses }}
   # {{ $nick }}
   {{- range $cidr := $cidrs }}
   - {{ $cidr }}

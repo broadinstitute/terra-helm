@@ -8,6 +8,7 @@
 {{- $defaults := $.Values.deploymentDefaults -}}
 {{- range $deploymentType, $overrides := $.Values.deployments }}
 {{- $settings := $defaults | merge (deepCopy $overrides) -}}
+{{- if $settings.enabled -}}
 {{- $templateScope := $ | merge (dict "DeploymentSettings" $settings) }}
 ---
 # Cromwell {{ $deploymentType }} deployment
@@ -16,5 +17,6 @@
 ---
 # Cromwell {{ $deploymentType }} service
 {{ template "cromwell.service" $templateScope }}
+{{- end -}}
 {{- end -}}
 {{- end -}}

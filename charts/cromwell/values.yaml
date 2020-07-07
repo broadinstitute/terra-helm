@@ -1,6 +1,9 @@
 # What version of Cromwell to deploy
 global:
+  # What version of the application to deploy
   applicationVersion: latest
+  # A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  trustedAddresses: {}
 
 # Cromwell has 4 deployments:
 # - reader      - serves requests from other apps
@@ -10,29 +13,15 @@ global:
 
 # Default settings for all Cromwell deployments
 deploymentDefaults:
+  enabled: true  # Whether a declared deployment is enabled. If false, no resources will be created
   name: null     # Set separately in each deployment. Eg. "cromwell1-reader"
   imageTag: null # Defaults to global.applicationVersion
   replicas: 0    # Number of replicas
   expose: false  # Whether to create a LoadBalancer service for this deployment
   serviceName: null  # What to call the service
   serviceIP: x.x.x.x # Static IP to use for the Service
-  serviceWhitelist: # What source IPs to whitelist for access to the service
-    broadIPs: # Always allow requests from broad office/VPN addresses
-    - 69.173.112.0/21
-    - 69.173.127.232/29
-    - 69.173.127.128/26
-    - 69.173.127.0/25
-    - 69.173.127.240/28
-    - 69.173.127.224/30
-    - 69.173.127.230/31
-    - 69.173.120.0/22
-    - 69.173.127.228/32
-    - 69.173.126.0/24
-    - 69.173.96.0/20
-    - 69.173.64.0/19
-    - 69.173.127.192/27
-# What prefix to use to refer to secrets rendered from firecloud-develop. Defaults to `name`
-# legacyResourcePrefix: null
+  serviceAllowedAddresses: {} # What source IPs to whitelist for access to the service
+  # legacyResourcePrefix: null # What prefix to use to refer to secrets rendered from firecloud-develop. Defaults to `name`
 
 # A map of Cromwell deployments. In Terra's production environment,
 # Cromwell is deployed as 4 separate services with different configurations.
