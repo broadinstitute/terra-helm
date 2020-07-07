@@ -24,7 +24,7 @@ spec:
             {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
-        {{- if not .Values.enableProxy }}
+        {{- if not .Values.proxy.enabled }}
         ports:
         - containerPort: 8080
         {{- end}}
@@ -72,7 +72,43 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
+      {{- if .Values.proxy.enabled }}
+      - name: oidc-proxy
+        image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+        ports:
+        - containerPort: 443
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/apache2/sites-available/site.conf
+          name: apache-httpd-proxy-config
+          subPath: crl-janitor-proxy.conf
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: tls.crt
+          name: cert
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: tls.key
+          name: cert
+          readOnly: true
+        {{- if .Values.vaultCert.enabled}}
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: cert
+          readOnly: true
+        {{- end }}
+      {{- end }}
       volumes:
         - name: cloudsql-sa-creds
           secret:
             secretName: crl-janitor-sa
+        {{- if .Values.proxy.enabled }}
+        - name: apache-httpd-proxy-config
+          configMap:
+            name: terra-crl-janitor-proxy-configmap
+            items:
+            - key: apache-httpd-proxy-config
+              path: crl-janitor-proxy.conf
+        - name: cert
+          secret:
+            secretName: {{ .Chart.Name }}-cert
+        {{- end }}

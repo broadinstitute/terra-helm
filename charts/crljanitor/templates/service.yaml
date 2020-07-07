@@ -7,9 +7,13 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
+  {{- if .Values.serviceFirewallEnabled }}
+  loadBalancerSourceRanges:
+  {{- template "crljanitor.servicefirewall" . }}
+  {{- end }}
   selector:
     app: terra-crl-janitor
-  {{- if .Values.enableProxy}}
+  {{- if .Values.proxy.enabled }}
   ports:
   - name: http
     protocol: TCP
@@ -21,4 +25,4 @@ spec:
   ports:
   - name: http
     port: 8080
-  {{- end}}
+  {{- end }}
