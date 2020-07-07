@@ -1,5 +1,6 @@
 # What version of Cromwell to deploy
-appVersion: latest
+global:
+  applicationVersion: latest
 
 # Cromwell has 4 deployments:
 # - reader      - serves requests from other apps
@@ -7,10 +8,10 @@ appVersion: latest
 # - summarizer  - background - summarizes job results
 # - legacy      - legacy all-in-one Cromwell (also serves requests from other apps)
 
-# Default settings for all deployments
+# Default settings for all Cromwell deployments
 deploymentDefaults:
   name: null     # Set separately in each deployment. Eg. "cromwell1-reader"
-  imageTag: null # Defaults to appVersion
+  imageTag: null # Defaults to global.applicationVersion
   replicas: 0    # Number of replicas
   expose: false  # Whether to create a LoadBalancer service for this deployment
   serviceName: null  # What to call the service
@@ -33,27 +34,31 @@ deploymentDefaults:
 # What prefix to use to refer to secrets rendered from firecloud-develop. Defaults to `name`
 # legacyResourcePrefix: null
 
-# Settings for the reader deployment
-reader:
-  name: cromwell1-reader
-  replicas: 3
-  expose: true
-  serviceName: cromwell1
-  legacyResourcePrefix: cromwell1-frontend
+# A map of Cromwell deployments. In Terra's production environment,
+# Cromwell is deployed as 4 separate services with different configurations.
+#
+deployments:
+  # Settings for the reader deployment
+  reader:
+    name: cromwell1-reader
+    replicas: 3
+    expose: true
+    serviceName: cromwell1
+    legacyResourcePrefix: cromwell1-frontend
 
-# Settings for the runner deployment
-runner:
-  name: cromwell1-runner
-  replicas: 3
+  # Settings for the runner deployment
+  runner:
+    name: cromwell1-runner
+    replicas: 3
 
-# Settings for the summarizer deployment
-summarizer:
-  name: cromwell1-summarizer
-  replicas: 1
+  # Settings for the summarizer deployment
+  summarizer:
+    name: cromwell1-summarizer
+    replicas: 1
 
-# Settings for the legacy cromwell2 deploymnet
-standalone:
-  name: cromwell2
-  replicas: 1
-  expose: true
-  serviceName: cromwell2
+  # Settings for the legacy cromwell2 deploymnet
+  legacy:
+    name: cromwell2
+    replicas: 1
+    expose: true
+    serviceName: cromwell2
