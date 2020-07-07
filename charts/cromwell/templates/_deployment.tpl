@@ -47,7 +47,7 @@ spec:
       - name: cromwell-gc-logs
         emptyDir: {}
       containers:
-      - name: app
+      - name: {{ $settings.name }}-app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
         command: ["/bin/bash"]
         args: ["-c", "java ${JAVA_OPTS} -Dsystem.cromwell_id=gke-${K8S_POD_NAME} -jar /app/cromwell.jar ${CROMWELL_ARGS} ${*}", "--"]
@@ -94,7 +94,7 @@ spec:
           timeoutSeconds: 1
           failureThreshold: 6
           successThreshold: 1
-      - name: proxy
+      - name: {{ $settings.name }}-proxy
         image: broadinstitute/openidc-proxy:modsecurity_2_9_2
         ports:
           - containerPort: 443
@@ -124,7 +124,7 @@ spec:
           subPath: mpm_event.conf
           name: proxy-ctmpls
           readOnly: true
-      - name: sqlproxy
+      - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:
         - secretRef:
