@@ -3,19 +3,18 @@
 */ -}}
 
 {{- /*
-  Generate Deployment and Service definitions for deployment type.
+  Generate Deployment, Service, and ConfigMap definitions for each deployment type.
 */ -}}
 {{- $defaults := $.Values.deploymentDefaults -}}
-{{- range $deploymentType := (list "reader" "runner" "summarizer" "standalone") }}
-{{- $overrides := (index $.Values $deploymentType) | deepCopy -}}
-{{- $settings := $defaults | merge $overrides -}}
+{{- range $deploymentType, $overrides := $.Values.deployments }}
+{{- $settings := $defaults | merge (deepCopy $overrides) -}}
 {{- $templateScope := $ | merge (dict "DeploymentSettings" $settings) }}
 ---
 # Cromwell {{ $deploymentType }} deployment
-{{ template "cromwell.deployment" (merge (dict "DeploymentSettings" $settings) $) }}
+{{ template "cromwell.deployment" $templateScope }}
 {{- if $settings.expose }}
 ---
 # Cromwell {{ $deploymentType }} service
-{{ template "cromwell.service" (merge (dict "DeploymentSettings" $settings) $) }}
+{{ template "cromwell.service" $templateScope }}
 {{- end -}}
 {{- end -}}
