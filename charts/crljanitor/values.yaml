@@ -16,7 +16,7 @@ appVersion:
 
 imageConfig:
   # imageConfig.repository -- Image repository
-  repository: gcr.io/terra-kernel-k8s/crl-janitor
+  repository: gcr.io/terra-kernel-k8s/terra-resource-janitor
   # imageConfig.tag -- (string) Image tag.
   # @default -- The chart's appVersion value will be used
   tag:
