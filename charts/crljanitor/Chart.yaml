@@ -13,4 +13,4 @@ keywords:
 
 sources:
 - https://github.com/broadinstitute/terra-helm/tree/master/charts
-- https://github.com/DataBiosphere/crl-janitor
+- https://github.com/DataBiosphere/terra-resource-janitor
