@@ -9,6 +9,7 @@ keywords:
 - dsp
 - broadinstitute
 - terra
+- foo
 
 sources:
 - https://github.com/broadinstitute/terra-helm/tree/master/charts
