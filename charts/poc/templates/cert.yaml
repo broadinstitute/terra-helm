@@ -33,4 +33,3 @@ spec:
       path: {{ required "A valid vaultCert.chain.path value is required when vaultCert is enabled" .Values.vaultCert.chain.path }}
       key: {{ required "A valid vaultCert.chain.secretKey value is required when vaultCert is enabled" .Values.vaultCert.chain.secretKey }}
 {{ end -}}
-
