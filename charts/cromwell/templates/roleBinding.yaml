@@ -9,5 +9,5 @@ subjects:
   name: cromwell-sa
 roleRef:
   kind: Role
-  name: pod-runner
+  name: cromwell-role
   apiGroup: rbac.authorization.k8s.io
