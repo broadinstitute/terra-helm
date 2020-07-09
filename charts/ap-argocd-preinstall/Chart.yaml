@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ap-argocd-preinstall
-version: 0.0.1
+version: 0.0.2
 
 description: Helm Chart with extra resources for the ap-devops argocd instance
 type: application
