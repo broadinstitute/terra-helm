@@ -1,9 +1,6 @@
-name: Release Charts
+name: Release Charts from PR
 
-on:
-  push:
-    branches:
-      - master
+on: [pull_request]
 
 jobs:
   release:
@@ -12,6 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: false
           fetch-depth: '2'
 
