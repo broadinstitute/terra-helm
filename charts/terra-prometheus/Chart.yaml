@@ -6,7 +6,7 @@ description: a helm chart to deploy monitoring infrastructure
 
 type: application
 
-version: 0.0.3
+version: 0.1.0
 
 keywords:
   - dsp
