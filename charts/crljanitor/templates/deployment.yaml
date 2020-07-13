@@ -44,6 +44,21 @@ spec:
             secretKeyRef:
               name: crl-janitor-postgres-db-creds
               key: db
+        - name: STAIRWAY_DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: crl-janitor-stairway-db-creds
+                key: username
+        - name: STAIRWAY_DATABASE_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-stairway-db-creds
+              key: password
+        - name: STAIRWAY_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-stairway-db-creds
+              key: db
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
