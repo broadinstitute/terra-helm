@@ -1,3 +1,6 @@
+# Deprecated 
+This chart has been deprecated and should no longer be used
+
 # Broad Institute AP-devops prometheus-operator chart
 
 This is a fork of the stable/promtheus-operator chart managed by broad institute. In addition to installing the prometheus operator resourses it also configures the stackdriver sidecar for the prometheus server for exporting metrics to a stackdriver workspace. 
