@@ -45,10 +45,10 @@ spec:
               name: crl-janitor-postgres-db-creds
               key: db
         - name: STAIRWAY_DATABASE_USER
-            valueFrom:
-              secretKeyRef:
-                name: crl-janitor-stairway-db-creds
-                key: username
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-stairway-db-creds
+              key: username
         - name: STAIRWAY_DATABASE_USER_PASSWORD
           valueFrom:
             secretKeyRef:
