@@ -71,7 +71,7 @@ prometheus-operator:
 
     prometheusSpec:
       # prometheus-operator.prometheus.prometheusSpec.externalUrl -- (string) URL at which prometheus UI will be available.
-      externalUrl: https://prometheus.dsde-dev.broadinstitute.org
+      externalUrl: 
       # prometheus-operator.prometheus.prometheusSpec.containers -- ([object]) Used to inject the stackdriver exporter into prometheus pods.
       containers: 
   #       # - name: stackdriver-exporter
