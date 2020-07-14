@@ -12,6 +12,9 @@
 {{- $_ := set $templateScope "_deploymentSettings" $settings -}}
 {{- if $settings.enabled }}
 ---
+# Cromwell {{ $deploymentType }} configmap
+{{ template "cromwell.configmap" $templateScope }}
+---
 # Cromwell {{ $deploymentType }} deployment
 {{ template "cromwell.deployment" $templateScope }}
 {{- if $settings.expose }}
