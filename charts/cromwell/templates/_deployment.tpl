@@ -44,13 +44,22 @@ spec:
       - name: sqlproxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
-      - name: cromwell-gc-logs
-        emptyDir: {}
+      - name: {{ $settings.name }}-cm
+        configMap:
+          name: {{ $settings.name }}-cm
       containers:
       - name: {{ $settings.name }}-app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
         command: ["/bin/bash"]
-        args: ["-c", "java ${JAVA_OPTS} -Dsystem.cromwell_id=gke-${K8S_POD_NAME} -jar /app/cromwell.jar ${CROMWELL_ARGS} ${*}", "--"]
+        args:
+        - '-c'
+        - >-
+          java ${JAVA_OPTS}
+          -Dlogback.configurationFile=/etc/cromwell-cm/logback.xml
+          -Dsystem.cromwell_id=gke-${K8S_POD_NAME}
+          -jar /app/cromwell.jar
+          ${CROMWELL_ARGS} ${*}
+        - '--'
         resources:
           requests:
             cpu: 7
@@ -83,8 +92,9 @@ spec:
           subPath: cromwell-carbonite-account.json
           name: app-ctmpls
           readOnly: true
-        - mountPath: /var/log/gc
-          name: cromwell-gc-logs
+        - mountPath: /etc/cromwell-cm
+          name: cromwell-cm
+          readOnly: true
         readinessProbe:
           httpGet:
             path: /engine/latest/version
