@@ -47,6 +47,8 @@ spec:
       - name: {{ $settings.name }}-cm
         configMap:
           name: {{ $settings.name }}-cm
+      - name: {{ $settings.name }}-gc-logs
+        emptyDir: {}
       containers:
       - name: {{ $settings.name }}-app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
@@ -95,6 +97,8 @@ spec:
         - mountPath: /etc/cromwell-cm
           name: {{ $settings.name }}-cm
           readOnly: true
+        - mountPath: /var/log/gc
+          name: {{ $settings.name }}-gc-logs
         readinessProbe:
           httpGet:
             path: /engine/latest/version
