@@ -5,7 +5,7 @@
         <encoder>
             <!--
               Poor man's JSON logging. Create a message in the form
-                {"severity": "WARNING", "message": "<msg>"}
+                {"severity": "WARNING", "localTimestamp": "<timestamp>", "sourceThread":"<sourceThread>", "message": "<msg>"}
 
               Read more about the rationale for this in DDO-512.
 
@@ -14,7 +14,7 @@
               * Newlines in exceptions are also escaped using the %replace function
               * Curly braces are added as HTML entities, because literal curly braces can't be escaped in logback patterns
             -->
-            <pattern><pattern>&#123;"severity":"%level", "message":"%replace(%replace(%msg){'"','\\"'}){'\n','\\n'}%replace(%xException){'\n','\\n'}%nopex"&#125;%n</pattern></pattern>
+            <pattern><pattern>&#123;"severity":"%level", "localTimestamp":"%date", "sourceThread":"%X{sourceThread}", "message":"%replace(%replace(%msg){'"','\\"'}){'\n','\\n'}%replace(%xException){'\n','\\n'}%nopex"&#125;%n</pattern></pattern>
         </encoder>
     </appender>
 
