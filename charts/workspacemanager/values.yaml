@@ -31,6 +31,9 @@ vault:
 # samAddress -- Address of SAM instance this deploy will talk to
 samAddress: https://sam.dsde-dev.broadinstitute.org/
 
+# serviceGoogleProject -- the id of the google project which the instance is associated with
+serviceGoogleProject: broad-dsde-dev
+
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
 

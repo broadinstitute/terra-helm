@@ -61,6 +61,8 @@ spec:
               key: db
         - name: SAM_ADDRESS
           value: {{ .Values.samAddress }}
+        - name: SERVICE_GOOGLE_PROJECT
+          value: {{ .Values.serviceGoogleProject }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
