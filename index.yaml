@@ -134,6 +134,23 @@ entries:
     version: 0.1.0
   cromwell:
   - apiVersion: v2
+    created: "2020-07-14T18:01:52.500528037Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 971b796c80ab89a899927a8eb5dc640dab862fb054c927a7e30e2ada21c0ccad
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.6.0-71.1594749708.2ee2c5/cromwell-0.6.0-71.1594749708.2ee2c5.tgz
+    version: 0.6.0-71.1594749708.2ee2c5
+  - apiVersion: v2
     created: "2020-07-14T17:44:16.552241378Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
     digest: 4eb1a036ac8e3050cb58e93d2a88b1fc8c238f35af02a9c783be65b9eb0ee874
