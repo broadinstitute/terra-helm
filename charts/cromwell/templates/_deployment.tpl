@@ -93,7 +93,7 @@ spec:
           name: app-ctmpls
           readOnly: true
         - mountPath: /etc/cromwell-cm
-          name: cromwell-cm
+          name: {{ $settings.name }}-cm
           readOnly: true
         readinessProbe:
           httpGet:
