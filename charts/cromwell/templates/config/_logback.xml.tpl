@@ -14,7 +14,7 @@
               * Newlines in exceptions are also escaped using the %replace function
               * Curly braces are added as HTML entities, because literal curly braces can't be escaped in logback patterns
             -->
-            <pattern><pattern>&#123;"severity":"%level", "localTimestamp":"%date", "sourceThread":"%X{sourceThread}", "message":"%replace(%replace(%msg){'"','\\"'}){'\n','\\n'}%replace(%xException){'\n','\\n'}%nopex"&#125;%n</pattern></pattern>
+            <pattern>&#123;"severity":"%level", "localTimestamp":"%date", "sourceThread":"%X{sourceThread}", "message":"%replace(%replace(%msg){'"','\\"'}){'\n','\\n'}%replace(%xException){'\n','\\n'}%nopex"&#125;%n</pattern>
         </encoder>
     </appender>
 
