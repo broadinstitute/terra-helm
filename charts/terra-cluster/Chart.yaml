@@ -32,3 +32,6 @@ dependencies:
   condition: terra-cluster-networking.enabled
   version: 0.0.1
   repository: https://broadinstitute.github.io/terra-helm/
+- name: terra-prometheus
+  version: 0.1.1
+  repository: https://broadinstitute.github.io/terra-helm/
