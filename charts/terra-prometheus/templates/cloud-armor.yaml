@@ -2,6 +2,9 @@ apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: prometheus-cloud-armor
+  {{- if ne .Values.argoCd.namespaceOverride "" }}
+  namespace: {{ .Values.argoCd.namespaceOverride }}
+  {{- end }}
   labels:
     {{ template "prometheus.labels" . }}
 spec:

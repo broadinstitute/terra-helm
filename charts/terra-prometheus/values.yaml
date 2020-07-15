@@ -1,3 +1,7 @@
+# Argo CD Values
+argoCd:
+  # argoCd.namespaceOverride -- (string) enables installing to monitoring namespace when deployed as dependency via argoCd
+  namespaceOverride: "" # Must match value for prometheus-operator.namespaceOverride if used
 
 # TLS Values
 certManager:
@@ -35,6 +39,8 @@ vaultCert:
 prometheus-operator:
   # promtheus-operator.fullnameOverride -- (string) Use the name of this chart rather than prometheus operator built in templating.
   fullnameOverride: "terra-prometheus-operator"
+  # prometheus-operator.namespaceOverride -- (string) 
+  namespaceOverride: ""
   prometheusOperator:
     # prometheusOperator.createCustomResource -- Older versions of prometheus-operator had issues installing crds properly, this may no longer be needed.
     createCustomResource: false
