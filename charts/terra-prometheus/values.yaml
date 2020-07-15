@@ -1,7 +1,6 @@
-# Argo CD Values
-argoCd:
-  # argoCd.namespaceOverride -- (string) enables installing to monitoring namespace when deployed as dependency via argoCd
-  namespaceOverride: "" # Must match value for prometheus-operator.namespaceOverride if used
+
+# namespaceOverride -- (string) enables installing to monitoring namespace when deployed as dependency via argoCd
+namespaceOverride: "" # Must match value for prometheus-operator.namespaceOverride if used
 
 # TLS Values
 certManager:
@@ -9,7 +8,8 @@ certManager:
   enabled: false
   # certManager.renewBefore -- (string) Time before expiration when cert-manager will auto renew tls. Default is 30 days. Must be specified in hours
   renewBefore: 720h # 30 days before exp
-
+  # certmanager.dnsNames --([string]) List of dns names to add to the tls cert
+  dnsNames: [] # prometheus.[cluster].envs.broadinstitute.org
   # Default lets-encypt certificates 
   # certManager.issuerName -- (string) Name of the Issuer or ClusterIssuer resource that will be used to obtain the tls certificate
   issuerName: cert-manager-letsencrypt-prod
