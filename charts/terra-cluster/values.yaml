@@ -34,6 +34,7 @@ terra-cluster-psps:
     - istio-sidecar-injector-service-account
     - promsd
 terra-prometheus:
+  enabled: true
   namespaceOverride: monitoring
   prometheus-operator:
     # passing override to stable/prometheus-operator dependency
