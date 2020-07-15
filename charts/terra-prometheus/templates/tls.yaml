@@ -4,13 +4,16 @@ apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
   name: {{ .Chart.Name }}-cert
+  {{- if ne .Values.namespaceOverride "" }}
+  namespace: {{ .Values.namespaceOverride }}
+  {{- end }}
   labels:
     {{ template "prometheus.labels" . }}
 spec:
   secretName: {{ .Chart.Name }}-cert
   renewBefore: {{ .Values.certManager.renewBefore }}
   dnsNames:
-  - {{ template "workspacemanager.fqdn" . }}
+  - {{ .Values.certmanager.dnsNames }}
   issuerRef:
     name: {{ .Values.certManager.issuerName }}
     kind: {{ .Values.certManager.issuerKind }}
@@ -19,6 +22,9 @@ apiVersion: secrets-manager.tuenti.io/v1alpha1
 kind: SecretDefinition
 metadata:
   name: secretdefinition-{{ .Chart.Name }}-cert
+  {{- if ne .Values.argoCd.namespaceOverride "" }}
+  namespace: {{ .Values.argoCd.namespaceOverride }}
+  {{- end }}
   labels:
     {{ template "prometheus.labels" . }}
 spec:
