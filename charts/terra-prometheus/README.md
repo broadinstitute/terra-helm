@@ -2,7 +2,7 @@ terra-prometheus
 ================
 a helm chart to deploy monitoring infrastructure
 
-Current chart version is `0.1.0`
+Current chart version is `0.1.1`
 
 
 
@@ -22,7 +22,7 @@ Current chart version is `0.1.0`
 | certManager.issuerName | string | `"cert-manager-letsencrypt-prod"` | (string) Name of the Issuer or ClusterIssuer resource that will be used to obtain the tls certificate |
 | certManager.renewBefore | string | `"720h"` | (string) Time before expiration when cert-manager will auto renew tls. Default is 30 days. Must be specified in hours |
 | prometheus-operator.fullnameOverride | string | `"terra-prometheus-operator"` |  |
-| prometheus-operator.namespaceOverride | string | `""` | (string)  |
+| prometheus-operator.namespaceOverride | string | `""` | (string) For use with argocd to ensure prometheus resources are installed to monitoring namespace |
 | prometheus-operator.prometheus.ingress.annotations | object | `{"kubernetes.io/ingress.allow-http":"false","kubernetes.io/ingress.global-static-ip-name":null}` | annotations to attache to prometheus ingress resource. |
 | prometheus-operator.prometheus.ingress.enabled | bool | `true` | expose prometheus web ui through gke ingress |
 | prometheus-operator.prometheus.ingress.hosts | list | `[]` | ([string]) List of domain host(s) that the ingress should be accessible from  |
