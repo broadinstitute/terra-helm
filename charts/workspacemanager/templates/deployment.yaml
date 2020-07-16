@@ -63,6 +63,8 @@ spec:
           value: {{ .Values.samAddress }}
         - name: SERVICE_GOOGLE_PROJECT
           value: {{ .Values.serviceGoogleProject }}
+        - name: SAMPLING_PROBABILITY
+          value: {{ .Values.samplingProbability }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:

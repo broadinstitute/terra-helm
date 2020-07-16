@@ -34,6 +34,9 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 # serviceGoogleProject -- the id of the google project which the instance is associated with
 serviceGoogleProject: broad-dsde-dev
 
+# samplingProbability -- the frequency with which calls should be traced.
+samplingProbability: 1.0
+
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
 
