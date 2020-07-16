@@ -1596,6 +1596,41 @@ entries:
     version: 0.0.1
   terra-cluster:
   - apiVersion: v2
+    created: "2020-07-16T16:36:28.556563192Z"
+    dependencies:
+    - name: terra-cluster-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.5
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.6
+    - condition: terra-cluster-networking.enabled
+      name: terra-cluster-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    - condition: terra-prometheus.enabled
+      name: terra-prometheus
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.2
+    description: A Helm chart to configure a k8s cluster for Terra
+    digest: 90e1313706c22c6b1461d538baa0c5c8a65a9aafcd04b5e47eabce5caea8f84c
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.1.6-78.1594917383.144a7b/terra-cluster-0.1.6-78.1594917383.144a7b.tgz
+    version: 0.1.6-78.1594917383.144a7b
+  - apiVersion: v2
     created: "2020-07-16T15:16:24.007379361Z"
     dependencies:
     - name: terra-cluster-psps
