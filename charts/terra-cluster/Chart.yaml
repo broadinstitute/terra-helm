@@ -5,7 +5,7 @@ description: A Helm chart to configure a k8s cluster for Terra
 
 type: application
 
-version: 0.1.4
+version: 0.1.5
 
 keywords:
 - dsp
@@ -31,4 +31,8 @@ dependencies:
 - name: terra-cluster-networking
   condition: terra-cluster-networking.enabled
   version: 0.0.1
+  repository: https://broadinstitute.github.io/terra-helm/
+- name: terra-prometheus
+  condition: terra-prometheus.enabled
+  version: 0.1.1
   repository: https://broadinstitute.github.io/terra-helm/
