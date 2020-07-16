@@ -22,8 +22,8 @@ apiVersion: secrets-manager.tuenti.io/v1alpha1
 kind: SecretDefinition
 metadata:
   name: secretdefinition-{{ .Chart.Name }}-cert
-  {{- if ne .Values.argoCd.namespaceOverride "" }}
-  namespace: {{ .Values.argoCd.namespaceOverride }}
+  {{- if ne .Values.namespaceOverride "" }}
+  namespace: {{ .Values.namespaceOverride }}
   {{- end }}
   labels:
     {{ template "prometheus.labels" . }}
