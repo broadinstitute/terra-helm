@@ -39,6 +39,10 @@ terra-prometheus:
   prometheus-operator:
     # passing override to stable/prometheus-operator dependency
     namespaceOverride: monitoring
+
+    defaultRules:
+      rules:
+        promtheus: false
     # Namespace overrides for sub charts
     grafana:
       namespaceOverride: monitoring
