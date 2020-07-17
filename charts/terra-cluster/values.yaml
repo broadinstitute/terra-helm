@@ -46,6 +46,9 @@ terra-prometheus:
         prometheus: false
         prometheusOperator: false
     # Namespace overrides for sub charts
+    prometheusOperator:
+      admissionWebhooks:
+        failurePolicy: Ignore
     grafana:
       namespaceOverride: monitoring
     kube-state-metrics:
