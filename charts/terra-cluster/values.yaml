@@ -41,6 +41,7 @@ terra-prometheus:
     namespaceOverride: monitoring
 
     defaultRules:
+      create: false
       rules:
         prometheus: false
         prometheusOperator: false
