@@ -39,9 +39,7 @@ terra-prometheus:
   prometheus-operator:
     # passing override to stable/prometheus-operator dependency
     namespaceOverride: monitoring
-
     defaultRules:
-      create: false
       rules:
         prometheus: false
         prometheusOperator: false
