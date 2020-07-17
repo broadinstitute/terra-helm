@@ -42,7 +42,7 @@ terra-prometheus:
 
     defaultRules:
       rules:
-        promtheus: false
+        prometheus: false
     # Namespace overrides for sub charts
     grafana:
       namespaceOverride: monitoring
