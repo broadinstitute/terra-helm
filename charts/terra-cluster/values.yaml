@@ -34,7 +34,7 @@ terra-cluster-psps:
     - istio-sidecar-injector-service-account
     - promsd
 terra-prometheus:
-  enabled: true
+  enabled: false
   namespaceOverride: monitoring
   prometheus-operator:
     # passing override to stable/prometheus-operator dependency
@@ -46,7 +46,7 @@ terra-prometheus:
     # Namespace overrides for sub charts
     prometheusOperator:
       admissionWebhooks:
-        failurePolicy: Ignore
+        enabled: false # known issue with GKE clusters
     grafana:
       namespaceOverride: monitoring
     kube-state-metrics:
