@@ -21,5 +21,6 @@ This repo is configured to use the [chart-releaser GitHub Action](https://github
 All charts in this repo should be configured to use [helm-docs](https://github.com/norwoodj/helm-docs). If your change affects the values or another part of the README that helm-docs generates, please re-generate the README and commit it with your other changes:
 ```
 brew install norwoodj/tap/helm-docs
+cd charts/[changed chart]
 helm-docs
 ```
