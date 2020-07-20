@@ -5,7 +5,7 @@ metadata:
   labels:
     {{ template "postgres.labels" . }}
 data:
-  initdb: |-
+  init-user-db.sh: |-
     #!/bin/bash
     set -e
 

@@ -24,18 +24,15 @@ spec:
         env:
         - name: POSTGRES_PASSWORD
           value: {{ .Values.password }}
-        {{- if not .Values.dbs }}
+        {{- if .Values.dbs }}
         volumeMounts:
         - name: initdb
-          mountPath: /docker-entrypoint-initdb.d
+          mountPath: /docker-entrypoint-initdb.d/init-user-db.sh
           subPath: init-user-db.sh
         {{- end }}
-      {{- if not .Values.dbs }}
+      {{- if .Values.dbs }}
       volumes:
         - name: initdb
           configMap:
             name: {{ .Chart.Name }}-initdb
-            items:
-            - key: initdb
-              path: init-user-db.sh
       {{- end }}
