@@ -1,0 +1,17 @@
+# appVersion -- (string) Service image version/tag
+appVersion: '12'
+
+imageConfig:
+  # imageConfig.repository -- Image repository
+  repository: postgres
+  # imageConfig.tag -- (string) Image tag
+  # @default -- The chart's appVersion value will be used
+  tag:
+  # imageConfig.imagePullPolicy -- Image pull policy
+  imagePullPolicy: Always
+
+# password -- Default postgres user password
+password: postgres
+
+# dbs -- (array(string)) Names of DBs to create and grant the postgres user access to
+dbs: []

@@ -1,0 +1,15 @@
+apiVersion: v2
+name: postgres
+version: 0.0.0
+
+description: Chart for an ephemeral PostgreSQL database
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- database
+- postgres
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts

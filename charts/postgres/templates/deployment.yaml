@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+    {{ template "postgres.labels" . }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-service
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-service-sa
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+        imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          value: {{ .Values.password }}
+        {{- if not .Values.dbs }}
+        volumeMounts:
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+          subPath: init-user-db.sh
+        {{- end }}
+      {{- if not .Values.dbs }}
+      volumes:
+        - name: initdb
+          configMap:
+            name: {{ .Chart.Name }}-initdb
+            items:
+            - key: initdb
+              path: init-user-db.sh
+      {{- end }}
