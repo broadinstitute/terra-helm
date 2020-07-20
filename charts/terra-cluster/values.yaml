@@ -47,6 +47,8 @@ terra-prometheus:
     prometheusOperator:
       admissionWebhooks:
         enabled: false # known issue with GKE clusters
+      tlsProxy:
+        enabled: false # Only needed for the above, causes race conditions when admisison webhook is enabled
     grafana:
       namespaceOverride: monitoring
     kube-state-metrics:
