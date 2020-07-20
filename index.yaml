@@ -971,6 +971,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.0.0/poc-0.0.0.tgz
     version: 0.0.0
+  postgres:
+  - apiVersion: v2
+    created: "2020-07-20T16:23:12.427919418Z"
+    description: Chart for an ephemeral PostgreSQL database
+    digest: 245aa736bcb2362e6346343e4d033ee472541e4f57d70b72822be00c11e929e7
+    keywords:
+    - dsp
+    - broadinstitute
+    - database
+    - postgres
+    name: postgres
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.0.0-80.1595262188.e7eeab/postgres-0.0.0-80.1595262188.e7eeab.tgz
+    version: 0.0.0-80.1595262188.e7eeab
   sam:
   - apiVersion: v2
     appVersion: develop
