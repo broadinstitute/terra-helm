@@ -1,3 +1,8 @@
+{{- /* Generate a chain of %replace macros to escape JSON-unfriendly characters */ -}}
+{{- define "cromwell.config.logback.jsonescape" -}}
+%replace(%replace(%replace(%replace(%replace({{- . -}}){'\', '\\'}){'\n', '\\n'}){'\t', '\\t'}){'\r', '\\r'}){'"', '\\"'}
+{{- end -}}
+
 {{- /* Generate a logback.xml config file for a Cromwell deployment */ -}}
 {{- define "cromwell.config.logback" -}}
 <configuration>
@@ -10,11 +15,12 @@
               Read more about the rationale for this in DDO-512.
 
               Notes:
-              * Double quotes and newlines in messages are escaped using the %replace function
-              * Newlines in exceptions are also escaped using the %replace function
               * Curly braces are added as HTML entities, because literal curly braces can't be escaped in logback patterns
+              * Double quotes, newlines and other troublesome characters in message and stacktrace are escaped using the %replace function
+              * Log message and exception stacktrace are included in the "message" field, as per Stackdriver guidelines
+              * This is intended to help us quickly adopt Stackdriver logging for Cromwell; long-term an application-side change should be made to log in JSON with an actual library
             -->
-            <pattern>&#123;"severity":"%level", "localTimestamp":"%date", "sourceThread":"%X{sourceThread}", "message":"%replace(%replace(%msg){'"','\\"'}){'\n','\\n'}%replace(%xException){'\n','\\n'}%nopex"&#125;%n</pattern>
+            <pattern>&#123;"severity":"%level", "localTimestamp":"%date", "sourceThread":"%X{sourceThread}", "message":"{{- include "cromwell.config.logback.jsonescape" "%msg" -}}{{- include "cromwell.config.logback.jsonescape" "%xException" -}}%nopex"&#125;%n</pattern>
         </encoder>
     </appender>
 
