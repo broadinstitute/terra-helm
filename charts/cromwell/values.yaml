@@ -1,23 +1,34 @@
-# What version of Cromwell to deploy
 global:
-  # What version of the application to deploy
+  # global.applicationVersion -- What version of the Cromwell application to deploy
   applicationVersion: latest
-  # A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses.
+  # Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   trustedAddresses: {}
 
-# Cromwell is can be run in multiple deployments; this key contains default
-# settings for all deployments configured under the `deployments` key
-#
+# Cromwell can be run in multiple deployments. This key contains default
+# settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
-  enabled: true  # Whether a declared deployment is enabled. If false, no resources will be created
-  name: null     # Set separately in each deployment. Eg. "cromwell1-reader"
-  imageTag: null # Defaults to global.applicationVersion
-  replicas: 0    # Number of replicas
-  expose: false  # Whether to create a service for this deployment
-  serviceName: null  # What to call the service
-  serviceIP: null    # Static IP to use for the Service. If set, service will be of type LoadBalancer
-  serviceAllowedAddresses: {} # What source IPs to whitelist for access to the service
-  # legacyResourcePrefix: null # What prefix to use to refer to secrets rendered from firecloud-develop. Defaults to `name`
+  # deploymentDefaults.enabled -- Whether a declared deployment is enabled. If false, no resources will be created
+  enabled: true
+  # deploymentDefaults.name -- A name for the deployment that will be substituted into resuorce definitions.
+  # Example: `"cromwell1-reader"`
+  name: null
+  # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
+  # @defautl global.applicationVersion
+  imageTag: null
+  # deploymentDefaults.replicas -- Number of replicas for the deployment
+  replicas: 0
+  # deploymentDefaults.expose -- Whether to create a Service for this deployment
+  expose: false
+  # deploymentDefaults.serviceName -- What to call the Service
+  serviceName: null
+  # deploymentDefaults.serviceIP -- Static IP to use for the Service. If set, service will be of type LoadBalancer
+  serviceIP: null
+  # deploymentDefaults.serviceAllowedAddresses -- What source IPs to whitelist for access to the service
+  serviceAllowedAddresses: {}
+  # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
+  # @default deploymentDefaults.name
+  legacyResourcePrefix: null
 
 # A map of Cromwell deployments. In Terra's production environment,
 # Cromwell is deployed as 4 separate services with different configurations.
@@ -26,7 +37,11 @@ deploymentDefaults:
 # developer might run Cromwell.
 deployments:
   standalone:
+    # deployments.standalone.name -- Name to use for the default standalone Cromwell deployment
     name: cromwell
+    # deployments.standalone.replicas -- Number of replicas in the default standalone Cromwell deployment
     replicas: 1
+    # deployments.standalone.expose -- Whether to expose the default standalone Cromwell deployment as a service
     expose: true
+    # deployments.standalone.serviceName -- Name of the default standalone Cromwell service
     serviceName: cromwell
