@@ -13,7 +13,7 @@ spec:
   secretName: {{ .Chart.Name }}-cert
   renewBefore: {{ .Values.certManager.renewBefore }}
   dnsNames:
-  - {{ .Values.certmanager.dnsNames }}
+  - {{ .Values.certManager.dnsNames }}
   issuerRef:
     name: {{ .Values.certManager.issuerName }}
     kind: {{ .Values.certManager.issuerKind }}
