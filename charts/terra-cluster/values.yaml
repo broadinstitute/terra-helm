@@ -39,3 +39,33 @@ terra-prometheus:
   prometheus-operator:
     # passing override to stable/prometheus-operator dependency
     namespaceOverride: monitoring
+    defaultRules:
+      rules:
+        prometheus: false
+        prometheusOperator: false
+    # Namespace overrides for sub charts
+    prometheusOperator:
+      admissionWebhooks:
+        enabled: false # known issue with GKE clusters
+      tlsProxy:
+        enabled: false # Only needed for the above, causes race conditions when admisison webhook is enabled
+    grafana:
+      namespaceOverride: monitoring
+    kube-state-metrics:
+      namespaceOverride: monitoring
+    prometheus-node-exporter:
+      namespaceOverride: monitoring
+    # Some k8s internals are abstracted by gke and are not accessible
+    # The following disable prometheus scraping of those components
+    coreDns:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
+    kubeDns:
+      enabled: true # used instead of coreDns in GKE
+    kubeEtcd:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
