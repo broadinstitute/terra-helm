@@ -25,6 +25,7 @@ spec:
     metadata:
       labels:
         deployment: {{ $settings.name }}
+      annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
     spec:
