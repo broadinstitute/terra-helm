@@ -1041,6 +1041,22 @@ entries:
     version: 0.0.0
   postgres:
   - apiVersion: v2
+    created: "2020-07-23T14:06:14.155077244Z"
+    description: Library chart for an ephemeral PostgreSQL database container
+    digest: 074deddc0d16a7d34cd0a6de89bbcc5ebf8b1ebf103310b419ff023a4798b790
+    keywords:
+    - dsp
+    - broadinstitute
+    - database
+    - postgres
+    name: postgres
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.0.0-85.1595513170.aea77d/postgres-0.0.0-85.1595513170.aea77d.tgz
+    version: 0.0.0-85.1595513170.aea77d
+  - apiVersion: v2
     created: "2020-07-20T17:13:12.146482143Z"
     description: Chart for an ephemeral PostgreSQL database
     digest: 604442e18d6cecc12fe6ac6cda79b8536a4a60c2084c647a023f6cf5e2fc15b5
