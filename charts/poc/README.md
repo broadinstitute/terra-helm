@@ -3,7 +3,11 @@ poc
 
 Chart for a POC Terra app
 
+## Chart Requirements
 
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | postgres | 0.0.0 |
 
 ## Chart Values
 
@@ -23,6 +27,8 @@ Chart for a POC Terra app
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/kernel-service-poc"` | Image repository |
 | imageConfig.tag | string | The chart's appVersion value will be used | Image tag. |
+| postgres.dbs | list | `["poc"]` | (array(string)) List of databases to create.  |
+| postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |
