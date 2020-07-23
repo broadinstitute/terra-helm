@@ -27,23 +27,36 @@ spec:
         {{- if not .Values.proxy.enabled }}
         ports:
         - containerPort: 8080
-        {{- end}}
+        {{- end }}
         env:
         - name: DATABASE_USER
+          {{- if not .Values.postgres.enabled }}
           valueFrom:
             secretKeyRef:
               name: {{ .Chart.Name }}-postgres-db-creds
               key: username
+          {{- else }}
+          value: postgres
+          {{- end }}
         - name: DATABASE_USER_PASSWORD
+          {{- if not .Values.postgres.enabled }}
           valueFrom:
             secretKeyRef:
               name: {{ .Chart.Name }}-postgres-db-creds
               key: password
+          {{- else }}
+          value: {{ .Values.postgres.password }}
+          {{- end }}
         - name: DATABASE_NAME
+          {{- if not .Values.postgres.enabled }}
           valueFrom:
             secretKeyRef:
               name: {{ .Chart.Name }}-postgres-db-creds
               key: db
+          {{- else }}
+          value: {{ index .Values.postgres.dbs 0 }}
+          {{- end }}
+      {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -72,6 +85,9 @@ spec:
         - name: sa-creds
           mountPath: /secrets/sa
           readOnly: true
+      {{- else }}
+      {{- include "postgres.container.tpl" . | indent 6 }}
+      {{- end }}
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
@@ -92,9 +108,13 @@ spec:
           readOnly: true
       {{- end }}
       volumes:
+        {{- if not .Values.postgres.enabled }}
         - name: sa-creds
           secret:
             secretName: {{ .Chart.Name }}-sa
+        {{- else }}
+        {{- include "postgres.volume.tpl" . | indent 8 }}
+        {{- end }}
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
