@@ -5,9 +5,10 @@ kind: Application
 metadata:
   name: {{ .app }}-configs-{{ .environment }}
   labels:
-    app: {{ .app }} # These labels are used as selectors in the UI
+    app: {{ .app }} # These labels are used as selectors in the UI and for argocd CLI calls
     env: {{ .environment }}
     cluster: {{ .clusterName }}
+    type: legacy-configs
   {{- if .purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io

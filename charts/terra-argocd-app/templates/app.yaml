@@ -4,9 +4,11 @@ kind: Application
 metadata:
   name: {{ required "A valid app name is required" .app }}-{{ required "A valid environment is required" .environment }}
   labels:
-    app: {{ .app }} # These labels are used as selectors in the UI
+    app: {{ .app }} # These labels are used as selectors in the UI and for argocd CLI calls
     env: {{ .environment }}
     cluster: {{ .clusterName }}
+    type: app
+    has-legacy-configs: {{ .legacyConfigsEnabled }}
   {{- if .purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
