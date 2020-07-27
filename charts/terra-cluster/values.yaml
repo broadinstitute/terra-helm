@@ -73,6 +73,6 @@ terra-prometheus:
     kubeStateMetrics:
       serviceMonitor:
         relabelings:
-          - source_labels: '[__name__]'
-            target_label: sd_export
+          - sourceLabels: '[__name__]'
+            targetLabel: sd_export
             replacement: false
