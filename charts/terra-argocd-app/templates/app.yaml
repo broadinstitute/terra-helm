@@ -9,6 +9,7 @@ metadata:
     cluster: {{ .clusterName }}
     type: app
     has-legacy-configs: {{ .legacyConfigsEnabled }}
+    jenkins-sync-enabled: {{ .jenkinsSyncEnabled }}
   {{- if .purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io

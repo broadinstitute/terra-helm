@@ -11,6 +11,9 @@ environment: null
 # Name of the application to render for. Eg. `cromwell`
 app: null
 
+# Whether to sync this app on Jenkins environment deploys
+jenkinsSyncEnabled: true
+
 # Optional: Sync policy for the app.
 # See https://argoproj.github.io/argo-cd/user-guide/auto_sync/
 # Default to no sync policy (manual)
