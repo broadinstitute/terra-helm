@@ -75,4 +75,4 @@ terra-prometheus:
         relabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
-            replacement: false
+            replacement: 'false'
