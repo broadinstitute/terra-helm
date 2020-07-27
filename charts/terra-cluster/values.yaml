@@ -69,3 +69,10 @@ terra-prometheus:
       enabled: false
     kubeProxy:
       enabled: false
+    # Metric relabelings for stackdriver filter
+    kubeStateMetrics:
+      serviceMonitor:
+        relabelings:
+          - source_labels: '[__name__]'
+            target_label: sd_export
+            replacement: false
