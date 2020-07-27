@@ -40,8 +40,6 @@ terra-prometheus:
     # passing override to stable/prometheus-operator dependency
     namespaceOverride: monitoring
     defaultRules:
-      labels:
-        sd_export: false
       rules:
         prometheus: false
         prometheusOperator: false
