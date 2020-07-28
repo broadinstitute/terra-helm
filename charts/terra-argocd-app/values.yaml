@@ -1,39 +1,55 @@
 # Default values for terra-argocd-app
-# The name of the cluster that is being deployed to. Eg. terra-dev
+# clusterName -- The name of the cluster that is being deployed to. Eg. terra-dev
 clusterName: null
 
-# The address of the cluster that is being deployed to. Eg. "https://35.238.186.116"
+# clusterAddress -- The address of the cluster that is being deployed to. Eg. "https://35.238.186.116"
 clusterAddress: null
 
-# The Terra environment the app belongs to
+# environment -- The Terra environment the app belongs to
 environment: null
 
-# Name of the application to render for. Eg. `cromwell`
+# app -- Name of the application to render for. Eg. `cromwell`
 app: null
 
-# Whether to sync this app on Jenkins environment deploys
+# jenkinsSyncEnabled -- Whether to sync this app on Jenkins environment deploys
 jenkinsSyncEnabled: true
 
-# Optional: Sync policy for the app.
+# syncPolicy -- Optional: Sync policy for the app.
 # See https://argoproj.github.io/argo-cd/user-guide/auto_sync/
-# Default to no sync policy (manual)
+# @default -- No sync policy (manual)
 syncPolicy: null
 
-# If an ArgoCD Application is deleted,
+# purgeDeployedResourcesOnDelete -- If an ArgoCD Application is deleted,
 # purge deployed resources as well. Eg. if the `cromwell-dev`
 # app is deleted, delete all the deployed Cromwell pods/secrets/etc from
 # the dev cluster
 purgeDeployedResourcesOnDelete: false
 
-# Terra's helmfile repo
+# helmfileRepo -- Terra's helmfile repo
 helmfileRepo: https://github.com/broadinstitute/terra-helmfile
 
-# Whether to create a separate application to sync values from firecloud-develop
+# legacyConfigsEnabled -- Whether to create a separate application to sync values from firecloud-develop
 legacyConfigsEnabled: false
+
+# legacyConfigsRepo -- Repo to pull legacy configs from
 legacyConfigsRepo: https://github.com/broadinstitute/firecloud-develop
-legacyConfigsRepoRef: dev # branch to pull configs from
-legacyConfigsInstanceTypes: [] # Instance types - passed in via INSTANCE_TYPES env var
-legacyConfigsEnv: # Additional environment variables to pass in
-  # APP_NAME - defaults to the terra app name, eg. cromwell
-  # ENV - defaults to the terra environment, eg. dev
-  RUN_CONTEXT: live  # configure.rb run context
+
+# legacyConfigsRepoRef -- Branch/ref to pull legacy configs from
+legacyConfigsRepoRef: dev
+
+# legacyConfigsInstanceTypes -- Which instance types to render consul-template configs for
+# (passed to consul-template via INSTANCE_TYPE env var)
+legacyConfigsInstanceTypes: []
+
+# legacyConfigsEnv -- Any additional environment variables to pass in to the configure.rb process.
+# @default -- documented invidually
+legacyConfigsEnv:
+  # legacyConfigsEnv.APP_NAME -- configure.rb app name
+  # @default -- terra app name passed in via .app value, eg. cromwell
+  APP_NAME: null
+  # legacyConfigsEnv.ENV -- configure.rb env name
+  # @default -- terra env name passed in via .environment value, eg. dev
+  ENV: null
+  # legacyConfigsEnv.RUN_CONTEXT -- configure.rb run context
+  # @default -- live
+  RUN_CONTEXT: live
