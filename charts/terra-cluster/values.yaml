@@ -72,55 +72,55 @@ terra-prometheus:
     # Metric relabelings for stackdriver filter
     kubeStateMetrics:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     prometheusOperator:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     prometheus:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     alertmanager:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     grafana:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     kubeApiServer:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     kubeDns:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     kubelet:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
     nodeExporter:
       serviceMonitor:
-        relabelings:
+        metricRelabelings:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
