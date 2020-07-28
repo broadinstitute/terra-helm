@@ -4,12 +4,12 @@ kind: Application
 metadata:
   name: {{ required "A valid app name is required" .app }}-{{ required "A valid environment is required" .environment }}
   labels:
-    app: {{ .app }} # These labels are used as selectors in the UI and for argocd CLI calls
-    env: {{ .environment }}
-    cluster: {{ .clusterName }}
+    app: {{ quote .app }} # These labels are used as selectors in the UI and for argocd CLI calls
+    env: {{ quote .environment }}
+    cluster: {{ quote .clusterName }}
     type: app
-    has-legacy-configs: {{ .legacyConfigsEnabled }}
-    jenkins-sync-enabled: {{ .jenkinsSyncEnabled }}
+    has-legacy-configs: {{ quote .legacyConfigsEnabled }}
+    jenkins-sync-enabled: {{ quote .jenkinsSyncEnabled }}
   {{- if .purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -18,17 +18,17 @@ spec:
   project: {{ include "terra-argocd.projectName" . }}
   destination:
     namespace: {{ include "terra-argocd.destinationNamespace" . }}
-    server: {{ .clusterAddress }}
+    server: {{ quote .clusterAddress }}
   source:
-    repoURL: {{ .helmfileRepo }}
+    repoURL: {{ quote .helmfileRepo }}
     path: .
     plugin:
       name: helmfile
       env:
       - name: HELMFILE_ENV
-        value: {{ .environment }}
+        value: {{ quote .environment }}
       - name: HELMFILE_SELECTOR
-        value: group=terra,app={{ .app }}
+        value: "group=terra,app={{ .app }}"
 {{- if .syncPolicy }}
     syncPolicy:
 {{ .syncPolicy | toYaml | indent 6 }}
