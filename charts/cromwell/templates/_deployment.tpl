@@ -1,6 +1,7 @@
 {{- /* Generate a Cromwell deployment */ -}}
 {{- define "cromwell.deployment" -}}
 {{- $settings := ._deploymentSettings -}}
+{{- $outputs := ._deploymentOutputs -}}
 {{- $imageTag := $settings.imageTag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := $settings.legacyResourcePrefix | default $settings.name -}}
 apiVersion: apps/v1
@@ -24,6 +25,9 @@ spec:
     metadata:
       labels:
         deployment: {{ $settings.name }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
     spec:
       serviceAccountName: cromwell-sa
       # Containers are configured to talk to each other by name
