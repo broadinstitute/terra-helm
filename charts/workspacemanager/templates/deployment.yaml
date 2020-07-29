@@ -61,6 +61,14 @@ spec:
               key: db
         - name: SAM_ADDRESS
           value: {{ .Values.samAddress }}
+        - name: SERVICE_GOOGLE_PROJECT
+          value: {{ .Values.serviceGoogleProject }}
+        - name: SAMPLING_PROBABILITY
+          value: "{{ .Values.samplingProbability }}"
+        volumeMounts:
+          - name: cloud-trace-sa-creds
+            mountPath: /secrets/cloudtrace
+            readOnly: true
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -117,7 +125,10 @@ spec:
       volumes:
         - name: cloudsql-sa-creds
           secret:
-            secretName: workspace-sa
+            secretName: workspace-sqlproxy-sa
+        - name: cloud-trace-sa-creds
+          secret:
+            secretName: workspace-cloud-trace-sa
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:

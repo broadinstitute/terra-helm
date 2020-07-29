@@ -47,6 +47,8 @@ terra-prometheus:
     prometheusOperator:
       admissionWebhooks:
         enabled: false # known issue with GKE clusters
+      tlsProxy:
+        enabled: false # Only needed for the above, causes race conditions when admisison webhook is enabled
     grafana:
       namespaceOverride: monitoring
     kube-state-metrics:
@@ -67,3 +69,59 @@ terra-prometheus:
       enabled: false
     kubeProxy:
       enabled: false
+    # Metric relabelings for stackdriver filter
+    kubeStateMetrics:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    prometheusOperator:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    prometheus:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    alertmanager:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    grafana:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    kubeApiServer:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    kubeDns:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    kubelet:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+    nodeExporter:
+      serviceMonitor:
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            targetLabel: sd_export
+            replacement: 'false'
+        
