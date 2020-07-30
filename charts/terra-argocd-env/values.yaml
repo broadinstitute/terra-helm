@@ -1,12 +1,8 @@
-# Default values for terra-argocd-env
-# The name of the cluster that is being deployed to. Eg. "terra-dev"
-clusterName: null
+# clusterAddresses -- A list of cluster addresses that this environment is deployed to. Eg. "https://35.238.186.116"
+clusterAddresses: []
 
-# The address of the cluster that is being deployed to. Eg. "https://35.238.186.116"
-clusterAddress: null
-
-# The Terra environment this project is for. Eg. `dev`
+# environment -- The Terra environment this project is for. Eg. `dev`
 environment: null
 
-# Whether this environment requires a user to be suitable to make changes.
+# requireSuitable -- Whether this environment requires a user to be suitable to make changes.
 requireSuitable: false
