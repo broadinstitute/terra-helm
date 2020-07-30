@@ -1,0 +1,7 @@
+{{- define "postgres.service.tpl" }}
+spec:
+  selector:
+    app: {{ .Chart.Name }}-postgres
+  ports:
+  - port: 5432
+{{- end }}

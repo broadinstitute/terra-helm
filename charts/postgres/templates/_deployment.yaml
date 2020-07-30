@@ -1,0 +1,35 @@
+{{- define "postgres.deployment.tpl" }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-postgres
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-postgres
+      labels:
+        app: {{ .Chart.Name }}-postgres
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-service-sa
+      containers:
+      - name: postgres
+        image: {{ .Values.postgres.imageConfig.repository }}:{{ default .Values.postgres.appVersion .Values.postgres.imageConfig.tag }}
+        imagePullPolicy: {{ .Values.postgres.imagePullPolicy }}
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          value: {{ .Values.postgres.password }}
+        {{- if .Values.postgres.dbs }}
+        volumeMounts:
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d/init-user-db.sh
+          subPath: init-user-db.sh
+        {{- end }}
+      {{- if .Values.postgres.dbs }}
+      volumes:
+      - name: initdb
+        configMap:
+          name: {{ .Chart.Name }}-postgres-initdb
+      {{- end }}
+{{- end }}
