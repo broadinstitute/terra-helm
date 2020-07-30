@@ -27,6 +27,8 @@ vault:
   enabled: true
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
+  # vault.configPathPrefix -- (string) Vault path prefix for configs. Required if vault.enabled.
+  configPathPrefix:
 
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:

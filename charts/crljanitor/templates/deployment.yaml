@@ -59,6 +59,21 @@ spec:
             secretKeyRef:
               name: crl-janitor-stairway-db-creds
               key: db
+        - name: PUBSUB_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-pubsub-project-id
+              key: project
+        - name: PUBSUB_TOPIC
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-pubsub-topic
+              key: topic
+        - name: PUBSUB_SUBSCRIPTION
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-pubsub-subscription
+              key: subscription
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
