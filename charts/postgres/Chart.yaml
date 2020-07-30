@@ -1,6 +1,5 @@
 apiVersion: v2
 name: postgres
-
 version: 0.1.0
 
 description: Library chart for an ephemeral PostgreSQL database container
