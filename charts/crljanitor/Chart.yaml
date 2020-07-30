@@ -12,5 +12,5 @@ keywords:
 - crl-janitor
 
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/yyu-PF-61/charts
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
 - https://github.com/DataBiosphere/terra-resource-janitor
