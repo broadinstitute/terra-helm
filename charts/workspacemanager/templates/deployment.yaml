@@ -65,6 +65,8 @@ spec:
           value: {{ .Values.serviceGoogleProject }}
         - name: SAMPLING_PROBABILITY
           value: "{{ .Values.samplingProbability }}"
+        - name: CLOUD_TRACE_SA_PATH
+          value: /secrets/cloudtrace/service-account.json
         volumeMounts:
           - name: cloud-trace-sa-creds
             mountPath: /secrets/cloudtrace
