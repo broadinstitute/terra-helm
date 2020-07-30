@@ -1735,6 +1735,20 @@ entries:
     version: 0.0.1
   terra-argocd-env:
   - apiVersion: v2
+    created: "2020-07-30T20:24:32.94861372Z"
+    dependencies:
+    - name: terra-argocd-templates
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.0.4
+    description: A Helm chart for generating environment-wide ArgoCD resources for
+      Terra environments
+    digest: d79bf0053abcf2ce618225ceef3dbf1b5dd02df58830513d6c7bce6f50addfa7
+    name: terra-argocd-env
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-env-0.0.8-95.1596140668.f1f269/terra-argocd-env-0.0.8-95.1596140668.f1f269.tgz
+    version: 0.0.8-95.1596140668.f1f269
+  - apiVersion: v2
     created: "2020-06-24T09:45:33.761642567Z"
     dependencies:
     - name: terra-argocd-templates
