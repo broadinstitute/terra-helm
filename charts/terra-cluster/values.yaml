@@ -51,6 +51,30 @@ terra-prometheus:
         enabled: false # Only needed for the above, causes race conditions when admisison webhook is enabled
     grafana:
       namespaceOverride: monitoring
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.global-static-ip-name: terra-dev-k8s-sys-graph-ip
+          kubernetes.io/ingress.allow-http: "false"
+        hosts:
+          - "k8s-sys-graph.dsde-dev.broadinstitute.org"
+        paths:
+          - /*
+        tls:
+          - secretName: terra-prometheus-cert
+      service:
+        type: NodePort
+        annotations:
+          cloud.google.com/backend-config: '{"ports": {"80": "prometheus-cloud-armor"}}'
+      grafana.ini:
+        users:
+          viewers_can_edit: false
+        auth:
+          disable_login_form: true
+          disable_signout_menu: true
+        auth.anonymous:
+          enabled: true
+          org_role: Viewer
     kube-state-metrics:
       namespaceOverride: monitoring
     prometheus-node-exporter:
