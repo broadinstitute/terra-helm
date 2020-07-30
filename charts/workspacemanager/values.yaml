@@ -93,3 +93,4 @@ proxy:
     repository: broadinstitute/openidc-proxy
     # proxy.image.version -- Proxy image tag
     version: bernick_tcell
+
