@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: terra-workspace-manager-service
+  name: {{ .Chart.Name }}-service
   labels:
     {{ template "workspacemanager.labels" . }}
 spec:
@@ -12,7 +12,7 @@ spec:
   {{- template "workspacemanager.servicefirewall" . }}
   {{- end }}
   selector:
-    app: terra-workspace-manager
+    app: {{ .Chart.Name }}
   {{- if .Values.proxy.enabled }}
   ports:
   - name: http

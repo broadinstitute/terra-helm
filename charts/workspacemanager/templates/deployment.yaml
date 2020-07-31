@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: terra-workspace-manager-deployment
+  name: {{ .Chart.Name }}-deployment
   labels:
     {{ template "workspacemanager.labels" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: terra-workspace-manager
+      app: {{ .Chart.Name }}
   template:
     metadata:
-      name: terra-workspace-manager-service
+      name: {{ .Chart.Name }}-service
       labels:
-        app: terra-workspace-manager
+        app: {{ .Chart.Name }}
     spec:
-      serviceAccountName: terra-workspace-manager-service-sa
+      serviceAccountName: {{ .Chart.Name }}-service-sa
       containers:
-      - name: terra-workspace-manager
+      - name: {{ .Chart.Name }}
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
@@ -134,7 +134,7 @@ spec:
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
-            name: terra-workspace-manager-proxy-configmap
+            name: {{ .Chart.Name }}-proxy-configmap
             items:
             - key: apache-httpd-proxy-config
               path: workspace-manager-proxy.conf
