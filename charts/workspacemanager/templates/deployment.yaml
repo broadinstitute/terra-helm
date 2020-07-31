@@ -148,10 +148,10 @@ spec:
         - name: cloudsql-sa-creds
           secret:
             secretName: workspace-sqlproxy-sa
+        {{- end }}
         - name: cloud-trace-sa-creds
           secret:
             secretName: workspace-cloud-trace-sa
-        {{- end }}
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
