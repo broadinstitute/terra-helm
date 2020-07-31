@@ -29,6 +29,7 @@ spec:
         - containerPort: 8080
         {{- end}}
         env:
+        {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
@@ -59,6 +60,20 @@ spec:
             secretKeyRef:
               name: workspace-stairway-db-creds
               key: db
+        {{- else }}
+        - name: DATABASE_USER
+          value: postgres
+        - name: DATABASE_USER_PASSWORD
+          value: {{ .Values.postgres.password }}
+        - name: DATABASE_NAME
+          value: {{ index .Values.postgres.dbs 0 }}
+        - name: STAIRWAY_DATABASE_USER
+          value: postgres
+        - name: STAIRWAY_DATABASE_USER_PASSWORD
+          value: {{ .Values.postgres.password }}
+        - name: STAIRWAY_DATABASE_NAME
+          value: {{ index .Values.postgres.dbs 1 }}
+        {{- end }}
         - name: SAM_ADDRESS
           value: {{ .Values.samAddress }}
         - name: SERVICE_GOOGLE_PROJECT
@@ -71,6 +86,7 @@ spec:
           - name: cloud-trace-sa-creds
             mountPath: /secrets/cloudtrace
             readOnly: true
+      {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -99,6 +115,7 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
+      {{- end }}
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
@@ -125,12 +142,14 @@ spec:
         {{- end }}
       {{- end }}
       volumes:
+        {{- if not .Values.postgres.enabled }}
         - name: cloudsql-sa-creds
           secret:
             secretName: workspace-sqlproxy-sa
         - name: cloud-trace-sa-creds
           secret:
             secretName: workspace-cloud-trace-sa
+        {{- end }}
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
@@ -142,3 +161,13 @@ spec:
           secret:
             secretName: {{ .Chart.Name }}-cert
         {{- end }}
+---
+{{- if .Values.postgres.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-postgres-deployment
+  labels:
+    {{ template "workspacemanager.labels" . }}
+{{- include "postgres.deployment.tpl" . }}
+{{- end }}

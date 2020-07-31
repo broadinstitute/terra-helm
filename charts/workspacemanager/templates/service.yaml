@@ -26,3 +26,13 @@ spec:
   - name: http
     port: 8080
   {{- end}}
+{{- if .Values.postgres.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-postgres-service
+  labels:
+    {{ template "workspacemanager.labels" . }}
+{{- include "postgres.service.tpl" . }}
+{{- end }}
