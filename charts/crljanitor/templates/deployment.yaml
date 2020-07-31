@@ -64,11 +64,6 @@ spec:
             secretKeyRef:
               name: crl-janitor-pubsub-project-id
               key: project
-        - name: TRACK_RESOURCE_PUBSUB_TOPIC
-          valueFrom:
-            secretKeyRef:
-              name: crl-janitor-pubsub-topic
-              key: topic
         - name: TRACK_RESOURCE_PUBSUB_SUBSCRIPTION
           valueFrom:
             secretKeyRef:
