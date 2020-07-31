@@ -2,7 +2,7 @@ terra-argocd-env
 ================
 A Helm chart for generating environment-wide ArgoCD resources for Terra environments
 
-Current chart version is `0.0.7`
+Current chart version is `0.0.8`
 
 
 
