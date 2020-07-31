@@ -61,6 +61,8 @@ spec:
               name: workspace-stairway-db-creds
               key: db
         {{- else }}
+        - name: DATABASE_HOSTNAME
+          value: {{ .Chart.Name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
         - name: DATABASE_USER
           value: postgres
         - name: DATABASE_USER_PASSWORD
