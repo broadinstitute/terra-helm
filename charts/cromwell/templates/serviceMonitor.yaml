@@ -4,7 +4,7 @@ metadata:
   name: cromwell-jvm-monitor
   namespace: monitoring # service monitors must be deployed in same namespace as prometheus
   labels:
-    app: prometheus
+    release: terra-cluster-dev 
 {{ include "cromwell.labels" . | indent 4 }}
 spec:
   jobLabel: cromwell-jvm
