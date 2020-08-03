@@ -114,7 +114,7 @@ spec:
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: cromwell-prometheusjmx-jar
-        - mountPath: /etc/prometheusjmx
+        - mountPath: /etc/prometheusjmx/conf
           name: jmx-exporter-cm
           readOnly: true
         readinessProbe:
