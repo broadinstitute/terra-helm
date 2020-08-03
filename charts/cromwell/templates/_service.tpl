@@ -11,9 +11,14 @@ spec:
   selector:
     deployment: {{ $settings.name }}
   ports:
-  - protocol: TCP
+  - name: https
+    protocol: TCP
     port: 443
     targetPort: 443
+  - name: metrics
+    protocol: TCP
+    port: 9090
+    targetPort: 9090
   {{- if $settings.serviceIP }}
   type: LoadBalancer
   loadBalancerIP: {{ $settings.serviceIP }}
