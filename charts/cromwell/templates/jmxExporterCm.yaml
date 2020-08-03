@@ -5,3 +5,5 @@ metadata:
   labels:
 {{ include "cromwell.labels" . | indent 4 }}
 data:
+  rules:
+  - pattern: ".*"
