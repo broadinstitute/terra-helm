@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cromwell-jvm-monitor
+  labels:
+    app: prometheus
+{{ include "cromwell.labels" . | indent 4 }}
+spec:
+  jobLabel: cromwell-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: cromwell
+      app.kubernetes.io/name: cromwell
+  namespaceSelector:
+    matchNames:
+    - terra-dev
+  endpoints:
+  - port: metrics
+    interval: 15s
