@@ -2,6 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: cromwell-jvm-monitor
+  namespace: monitoring # service monitors must be deployed in same namespace as prometheus
   labels:
     app: prometheus
 {{ include "cromwell.labels" . | indent 4 }}
