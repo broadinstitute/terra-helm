@@ -58,6 +58,8 @@ spec:
       containers:
       - name: {{ $settings.name }}-app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
+        ports:
+          - containerPort: 9090
         command: ["/bin/bash"]
         args:
         - '-c'
