@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: terra-workspace-manager-service
+  name: {{ .Chart.Name }}-service
   labels:
     {{ template "workspacemanager.labels" . }}
 spec:
@@ -12,7 +12,7 @@ spec:
   {{- template "workspacemanager.servicefirewall" . }}
   {{- end }}
   selector:
-    app: terra-workspace-manager
+    app: {{ .Chart.Name }}
   {{- if .Values.proxy.enabled }}
   ports:
   - name: http
@@ -26,3 +26,13 @@ spec:
   - name: http
     port: 8080
   {{- end}}
+{{- if .Values.postgres.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-postgres-service
+  labels:
+    {{ template "workspacemanager.labels" . }}
+{{- include "postgres.service.tpl" . }}
+{{- end }}
