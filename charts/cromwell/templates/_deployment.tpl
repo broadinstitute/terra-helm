@@ -53,7 +53,7 @@ spec:
           name: {{ $settings.name }}-cm
       - name: {{ $settings.name }}-gc-logs
         emptyDir: {}
-      - name: cromwell-prometheusJmx-jar
+      - name: cromwell-prometheusjmx-jar
         emptyDir: {}
       containers:
       - name: {{ $settings.name }}-app
@@ -67,7 +67,7 @@ spec:
           java ${JAVA_OPTS}
           -Dlogback.configurationFile=/etc/cromwell-cm/logback.xml
           -Dsystem.cromwell_id=gke-${K8S_POD_NAME}
-          -javaagent:/etc/prometheusJmx/prometheusJmx.jar=9090
+          -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090
           -jar /app/cromwell.jar
           ${CROMWELL_ARGS} ${*}
         - '--'
@@ -108,9 +108,9 @@ spec:
           readOnly: true
         - mountPath: /var/log/gc
           name: {{ $settings.name }}-gc-logs
-        - mountPath: /etc/prometheusJmx/prometheusJmx.jar
-          subPath: prometheusJmx.jar
-          name: cromwell-prometheusJmx-jar
+        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+          name: cromwell-prometheusjmx-jar
         readinessProbe:
           httpGet:
             path: /engine/latest/version
@@ -161,10 +161,10 @@ spec:
           name: sqlproxy-ctmpls
           readOnly: true
       initContainers:
-      - name: download-prometheusJmx-jar
+      - name: download-prometheusjmx-jar
         image: alpine:3.12.0
-        command: ["wget", "-O", "/cromwell-prometheusJmx-jar/prometheusJmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
+        command: ["wget", "-O", "/cromwell-prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
         volumeMounts:
-        - mountPath: /cromwel-prometheusJmx-jar
-          name: cromwell-prometheusJmx-jar
+        - mountPath: /cromwel-prometheusjmx-jar
+          name: cromwell-prometheusjmx-jar
 {{- end -}}
