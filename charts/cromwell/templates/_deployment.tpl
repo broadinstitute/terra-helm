@@ -55,6 +55,9 @@ spec:
         emptyDir: {}
       - name: cromwell-prometheusjmx-jar
         emptyDir: {}
+      - name: cromwell-prometheusjmx-cm
+        configMap:
+          name: cromwell-prometheusjmx-cm
       containers:
       - name: {{ $settings.name }}-app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
@@ -111,6 +114,10 @@ spec:
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: cromwell-prometheusjmx-jar
+        - mountPath: /etc/prometheusjmx/prometheusjmxconf.yaml
+          subPath: prometheusjmxconf.yaml
+          name: cromwell-prometheusjmx-cm
+          readOnly: true
         readinessProbe:
           httpGet:
             path: /engine/latest/version
