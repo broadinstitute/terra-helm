@@ -55,7 +55,7 @@ spec:
         emptyDir: {}
       - name: cromwell-prometheusjmx-jar
         emptyDir: {}
-      - name: cromwell-prometheusjmx-cm
+      - name: jmx-exporter-cm
         configMap:
           name: jmx-exporter-cm
       containers:
