@@ -165,6 +165,6 @@ spec:
         image: alpine:3.12.0
         command: ["wget", "-O", "/cromwell-prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
         volumeMounts:
-        - mountPath: /cromwel-prometheusjmx-jar
+        - mountPath: /cromwell-prometheusjmx-jar
           name: cromwell-prometheusjmx-jar
 {{- end -}}
