@@ -70,7 +70,7 @@ spec:
           java ${JAVA_OPTS}
           -Dlogback.configurationFile=/etc/cromwell-cm/logback.xml
           -Dsystem.cromwell_id=gke-${K8S_POD_NAME}
-          -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:
+          -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:prometheusJmx.yaml
           -jar /app/cromwell.jar
           ${CROMWELL_ARGS} ${*}
         - '--'
@@ -114,8 +114,7 @@ spec:
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: cromwell-prometheusjmx-jar
-        - mountPath: /etc/prometheusjmx/prometheusjmxconf.yaml
-          subPath: prometheusjmxconf.yaml
+        - mountPath: /etc/prometheusjmx
           name: jmx-exporter-cm
           readOnly: true
         readinessProbe:
