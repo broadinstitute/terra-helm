@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: consent-ontology-role-binding
+  labels:
+  {{ include "consent-ontology.labels" . | indent 4 }}
+roleRef:
+  kind: Role
+  name: consent-ontology-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: consent-ontology-sa

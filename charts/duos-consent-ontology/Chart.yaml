@@ -1,0 +1,16 @@
+apiVersion: v2
+name: duos-consent-ontology
+version: 0.1.0
+type: application
+
+description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+
+keywords:
+- dsp
+- broadinstitute
+- duos
+- consent-ontology
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+- https://github.com/DataBiosphere/consent-ontology

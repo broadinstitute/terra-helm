@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consent-ontology-deployment
+  labels:
+  {{ include "consent-ontology.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: consent-ontology
+  template:
+    metadata:
+      name: consent-ontology
+      labels:
+        app: consent-ontology
+    spec:
+      serviceAccountName: consent-ontology-sa
+      containers:
+        - name: consent-ontology-service
+          image: "{{- if .Values.image -}}
+            {{ .Values.image }}
+          {{- else -}}
+            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+          {{- end }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8180
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
