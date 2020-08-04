@@ -10,7 +10,7 @@ spec:
   jobLabel: cromwell-jvm
   selector:
     matchLabels:
-      prometheus.io/scrape: true
+      prometheus.io/scrape: "true"
   namespaceSelector:
     matchNames:
     - terra-dev
