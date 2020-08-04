@@ -25,6 +25,7 @@ spec:
     metadata:
       labels:
         deployment: {{ $settings.name }}
+{{ include "cromwell.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
