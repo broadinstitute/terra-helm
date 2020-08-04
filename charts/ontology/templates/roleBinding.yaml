@@ -3,7 +3,7 @@ kind: RoleBinding
 metadata:
   name: consent-ontology-role-binding
   labels:
-  {{ include "consent-ontology.labels" . | indent 4 }}
+{{ include "consent-ontology.labels" . | indent 4 }}
 roleRef:
   kind: Role
   name: consent-ontology-role

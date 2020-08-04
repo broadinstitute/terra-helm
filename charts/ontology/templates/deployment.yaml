@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: consent-ontology-deployment
   labels:
-  {{ include "consent-ontology.labels" . | indent 4 }}
+{{ include "consent-ontology.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
