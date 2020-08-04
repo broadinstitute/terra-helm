@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: terra-workspace-manager-proxy-configmap
+  name: {{ .Chart.Name }}-proxy-configmap
   labels:
     {{ template "workspacemanager.labels" . }}
 data:

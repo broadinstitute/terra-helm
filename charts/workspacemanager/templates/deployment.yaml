@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: terra-workspace-manager-deployment
+  name: {{ .Chart.Name }}-deployment
   labels:
     {{ template "workspacemanager.labels" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: terra-workspace-manager
+      app: {{ .Chart.Name }}
   template:
     metadata:
-      name: terra-workspace-manager-service
+      name: {{ .Chart.Name }}-service
       labels:
-        app: terra-workspace-manager
+        app: {{ .Chart.Name }}
     spec:
-      serviceAccountName: terra-workspace-manager-service-sa
+      serviceAccountName: {{ .Chart.Name }}-service-sa
       containers:
-      - name: terra-workspace-manager
+      - name: {{ .Chart.Name }}
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
@@ -29,6 +29,7 @@ spec:
         - containerPort: 8080
         {{- end}}
         env:
+        {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
@@ -59,16 +60,35 @@ spec:
             secretKeyRef:
               name: workspace-stairway-db-creds
               key: db
+        {{- else }}
+        - name: DATABASE_HOSTNAME
+          value: {{ .Chart.Name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
+        - name: DATABASE_USER
+          value: postgres
+        - name: DATABASE_USER_PASSWORD
+          value: {{ .Values.postgres.password }}
+        - name: DATABASE_NAME
+          value: {{ index .Values.postgres.dbs 0 }}
+        - name: STAIRWAY_DATABASE_USER
+          value: postgres
+        - name: STAIRWAY_DATABASE_USER_PASSWORD
+          value: {{ .Values.postgres.password }}
+        - name: STAIRWAY_DATABASE_NAME
+          value: {{ index .Values.postgres.dbs 1 }}
+        {{- end }}
         - name: SAM_ADDRESS
           value: {{ .Values.samAddress }}
         - name: SERVICE_GOOGLE_PROJECT
           value: {{ .Values.serviceGoogleProject }}
         - name: SAMPLING_PROBABILITY
           value: "{{ .Values.samplingProbability }}"
+        - name: CLOUD_TRACE_SA_PATH
+          value: /secrets/cloudtrace/service-account.json
         volumeMounts:
           - name: cloud-trace-sa-creds
             mountPath: /secrets/cloudtrace
             readOnly: true
+      {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -97,6 +117,7 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
+      {{- end }}
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
@@ -123,16 +144,18 @@ spec:
         {{- end }}
       {{- end }}
       volumes:
+        {{- if not .Values.postgres.enabled }}
         - name: cloudsql-sa-creds
           secret:
             secretName: workspace-sqlproxy-sa
+        {{- end }}
         - name: cloud-trace-sa-creds
           secret:
             secretName: workspace-cloud-trace-sa
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
-            name: terra-workspace-manager-proxy-configmap
+            name: {{ .Chart.Name }}-proxy-configmap
             items:
             - key: apache-httpd-proxy-config
               path: workspace-manager-proxy.conf
@@ -140,3 +163,13 @@ spec:
           secret:
             secretName: {{ .Chart.Name }}-cert
         {{- end }}
+---
+{{- if .Values.postgres.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-postgres-deployment
+  labels:
+    {{ template "workspacemanager.labels" . }}
+{{- include "postgres.deployment.tpl" . }}
+{{- end }}

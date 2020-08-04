@@ -93,3 +93,11 @@ proxy:
     repository: broadinstitute/openidc-proxy
     # proxy.image.version -- Proxy image tag
     version: bernick_tcell
+
+postgres:
+  # postgres.enabled -- Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options.
+  enabled: false
+  # postgres.dbs -- (array(string)) List of databases to create. 
+  dbs:
+    - workspace
+    - stairway
