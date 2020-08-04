@@ -14,13 +14,13 @@ logging:
       target: stdout
     - type: sentry
       threshold: ERROR
-      dsn: {{. Values.sentry.dsn.path }}
-      environment: {{. Values.environment }}
+      dsn: {{ .Values.sentry.dsn.path }}
+      environment: {{ .Values.environment }}
   loggers:
     "org.semanticweb": ERROR
 elasticSearch:
   servers:
-    {{. Values.elasticSearchServers }}
+    {{ .Values.elasticSearchServers }}
   index: ontology
 cors:
   allowedDomains: "*"
