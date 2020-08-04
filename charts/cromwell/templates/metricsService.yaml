@@ -13,4 +13,4 @@ spec:
     protocol: TCP
     port: 9090
     targetPort: 9090
-  type: ClusterIp
+  type: ClusterIP
