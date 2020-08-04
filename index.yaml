@@ -1280,6 +1280,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/istioconfig-0.0.1/istioconfig-0.0.1.tgz
     version: 0.0.1
+  ontology:
+  - apiVersion: v2
+    created: "2020-08-04T17:52:57.161955362Z"
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: 3ebe235b62857e3d927dd254a9870a777eeb45d4d8c7fc8d040fee1a60781368
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent-ontology
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.1.0-98.1596563573.b8851f/ontology-0.1.0-98.1596563573.b8851f.tgz
+    version: 0.1.0-98.1596563573.b8851f
   opendj:
   - apiVersion: v2
     created: "2020-05-14T18:22:22.017475585Z"
