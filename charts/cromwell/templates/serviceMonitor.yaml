@@ -10,7 +10,7 @@ spec:
   jobLabel: cromwell-jvm
   selector:
     matchLabels:
-      app.kubernetes.io/component: cromwell
+      prometheus.io/scrape: true
   namespaceSelector:
     matchNames:
     - terra-dev
