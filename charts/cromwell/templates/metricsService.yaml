@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: cromwell-metrics
   labels:
-    prometheus.io/scrape: true
+    prometheus.io/scrape: "true"
 {{ include "cromwell.labels" . | indent 4 }}
 spec:
   selector:
