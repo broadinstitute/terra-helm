@@ -1,5 +1,5 @@
 apiVersion: v2
-name: duos-consent-ontology
+name: ontology
 version: 0.1.0
 type: application
 
@@ -10,6 +10,7 @@ keywords:
 - broadinstitute
 - duos
 - consent-ontology
+- ontology
 
 sources:
 - https://github.com/broadinstitute/terra-helm/tree/master/charts
