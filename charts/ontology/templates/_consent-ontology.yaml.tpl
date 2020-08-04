@@ -1,4 +1,4 @@
-{{- define "consent-ontology.config.consent-ontology.yaml" -}}
+{{- define "ontology.config.consent-ontology.yaml" -}}
 server:
   type: simple
   applicationContextPath: /
@@ -14,7 +14,7 @@ logging:
       target: stdout
     - type: sentry
       threshold: ERROR
-      dsn: {{ .Values.sentry.dsn.path }}
+      dsn: {{ SENTRY_DSN }} # TODO: How do I get this value injected?
       environment: {{ .Values.environment }}
   loggers:
     "org.semanticweb": ERROR

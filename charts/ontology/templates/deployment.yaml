@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   name: consent-ontology-deployment
   labels:
-{{ include "consent-ontology.labels" . | indent 4 }}
+{{ include "ontology.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: consent-ontology
+      app: ontology
   template:
     metadata:
-      name: consent-ontology
+      name: ontology
       labels:
-        app: consent-ontology
+        app: ontology
     spec:
       serviceAccountName: consent-ontology-sa
       containers:
-        - name: consent-ontology-service
+        - name: ontology-service
           image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
@@ -29,3 +29,10 @@ spec:
           securityContext:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
+          env:
+          - name: SENTRY_DSN
+            valueFrom:
+              secretKeyRef:
+                name: sentry-dsn
+                key: sentryDSN
+

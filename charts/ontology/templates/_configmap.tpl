@@ -2,7 +2,7 @@
 {{- define "consent-ontology.configmap.data" -}}
 data:
   consent-ontology.yaml: |
-{{ include "consent-ontology.config.consent-ontology.yaml" . | indent 4 }}
+{{ include "ontology.config.consent-ontology.yaml" . | indent 4 }}
   consent-service-account.json: | {}
 {{- end -}}
 
@@ -26,6 +26,6 @@ kind: ConfigMap
 metadata:
   name: {{ $settings.name }}-cm
   labels:
-{{ include "consent-ontology.labels" . | indent 4 }}
+{{ include "ontology.labels" . | indent 4 }}
 {{ $data }}
 {{ end -}}

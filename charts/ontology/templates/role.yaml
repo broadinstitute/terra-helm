@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: consent-ontology-role
   labels:
-{{ include "consent-ontology.labels" . | indent 4 }}
+{{ include "ontology.labels" . | indent 4 }}
 rules:
   - apiGroups: ['policy']
     resources: ['podsecuritypolicies']

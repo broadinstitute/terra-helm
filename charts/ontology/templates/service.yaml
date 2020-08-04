@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: consent-ontology
   labels:
-  {{ if not .Values.devDeploy }}{{ template "consent-ontology.labels" }}{{ end }}
+  {{ if not .Values.devDeploy }}{{ template "ontology.labels" }}{{ end }}
 spec:
   ports:
     - name: http
       port: 8080
   selector:
-    app: consent-ontology-service
+    app: ontology-service

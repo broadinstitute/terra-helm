@@ -1,4 +1,7 @@
 # image is used for local Skaffold deploys
+global:
+  # global.applicationVersion -- What version of the Cromwell application to deploy
+  applicationVersion: latest
 
 imageConfig:
   repository: gcr.io/broad-dsp-gcr-public/consent-ontology
