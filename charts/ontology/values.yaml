@@ -15,6 +15,12 @@ environment: dev
 
 elasticSearchServers:
 
+vault:
+  # vault.enabled -- When enabled, syncs required secrets from Vault
+  enabled: true
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix:
+
 sentry:
   dsn:
     path:
