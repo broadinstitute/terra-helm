@@ -41,7 +41,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: sentry-dsn
-              key: sentryDSN
+              key: dsn
         command:
           - java
           - -Dsentry.dsn=
