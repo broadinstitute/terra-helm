@@ -42,10 +42,14 @@ spec:
           - /opt/consent-ontology.jar
           - server
           - /etc/ontology.yaml
+        volumeMounts:
+          - mountPath: /etc
+            name: ontology-configs
+            readOnly: true
       volumes:
       - name: ontology-configs
         configMap:
           name: ontology-configmap
           items:
             - key: ontology.yaml
-              path: /etc/ontology.yaml
+              path: ontology.yaml
