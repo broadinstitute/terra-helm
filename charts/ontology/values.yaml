@@ -16,9 +16,6 @@ devDeploy: false
 
 environment:
 
-elasticSearch:
-  servers:
-
 vault:
   # vault.enabled -- When enabled, syncs required secrets from Vault
   enabled: true
@@ -29,3 +26,7 @@ sentry:
   dsn:
     path:
     key:
+
+google:
+  project:
+  subdirectory:

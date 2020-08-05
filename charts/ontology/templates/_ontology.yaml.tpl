@@ -1,11 +1,11 @@
-{{- define "ontology.config.ontology.yaml" -}}
+{{- define "ontology.config.yaml" -}}
 server:
   type: simple
   applicationContextPath: /
   adminContextPath: /admin
   connector:
     type: http
-    port: 8180
+    port: 8080
 logging:
   level: INFO
   appenders:
@@ -14,21 +14,20 @@ logging:
       target: stdout
     - type: sentry
       threshold: ERROR
-      dsn: {{ .Values.sentry.dsn.key }}
+      dsn:
       environment: {{ .Values.environment }}
   loggers:
     "org.semanticweb": ERROR
 elasticSearch:
   servers:
-    {{ .Values.elasticSearch.servers }}
   index: ontology
 cors:
   allowedDomains: "*"
 googleStore:
   password: /etc/consent-ontology-account.json
   endpoint: https://storage.googleapis.com/
-  bucket: broad-dsde-dev-consent
+  bucket: {{ .Values.google.project }}
 storeOntology:
-  bucketSubdirectory: ontology
+  bucketSubdirectory: {{ .Values.google.subdirectory }}
   configurationFileName: /configuration
 {{- end -}}

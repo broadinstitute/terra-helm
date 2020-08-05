@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ontology-configmap
+  labels:
+{{ include "ontology.labels" . | indent 4 }}
+data:
+  ontology.yaml: |
+{{ include "ontology.config.yaml" . | indent 4 }}
