@@ -3,35 +3,35 @@ global:
   # global.applicationVersion -- What version of the Cromwell application to deploy
   applicationVersion: latest
 
-imageConfig:
-  repository:
-  tag:
-
-replicas: 1
-
 appVersion: 1
 
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false
-
-environment:
-
-vault:
-  # vault.enabled -- When enabled, syncs required secrets from Vault
-  enabled: true
-  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
-  pathPrefix:
 
 elasticSearch:
   server1:
   server2:
   server3:
 
+environment:
+
+google:
+  project:
+  subdirectory:
+
+imageConfig:
+  repository:
+  tag:
+
+replicas: 1
+
 sentry:
   dsn:
     path:
     key:
 
-google:
-  project:
-  subdirectory:
+vault:
+  # vault.enabled -- When enabled, syncs required secrets from Vault
+  enabled: true
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix:

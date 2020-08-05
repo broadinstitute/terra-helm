@@ -12,10 +12,17 @@ Current chart version is `0.1.0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| global.applicationVersion | string | Is set by Helmfile on deploy | Ontology global version |
+| appVersion | string | Is set by Helmfile on deploy | Ontology image version/tag. Required unless using `image`. |
 | devDeploy | bool | `false` | Enable to deploy to dev locally with Skaffold |
-| appVersion | string | Is set by Helmfile on deploy | Workspace Manager image version/tag. Required unless using `image`. |
 | environment | string | `nil` | Environment, [dev, staging, prod] |
-| elasticSearch.servers | array | `nil` | List of elastic search hosts |
+| elasticSearch.server1 | string | `nil` | first elastic search host |
+| elasticSearch.server2 | string | `nil` | second elastic search host |
+| elasticSearch.server3 | string | `nil` | third elastic search host |
+| google.project | string | `nil` | Google project where GCS files are stored |
+| google.subdirectory | string | `nil` | Google bucket subdirectory |
+| imageConfig.repository | string | `nil` | GCR image location |
+| imageConfig.tag | string | `nil` | GCR image tag |
 | sentry.dsn.path | string | `nil` | Vault path to secret containing Sentry DSN value |
 | sentry.dsn.key | string | `nil` | Vault key of secret containing Sentry DSN value |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
