@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: ontology
   labels:
-  {{ if not .Values.devDeploy }}{{ template "ontology.labels" . | indent 2 }}{{ end }}
+{{ include "ontology.labels" . | indent 4 }}
 spec:
   ports:
     - name: http
