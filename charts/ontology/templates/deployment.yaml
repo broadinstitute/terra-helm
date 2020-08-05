@@ -17,28 +17,42 @@ spec:
     spec:
       serviceAccountName: ontology-sa
       containers:
-        - name: ontology-service
-          image: "{{- if .Values.image -}}
-            {{ .Values.image }}
-          {{- else -}}
-            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
-          {{- end }}"
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          securityContext:
-            runAsUser: 2  # non-root user
-            allowPrivilegeEscalation: false
-          env:
-          - name: SENTRY_DSN
-            valueFrom:
-              secretKeyRef:
-                name: sentry-dsn
-                key: sentryDSN
-          command:
-            - java
-            - -Dsentry.dsn=
-            - -jar
-            - /opt/consent-ontology.jar
-            - server
-            - /etc/ontology.yaml
+      - name: ontology-service
+        image: "{{- if .Values.image -}}
+          {{ .Values.image }}
+        {{- else -}}
+          {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+        {{- end }}"
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - name: ontology-configs
+            mountPath: /etc/ontology-configs
+            readOnly: true
+          - name: ontology-sa-creds
+            mountPath: /etc/ontology-configs
+            readOnly: true
+        env:
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              name: sentry-dsn
+              key: sentryDSN
+        command:
+          - java
+          - -Dsentry.dsn=
+          - -jar
+          - /opt/consent-ontology.jar
+          - server
+          - /etc/ontology-configs/ontology.yaml
+      volumes:
+      - name: ontology-configs
+        secret:
+          secretName: ontology-configs
+      - name: ontology-sa-creds
+        secret:
+          secretName: ontology-sa-creds
