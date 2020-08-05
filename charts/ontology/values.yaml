@@ -4,8 +4,8 @@ global:
   applicationVersion: latest
 
 imageConfig:
-  repository: gcr.io/broad-dsp-gcr-public/consent-ontology
-  tag: 2c8df64b61de
+  repository:
+  tag:
 
 replicas: 1
 
@@ -21,6 +21,11 @@ vault:
   enabled: true
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
+
+elasticSearch:
+  server1:
+  server2:
+  server3:
 
 sentry:
   dsn:

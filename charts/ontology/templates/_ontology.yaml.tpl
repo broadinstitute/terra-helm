@@ -20,6 +20,9 @@ logging:
     "org.semanticweb": ERROR
 elasticSearch:
   servers:
+    - {{ .Values.elasticSearch.server1 }}
+    - {{ .Values.elasticSearch.server2 }}
+    - {{ .Values.elasticSearch.server3 }}
   index: ontology
 cors:
   allowedDomains: "*"

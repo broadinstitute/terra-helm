@@ -25,7 +25,7 @@ spec:
           {{- end }}"
           imagePullPolicy: Always
           ports:
-            - containerPort: 8180
+            - containerPort: 8080
           securityContext:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
@@ -35,4 +35,10 @@ spec:
               secretKeyRef:
                 name: sentry-dsn
                 key: sentryDSN
-
+          command:
+            - java
+            - -Dsentry.dsn=
+            - -jar
+            - /opt/consent-ontology.jar
+            - server
+            - /etc/ontology.yaml
