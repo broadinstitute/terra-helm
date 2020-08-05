@@ -62,12 +62,12 @@ spec:
         - name: TRACK_RESOURCE_PUBSUB_PROJECT_ID
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-pubsub-project-id
+              name: crl-janitor-track-resource-pubsub
               key: project
         - name: TRACK_RESOURCE_PUBSUB_SUBSCRIPTION
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-pubsub-subscription
+              name: crl-janitor-track-resource-pubsub
               key: subscription
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
