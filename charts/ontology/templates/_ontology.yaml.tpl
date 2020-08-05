@@ -1,4 +1,4 @@
-{{- define "ontology.config.consent-ontology.yaml" -}}
+{{- define "ontology.config.ontology.yaml" -}}
 server:
   type: simple
   applicationContextPath: /

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: consent-ontology-deployment
+  name: ontology-deployment
   labels:
 {{ include "ontology.labels" . | indent 4 }}
 spec:

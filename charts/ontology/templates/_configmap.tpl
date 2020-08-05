@@ -1,13 +1,13 @@
 {{- /* Generate the data component of a Ontology config map */ -}}
-{{- define "consent-ontology.configmap.data" -}}
+{{- define "ontology.configmap.data" -}}
 data:
-  consent-ontology.yaml: |
-{{ include "ontology.config.consent-ontology.yaml" . | indent 4 }}
+  ontology.yaml: |
+{{ include "ontology.config.ontology.yaml" . | indent 4 }}
   consent-service-account.json: | {}
 {{- end -}}
 
 {{- /* Generate a configmap for a Ontology deployment */ -}}
-{{- define "consent-ontology.configmap" -}}
+{{- define "ontology.configmap" -}}
 {{- $settings := ._deploymentSettings -}}
 
 {{- /*
@@ -18,7 +18,7 @@ data:
   This is used to automatically restart Ontology pods when the ConfigMap
   changes.
 */ -}}
-{{- $data := include "consent-ontology.configmap.data" . -}}
+{{- $data := include "ontology.configmap.data" . -}}
 {{- $checksum := $data | sha256sum -}}
 {{- $_ := set ._deploymentOutputs "configmapChecksum" $checksum -}}
 apiVersion: v1
