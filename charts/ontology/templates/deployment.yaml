@@ -29,13 +29,6 @@ spec:
         securityContext:
           runAsUser: 2  # non-root user
           allowPrivilegeEscalation: false
-        volumeMounts:
-          - name: ontology-configs
-            mountPath: /etc/ontology-configs
-            readOnly: true
-          - name: ontology-sa-creds
-            mountPath: /etc/ontology-configs
-            readOnly: true
         env:
         - name: SENTRY_DSN
           valueFrom:
@@ -48,11 +41,11 @@ spec:
           - -jar
           - /opt/consent-ontology.jar
           - server
-          - /etc/ontology-configs/ontology.yaml
+          - /etc/ontology.yaml
       volumes:
       - name: ontology-configs
-        secret:
-          secretName: ontology-configs
-      - name: ontology-sa-creds
-        secret:
-          secretName: ontology-sa-creds
+        configMap:
+          name: ontology-configmap
+          items:
+            - key: ontology.yaml
+              path: /etc/ontology.yaml
