@@ -14,13 +14,13 @@ logging:
       target: stdout
     - type: sentry
       threshold: ERROR
-      dsn: {{ SENTRY_DSN }} # TODO: How do I get this value injected?
+      dsn: {{ .Values.sentry.dsn.key }}
       environment: {{ .Values.environment }}
   loggers:
     "org.semanticweb": ERROR
 elasticSearch:
   servers:
-    {{ .Values.elasticSearchServers }}
+    {{ .Values.elasticSearch.servers }}
   index: ontology
 cors:
   allowedDomains: "*"
