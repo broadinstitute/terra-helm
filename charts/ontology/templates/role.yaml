@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: consent-ontology-role
+  name: ontology-role
   labels:
 {{ include "ontology.labels" . | indent 4 }}
 rules:

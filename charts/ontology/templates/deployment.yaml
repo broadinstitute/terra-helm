@@ -15,7 +15,7 @@ spec:
       labels:
         app: ontology
     spec:
-      serviceAccountName: consent-ontology-sa
+      serviceAccountName: ontology-sa
       containers:
         - name: ontology-service
           image: "{{- if .Values.image -}}
