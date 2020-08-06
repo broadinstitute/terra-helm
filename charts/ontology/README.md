@@ -21,9 +21,18 @@ Current chart version is `0.1.0`
 | elasticSearch.server3 | string | `nil` | third elastic search host |
 | google.project | string | `nil` | Google project where GCS files are stored |
 | google.subdirectory | string | `nil` | Google bucket subdirectory |
+| gcsAccount.path | string | `nil` | Vault path to GCS service account json |
+| gcsAccount.key | string | `nil` | Vault key of GCS service account json |
 | imageConfig.repository | string | `nil` | GCR image location |
 | imageConfig.tag | string | `nil` | GCR image tag |
 | sentry.dsn.path | string | `nil` | Vault path to secret containing Sentry DSN value |
 | sentry.dsn.key | string | `nil` | Vault key of secret containing Sentry DSN value |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
+
+## Cheat Sheet
+
+* `gcloud container clusters get-credentials terra-dev --zone us-central1-a --project broad-dsde-dev`
+* `kubectl get secrets -n terra-dev`
+* `kubectl describe secret ontology-sentry-dsn -n terra-dev`
+* `helmfile -e dev --selector group=terra,app=ontology template`
