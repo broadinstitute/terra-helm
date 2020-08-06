@@ -9,9 +9,7 @@ spec:
   selector:
     matchLabels:
       prometheus.io/scrape: "true"
-  namespaceSelector:
-    matchNames:
-    - terra-dev
+  namespaceSelector: {}
   endpoints:
   - port: metrics
     interval: 15s
