@@ -1418,6 +1418,24 @@ entries:
     version: 0.0.1
   ontology:
   - apiVersion: v2
+    created: "2020-08-06T16:33:10.481648624Z"
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: 1937ebfe212cc5ea756c38be36c64645f7eff8e4fb0e354590750c959e275262
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.1.0-98.1596731586.ec295d/ontology-0.1.0-98.1596731586.ec295d.tgz
+    version: 0.1.0-98.1596731586.ec295d
+  - apiVersion: v2
     created: "2020-08-06T16:26:12.971939717Z"
     description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
     digest: 6666f8a442fc018994371e5bef535d23ccad209be266f1b46f27a1cbcced6413
