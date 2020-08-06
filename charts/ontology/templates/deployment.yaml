@@ -37,7 +37,7 @@ spec:
               key: dsn
         command:
           - java
-          - -Dsentry.dsn=${SENTRY_DSN}
+          - -Dsentry.dsn=$SENTRY_DSN
           - -jar
           - /opt/consent-ontology.jar
           - server
