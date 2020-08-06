@@ -17,47 +17,47 @@ spec:
     spec:
       serviceAccountName: ontology-sa
       containers:
-        - name: ontology-service
-          image: "{{- if .Values.image -}}
-          {{ .Values.image }}
+      - name: ontology-service
+        image: "{{- if .Values.image -}}
+        {{ .Values.image }}
         {{- else -}}
-          {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+        {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
         {{- end }}"
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          securityContext:
-            runAsUser: 2  # non-root user
-            allowPrivilegeEscalation: false
-          env:
-            - name: SENTRY_DSN
-              valueFrom:
-                secretKeyRef:
-                  name: ontology-secrets
-                  key: dsn
-          command: ["/bin/bash"]
-          args:
-            - '-c'
-            - >-
-              java
-              -Dsentry.dsn=${SENTRY_DSN}
-              -jar
-              /opt/consent-ontology.jar
-              server
-              /etc/ontology.yaml
-          volumeMounts:
-            - name: ontology-configs
-              mountPath: /etc/ontology.yaml
-              subPath: ontology.yaml
-              readOnly: true
-            - name: ontology-gcs-account
-              mountPath: /etc/service-account.json
-              subPath: service-account.json
-              readOnly: true
-      volumes:
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        env:
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              name: ontology-secrets
+              key: dsn
+        command: ["/bin/bash"]
+        args:
+        - '-c'
+        - >-
+          java
+          -Dsentry.dsn=${SENTRY_DSN}
+          -jar
+          /opt/consent-ontology.jar
+          server
+          /etc/ontology.yaml
+        volumeMounts:
         - name: ontology-configs
-          configMap:
-            name: ontology-configmap
+          mountPath: /etc/ontology.yaml
+          subPath: ontology.yaml
+          readOnly: true
         - name: ontology-gcs-account
-          secret:
-            secretName: ontology-secrets
+          mountPath: /etc/service-account.json
+          subPath: service-account.json
+          readOnly: true
+      volumes:
+      - name: ontology-configs
+        configMap:
+          name: ontology-configmap
+      - name: ontology-gcs-account
+        secret:
+          secretName: ontology-secrets
