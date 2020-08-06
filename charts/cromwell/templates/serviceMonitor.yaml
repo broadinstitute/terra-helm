@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       prometheus.io/scrape: "true"
-  namespaceSelector: {}
   endpoints:
   - port: metrics
     interval: 15s
