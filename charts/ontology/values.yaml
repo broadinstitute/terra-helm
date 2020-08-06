@@ -19,6 +19,10 @@ google:
   project:
   subdirectory:
 
+gcsAccount:
+  path:
+  key:
+
 imageConfig:
   repository:
   tag:
