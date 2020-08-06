@@ -27,7 +27,7 @@ elasticSearch:
 cors:
   allowedDomains: "*"
 googleStore:
-  password: /etc/consent-ontology-account.json
+  password: /etc/service-account.json
   endpoint: https://storage.googleapis.com/
   bucket: {{ .Values.google.project }}
 storeOntology:

@@ -46,18 +46,9 @@ spec:
           - mountPath: /etc
             name: ontology-configs
             readOnly: true
-{{/*        readinessProbe:*/}}
-{{/*          httpGet:*/}}
-{{/*            path: /status*/}}
-{{/*            port: 8080*/}}
-{{/*          initialDelaySeconds: 3*/}}
-{{/*          periodSeconds: 3*/}}
-{{/*        livenessProbe:*/}}
-{{/*          httpGet:*/}}
-{{/*            path: /status*/}}
-{{/*            port: 8080*/}}
-{{/*          initialDelaySeconds: 3*/}}
-{{/*          periodSeconds: 3*/}}
+          - mountPath: /etc
+            name: ontology-gcs-account
+            readOnly: true
       volumes:
       - name: ontology-configs
         configMap:
@@ -65,3 +56,9 @@ spec:
           items:
             - key: ontology.yaml
               path: ontology.yaml
+      - name: ontology-gcs-account
+        secret:
+          secretName: ontology-gcs-account
+          items:
+            - key: service-account.json
+              path: service-account.json
