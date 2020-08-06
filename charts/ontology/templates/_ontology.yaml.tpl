@@ -29,7 +29,7 @@ cors:
 googleStore:
   password: /etc/service-account.json
   endpoint: https://storage.googleapis.com/
-  bucket: {{ .Values.google.project }}
+  bucket: {{ .Values.google.bucket }}
 storeOntology:
   bucketSubdirectory: {{ .Values.google.subdirectory }}
   configurationFileName: /configuration

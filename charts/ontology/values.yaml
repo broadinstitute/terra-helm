@@ -16,7 +16,7 @@ elasticSearch:
 environment:
 
 google:
-  project:
+  bucket:
   subdirectory:
 
 gcsAccount:
