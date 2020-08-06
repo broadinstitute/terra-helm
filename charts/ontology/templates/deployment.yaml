@@ -35,13 +35,13 @@ spec:
             secretKeyRef:
               name: ontology-secrets
               key: dsn
-        command:
-          - java
-          - -Dsentry.dsn=$SENTRY_DSN
-          - -jar
-          - /opt/consent-ontology.jar
-          - server
-          - /etc/ontology.yaml
+        command: ["/bin/bash"]
+        args:
+          - '-c'
+          - >-
+            java -Dsentry.dsn=${SENTRY_DSN}
+            -jar /opt/consent-ontology.jar
+            server /etc/ontology.yaml
         volumeMounts:
           - name: ontology-configs
             mountPath: /etc/ontology.yaml

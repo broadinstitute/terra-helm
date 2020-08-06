@@ -14,7 +14,7 @@ logging:
       target: stdout
     - type: sentry
       threshold: ERROR
-      dsn:
+      dsn: manual_override
       environment: {{ .Values.environment }}
   loggers:
     "org.semanticweb": ERROR
