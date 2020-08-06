@@ -43,11 +43,11 @@ spec:
           - server
           - /etc/ontology.yaml
         volumeMounts:
-          - mountPath: /etc
-            name: ontology-configs
+          - name: ontology-configs
+            mountPath: /etc/ontology.yaml
             readOnly: true
-          - mountPath: /etc
-            name: ontology-gcs-account
+          - name: ontology-gcs-account
+            mountPath: /etc/service-account.json
             readOnly: true
       volumes:
       - name: ontology-configs
