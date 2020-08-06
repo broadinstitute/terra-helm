@@ -39,8 +39,12 @@ spec:
           args:
             - '-c'
             - >-
-              java -Dsentry.dsn=${SENTRY_DSN} -jar /opt/consent-ontology.jar
-              server /etc/ontology.yaml
+              java
+              -Dsentry.dsn=${SENTRY_DSN}
+              -jar
+              /opt/consent-ontology.jar
+              server
+              /etc/ontology.yaml
           volumeMounts:
             - name: ontology-configs
               mountPath: /etc/ontology.yaml
