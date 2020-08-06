@@ -33,7 +33,7 @@ spec:
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
-              name: sentry-dsn
+              name: ontology-sentry-dsn
               key: dsn
         command:
           - java
