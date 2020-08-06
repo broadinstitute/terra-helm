@@ -13,7 +13,7 @@ logging:
       threshold: INFO
       target: stdout
     - type: sentry
-      dsn: https://foo:bar@sentry.io/baz
+      dsn: https://foo:bar@sentry.io/baz {{/* Override on the command line */}}
       threshold: ERROR
       environment: {{ .Values.environment }}
   loggers:
