@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cromwell-jvm-monitor
+  labels: 
+{{ include "cromwell.labels" . | indent 4 }}
+spec:
+  jobLabel: cromwell-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: cromwell
+  podMetricsEndpoints:
+    - port: 9090

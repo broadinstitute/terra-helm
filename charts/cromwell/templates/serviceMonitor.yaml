@@ -1,15 +1,15 @@
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: cromwell-jvm-monitor
-  labels: 
-{{ include "cromwell.labels" . | indent 4 }}
-spec:
-  jobLabel: cromwell-jvm
-  selector:
-    matchLabels:
-      prometheus.io/scrape: "true"
-  endpoints:
-  - port: metrics
-    interval: 15s
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: cromwell-jvm-monitor
+#   labels: 
+# {{ include "cromwell.labels" . | indent 4 }}
+# spec:
+#   jobLabel: cromwell-jvm
+#   selector:
+#     matchLabels:
+#       prometheus.io/scrape: "true"
+#   endpoints:
+#   - port: metrics
+#     interval: 15s
     
