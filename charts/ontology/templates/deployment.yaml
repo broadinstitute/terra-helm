@@ -45,9 +45,11 @@ spec:
         volumeMounts:
           - name: ontology-configs
             mountPath: /etc/ontology.yaml
+            subPath: ontology.yaml
             readOnly: true
           - name: ontology-gcs-account
             mountPath: /etc/service-account.json
+            subPath: service-account.json
             readOnly: true
       volumes:
       - name: ontology-configs
@@ -60,5 +62,5 @@ spec:
         secret:
           secretName: ontology-gcs-account
           items:
-            - key: service-account.json
-              path: service-account.json
+            - key: service-account-json
+              path: service-account-json
