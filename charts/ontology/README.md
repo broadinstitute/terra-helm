@@ -34,7 +34,7 @@ Current chart version is `0.1.0`
 
 * `gcloud container clusters get-credentials terra-dev --zone us-central1-a --project broad-dsde-dev`
 * `kubectl get secrets -n terra-dev`
-* `kubectl describe secret ontology-sentry-dsn -n terra-dev`
+* `kubectl describe secret ontology-secrets -n terra-dev`
 * `kubectl get configmap -n terra-dev`
 * `kubectl describe configmap ontology-configmap -n terra-dev`
 * `helmfile -e dev --selector group=terra,app=ontology template`
