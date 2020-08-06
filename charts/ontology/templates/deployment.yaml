@@ -54,12 +54,6 @@ spec:
         - name: ontology-configs
           configMap:
             name: ontology-configmap
-            items:
-              - key: ontology.yaml
-                path: ontology.yaml
         - name: ontology-gcs-account
           secret:
             secretName: ontology-secrets
-            items:
-              - key: service-account.json
-                path: service-account.json
