@@ -65,7 +65,7 @@ spec:
         ports:
           - name: metrics
             containerPort: 9090
-            protocol: tcp
+            protocol: TCP
         command: ["/bin/bash"]
         args:
         - '-c'
