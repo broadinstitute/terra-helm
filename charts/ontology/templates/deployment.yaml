@@ -46,6 +46,18 @@ spec:
           - mountPath: /etc
             name: ontology-configs
             readOnly: true
+{{/*        readinessProbe:*/}}
+{{/*          httpGet:*/}}
+{{/*            path: /status*/}}
+{{/*            port: 8080*/}}
+{{/*          initialDelaySeconds: 3*/}}
+{{/*          periodSeconds: 3*/}}
+{{/*        livenessProbe:*/}}
+{{/*          httpGet:*/}}
+{{/*            path: /status*/}}
+{{/*            port: 8080*/}}
+{{/*          initialDelaySeconds: 3*/}}
+{{/*          periodSeconds: 3*/}}
       volumes:
       - name: ontology-configs
         configMap:
