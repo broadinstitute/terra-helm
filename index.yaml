@@ -48,6 +48,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.1.5/crljanitor-0.1.5.tgz
     version: 0.1.5
   - apiVersion: v2
+    created: "2020-08-07T14:38:48.244719776Z"
+    description: Chart for Cloud Resource Manager Janitor
+    digest: b91733df9bf5e808c512bd64c6b0e5324634f0fe20c9f12071827d2c457b9669
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.1.5-101.1596811124.2dd3f9/crljanitor-0.1.5-101.1596811124.2dd3f9.tgz
+    version: 0.1.5-101.1596811124.2dd3f9
+  - apiVersion: v2
     created: "2020-08-07T14:14:34.89237655Z"
     description: Chart for Cloud Resource Manager Janitor
     digest: 75f19340ea96ee3b4fe346a04bc3576750d2d61cf3040e6366d3bb42f39c099e
