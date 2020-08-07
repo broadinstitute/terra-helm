@@ -62,8 +62,8 @@ spec:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           valueFrom:
             secretKeyRef:
-              name: cloudsql-sa-creds
-              key: crl-janitor-sa
+              name: crl-janitor-sa
+              key: service-account.json
         - name: TRACK_RESOURCE_PUBSUB_ENABLED
           value: "{{ .Values.trackResourcePubsubEnabled }}"
         - name: TRACK_RESOURCE_PUBSUB_PROJECT_ID
