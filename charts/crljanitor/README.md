@@ -35,6 +35,7 @@ Current chart version is `0.1.1`
 | serviceAllowedAddresses | object | `{}` | A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceIP | string | `nil` | External IP of the service. Required. |
+| trackResourcePubsubEnabled | bool | `trus` | Enable pubsub to track resource. |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
 | vaultCert.cert.path | string | `nil` | Path to secret containing .crt |

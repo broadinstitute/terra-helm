@@ -59,6 +59,8 @@ spec:
             secretKeyRef:
               name: crl-janitor-stairway-db-creds
               key: db
+        - name: TRACK_RESOURCE_PUBSUB_ENABLED
+          value: "{{ .Values.trackResourcePubsubEnabled }}"
         - name: TRACK_RESOURCE_PUBSUB_PROJECT_ID
           valueFrom:
             secretKeyRef:
