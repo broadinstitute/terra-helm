@@ -15,14 +15,14 @@ Current chart version is `0.1.0`
 | global.applicationVersion | string | Is set by Helmfile on deploy | Ontology global version |
 | appVersion | string | Is set by Helmfile on deploy | Ontology image version/tag. Required unless using `image`. |
 | devDeploy | bool | `false` | Enable to deploy to dev locally with Skaffold |
-| environment | string | `nil` | Environment, [dev, staging, prod] |
 | elasticSearch.server1 | string | `nil` | first elastic search host |
 | elasticSearch.server2 | string | `nil` | second elastic search host |
 | elasticSearch.server3 | string | `nil` | third elastic search host |
-| google.project | string | `nil` | Google project where GCS files are stored |
+| environment | string | `nil` | Environment, [dev, staging, prod] |
+| gcsAccount.path | string | `nil` | Vault path to GCS base64 service account json |
+| gcsAccount.key | string | `nil` | Vault key of GCS base64 service account json |
+| google.bucket | string | `nil` | Google project where GCS files are stored |
 | google.subdirectory | string | `nil` | Google bucket subdirectory |
-| gcsAccount.path | string | `nil` | Vault path to GCS service account json |
-| gcsAccount.key | string | `nil` | Vault key of GCS service account json |
 | imageConfig.repository | string | `nil` | GCR image location |
 | imageConfig.tag | string | `nil` | GCR image tag |
 | sentry.dsn.path | string | `nil` | Vault path to secret containing Sentry DSN value |
@@ -38,3 +38,32 @@ Current chart version is `0.1.0`
 * `kubectl get configmap -n terra-dev`
 * `kubectl describe configmap ontology-configmap -n terra-dev`
 * `helmfile -e dev --selector group=terra,app=ontology template`
+
+## Storing JSON Secrets in Vault
+Our k8s json secrets in vault are first base64 encoded and then written to 
+the path. To pull them back out, we pull them using secrets.yaml and 
+base64 decode them before writing to the pod's file system.
+
+To convert our standard vault secrets to k8s friendly base64 versions, do this.
+```
+vault read -format=json secret/path/secret.json | jq '.data' | base64 -o base64.txt
+```  
+Decide on a new secret path and create it like this:
+```
+docker run -it --rm \
+    -v $HOME:/root \
+    broadinstitute/dsde-toolbox:dev vault-edit secret/path/secret-k8s.json
+```
+That drops you into vim. Edit the file to look like:
+```
+{ "key": "<paste contents of base64.txt>" }
+```
+and save. Now you can refer to this in your `secrets.yaml` like so
+```
+...
+    secret-k8s.json:
+      path: secret/path/secret-k8s.json
+      encoding: base64
+      key: key
+...
+```
