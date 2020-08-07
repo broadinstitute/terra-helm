@@ -1,4 +1,4 @@
-{{- /* Configuration for Prometheus JMX exporter javaagent */-}}
+{{- /* Configuration for Prometheus JMX exporter javaagent */ -}}
 {{- define "cromwell.config.prometheusJmx" -}}
 rules:
 - pattern: ".*"
