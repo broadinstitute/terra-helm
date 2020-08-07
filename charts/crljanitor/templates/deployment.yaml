@@ -57,8 +57,14 @@ spec:
         - name: STAIRWAY_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-stairway-db-creds
-              key: db
+              name: crl-janitor-sa
+              key: service-account.json
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-track-resource-pubsub
+              key: project
+          value: "{{ .Values.trackResourcePubsubEnabled }}"
         - name: TRACK_RESOURCE_PUBSUB_ENABLED
           value: "{{ .Values.trackResourcePubsubEnabled }}"
         - name: TRACK_RESOURCE_PUBSUB_PROJECT_ID
