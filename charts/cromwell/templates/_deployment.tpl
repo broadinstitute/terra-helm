@@ -25,6 +25,7 @@ spec:
     metadata:
       labels:
         deployment: {{ $settings.name }}
+{{ include "cromwell.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
@@ -53,9 +54,15 @@ spec:
           name: {{ $settings.name }}-cm
       - name: {{ $settings.name }}-gc-logs
         emptyDir: {}
+      - name: cromwell-prometheusjmx-jar
+        emptyDir: {}
       containers:
       - name: {{ $settings.name }}-app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
+        ports:
+          - name: metrics
+            containerPort: 9090
+            protocol: TCP
         command: ["/bin/bash"]
         args:
         - '-c'
@@ -63,6 +70,7 @@ spec:
           java ${JAVA_OPTS}
           -Dlogback.configurationFile=/etc/cromwell-cm/logback.xml
           -Dsystem.cromwell_id=gke-${K8S_POD_NAME}
+          -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/cromwell-cm/prometheusJmx.yaml
           -jar /app/cromwell.jar
           ${CROMWELL_ARGS} ${*}
         - '--'
@@ -103,6 +111,9 @@ spec:
           readOnly: true
         - mountPath: /var/log/gc
           name: {{ $settings.name }}-gc-logs
+        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+          name: cromwell-prometheusjmx-jar
         readinessProbe:
           httpGet:
             path: /engine/latest/version
@@ -152,4 +163,11 @@ spec:
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
           readOnly: true
+      initContainers:
+      - name: download-prometheusjmx-jar
+        image: alpine:3.12.0
+        command: ["wget", "-O", "/cromwell-prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
+        volumeMounts:
+        - mountPath: /cromwell-prometheusjmx-jar
+          name: cromwell-prometheusjmx-jar
 {{- end -}}

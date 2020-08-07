@@ -11,7 +11,8 @@ spec:
   selector:
     deployment: {{ $settings.name }}
   ports:
-  - protocol: TCP
+  - name: https
+    protocol: TCP
     port: 443
     targetPort: 443
   {{- if $settings.serviceIP }}

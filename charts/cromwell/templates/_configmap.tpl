@@ -3,6 +3,8 @@
 data:
   logback.xml: |
 {{ include "cromwell.config.logback" . | indent 4 }}
+  prometheusJmx.yaml: |
+{{ include "cromwell.config.prometheusJmx" . | indent 4 }}
 {{- end -}}
 
 {{- /* Generate a configmap for a Cromwell deployment */ -}}
