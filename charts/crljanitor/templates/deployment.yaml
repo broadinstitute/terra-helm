@@ -101,10 +101,9 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
-        volumeMounts:
-          - name: app-sa-creds
-            mountPath: /secrets/app/service-account.json
-            readOnly: true
+        - name: app-sa-creds
+          mountPath: /secrets/app/service-account.json
+          readOnly: true
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
