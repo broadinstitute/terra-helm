@@ -39,6 +39,8 @@ serviceFirewallEnabled: false
 # serviceAllowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
 serviceAllowedAddresses: {}
 
+# trackResourcePubsubEnabled -- Whether to enable using pubsub to receive new tracked resources.
+trackResourcePubsubEnabled: true
 # DNS/TLS Values
 domain:
   # domain.hostname -- Hostname of this deployment
