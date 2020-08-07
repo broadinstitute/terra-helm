@@ -36,7 +36,7 @@ spec:
               name: ontology-secrets
               key: dsn
         command: ["java"]
-        args: ["-Dsentry.dsn=$(SENTRY_DSN)", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology.yaml"]
+        args: ["-Dstacktrace.app.packages=org.broadinstitute", "-Dsentry.dsn=$(SENTRY_DSN)", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology.yaml"]
         volumeMounts:
         - name: ontology-configs
           mountPath: /etc/ontology.yaml
