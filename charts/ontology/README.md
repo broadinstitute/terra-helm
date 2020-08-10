@@ -29,6 +29,13 @@ Current chart version is `0.1.0`
 | sentry.dsn.key | string | `nil` | Vault key of secret containing Sentry DSN value |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
+| vaultCert.enabled | bool | `false` | Enable to sync certificate secret from Vault with secrets-manager |
+| vaultCert.cert.path | string | `nil` | Path to secret containing .crt |
+| vaultCert.cert.secretKey | string | `nil` | Key in secret containing .crt |
+| vaultCert.key.path | string | `nil` | Path to secret containing .key |
+| vaultCert.key.secretKey | string | `nil` | Key in secret containing .key |
+| vaultCert.chain.path | string | `nil` | Path to secret containing intermediate .crt |
+| vaultCert.chain.secretKey | string | `nil` | Key in secret containing intermediate .crt |
 
 ## Cheat Sheet
 

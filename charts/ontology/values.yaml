@@ -39,3 +39,22 @@ vault:
   enabled: true
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
+
+vaultCert:
+  # vaultCert.enabled -- Enable to sync certificate secret from Vault with secrets-manager
+  enabled:
+  cert:
+    # vaultCert.cert.path -- (string) Path to secret containing .crt
+    path:
+    # vaultCert.cert.secretKey -- (string) Key in secret containing .crt
+    secretKey:
+  key:
+    # vaultCert.key.path -- (string) Path to secret containing .key
+    path:
+    # vaultCert.key.secretKey -- (string) Key in secret containing .key
+    secretKey:
+  chain:
+    # vaultCert.chain.path -- (string) Path to secret containing intermediate .crt
+    path:
+    # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
+    secretKey:
