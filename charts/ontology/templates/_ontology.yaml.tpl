@@ -24,8 +24,6 @@ elasticSearch:
     - {{ .Values.elasticSearch.server2 }}
     - {{ .Values.elasticSearch.server3 }}
   index: ontology
-cors:
-  allowedDomains: "*"
 googleStore:
   password: /etc/service-account.json
   endpoint: https://storage.googleapis.com/
