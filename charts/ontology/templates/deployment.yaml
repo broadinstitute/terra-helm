@@ -17,57 +17,57 @@ spec:
     spec:
       serviceAccountName: ontology-sa
       containers:
-      - name: ontology-service
-        image: "{{- if .Values.image -}}
-        {{ .Values.image }}
-        {{- else -}}
-        {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
-        {{- end }}"
-        imagePullPolicy: Always
-        ports:
-          - containerPort: 8080
-        securityContext:
-          runAsUser: 2  # non-root user
-          allowPrivilegeEscalation: false
-        env:
-        - name: SENTRY_DSN
-          valueFrom:
-            secretKeyRef:
-              name: ontology-secrets
-              key: dsn
-        command: ["java"]
-        args: ["-Dsentry.stacktrace.app.packages=org.broadinstitute", "-Dsentry.dsn=$(SENTRY_DSN)", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology.yaml"]
-        volumeMounts:
-          - name: configs
-            mountPath: /etc/ontology.yaml
-            subPath: ontology.yaml
-            readOnly: true
-          - name: secrets
-            mountPath: /etc/service-account.json
-            subPath: service-account.json
-            readOnly: true
-      - name: oidc-proxy
-        image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
-        ports:
-          - containerPort: 443
-          - containerPort: 80
-        volumeMounts:
-          - name: configs
-            mountPath: /etc/apache2/sites-available/site.conf
-            subPath: site.conf
-            readOnly: true
-          - name: secrets
-            mountPath: /etc/ssl/certs/server.crt
-            subPath: tls.cert
-            readOnly: true
-          - name: secrets
-            mountPath: /etc/ssl/private/server.key
-            subPath: tls.key
-            readOnly: true
-          - name: secrets
-            mountPath: /etc/ssl/certs/ca-bundle.crt
-            subPath: ca-bundle.crt
-            readOnly: true
+        - name: ontology-service
+          image: "{{- if .Values.image -}}
+          {{ .Values.image }}
+          {{- else -}}
+          {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+          {{- end }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
+          env:
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: ontology-secrets
+                  key: dsn
+          command: ["java"]
+          args: ["-Dsentry.stacktrace.app.packages=org.broadinstitute", "-Dsentry.dsn=$(SENTRY_DSN)", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology.yaml"]
+          volumeMounts:
+            - name: configs
+              mountPath: /etc/ontology.yaml
+              subPath: ontology.yaml
+              readOnly: true
+            - name: secrets
+              mountPath: /etc/service-account.json
+              subPath: service-account.json
+              readOnly: true
+        - name: oidc-proxy
+          image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+          ports:
+            - containerPort: 443
+            - containerPort: 80
+          volumeMounts:
+            - name: configs
+              mountPath: /etc/apache2/sites-available/site.conf
+              subPath: site.conf
+              readOnly: true
+            - name: secrets
+              mountPath: /etc/ssl/certs/server.crt
+              subPath: tls.cert
+              readOnly: true
+            - name: secrets
+              mountPath: /etc/ssl/private/server.key
+              subPath: tls.key
+              readOnly: true
+            - name: secrets
+              mountPath: /etc/ssl/certs/ca-bundle.crt
+              subPath: ca-bundle.crt
+              readOnly: true
       volumes:
         - name: configs
           configMap:

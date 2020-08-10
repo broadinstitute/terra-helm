@@ -23,6 +23,8 @@ gcsAccount:
   path:
   key:
 
+image:
+
 imageConfig:
   repository:
   tag:
