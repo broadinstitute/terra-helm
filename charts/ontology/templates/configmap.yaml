@@ -7,3 +7,5 @@ metadata:
 data:
   ontology.yaml: |
 {{ include "ontology.config.yaml" . | indent 4 }}
+  site.conf: |
+{{ include "ontology.site.conf" . | indent 4 }}

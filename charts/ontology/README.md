@@ -40,10 +40,10 @@ Current chart version is `0.1.0`
 ## Cheat Sheet
 
 * `gcloud container clusters get-credentials terra-dev --zone us-central1-a --project broad-dsde-dev`
-* `kubectl get secrets -n terra-dev`
-* `kubectl describe secret ontology-secrets -n terra-dev`
-* `kubectl get configmap -n terra-dev`
-* `kubectl describe configmap ontology-configmap -n terra-dev`
+* `k get secrets -n terra-dev`
+* `k describe secret ontology-secrets -n terra-dev`
+* `k get configmap -n terra-dev`
+* `k describe configmap ontology-configmap -n terra-dev`
 * `helmfile -e dev --selector group=terra,app=ontology template`
 
 ## Storing JSON Secrets in Vault
