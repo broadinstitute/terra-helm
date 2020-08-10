@@ -59,8 +59,6 @@ spec:
             secretKeyRef:
               name: crl-janitor-stairway-db-creds
               key: db
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /secrets/app/service-account.json
         - name: TRACK_RESOURCE_PUBSUB_ENABLED
           value: "{{ .Values.trackResourcePubsubEnabled }}"
         - name: TRACK_RESOURCE_PUBSUB_PROJECT_ID
@@ -73,6 +71,12 @@ spec:
             secretKeyRef:
               name: crl-janitor-track-resource-pubsub
               key: subscription
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secrets/app/service-account.json
+        volumeMounts:
+          - name: app-sa-creds
+            mountPath: /secrets/app
+            readOnly: true
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -100,9 +104,6 @@ spec:
         volumeMounts:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
-          readOnly: true
-        - name: app-sa-creds
-          mountPath: /secrets/app/service-account.json
           readOnly: true
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
