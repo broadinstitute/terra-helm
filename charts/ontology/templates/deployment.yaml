@@ -42,7 +42,7 @@ spec:
               mountPath: /etc/ontology.yaml
               subPath: ontology.yaml
               readOnly: true
-            - name: secrets
+            - name: app-secrets
               mountPath: /etc/service-account.json
               subPath: service-account.json
               readOnly: true
@@ -56,15 +56,15 @@ spec:
               mountPath: /etc/apache2/sites-available/site.conf
               subPath: site.conf
               readOnly: true
-            - name: secrets
+            - name: proxy-secrets
               mountPath: /etc/ssl/certs/server.crt
               subPath: tls.cert
               readOnly: true
-            - name: secrets
+            - name: proxy-secrets
               mountPath: /etc/ssl/private/server.key
               subPath: tls.key
               readOnly: true
-            - name: secrets
+            - name: proxy-secrets
               mountPath: /etc/ssl/certs/ca-bundle.crt
               subPath: ca-bundle.crt
               readOnly: true
@@ -72,6 +72,9 @@ spec:
         - name: configs
           configMap:
             name: ontology-configmap
-        - name: secrets
+        - name: app-secrets
+          secret:
+            secretName: ontology-secrets
+        - name: proxy-secrets
           secret:
             secretName: ontology-secrets
