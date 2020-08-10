@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ontology-deployment
+  name: {{ .Chart.Name }}-deployment
   labels:
 {{ include "ontology.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: ontology
+      app: {{ .Chart.Name }}
   template:
     metadata:
-      name: ontology
+      name: {{ .Chart.Name }}
       labels:
-        app: ontology
+        app: {{ .Chart.Name }}
     spec:
-      serviceAccountName: ontology-sa
+      serviceAccountName: {{ .Chart.Name }}-sa
       containers:
-        - name: ontology-service
+        - name: {{ .Chart.Name }}-service
           image: "{{- if .Values.image -}}
           {{ .Values.image }}
           {{- else -}}
@@ -33,7 +33,7 @@ spec:
             - name: SENTRY_DSN
               valueFrom:
                 secretKeyRef:
-                  name: ontology-secrets
+                  name: {{ .Chart.Name }}-secrets
                   key: dsn
           command: ["java"]
           args: ["-Dsentry.stacktrace.app.packages=org.broadinstitute", "-Dsentry.dsn=$(SENTRY_DSN)", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology.yaml"]
@@ -62,13 +62,13 @@ spec:
       volumes:
         - name: configs
           configMap:
-            name: ontology-configmap
+            name: {{ .Chart.Name }}-configmap
         - name: app-secrets
           secret:
-            secretName: ontology-secrets
+            secretName: {{ .Chart.Name }}-secrets
         - name: proxy-secrets
           secret:
-            secretName: ontology-proxy-secrets
+            secretName: {{ .Chart.Name }}-proxy-secrets
             items:
               - key: tls.crt
                 path: certs/server.crt

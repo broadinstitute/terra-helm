@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ontology-configmap
+  name: {{ .Chart.Name }}-configmap
   labels:
 {{ include "ontology.labels" . | indent 4 }}
 data:
