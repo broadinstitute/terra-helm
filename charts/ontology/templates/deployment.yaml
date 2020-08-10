@@ -43,7 +43,8 @@ spec:
               subPath: ontology.yaml
               readOnly: true
             - name: app-secrets
-              mountPath: "/etc"
+              mountPath: /etc/service-account.json
+              subPath: service-account.json
               readOnly: true
         - name: oidc-proxy
           image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
@@ -65,9 +66,6 @@ spec:
         - name: app-secrets
           secret:
             secretName: ontology-secrets
-            items:
-              - key: service-account.json
-                path: service-account.json
         - name: proxy-secrets
           secret:
             secretName: ontology-secrets
