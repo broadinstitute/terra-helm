@@ -76,6 +76,10 @@ spec:
         - name: STAIRWAY_DATABASE_NAME
           value: {{ index .Values.postgres.dbs 1 }}
         {{- end }}
+        {{- if .Values.initDB }}
+        - name: INIT_DB
+          value: 'true'
+        {{- end }}
         - name: SAM_ADDRESS
           value: {{ .Values.samAddress }}
         - name: SERVICE_GOOGLE_PROJECT
