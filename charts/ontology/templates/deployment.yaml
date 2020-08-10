@@ -68,7 +68,7 @@ spec:
             secretName: ontology-secrets
         - name: proxy-secrets
           secret:
-            secretName: ontology-secrets
+            secretName: ontology-proxy-secrets
             items:
               - key: tls.crt
                 path: certs/server.crt
