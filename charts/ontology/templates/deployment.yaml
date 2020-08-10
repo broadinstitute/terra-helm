@@ -52,7 +52,7 @@ spec:
           - containerPort: 443
           - containerPort: 80
         volumeMounts:
-        - name: secrets
+        - name: configs
           mountPath: /etc/apache2/sites-available/site.conf
           subPath: site.conf
           readOnly: true
