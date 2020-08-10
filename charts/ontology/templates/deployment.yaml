@@ -38,18 +38,40 @@ spec:
         command: ["java"]
         args: ["-Dsentry.stacktrace.app.packages=org.broadinstitute", "-Dsentry.dsn=$(SENTRY_DSN)", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology.yaml"]
         volumeMounts:
-        - name: ontology-configs
+        - name: configs
           mountPath: /etc/ontology.yaml
           subPath: ontology.yaml
           readOnly: true
-        - name: ontology-gcs-account
+        - name: secrets
           mountPath: /etc/service-account.json
           subPath: service-account.json
           readOnly: true
+      - name: oidc-proxy
+        image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+        volumeMounts:
+        - name: secrets
+          mountPath: /etc/apache2/sites-available/site.conf
+          subPath: site.conf
+          readOnly: true
+        - name: secrets
+          mountPath: /etc/ssl/certs/server.crt
+          subPath: tls.cert
+          readOnly: true
+        - name: secrets
+          mountPath: /etc/ssl/private/server.key
+          subPath: tls.key
+          readOnly: true
+        - name: secrets
+          mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          readOnly: true
       volumes:
-      - name: ontology-configs
+      - name: configs
         configMap:
           name: ontology-configmap
-      - name: ontology-gcs-account
+      - name: secrets
         secret:
           secretName: ontology-secrets

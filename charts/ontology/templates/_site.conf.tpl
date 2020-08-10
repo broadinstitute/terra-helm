@@ -10,7 +10,7 @@ LogFormat "%{X-Forwarded-For}i %l %u \"%{OIDC_CLAIM_email}i\" \"%{X-App-ID}i\" [
 SetEnvIf X-Forwarded-For "^.*\..*\..*\..*" forwarded
 CustomLog "/dev/stdout" combined env=!forwarded
 CustomLog "/dev/stdout" proxy env=forwarded
-LogLevel ${LOG_LEVEL}
+LogLevel {{ .Values.proxy.logLevel }}
 
 Header unset X-Frame-Options
 Header always set X-Frame-Options SAMEORIGIN

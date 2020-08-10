@@ -27,6 +27,12 @@ imageConfig:
   repository:
   tag:
 
+proxy:
+  logLevel:
+  image:
+    repository:
+    version:
+
 replicas: 1
 
 sentry:

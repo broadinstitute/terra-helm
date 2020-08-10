@@ -25,6 +25,9 @@ Current chart version is `0.1.0`
 | google.subdirectory | string | `nil` | Google bucket subdirectory |
 | imageConfig.repository | string | `nil` | GCR image location |
 | imageConfig.tag | string | `nil` | GCR image tag |
+| proxy.logLevel | string | `"debug"` | Proxy log level |
+| proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
+| proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |
 | sentry.dsn.path | string | `nil` | Vault path to secret containing Sentry DSN value |
 | sentry.dsn.key | string | `nil` | Vault key of secret containing Sentry DSN value |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
