@@ -73,10 +73,6 @@ spec:
               key: subscription
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
-        volumeMounts:
-          - name: app-sa-creds
-            mountPath: /secrets/app
-            readOnly: true
         # Environment variables for OpenCensus resource auto detection.
         - name: CONTAINER_NAME
           valueFrom:
@@ -86,6 +82,10 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        volumeMounts:
+          - name: app-sa-creds
+            mountPath: /secrets/app
+            readOnly: true
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
