@@ -73,7 +73,7 @@ spec:
               key: subscription
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
-          # Environment variables for OpenCensus resource auto detection.
+        # Environment variables for OpenCensus resource auto detection.
         - name: CONTAINER_NAME
           valueFrom:
             fieldRef:
