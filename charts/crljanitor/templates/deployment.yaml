@@ -71,6 +71,12 @@ spec:
             secretKeyRef:
               name: crl-janitor-track-resource-pubsub
               key: subscription
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secrets/app/service-account.json
+        volumeMounts:
+          - name: app-sa-creds
+            mountPath: /secrets/app
+            readOnly: true
         # Environment variables for OpenCensus resource auto detection.
         - name: CONTAINER_NAME
           valueFrom:
@@ -136,7 +142,10 @@ spec:
       volumes:
         - name: cloudsql-sa-creds
           secret:
-            secretName: crl-janitor-sa
+            secretName: crl-janitor-cloudsql-sa
+        - name: app-sa-creds
+          secret:
+            secretName: crl-janitor-app-sa
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
