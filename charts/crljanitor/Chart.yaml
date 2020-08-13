@@ -1,6 +1,6 @@
 apiVersion: v2
 name: crljanitor
-version: 0.1.9
+version: 0.1.10
 
 description: Chart for Cloud Resource Manager Janitor
 type: application
