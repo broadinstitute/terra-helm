@@ -67,7 +67,6 @@ spec:
           image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
           ports:
             - containerPort: 443
-            - containerPort: 80
           volumeMounts:
             - name: configs
               mountPath: /etc/apache2/sites-available/site.conf
