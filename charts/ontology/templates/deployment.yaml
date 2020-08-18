@@ -47,6 +47,15 @@ spec:
               mountPath: /etc/service-account.json
               subPath: service-account.json
               readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 10
+            successThreshold: 1
         - name: oidc-proxy
           image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
           ports:
