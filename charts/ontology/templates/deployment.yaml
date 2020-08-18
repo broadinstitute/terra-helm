@@ -13,6 +13,7 @@ spec:
     metadata:
       name: {{ .Chart.Name }}
       labels:
+{{ include "ontology.labels" . | indent 8 }}
         app: {{ .Chart.Name }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
