@@ -17,6 +17,13 @@ spec:
         app: {{ .Chart.Name }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+        - ip: 127.0.0.1
+          hostnames:
+            - app
       containers:
         - name: {{ .Chart.Name }}-service
           image: "{{- if .Values.image -}}
