@@ -18,6 +18,7 @@ Current chart version is `0.1.0`
 | gcsAccountKey | string | `nil` | Vault key of GCS base64 service account json |
 | googleBucket | string | `nil` | Google project where GCS files are stored |
 | googleBucketSubdirectory | string | `nil` | Google bucket subdirectory |
+| image | string | `nil` | If specified, overrides the GCR image location |
 | imageConfigRepository | string | `nil` | GCR image location |
 | imageConfigTag | string | `nil` | GCR image tag |
 | proxyLogLevel | string | `"debug"` | Proxy log level |
