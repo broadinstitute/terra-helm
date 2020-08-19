@@ -18,9 +18,8 @@ googleBucket:
 googleBucketSubdirectory:
 
 image:
-
-imageConfigRepository:
-imageConfigTag:
+imageRepository:
+imageTag:
 
 proxyLogLevel:
 proxyImageRepository:
