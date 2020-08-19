@@ -24,6 +24,7 @@ Current chart version is `0.1.0`
 | proxyLogLevel | string | `"debug"` | Proxy log level |
 | proxyImageRepository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxyImageVersion | string | `"bernick_tcell"` | Proxy image tag |
+| replicas | int | `1` | Number of replicas |
 | sentryDsnPath | string | `nil` | Vault path to secret containing Sentry DSN value |
 | sentryDsnKey | string | `nil` | Vault key of secret containing Sentry DSN value |
 | vaultCertPath | string | `nil` | Path to secret containing .crt |
