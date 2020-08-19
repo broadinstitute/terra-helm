@@ -13,7 +13,6 @@ Current chart version is `0.1.0`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | global.applicationVersion | string | Is set by Helmfile on deploy | Ontology global version |
-| appVersion | string | Is set by Helmfile on deploy | Ontology image version/tag. Required unless using `image`. |
 | devDeploy | bool | `false` | Enable to deploy to dev locally with Skaffold |
 | elasticSearch.server1 | string | `nil` | first elastic search host |
 | elasticSearch.server2 | string | `nil` | second elastic search host |

@@ -29,7 +29,7 @@ spec:
           image: "{{- if .Values.image -}}
           {{ .Values.image }}
           {{- else -}}
-          {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+          {{ .Values.imageConfig.repository }}:{{ default .Values.global.applicationVersion .Values.imageConfig.tag }}
           {{- end }}"
           imagePullPolicy: Always
           ports:
