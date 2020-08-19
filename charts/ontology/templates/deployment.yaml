@@ -29,7 +29,7 @@ spec:
           image: "{{- if .Values.image -}}
           {{ .Values.image }}
           {{- else -}}
-          {{ .Values.imageConfig.repository }}:{{ default .Values.global.applicationVersion .Values.imageConfig.tag }}
+          {{ .Values.imageConfigRepository }}:{{ default .Values.global.applicationVersion .Values.imageConfigTag }}
           {{- end }}"
           imagePullPolicy: Always
           ports:
@@ -64,7 +64,7 @@ spec:
             failureThreshold: 10
             successThreshold: 1
         - name: oidc-proxy
-          image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+          image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:
             - containerPort: 443
           volumeMounts:

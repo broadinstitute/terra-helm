@@ -20,15 +20,15 @@ logging:
     "org.semanticweb": ERROR
 elasticSearch:
   servers:
-    - {{ .Values.elasticSearch.server1 }}
-    - {{ .Values.elasticSearch.server2 }}
-    - {{ .Values.elasticSearch.server3 }}
+    - {{ .Values.elasticSearchServer1 }}
+    - {{ .Values.elasticSearchServer2 }}
+    - {{ .Values.elasticSearchServer3 }}
   index: ontology
 googleStore:
   password: /etc/service-account.json
   endpoint: https://storage.googleapis.com/
-  bucket: {{ .Values.google.bucket }}
+  bucket: {{ .Values.googleBucket }}
 storeOntology:
-  bucketSubdirectory: {{ .Values.google.subdirectory }}
+  bucketSubdirectory: {{ .Values.googleBucketSubdirectory }}
   configurationFileName: /configuration
 {{- end -}}

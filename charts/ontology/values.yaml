@@ -5,61 +5,38 @@ global:
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false
 
-elasticSearch:
-  server1:
-  server2:
-  server3:
+elasticSearchServer1:
+elasticSearchServer2:
+elasticSearchServer3:
 
 environment:
 
-google:
-  bucket:
-  subdirectory:
+gcsAccountPath:
+gcsAccountKey:
 
-gcsAccount:
-  path:
-  key:
+googleBucket:
+googleBucketSubdirectory:
 
 image:
 
-imageConfig:
-  repository:
-  tag:
+imageConfigRepository:
+imageConfigTag:
 
-proxy:
-  logLevel:
-  image:
-    repository:
-    version:
+proxyLogLevel:
+proxyImageRepository:
+proxyImageVersion:
 
 replicas: 1
 
-sentry:
-  dsn:
-    path:
-    key:
+sentryDsnPath:
+sentryDsnKey:
 
-vault:
-  # vault.enabled -- When enabled, syncs required secrets from Vault
-  enabled: true
-  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
-  pathPrefix:
+vaultEnabled: true
 
-vaultCert:
-  # vaultCert.enabled -- Enable to sync certificate secret from Vault with secrets-manager
-  enabled:
-  cert:
-    # vaultCert.cert.path -- (string) Path to secret containing .crt
-    path:
-    # vaultCert.cert.secretKey -- (string) Key in secret containing .crt
-    secretKey:
-  key:
-    # vaultCert.key.path -- (string) Path to secret containing .key
-    path:
-    # vaultCert.key.secretKey -- (string) Key in secret containing .key
-    secretKey:
-  chain:
-    # vaultCert.chain.path -- (string) Path to secret containing intermediate .crt
-    path:
-    # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
-    secretKey:
+vaultCertPath:
+vaultCertSecretKey:
+vaultKeyPath:
+vaultKeySecretKey:
+vaultChain:
+vaultChainPath:
+vaultChainSecretKey:
