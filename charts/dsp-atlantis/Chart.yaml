@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dsp-atlantis
-version: 0.0.1
+version: 0.1.0
 
 description: Chart for DSP Atlantis deployment
 type: application
@@ -15,5 +15,5 @@ sources:
 
 dependencies:
 - name: atlantis
-  version: 3.11.0
+  version: 3.12.2
   repository: https://kubernetes-charts.storage.googleapis.com/
