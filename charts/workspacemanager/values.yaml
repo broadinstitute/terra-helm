@@ -94,6 +94,9 @@ proxy:
     # proxy.image.version -- Proxy image tag
     version: bernick_tcell
 
+# initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
+initDB: false
+
 postgres:
   # postgres.enabled -- Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options.
   enabled: false
