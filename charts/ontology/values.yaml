@@ -5,6 +5,8 @@ global:
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false
 
+# serviceIP -- (string) External IP of the service. Required.
+serviceIP:
 elasticSearchServer1:
 elasticSearchServer2:
 elasticSearchServer3:
