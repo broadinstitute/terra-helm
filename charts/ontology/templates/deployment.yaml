@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+{{ include "ontology.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      name: {{ .Chart.Name }}
+      labels:
+{{ include "ontology.labels" . | indent 8 }}
+        app: {{ .Chart.Name }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+        - ip: 127.0.0.1
+          hostnames:
+            - app
+      containers:
+        - name: {{ .Chart.Name }}-service
+          image: "{{- if .Values.image -}}
+          {{ .Values.image }}
+          {{- else -}}
+          {{ .Values.imageRepository }}:{{ default .Values.global.applicationVersion .Values.imageTag }}
+          {{- end }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
+          env:
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-secrets
+                  key: dsn
+          command: ["java"]
+          args: ["-Dsentry.stacktrace.app.packages=org.broadinstitute", "-Dsentry.dsn=$(SENTRY_DSN)", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology.yaml"]
+          volumeMounts:
+            - name: configs
+              mountPath: /etc/ontology.yaml
+              subPath: ontology.yaml
+              readOnly: true
+            - name: app-secrets
+              mountPath: /etc/service-account.json
+              subPath: service-account.json
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 10
+            successThreshold: 1
+        - name: oidc-proxy
+          image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - name: configs
+              mountPath: /etc/apache2/sites-available/site.conf
+              subPath: site.conf
+              readOnly: true
+            - name: proxy-secrets
+              mountPath: "/etc/ssl"
+              readOnly: true
+      volumes:
+        - name: configs
+          configMap:
+            name: {{ .Chart.Name }}-configmap
+        - name: app-secrets
+          secret:
+            secretName: {{ .Chart.Name }}-secrets
+        - name: proxy-secrets
+          secret:
+            secretName: {{ .Chart.Name }}-proxy-secrets
+            items:
+              - key: tls.crt
+                path: certs/server.crt
+              - key: tls.key
+                path: private/server.key
+              - key: ca-bundle.crt
+                path: certs/ca-bundle.crt

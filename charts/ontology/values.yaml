@@ -1,0 +1,43 @@
+global:
+  # global.applicationVersion -- What version of the Ontology application to deploy
+  applicationVersion: latest
+
+# Should be set to true when deploying locally with Skaffold
+devDeploy: false
+
+# serviceIP -- (string) External IP of the service. Required.
+serviceIP:
+elasticSearchServer1:
+elasticSearchServer2:
+elasticSearchServer3:
+
+environment:
+
+gcsAccountPath:
+gcsAccountKey:
+
+googleBucket:
+googleBucketSubdirectory:
+
+image:
+imageRepository:
+imageTag:
+
+proxyLogLevel:
+proxyImageRepository:
+proxyImageVersion:
+
+replicas: 1
+
+sentryDsnPath:
+sentryDsnKey:
+
+vaultEnabled: true
+
+vaultCertPath:
+vaultCertSecretKey:
+vaultKeyPath:
+vaultKeySecretKey:
+vaultChain:
+vaultChainPath:
+vaultChainSecretKey:

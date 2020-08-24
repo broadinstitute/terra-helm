@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-configmap
+  labels:
+{{ include "ontology.labels" . | indent 4 }}
+data:
+  ontology.yaml: |
+{{ include "ontology.config.yaml" . | indent 4 }}
+  site.conf: |
+{{ include "ontology.site.conf" . | indent 4 }}
