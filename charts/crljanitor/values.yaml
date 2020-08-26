@@ -29,6 +29,9 @@ vault:
   pathPrefix:
   # vault.configPathPrefix -- (string) Vault path prefix for configs. Required if vault.enabled.
   configPathPrefix:
+  # vault.adminUserFilePath -- (string) Vault path prefix for admin user list. Required if vault.enabled.
+  # Use the same users as admin for all env by default. Override if needed in helmfile repo.
+  adminUserFilePath: config/terra/crl-janitor/common/iam
 
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
