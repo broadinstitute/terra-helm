@@ -74,7 +74,7 @@ spec:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
         - name: CONFIG_BASED_AUTHZ_ENABLED
-          value: "{{ .Values.configBasedAuthZEnabled }}"
+          value: "{{ .Values.configBasedAuthzEnabled }}"
         - name: ADMIN_USER_LIST
           valueFrom:
             secretKeyRef:

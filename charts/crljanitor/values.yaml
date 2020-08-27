@@ -44,9 +44,9 @@ serviceAllowedAddresses: {}
 
 # trackResourcePubsubEnabled -- Whether to enable using pubsub to receive new tracked resources.
 trackResourcePubsubEnabled: true
-# configBasedAuthZEnabled -- Whether to use static file with admin users email for authorization.
+# configBasedAuthzEnabled -- Whether to use static file with admin users email for authorization.
 # TODO(PF-81): Switch to use SAM instead of config file for user authZ.
-configBasedAuthZEnabled: true
+configBasedAuthzEnabled: true
 # DNS/TLS Values
 domain:
   # domain.hostname -- Hostname of this deployment
