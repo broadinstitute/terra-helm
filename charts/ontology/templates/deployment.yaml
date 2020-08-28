@@ -46,11 +46,9 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}-secrets
                   key: dsn
-          command: ["/bin/bash"]
+          command: ["java"]
           args: 
-          - '-c'
           - >-
-            java
             -Dsentry.stacktrace.app.packages=org.broadinstitute
             -Dsentry.dsn=$(SENTRY_DSN)
             -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/ontology-cm/prometheusJmx.yaml
