@@ -46,8 +46,16 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}-secrets
                   key: dsn
-          command: ["java"]
-          args: ["-Dsentry.stacktrace.app.packages=org.broadinstitute", "-Dsentry.dsn=$(SENTRY_DSN)", "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/ontology-cm/prometheusJmx.yaml", "-jar", "/opt/consent-ontology.jar", "server", "/etc/ontology-cm/ontology.yaml"]
+          command: ["/bin/bash"]
+          args: 
+          - '-c'
+          - >-
+            java
+            -Dsentry.stacktrace.app.packages=org.broadinstitute
+            -Dsentry.dsn=$(SENTRY_DSN)
+            -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/ontology-cm/prometheusJmx.yaml
+            -jar /opt/consent-ontology.jar server /etc/ontology-cm/ontology.yaml"
+          - '--'
           volumeMounts:
             - name: configs
               mountPath: /etc/ontology-cm
