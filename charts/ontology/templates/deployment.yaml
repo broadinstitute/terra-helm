@@ -54,6 +54,9 @@ spec:
               mountPath: /etc/service-account.json
               subPath: service-account.json
               readOnly: true
+            - name: ontology-prometheus-jmx-jar
+              mountPath: /etc/prometheusjmx/prometheusjmx.jar
+              subPath: prometheusjmx.jar
           readinessProbe:
             httpGet:
               path: /status
@@ -92,3 +95,12 @@ spec:
                 path: private/server.key
               - key: ca-bundle.crt
                 path: certs/ca-bundle.crt
+        - name: ontology-prometheusjmx-jar
+          emptyDir: {}
+      initContainers:
+      - name: download-prometheus-jmx-jar
+        image: alpine:3.12.0
+        command: ["wget", "-O", "/ontology-prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
+        volumeMounts:
+        - name: ontology-prometheujmx-jar
+          mountPath: /ontology-prometheusjmx-jar
