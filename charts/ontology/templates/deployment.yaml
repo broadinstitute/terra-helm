@@ -53,7 +53,6 @@ spec:
             -Dsentry.dsn=$(SENTRY_DSN)
             -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/ontology-cm/prometheusJmx.yaml
             -jar /opt/consent-ontology.jar server /etc/ontology-cm/ontology.yaml
-          - '--'
           volumeMounts:
             - name: configs
               mountPath: /etc/ontology-cm
