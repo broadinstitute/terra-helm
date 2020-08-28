@@ -10,4 +10,4 @@ data:
   site.conf: |
 {{ include "ontology.site.conf" . | indent 4 }}
   prometheusJmx.yaml: |
-{{ include "ontology.config.prometheusJmx". |  indent 4 }}
+{{ include "ontology.config.prometheusJmx" . |  indent 4 }}
