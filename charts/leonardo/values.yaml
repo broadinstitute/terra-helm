@@ -40,18 +40,21 @@ deployments:
     # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
     serviceName: leonardo
 
-resource-validator:
-  standalone:
-    # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
-    name: resource-validator
-    # deployments.standalone.replicas -- Number of replicas in the default standalone Leonardo deployment
-    replicas: 1
-    # deployments.standalone.expose -- Whether to expose the default standalone Leonardo deployment as a service
-    expose: false
-    # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
-    serviceName: resourceValidator
-    enabled: true
-    imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-    imageTag: latest
-    serviceIP: null
+cronjob:
+  # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
+  name: resource-validator-cronjob
+  # deployments.standalone.replicas -- Number of replicas in the default standalone Leonardo deployment
+  replicas: 1
+  # deployments.standalone.expose -- Whether to expose the default standalone Leonardo deployment as a service
+  expose: false
+  # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
+  serviceName: resourceValidator
+  enabled: true
+  imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
+  imageTag: latest
 
+vault:
+  # vault.enabled -- When enabled, syncs required secrets from Vault
+  enabled: true
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix:

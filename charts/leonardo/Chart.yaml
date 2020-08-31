@@ -13,3 +13,4 @@ keywords:
 sources:
 - https://github.com/broadinstitute/terra-helm/
 - https://github.com/DataBiosphere/leonardo
+- https://github.com/broadinstitute/resource-validator

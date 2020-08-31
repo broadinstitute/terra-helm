@@ -10,7 +10,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
         <!-- daily rollover -->
-        <fileNamePattern>${WORKING_DIRECTORY}/welder.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        <fileNamePattern>application.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
         <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
             <!-- or whenever the file size reaches 50MB -->

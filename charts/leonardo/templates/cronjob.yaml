@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+name: "resource-validator-cron"
+labels:
+{{ include "leonardo.labels" . | indent 4 }}
+spec:
+schedule: "*/10 * * * *"
+successfulJobsHistoryLimit: 0
+jobTemplate:
+ spec:
+ template:
+  spec:
+  restartPolicy: Never
+  containers:
+  - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.imageTag }}"
+   name: "{{ .Values.cronjob.name }}
+   args:
+   - --version
