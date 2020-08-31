@@ -29,6 +29,9 @@ vault:
   pathPrefix:
   # vault.configPathPrefix -- (string) Vault path prefix for configs. Required if vault.enabled.
   configPathPrefix:
+  # vault.adminUserFilePath -- (string) Vault path prefix for admin user list. Required if vault.enabled.
+  # Use the same users as admin for all env by default. Override if needed in helmfile repo.
+  adminUserFilePath: config/terra/crl-janitor/common/iam
 
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
@@ -41,6 +44,9 @@ serviceAllowedAddresses: {}
 
 # trackResourcePubsubEnabled -- Whether to enable using pubsub to receive new tracked resources.
 trackResourcePubsubEnabled: true
+# configBasedAuthzEnabled -- Whether to use static file with admin users email for authorization.
+# TODO(PF-81): Switch to use SAM instead of config file for user authZ.
+configBasedAuthzEnabled: true
 # DNS/TLS Values
 domain:
   # domain.hostname -- Hostname of this deployment
