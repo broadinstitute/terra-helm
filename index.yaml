@@ -2100,6 +2100,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/istioconfig-0.0.1/istioconfig-0.0.1.tgz
     version: 0.0.1
+  leonardo:
+  - apiVersion: v2
+    created: "2020-08-31T12:52:50.723435755Z"
+    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
+    digest: 834a5f769db0bd01c6c4eb690db5e66b2016e644c9ed37dc26d97bddcbc58c54
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.0.1-110.1598878366.f39927/leonardo-0.0.1-110.1598878366.f39927.tgz
+    version: 0.0.1-110.1598878366.f39927
   ontology:
   - apiVersion: v2
     created: "2020-08-28T20:07:11.231734718Z"
