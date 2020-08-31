@@ -1,0 +1,41 @@
+global:
+  # global.applicationVersion -- What version of the Leonardo application to deploy
+  applicationVersion: latest
+
+# Leonardo can be run in multiple deployments. This key contains default
+# settings for all deployments configured under the `deployments` key.
+deploymentDefaults:
+  # deploymentDefaults.enabled -- Whether a declared deployment is enabled. If false, no resources will be created
+  enabled: true
+  # deploymentDefaults.name -- (Required) A name for the deployment that will be substituted into resource definitions.
+  # Example: `"leonardo-backend"`
+  name: null
+  # deploymentDefaults.imageRepository -- Image repo to pull Leonardo images from
+  imageRepository: gcr.io/broad-dsp-gcr-public/leonardo
+  # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
+  # @default global.applicationVersion
+  imageTag: null
+  # deploymentDefaults.replicas -- Number of replicas for the deployment
+  replicas: 0
+  # deploymentDefaults.expose -- Whether to create a Service + Ingress for this deployment
+  expose: false
+  # deploymentDefaults.serviceIP -- Static IP to use for the Service. (optional)
+  serviceIP: null
+
+
+# A map of Leonardo deployments. In Terra's production environment,
+# Leonardo is deployed as two services (backend and frontend)
+# with different configurations.
+#
+# Here, we configure it as a single standalone deployment, similar to how a
+# developer might run Leonardo.
+deployments:
+  standalone:
+    # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
+    name: leonardo
+    # deployments.standalone.replicas -- Number of replicas in the default standalone Leonardo deployment
+    replicas: 1
+    # deployments.standalone.expose -- Whether to expose the default standalone Leonardo deployment as a service
+    expose: true
+    # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
+    serviceName: leonardo
