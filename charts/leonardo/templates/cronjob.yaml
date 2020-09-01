@@ -20,19 +20,23 @@ spec:
             - --dryRun
             - --all
             env:
-              - name: LEONARDO_DB_USER
-                valueFrom:
-                  secretKeyRef:
-                    name: leonardo-db-creds
-                    key: username              
-              - name: LEONARDO_DB_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: leonardo-db-creds
-                    key: password
-              - name: LEONARDO_SA_PATH
-                value: /secrets/service-account.json
-              volumeMounts:
-                - name: leonardo-sa
-                  mountPath: /secrets
-                  readOnly: true
+            - name: LEONARDO_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: username              
+            - name: LEONARDO_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: password
+            - name: LEONARDO_SA_PATH
+              value: /secrets/service-account.json
+            volumeMounts:
+              - name: leonardo-sa-json
+                mountPath: /secrets
+                readOnly: true
+          volumes:
+            - name: leonardo-sa-json
+              secret:
+                secretName: leonardo-sa
