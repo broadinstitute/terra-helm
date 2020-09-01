@@ -33,10 +33,10 @@ spec:
             - name: LEONARDO_SA_PATH
               value: /secrets/service-account.json
             volumeMounts:
-              - name: leonardo-sa-json
-                mountPath: /secrets
-                readOnly: true
+            - name: leonardo-sa-json-file
+              mountPath: /secrets
+              readOnly: true
           volumes:
-            - name: leonardo-sa-json
-              secret:
-                secretName: leonardo-sa
+          - name: leonardo-sa-json-file
+            secret:
+              secretName: leonardo-sa-json
