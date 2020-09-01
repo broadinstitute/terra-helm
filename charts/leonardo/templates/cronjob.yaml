@@ -12,7 +12,7 @@ spec:
       template:
         spec:
           restartPolicy: Never
-          serviceAccountName: leonardo-sa
+          serviceAccountName: leonardo-ksa
           containers:
           - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.imageTag }}"
             name: "{{ .Values.cronjob.name }}"
@@ -30,7 +30,7 @@ spec:
                 secretKeyRef:
                   name: leonardo-db-creds
                   key: password
-            - name: LEONARDO_SA_PATH
+            - name: LEONARDO_PATH_TO_CREDENTIAL
               value: /secrets/service-account.json
             volumeMounts:
             - name: leonardo-sa-json-file
