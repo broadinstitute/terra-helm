@@ -26,4 +26,15 @@ spec:
     - local-notsuitable
     - broadinstitute:DSDE Engineering
 {{- end }}
+  - description: Service account permissions used by CI/CD tools to deploy applications in {{ $projectName }}
+    name: deploy
+    policies:
+    - p, proj:{{ $projectName }}:deploy, applications, sync, {{ $projectName }}/*, allow
+    - p, proj:{{ $projectName }}:deploy, applications, action/apps/Deployment/restart, {{ $projectName }}/*, allow
+    groups:
+{{- if .requireSuitable }}
+    - fcprod-jenkins
+{{- else }}
+    - fc-jenkins
+{{- end }}
 {{- end -}}
