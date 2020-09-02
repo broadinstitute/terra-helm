@@ -16,9 +16,11 @@ spec:
           containers:
           - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.imageTag }}"
             name: "{{ .Values.cronjob.name }}"
+            command: ["/bin/sh", "-c"]
             args:
-            - --dryRun
-            - --all
+              - |
+                trap "touch /tmp/pod/main-terminated" EXIT
+                /opt/docker/bin/resource-validator --dryRun --all
             env:
             - name: LEONARDO_DB_USER
               valueFrom:
@@ -36,8 +38,12 @@ spec:
             - name: leonardo-sa-json-file
               mountPath: /secrets
               readOnly: true
+            - mountPath: /tmp/pod
+              name: tmp-pod
           - name: cloudsql-proxy
             image: gcr.io/cloudsql-docker/gce-proxy:1.16
+            lifecycle:
+              type: Sidecar 
             env:
             - name: SQL_INSTANCE_PROJECT
               valueFrom:
@@ -54,14 +60,24 @@ spec:
                 secretKeyRef:
                   name: leonardo-db-creds
                   key: instance_name
-            command: ["/cloud_sql_proxy",
-                      "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:0.0.0.0:3306",
-                      "-credential_file=/secrets/service-account.json"]
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              /cloud_sql_proxy --dir=/cloudsql -instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:0.0.0.0:3306 -credential_file=/secrets/service-account.json &
+              CHILD_PID=$!
+              (while true; do if [[ -f "/tmp/pod/main-terminated" ]]; then kill $CHILD_PID; echo "Killed $CHILD_PID as the main container terminated."; fi; sleep 1; done) &
+              wait $CHILD_PID
+              if [[ -f "/tmp/pod/main-terminated" ]]; then exit 0; echo "Job completed. Exiting..."; fi
             volumeMounts:
             - name: leonardo-sa-json-file
               mountPath: /secrets
+              readOnly: true
+            - mountPath: /tmp/pod
+              name: tmp-pod
               readOnly: true
           volumes:
           - name: leonardo-sa-json-file
             secret:
               secretName: leonardo-sa-json
+          - name: tmp-pod
+            emptyDir: {}
