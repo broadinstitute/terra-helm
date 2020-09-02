@@ -16,12 +16,14 @@ spec:
           containers:
           - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.imageTag }}"
             name: "{{ .Values.cronjob.name }}"
-            command: ["/bin/sh", "-c"]
+            command: ["/bin/bash", "-c"]
             args:
               - |
                 trap "touch /tmp/pod/main-terminated" EXIT
                 /opt/docker/bin/resource-validator --dryRun --all
             env:
+            - name: JAVA_OPTS
+              value: -Dlogback.configurationFile=/opt/docker/logback.xml
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -40,10 +42,10 @@ spec:
               readOnly: true
             - mountPath: /tmp/pod
               name: tmp-pod
+            - mountPath: /opt/docker/logback.xml
+              name: logback-config
           - name: cloudsql-proxy
-            image: gcr.io/cloudsql-docker/gce-proxy:1.16
-            lifecycle:
-              type: Sidecar 
+            image: gcr.io/cloudsql-docker/gce-proxy:1.15
             env:
             - name: SQL_INSTANCE_PROJECT
               valueFrom:
@@ -81,3 +83,6 @@ spec:
               secretName: leonardo-sa-json
           - name: tmp-pod
             emptyDir: {}
+          - name: logback-config
+            configMap:
+              name: logback.xml
