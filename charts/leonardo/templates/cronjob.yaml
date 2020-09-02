@@ -11,14 +11,20 @@ spec:
     spec:
       template:
         spec:
+          shareProcessNamespace: true
           restartPolicy: Never
-          serviceAccountName: leonardo-ksa
+          serviceAccountName: leonardo-cronjob-ksa
           containers:
           - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.imageTag }}"
             name: "{{ .Values.cronjob.name }}"
+            command: ["/bin/bash", "-c"]
             args:
-            - --dryRun
-            - --all
+              - |
+                /opt/docker/bin/resource-validator --dryRun --all && sql_proxy_pid=$(pgrep cloud_sql_proxy) && kill -INT $sql_proxy_pid
+            securityContext:
+              capabilities:
+                add:
+                - SYS_PTRACE
             env:
             - name: LEONARDO_DB_USER
               valueFrom:
