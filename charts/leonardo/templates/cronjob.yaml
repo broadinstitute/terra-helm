@@ -36,6 +36,31 @@ spec:
             - name: leonardo-sa-json-file
               mountPath: /secrets
               readOnly: true
+          - name: cloudsql-proxy
+            image: gcr.io/cloudsql-docker/gce-proxy:1.16
+            env:
+            - name: SQL_INSTANCE_PROJECT
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: instance_project
+            - name: SQL_INSTANCE_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: instance_region
+            - name: SQL_INSTANCE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: instance_name
+            command: ["/cloud_sql_proxy",
+                      "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:0.0.0.0:3306",
+                      "-credential_file=/secrets/service-account.json"]
+            volumeMounts:
+            - name: leonardo-sa-json-file
+              mountPath: /secrets
+              readOnly: true
           volumes:
           - name: leonardo-sa-json-file
             secret:
