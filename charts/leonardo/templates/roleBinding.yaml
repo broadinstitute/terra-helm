@@ -1,12 +1,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: leonardo-ksa-binding
+  name: leonardo-sa-binding
   labels:
 {{ include "leonardo.labels" . | indent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: leonardo-ksa
+  name: leonardo-sa
 roleRef:
   kind: Role
   name: leonardo-role

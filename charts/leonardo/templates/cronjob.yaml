@@ -12,7 +12,7 @@ spec:
       template:
         spec:
           restartPolicy: Never
-          serviceAccountName: leonardo-ksa
+          serviceAccountName: leonardo-sa
           containers:
           - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.imageTag }}"
             name: "{{ .Values.cronjob.name }}"
