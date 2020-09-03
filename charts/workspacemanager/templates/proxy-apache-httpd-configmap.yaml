@@ -74,8 +74,8 @@ data:
           ${AUTH_TYPE2}
           ${AUTH_REQUIRE2}
 
-          ProxyPass http://localhost:8080/api
-          ProxyPassReverse http://localhost:8080/api
+          ProxyPass http://localhost:8081/api
+          ProxyPassReverse http://localhost:8081/api
 
           AddOutputFilterByType DEFLATE application/json text/plain text/html application/javascript application/x-javascript
         </Location>
