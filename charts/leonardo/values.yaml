@@ -51,7 +51,7 @@ cronjob:
   serviceName: resourceValidator
   enabled: true
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  imageTag: latest
+  imageTag: 0.0.1-rc2
 
 vault:
   # vault.enabled -- When enabled, syncs required secrets from Vault

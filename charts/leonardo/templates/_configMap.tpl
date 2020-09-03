@@ -2,7 +2,7 @@
 {{- define "leonardo.configmap.data" -}}
 data:
   logback.xml: |
-{{ include "resourceValidator.config.logback" . | indent 4 }}
+{{ include "leonardo.config.logback" . | indent 4 }}
 {{- end -}}
 
 {{- /* Generate a configmap for a Cromwell deployment */ -}}
@@ -18,12 +18,10 @@ data:
   changes.
 */ -}}
 {{- $data := include "leonardo.configmap.data" . -}}
-{{- $checksum := $data | sha256sum -}}
-{{- $_ := set ._deploymentOutputs "configmapChecksum" $checksum -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ $settings.name }}-cm
+  name: resource-validator-cm
   labels: {}
 {{ $data }}
 {{ end -}}

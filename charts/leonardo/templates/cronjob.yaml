@@ -23,7 +23,7 @@ spec:
                 /opt/docker/bin/resource-validator --dryRun --all
             env:
             - name: JAVA_OPTS
-              value: -Dlogback.configurationFile=/opt/docker/logback.xml
+              value: -Dlogback.configurationFile=file:/opt/docker/resource-validator-config/logback.xml
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -42,7 +42,7 @@ spec:
               readOnly: true
             - mountPath: /tmp/pod
               name: tmp-pod
-            - mountPath: /opt/docker/logback.xml
+            - mountPath: /opt/docker/resource-validator-config
               name: logback-config
           - name: cloudsql-proxy
             image: gcr.io/cloudsql-docker/gce-proxy:1.15
@@ -85,4 +85,7 @@ spec:
             emptyDir: {}
           - name: logback-config
             configMap:
-              name: logback.xml
+              name: resource-validator-cm
+---
+{{- $templateScope := $ | deepCopy -}}
+{{ template "leonardo.configmap" $templateScope }}
