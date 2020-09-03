@@ -36,6 +36,8 @@ spec:
                   key: password
             - name: LEONARDO_PATH_TO_CREDENTIAL
               value: /secrets/service-account.json
+            - name: REPORT_DESTINATION_BUCKET
+              value: "{{ .Values.cronjob.report-destination-bucket }}"
             volumeMounts:
             - name: leonardo-sa-json-file
               mountPath: /secrets
