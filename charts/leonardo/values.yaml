@@ -39,3 +39,14 @@ deployments:
     expose: true
     # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
     serviceName: leonardo
+
+cronjob:
+  # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
+  name: leonardo-resource-validator-cronjob
+  imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
+  imageTag: 0.0.1-rc3
+  reportDestinationBucket:
+
+vault:
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix:
