@@ -4,7 +4,7 @@ metadata:
   name: "resource-validator-cron"
   labels: {}
 spec:
-  schedule: "*/30 * * * *"
+  schedule: "30 4 * * *"
   startingDeadlineSeconds: 100
   successfulJobsHistoryLimit: 0
   jobTemplate:
