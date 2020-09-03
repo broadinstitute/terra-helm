@@ -58,8 +58,8 @@ data:
           ${AUTH_TYPE}
           ${AUTH_REQUIRE}
 
-          ProxyPass http://localhost:8080/
-          ProxyPassReverse http://localhost:8080/
+          ProxyPass http://localhost:8081/
+          ProxyPassReverse http://localhost:8081/
         </Location>
 
         <Location ${PROXY_PATH2}>
