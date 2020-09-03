@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: "resource-validator-cron"
+  name: "{{ .Values.cronjob.name }}"
   labels: {}
 spec:
   schedule: "30 4 * * *"
@@ -17,6 +17,8 @@ spec:
           - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.imageTag }}"
             name: "{{ .Values.cronjob.name }}"
             command: ["/bin/bash", "-c"]
+            # This is workaround for terminating sidecar container when the main container terminates
+            # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
             args:
               - |
                 trap "touch /tmp/pod/main-terminated" EXIT
@@ -37,7 +39,7 @@ spec:
             - name: LEONARDO_PATH_TO_CREDENTIAL
               value: /secrets/service-account.json
             - name: REPORT_DESTINATION_BUCKET
-              value: "{{ .Values.cronjob.report-destination-bucket }}"
+              value: "{{ .Values.cronjob.reportDestinationBucket }}"
             volumeMounts:
             - name: leonardo-sa-json-file
               mountPath: /secrets
@@ -46,7 +48,7 @@ spec:
               name: tmp-pod
             - mountPath: /opt/docker/resource-validator-config
               name: logback-config
-          - name: cloudsql-proxy
+          - name: leonardo-cloudsql-proxy
             image: gcr.io/cloudsql-docker/gce-proxy:1.15
             env:
             - name: SQL_INSTANCE_PROJECT
@@ -65,6 +67,8 @@ spec:
                   name: leonardo-db-creds
                   key: instance_name
             command: ["/bin/sh", "-c"]
+            # This is workaround for terminating sidecar container when the main container terminates
+            # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
             args:
             - |
               /cloud_sql_proxy --dir=/cloudsql -instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:0.0.0.0:3306 -credential_file=/secrets/service-account.json &
@@ -83,6 +87,8 @@ spec:
           - name: leonardo-sa-json-file
             secret:
               secretName: leonardo-sa-json
+          # This is workaround for terminating sidecar container when the main container terminates
+          # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
           - name: tmp-pod
             emptyDir: {}
           - name: logback-config
