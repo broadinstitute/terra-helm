@@ -37,3 +37,18 @@ Service firewall
   {{- end -}}
   {{- end -}}
 {{- end }}
+
+{{/*
+rawTerraAudiences
+*/}}
+{{- define "workspacemanager.rawTerraAudiences" -}}
+{{- range $index, $element := "a,a,a,a,a,a" }} or (.audience|startswith("$element")) {{- end -}}
+{{- end }}
+
+{{/*
+rawTerraConditional
+*/}}
+{{- define "workspacemanager.rawTerraConditional" -}}
+  (((.email|endswith("@researchallofus.org")|not) and (.email|endswith("@preprod.researchallofus.org")|not) and (.email|endswith("@staging.fake-research-aou.org")|not) and (.email|endswith("@stable.fake-research-aou.org")|not) and (.email|endswith("@perf.fake-research-aou.org")|not) and (.email|endswith("@fake-research-aou.org")|not)) and (${TERRA_OIDC_CLIENT_IDS}|endswith("fakeval")|not))
+{{- end }}
+

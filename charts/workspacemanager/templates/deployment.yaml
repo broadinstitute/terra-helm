@@ -125,6 +125,12 @@ spec:
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+        env:
+        - name: TERRA_OIDC_CLIENT_IDS
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-client-ids
+              key: terra
         ports:
         - containerPort: 443
         - containerPort: 80
