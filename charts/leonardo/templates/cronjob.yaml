@@ -98,5 +98,5 @@ spec:
               name: resource-validator-cm
 ---
 # Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
-{{- $templateScope := $ | deepCopy -}}
+{{- $templateScope := $ | deepCopy }}
 {{ template "leonardo.configmap" $templateScope }}
