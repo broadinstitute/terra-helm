@@ -27,10 +27,8 @@ spec:
             {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
-        {{- if not .Values.proxy.enabled }}
         ports:
         - containerPort: 8080
-        {{- end}}
         env:
         {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
