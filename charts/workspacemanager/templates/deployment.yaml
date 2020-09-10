@@ -126,11 +126,37 @@ spec:
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
         env:
-        - name: TERRA_OIDC_CLIENT_IDS
+        {{- if .Values.proxy.ldap.enabled }}
+        - name: LDAP_BASE_DOMAIN
+          value: {{ template "workspacemanager.ldapbasedomain" . }}
+        - name: AUTH_LDAP_URL2
+          value: 'AuthLDAPURL "ldaps://opendj.dsde-{{ .Values.global.terraEnv }}.broadinstitute.org/ou=people,{{ template "workspacemanager.ldapbasedomain" . }}?googleSubjectId?sub?(objectClass=*)"'
+        - name: AUTH_LDAP_GROUP_ATTR2
+          value: 'AuthLDAPGroupAttribute member'
+        - name: AUTH_LDAP_BIND_DN2
+          value: 'AuthLDAPBindDN "cn=proxy-ro,ou=people,{{ template "workspacemanager.ldapbasedomain" . }}"'
+        - name: AUTH_REQUIRE2
+          value: 'Require ldap-group cn=enabled-users,ou=groups,{{ template "workspacemanager.ldapbasedomain" . }}'
+        - name: PROXY_LDAP_BIND_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-client-ids
-              key: terra
+              name: proxy-ldap-bind-password
+              key: password
+        {{- end }}
+        {{- if .Values.proxy.tcell.enabled }}
+        - name: TCELL_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: proxy-tcell-secrets
+              key: app-id
+        - name: TCELL_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: proxy-tcell-secrets
+              key: api-key
+        - name: ENABLE_TCELL
+          value: 'yes'
+        {{- end }}
         ports:
         - containerPort: 443
         - containerPort: 80
@@ -152,6 +178,11 @@ spec:
           name: cert
           readOnly: true
         {{- end }}
+        {{- if .Values.proxy.tcell.enabled }}
+        - mountPath: /etc/apache2/tcell_agent.config
+          name: tcell-config
+          subPath: tcell-config.conf
+        {{- end }}
       {{- end }}
       volumes:
         {{- if not .Values.postgres.enabled }}
@@ -172,6 +203,15 @@ spec:
         - name: cert
           secret:
             secretName: {{ .Chart.Name }}-cert
+        {{- if .Values.proxy.tcell.enabled }}
+        - name: tcell-config
+        configMap:
+          name: {{ .Chart.Name }}-tcell-configmap
+          items:
+          - key: tcell-config
+            path: tcell-config.conf
+        {{- end }}
+        {{- end }}
         {{- end }}
 ---
 {{- if .Values.postgres.enabled }}

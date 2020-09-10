@@ -93,6 +93,16 @@ proxy:
     repository: broadinstitute/openidc-proxy
     # proxy.image.version -- Proxy image tag
     version: bernick_tcell
+  tcell:
+    # proxy.tcell.enabled -- Enables TCell
+    enabled: true
+    # proxy.tcell.vaultPrefix -- Prefix for TCell secrets in vault. Required if proxy.tcell.enabled is true.
+    vaultPrefix:
+  ldap:
+    # proxy.ldap.enabled -- Enables LDAP authorization checks in the proxy
+    enabled: true
+    # proxy.ldap.passwordVaultPath -- Vault path for LDAP binding password. Required if proxy.ldap.enabled is true
+    passwordVaultPath:
 
 # initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
 initDB: false

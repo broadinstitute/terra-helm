@@ -94,18 +94,9 @@ data:
           ${AUTH_LDAP_URL2}
           ${AUTH_LDAP_GROUP_ATTR2}
           ${AUTH_LDAP_BIND_DN2}
-          ${AUTH_LDAP_BIND_PASSWORD2}
-
+          AuthLDAPBindPassword ${PROXY_LDAP_BIND_PASSWORD}
+          ${AUTH_REQUIRE2}
           AuthLDAPMaxSubGroupDepth 0
-
-          <RequireAll>
-            <RequireAll>
-              ${AUTH_REQUIRE2}
-            </RequireAll>
-            <RequireAny>
-             Require claims_expr '((.email|endswith("@test.firecloud.org")) and (.email|endswith("${TERRA_OIDC_CLIENT_IDS}")|not))'
-            </RequireAny>
-          </RequireAll>
 
           ProxyPass http://localhost:8080/api
           ProxyPassReverse http://localhost:8080/api
