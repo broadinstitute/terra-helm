@@ -112,4 +112,4 @@ data:
           AddOutputFilterByType DEFLATE application/json text/plain text/html application/javascript application/x-javascript
         </Location>
     </VirtualHost>
-  {{- end }}
+{{- end }}
