@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: ontology-jvm-monitor
+  labels: 
+{{ include "ontology.labels" . | indent 4 }}
+spec:
+  jobLabel: ontology-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: ontology
+  podMetricsEndpoints:
+    - port: metrics
+    
