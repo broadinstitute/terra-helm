@@ -46,11 +46,13 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}-secrets
                   key: dsn
+            -name: PROMETHEUS_ARGS
+              value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/ontology-cm/prometheusJmx.yaml"
           command: ["java"]
           args: 
           - -Dsentry.stacktrace.app.packages=org.broadinstitute
           - -Dsentry.dsn=$(SENTRY_DSN)
-          # - -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/ontology-cm/prometheusJmx.yaml
+          - $(PROMETHEUS_ARGS)
           - -jar 
           - /opt/consent-ontology.jar 
           - server 
