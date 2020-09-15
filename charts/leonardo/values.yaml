@@ -14,7 +14,7 @@ deploymentDefaults:
   imageRepository: gcr.io/broad-dsp-gcr-public/leonardo
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
   # @default global.applicationVersion
-  imageTag: null
+  imageTag: f7b1a9b
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
   # deploymentDefaults.expose -- Whether to create a Service + Ingress for this deployment
@@ -44,7 +44,7 @@ cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  imageTag: 0.0.1-rc3
+  imageTag: f7b1a9b
   reportDestinationBucket:
 
 vault:
