@@ -126,6 +126,43 @@ spec:
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
         env:
+        - name: AOU_PREPROD_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-preprod
+        - name: AOU_PERF_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-perf
+        - name: AOU_PROD_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-prod
+        - name: AOU_DEV_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-dev
+        - name: AOU_STABLE_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-stable
+        - name: AOU_STAGING_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-staging
+        - name: TERRA_ID_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: terra
+        - name: REMOTE_USER_CLAIM
+          value: sub
         {{- if .Values.proxy.ldap.enabled }}
         - name: LDAP_BASE_DOMAIN
           value: {{ template "workspacemanager.ldapbasedomain" . }}
