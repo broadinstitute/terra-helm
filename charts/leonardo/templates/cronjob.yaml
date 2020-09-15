@@ -14,7 +14,7 @@ spec:
           restartPolicy: Never
           serviceAccountName: leonardo-sa
           containers:
-          - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.imageTag }}"
+          - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.resourceValidatorImageTag }}"
             name: "{{ .Values.cronjob.name }}"
             command: ["/bin/bash", "-c"]
             # This is workaround for terminating sidecar container when the main container terminates
