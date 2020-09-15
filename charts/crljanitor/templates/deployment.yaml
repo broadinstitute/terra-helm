@@ -29,27 +29,27 @@ spec:
         - containerPort: 8080
         {{- end}}
         env:
-        - name: DATABASE_USER
+        - name: JANITOR_DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: crl-janitor-postgres-db-creds
               key: username
-        - name: DATABASE_USER_PASSWORD
+        - name: JANITOR_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: crl-janitor-postgres-db-creds
               key: password
-        - name: DATABASE_NAME
+        - name: JANITOR_DATABASE_NAME
           valueFrom:
             secretKeyRef:
               name: crl-janitor-postgres-db-creds
               key: db
-        - name: STAIRWAY_DATABASE_USER
+        - name: JANITOR_STAIRWAY_DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: crl-janitor-stairway-db-creds
               key: username
-        - name: STAIRWAY_DATABASE_USER_PASSWORD
+        - name: JANITOR_STAIRWAY_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: crl-janitor-stairway-db-creds
@@ -57,25 +57,25 @@ spec:
         - name: STAIRWAY_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-stairway-db-creds
+              nam1e: crl-janitor-stairway-db-creds
               key: db
-        - name: TRACK_RESOURCE_PUBSUB_ENABLED
+        - name: JANITOR_PUBSUB_TRACK_RESOURCE_ENABLED
           value: "{{ .Values.trackResourcePubsubEnabled }}"
-        - name: TRACK_RESOURCE_PUBSUB_PROJECT_ID
+        - name: JANITOR_PUBSUB_TRACK_RESOURCE_PROJECT_ID
           valueFrom:
             secretKeyRef:
               name: crl-janitor-track-resource-pubsub
               key: project
-        - name: TRACK_RESOURCE_PUBSUB_SUBSCRIPTION
+        - name: JANITOR_PUBSUB_TRACK_RESOURCE_SUBSCRIPTION
           valueFrom:
             secretKeyRef:
               name: crl-janitor-track-resource-pubsub
               key: subscription
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
-        - name: CONFIG_BASED_AUTHZ_ENABLED
+        - name: JANITOR_IAM_CONFIG_BASED_AUTHZ_ENABLED
           value: "{{ .Values.configBasedAuthzEnabled }}"
-        - name: ADMIN_USER_LIST
+        - name: JANITOR_IAM_ADMIN_USER_LIST
           valueFrom:
             secretKeyRef:
               name: crl-janitor-admin-user-list
