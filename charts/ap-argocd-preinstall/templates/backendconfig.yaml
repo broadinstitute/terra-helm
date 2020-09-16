@@ -1,15 +1,12 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
 metadata:
-  name: argocd-pod-runner
+  name: argocd-backendconfig
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/part-of: {{ .Chart.Name }}
-rules:
-- apiGroups: ['policy']
-  resources: ['podsecuritypolicies']
-  verbs: ['use']
-  resourceNames:
-  - argocd-psp
+spec:
+  securityPolicy:
+    name: "argocd-policy" # Configure ArgoCD ingress to use CloudArmor policy
