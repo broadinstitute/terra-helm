@@ -9,4 +9,4 @@ metadata:
     app.kubernetes.io/part-of: {{ .Chart.Name }}
 spec:
   securityPolicy:
-    name: "argocd-policy" # Configure ArgoCD ingress to use CloudArmor policy
+    name: "argocd-cloud-armor" # Configure ArgoCD ingress to use CloudArmor policy
