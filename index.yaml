@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   ap-argocd-preinstall:
   - apiVersion: v2
+    created: "2020-09-16T22:00:18.903919826Z"
+    description: Helm Chart with extra resources for the ap-devops argocd instance
+    digest: 15706a8a6c02a8fec5dee95940a9d0b1dae5815fcf9babfd87a2fa43b75ce096
+    maintainers:
+    - email: chelsea@broadinstitute.org
+      name: Chelsea Hoover
+    name: ap-argocd-preinstall
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/ap-argocd-preinstall
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ap-argocd-preinstall-0.1.0-122.1600293615.2446e4/ap-argocd-preinstall-0.1.0-122.1600293615.2446e4.tgz
+    version: 0.1.0-122.1600293615.2446e4
+  - apiVersion: v2
     created: "2020-07-09T11:56:38.682871413Z"
     description: Helm Chart with extra resources for the ap-devops argocd instance
     digest: f54d2e3ae100cba73a62a891da008d5d7f66962e8ecc0d5b50b977fdfb68c750
