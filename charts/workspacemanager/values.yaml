@@ -98,11 +98,17 @@ proxy:
     enabled: true
     # proxy.tcell.vaultPrefix -- Prefix for TCell secrets in vault. Required if proxy.tcell.enabled is true.
     vaultPrefix:
+    # proxy.tcell.hostIdentifier -- Identifier used for logging to TCell. Required if proxy.tcell.enabled is true
+    hostIdentifier:
   ldap:
     # proxy.ldap.enabled -- Enables LDAP authorization checks in the proxy
     enabled: true
     # proxy.ldap.passwordVaultPath -- Vault path for LDAP binding password. Required if proxy.ldap.enabled is true
     passwordVaultPath:
+    # proxy.ldap.url -- URL of LDAP server to use for auth. Required if proxy.ldap.enabled is true
+    url:
+    # proxy.ldap.baseDomain -- Base domain for LDAP. Required if proxy.ldap.enabled is true
+    baseDomain:
 
 # initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
 initDB: false

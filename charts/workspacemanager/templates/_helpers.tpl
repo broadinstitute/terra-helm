@@ -39,13 +39,6 @@ Service firewall
 {{- end }}
 
 {{/*
-LDAP base domain template
-*/}}
-{{- define "workspacemanager.ldapbasedomain" -}}
-  dc=dsde-{{ .Values.global.terraEnv }},dc=broadinstitute,dc=org
-{{- end }}
-
-{{/*
 AoU Preprod Conditional
 */}}
 {{- define "workspacemanager.aoupreprodconditional" -}}
