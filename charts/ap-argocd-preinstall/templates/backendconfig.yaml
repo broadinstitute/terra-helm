@@ -6,7 +6,7 @@ metadata:
     helm.sh/chart: {{ .Chart.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/part-of: {{ .Chart.Name }}
-  name: {{ .Release.Namespace }}-backendconfig
+  name: argocd-backendconfig
 spec:
   securityPolicy:
     name: "argocd-policy" # Configure ArgoCD ingress to use CloudArmor policy
