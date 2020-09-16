@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1alpha3
 kind: Certificate
 metadata:
+  name: argocd-cert
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/part-of: {{ .Chart.Name }}
-  name: argocd-cert
 spec:
   dnsNames:
   - ap-argocd.dsp-devops.broadinstitute.org
