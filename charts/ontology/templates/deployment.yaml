@@ -6,6 +6,7 @@ metadata:
 {{ include "ontology.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
@@ -53,10 +54,10 @@ spec:
           - -Dsentry.stacktrace.app.packages=org.broadinstitute
           - -Dsentry.dsn=$(SENTRY_DSN)
           - $(PROMETHEUS_ARGS)
-          - -jar 
-          - /opt/consent-ontology.jar 
-          - server 
-          - /etc/ontology-cm/ontology.yaml 
+          - -jar
+          - /opt/consent-ontology.jar
+          - server
+          - /etc/ontology-cm/ontology.yaml
           volumeMounts:
             - name: configs
               mountPath: /etc/ontology-cm
