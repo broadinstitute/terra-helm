@@ -29,6 +29,15 @@ spec:
         - containerPort: 8080
         {{- end}}
         env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secrets/app/service-account.json
+        # Note: Rather than mapping directly to an application property path, this env var is interpolated
+        # by application.yaml into the actual target property `janitor.db.uri`.
+        - name: JANITOR_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-postgres-db-creds
+              key: db
         - name: JANITOR_DB_USERNAME
           valueFrom:
             secretKeyRef:
@@ -39,26 +48,13 @@ spec:
             secretKeyRef:
               name: crl-janitor-postgres-db-creds
               key: password
-        - name: JANITOR_DATABASE_NAME
+        - name: JANITOR_IAM_CONFIG_BASED_AUTHZ_ENABLED
+          value: "{{ .Values.configBasedAuthzEnabled }}"
+        - name: JANITOR_IAM_ADMIN_USER_LIST
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-postgres-db-creds
-              key: db
-        - name: JANITOR_STAIRWAY_DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: crl-janitor-stairway-db-creds
-              key: username
-        - name: JANITOR_STAIRWAY_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: crl-janitor-stairway-db-creds
-              key: password
-        - name: STAIRWAY_DATABASE_NAME
-          valueFrom:
-            secretKeyRef:
-              name: crl-janitor-stairway-db-creds
-              key: db
+              name: crl-janitor-admin-user-list
+              key: admin-users
         - name: JANITOR_PUBSUB_TRACK_RESOURCE_ENABLED
           value: "{{ .Values.trackResourcePubsubEnabled }}"
         - name: JANITOR_PUBSUB_TRACK_RESOURCE_PROJECT_ID
@@ -71,15 +67,23 @@ spec:
             secretKeyRef:
               name: crl-janitor-track-resource-pubsub
               key: subscription
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /secrets/app/service-account.json
-        - name: JANITOR_IAM_CONFIG_BASED_AUTHZ_ENABLED
-          value: "{{ .Values.configBasedAuthzEnabled }}"
-        - name: JANITOR_IAM_ADMIN_USER_LIST
+        - name: JANITOR_STAIRWAY_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-admin-user-list
-              key: admin-users
+              name: crl-janitor-stairway-db-creds
+              key: password
+        - name: JANITOR_STAIRWAY_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-stairway-db-creds
+              key: username
+          # Note: Rather than mapping directly to an application property path, this env var is interpolated
+          # by application.yaml into the actual target property `janitor.stairway.db.uri`.
+        - name: STAIRWAY_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-stairway-db-creds
+              key: db
         # Environment variables for OpenCensus resource auto detection.
         - name: CONTAINER_NAME
           valueFrom:
