@@ -44,7 +44,7 @@ cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  resourceValidatorImageTag: 7dc8db2
+  resourceValidatorImageTag: 987f41f
   reportDestinationBucket:
 
 vault:
