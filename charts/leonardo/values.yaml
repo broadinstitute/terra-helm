@@ -40,11 +40,22 @@ deployments:
     # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
     serviceName: leonardo
 
+# TODO: make a common section for reportDestinationBucket
+
 cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
   resourceValidatorImageTag: 8f3e89e
+  # this is defined in terra-helm repo
+  reportDestinationBucket:
+
+zombieMonitorCron:
+  # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
+  name: leonardo-zombie-monitor-cronjob
+  imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
+  zombieMonitorImageTag: latest
+  # this is defined in terra-helm repo
   reportDestinationBucket:
 
 vault:
