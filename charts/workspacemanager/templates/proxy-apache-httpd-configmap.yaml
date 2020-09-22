@@ -22,9 +22,19 @@ data:
 
     Header unset X-Frame-Options
     Header always set X-Frame-Options SAMEORIGIN
+    Header unset X-XSS-Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    Header unset X-Content-Type-Options
+    Header always set X-Content-Type-Options: nosniff
+    Header unset Strict-Transport-Security
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
     ProxyTimeout ${PROXY_TIMEOUT}
     OIDCOAuthTokenIntrospectionInterval 60
+    LDAPCacheTTL ${LDAP_CACHE_TTL}
+    LDAPRetries 5
+    LDAPRetryDelay 1
+    LDAPConnectionPoolTTL 30
 
     <VirtualHost _default_:${HTTPD_PORT}>
       ErrorLog /dev/stdout
@@ -63,6 +73,15 @@ data:
         </Location>
 
         <Location ${PROXY_PATH2}>
+          Header unset Access-Control-Allow-Origin
+          Header always set Access-Control-Allow-Origin "*"
+          Header unset Access-Control-Allow-Headers
+          Header always set Access-Control-Allow-Headers "authorization,content-type,accept,origin,x-app-id"
+          Header unset Access-Control-Allow-Methods
+          Header always set Access-Control-Allow-Methods "GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD"
+          Header unset Access-Control-Max-Age
+          Header always set Access-Control-Max-Age 1728000
+
           RewriteEngine On
           RewriteCond %{REQUEST_METHOD} OPTIONS
           RewriteRule ^(.*)$ $1 [R=204,L]
@@ -72,7 +91,20 @@ data:
           </Limit>
 
           ${AUTH_TYPE2}
-          ${AUTH_REQUIRE2}
+          ${AUTH_LDAP_URL2}
+          ${AUTH_LDAP_GROUP_ATTR2}
+          ${AUTH_LDAP_BIND_DN2}
+          AuthLDAPBindPassword ${PROXY_LDAP_BIND_PASSWORD}
+          AuthLDAPMaxSubGroupDepth 0
+
+          <RequireAll>
+            <RequireAll>
+              ${AUTH_REQUIRE2}
+            </RequireAll>
+            <RequireAny>
+              Require claims_expr '((.email|endswith(".gserviceaccount.com")) or {{ template "workspacemanager.aoupreprodconditional" . }} or {{ template "workspacemanager.aouperfconditional" . }} or {{ template "workspacemanager.aouprodconditional" . }} or {{ template "workspacemanager.aoudevconditional" . }} or {{ template "workspacemanager.aoustableconditional" . }} or {{ template "workspacemanager.aoustagingconditional" . }} or {{ template "workspacemanager.terraconditional" . }})'
+            </RequireAny>
+          </RequireAll>
 
           ProxyPass http://localhost:8080/api
           ProxyPassReverse http://localhost:8080/api
