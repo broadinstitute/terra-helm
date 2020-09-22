@@ -22,7 +22,7 @@ spec:
             args:
               - |
                 trap "touch /tmp/pod/main-terminated" EXIT
-                /opt/docker/bin/zombie-monitor --dryRun --all
+                /opt/docker/bin/zombie-monitor --all
             env:
             - name: LEONARDO_DB_USER
               valueFrom:
