@@ -167,7 +167,7 @@ spec:
         - name: LDAP_BASE_DOMAIN
           value: {{ .Values.proxy.ldap.baseDomain }}
         - name: AUTH_LDAP_URL2
-          value: 'AuthLDAPURL "ldaps://{{ .Values.proxy.ldap.url }}.broadinstitute.org/ou=people,{{ .Values.proxy.ldap.baseDomain }}?googleSubjectId?sub?(objectClass=*)"'
+          value: 'AuthLDAPURL "ldaps://{{ .Values.proxy.ldap.url }}/ou=people,{{ .Values.proxy.ldap.baseDomain }}?googleSubjectId?sub?(objectClass=*)"'
         - name: AUTH_LDAP_GROUP_ATTR2
           value: 'AuthLDAPGroupAttribute member'
         - name: AUTH_LDAP_BIND_DN2
