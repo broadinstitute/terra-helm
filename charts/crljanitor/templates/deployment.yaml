@@ -31,8 +31,8 @@ spec:
         env:
         - name: DATABASE_USER
           valueFrom:
-            secretKeyRef:
-              name: crl-janitor-postgres-db-creds
+            configMapKeyRef:
+              name: configmap-crl-janitor
               key: username
         - name: DATABASE_USER_PASSWORD
           valueFrom:
