@@ -249,7 +249,6 @@ spec:
             path: tcell-config.conf
         {{- end }}
         {{- end }}
-        {{- end }}
 ---
 {{- if .Values.postgres.enabled }}
 apiVersion: apps/v1
