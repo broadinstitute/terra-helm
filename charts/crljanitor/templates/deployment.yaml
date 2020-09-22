@@ -44,6 +44,16 @@ spec:
             secretKeyRef:
               name: crl-janitor-postgres-db-creds
               key: db
+        - name: RECREATE_DB_ON_START
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-crl-janitor
+              key: db.recreate-db-on-start
+        - name: UPDATE_DB_ON_START
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-crl-janitor
+              key: db.update-db-on-start
         - name: STAIRWAY_DATABASE_USER
           valueFrom:
             secretKeyRef:

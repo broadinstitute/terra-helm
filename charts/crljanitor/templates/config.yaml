@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-crl-janitor
+  labels:
+    {{ template "crljanitor.labels" . }}
+data:
+  config.json: |-
+  {{ .Files.Get "config.json" | indent 4 }}

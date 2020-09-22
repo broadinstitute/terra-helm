@@ -1,0 +1,6 @@
+{
+  "db.recreate-db-on-start": "false",
+  "db.update-db-on-start": "false",
+  "track-resource.enabled": "false",
+  "server.port": "8080"
+}
