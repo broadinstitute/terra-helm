@@ -1,6 +1,3 @@
 {
-  "db.name": "false",
-  "db.update-db-on-start": "false",
-  "track-resource.enabled": "false",
-  "server.port": "8080"
+  "db.username": "crljanitor"
 }
