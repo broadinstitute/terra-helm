@@ -37,7 +37,7 @@ spec:
             - name: LEONARDO_PATH_TO_CREDENTIAL
               value: /secrets/service-account.json
             - name: REPORT_DESTINATION_BUCKET
-              value: "{{ .Values.zombieMonitorCron.reportDestinationBucket }}"
+              value: "{{ .Values.commonCronjob.reportDestinationBucket }}"
             volumeMounts:
             - name: leonardo-sa-json-file
               mountPath: /secrets
