@@ -48,7 +48,7 @@ cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  resourceValidatorImageTag: 6df98f2
+  resourceValidatorImageTag: 1f77844
 
 zombieMonitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
