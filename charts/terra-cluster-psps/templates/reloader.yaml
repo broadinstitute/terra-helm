@@ -1,0 +1,36 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: reloader-psp-clusterrole
+  namespace: default
+  labels:
+    name: clusterrole
+    helm.sh/chart: {{ template "terra-cluster-psps.chart" . }}
+    app.kubernetes.io/name: {{ template "terra-cluster-psps.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+rules:
+- apiGroups: ["extensions"]
+  resources: ["podsecuritypolicies"]
+  resourceNames: ["terra-default-psp"]
+  verbs: ["use"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: reloader-psp-rolebinding
+  namespace: default
+  labels:
+    name: clusterrolebinding
+    helm.sh/chart: {{ template "terra-cluster-psps.chart" . }}
+    app.kubernetes.io/name: {{ template "terra-cluster-psps.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: reloader-psp-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.serviceAccounts.reloader }}
+  namespace: default
