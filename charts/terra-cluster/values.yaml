@@ -126,5 +126,6 @@ terra-prometheus:
             replacement: 'false'
 reloader:
   enabled: true
-  serviceAccount:
-    name: reloader
+  reloader:
+    serviceAccount:
+      name: reloader
