@@ -6,6 +6,7 @@ metadata:
 {{ include "ontology.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: {{ .Chart.Name }}

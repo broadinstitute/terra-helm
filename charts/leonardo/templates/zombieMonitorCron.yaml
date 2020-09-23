@@ -1,10 +1,10 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: "{{ .Values.cronjob.name }}"
+  name: "{{ .Values.zombieMonitorCron.name }}"
   labels: {}
 spec:
-  schedule: "30 4 * * *"
+  schedule: "0 */4 * * *"
   startingDeadlineSeconds: 100
   successfulJobsHistoryLimit: 1
   jobTemplate:
@@ -14,19 +14,16 @@ spec:
           restartPolicy: Never
           serviceAccountName: leonardo-sa
           containers:
-          - image: "{{ .Values.cronjob.imageRepository }}:{{ .Values.cronjob.resourceValidatorImageTag }}"
-            name: "{{ .Values.cronjob.name }}"
+          - image: "{{ .Values.zombieMonitorCron.imageRepository }}:{{ .Values.zombieMonitorCron.zombieMonitorImageTag }}"
+            name: "{{ .Values.zombieMonitorCron.name }}"
             command: ["/bin/bash", "-c"]
             # This is workaround for terminating sidecar container when the main container terminates
             # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
             args:
               - |
                 trap "touch /tmp/pod/main-terminated" EXIT
-                /opt/docker/bin/resource-validator --dryRun --all
+                /opt/docker/bin/zombie-monitor --all
             env:
-            # Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
-            - name: JAVA_OPTS
-              value: -Dlogback.configurationFile=file:/opt/docker/resource-validator-config/logback.xml
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -45,10 +42,8 @@ spec:
             - name: leonardo-sa-json-file
               mountPath: /secrets
               readOnly: true
-            - mountPath: /tmp/pod
-              name: tmp-pod
-            - mountPath: /opt/docker/resource-validator-config
-              name: logback-config
+            - name: tmp-pod
+              mountPath: /tmp/pod
           - name: leonardo-cloudsql-proxy
             image: gcr.io/cloudsql-docker/gce-proxy:1.15
             env:
@@ -92,11 +87,3 @@ spec:
           # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
           - name: tmp-pod
             emptyDir: {}
-          # Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
-          - name: logback-config
-            configMap:
-              name: resource-validator-cm
----
-# Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
-{{- $templateScope := $ | deepCopy }}
-{{ template "leonardo.configmap" $templateScope }}

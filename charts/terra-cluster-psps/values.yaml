@@ -13,3 +13,4 @@ serviceAccounts:
     - istio-security-post-install-account
     - istio-sidecar-injector-service-account
     - promsd
+  reloader: reloader

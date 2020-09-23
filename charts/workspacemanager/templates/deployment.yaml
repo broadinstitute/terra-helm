@@ -125,6 +125,75 @@ spec:
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+        env:
+        - name: AOU_PREPROD_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-preprod
+        - name: AOU_PERF_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-perf
+        - name: AOU_PROD_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-prod
+        - name: AOU_DEV_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-dev
+        - name: AOU_STABLE_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-stable
+        - name: AOU_STAGING_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: aou-staging
+        - name: TERRA_ID_WHITELIST
+          valueFrom:
+            secretKeyRef:
+              name: proxy-oauth-whitelist
+              key: terra
+        - name: REMOTE_USER_CLAIM
+          value: sub
+        {{- if .Values.proxy.ldap.enabled }}
+        - name: LDAP_BASE_DOMAIN
+          value: {{ .Values.proxy.ldap.baseDomain }}
+        - name: AUTH_LDAP_URL2
+          value: 'AuthLDAPURL "ldaps://{{ .Values.proxy.ldap.url }}/ou=people,{{ .Values.proxy.ldap.baseDomain }}?googleSubjectId?sub?(objectClass=*)"'
+        - name: AUTH_LDAP_GROUP_ATTR2
+          value: 'AuthLDAPGroupAttribute member'
+        - name: AUTH_LDAP_BIND_DN2
+          value: 'AuthLDAPBindDN "cn=proxy-ro,ou=people,{{ .Values.proxy.ldap.baseDomain }}"'
+        - name: AUTH_REQUIRE2
+          value: 'Require ldap-group cn=enabled-users,ou=groups,{{ .Values.proxy.ldap.baseDomain }}'
+        - name: PROXY_LDAP_BIND_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: proxy-ldap-bind-password
+              key: password
+        {{- end }}
+        {{- if .Values.proxy.tcell.enabled }}
+        - name: TCELL_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: proxy-tcell-secrets
+              key: app-id
+        - name: TCELL_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: proxy-tcell-secrets
+              key: api-key
+        - name: ENABLE_TCELL
+          value: 'yes'
+        {{- end }}
         ports:
         - containerPort: 443
         - containerPort: 80
@@ -146,6 +215,11 @@ spec:
           name: cert
           readOnly: true
         {{- end }}
+        {{- if .Values.proxy.tcell.enabled }}
+        - mountPath: /etc/apache2/tcell_agent.config
+          name: tcell-config
+          subPath: tcell-config.conf
+        {{- end }}
       {{- end }}
       volumes:
         {{- if not .Values.postgres.enabled }}
@@ -166,6 +240,14 @@ spec:
         - name: cert
           secret:
             secretName: {{ .Chart.Name }}-cert
+        {{- if .Values.proxy.tcell.enabled }}
+        - name: tcell-config
+          configMap:
+            name: {{ .Chart.Name }}-tcell-configmap
+            items:
+            - key: tcell-config
+              path: tcell-config.conf
+        {{- end }}
         {{- end }}
 ---
 {{- if .Values.postgres.enabled }}

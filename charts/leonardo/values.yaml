@@ -40,12 +40,21 @@ deployments:
     # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
     serviceName: leonardo
 
+commonCronjob:
+  # this is defined in terra-helm repo
+  reportDestinationBucket:
+
 cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  resourceValidatorImageTag: 0.0.1-rc3
-  reportDestinationBucket:
+  resourceValidatorImageTag: b994ab5
+
+zombieMonitorCron:
+  # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
+  name: leonardo-zombie-monitor-cronjob
+  imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
+  zombieMonitorImageTag: 1f77844
 
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
