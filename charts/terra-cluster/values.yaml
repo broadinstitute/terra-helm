@@ -124,4 +124,7 @@ terra-prometheus:
           - sourceLabels: [__name__]
             targetLabel: sd_export
             replacement: 'false'
-        
+reloader:
+  enabled: true
+  serviceAccount:
+    name: reloader
