@@ -28,12 +28,21 @@ Chart for Terra Workspace Manager
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-workspace-manager"` | Image repository |
 | imageConfig.tag | string | The chart's appVersion value will be used | Image tag. |
+| initDB | bool | `false` | Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments. |
 | postgres.dbs | list | `["workspace","stairway"]` | (array(string)) List of databases to create.  |
 | postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |
+| proxy.ldap.baseDomain | string | `nil` | Base domain for LDAP. Required if proxy.ldap.enabled is true |
+| proxy.ldap.enabled | bool | `true` | Enables LDAP authorization checks in the proxy |
+| proxy.ldap.passwordVaultPath | string | `nil` | Vault path for LDAP binding password. Required if proxy.ldap.enabled is true |
+| proxy.ldap.url | string | `nil` | URL of LDAP server to use for auth. Required if proxy.ldap.enabled is true |
 | proxy.logLevel | string | `"debug"` | Proxy log level |
+| proxy.reloadOnCertUpdate | bool | `true` | Whether to reload the deployment when the cert is updated. Requires stakater/Reloader service to be running in the cluster. |
+| proxy.tcell.enabled | bool | `true` | Enables TCell |
+| proxy.tcell.hostIdentifier | string | `nil` | Identifier used for logging to TCell. Required if proxy.tcell.enabled is true |
+| proxy.tcell.vaultPrefix | string | `nil` | Prefix for TCell secrets in vault. Required if proxy.tcell.enabled is true. |
 | replicas | int | `1` |  |
 | samAddress | string | `"https://sam.dsde-dev.broadinstitute.org/"` | Address of SAM instance this deploy will talk to |
 | samplingProbability | float | `1` | the frequency with which calls should be traced. |
