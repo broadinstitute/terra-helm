@@ -4,6 +4,10 @@ metadata:
   name: {{ .Chart.Name }}-deployment
   labels:
     {{ template "workspacemanager.labels" . }}
+  {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
+  annotations:
+    reloader.stakater.com/auto: "true"
+  {{- end }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -27,7 +31,7 @@ spec:
         {{- if not .Values.proxy.enabled }}
         ports:
         - containerPort: 8080
-        {{- end}}
+        {{- end }}
         env:
         {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
