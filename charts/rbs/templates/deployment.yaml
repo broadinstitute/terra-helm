@@ -13,7 +13,7 @@ spec:
     metadata:
       name: terra-rbs-service
       labels:
-        app: terra-rbs
+        {{ template "rbs.labels" . }}
     spec:
       serviceAccountName: terra-rbs-service-sa
       containers:
