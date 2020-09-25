@@ -5379,6 +5379,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.0.0-80.1595262188.e7eeab/postgres-0.0.0-80.1595262188.e7eeab.tgz
     version: 0.0.0-80.1595262188.e7eeab
+  rbs:
+  - apiVersion: v2
+    created: "2020-09-25T13:13:53.615949763Z"
+    description: Chart for Resource Buffering Service
+    digest: 396164825851a7984b18adf39b78ed6717dd4a86f3d44606a388661700740f3a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rbs
+    name: rbs
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-rbs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rbs-0.1.11-137.1601039629.ea1afc/rbs-0.1.11-137.1601039629.ea1afc.tgz
+    version: 0.1.11-137.1601039629.ea1afc
   sam:
   - apiVersion: v2
     appVersion: develop
