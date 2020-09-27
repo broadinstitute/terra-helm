@@ -82,4 +82,3 @@ postgres:
   # postgres.dbs -- (array(string)) List of databases to create. 
   dbs:
     - poc
-
