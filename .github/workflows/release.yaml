@@ -3,7 +3,9 @@ name: Release Charts
 on:
   push:
     branches:
-      - master
+      - gm-version-update
+    paths:
+      - 'charts/**'
 
 jobs:
   release:
@@ -21,6 +23,6 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Run chart-releaser
-        uses: broadinstitute/chart-releaser-action@1.1.0
+        uses: databiosphere/github-actions/actions/chart-releaser@gm-chart-releaser
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
