@@ -3,7 +3,7 @@ name: Release Charts
 on:
   push:
     branches:
-      - gm-version-update
+      - master
     paths-ignore:
       - 'charts/**/Chart.yaml'
       - 'README.md'
