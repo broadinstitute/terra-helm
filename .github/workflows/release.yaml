@@ -27,4 +27,4 @@ jobs:
       - name: Run chart-releaser
         uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
         env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
