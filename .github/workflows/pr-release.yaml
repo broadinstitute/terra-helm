@@ -11,6 +11,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: false
+          fetch-depth: '0'
 
       - name: Configure Git
         run: |
