@@ -18,6 +18,6 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Run chart-releaser
-        uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
+        uses: databiosphere/github-actions/actions/chart-releaser@gm-cr-test
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
