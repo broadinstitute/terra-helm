@@ -1,20 +1,16 @@
 apiVersion: v2
 name: poc
-version: 0.2.0
-
+version: 0.3.0
 description: Chart for a POC Terra app
 type: application
-
 keywords:
-- dsp
-- broadinstitute
-- terra
-
+  - dsp
+  - broadinstitute
+  - terra
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/master/charts
-
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
 dependencies:
-- name: postgres
-  condition: postgres.enabled
-  version: 0.1.0
-  repository: https://broadinstitute.github.io/terra-helm/
+  - name: postgres
+    condition: postgres.enabled
+    version: 0.1.0
+    repository: https://broadinstitute.github.io/terra-helm/
