@@ -26,3 +26,4 @@ jobs:
         uses: databiosphere/github-actions/actions/chart-releaser@gm-chart-releaser
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+          GIT_BRANCH: gm-version-update
