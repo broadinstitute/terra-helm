@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - gm-version-update
-    paths:
-      - 'charts/**'
-
+    paths-ignore:
+      - 'charts/**/Chart.yaml'
+      - 'README.md'
+      - '.github/**'
+ 
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -23,7 +25,6 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Run chart-releaser
-        uses: databiosphere/github-actions/actions/chart-releaser@gm-chart-releaser
+        uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          GIT_BRANCH: gm-version-update
+          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
