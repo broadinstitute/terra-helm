@@ -15,3 +15,4 @@ password: postgres
 
 # dbs -- (array(string)) List of additional databases to create. 
 dbs: []
+
