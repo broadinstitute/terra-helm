@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
+
       - name: Get release info
         id: release-info
         run: |
@@ -25,6 +26,7 @@ jobs:
           echo "Chart version: ${CHART_VERSION}"
           echo ::set-output name=chart-name::${CHART_NAME}
           echo ::set-output name=chart-version::${CHART_VERSION}
+
       - name: Get release strategy
         id: release-strategy
         run: |
@@ -36,6 +38,7 @@ jobs:
             echo "Release strategy for chart ${CHART_NAME} is 'dev_only: ${DEV_ONLY}'"
           fi
           echo ::set-output name=dev-only::${DEV_ONLY}
+
       - name: Send dispatch to terra-helmfile
         if: steps.release-strategy.outputs.dev-only != 'null'
         uses: broadinstitute/repository-dispatch@master
@@ -44,3 +47,14 @@ jobs:
           repository: broadinstitute/terra-helmfile
           event-type: update-chart
           client-payload: '{"service": "${{ steps.release-info.outputs.chart-name }}", "version": "${{ steps.release-info.outputs.chart-version }}", "dev_only": ${{ steps.release-strategy.outputs.dev-only }}}'
+
+      - name: Notify Slack on failure
+        if: failure()
+        uses: broadinstitute/action-slack@v2.7.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.CR_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
+          username: "Release Dispatch Action"
+          text: "Dispatch to terra-helmfile on chart release failed!"
