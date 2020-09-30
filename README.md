@@ -14,7 +14,14 @@ For more information on using Helm, refer to the [Helm documentation](https://gi
 
 ## How are new chart versions released?
 
-This repo is configured to use the [chart-releaser GitHub Action](https://github.com/helm/chart-releaser-action). On every commit to master, it checks if there are version updates to any charts. If there are, it automatically creates new releases for them and publishes them to the Helm repo hosted on this repo's GitHub pages.
+This repo is configured to use the [chart-releaser GitHub Action](https://github.com/DataBiosphere/github-actions/tree/master/actions/chart-releaser). On every commit to master, it checks if there are version updates to any charts. If there are, it automatically bumps those charts' versions, creates new releases for them and publishes them to the Helm repo hosted on this repo's GitHub pages.
+
+Additionally, this action also runs on every commit in PRs, so that it's possible to deploy and test charts from those commits.
+
+When a new version of a chart becomes available on the master branch, the [`dispatch-on-release` workflow](https://github.com/broadinstitute/terra-helm/blob/master/.github/workflows/dispatch-on-release.yaml) is triggered, which does one of 3 things, depending on the chart's entry in the [`release-strategy.json` file](https://github.com/broadinstitute/terra-helm/blob/master/release-strategy.json):
+- Nothing if there is no release strategy
+- If the strategy is `{"dev_only": false}`, sends a dispatch to [`terra-helmfile`](https://github.com/broadinstitute/terra-helmfile) to update the [default version file](https://github.com/broadinstitute/terra-helmfile/blob/master/versions.yaml), adding it to the next release train.
+- If the strategy is `{"dev_only": true}`, sends a dispatch to `terra-helmfile` to update the [dev version override](https://github.com/broadinstitute/terra-helmfile/blob/master/environments/live/dev.yaml) of the chart. The team responsible for the chart can then later choose to update the default version file when the chart is ready to go on the release train.
 
 ## Documentation
 
