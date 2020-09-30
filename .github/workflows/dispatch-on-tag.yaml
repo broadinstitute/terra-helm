@@ -25,7 +25,7 @@ jobs:
         id: release-strategy
         run: |
           CHART_NAME="${{ steps.release-info.outputs.chart-name }}"
-          DEV_ONLY=$(jq -r ".${CHART_NAME}.dev_only")
+          DEV_ONLY=$(jq -r ".${CHART_NAME}.dev_only" release-strategy.json)
           echo "Release strategy for chart ${CHART_NAME} is 'dev_only: ${DEV_ONLY}'"
           echo ::set-output name=dev-only::${DEV_ONLY}
       - name: Send dispatch to terra-helmfile
