@@ -43,4 +43,4 @@ jobs:
           token: ${{ secrets.CR_TOKEN }}
           repository: broadinstitute/terra-helmfile
           event-type: update-chart
-          client-payload: '{"chart": "${{ steps.release-info.outputs.chart-name }}", "version": "${{ steps.release-info.outputs.chart-version }}", "dev_only": ${{ steps.release-strategy.outputs.dev-only }}}'
+          client-payload: '{"service": "${{ steps.release-info.outputs.chart-name }}", "version": "${{ steps.release-info.outputs.chart-version }}", "dev_only": ${{ steps.release-strategy.outputs.dev-only }}}'
