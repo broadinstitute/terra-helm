@@ -5118,6 +5118,26 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.3.0/poc-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2020-09-30T17:39:00.311859226Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    description: Chart for a POC Terra app
+    digest: 0f8c3b766e4079ca11864ae2dcdccad4dec2e8d12aad1e7a80c4178301f81b52
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.3.0-141.1601487534.b4f3fb/poc-0.3.0-141.1601487534.b4f3fb.tgz
+    version: 0.3.0-141.1601487534.b4f3fb
+  - apiVersion: v2
     created: "2020-09-30T17:25:00.233477965Z"
     dependencies:
     - condition: postgres.enabled
@@ -5415,6 +5435,22 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
+  - apiVersion: v2
+    created: "2020-09-30T17:39:00.41922707Z"
+    description: Library chart for an ephemeral PostgreSQL database container
+    digest: d39dc9fcf145db98c01d47a7603d15a193a14d13b26eaa7ef08c02b027f9976d
+    keywords:
+    - dsp
+    - broadinstitute
+    - database
+    - postgres
+    name: postgres
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.1.0-141.1601487535.b4f3fb/postgres-0.1.0-141.1601487535.b4f3fb.tgz
+    version: 0.1.0-141.1601487535.b4f3fb
   - apiVersion: v2
     created: "2020-07-23T15:14:49.967784672Z"
     description: Library chart for an ephemeral PostgreSQL database container
