@@ -1,9 +1,13 @@
 name: Process new chart releases
 
-on: release
+on:
+  release:
+    types:
+      - published
 
 jobs:
   dispatch:
+    if: ${{ github.event.release.tag_commitish }} == 'master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
