@@ -92,6 +92,10 @@ spec:
           value: "{{ .Values.samplingProbability }}"
         - name: CLOUD_TRACE_SA_PATH
           value: /secrets/cloudtrace/service-account.json
+        - name: CLOUD_TRACE_ENABLED
+          value: "{{ .Values.cloudTraceEnabled }}"
+        - name: TERRA_DATAREPO_URL
+          value: "{{ .Values.terraDataRepoUrl }}"
         volumeMounts:
           - name: cloud-trace-sa-creds
             mountPath: /secrets/cloudtrace
