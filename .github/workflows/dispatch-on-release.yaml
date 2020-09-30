@@ -1,0 +1,46 @@
+name: Process new chart releases
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  dispatch:
+    if: ${{ github.event.release.tag_commitish }} == 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Get release info
+        id: release-info
+        run: |
+          tag_name='${{ github.event.release.tag_name }}'
+          CHART_NAME="${tag_name%-*.*.*}"
+          CHART_VERSION="${tag_name##*-}"
+          echo "Tag name: ${tag_name}"
+          echo "Chart name: ${CHART_NAME}"
+          echo "Chart version: ${CHART_VERSION}"
+          echo ::set-output name=chart-name::${CHART_NAME}
+          echo ::set-output name=chart-version::${CHART_VERSION}
+      - name: Get release strategy
+        id: release-strategy
+        run: |
+          CHART_NAME="${{ steps.release-info.outputs.chart-name }}"
+          DEV_ONLY=$(jq -r ".${CHART_NAME}.dev_only" release-strategy.json)
+          if [[ "${DEV_ONLY}" == 'null' ]]; then
+            echo "No release strategy found, no dispatch will be sent"
+          else
+            echo "Release strategy for chart ${CHART_NAME} is 'dev_only: ${DEV_ONLY}'"
+          fi
+          echo ::set-output name=dev-only::${DEV_ONLY}
+      - name: Send dispatch to terra-helmfile
+        if: steps.release-strategy.outputs.dev-only != 'null'
+        uses: broadinstitute/repository-dispatch@master
+        with:
+          token: ${{ secrets.CR_TOKEN }}
+          repository: broadinstitute/terra-helmfile
+          event-type: update-chart
+          client-payload: '{"chart": "${{ steps.release-info.outputs.chart-name }}", "version": "${{ steps.release-info.outputs.chart-version }}", "dev_only": ${{ steps.release-strategy.outputs.dev-only }}}'
