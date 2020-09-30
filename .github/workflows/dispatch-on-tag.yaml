@@ -1,4 +1,4 @@
-name: Send dispatch to terra-helmfile on new chart releases
+name: Process new chart releases
 
 on: release
 
@@ -26,7 +26,11 @@ jobs:
         run: |
           CHART_NAME="${{ steps.release-info.outputs.chart-name }}"
           DEV_ONLY=$(jq -r ".${CHART_NAME}.dev_only" release-strategy.json)
-          echo "Release strategy for chart ${CHART_NAME} is 'dev_only: ${DEV_ONLY}'"
+          if [[ "${DEV_ONLY}" == 'null' ]]; then
+            echo "No release strategy found, no dispatch will be sent"
+          else
+            echo "Release strategy for chart ${CHART_NAME} is 'dev_only: ${DEV_ONLY}'"
+          fi
           echo ::set-output name=dev-only::${DEV_ONLY}
       - name: Send dispatch to terra-helmfile
         if: steps.release-strategy.outputs.dev-only != 'null'
