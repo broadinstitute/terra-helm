@@ -28,15 +28,6 @@ vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
 
-# samAddress -- Address of SAM instance this deploy will talk to
-samAddress: https://sam.dsde-dev.broadinstitute.org/
-
-# serviceGoogleProject -- the id of the google project which the instance is associated with
-serviceGoogleProject: broad-dsde-dev
-
-# samplingProbability -- the frequency with which calls should be traced.
-samplingProbability: 1.0
-
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
 
@@ -112,13 +103,32 @@ proxy:
   # proxy.reloadOnCertUpdate -- Whether to reload the deployment when the cert is updated. Requires stakater/Reloader service to be running in the cluster.
   reloadOnCertUpdate: true
 
-# initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
-initDB: false
-
 postgres:
   # postgres.enabled -- Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options.
   enabled: false
-  # postgres.dbs -- (array(string)) List of databases to create. 
+  # postgres.dbs -- (array(string)) List of databases to create.
   dbs:
     - workspace
     - stairway
+
+###############################################################
+# Values that will be exposed to the running app via the env: #
+###############################################################
+
+# cloudTraceEnabled -- Whether to enable gcp cloud trace
+cloudTraceEnabled: true
+
+# initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
+initDB: false
+
+# samAddress -- Address of SAM instance this deploy will talk to
+samAddress: https://sam.dsde-dev.broadinstitute.org/
+
+# serviceGoogleProject -- the id of the google project which the instance is associated with
+serviceGoogleProject: broad-dsde-dev
+
+# samplingProbability -- the frequency with which calls should be traced.
+samplingProbability: 1.0
+
+# terraDataRepoUrl -- corresponding data repo instance for the environment
+terraDataRepoUrl: https://jade.datarepo-dev.broadinstitute.org
