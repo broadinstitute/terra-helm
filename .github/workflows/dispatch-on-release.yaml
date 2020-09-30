@@ -7,7 +7,6 @@ on:
 
 jobs:
   dispatch:
-    if: ${{ github.event.release.tag_commitish }} == 'master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,7 +14,18 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Get branch
+        id: branch
+        run: |
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          echo "Branch is: ${BRANCH}"
+          if [[ "${BRANCH}" != 'master' ]]; then
+            echo "Branch is not master, no dispatch will be sent"
+          fi
+          echo ::set-output name=branch::${BRANCH}
+
       - name: Get release info
+        if: steps.branch.outputs.branch == 'master'
         id: release-info
         run: |
           tag_name='${{ github.event.release.tag_name }}'
@@ -28,6 +38,7 @@ jobs:
           echo ::set-output name=chart-version::${CHART_VERSION}
 
       - name: Get release strategy
+        if: steps.branch.outputs.branch == 'master'
         id: release-strategy
         run: |
           CHART_NAME="${{ steps.release-info.outputs.chart-name }}"
@@ -40,7 +51,7 @@ jobs:
           echo ::set-output name=dev-only::${DEV_ONLY}
 
       - name: Send dispatch to terra-helmfile
-        if: steps.release-strategy.outputs.dev-only != 'null'
+        if: (steps.branch.outputs.branch == 'master') && (steps.release-strategy.outputs.dev-only != 'null')
         uses: broadinstitute/repository-dispatch@master
         with:
           token: ${{ secrets.CR_TOKEN }}
