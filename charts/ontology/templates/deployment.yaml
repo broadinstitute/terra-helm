@@ -76,8 +76,16 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 10
             timeoutSeconds: 1
-            failureThreshold: 10
+            failureThreshold: 6 # mark pod unavaible for traffic after 60s
             successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            timeoutSeconds: 5
+            intialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 30 # Restart container after 5 minutes
         - name: oidc-proxy
           image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:
