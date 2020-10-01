@@ -118,10 +118,19 @@ spec:
           httpGet:
             path: /engine/latest/version
             port: 8000
-          initialDelaySeconds: 0
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
           periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 6
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /engine/latest/version
+            port: 8000
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
           successThreshold: 1
       - name: {{ $settings.name }}-proxy
         image: broadinstitute/openidc-proxy:modsecurity_2_9_2
