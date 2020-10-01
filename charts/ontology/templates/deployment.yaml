@@ -83,7 +83,7 @@ spec:
               path: /status
               port: 8080
             timeoutSeconds: 5
-            intialDelaySeconds: 60
+            initialDelaySeconds: 60
             periodSeconds: 10
             failureThreshold: 30 # Restart container after 5 minutes
         - name: oidc-proxy
