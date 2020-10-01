@@ -20,9 +20,6 @@ jobs:
           TAG='${{ github.event.release.tag_name }}'
           echo "Tag is: ${TAG}"
           if echo $TAG | grep '^[^0-9]*\-[0-9]*\.[0-9]*\.[0-9]*$'; then
-            echo "Not an official release tag (from non-default branch or PR), no dispatch will be sent"
-            echo ::set-output name=master-tag::false
-          else
             echo ::set-output name=master-tag::true
             CHART_NAME="${TAG%-*.*.*}"
             CHART_VERSION="${TAG##*-}"
@@ -30,6 +27,9 @@ jobs:
             echo "Chart version: ${CHART_VERSION}"
             echo ::set-output name=chart-name::${CHART_NAME}
             echo ::set-output name=chart-version::${CHART_VERSION}
+          else
+            echo "Not an official release tag (from non-default branch or PR), no dispatch will be sent"
+            echo ::set-output name=master-tag::false
           fi
 
       - name: Get release strategy
