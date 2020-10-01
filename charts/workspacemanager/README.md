@@ -1,15 +1,14 @@
-workspacemanager
-================
+# workspacemanager
 
 Chart for Terra Workspace Manager
 
-## Chart Requirements
+## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://broadinstitute.github.io/terra-helm/ | postgres | 0.1.0 |
 
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -19,6 +18,7 @@ Chart for Terra Workspace Manager
 | certManager.issuerKind | string | `"ClusterIssuer"` |  |
 | certManager.issuerName | string | `"cert-manager-letsencrypt-prod"` |  |
 | certManager.renewBefore | string | `"360h0m0s"` | When to renew the cert. Defaults to 15 days before expiry. |
+| cloudTraceEnabled | bool | `true` | Whether to enable gcp cloud trace |
 | domain.hostname | string | `"workspace"` | Hostname of this deployment |
 | domain.namespaceEnv | bool | `true` | If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix |
 | domain.suffix | string | `"integ.envs.broadinstitute.org"` | Domain suffix |
@@ -29,7 +29,7 @@ Chart for Terra Workspace Manager
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-workspace-manager"` | Image repository |
 | imageConfig.tag | string | The chart's appVersion value will be used | Image tag. |
 | initDB | bool | `false` | Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments. |
-| postgres.dbs | list | `["workspace","stairway"]` | (array(string)) List of databases to create.  |
+| postgres.dbs | list | `["workspace","stairway"]` | (array(string)) List of databases to create. |
 | postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
@@ -50,6 +50,7 @@ Chart for Terra Workspace Manager
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
 | serviceIP | string | `nil` | External IP of the service. Required. |
+| terraDataRepoUrl | string | `"https://jade.datarepo-dev.broadinstitute.org"` | corresponding data repo instance for the environment |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
 | vaultCert.cert.path | string | `nil` | Path to secret containing .crt |
