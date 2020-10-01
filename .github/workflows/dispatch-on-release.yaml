@@ -14,31 +14,26 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Get branch
-        id: branch
-        run: |
-          BRANCH="${GITHUB_REF#refs/heads/}"
-          echo "Branch is: ${BRANCH}"
-          if [[ "${BRANCH}" != 'master' ]]; then
-            echo "Branch is not master, no dispatch will be sent"
-          fi
-          echo ::set-output name=branch::${BRANCH}
-
       - name: Get release info
-        if: steps.branch.outputs.branch == 'master'
         id: release-info
         run: |
-          tag_name='${{ github.event.release.tag_name }}'
-          CHART_NAME="${tag_name%-*.*.*}"
-          CHART_VERSION="${tag_name##*-}"
-          echo "Tag name: ${tag_name}"
-          echo "Chart name: ${CHART_NAME}"
-          echo "Chart version: ${CHART_VERSION}"
-          echo ::set-output name=chart-name::${CHART_NAME}
-          echo ::set-output name=chart-version::${CHART_VERSION}
+          TAG='${{ github.event.release.tag_name }}'
+          echo "Tag is: ${TAG}"
+          if echo $TAG | grep '^[^0-9]*\-[0-9]*\.[0-9]*\.[0-9]*$'; then
+            echo "Not an official release tag (from non-default branch or PR), no dispatch will be sent"
+            echo ::set-output name=master-tag::false
+          else
+            echo ::set-output name=master-tag::true
+            CHART_NAME="${TAG%-*.*.*}"
+            CHART_VERSION="${TAG##*-}"
+            echo "Chart name: ${CHART_NAME}"
+            echo "Chart version: ${CHART_VERSION}"
+            echo ::set-output name=chart-name::${CHART_NAME}
+            echo ::set-output name=chart-version::${CHART_VERSION}
+          fi
 
       - name: Get release strategy
-        if: steps.branch.outputs.branch == 'master'
+        if: steps.release-info.outputs.master-tag == 'true'
         id: release-strategy
         run: |
           CHART_NAME="${{ steps.release-info.outputs.chart-name }}"
@@ -51,7 +46,7 @@ jobs:
           echo ::set-output name=dev-only::${DEV_ONLY}
 
       - name: Send dispatch to terra-helmfile
-        if: (steps.branch.outputs.branch == 'master') && (steps.release-strategy.outputs.dev-only != 'null')
+        if: (steps.release-info.outputs.master-tag == 'true') && (steps.release-strategy.outputs.dev-only != 'null')
         uses: broadinstitute/repository-dispatch@master
         with:
           token: ${{ secrets.CR_TOKEN }}
