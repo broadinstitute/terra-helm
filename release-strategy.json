@@ -1,6 +1,7 @@
 {
     "crljanitor":       {"dev_only": false},
     "cromwell":         {"dev_only": false},
+    "ontology":         {"dev_only": false},
     "poc":              {"dev_only": false},
     "workspacemanager": {"dev_only": true}
 }
