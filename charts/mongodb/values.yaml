@@ -4,4 +4,4 @@ vaultSecretsPath:
 # These values are passed to the upstream bitnami chart
 bitnami:
   auth:
-    existingSecret: mongodb-creds
+    existingSecret: mongodb-secrets
