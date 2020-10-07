@@ -3489,6 +3489,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.0.1-110.1598878366.f39927/leonardo-0.0.1-110.1598878366.f39927.tgz
     version: 0.0.1-110.1598878366.f39927
+  mongodb:
+  - apiVersion: v2
+    created: "2020-10-07T19:21:46.731436798Z"
+    description: A Helm chart for MongoDB, used by Terra's Agora application
+    digest: 0c8aecc08c30de09038cdc19570a0abb0c6836589e80fd30ebbe10fb9327c087
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - mongodb
+    - agora
+    name: mongodb
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/mongodb-0.0.1-152.1602098503.69881c/mongodb-0.0.1-152.1602098503.69881c.tgz
+    version: 0.0.1-152.1602098503.69881c
   ontology:
   - apiVersion: v2
     created: "2020-10-01T19:38:38.240322825Z"
