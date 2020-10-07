@@ -1,0 +1,13 @@
+apiVersion: v2
+name: mongodb
+version: 0.0.1
+type: application
+description: A Helm chart for MongoDB, used by Terra's Agora application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - mongodb
+  - agora
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
