@@ -7,5 +7,4 @@ bitnami:
     existingSecret: mongodb-secrets
   serviceAccount:
     create: false
-  serviceAccount:
     name: mongodb-sa
