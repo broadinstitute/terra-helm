@@ -1,0 +1,7 @@
+# vaultSecretsPath -- Where in Vault to find secrets used in this chart. Required keys: `replicaSetKey`, `rootPassword`, `userPassword`
+vaultSecretsPath:
+
+# These values are passed to the upstream bitnami chart
+bitnami:
+  auth:
+    existingSecret: mongodb-creds
