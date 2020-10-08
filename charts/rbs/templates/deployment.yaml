@@ -29,32 +29,32 @@ spec:
         - containerPort: 8080
         {{- end}}
         env:
-        - name: DATABASE_USER
+        - name: RBS_DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: rbs-postgres-db-creds
               key: username
-        - name: DATABASE_USER_PASSWORD
+        - name: RBS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: rbs-postgres-db-creds
               key: password
-        - name: DATABASE_NAME
+        - name: RBS_DATABASE_NAME
           valueFrom:
             secretKeyRef:
               name: rbs-postgres-db-creds
               key: db
-        - name: STAIRWAY_DATABASE_USER
+        - name: RBS_STAIRWAY_DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: rbs-stairway-db-creds
               key: username
-        - name: STAIRWAY_DATABASE_USER_PASSWORD
+        - name: RBS_STAIRWAY_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: rbs-stairway-db-creds
               key: password
-        - name: STAIRWAY_DATABASE_NAME
+        - name: RBS_STAIRWAY_DATABASE_NAME
           valueFrom:
             secretKeyRef:
               name: rbs-stairway-db-creds
