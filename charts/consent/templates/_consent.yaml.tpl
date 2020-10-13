@@ -33,7 +33,7 @@ elasticSearch:
     - {{ .Values.elasticSearchServer1 }}
     - {{ .Values.elasticSearchServer2 }}
     - {{ .Values.elasticSearchServer3 }}
-  index: ontology
+  indexName: ontology
 googleStore:
   password: /etc/service-account.json
   endpoint: https://storage.googleapis.com/
