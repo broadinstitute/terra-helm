@@ -5970,6 +5970,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.0.0-80.1595262188.e7eeab/postgres-0.0.0-80.1595262188.e7eeab.tgz
     version: 0.0.0-80.1595262188.e7eeab
+  rawls:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-10-13T19:48:33.824852897Z"
+    description: Chart for Rawls service in Terra
+    digest: e3ad3b9c521a5a2370c086475132fdca943ba0f04ac12999581a613ebb412ac0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.0-155.1602618510.9ead02/rawls-0.0.0-155.1602618510.9ead02.tgz
+    version: 0.0.0-155.1602618510.9ead02
   rbs:
   - apiVersion: v2
     created: "2020-09-25T13:13:53.615949763Z"
