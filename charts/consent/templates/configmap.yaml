@@ -11,3 +11,5 @@ data:
 {{ include "consent.site.conf" . | indent 4 }}
   prometheusJmx.yaml: |
 {{ include "consent.config.prometheusJmx" . | indent 4 }}
+  sqlproxy.env: |
+{{ include "consent.config.sqlproxy.env" . | indent 4 }}

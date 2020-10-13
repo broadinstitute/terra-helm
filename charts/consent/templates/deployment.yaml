@@ -94,6 +94,15 @@ spec:
           image: broadinstitute/cloudsqlproxy:1.11_20191120
           ports:
             - containerPort: 5432
+          volumeMounts:
+            - name: configs
+              mountPath: /app/sqlproxy.env
+              subPath: sqlproxy.env
+              readOnly: true
+            - name: app-secrets
+              mountPath: /etc/sqlproxy-service-account.json
+              subPath: service-account.json
+              readOnly: true
       volumes:
         - name: configs
           configMap:

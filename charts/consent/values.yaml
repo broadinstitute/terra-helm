@@ -22,6 +22,9 @@ gcsAccountKey:
 googleClientId:
 googleBucket:
 googleBucketSubdirectory:
+googleProject:
+googleProjectZone:
+cloudSqlInstance:
 
 image:
 imageRepository:
