@@ -17,7 +17,17 @@ logging:
       threshold: ERROR
       environment: {{ .Values.environment }}
   loggers:
-    "org.semanticweb": ERROR
+    "org.reflections.Reflections": ERROR
+    "org.apache.pdfbox": ERROR
+database:
+  driverClass: org.postgresql.Driver
+  user: {{ .Values.databaseUser }}
+  password:  {{ .Values.databasePassword }}
+  url: jdbc:postgresql://sqlproxy:5432/consent
+  initialSize: 20
+  minSize: 20
+  maxSize: 128
+  validationQuery: SELECT 1
 elasticSearch:
   servers:
     - {{ .Values.elasticSearchServer1 }}
@@ -28,6 +38,25 @@ googleStore:
   password: /etc/service-account.json
   endpoint: https://storage.googleapis.com/
   bucket: {{ .Values.googleBucket }}
+datasets:
+  - Melanoma-Regev-Izar-Garraway-DFCI-ICR
+  - Melanoma_Regev
+services:
+  localURL: {{ .Values.servicesLocalUrl }}
+  ontologyURL: {{ .Values.servicesOntologyUrl }}
+mailConfiguration:
+  activateEmailNotifications: false
+  googleAccount: duos@broadinstitute.org
+  sendGridApiKey: {{ .Values.sendgridApiKey }}
+freeMarkerConfiguration:
+  templateDirectory: /freemarker
+  defaultEncoding: UTF-8
+googleAuthentication:
+  clientId: {{ .Values.googleClientId }}
+basicAuthentication:
+  users:
+    - user: {{ .Values.basicAuthUser }}
+      password: {{ .Values.basicAuthPassword }}
 storeOntology:
   bucketSubdirectory: {{ .Values.googleBucketSubdirectory }}
   configurationFileName: /configuration

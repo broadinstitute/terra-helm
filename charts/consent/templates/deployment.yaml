@@ -90,6 +90,10 @@ spec:
             - name: proxy-secrets
               mountPath: "/etc/ssl"
               readOnly: true
+        - name: sqlproxy
+          image: broadinstitute/cloudsqlproxy:1.11_20191120
+          ports:
+            - containerPort: 5432
       volumes:
         - name: configs
           configMap:
