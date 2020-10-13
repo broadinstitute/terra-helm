@@ -113,6 +113,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ap-argocd-preinstall-0.0.1/ap-argocd-preinstall-0.0.1.tgz
     version: 0.0.1
+  consent:
+  - apiVersion: v2
+    created: "2020-10-13T17:42:40.344004508Z"
+    description: A Helm chart for DUOS Consent
+    digest: 6dd7ecc1da3f92777b6d414928ba8867b8f5b720e7c1760b47d8603572e39628
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.1.0-154.1602610956.52ab06/consent-0.1.0-154.1602610956.52ab06.tgz
+    version: 0.1.0-154.1602610956.52ab06
   crljanitor:
   - apiVersion: v2
     created: "2020-08-31T13:32:57.82262797Z"
