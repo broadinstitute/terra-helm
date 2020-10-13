@@ -1,0 +1,16 @@
+apiVersion: v2
+name: rawls
+version: 0.0.0
+appVersion: latest
+
+description: Chart for Rawls service in Terra
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+- rawls
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
