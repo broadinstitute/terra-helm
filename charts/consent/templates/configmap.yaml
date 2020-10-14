@@ -12,4 +12,4 @@ data:
   prometheusJmx.yaml: |
 {{ include "consent.config.prometheusJmx" . | indent 4 }}
   sqlproxy.env: |
-{{ include "consent.config.sqlproxy.env" . | indent 4 }}
+{{ include "consent.sqlproxy.env" . }}

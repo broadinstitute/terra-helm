@@ -108,7 +108,7 @@ spec:
             - name: proxy-secrets
               mountPath: "/etc/ssl"
               readOnly: true
-        - name: consent-sqlproxy
+        - name: {{ .Chart.Name }}-sqlproxy
           image: broadinstitute/cloudsqlproxy:1.11_20191120
           env:
             - name: CLOUDSQL_CREDENTIAL_FILE

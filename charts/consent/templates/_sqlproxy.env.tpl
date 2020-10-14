@@ -1,5 +1,5 @@
 {{- /* Configuration for Cloud SQL client */ -}}
-{{- define "consent.config.sqlproxy.env" -}}
+{{- define "consent.sqlproxy.env" -}}
 GOOGLE_PROJECT={{ .Values.googleProject }}
 CLOUDSQL_ZONE={{ .Values.googleProjectZone  }}
 CLOUDSQL_INSTANCE={{ .Values.cloudSqlInstance  }}
