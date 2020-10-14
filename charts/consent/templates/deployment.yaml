@@ -110,18 +110,17 @@ spec:
               readOnly: true
         - name: {{ .Chart.Name }}-sqlproxy
           image: broadinstitute/cloudsqlproxy:1.11_20191120
+          envFrom:
+            - configMapRef:
+                name: configs
           env:
             - name: CLOUDSQL_CREDENTIAL_FILE
-              value: /etc/sqlproxy-service-account.json
+              value: /etc/service-account.json
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: configs
-              mountPath: /app/sqlproxy.env
-              subPath: sqlproxy.env
-              readOnly: true
             - name: app-secrets
-              mountPath: /etc/sqlproxy-service-account.json
+              mountPath: /etc/service-account.json
               subPath: service-account.json
               readOnly: true
           securityContext:
