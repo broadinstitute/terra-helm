@@ -1,6 +1,6 @@
-DUOS Ontology
+DUOS Consent
 ========
-A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+A Helm chart for DUOS Consent
 
 Current chart version is `0.1.0`
 
@@ -8,31 +8,48 @@ Current chart version is `0.1.0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.applicationVersion | string | Is set by Helmfile on deploy | Ontology global version |
-| devDeploy | bool | `false` | Enable to deploy to dev locally with Skaffold |
-| elasticSearchServer1 | string | `nil` | first elastic search host |
-| elasticSearchServer2 | string | `nil` | second elastic search host |
-| elasticSearchServer3 | string | `nil` | third elastic search host |
-| environment | string | `nil` | Environment, [dev, alpha, staging, prod] |
-| gcsAccountPath | string | `nil` | Vault path to GCS base64 service account json |
-| gcsAccountKey | string | `nil` | Vault key of GCS base64 service account json |
-| googleBucket | string | `nil` | Google project where GCS files are stored |
-| googleBucketSubdirectory | string | `nil` | Google bucket subdirectory |
-| image | string | `nil` | If specified, overrides the GCR image location |
-| imageRepository | string | `nil` | GCR image location |
-| imageTag | string | `nil` | GCR image tag |
-| proxyLogLevel | string | `"debug"` | Proxy log level |
-| proxyImageRepository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
-| proxyImageVersion | string | `"bernick_tcell"` | Proxy image tag |
-| replicas | int | `1` | Number of replicas |
-| sentryDsnPath | string | `nil` | Vault path to secret containing Sentry DSN value |
-| sentryDsnKey | string | `nil` | Vault key of secret containing Sentry DSN value |
-| vaultCertPath | string | `nil` | Path to secret containing .crt |
-| vaultCertSecretKey | string | `nil` | Key in secret containing .crt |
-| vaultKeyPath | string | `nil` | Path to secret containing .key |
-| vaultKeySecretKey | string | `nil` | Key in secret containing .key |
-| vaultChainPath | string | `nil` | Path to secret containing intermediate .crt |
-| vaultChainSecretKey | string | `nil` | Key in secret containing intermediate .crt |
+| basicAuthPasswordKey | string | `nil` |  |
+| basicAuthUserKey | string | `nil` |  |
+| cloudSqlInstance | string | `nil` |  |
+| confFilePath | string | `nil` |  |
+| databasePasswordKey | string | `nil` |  |
+| databaseUrl | string | `nil` |  |
+| databaseUserKey | string | `nil` |  |
+| devDeploy | bool | `false` |  |
+| elasticSearchServer1 | string | `nil` |  |
+| elasticSearchServer2 | string | `nil` |  |
+| elasticSearchServer3 | string | `nil` |  |
+| environment | string | `nil` |  |
+| gcsAccountKey | string | `nil` |  |
+| gcsAccountPath | string | `nil` |  |
+| global.applicationVersion | string | `"latest"` | What version of the Ontology application to deploy |
+| googleBucket | string | `nil` |  |
+| googleBucketSubdirectory | string | `nil` |  |
+| googleClientId | string | `nil` |  |
+| googleProject | string | `nil` |  |
+| googleProjectZone | string | `nil` |  |
+| image | string | `nil` |  |
+| imageRepository | string | `nil` |  |
+| imageTag | string | `nil` |  |
+| proxyImageRepository | string | `nil` |  |
+| proxyImageVersion | string | `nil` |  |
+| proxyLogLevel | string | `nil` |  |
+| replicas | int | `1` |  |
+| sendgridApiKey | string | `nil` |  |
+| sendgridApiKeyKey | string | `nil` |  |
+| sentryDsnKey | string | `nil` |  |
+| sentryDsnPath | string | `nil` |  |
+| serviceIP | string | `nil` | External IP of the service. Required. |
+| servicesLocalUrl | string | `nil` |  |
+| servicesOntologyUrl | string | `nil` |  |
+| vaultCertPath | string | `nil` |  |
+| vaultCertSecretKey | string | `nil` |  |
+| vaultChain | string | `nil` |  |
+| vaultChainPath | string | `nil` |  |
+| vaultChainSecretKey | string | `nil` |  |
+| vaultEnabled | bool | `true` |  |
+| vaultKeyPath | string | `nil` |  |
+| vaultKeySecretKey | string | `nil` |  |
 
 ## Cheat Sheet
 
