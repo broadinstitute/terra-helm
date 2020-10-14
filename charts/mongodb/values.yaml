@@ -8,3 +8,5 @@ bitnami:
   serviceAccount:
     create: false
     name: mongodb-sa
+initConfigMap:
+  name: mongodb-init-cm
