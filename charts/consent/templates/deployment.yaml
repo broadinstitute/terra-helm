@@ -25,6 +25,7 @@ spec:
         - ip: 127.0.0.1
           hostnames:
             - app
+            - sqlproxy
       containers:
         - name: {{ .Chart.Name }}-service
           image: "{{- if .Values.image -}}
