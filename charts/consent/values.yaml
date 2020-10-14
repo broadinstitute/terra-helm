@@ -2,10 +2,13 @@ global:
   # global.applicationVersion -- What version of the Ontology application to deploy
   applicationVersion: latest
 
-basicAuthUser:
-basicAuthPassword:
-databaseUser:
-databasePassword:
+# Values from consent config
+confFilePath:
+basicAuthUserKey:
+basicAuthPasswordKey:
+databaseUserKey:
+databasePasswordKey:
+sendgridApiKeyKey:
 
 # Should be set to true when deploying locally with Skaffold
 devDeploy: false

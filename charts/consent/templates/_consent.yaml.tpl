@@ -21,8 +21,8 @@ logging:
     "org.apache.pdfbox": ERROR
 database:
   driverClass: org.postgresql.Driver
-  user: {{ .Values.databaseUser }}
-  password:  {{ .Values.databasePassword }}
+  user: foo {{/* Override on the command line */}}
+  password: foo {{/* Override on the command line */}}
   url: jdbc:postgresql://sqlproxy:5432/consent
   initialSize: 20
   minSize: 20
@@ -47,7 +47,7 @@ services:
 mailConfiguration:
   activateEmailNotifications: false
   googleAccount: duos@broadinstitute.org
-  sendGridApiKey: {{ .Values.sendgridApiKey }}
+  sendGridApiKey: foo {{/* Override on the command line */}}
 freeMarkerConfiguration:
   templateDirectory: /freemarker
   defaultEncoding: UTF-8
@@ -55,8 +55,8 @@ googleAuthentication:
   clientId: {{ .Values.googleClientId }}
 basicAuthentication:
   users:
-    - user: {{ .Values.basicAuthUser }}
-      password: {{ .Values.basicAuthPassword }}
+    - user:
+      password:
 storeOntology:
   bucketSubdirectory: {{ .Values.googleBucketSubdirectory }}
   configurationFileName: /configuration
