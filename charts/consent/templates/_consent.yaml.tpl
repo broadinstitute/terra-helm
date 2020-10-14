@@ -23,7 +23,7 @@ database:
   driverClass: org.postgresql.Driver
   user: foo {{/* Override on the command line */}}
   password: foo {{/* Override on the command line */}}
-  url: jdbc:postgresql://sqlproxy:5432/consent
+  url: {{ .Values.databaseUrl }}
   initialSize: 20
   minSize: 20
   maxSize: 128

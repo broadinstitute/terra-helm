@@ -26,7 +26,6 @@ LDAPCacheTTL ${LDAP_CACHE_TTL}
 </VirtualHost>
 
 <VirtualHost _default_:${SSL_HTTPD_PORT}>
-ServerAlias ${SERVER_NAME_INT}
 
     DocumentRoot /app
 
@@ -125,7 +124,7 @@ ServerAlias ${SERVER_NAME_INT}
         Header unset Access-Control-Allow-Origin
         Header always set Access-Control-Allow-Origin "*"
         Header unset Access-Control-Allow-Headers
-        Header always set Access-Control-Allow-Headers "authorization,content-type,accept,origin,x-app-id"
+        Header always set Access-Control-Allow-Headers "X-Requested-With,Content-Type,Accept,Origin,Authorization,Content-Disposition,Access-Control-Expose-Headers,Pragma,Cache-Control,Expires,X-App-ID"
         Header unset Access-Control-Allow-Methods
         Header always set Access-Control-Allow-Methods "GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD"
         Header unset Access-Control-Max-Age
