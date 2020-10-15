@@ -111,18 +111,37 @@ spec:
               readOnly: true
         - name: {{ .Chart.Name }}-sqlproxy
           image: broadinstitute/cloudsqlproxy:1.11_20191120
-          envFrom:
-            - configMapRef:
-                name: configs
           env:
             - name: CLOUDSQL_CREDENTIAL_FILE
               value: /etc/service-account.json
+            - name: GOOGLE_PROJECT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-sqlproxy-secrets
+                  key: googleProject
+            - name: CLOUDSQL_ZONE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-sqlproxy-secrets
+                  key: cloudsqlZone
+            - name: CLOUDSQL_INSTANCE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-sqlproxy-secrets
+                  key: cloudsqlInstance
+            - name: CLOUDSQL_MAXCONNS
+              value: '300'
+            - name: PORT
+              value: '5432'
           ports:
             - containerPort: 5432
           volumeMounts:
             - name: app-secrets
               mountPath: /etc/service-account.json
               subPath: service-account.json
+              readOnly: true
+            - name: sqlproxy-secrets
+              mountPath: /etc
               readOnly: true
           securityContext:
             runAsUser: 2  # non-root user
@@ -134,6 +153,9 @@ spec:
         - name: app-secrets
           secret:
             secretName: {{ .Chart.Name }}-secrets
+        - name: sqlproxy-secrets
+          secret:
+            secretName: {{ .Chart.Name }}-sqlproxy-secrets
         - name: proxy-secrets
           secret:
             secretName: {{ .Chart.Name }}-proxy-secrets
