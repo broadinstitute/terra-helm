@@ -126,27 +126,15 @@ spec:
               readOnly: true
         - name: {{ .Chart.Name }}-sqlproxy
           image: broadinstitute/cloudsqlproxy:1.11_20191120
-          envFrom:
-            - secretRef:
-                name: {{ .Chart.Name }}-sqlproxy-secrets
           env:
             - name: CLOUDSQL_CREDENTIAL_FILE
               value: /etc/service-account.json
             - name: GOOGLE_PROJECT
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}-sqlproxy-secrets
-                  key: googleProject
+              value: {{ .Values.googleProject }}
             - name: CLOUDSQL_ZONE
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}-sqlproxy-secrets
-                  key: cloudsqlZone
+              value: {{ .Values.googleProjectZone }}
             - name: CLOUDSQL_INSTANCE
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}-sqlproxy-secrets
-                  key: cloudsqlInstance
+              value: {{ .Values.cloudSqlInstance }}
             - name: CLOUDSQL_MAXCONNS
               value: '300'
             - name: PORT
