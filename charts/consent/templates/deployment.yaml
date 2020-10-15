@@ -111,6 +111,9 @@ spec:
               readOnly: true
         - name: {{ .Chart.Name }}-sqlproxy
           image: broadinstitute/cloudsqlproxy:1.11_20191120
+          envFrom:
+            - secretRef:
+                name: {{ .Chart.Name }}-sqlproxy-secrets
           env:
             - name: CLOUDSQL_CREDENTIAL_FILE
               value: /etc/service-account.json
@@ -140,9 +143,6 @@ spec:
               mountPath: /etc/service-account.json
               subPath: service-account.json
               readOnly: true
-            - name: sqlproxy-secrets
-              mountPath: /etc
-              readOnly: true
           securityContext:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
@@ -153,9 +153,6 @@ spec:
         - name: app-secrets
           secret:
             secretName: {{ .Chart.Name }}-secrets
-        - name: sqlproxy-secrets
-          secret:
-            secretName: {{ .Chart.Name }}-sqlproxy-secrets
         - name: proxy-secrets
           secret:
             secretName: {{ .Chart.Name }}-proxy-secrets
