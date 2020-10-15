@@ -6,10 +6,12 @@ global:
 confFilePath:
 basicAuthUserKey:
 basicAuthPasswordKey:
+sendgridApiKeyKey:
+
+# Values from postgres user info
 databaseUserPath:
 databaseUserKey:
 databasePasswordKey:
-sendgridApiKeyKey:
 
 databaseUrl:
 # Should be set to true when deploying locally with Skaffold
