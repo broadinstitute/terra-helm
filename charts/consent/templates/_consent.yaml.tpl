@@ -55,8 +55,8 @@ googleAuthentication:
   clientId: {{ .Values.googleClientId }}
 basicAuthentication:
   users:
-    - user:
-      password:
+    - user: foo {{/* Override on the command line */}}
+      password: foo {{/* Override on the command line */}}
 storeOntology:
   bucketSubdirectory: {{ .Values.googleBucketSubdirectory }}
   configurationFileName: /configuration
