@@ -6,6 +6,7 @@ global:
 confFilePath:
 basicAuthUserKey:
 basicAuthPasswordKey:
+databaseUserPath:
 databaseUserKey:
 databasePasswordKey:
 sendgridApiKeyKey:
