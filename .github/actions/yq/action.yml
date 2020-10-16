@@ -1,0 +1,13 @@
+name: 'yq'
+description: 'Run a yq command'
+inputs:
+  command:
+    description: 'yq command to run'
+    required: true
+runs:
+  using: 'docker'
+  image: 'mikefarah/yq:3'
+  args:
+  - sh
+  - -c
+  - ${{ inputs.command }}
