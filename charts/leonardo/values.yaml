@@ -1,7 +1,6 @@
 global:
   # global.applicationVersion -- What version of the Leonardo application to deploy
   applicationVersion: latest
-
 # Leonardo can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
@@ -21,8 +20,6 @@ deploymentDefaults:
   expose: false
   # deploymentDefaults.serviceIP -- Static IP to use for the Service. (optional)
   serviceIP: null
-
-
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
 # with different configurations.
@@ -39,23 +36,19 @@ deployments:
     expose: true
     # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
     serviceName: leonardo
-
 commonCronjob:
   # this is defined in terra-helm repo
   reportDestinationBucket:
-
 cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  resourceValidatorImageTag: b994ab5
-
+  imageTag: b994ab5
 zombieMonitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-zombie-monitor-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
-  zombieMonitorImageTag: 1f77844
-
+  imageTag: 1f77844
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
