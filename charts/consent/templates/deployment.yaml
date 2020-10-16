@@ -15,7 +15,6 @@ spec:
       name: {{ .Chart.Name }}
       labels:
 {{ include "consent.labels" . | indent 8 }}
-        app: {{ .Chart.Name }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name

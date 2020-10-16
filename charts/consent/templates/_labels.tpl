@@ -8,4 +8,5 @@ app.kubernetes.io/instance: {{ .Release.Name | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/component: {{ .Chart.Name }}
 app.kubernetes.io/part-of: terra
+app: {{ .Chart.Name }}
 {{- end -}}
