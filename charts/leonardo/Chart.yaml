@@ -1,16 +1,13 @@
 apiVersion: v2
 name: leonardo
-version: 0.0.10
+version: 0.1.0
 type: application
-
 description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
-
 keywords:
-- dsp
-- broadinstitute
-- leonardo
-
+  - dsp
+  - broadinstitute
+  - leonardo
 sources:
-- https://github.com/broadinstitute/terra-helm/
-- https://github.com/DataBiosphere/leonardo
-- https://github.com/broadinstitute/leonardo-cron-jobs
+  - https://github.com/broadinstitute/terra-helm/
+  - https://github.com/DataBiosphere/leonardo
+  - https://github.com/broadinstitute/leonardo-cron-jobs
