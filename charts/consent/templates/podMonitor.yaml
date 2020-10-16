@@ -8,6 +8,6 @@ spec:
   jobLabel: consent-jvm
   selector:
     matchLabels:
-      app.kubernetes.io/component: consent
+      app.kubernetes.io/component: {{ .Chart.name }}
   podMetricsEndpoints:
     - port: metrics
