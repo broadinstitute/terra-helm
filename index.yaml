@@ -115,24 +115,6 @@ entries:
     version: 0.0.1
   consent:
   - apiVersion: v2
-    created: "2020-10-16T17:41:53.465564868Z"
-    description: A Helm chart for DUOS Consent
-    digest: d46b8792d44f75cda4bcc00b533bdc0db311083f58d4880b11303dc08c3abfaf
-    keywords:
-    - dsp
-    - broadinstitute
-    - duos
-    - consent
-    - ontology
-    name: consent
-    sources:
-    - https://github.com/broadinstitute/terra-helm/tree/master/charts
-    - https://github.com/DataBiosphere/consent
-    type: application
-    urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.1.0-154.1602870109.287103/consent-0.1.0-154.1602870109.287103.tgz
-    version: 0.1.0-154.1602870109.287103
-  - apiVersion: v2
     created: "2020-10-15T19:06:00.531243869Z"
     description: A Helm chart for DUOS Consent
     digest: 99f2ddd8ecd3f3bc774dd89317192445b1238dbb9a8113a54306c148a2853cad
@@ -2717,6 +2699,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.0.12-157.1602790751.b08514/leonardo-0.0.12-157.1602790751.b08514.tgz
     version: 0.0.12-157.1602790751.b08514
+  - apiVersion: v2
+    created: "2020-10-16T17:42:12.776569056Z"
+    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
+    digest: fdeb1dde13e54bb589464c163cc7f5ed6141099ecfbcfeb85b3a557d5269940e
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.0.11-161.1602870128.8f594a/leonardo-0.0.11-161.1602870128.8f594a.tgz
+    version: 0.0.11-161.1602870128.8f594a
   - apiVersion: v2
     created: "2020-10-16T17:36:21.359001214Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
