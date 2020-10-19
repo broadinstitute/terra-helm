@@ -1,17 +1,14 @@
 apiVersion: v2
 name: consent
-version: 0.1.0
+version: 0.2.0
 type: application
-
 description: A Helm chart for DUOS Consent
-
 keywords:
-- dsp
-- broadinstitute
-- duos
-- consent
-- ontology
-
+  - dsp
+  - broadinstitute
+  - duos
+  - consent
+  - ontology
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/master/charts
-- https://github.com/DataBiosphere/consent
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/DataBiosphere/consent
