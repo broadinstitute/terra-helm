@@ -34,10 +34,4 @@ spec:
           - name: metrics
             containerPort: 9090
             protocol: TCP
-        resources:
-          requests: 
-            cpu: 8
-            memory: 16Gi
-          limits:
-            cpu: 8
-            memory: 16Gi
+            
