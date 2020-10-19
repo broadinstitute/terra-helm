@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rawls-deployment
+  name: rawls-backend-deployment
   labels:
 {{ include "rawls.labels" . | indent 4 }}
 spec:
@@ -34,4 +34,4 @@ spec:
           - name: metrics
             containerPort: 9090
             protocol: TCP
-            
+
