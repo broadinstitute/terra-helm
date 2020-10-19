@@ -1,0 +1,65 @@
+global:
+  # global.applicationVersion -- What version of the Ontology application to deploy
+  applicationVersion: latest
+
+# Values from consent config
+confFilePath:
+basicAuthUserKey:
+basicAuthPasswordKey:
+sendgridApiKeyKey:
+
+# Values from postgres user info
+databaseUserPath:
+databaseUserKey:
+databasePasswordKey:
+
+databaseUrl:
+# Should be set to true when deploying locally with Skaffold
+devDeploy: false
+
+elasticSearchServer1:
+elasticSearchServer2:
+elasticSearchServer3:
+
+environment:
+
+gcsAccountPath:
+gcsAccountKey:
+
+googleClientId:
+googleBucket:
+googleBucketSubdirectory:
+googleProject:
+googleProjectZone:
+cloudSqlInstance:
+
+image:
+imageRepository:
+imageTag:
+
+proxyLogLevel:
+proxyImageRepository:
+proxyImageVersion:
+
+replicas: 1
+
+sendgridApiKey:
+
+sentryDsnPath:
+sentryDsnKey:
+
+# serviceIP -- (string) External IP of the service. Required.
+serviceIP:
+
+servicesLocalUrl:
+servicesOntologyUrl:
+
+vaultEnabled: true
+
+vaultCertPath:
+vaultCertSecretKey:
+vaultKeyPath:
+vaultKeySecretKey:
+vaultChain:
+vaultChainPath:
+vaultChainSecretKey:
