@@ -1,0 +1,18 @@
+{{- /*
+  Build deployments map, where deployment type keys a map of deployment settings.
+*/ -}}
+{{- /*
+  Generate Deployment definitions for each deployment type
+*/ -}}
+
+{{- $defaults := $.Values.deploymentDefaults -}}
+{{- range $deploymentType, $overrides := $.Values.deployments -}}
+{{- $settings := mergeOverwrite ($defautls | deepCopy) ($overrides | deepCopy) -}}
+{{- $templateScope := $ | deepCopy -}}
+{{- $_ := set $templateScope "_deploymentSettings" $settings -}}
+{{- if $settings.enabled }}
+---
+# Rawls {{ $deploymentType }} deployment
+{{ template "rawls.deployment" $templateScope }}
+{{- end-}}
+{{- end -}}
