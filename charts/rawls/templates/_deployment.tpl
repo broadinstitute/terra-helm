@@ -100,7 +100,7 @@ spec:
           name: proxy-ctmpls
           readOnly: true
         - mountPath: /etc/ssl/certs/ca-bundle.crt
-          subPath: ca-bundler.crt
+          subPath: ca-bundle.crt
           name: proxy-ctmpls
           readOnly: true
         - mountPath: /etc/apache2/sites-available/site.conf
