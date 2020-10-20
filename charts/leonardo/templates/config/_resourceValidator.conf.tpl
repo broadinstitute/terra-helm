@@ -1,4 +1,4 @@
-{{- define "leonardo.config.resourceValidator" -}}
+{{- define "cronjobs.config.resourceValidator" -}}
 
 leonardo-pubsub.google-project = {{ .Values.cronjob.googleProject }}
 
