@@ -92,6 +92,4 @@ spec:
           - name: application-config
             configMap:
               name: resource-validator-cm
----
-{{- $templateScope := $ | deepCopy }}
-{{ template "resource-validator.configmap" $templateScope }}
+              
