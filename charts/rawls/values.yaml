@@ -35,13 +35,3 @@ deploymentDefaults:
 #
 # Here, we configure it as a single standalone deployment, similar to how a
 # developer might run rawls.
-deployments:
-  standalone:
-    # deployments.standalone.name -- Name to use for the default standalone rawls deployment
-    name: rawls
-    # deployments.standalone.replicas -- Number of replicas in the default standalone rawls deployment
-    replicas: 1
-    # deployments.standalone.expose -- Whether to expose the default standalone rawls deployment as a service
-    expose: true
-    # deployments.standalone.serviceName -- Name of the default standalone rawls service
-    serviceName: rawls
