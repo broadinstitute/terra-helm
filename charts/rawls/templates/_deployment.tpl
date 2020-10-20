@@ -89,7 +89,7 @@ spec:
           - containerPort: 8888
         envFrom:
         - secretRef:
-            name: {{ legacyResourcePrefix }}-proxy-env
+            name: {{ $legacyResourcePrefix }}-proxy-env
         volumeMounts:
         - mountPath: /etc/ssl/server.crt
           subPath: server.crt
