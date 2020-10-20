@@ -1,11 +1,11 @@
 {{- /* Generate the data component of a Cromwell config map */ -}}
 {{- define "leonardo.configmap.data" -}}
 data:
-  logback.xml: |
-{{ include "leonardo.config.logback" . | indent 4 }}
+  application.conf: |
+{{ include "leonardo.config.resourceValidator" . | indent 4 }}
 {{- end -}}
 
-{{- /* Generate a configmap for a Cromwell deployment */ -}}
+{{- /* Generate a configmap for a Leonardo deployment */ -}}
 {{- define "leonardo.configmap" -}}
 {{- $settings := ._deploymentSettings -}}
 

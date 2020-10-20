@@ -26,7 +26,7 @@ spec:
             env:
             # Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
             - name: JAVA_OPTS
-              value: -Dlogback.configurationFile=file:/opt/docker/resource-validator-config/logback.xml
+              value: -Dconfig.file=/opt/docker/resource-validator-config/application.conf
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -39,8 +39,6 @@ spec:
                   key: password
             - name: LEONARDO_PATH_TO_CREDENTIAL
               value: /secrets/service-account.json
-            - name: REPORT_DESTINATION_BUCKET
-              value: "{{ .Values.commonCronjob.reportDestinationBucket }}"
             volumeMounts:
             - name: leonardo-sa-json-file
               mountPath: /secrets
@@ -48,7 +46,7 @@ spec:
             - mountPath: /tmp/pod
               name: tmp-pod
             - mountPath: /opt/docker/resource-validator-config
-              name: logback-config
+              name: application-config
           - name: leonardo-cloudsql-proxy
             image: gcr.io/cloudsql-docker/gce-proxy:1.15
             env:
@@ -93,7 +91,7 @@ spec:
           - name: tmp-pod
             emptyDir: {}
           # Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
-          - name: logback-config
+          - name: application-config
             configMap:
               name: resource-validator-cm
 ---
