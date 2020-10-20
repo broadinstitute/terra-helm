@@ -2808,40 +2808,6 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0/leonardo-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
-    created: "2020-10-20T19:34:20.292352563Z"
-    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
-    digest: 288670119782637f87226ab628ca8c5ac2dfd3acd6ffbea63a43a6c6af5b8a24
-    keywords:
-    - dsp
-    - broadinstitute
-    - leonardo
-    name: leonardo
-    sources:
-    - https://github.com/broadinstitute/terra-helm/
-    - https://github.com/DataBiosphere/leonardo
-    - https://github.com/broadinstitute/leonardo-cron-jobs
-    type: application
-    urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0-165.1603222456.d59b5b/leonardo-0.1.0-165.1603222456.d59b5b.tgz
-    version: 0.1.0-165.1603222456.d59b5b
-  - apiVersion: v2
-    created: "2020-10-20T18:55:13.603212258Z"
-    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
-    digest: 7e275a46aae69b3e1e631f68156055bebc36f0c050a4c43f1baa8b57c4a1f120
-    keywords:
-    - dsp
-    - broadinstitute
-    - leonardo
-    name: leonardo
-    sources:
-    - https://github.com/broadinstitute/terra-helm/
-    - https://github.com/DataBiosphere/leonardo
-    - https://github.com/broadinstitute/leonardo-cron-jobs
-    type: application
-    urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0-165.1603220109.861fd5/leonardo-0.1.0-165.1603220109.861fd5.tgz
-    version: 0.1.0-165.1603220109.861fd5
-  - apiVersion: v2
     created: "2020-10-20T18:34:41.793369783Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
     digest: 99216efab7a41a8609b960b97f47ab7b0c3ceb37e1fd41ce61b8ca7274d6af30
@@ -6751,9 +6717,9 @@ entries:
   rawls:
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-20T20:04:59.980367911Z"
+    created: "2020-10-20T20:10:57.123196466Z"
     description: Chart for Rawls service in Terra
-    digest: cb2e94e9c8767e398ea13ae7ce748ef83df4c0a5555f3dce600988b86d6de407
+    digest: 30827e3286d4279f9f0f315931c737c45063b8d0e5c00e6b922d1930734f3c56
     keywords:
     - dsp
     - broadinstitute
@@ -6765,26 +6731,8 @@ entries:
     - https://github.com/broadinstitute/rawls
     type: application
     urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-163.1603224295.686fee/rawls-0.0.1-163.1603224295.686fee.tgz
-    version: 0.0.1-163.1603224295.686fee
-  - apiVersion: v2
-    appVersion: latest
-    created: "2020-10-20T18:54:35.208669998Z"
-    description: Chart for Rawls service in Terra
-    digest: 6a3daf6c3675fca5e13c799afe6b5dbae8c7f21565bef713a6e714a00b9491e9
-    keywords:
-    - dsp
-    - broadinstitute
-    - terra
-    - rawls
-    name: rawls
-    sources:
-    - https://github.com/broadinstitute/terra-helm/tree/master/charts
-    - https://github.com/broadinstitute/rawls
-    type: application
-    urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-163.1603220071.434fc2/rawls-0.0.1-163.1603220071.434fc2.tgz
-    version: 0.0.1-163.1603220071.434fc2
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-163.1603224653.3b2874/rawls-0.0.1-163.1603224653.3b2874.tgz
+    version: 0.0.1-163.1603224653.3b2874
   - apiVersion: v2
     appVersion: latest
     created: "2020-10-20T18:19:23.981908577Z"
