@@ -122,3 +122,4 @@ spec:
         - mountPath: /var/log/modsecurity
           name: {{ $settings.name }}-proxy-security-logs
 {{- end -}}
+
