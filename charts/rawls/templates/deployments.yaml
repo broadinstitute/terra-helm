@@ -14,5 +14,5 @@
 ---
 # Rawls {{ $deploymentType }} deployment
 {{ template "rawls.deployment" $templateScope }}
-{{- end-}}
+{{- end -}}
 {{- end -}}
