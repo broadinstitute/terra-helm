@@ -2808,9 +2808,9 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0/leonardo-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
-    created: "2020-10-20T20:25:27.009860636Z"
+    created: "2020-10-20T19:34:20.292352563Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
-    digest: 4c28dd9a8475900840fa81111358356483cd7366200ae2097a6f939af08ce18f
+    digest: 288670119782637f87226ab628ca8c5ac2dfd3acd6ffbea63a43a6c6af5b8a24
     keywords:
     - dsp
     - broadinstitute
@@ -2822,12 +2822,12 @@ entries:
     - https://github.com/broadinstitute/leonardo-cron-jobs
     type: application
     urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0-165.1603225522.f60dc0/leonardo-0.1.0-165.1603225522.f60dc0.tgz
-    version: 0.1.0-165.1603225522.f60dc0
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0-165.1603222456.d59b5b/leonardo-0.1.0-165.1603222456.d59b5b.tgz
+    version: 0.1.0-165.1603222456.d59b5b
   - apiVersion: v2
-    created: "2020-10-20T20:17:41.152945531Z"
+    created: "2020-10-20T18:55:13.603212258Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
-    digest: c1572fd6a0850a76044d958e55cc694226aa918047e9543da2701e8d6266d20b
+    digest: 7e275a46aae69b3e1e631f68156055bebc36f0c050a4c43f1baa8b57c4a1f120
     keywords:
     - dsp
     - broadinstitute
@@ -2839,8 +2839,8 @@ entries:
     - https://github.com/broadinstitute/leonardo-cron-jobs
     type: application
     urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0-165.1603225056.19259f/leonardo-0.1.0-165.1603225056.19259f.tgz
-    version: 0.1.0-165.1603225056.19259f
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.1.0-165.1603220109.861fd5/leonardo-0.1.0-165.1603220109.861fd5.tgz
+    version: 0.1.0-165.1603220109.861fd5
   - apiVersion: v2
     created: "2020-10-20T18:34:41.793369783Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
@@ -6751,9 +6751,9 @@ entries:
   rawls:
   - apiVersion: v2
     appVersion: latest
-    created: "2020-10-20T20:34:27.814330491Z"
+    created: "2020-10-20T21:03:53.511002213Z"
     description: Chart for Rawls service in Terra
-    digest: 42873cb90fed6090350a88816e3590dacd0a821bd37874aa00110b8e92436888
+    digest: 5d0c94c5086e7d85abda51eca5767203694dc35542f41f8f5e3a5fe1333901a9
     keywords:
     - dsp
     - broadinstitute
@@ -6765,8 +6765,26 @@ entries:
     - https://github.com/broadinstitute/rawls
     type: application
     urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-163.1603226064.af5b7c/rawls-0.0.1-163.1603226064.af5b7c.tgz
-    version: 0.0.1-163.1603226064.af5b7c
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-163.1603227829.976b1e/rawls-0.0.1-163.1603227829.976b1e.tgz
+    version: 0.0.1-163.1603227829.976b1e
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-10-20T18:54:35.208669998Z"
+    description: Chart for Rawls service in Terra
+    digest: 6a3daf6c3675fca5e13c799afe6b5dbae8c7f21565bef713a6e714a00b9491e9
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-163.1603220071.434fc2/rawls-0.0.1-163.1603220071.434fc2.tgz
+    version: 0.0.1-163.1603220071.434fc2
   - apiVersion: v2
     appVersion: latest
     created: "2020-10-20T18:19:23.981908577Z"
@@ -9937,28 +9955,6 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   workspacemanager:
-  - apiVersion: v2
-    created: "2020-10-20T20:44:01.190140639Z"
-    dependencies:
-    - condition: postgres.enabled
-      name: postgres
-      repository: https://broadinstitute.github.io/terra-helm/
-      version: 0.1.0
-    description: Chart for Terra Workspace Manager
-    digest: 9c6a349a0fcc2f397705e43659417cb5bc6276e25cc04473daae8bceb8cb0b05
-    keywords:
-    - dsp
-    - broadinstitute
-    - terra
-    - workspacemanager
-    name: workspacemanager
-    sources:
-    - https://github.com/broadinstitute/terra-helm/tree/master/charts
-    - https://github.com/DataBiosphere/terra-workspace-manager
-    type: application
-    urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.8.0-164.1603226636.40f234/workspacemanager-0.8.0-164.1603226636.40f234.tgz
-    version: 0.8.0-164.1603226636.40f234
   - apiVersion: v2
     created: "2020-10-01T18:46:09.607397896Z"
     dependencies:
