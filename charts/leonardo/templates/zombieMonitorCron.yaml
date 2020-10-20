@@ -25,7 +25,7 @@ spec:
                 /opt/docker/bin/zombie-monitor --all
             env:
             - name: JAVA_OPTS
-              value: -Dconfig.file=/opt/docker/zombie-monitor-config/zombieMonitor.conf
+              value: -Dconfig.file=/opt/docker/zombie-monitor-config/application.conf
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -93,4 +93,4 @@ spec:
             emptyDir: {}
           - name: application-config
             configMap:
-              name: leonardo-cm
+              name: zombie-monitor-cm

@@ -25,7 +25,7 @@ spec:
                 /opt/docker/bin/resource-validator --dryRun --all
             env:
             - name: JAVA_OPTS
-              value: -Dconfig.file=/opt/docker/resource-validator-config/resourceValidator.conf
+              value: -Dconfig.file=/opt/docker/resource-validator-config/application.conf
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -91,7 +91,7 @@ spec:
             emptyDir: {}
           - name: application-config
             configMap:
-              name: leonardo-cm
+              name: resource-validator-cm
 ---
 {{- $templateScope := $ | deepCopy }}
-{{ template "leonardo.configmap" $templateScope }}
+{{ template "resource-validator.configmap" $templateScope }}

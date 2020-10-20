@@ -1,14 +1,12 @@
 {{- /* Generate the data component of a Cromwell config map */ -}}
-{{- define "leonardo.configmap.data" -}}
+{{- define "resource-validator.configmap.data" -}}
 data:
   resourceValidator.conf: |
-{{ include "leonardo.config.resourceValidator" . | indent 4 }}  
-  zombieMonitor.conf: |
-{{ include "leonardo.config.zombieMonitor" . | indent 4 }}
+{{ include "resource-validator.config.resourceValidator" . | indent 4 }}  
 {{- end -}}
 
-{{- /* Generate a configmap for a Leonardo deployment */ -}}
-{{- define "leonardo.configmap" -}}
+{{- /* Generate a configmap for a resource-validator deployment */ -}}
+{{- define "resource-validator.configmap" -}}
 {{- $settings := ._deploymentSettings -}}
 
 {{- /*
@@ -16,14 +14,14 @@ data:
   in the deploymentOutputs dictionary so that it be included as an annotation
   on the deployment's pod template. (see _deployment.tpl)
 
-  This is used to automatically restart Leonardo pods when the ConfigMap
+  This is used to automatically restart resource-validator pods when the ConfigMap
   changes.
 */ -}}
-{{- $data := include "leonardo.configmap.data" . -}}
+{{- $data := include "resource-validator.configmap.data" . -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: leonardo-cm
+  name: resource-validator-cm
   labels: {}
 {{ $data }}
 {{ end -}}
