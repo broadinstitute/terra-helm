@@ -42,6 +42,8 @@ spec:
       - name: sqlproxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
+      - name: {{ $settings.name }}-proxy-security-logs
+        emptyDir: {}
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
@@ -69,4 +71,54 @@ spec:
           subPath: billing-account.pem
           name: app-ctmpls
           readOnly: true
+      - name: {{ $settings.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
+      - name: {{ $settings.name }}-proxy
+        image: broadinstitute/openidc-proxy:tcell-mpm-big
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        envFrom:
+        - secretRef:
+            name: {{ legacyResourcePrefix }}-proxy-env
+        volumeMounts:
+        - mountPath: /etc/ssl/server.crt
+          subPath: server.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundler.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-available/site.conf
+          subPath: site.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
+          subPath: mod_security_logging.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/modsecurity/mod_security_ignore.conf
+          subPath: mod_security_ignore.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/tcell_agent.config
+          subPath: tcell_agent.config
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /var/log/modsecurity
+          name: {{ $settings.name }}-proxy-security-logs
 {{- end -}}
