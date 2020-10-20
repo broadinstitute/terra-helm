@@ -24,6 +24,8 @@ spec:
                 trap "touch /tmp/pod/main-terminated" EXIT
                 /opt/docker/bin/zombie-monitor --all
             env:
+            - name: JAVA_OPTS
+              value: -Dconfig.file=/opt/docker/zombie-monitor-config/zombieMonitor.conf
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -44,6 +46,8 @@ spec:
               readOnly: true
             - name: tmp-pod
               mountPath: /tmp/pod
+            - mountPath: /opt/docker/zombie-monitor-config
+              name: application-config
           - name: leonardo-cloudsql-proxy
             image: gcr.io/cloudsql-docker/gce-proxy:1.15
             env:
@@ -87,3 +91,6 @@ spec:
           # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
           - name: tmp-pod
             emptyDir: {}
+          - name: application-config
+            configMap:
+              name: leonardo-cm

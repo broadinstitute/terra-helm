@@ -24,9 +24,8 @@ spec:
                 trap "touch /tmp/pod/main-terminated" EXIT
                 /opt/docker/bin/resource-validator --dryRun --all
             env:
-            # Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
             - name: JAVA_OPTS
-              value: -Dconfig.file=/opt/docker/resource-validator-config/application.conf
+              value: -Dconfig.file=/opt/docker/resource-validator-config/resourceValidator.conf
             - name: LEONARDO_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -90,11 +89,9 @@ spec:
           # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
           - name: tmp-pod
             emptyDir: {}
-          # Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
           - name: application-config
             configMap:
-              name: resource-validator-cm
+              name: leonardo-cm
 ---
-# Not really needed for cron job. Leaving it here for future reference when we create leonardo chart
 {{- $templateScope := $ | deepCopy }}
 {{ template "leonardo.configmap" $templateScope }}

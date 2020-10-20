@@ -1,8 +1,10 @@
 {{- /* Generate the data component of a Cromwell config map */ -}}
 {{- define "leonardo.configmap.data" -}}
 data:
-  application.conf: |
-{{ include "leonardo.config.resourceValidator" . | indent 4 }}
+  resourceValidator.conf: |
+{{ include "leonardo.config.resourceValidator" . | indent 4 }}  
+  zombieMonitor.conf: |
+{{ include "leonardo.config.zombieMonitor" . | indent 4 }}
 {{- end -}}
 
 {{- /* Generate a configmap for a Leonardo deployment */ -}}
@@ -21,7 +23,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: resource-validator-cm
+  name: leonardo-cm
   labels: {}
 {{ $data }}
 {{ end -}}
