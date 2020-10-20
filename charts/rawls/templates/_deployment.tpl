@@ -51,7 +51,7 @@ spec:
             protocol: TCP
         envFrom:
         - secretRef:
-          name: {{ $legacyResourcePrefix }}-app-env
+            name: {{ $legacyResourcePrefix }}-app-env
         volumeMounts:
         - mountPath: /etc/rawls.conf
           subPath: rawls.conf
