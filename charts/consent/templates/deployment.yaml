@@ -129,8 +129,17 @@ spec:
               mountPath: /etc/apache2/sites-available/site.conf
               subPath: site.conf
               readOnly: true
-            - name: proxy-secrets
-              mountPath: "/etc/ssl"
+            - mountPath: /etc/ssl/certs/server.crt
+              subPath: server.crt
+              name: proxy-secrets
+              readOnly: true
+            - mountPath: /etc/ssl/private/server.key
+              subPath: server.key
+              name: proxy-secrets
+              readOnly: true
+            - mountPath: /etc/ssl/certs/ca-bundle.crt
+              subPath: ca-bundle.crt
+              name: proxy-secrets
               readOnly: true
         - name: {{ .Chart.Name }}-sqlproxy
           image: broadinstitute/cloudsqlproxy:1.11_20191120
@@ -167,13 +176,6 @@ spec:
         - name: proxy-secrets
           secret:
             secretName: {{ .Chart.Name }}-proxy-secrets
-            items:
-              - key: tls.crt
-                path: certs/server.crt
-              - key: tls.key
-                path: private/server.key
-              - key: ca-bundle.crt
-                path: certs/ca-bundle.crt
         - name: consent-prometheusjmx-jar
           emptyDir: {}
       initContainers:
