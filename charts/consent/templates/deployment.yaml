@@ -173,7 +173,7 @@ spec:
               - key: tls.key
                 path: private/server.key
               - key: ca-bundle.crt
-                path: certs/ca-bundle.crt
+                path: certs/ca-certificates.crt
         - name: consent-prometheusjmx-jar
           emptyDir: {}
       initContainers:
