@@ -1,6 +1,6 @@
 apiVersion: v2
 name: leonardo
-version: 0.1.0
+version: 0.2.0
 type: application
 description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
 keywords:
