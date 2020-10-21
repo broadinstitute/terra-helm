@@ -91,7 +91,7 @@ spec:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-proxy-env
         volumeMounts:
-        - mountPath: /etc/ssl/server.crt
+        - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
           name: proxy-ctmpls
           readOnly: true
