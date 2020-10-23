@@ -21,7 +21,7 @@ spec:
     server: {{ quote .clusterAddress }}
   source:
     repoURL: {{ quote .legacyConfigsRepo }}
-    targetRevision: {{ .legacyConfigsRepoRef }}
+    targetRevision: {{ quote .legacyConfigsRepoRef }}
     path: .
     plugin:
       name: legacy-configs
