@@ -1,0 +1,157 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+{{ include "sam.labels" . | indent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      deployment: {{ .Chart.Name }}-deployment
+  template:
+    metadata:
+      labels:
+        deployment: {{ .Chart.Name }}-deployment
+{{ include "cromwell.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - app
+        - sqlproxy
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
+      - name: proxy-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
+      - name: sqlproxy-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
+      - name: {{ .Chart.Name }}-gc-logs
+        emptyDir: {}
+      containers:
+      - name: {{ .Chart.Name }}-app
+        image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
+        ports:
+          - name: metrics
+            containerPort: 9090
+            protocol: TCP
+        resources:
+          requests:
+            cpu: 4
+            memory: 16Gi
+          limits:
+            cpu: 4
+            memory: 16Gi
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-app-env
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /etc/sam.conf
+          subPath: sam.conf
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/sam-account.json
+          subPath: sam-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/sam-firestore-account.json
+          subPath: sam-firestore-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /var/log/gc
+          name: {{ .Chart.Name }}-gc-logs
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8000
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8000
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
+      - name: {{ .Chart.Name }}-proxy
+        image: broadinstitute/openidc-proxy:tcell-mpm-big
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-proxy-env
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: server.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-enabled/site.conf
+          subPath: site.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /var/log/modsecurity
+          subPath: mpm_event.conf
+          name: proxy-ctmpls
+          readOnly: false
+      - name: {{ $settings.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_2018117
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
+      initContainers:
+      - name: download-prometheusjmx-jar
+        image: alpine:3.12.0
+        command: ["wget", "-O", "/cromwell-prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
+        volumeMounts:
+        - mountPath: /cromwell-prometheusjmx-jar
+          name: cromwell-prometheusjmx-jar
+

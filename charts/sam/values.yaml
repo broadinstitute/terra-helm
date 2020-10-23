@@ -1,0 +1,27 @@
+global:
+  # global.applicationVersion -- What version of the Cromwell application to deploy
+  applicationVersion: latest
+  # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses.
+  # Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  trustedAddresses: {}
+
+# ingressIP -- Static IP to use for the ingress. Required.
+ingressIP:
+
+imageConfig:
+  # imageConfig.repository -- Image repository
+  repository: gcr.io/broad-dsp-gcr-public/sam
+  # imageConfig.tag -- (string) Image tag.
+  # @default -- global.applicationVersion
+  tag:
+  imagePullPolicy: Always
+
+# replicas -- Number of replicas for the deployment
+replicas: 0
+
+# allowedAddresses -- What source IPs to whitelist for access to the service
+allowedAddresses: {}
+
+# legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
+# @default .Chart.Name
+legacyResourcePrefix: null
