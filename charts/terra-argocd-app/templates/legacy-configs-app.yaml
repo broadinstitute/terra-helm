@@ -21,7 +21,7 @@ spec:
     server: {{ quote .clusterAddress }}
   source:
     repoURL: {{ quote .legacyConfigsRepo }}
-    targetRevision: {{ .legacyConfigsRepoRef }}
+    targetRevision: {{ quote .legacyConfigsRepoRef }}
     path: .
     plugin:
       name: legacy-configs
@@ -29,7 +29,7 @@ spec:
       {{- $instanceTypes := .legacyConfigsInstanceTypes | join "," -}}
       {{- $envVars := merge .legacyConfigsEnv (dict "ENV" .environment "APP_NAME" .app "INSTANCE_TYPES" $instanceTypes ) -}}
       {{- range $name, $value := $envVars }}
-      - name: {{ $name }}
-        value: {{ $value }}
+      - name: {{ quote $name }}
+        value: {{ quote $value }}
       {{- end -}}
 {{- end -}}{{- end -}}
