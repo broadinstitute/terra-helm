@@ -42,43 +42,43 @@ Service firewall
 AoU Preprod Conditional
 */}}
 {{- define "workspacemanager.aoupreprodconditional" -}}
-  ((.email|endswith("@preprod.researchallofus.org")) and (.audience | split(".")[0] as $idkey | "${AOU_PREPROD_WHITELIST}" | split(",") | any(contains($idkey))))
+  ((.email|endswith("@preprod.researchallofus.org")) and (.audience as $idkey | "${AOU_PREPROD_WHITELIST}" | split(",") | map(. as $element | $idkey | startswith($element))))
 {{- end }}
 {{/*
 AoU Perf Conditional
 */}}
 {{- define "workspacemanager.aouperfconditional" -}}
-  ((.email|endswith("@perf.fake-research-aou.org")) and (.audience | split(".")[0] as $idkey | "${AOU_PERF_WHITELIST}" | split(",") | any(contains($idkey))))
+  ((.email|endswith("@perf.fake-research-aou.org")) and (.audience as $idkey | "${AOU_PERF_WHITELIST}" | split(",") | map(. as $element | $idkey | startswith($element))))
 {{- end }}
 {{/*
 AoU Prod Conditional
 */}}
 {{- define "workspacemanager.aouprodconditional" -}}
-  ((.email|endswith("@researchallofus.org")) and (.audience | split(".")[0] as $idkey | "${AOU_PROD_WHITELIST}" | split(",") | any(contains($idkey))))
+  ((.email|endswith("@researchallofus.org")) and (.audience as $idkey | "${AOU_PROD_WHITELIST}" | split(",") | map(. as $element | $idkey | startswith($element))))
 {{- end }}
 {{/*
 AoU Dev Conditional
 */}}
 {{- define "workspacemanager.aoudevconditional" -}}
-  ((.email|endswith("@fake-research-aou.org")) and (.audience | split(".")[0] as $idkey | "${AOU_DEV_WHITELIST}" | split(",") | any(contains($idkey))))
+  ((.email|endswith("@fake-research-aou.org")) and (.audience as $idkey | "${AOU_DEV_WHITELIST}" | split(",") | map(. as $element | $idkey | startswith($element))))
 {{- end }}
 {{/*
 AoU Stable Conditional
 */}}
 {{- define "workspacemanager.aoustableconditional" -}}
-  ((.email|endswith("@stable.fake-research-aou.org")) and (.audience | split(".")[0] as $idkey | "${AOU_STABLE_WHITELIST}" | split(",") | any(contains($idkey))))
+  ((.email|endswith("@stable.fake-research-aou.org")) and (.audience as $idkey | "${AOU_STABLE_WHITELIST}" | split(",") | map(. as $element | $idkey | startswith($element))))
 {{- end }}
 {{/*
 AoU Staging Conditional
 */}}
 {{- define "workspacemanager.aoustagingconditional" -}}
-  ((.email|endswith("@staging.fake-research-aou.org")) and (.audience | split(".")[0] as $idkey | "${AOU_STAGING_WHITELIST}" | split(",") | any(contains($idkey))))
+  ((.email|endswith("@staging.fake-research-aou.org")) and (.audience as $idkey | "${AOU_STAGING_WHITELIST}" | split(",") | map(. as $element | $idkey | startswith($element))))
 {{- end }}
 {{/*
 Terra ID Whitelist
 */}}
 {{- define "workspacemanager.terraidwhitelist" -}}
-  (.audience | split(".")[0] as $idkey | "${TERRA_ID_WHITELIST}" | split(",") | any(contains($idkey)))
+  (.audience as $idkey | "${TERRA_ID_WHITELIST}" | split(",") | map(. as $element | $idkey | startswith($element)))
 {{- end }}
 {{/*
 Terra Conditional
