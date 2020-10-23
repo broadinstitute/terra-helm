@@ -2862,6 +2862,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.4.0/leonardo-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
+    created: "2020-10-23T13:22:45.245365466Z"
+    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
+    digest: 8b4db7779c41a3332a13985f2a139b7ae7b20bfc6c4306e59f30c8ae02f5c187
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.4.0-173.1603459361.d347e2/leonardo-0.4.0-173.1603459361.d347e2.tgz
+    version: 0.4.0-173.1603459361.d347e2
+  - apiVersion: v2
     created: "2020-10-22T18:49:11.790396501Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
     digest: 3824a80865402c1e75b1bb760de9276ec7446f745b0c171d32f319b78e67e749
