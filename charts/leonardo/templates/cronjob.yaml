@@ -91,5 +91,5 @@ spec:
             emptyDir: {}
           - name: application-config
             configMap:
-              name: resource-validator-cm
+              name: leonardo-resource-validator-cm
               

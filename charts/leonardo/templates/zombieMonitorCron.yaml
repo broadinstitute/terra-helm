@@ -93,4 +93,4 @@ spec:
             emptyDir: {}
           - name: application-config
             configMap:
-              name: zombie-monitor-cm
+              name: leonardo-zombie-monitor-cm
