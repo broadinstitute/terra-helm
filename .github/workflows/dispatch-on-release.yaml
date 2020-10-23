@@ -37,7 +37,7 @@ jobs:
         id: release-strategy
         run: |
           CHART_NAME="${{ steps.release-info.outputs.chart-name }}"
-          DEV_ONLY=$(jq -r ".${CHART_NAME}.dev_only" release-strategy.json)
+          DEV_ONLY=$(jq -r ".\"${CHART_NAME}\".dev_only" release-strategy.json)
           if [[ "${DEV_ONLY}" == 'null' ]]; then
             echo "No release strategy found, no dispatch will be sent"
           else
