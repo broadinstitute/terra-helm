@@ -44,6 +44,8 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: {{ $settings.name }}-proxy-security-logs
         emptyDir: {}
+      - name: rawls-prometheusjmx-jar
+        emptyDir: {}
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
@@ -70,6 +72,10 @@ spec:
         - mountPath: /etc/billing-account.pem
           subPath: billing-account.pem
           name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+          name: rawls-prometheusjmx-jar
           readOnly: true
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
@@ -121,5 +127,12 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ $settings.name }}-proxy-security-logs
+      initContainers:
+      - name: download-prometheusjmx-jar
+        image: alpine:3.12.0
+        command: ["wget", "-O", "/rawls-prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
+        volumeMounts:
+        - mountPath: /rawls-prometheusjmx-jar
+          name: rawls-prometheusjmx-jar
 {{- end -}}
 
