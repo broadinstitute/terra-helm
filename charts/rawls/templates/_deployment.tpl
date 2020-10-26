@@ -44,8 +44,11 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: {{ $settings.name }}-proxy-security-logs
         emptyDir: {}
+<<<<<<< HEAD
       - name: rawls-prometheusjmx-jar
         emptyDir: {}
+=======
+>>>>>>> f7f8e005f2b0110a00f707f1228bea083fa0bee2
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
@@ -73,10 +76,13 @@ spec:
           subPath: billing-account.pem
           name: app-ctmpls
           readOnly: true
+<<<<<<< HEAD
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: rawls-prometheusjmx-jar
           readOnly: true
+=======
+>>>>>>> f7f8e005f2b0110a00f707f1228bea083fa0bee2
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
         envFrom:
@@ -127,6 +133,7 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ $settings.name }}-proxy-security-logs
+<<<<<<< HEAD
       initContainers:
       - name: download-prometheusjmx-jar
         image: alpine:3.12.0
@@ -134,5 +141,7 @@ spec:
         volumeMounts:
         - mountPath: /rawls-prometheusjmx-jar
           name: rawls-prometheusjmx-jar
+=======
+>>>>>>> f7f8e005f2b0110a00f707f1228bea083fa0bee2
 {{- end -}}
 
