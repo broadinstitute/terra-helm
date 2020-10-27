@@ -86,7 +86,7 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 10
             failureThreshold: 30 # Restart container after 5 minutes
-        - name: {{ Chart.Name }}-proxy
+        - name: {{ .Chart.Name }}-proxy
           image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:
             - containerPort: 443
