@@ -26,7 +26,7 @@ spec:
           hostnames:
             - app
       containers:
-        - name: {{ .Chart.Name }}-service
+        - name: {{ .Chart.Name }}-app
           image: "{{- if .Values.image -}}
           {{ .Values.image }}
           {{- else -}}
@@ -86,7 +86,7 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 10
             failureThreshold: 30 # Restart container after 5 minutes
-        - name: oidc-proxy
+        - name: {{ Chart.Name }}-proxy
           image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:
             - containerPort: 443
