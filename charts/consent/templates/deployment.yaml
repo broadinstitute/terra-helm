@@ -120,7 +120,7 @@ spec:
           securityContext:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
-        - name: {{ Chart.Name }}-proxy
+        - name: {{ .Chart.Name }}-proxy
           image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:
             - containerPort: 443
