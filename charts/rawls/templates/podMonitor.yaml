@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: rawls-jvm-monitor
+  labels: 
+{{ include "rawls.labels" . | indent 4 }}
+spec:
+  jobLabel: rawls-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: rawls
+  podMetricsEndpoints:
+    - port: metrics
