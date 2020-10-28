@@ -1,11 +1,11 @@
 apiVersion: secrets-manager.tuenti.io/v1alpha1
 kind: SecretDefinition
 metadata:
-  name: secretdefinition-{{ .Values.Name }}-cert
+  name: secretdefinition-{{ .Values.name }}-cert
   labels:
 {{ include "sam.labels" . | indent 4 }}
 spec:
-  name: {{ .Values.Name }}-cert
+  name: {{ .Values.name }}-cert
   keysMap:
     cert:
       path: {{ required "A valid ingressCert.cert.path value is required when ingressCert is enabled" .Values.ingressCert.cert.path }}

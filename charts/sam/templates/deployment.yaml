@@ -4,7 +4,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.Name }}-deployment
+  name: {{ .Values.name }}-deployment
   labels:
 {{ include "sam.labels" . | indent 4 }}
 spec:
@@ -17,15 +17,15 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.Name }}-deployment
+      deployment: {{ .Values.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.Name }}-deployment
+        deployment: {{ .Values.name }}-deployment
 {{ include "sam.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ .Values.Name }}-cm: {{ $outputs.configmapChecksum }}
+        checksum/{{ .Values.name }}-cm: {{ $outputs.configmapChecksum }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name
@@ -46,10 +46,10 @@ spec:
       - name: sqlproxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
-      - name: {{ .Values.Name }}-gc-logs
+      - name: {{ .Values.name }}-gc-logs
         emptyDir: {}
       containers:
-      - name: {{ .Values.Name }}-app
+      - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
           - name: metrics
@@ -93,7 +93,7 @@ spec:
           name: app-ctmpls
           readOnly: true
         - mountPath: /var/log/gc
-          name: {{ .Values.Name }}-gc-logs
+          name: {{ .Values.name }}-gc-logs
         readinessProbe:
           httpGet:
             path: /status
@@ -112,7 +112,7 @@ spec:
           periodSeconds: 10
           failureThreshold: 30 # 5 minutes before restarted
           successThreshold: 1
-      - name: {{ .Values.Name }}-sqlproxy
+      - name: {{ .Values.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:
         - secretRef:
@@ -122,7 +122,7 @@ spec:
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
           readOnly: true
-      - name: {{ .Values.Name }}-proxy
+      - name: {{ .Values.name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big
         ports:
           - containerPort: 443
@@ -157,4 +157,4 @@ spec:
           name: proxy-ctmpls
           readOnly: true
         - mountPath: /var/log/modsecurity
-          name: {{ .Values.Name }}-proxy-security-logs
+          name: {{ .Values.name }}-proxy-security-logs
