@@ -40,3 +40,7 @@ dependencies:
   condition: reloader.enabled
   version: v0.0.69
   repository: https://stakater.github.io/stakater-charts
+- name: filebeat
+  condition: filebeat.enabled
+  version: 7.9.3
+  repository: https://helm.elastic.co
