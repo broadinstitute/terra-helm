@@ -6,7 +6,7 @@ global:
   trustedAddresses: {}
 
 # name -- A name for the deployment that will be substituted into resuorce definitions
-name: cromwell
+name: sam
 
 # ingressIpName -- Name of GCP global static external IP address. Required.
 ingressIpName:
