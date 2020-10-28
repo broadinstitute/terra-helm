@@ -22,6 +22,18 @@ imageConfig:
 # replicas -- Number of replicas for the deployment
 replicas: 0
 
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 4
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 16Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 4
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 16Gi
+
 # allowedAddresses -- What source IPs to whitelist for access to the service
 allowedAddresses: {}
 

@@ -54,12 +54,7 @@ spec:
             containerPort: 9090
             protocol: TCP
         resources:
-          requests:
-            cpu: 4
-            memory: 16Gi
-          limits:
-            cpu: 4
-            memory: 16Gi
+{{ toYaml .Values.resources | indent 10 }}
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
