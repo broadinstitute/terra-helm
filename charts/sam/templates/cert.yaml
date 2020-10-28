@@ -7,9 +7,9 @@ metadata:
 spec:
   name: {{ .Values.name }}-cert
   keysMap:
-    cert:
+    tls.crt:
       path: {{ required "A valid ingressCert.cert.path value is required when ingressCert is enabled" .Values.ingressCert.cert.path }}
       key: {{ required "A valid ingressCert.cert.secretKey value is required when ingressCert is enabled" .Values.ingressCert.cert.secretKey }}
-    key:
+    tls.key:
       path: {{ required "A valid ingressCert.key.path value is required when ingressCert is enabled" .Values.ingressCert.key.path }}
       key: {{ required "A valid ingressCert.key.secretKey value is required when ingressCert is enabled" .Values.ingressCert.key.secretKey }}
