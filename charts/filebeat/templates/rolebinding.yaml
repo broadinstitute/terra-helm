@@ -7,6 +7,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: filebeat-sa
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: terra-filebeat-clusterrole
