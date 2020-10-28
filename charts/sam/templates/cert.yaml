@@ -3,7 +3,7 @@ kind: SecretDefinition
 metadata:
   name: secretdefinition-{{ .Values.Name }}-cert
   labels:
-    {{ include "sam.labels" . | indent 4 }}
+{{ include "sam.labels" . | indent 4 }}
 spec:
   name: {{ .Values.Name }}-cert
   keysMap:
