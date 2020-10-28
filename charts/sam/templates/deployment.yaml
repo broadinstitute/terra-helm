@@ -1,9 +1,10 @@
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
+{{- $outputs := ._deploymentOutputs -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ .Values.Name }}-deployment
   labels:
 {{ include "sam.labels" . | indent 4 }}
 spec:
@@ -16,15 +17,15 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Chart.Name }}-deployment
+      deployment: {{ .Values.Name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Chart.Name }}-deployment
-{{ include "cromwell.labels" . | indent 8 }}
+        deployment: {{ .Values.Name }}-deployment
+{{ include "sam.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
+        checksum/{{ .Values.Name }}-cm: {{ $outputs.configmapChecksum }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name
@@ -45,10 +46,10 @@ spec:
       - name: sqlproxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
-      - name: {{ .Chart.Name }}-gc-logs
+      - name: {{ .Values.Name }}-gc-logs
         emptyDir: {}
       containers:
-      - name: {{ .Chart.Name }}-app
+      - name: {{ .Values.Name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
           - name: metrics
@@ -79,6 +80,10 @@ spec:
           subPath: sam.conf
           name: app-ctmpls
           readOnly: true
+        - mountPath: /etc/sam-account.pem
+          subPath: sam-account.pem
+          name: app-ctmpls
+          readOnly: true
         - mountPath: /etc/sam-account.json
           subPath: sam-account.json
           name: app-ctmpls
@@ -88,7 +93,7 @@ spec:
           name: app-ctmpls
           readOnly: true
         - mountPath: /var/log/gc
-          name: {{ .Chart.Name }}-gc-logs
+          name: {{ .Values.Name }}-gc-logs
         readinessProbe:
           httpGet:
             path: /status
@@ -107,7 +112,17 @@ spec:
           periodSeconds: 10
           failureThreshold: 30 # 5 minutes before restarted
           successThreshold: 1
-      - name: {{ .Chart.Name }}-proxy
+      - name: {{ .Values.Name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_2018117
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
+      - name: {{ .Values.Name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big
         ports:
           - containerPort: 443
@@ -129,29 +144,17 @@ spec:
           subPath: ca-bundle.crt
           name: proxy-ctmpls
           readOnly: true
-        - mountPath: /etc/apache2/sites-enabled/site.conf
+        - mountPath: /etc/apache2/sites-available/site.conf
           subPath: site.conf
           name: proxy-ctmpls
           readOnly: true
-        - mountPath: /var/log/modsecurity
-          subPath: mpm_event.conf
+        - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
+          subPath: mod_security_logging.conf
           name: proxy-ctmpls
-          readOnly: false
-      - name: {{ $settings.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_2018117
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
           readOnly: true
-      initContainers:
-      - name: download-prometheusjmx-jar
-        image: alpine:3.12.0
-        command: ["wget", "-O", "/cromwell-prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
-        volumeMounts:
-        - mountPath: /cromwell-prometheusjmx-jar
-          name: cromwell-prometheusjmx-jar
-
+        - mountPath: /etc/apache2/tcell_agent.config
+          subPath: tcell_agent.config
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /var/log/modsecurity
+          name: {{ $settings.name }}-proxy-security-logs
