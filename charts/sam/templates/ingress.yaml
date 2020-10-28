@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: {{ .Values.name }}-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: my-static-address
+    kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingressIpName }}
     kubernetes.io/ingress.allow-http: "false"
 spec:
   tls:
