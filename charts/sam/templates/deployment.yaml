@@ -157,4 +157,4 @@ spec:
           name: proxy-ctmpls
           readOnly: true
         - mountPath: /var/log/modsecurity
-          name: {{ $settings.name }}-proxy-security-logs
+          name: {{ .Values.Name }}-proxy-security-logs
