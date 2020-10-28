@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io.v1beta1
+kind: ClusterRole
+metadata:
+  name: terra-filebeat-clusterrole
+  labels: 
+{{ include "terra-filebeat.labels" . | indent 4 }}
+rules:
+- apiGroups: ["extensions"]
+  resources: ["podsecuritypolicies"]
+  resourceNames: ["terra-default-psp"]
+  verbs: ["use"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metatdata:
+  name: terra-filebeat-rolebinding
+  labels:
+{{ include "terra-filebeat.labels" . | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: terra-filebeat-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: filebeat-sa
+  namespace: {{ .Release.Namespace }}

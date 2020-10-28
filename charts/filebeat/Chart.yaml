@@ -1,0 +1,24 @@
+---
+apiVersion: v2
+name: terra-filebeat
+version: 0.0.0
+
+description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+type: application
+
+keywords:
+- dsp
+- broadinstitute
+- logs
+- logging
+- log
+- filebeat
+- kibana
+
+sources: 
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
+
+dependencies:
+- name: filebeat
+  version: 7.9.3
+  repository: https://helm.elastic.co
