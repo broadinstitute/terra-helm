@@ -1,6 +1,5 @@
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
-{{- $outputs := ._deploymentOutputs -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,9 +22,6 @@ spec:
       labels:
         deployment: {{ .Values.name }}-deployment
 {{ include "sam.labels" . | indent 8 }}
-      annotations:
-        {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ .Values.name }}-cm: {{ $outputs.configmapChecksum }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name
