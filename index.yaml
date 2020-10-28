@@ -1562,6 +1562,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.8.0/cromwell-0.8.0.tgz
     version: 0.8.0
   - apiVersion: v2
+    created: "2020-10-28T19:15:54.130099443Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 604e1b2c5bf25141b58f0f344efb327f6f36b1c9d80d000f6661ce1345618133
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.8.0-183.1603912545.dc259d/cromwell-0.8.0-183.1603912545.dc259d.tgz
+    version: 0.8.0-183.1603912545.dc259d
+  - apiVersion: v2
     created: "2020-10-01T16:21:31.323689292Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
     digest: 82fde2c45d23285be528ddbda5484700e97c93a76a84d5b1fd4a0cba17f10bd5
@@ -10493,6 +10510,29 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-psps-0.0.2/terra-cluster-psps-0.0.2.tgz
     version: 0.0.2
   terra-filebeat:
+  - apiVersion: v2
+    created: "2020-10-28T19:15:54.23664216Z"
+    dependencies:
+    - name: filebeat
+      repository: https://helm.elastic.co
+      version: 7.9.3
+    description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+    digest: 4409facdf4ce2c1f020e2f22dd1226f0a7644492e6cee5883ab0d138aa2811c5
+    keywords:
+    - dsp
+    - broadinstitute
+    - logs
+    - logging
+    - log
+    - filebeat
+    - kibana
+    name: terra-filebeat
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.0.0-183.1603912545.dc259d/terra-filebeat-0.0.0-183.1603912545.dc259d.tgz
+    version: 0.0.0-183.1603912545.dc259d
   - apiVersion: v2
     created: "2020-10-28T18:57:24.491927534Z"
     dependencies:
