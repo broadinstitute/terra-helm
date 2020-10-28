@@ -5,7 +5,8 @@ metadata:
   labels:
 {{ include "filebeat.labels" . | indent 4 }}
 rules:
-- apiGroups: ["extensions"]
-  resources: ["podsecuritypolicies"]
-  resourceNames: ["terra-default-psp"]
-  verbs: ["use"]
+- apiGroups: ['policy']
+  resources: ['podsecuritypolicies']
+  verbs:     ['use']
+  resourceNames:
+  - terra-default-psp
