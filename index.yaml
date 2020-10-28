@@ -10422,6 +10422,29 @@ entries:
     version: 0.0.2
   terra-filebeat:
   - apiVersion: v2
+    created: "2020-10-28T18:11:33.366556749Z"
+    dependencies:
+    - name: filebeat
+      repository: https://helm.elastic.co
+      version: 7.9.3
+    description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+    digest: a038bf5a57a6d3e7d4e64fae2a0de0bf090277e752ed4a1ab9070b5955698b5e
+    keywords:
+    - dsp
+    - broadinstitute
+    - logs
+    - logging
+    - log
+    - filebeat
+    - kibana
+    name: terra-filebeat
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.0.0-183.1603908686.06d64b/terra-filebeat-0.0.0-183.1603908686.06d64b.tgz
+    version: 0.0.0-183.1603908686.06d64b
+  - apiVersion: v2
     created: "2020-10-28T18:00:20.474551308Z"
     dependencies:
     - name: filebeat
