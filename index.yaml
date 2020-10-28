@@ -10366,6 +10366,30 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-psps-0.0.2/terra-cluster-psps-0.0.2.tgz
     version: 0.0.2
+  terra-filebeat:
+  - apiVersion: v2
+    created: "2020-10-28T17:14:35.603657829Z"
+    dependencies:
+    - name: filebeat
+      repository: https://helm.elastic.co
+      version: 7.9.3
+    description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+    digest: 073cfba2e4f286e072af833767d2bb694fdd9100136396551819d1ecb82f36f0
+    keywords:
+    - dsp
+    - broadinstitute
+    - logs
+    - logging
+    - log
+    - filebeat
+    - kibana
+    name: terra-filebeat
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.0.0-183.1603905269.e52e4f/terra-filebeat-0.0.0-183.1603905269.e52e4f.tgz
+    version: 0.0.0-183.1603905269.e52e4f
   terra-kernel:
   - apiVersion: v2
     created: "2020-04-13T18:04:39.711747303Z"
