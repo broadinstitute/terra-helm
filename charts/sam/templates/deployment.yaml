@@ -44,6 +44,8 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: {{ .Values.name }}-gc-logs
         emptyDir: {}
+      - name: {{ .Values.name }}-proxy-security-logs
+        emptyDir: {}
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
