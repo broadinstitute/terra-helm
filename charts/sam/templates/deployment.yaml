@@ -50,6 +50,9 @@ spec:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
+          - name: status
+            containerPort: 8080
+            protocol: TCP
           - name: metrics
             containerPort: 9090
             protocol: TCP
@@ -87,24 +90,24 @@ spec:
           readOnly: true
         - mountPath: /var/log/gc
           name: {{ .Values.name }}-gc-logs
-        # readinessProbe:
-        #   httpGet:
-        #     path: /status
-        #     port: 8000
-        #   timeoutSeconds: 5
-        #   initialDelaySeconds: 20
-        #   periodSeconds: 10
-        #   failureThreshold: 6 # 60 seconds before unready
-        #   successThreshold: 1
-        # livenessProbe:
-        #   httpGet:
-        #     path: /status
-        #     port: 8000
-        #   timeoutSeconds: 5
-        #   initialDelaySeconds: 20
-        #   periodSeconds: 10
-        #   failureThreshold: 30 # 5 minutes before restarted
-        #   successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
       - name: {{ .Values.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:
