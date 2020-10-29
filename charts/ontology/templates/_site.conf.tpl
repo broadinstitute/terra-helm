@@ -26,7 +26,6 @@ LDAPCacheTTL ${LDAP_CACHE_TTL}
 </VirtualHost>
 
 <VirtualHost _default_:${SSL_HTTPD_PORT}>
-ServerAlias ${SERVER_NAME_INT}
 
     DocumentRoot /app
 
