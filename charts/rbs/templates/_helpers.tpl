@@ -1,7 +1,7 @@
 {{/*
 Create labels to use for resources in this chart
 */}}
-{{ include "rbs.labels" . | indent 4 }}
+{{ include "rbs.labels" . | indent 8 }}
 {{- define "rbs.labels" -}}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app.kubernetes.io/name: {{ .Chart.Name }}
