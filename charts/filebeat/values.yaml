@@ -2,4 +2,4 @@ filebeat:
   serviceAccount: filebeat-sa
   envFrom:
   - secretRef:
-    name: filebeat-secrets
+      name: filebeat-secrets
