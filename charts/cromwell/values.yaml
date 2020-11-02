@@ -29,6 +29,8 @@ deploymentDefaults:
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
   legacyResourcePrefix: null
+  # deploymentDefaults.nodeSelector -- Optional nodeSelector
+  nodeSelector: null
 
 # A map of Cromwell deployments. In Terra's production environment,
 # Cromwell is deployed as 4 separate services with different configurations.

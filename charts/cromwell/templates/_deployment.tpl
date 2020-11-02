@@ -179,4 +179,8 @@ spec:
         volumeMounts:
         - mountPath: /cromwell-prometheusjmx-jar
           name: cromwell-prometheusjmx-jar
+      {{- if $settings.nodeSelector }}
+      nodeSelector:
+        {{ $settings.nodeSelector | toYaml | indent 8 | trim }}
+      {{- end -}}
 {{- end -}}
