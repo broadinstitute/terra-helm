@@ -6,9 +6,9 @@ metadata:
 {{ include "filebeat.labels" . | indent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: filebeat-sa
+  name: {{ .Chart.Name }}-sa
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: terra-filebeat-clusterrole
+  name: {{ .Chart.Name }}-clusterrole
   apiGroup: rbac.authorization.k8s.io

@@ -1,5 +1,3 @@
-filebeat:
-  serviceAccount: filebeat-sa
-  envFrom:
-  - secretRef:
-      name: filebeat-secrets
+image: docker.elastic.co/beats/filebeat-oss
+imageTag: 7.6.2
+podSecurityPolicy: terra-default-psp
