@@ -18,7 +18,3 @@ keywords:
 sources: 
 - https://github.com/broadinstitute/terra-helm/tree/master/charts
 
-dependencies:
-- name: filebeat
-  version: 6.8.13
-  repository: https://helm.elastic.co
