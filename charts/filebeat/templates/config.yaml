@@ -20,7 +20,7 @@ data:
     processors:
       - add_cloud_metadata:
 
-    output.logstash:
-      hosts: ['${LOGIT_URL}:{{ .Values.beatsPort }}']
-      loadbalance: true
-      ssl.enabled: true
+    output.elasticsearch:
+      hosts: ["https://${LOGIT_URL}"]
+      api_key: ${LOGIT_KEY}
+      
