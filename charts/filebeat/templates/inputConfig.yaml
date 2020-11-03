@@ -8,6 +8,7 @@ metadata:
 data:
   kubernetes.yml: |-
     - type: docker
+      enabled: true
       containers.ids:
       - "*"
       processors:
