@@ -23,4 +23,5 @@ data:
     output.elasticsearch:
       hosts: ["https://${LOGIT_URL}:443"]
       api_key: ${LOGIT_KEY}
+      index: mf-test
       
