@@ -49,7 +49,8 @@ spec:
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
-        ports: 
+        ports:
+          - containerPort: 8080 
           - name: metrics
             containerPort: 9090
             protocol: TCP
@@ -77,6 +78,24 @@ spec:
           subPath: prometheusjmx.jar
           name: rawls-prometheusjmx-jar
           readOnly: true
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
         envFrom:
