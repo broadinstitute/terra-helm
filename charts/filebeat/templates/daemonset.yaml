@@ -13,7 +13,7 @@ spec:
       labels:
 {{ include "filebeat.labels" . | indent 8 }}
     spec:
-      serviceAccountName: filebeat
+      serviceAccountName: {{ .Chart.Name }}-sa
       terminationGracePeriodSeconds: 30
       containers:
       - name: filebeat
