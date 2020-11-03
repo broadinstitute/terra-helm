@@ -17,3 +17,6 @@ data:
             when:
               equals:
                 kubernetes.namespace: "kube-system"
+        - add_fields:
+            fields:
+              type: syslog
