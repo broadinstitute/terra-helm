@@ -3,13 +3,11 @@ kind: DaemonSet
 metadata:
   name: {{ .Chart.Name }}-daemonset
   labels:
-    k8s-app: filebeat
 {{ include "filebeat.labels" . | indent 4 }}
 spec:
   template:
     metadata:
       labels:
-        k8s-app: filebeat
 {{ include "filebeat.labels" . | indent 8 }}
     spec:
       serviceAccountName: filebeat
