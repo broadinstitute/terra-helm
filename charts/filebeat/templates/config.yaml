@@ -21,6 +21,6 @@ data:
       - add_cloud_metadata:
 
     output.elasticsearch:
-      hosts: ["https://${LOGIT_URL}"]
+      hosts: ["https://${LOGIT_URL}:443"]
       api_key: ${LOGIT_KEY}
       
