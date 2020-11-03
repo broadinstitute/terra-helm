@@ -5,6 +5,9 @@ metadata:
   labels:
 {{ include "filebeat.labels" . | indent 4 }}
 spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Chart.Name }}
   template:
     metadata:
       labels:
