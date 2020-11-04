@@ -3020,6 +3020,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.12.0/leonardo-0.12.0.tgz
     version: 0.12.0
   - apiVersion: v2
+    created: "2020-11-04T20:05:58.417856254Z"
+    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
+    digest: d321fc8f7bdb13869a6b87f7b8ce7f4ff1d2fa48bf72f8dfe198cd09eeca8c0b
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.12.0-183.1604520348.d47835/leonardo-0.12.0-183.1604520348.d47835.tgz
+    version: 0.12.0-183.1604520348.d47835
+  - apiVersion: v2
     created: "2020-10-29T15:14:47.092344856Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
     digest: 638ff9421d17ffd84631666ed53f2a5537d850eea4905becd484800f7a92f121
@@ -5087,6 +5104,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.6.0/ontology-0.6.0.tgz
     version: 0.6.0
+  - apiVersion: v2
+    created: "2020-11-04T20:05:58.52567337Z"
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: 1ead3d3efeae2b4788bc1ea3974cb8beb2a294658629f9d8f58e386e333d1871
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.6.0-183.1604520348.d47835/ontology-0.6.0-183.1604520348.d47835.tgz
+    version: 0.6.0-183.1604520348.d47835
   - apiVersion: v2
     created: "2020-10-27T15:03:03.028228077Z"
     description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
@@ -7854,6 +7889,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/rbs-0.3.0/rbs-0.3.0.tgz
     version: 0.3.0
+  - apiVersion: v2
+    created: "2020-11-04T20:05:58.610077153Z"
+    description: Chart for Resource Buffering Service
+    digest: 1d219a0be2fbab64ff311dbf8cffe1adaff4803b6bccd6e37ed5b4b6b0cb8c52
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rbs
+    name: rbs
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-rbs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rbs-0.3.0-183.1604520349.d47835/rbs-0.3.0-183.1604520349.d47835.tgz
+    version: 0.3.0-183.1604520349.d47835
   - apiVersion: v2
     created: "2020-11-02T14:22:08.003489425Z"
     description: Chart for Resource Buffering Service
@@ -10872,6 +10924,25 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-psps-0.0.2/terra-cluster-psps-0.0.2.tgz
     version: 0.0.2
   terra-filebeat:
+  - apiVersion: v2
+    created: "2020-11-04T20:05:58.741749606Z"
+    description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+    digest: 07e421c22fc1a6fc879157b2151c2171303957cabfbd302827b60b946a7a5607
+    keywords:
+    - dsp
+    - broadinstitute
+    - logs
+    - logging
+    - log
+    - filebeat
+    - kibana
+    name: terra-filebeat
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.0.0-183.1604520348.d47835/terra-filebeat-0.0.0-183.1604520348.d47835.tgz
+    version: 0.0.0-183.1604520348.d47835
   - apiVersion: v2
     created: "2020-11-03T20:35:08.164096714Z"
     description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
