@@ -46,6 +46,8 @@ spec:
         emptyDir: {}
       - name: rawls-prometheusjmx-jar
         emptyDir: {}
+      resources:
+{{ toYaml .Values.resources | indent 8 }}
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
@@ -57,6 +59,15 @@ spec:
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
+        env: 
+        - name: K8S_NODE_NAME
+          valueFrom: 
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         volumeMounts:
         - mountPath: /etc/rawls.conf
           subPath: rawls.conf

@@ -5,6 +5,20 @@ global:
   # Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   trustedAddresses: {}
 
+
+# Resource limits for rawls containers
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 8
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 16Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 8
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 16Gi
+
 # rawls can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
@@ -32,6 +46,4 @@ deploymentDefaults:
 
 # A map of rawls deployments. In Terra's production environment,
 # rawls is deployed as 2 separate services (frontend and backend) with different configurations.
-#
-# Here, we configure it as a single standalone deployment, similar to how a
-# developer might run rawls.
+
