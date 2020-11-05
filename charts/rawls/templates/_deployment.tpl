@@ -47,7 +47,7 @@ spec:
       - name: rawls-prometheusjmx-jar
         emptyDir: {}
       resources:
-{{ toYaml .Values.resources | indent 8 }}
+{{ toYaml .Values.resources | indent 10 }}
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
