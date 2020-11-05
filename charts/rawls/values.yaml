@@ -19,6 +19,19 @@ resources:
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 16Gi
 
+# Parameters to pull cert for GKE ingress from vault
+ingressCert:
+  cert:
+    # ingressCert.cert.path -- (string) Path to secret containing .crt
+    path:
+    # ingressCert.cert.secretKey -- (string) Key in secret containing .crt
+    secretKey:
+  key:
+    # ingressCert.key.path -- (string) Path to secret containing .key
+    path:
+    # ingressCert.key.secretKey -- (string) Key in secret containing .key
+    secretKey:
+
 # rawls can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:

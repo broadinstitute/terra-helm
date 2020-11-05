@@ -7,6 +7,8 @@ metadata:
   name: {{ $settings.serviceName | default $settings.name }}
   labels:
 {{ include "rawls.labels" . | indent 4 }}
+  annotations:
+    cloud.google.com/app-protocols: '{"https":"HTTPS"}'
 spec:
   selector:
     deployment: {{ $settings.name }}
