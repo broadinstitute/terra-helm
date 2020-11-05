@@ -1,0 +1,15 @@
+apiVersion: secrets-manager.tuenti.io/v1alpha1
+kind: SecretDefinition
+metadata:
+  name: secretdefinition-{{ .Chart.Name }}-cert
+  labels:
+{{ include "rawls.labels" . | indent 4 }}
+spec:
+  name: {{ .Values.name }}-cert
+  keysMap:
+    tls.crt:
+      path: {{ required "A valid ingressCert.cert.path value is required when ingressCert is enabled" .Values.ingressCert.cert.path }}
+      key: {{ required "A valid ingressCert.cert.secretKey value is required when ingressCert is enabled" .Values.ingressCert.cert.secretKey }}
+    tls.key:
+      path: {{ required "A valid ingressCert.key.path value is required when ingressCert is enabled" .Values.ingressCert.key.path }}
+      key: {{ required "A valid ingressCert.key.secretKey value is required when ingressCert is enabled" .Values.ingressCert.key.secretKey }}
