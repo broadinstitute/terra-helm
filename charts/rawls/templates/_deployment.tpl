@@ -46,11 +46,12 @@ spec:
         emptyDir: {}
       - name: rawls-prometheusjmx-jar
         emptyDir: {}
-      resources:
-{{ toYaml .Values.resources | indent 10 }}
+
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
         ports:
           - containerPort: 8080 
           - name: metrics
