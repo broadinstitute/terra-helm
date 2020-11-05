@@ -20,5 +20,7 @@ spec:
   {{- if $settings.serviceIP }}
   type: LoadBalancer
   loadBalancerIP: {{ $settings.serviceIP }}
+  {{- else -}}
+  type: NodePort
   {{- end -}}
 {{- end -}}
