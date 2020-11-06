@@ -6,6 +6,11 @@ metadata:
   name: {{ .Values.name }}-deployment
   labels:
 {{ include "sam.labels" . | indent 4 }}
+  {{- if and .Values.reloader.enabled }}
+  annotations:
+    # Use https://github.com/stakater/Reloader to reload deployment on config changes
+    reloader.stakater.com/auto: "true"
+  {{- end }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -46,6 +51,10 @@ spec:
         emptyDir: {}
       - name: {{ .Values.name }}-proxy-security-logs
         emptyDir: {}
+      {{- if .Values.prometheus.enabled }}
+      - name: {{ .Values.name }}-prometheusjmx-jar
+        emptyDir: {}
+      {{- end }}
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
@@ -53,9 +62,21 @@ spec:
           - name: status
             containerPort: 8080
             protocol: TCP
+          {{- if .Values.prometheus.enabled }}
           - name: metrics
             containerPort: 9090
             protocol: TCP
+          {{- end }}
+        command: ["/bin/bash"]
+        args:
+        - '-c'
+        - >-
+          java ${JAVA_OPTS}
+          {{- if .Values.prometheus.enabled }}
+          -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/cromwell-cm/prometheusJmx.yaml
+          {{- end }}
+          -jar $(find /sam -name 'sam*.jar')
+        - '--'
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         envFrom:
@@ -72,6 +93,9 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         volumeMounts:
+        - name: configs
+          mountPath: /etc/{{ .Values.name }}-cm
+          readOnly: true
         - mountPath: /etc/sam.conf
           subPath: sam.conf
           name: app-ctmpls
@@ -90,6 +114,11 @@ spec:
           readOnly: true
         - mountPath: /var/log/gc
           name: {{ .Values.name }}-gc-logs
+        {{- if .Values.prometheus.enabled }}
+        - name: {{ .Values.name }}-prometheusjmx-jar
+          mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+        {{- end }}
         readinessProbe:
           httpGet:
             path: /status
@@ -154,3 +183,16 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ .Values.name }}-proxy-security-logs
+      {{- if .Values.prometheus.enabled }}
+      initContainers:
+      - name: download-prometheus-jmx-jar
+        image: {{ .Values.prometheus.initContainerImage }}
+        command: [
+          "wget",
+          "-O",
+          "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+        ]
+        volumeMounts:
+        - name: {{ .Values.name }}-prometheusjmx-jar
+          mountPath: /{{ .Values.name }}-prometheusjmx-jar
+      {{- end }}
