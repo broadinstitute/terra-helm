@@ -38,9 +38,9 @@ spec:
         - app
         - sam-sqlproxy
       volumes:
-      - name: app-ctmpls
-        secret:
-          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
+      - name: configs
+        configMap:
+          name: {{ .Values.name }}-configmap
       - name: proxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
