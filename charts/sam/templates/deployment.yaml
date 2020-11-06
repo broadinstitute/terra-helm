@@ -76,7 +76,7 @@ spec:
         - >-
           java ${JAVA_OPTS}
           {{- if .Values.prometheus.enabled }}
-          -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/cromwell-cm/prometheusJmx.yaml
+          -javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ .Values.name }}-cm/prometheusJmx.yaml
           {{- end }}
           -jar $(find /sam -name 'sam*.jar')
         - '--'
