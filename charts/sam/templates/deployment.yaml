@@ -40,7 +40,10 @@ spec:
       volumes:
       - name: configs
         configMap:
-          name: {{ .Values.name }}-configmap
+          name: {{ .Chart.Name }}-configmap
+      - name: app-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       - name: proxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
