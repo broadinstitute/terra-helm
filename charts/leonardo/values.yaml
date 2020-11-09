@@ -1,6 +1,7 @@
 global:
   # global.applicationVersion -- What version of the Leonardo application to deploy
   applicationVersion: latest
+
 # Leonardo can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
@@ -18,8 +19,10 @@ deploymentDefaults:
   replicas: 0
   # deploymentDefaults.expose -- Whether to create a Service + Ingress for this deployment
   expose: false
-  # deploymentDefaults.serviceIP -- Static IP to use for the Service. (optional)
-  serviceIP: null
+  ingress:
+    # deploymentDefaults.ingress.annotations -- (object) Map of annotations to add to Ingress
+    annotations: null
+
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
 # with different configurations.
@@ -34,8 +37,7 @@ deployments:
     replicas: 1
     # deployments.standalone.expose -- Whether to expose the default standalone Leonardo deployment as a service
     expose: true
-    # deployments.standalone.serviceName -- Name of the default standalone Leonardo service
-    serviceName: leonardo
+
 commonCronjob:
   # this is defined in terra-helm repo
   reportDestinationBucket:
