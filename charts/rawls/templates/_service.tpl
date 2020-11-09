@@ -9,7 +9,6 @@ metadata:
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
   labels:
 {{ include "rawls.labels" . | indent 4 }}
-  
 spec:
   selector:
     deployment: {{ $settings.name }}
@@ -21,7 +20,7 @@ spec:
   {{- if $settings.serviceIP }}
   type: LoadBalancer
   loadBalancerIP: {{ $settings.serviceIP }}
-  {{- else -}}
+  {{- else }}
   type: NodePort
   {{- end -}}
 {{- end -}}
