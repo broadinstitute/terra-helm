@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ .Chart.Name }}-ingress
+  labels:
+{{ include "rawls.labels" . | indent 4 }}
   annotations:
     kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingressIpName }}
     kubernetes.io/ingress.allow-http: "false"
