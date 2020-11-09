@@ -17,11 +17,12 @@ Current chart version is `0.8.0`
 | deploymentDefaults.imageTag | string | `nil` | Image tag to be used when deploying Pods @defautl global.applicationVersion |
 | deploymentDefaults.legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default deploymentDefaults.name |
 | deploymentDefaults.name | string | `nil` | A name for the deployment that will be substituted into resuorce definitions. Example: `"cromwell1-reader"` |
-| deploymentDefaults.nodeSelector | string | `nil` | Optional nodeSelector |
+| deploymentDefaults.nodeSelector | string | `nil` | Optional nodeSelector map |
 | deploymentDefaults.replicas | int | `0` | Number of replicas for the deployment |
 | deploymentDefaults.serviceAllowedAddresses | object | `{}` | What source IPs to whitelist for access to the service |
 | deploymentDefaults.serviceIP | string | `nil` | Static IP to use for the Service. If set, service will be of type LoadBalancer |
 | deploymentDefaults.serviceName | string | `nil` | What to call the Service |
+| deploymentDefaults.tolerations | string | `nil` | Optional array of tolerations |
 | deployments.standalone.expose | bool | `true` | Whether to expose the default standalone Cromwell deployment as a service |
 | deployments.standalone.name | string | `"cromwell"` | Name to use for the default standalone Cromwell deployment |
 | deployments.standalone.replicas | int | `1` | Number of replicas in the default standalone Cromwell deployment |

@@ -183,4 +183,8 @@ spec:
       nodeSelector:
         {{ $settings.nodeSelector | toYaml | indent 8 | trim }}
       {{- end -}}
+      {{- if $settings.tolerations }}
+      tolerations:
+        {{ $settings.tolerations | toYaml | indent 8 | trim }}
+      {{- end -}}
 {{- end -}}
