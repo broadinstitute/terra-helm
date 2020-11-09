@@ -7704,6 +7704,24 @@ entries:
   rawls:
   - apiVersion: v2
     appVersion: latest
+    created: "2020-11-09T20:58:14.533990609Z"
+    description: Chart for Rawls service in Terra
+    digest: c2f55344e511da5a6030701b8185af8bd8c4908ab3680da747fd11f8b0b5365d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-181.1604955488.7a8b6b/rawls-0.0.1-181.1604955488.7a8b6b.tgz
+    version: 0.0.1-181.1604955488.7a8b6b
+  - apiVersion: v2
+    appVersion: latest
     created: "2020-11-09T20:50:56.569583028Z"
     description: Chart for Rawls service in Terra
     digest: d405cc9a603d54ca125bfdfcfac448cefc4bf363c70f30c1424e1d172575f77d
