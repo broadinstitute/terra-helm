@@ -46,7 +46,9 @@ spec:
         emptyDir: {}
       - name: rawls-prometheusjmx-jar
         emptyDir: {}
-
+      - name: {{ $settings.name }}-cm
+        configMap:
+          name: {{ $settings.name }}-cm
       containers:
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
@@ -69,6 +71,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        - name: PROMETHEUS_ARGS
+              value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/rawls-cm/prometheusJmx.yaml"
         volumeMounts:
         - mountPath: /etc/rawls.conf
           subPath: rawls.conf
@@ -89,6 +93,9 @@ spec:
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: rawls-prometheusjmx-jar
+          readOnly: true
+        - mountPath: /etc/rawls-cm
+          name: {{ $settings.name }}-cm
           readOnly: true
         readinessProbe:
           httpGet:
