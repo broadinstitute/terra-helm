@@ -72,7 +72,7 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: PROMETHEUS_ARGS
-          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ $settings.name }}-cm/prometheusJmx.yaml"
+          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/rawls-cm/prometheusJmx.yaml"
         command: ["/bin/bash"]
         args:
         - '-c'
