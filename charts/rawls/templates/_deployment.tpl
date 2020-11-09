@@ -75,7 +75,7 @@ spec:
           value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ $settings.name }}-cm/prometheusJmx.yaml"
         command: ["java"]
         args:
-        - $(JAVA_OPTS)
+        - $JAVA_OPTS
         - $(PROMETHEUS_ARGS)
         - -jar $(find /rawls -name 'rawls*.jar')
         volumeMounts:
