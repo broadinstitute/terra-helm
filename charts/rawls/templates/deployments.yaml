@@ -12,6 +12,9 @@
 {{- $_ := set $templateScope "_deploymentSettings" $settings -}}
 {{- if $settings.enabled }}
 ---
+# Rawls {{ $deploymentType }} configMap
+{{ template "rawls.configmap" $templateScope }}
+---
 # Rawls {{ $deploymentType }} deployment
 {{ template "rawls.deployment" $templateScope }}
 ---
