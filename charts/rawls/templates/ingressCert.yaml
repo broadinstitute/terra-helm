@@ -5,7 +5,7 @@ metadata:
   labels:
 {{ include "rawls.labels" . | indent 4 }}
 spec:
-  name: {{ .Values.name }}-cert
+  name: {{ .Chart.name }}-cert
   keysMap:
     tls.crt:
       path: {{ required "A valid ingressCert.cert.path value is required when ingressCert is enabled" .Values.ingressCert.cert.path }}
