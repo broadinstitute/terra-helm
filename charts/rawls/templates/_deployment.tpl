@@ -78,8 +78,9 @@ spec:
         - '-c'
         - >-
           java ${JAVA_OPTS}
-          {{- if .Values.prometheus.enabled -}}
+          {{- if .Values.prometheus.enabled }}
           ${PROMETHEUS_ARGS}
+          {{- end }}
           -jar $(find /rawls -name 'rawls*.jar')
         - '--'
         volumeMounts:
