@@ -38,6 +38,11 @@ ingressIpName:
 # ingressServiceName -- (string) Name of the rawls service to associate with GKE ingress.
 ingressServiceName: rawls-frontend
 
+
+prometheus:
+  # prometheus.enabled -- (bool) Flag to enable JVM profiling via prometheus
+  enabled: true
+
 # rawls can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
