@@ -6,7 +6,7 @@ metadata:
   labels:
 {{ include "rawls.labels" . | indent 4 }}
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingressIpName }}
+    kubernetes.io/ingress.global-static-ip-name: {{ required "a valid gcp resource name for the ingress ip is required" .Values.ingressIpName }}
     kubernetes.io/ingress.allow-http: "false"
 spec:
   tls:
