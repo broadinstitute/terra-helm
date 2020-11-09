@@ -35,6 +35,9 @@ ingressCert:
 # ingressIpName -- (string) Required. GCP resource name for ingress static ip
 ingressIpName:
 
+# ingressServiceName -- (string) Name of the rawls service to associate with GKE ingress.
+ingressServiceName: rawls-frontend
+
 # rawls can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
