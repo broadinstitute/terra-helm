@@ -72,7 +72,12 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: PROMETHEUS_ARGS
-          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/rawls-cm/prometheusJmx.yaml"
+          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ $settings.name }}-cm/prometheusJmx.yaml"
+        command: ["java"]
+        args:
+        - $(JAVA_OPTS)
+        - $(PROMETHEUS_ARGS)
+        - -jar $(find /rawls -name 'rawls*.jar')
         volumeMounts:
         - mountPath: /etc/rawls.conf
           subPath: rawls.conf
