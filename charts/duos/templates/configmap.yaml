@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-configmap
+  labels:
+{{ include "duos.labels" . | indent 4 }}
+data:
+  config.json: |
+{{ include "duos.config.json" . | indent 4 }}
+  site.conf: |
+{{ include "duos.site.conf" . | indent 4 }}

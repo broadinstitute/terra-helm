@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: ontology-jvm-monitor
+  labels:
+{{ include "duos.labels" . | indent 4 }}
+spec:
+  jobLabel: duos-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: duos
+  podMetricsEndpoints:
+    - port: metrics

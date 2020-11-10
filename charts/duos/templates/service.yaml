@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}-service
+{{ include "duos.labels" . | indent 4 }}
+spec:
+  loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
+  ports:
+    - name: https
+      protocol: TCP
+      port: 443
+  type: LoadBalancer
+  selector:
+    app: {{ .Chart.Name }}
