@@ -60,7 +60,7 @@ spec:
         image: "{{ $settings.imageRepository }}:{{ $imageTag }}"
         ports:
         - name: app
-          containerPort: 9010
+          containerPort: 8080
           protocol: TCP
         - name: metrics
           containerPort: 9090
@@ -126,7 +126,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /status
-            port: 9010
+            port: 8080
           timeoutSeconds: 5
           initialDelaySeconds: 15
           periodSeconds: 10
@@ -135,7 +135,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /status
-            port: 9010
+            port: 8080
           timeoutSeconds: 5
           initialDelaySeconds: 15
           periodSeconds: 10
