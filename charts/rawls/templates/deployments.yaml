@@ -17,8 +17,10 @@
 ---
 # Rawls {{ $deploymentType }} deployment
 {{ template "rawls.deployment" $templateScope }}
+{{- if $settings.expose }}
 ---
 # Rawls {{ $deploymentType }} service
 {{ template "rawls.service" $templateScope }}
+{{- end -}}
 {{- end -}}
 {{- end -}}
