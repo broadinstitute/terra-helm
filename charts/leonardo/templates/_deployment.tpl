@@ -116,7 +116,7 @@ spec:
         - mountPath: /etc/rootCA.pem
           subPath: rootCA.pem
           readOnly: true
-          name: app-cmtpls
+          name: app-ctmpls
         - mountPath: /etc/rstudio-license-file.lic
           subPath: rstudio-license-file.lic
           readOnly: true
