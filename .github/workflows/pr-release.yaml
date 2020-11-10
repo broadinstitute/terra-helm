@@ -19,7 +19,7 @@ jobs:
           git config user.email "broadbot@broadinstitute.org"
 
       - name: Run chart-releaser
-        uses: databiosphere/github-actions/actions/action-releaser@ch-cr-test
+        uses: DataBiosphere/github-actions/actions/chart-releaser@ch-cr-test
         # uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
