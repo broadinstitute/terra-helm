@@ -7,8 +7,11 @@ metadata:
   name: {{ $settings.name }}-service
   labels:
 {{ include "leonardo.labels" . | indent 4 }}
+  annotations:
+    # Enable container-native load balancing https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     deployment: {{ $settings.name }}-deployment
   ports:
