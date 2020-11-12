@@ -2,15 +2,17 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Chart.Name }}
+  annotations:
+    cloud.google.com/app-protocols: '{"https":"HTTPS"}'
   labels:
     app: {{ .Chart.Name }}-service
 {{ include "consent.labels" . | indent 4 }}
 spec:
-  loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
   ports:
     - name: https
       protocol: TCP
       port: 443
-  type: LoadBalancer
+      targetPort: 443
+  type: NodePort
   selector:
     app: {{ .Chart.Name }}

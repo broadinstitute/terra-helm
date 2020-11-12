@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Chart.Name }}-ingress
+  labels:
+{{ include "consent.labels" . | indent 4 }}
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: {{ required "a valid gcp resource name for the ingress ip is required" .Values.ingressIpName }}
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  tls:
+  - secretName: {{ .Chart.Name }}-cert
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: {{ .Values.ingressServiceName }}
+          servicePort: 443 
