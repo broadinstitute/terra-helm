@@ -10,6 +10,8 @@ metadata:
   annotations:
     # Enable container-native load balancing https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing
     cloud.google.com/neg: '{"ingress": true}'
+    # Enable TLS between LB and apache proxy https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb
+    cloud.google.com/app-protocols: '{"https":"HTTPS"}'
 spec:
   type: ClusterIP
   selector:
