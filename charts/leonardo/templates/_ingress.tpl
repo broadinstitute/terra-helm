@@ -12,11 +12,7 @@ metadata:
     {{ $settings.ingress.annotations | toYaml | indent 4 | trim }}
 {{- end }}
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: {{ $settings.name }}-service
-          servicePort: 443
+  backend:
+    serviceName: {{ $settings.name }}-service
+    servicePort: 443
 {{ end -}}
