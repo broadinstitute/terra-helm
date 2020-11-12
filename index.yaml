@@ -133,6 +133,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.5.0/consent-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v2
+    created: "2020-11-12T21:02:09.32011962Z"
+    description: A Helm chart for DUOS Consent
+    digest: 86386b2e9975e0e8a821fc434b28415503e4db82ef01eaf125ca118df3b17c23
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.5.0-199.1605214923.07cdb0/consent-0.5.0-199.1605214923.07cdb0.tgz
+    version: 0.5.0-199.1605214923.07cdb0
+  - apiVersion: v2
     created: "2020-11-12T20:34:57.989703832Z"
     description: A Helm chart for DUOS Consent
     digest: 3f79808c5a4654cedb2d96ea499ed5fa8581a61276e5ae241f3bd00f316fc4e7
