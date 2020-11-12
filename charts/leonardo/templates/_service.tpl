@@ -8,6 +8,7 @@ metadata:
   labels:
 {{ include "leonardo.labels" . | indent 4 }}
 spec:
+  type: NodePort
   selector:
     deployment: {{ $settings.name }}-deployment
   ports:
