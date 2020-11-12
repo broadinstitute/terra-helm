@@ -8,7 +8,7 @@ metadata:
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
     cloud.google.com/neg: '{"ingress": true}'
 spec:
-  type: ClusterIp
+  type: ClusterIP
   selector:
     deployment: {{ .Values.name }}-deployment
   ports:
