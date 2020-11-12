@@ -6,8 +6,9 @@ metadata:
 {{ include "sam.labels" . | indent 4 }}
   annotations:
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
-  type: NodePort
+  type: ClusterIp
   selector:
     deployment: {{ .Values.name }}-deployment
   ports:
