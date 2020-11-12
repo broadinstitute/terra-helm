@@ -19,11 +19,11 @@ spec:
   replicas: {{ $settings.replicas }}
   selector:
     matchLabels:
-      deployment: {{ $settings.name }}
+      deployment: {{ $settings.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ $settings.name }}
+        deployment: {{ $settings.name }}-deployment
 {{ include "leonardo.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
