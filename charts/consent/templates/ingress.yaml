@@ -10,10 +10,6 @@ metadata:
 spec:
   tls:
   - secretName: {{ .Chart.Name }}-cert
-  rules:
-  - http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: {{ .Chart.Name }}
-          servicePort: 443 
+  backend:
+    serviceName: {{ .Chart.Name }}
+    servicePort: 443 
