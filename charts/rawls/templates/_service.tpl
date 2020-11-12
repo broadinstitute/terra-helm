@@ -7,6 +7,7 @@ metadata:
   name: {{ $settings.serviceName | default $settings.name }}
   annotations:
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
+    cloud.google.com/neg: '{"ingress": true}'
   labels:
 {{ include "rawls.labels" . | indent 4 }}
 spec:
@@ -21,6 +22,6 @@ spec:
   type: LoadBalancer
   loadBalancerIP: {{ $settings.serviceIP }}
   {{- else }}
-  type: NodePort
+  type: ClusterIP
   {{- end -}}
 {{- end -}}
