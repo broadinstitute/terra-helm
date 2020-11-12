@@ -8,10 +8,6 @@ metadata:
 spec:
   tls:
   - secretName: {{ .Values.name }}-cert
-  rules:
-  - http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: {{ .Values.name }}-service
-          servicePort: 443
+  backend:
+    serviceName: {{ .Values.name }}-service
+    servicePort: 443
