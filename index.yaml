@@ -205,6 +205,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.5.0-199.1605194104.e71786/consent-0.5.0-199.1605194104.e71786.tgz
     version: 0.5.0-199.1605194104.e71786
   - apiVersion: v2
+    created: "2020-11-12T22:16:32.662297824Z"
+    description: A Helm chart for DUOS Consent
+    digest: ec86b962aa8610d670c0270adaa14401aa7671ba7dd4992a92a2d131a56f110e
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.5.0-181.1605219379.2876ba/consent-0.5.0-181.1605219379.2876ba.tgz
+    version: 0.5.0-181.1605219379.2876ba
+  - apiVersion: v2
     created: "2020-10-27T13:43:48.096594164Z"
     description: A Helm chart for DUOS Consent
     digest: 9c9663fced5723f78b3604e1f06d06e71a5f785d097156457d9a2a6169769c5d
@@ -1667,6 +1685,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.9.0-198.1605188391.35bdfe/cromwell-0.9.0-198.1605188391.35bdfe.tgz
     version: 0.9.0-198.1605188391.35bdfe
+  - apiVersion: v2
+    created: "2020-11-12T22:16:32.760417302Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 5bedc7a893c2cf73bcf0a0ca5940fd50a6ee5b4d7e4dd7ebf5c016f461b70cf6
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.9.0-181.1605219379.2876ba/cromwell-0.9.0-181.1605219379.2876ba.tgz
+    version: 0.9.0-181.1605219379.2876ba
   - apiVersion: v2
     created: "2020-11-09T15:11:01.929484521Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
@@ -3331,6 +3366,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.16.0/leonardo-0.16.0.tgz
     version: 0.16.0
+  - apiVersion: v2
+    created: "2020-11-12T22:16:32.871871577Z"
+    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
+    digest: fc7acdecd2b4851bf6c0cb1d1af1c35e838d4311bf0e31f75faf82941e56af07
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.16.0-181.1605219380.2876ba/leonardo-0.16.0-181.1605219380.2876ba.tgz
+    version: 0.16.0-181.1605219380.2876ba
   - apiVersion: v2
     created: "2020-11-10T13:03:25.823532393Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
@@ -5604,6 +5656,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.6.0-183.1604520348.d47835/ontology-0.6.0-183.1604520348.d47835.tgz
     version: 0.6.0-183.1604520348.d47835
+  - apiVersion: v2
+    created: "2020-11-12T22:16:32.971793955Z"
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: 723e348b1e29c8df1f7f5f634a1e92d8716db103895e0d713a0896c636fb4b88
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.6.0-181.1605219380.2876ba/ontology-0.6.0-181.1605219380.2876ba.tgz
+    version: 0.6.0-181.1605219380.2876ba
   - apiVersion: v2
     created: "2020-10-27T15:03:03.028228077Z"
     description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
@@ -8048,6 +8118,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.0.0-80.1595262188.e7eeab/postgres-0.0.0-80.1595262188.e7eeab.tgz
     version: 0.0.0-80.1595262188.e7eeab
   rawls:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-11-12T22:16:33.080725731Z"
+    description: Chart for Rawls service in Terra
+    digest: 2746f211f901ee1ade2e35e7248474a0b5014615c467f5416de712305369cbc0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.0.1-181.1605219380.2876ba/rawls-0.0.1-181.1605219380.2876ba.tgz
+    version: 0.0.1-181.1605219380.2876ba
   - apiVersion: v2
     appVersion: latest
     created: "2020-11-10T15:21:13.260748347Z"
@@ -11929,6 +12017,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.1.0/terra-filebeat-0.1.0.tgz
     version: 0.1.0
+  - apiVersion: v2
+    created: "2020-11-12T22:16:33.237678596Z"
+    description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+    digest: 0fe29516985e356c9cd5788fadf2e983881ba13cd97e955f38c118d63b9dd304
+    keywords:
+    - dsp
+    - broadinstitute
+    - logs
+    - logging
+    - log
+    - filebeat
+    - kibana
+    name: terra-filebeat
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.1.0-181.1605219379.2876ba/terra-filebeat-0.1.0-181.1605219379.2876ba.tgz
+    version: 0.1.0-181.1605219379.2876ba
   - apiVersion: v2
     created: "2020-11-04T20:48:54.406387699Z"
     description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
