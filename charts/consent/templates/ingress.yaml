@@ -15,5 +15,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: {{ .Values.ingressServiceName }}
+          serviceName: {{ .Chart.Name }}
           servicePort: 443 
