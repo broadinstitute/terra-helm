@@ -2,7 +2,7 @@ rawls
 =====
 Chart for Rawls service in Terra
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.0`
 
 
 
