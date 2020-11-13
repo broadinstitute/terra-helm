@@ -17,11 +17,6 @@ deploymentDefaults:
   imageTag: null
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
-  # deploymentDefaults.expose -- Whether to create a Service + Ingress for this deployment
-  expose: false
-  ingress:
-    # deploymentDefaults.ingress.annotations -- (object) Map of annotations to add to Ingress
-    annotations: null
 
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
