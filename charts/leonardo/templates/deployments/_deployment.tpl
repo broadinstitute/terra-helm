@@ -55,6 +55,8 @@ spec:
         emptyDir: {}
       - name: {{ $settings.name }}-modsecurity-logs
         emptyDir: {}
+      - name: prometheusjmx-jar
+        emptyDir: {}
       containers:
       - name: {{ $settings.name }}-app
         image: "{{ $settings.imageRepository }}:{{ $imageTag }}"
@@ -123,6 +125,13 @@ spec:
           name: app-ctmpls
         - mountPath: /var/log/gc
           name: {{ $settings.name }}-gc-logs
+        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+          name: prometheusjmx-jar
+          readOnly: true
+        - mountPath: /etc/leonardo-cm
+          name: {{ $settings.name }}-cm
+          readOnly: true
         readinessProbe:
           httpGet:
             path: /status
@@ -187,4 +196,11 @@ spec:
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
           readOnly: true
+      initContainers:
+      - name: download-prometheusjmx-jar
+        image: alpine:3.12.0
+        command: ["wget", "-O", "/prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
+        volumeMounts:
+        - mountPath: /prometheusjmx-jar
+          name: prometheusjmx-jar
 {{ end -}}

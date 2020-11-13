@@ -1,9 +1,5 @@
 {{- /*
-  Build deployments map, where deployment type keys a map of deployment settings.
-*/ -}}
-
-{{- /*
-  Generate Deployment, Service, and ConfigMap definitions for each deployment type.
+  Generate Deployment and ConfigMap definitions for each declared deployment type.
 */ -}}
 {{- $defaults := $.Values.deploymentDefaults -}}
 {{- range $deploymentType, $overrides := $.Values.deployments }}
@@ -19,13 +15,5 @@
 ---
 # Leonardo {{ $deploymentType }} deployment
 {{ template "leonardo.deployment" $templateScope }}
-{{- if $settings.expose }}
----
-# Leonardo {{ $deploymentType }} service
-{{ template "leonardo.service" $templateScope }}
----
-# Leonardo {{ $deploymentType }} ingress
-{{ template "leonardo.ingress" $templateScope }}
-{{- end -}}
 {{- end -}}
 {{- end -}}

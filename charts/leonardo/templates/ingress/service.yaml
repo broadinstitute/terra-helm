@@ -1,10 +1,7 @@
-{{- /* Generate a Leonardo service */ -}}
-{{- define "leonardo.service" -}}
-{{- $settings := ._deploymentSettings -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $settings.name }}-service
+  name: {{ .Chart.Name }}-service
   labels:
 {{ include "leonardo.labels" . | indent 4 }}
   annotations:
@@ -15,10 +12,9 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    deployment: {{ $settings.name }}-deployment
+    deployment: {{ .Values.ingress.deployment }}-deployment
   ports:
   - name: https
     protocol: TCP
     port: 443
     targetPort: 443
-{{ end -}}
