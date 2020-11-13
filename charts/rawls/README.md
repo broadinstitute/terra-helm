@@ -18,11 +18,9 @@ Current chart version is `0.0.1`
 | deploymentDefaults.legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default deploymentDefaults.name |
 | deploymentDefaults.name | string | `nil` | A name for the deployment that will be substituted into resuorce definitions. Example: `"rawls1-reader"` |
 | deploymentDefaults.replicas | int | `0` | Number of replicas for the deployment |
-| deploymentDefaults.serviceAllowedAddresses | object | `{}` | What source IPs to whitelist for access to the service |
 | deploymentDefaults.serviceIP | string | `nil` | Static IP to use for the Service. If set, service will be of type LoadBalancer |
 | deploymentDefaults.serviceName | string | `nil` | What to call the Service |
 | global.applicationVersion | string | `"latest"` | What version of the rawls application to deploy |
-| global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | ingressCert.cert.path | string | `nil` | Path to secret containing .crt |
 | ingressCert.cert.secretKey | string | `nil` | Key in secret containing .crt |
 | ingressCert.key.path | string | `nil` | Path to secret containing .key |

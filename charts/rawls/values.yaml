@@ -1,10 +1,6 @@
 global:
   # global.applicationVersion -- What version of the rawls application to deploy
   applicationVersion: latest
-  # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses.
-  # Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
-  trustedAddresses: {}
-
 
 # Resource limits for rawls containers
 resources:
@@ -65,8 +61,6 @@ deploymentDefaults:
   serviceName: null
   # deploymentDefaults.serviceIP -- Static IP to use for the Service. If set, service will be of type LoadBalancer
   serviceIP: null
-  # deploymentDefaults.serviceAllowedAddresses -- What source IPs to whitelist for access to the service
-  serviceAllowedAddresses: {}
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
   legacyResourcePrefix: null
