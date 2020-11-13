@@ -34,3 +34,4 @@ Current chart version is `0.0.1`
 | resources.limits.memory | string | `"16Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `8` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"16Gi"` | Memory to request for the deployment |
+| sslPolicy | string | `"tls12-ssl-policy"` | (string) Name of an existing google ssl policy to associate with an ingress frontend-config |

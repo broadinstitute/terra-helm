@@ -43,6 +43,7 @@ prometheus:
   # prometheus.enabled -- (bool) Flag to enable JVM profiling via prometheus
   enabled: true
 
+# sslPolicy -- (string) Name of an existing google ssl policy to associate with an ingress frontend-config
 sslPolicy: tls12-ssl-policy 
 
 # rawls can be run in multiple deployments. This key contains default
