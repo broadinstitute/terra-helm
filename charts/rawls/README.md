@@ -27,7 +27,6 @@ Current chart version is `0.0.0`
 | ingressCert.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingressIpName | string | `nil` | Required. GCP resource name for ingress static ip |
 | ingressServiceName | string | `"rawls-frontend"` | (string) Name of the rawls service to associate with GKE ingress. |
-| prometheus.enabled | bool | `true` | (bool) Flag to enable JVM profiling via prometheus |
 | resources.limits.cpu | int | `8` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"16Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `8` | Number of CPU units to request for the deployment |

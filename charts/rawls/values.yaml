@@ -34,11 +34,6 @@ ingressIpName:
 # ingressServiceName -- (string) Name of the rawls service to associate with GKE ingress.
 ingressServiceName: rawls-frontend
 
-
-prometheus:
-  # prometheus.enabled -- (bool) Flag to enable JVM profiling via prometheus
-  enabled: true
-
 # sslPolicy -- (string) Name of an existing google ssl policy to associate with an ingress frontend-config
 sslPolicy: tls12-ssl-policy 
 
