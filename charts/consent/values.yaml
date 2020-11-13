@@ -37,6 +37,23 @@ image:
 imageRepository:
 imageTag:
 
+# GKE ingress requires certificate in a slightly different format from the apache proxy
+# This is used to set tls for the GKE ingress
+ingressCert:
+  cert:
+    # ingressCert.cert.path -- (string) Path to secret containing .crt
+    path:
+    # ingressCert.cert.secretKey -- (string) Key in secret containing .crt
+    secretKey:
+  key:
+    # ingressCert.key.path -- (string) Path to secret containing .key
+    path:
+    # ingressCert.key.secretKey -- (string) Key in secret containing .key
+    secretKey:
+
+# Resource name for the global static ip in google to be used for the ingress
+ingressIpName:
+
 proxyLogLevel:
 proxyImageRepository:
 proxyImageVersion:
@@ -48,11 +65,10 @@ sendgridApiKey:
 sentryDsnPath:
 sentryDsnKey:
 
-# serviceIP -- (string) External IP of the service. Required.
-serviceIP:
-
 servicesLocalUrl:
 servicesOntologyUrl:
+
+sslPolicy:  tls12-ssl-policy
 
 vaultEnabled: true
 
