@@ -64,7 +64,3 @@ deploymentDefaults:
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
   legacyResourcePrefix: null
-
-# A map of rawls deployments. In Terra's production environment,
-# rawls is deployed as 2 separate services (frontend and backend) with different configurations.
-
