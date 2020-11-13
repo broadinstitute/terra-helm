@@ -68,6 +68,8 @@ sentryDsnKey:
 servicesLocalUrl:
 servicesOntologyUrl:
 
+sslPolicy:  tls12-ssl-policy
+
 vaultEnabled: true
 
 vaultCertPath:
