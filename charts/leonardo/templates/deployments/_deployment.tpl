@@ -134,8 +134,8 @@ spec:
           name: {{ $settings.name }}-cm
           readOnly: true
         # Note: These readiness settings only apply to Kubernetes' internal load
-        # balancing mechanism -- there's a separate health check setting in the
-        # Leo Ingress's backendConfig that applies
+        # balancing mechanism -- there's a separate health check setting for
+        # Leo's Ingress / GCP load balancer in the Ingress's backendConfig
         readinessProbe:
           httpGet:
             path: /status

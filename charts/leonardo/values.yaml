@@ -38,14 +38,14 @@ deployments:
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
   enabled: true
-  # ingress.deployment -- Name of the deployment to associate with the ingress
+  # ingress.deployment -- Name of the deployment to associate with the Ingress
   # Should correspond to the "name" field of a deployment, under the deployments key, above
   deployment: leonardo
-  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with this ingress
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
-  # ingress.preSharedCerts -- Array of pre-shared GCP ssl certificate names to associate with this ingress
+  # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
   preSharedCerts: []
-  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with this ingress
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
   # Leonardo has a large backend timeout to support long-lived websockets (see DDO-132 / IA-1665)

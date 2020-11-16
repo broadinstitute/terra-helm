@@ -22,11 +22,11 @@ A Helm chart for Leonardo, Terra's Jupyter notebook integration service
 | deployments.standalone.name | string | `"leonardo"` | Name to use for the default standalone Leonardo deployment |
 | deployments.standalone.replicas | int | `1` | Number of replicas in the default standalone Leonardo deployment |
 | global.applicationVersion | string | `"latest"` | What version of the Leonardo application to deploy |
-| ingress.deployment | string | `"leonardo"` | Name of the deployment to associate with the ingress Should correspond to the "name" field of a deployment, under the deployments key, above |
+| ingress.deployment | string | `"leonardo"` | Name of the deployment to associate with the Ingress Should correspond to the "name" field of a deployment, under the deployments key, above |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
-| ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP ssl certificate names to associate with this ingress |
-| ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with this ingress |
-| ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with this ingress |
+| ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
+| ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
+| ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `28800` | Load balancer backend timeout Leonardo has a large backend timeout to support long-lived websockets (see DDO-132 / IA-1665) |
 | monitoring.enabled | bool | `true` | Whether to enable Prometheus monitoring for Leonardo pods |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
