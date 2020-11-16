@@ -16,6 +16,7 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
+  revisionHistoryLimit: 0
   replicas: {{ $settings.replicas }}
   selector:
     matchLabels:
