@@ -7,15 +7,6 @@ metadata:
 {{ include "leonardo.labels" . | indent 4 }}
 spec:
   timeoutSec: {{ .Values.ingress.timeoutSec }}
-  # Define a container-native load-balancing health check in a BackendConfig
-  # https://cloud.google.com/kubernetes-engine/docs/concepts/ingress#health_checks
-  #
-  # GKE _can_ populate LB health check settings from a readiness probe
-  # on a pod's containers, but GKE doesn't update the LB health check
-  # if the readiness probe is modified after the LB is created... So it seems
-  # safer in the long term to just define the health check here.
-  # Ref: https://cloud.google.com/kubernetes-engine/docs/concepts/ingress#interpreted_hc
-  #
   healthCheck:
     checkIntervalSec: 5
     timeoutSec: 5
