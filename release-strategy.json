@@ -1,4 +1,5 @@
 {
+    "consent":          {"dev_only": false},
     "crljanitor":       {"dev_only": false},
     "cromwell":         {"dev_only": false},
     "leonardo":         {"dev_only": false},
