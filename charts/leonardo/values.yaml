@@ -50,6 +50,10 @@ ingress:
   # Leonardo has a large backend timeout to support long-lived websockets (see DDO-132 / IA-1665)
   timeoutSec: 28800
 
+# Settings for Promethes monitoring
+monitoring:
+  enabled: true
+
 commonCronjob:
   # this is defined in terra-helm repo
   reportDestinationBucket:
