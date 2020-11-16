@@ -8,7 +8,9 @@ deploymentDefaults:
   # deploymentDefaults.enabled -- Whether a declared deployment is enabled. If false, no resources will be created
   enabled: true
   # deploymentDefaults.name -- (Required) A name for the deployment that will be substituted into resource definitions.
-  # Example: `"leonardo-backend"`
+  # Example: `"leonardo-backend"`.
+  # The deployment name will be substituted into Deployment and ConfigMap names.
+  #   Eg. "leonardo-frontend" -> "leonardo-frontend-deployment", "leonardo-frontend-cm"
   name: null
   # deploymentDefaults.imageRepository -- Image repo to pull Leonardo images from
   imageRepository: gcr.io/broad-dsp-gcr-public/leonardo
@@ -26,10 +28,7 @@ deploymentDefaults:
 # developer might run Leonardo.
 deployments:
   standalone:
-    # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
-    # Will be substituted into deployment and configmap names
-    #   Eg. "leonardo" -> "leonardo-deployment", "leonardo-cm"
-    #       "leonardo-frontend" -> "leonardo-frontend-deployment", "leonardo-frontend-cm"
+    # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment.
     name: leonardo
     # deployments.standalone.replicas -- Number of replicas in the default standalone Leonardo deployment
     replicas: 1
@@ -39,7 +38,7 @@ ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
   enabled: true
   # ingress.deployment -- Name of the deployment to associate with the Ingress
-  # Should correspond to the "name" field of a deployment, under the deployments key, above
+  # (should correspond to the "name" field of a deployment, under the deployments key, above)
   deployment: leonardo
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
@@ -48,7 +47,7 @@ ingress:
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
-  # Leonardo has a large backend timeout to support long-lived websockets (see DDO-132 / IA-1665)
+  # (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665)
   timeoutSec: 28800
 
 # Settings for Prometheus monitoring
