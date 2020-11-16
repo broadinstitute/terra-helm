@@ -5,6 +5,7 @@ metadata:
   annotations:
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
     cloud.google.com/neg: '{"ingress": true}' 
+    cloud.google.com/backend-config: '{"default": "{{ .Chart.Name }}-ingress-backendconfig"}'
   labels:
     app: {{ .Chart.Name }}-service
 {{ include "consent.labels" . | indent 4 }}
