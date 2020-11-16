@@ -7,7 +7,6 @@ metadata:
 {{ include "leonardo.labels" . | indent 4 }}
   annotations:
     networking.gke.io/v1beta1.FrontendConfig: "{{ .Chart.Name }}-ingress-frontendconfig"
-    cloud.google.com/backend-config: '{"default": "{{ .Chart.Name }}-ingress-backendconfig"}'
     kubernetes.io/ingress.global-static-ip-name: {{ required "ingress.staticIpName value is required" .Values.ingress.staticIpName | quote }}
 {{- if not (empty .Values.ingress.preSharedCerts) }}
     ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.preSharedCerts | join "," | quote }}
