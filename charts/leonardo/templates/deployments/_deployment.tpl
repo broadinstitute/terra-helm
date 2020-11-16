@@ -133,15 +133,14 @@ spec:
         - mountPath: /etc/leonardo-cm
           name: {{ $settings.name }}-cm
           readOnly: true
-        readinessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 15
-          periodSeconds: 10
-          failureThreshold: 6 # 60 seconds before unready
-          successThreshold: 1
+        #
+        # Note: readinessProbe is defined on the Apache proxy, because
+        # traffic is routed through it, and having it defined there makes it
+        # possible for GKE Ingress to detect the readiness settings
+        # and define them on the underlying Google load balancer
+        #
+        # https://cloud.google.com/kubernetes-engine/docs/concepts/ingress#health_checks
+        #
         livenessProbe:
           httpGet:
             path: /status
@@ -187,6 +186,24 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ $settings.name }}-modsecurity-logs
+        #
+        # These settings are automatically detected and configured on the
+        # underlying Ingress load balancer
+        #
+        # https://cloud.google.com/kubernetes-engine/docs/concepts/ingress#def_inf_hc
+        #
+        # The values themselves were pulled from the existing GCP health check
+        # used by firecloud apps, "gce-lb-health-check-firecloud-https"
+        #
+        readinessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /status
+            port: 443
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 2
+          successThreshold: 2
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
         envFrom:
