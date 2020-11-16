@@ -133,14 +133,6 @@ spec:
         - mountPath: /etc/leonardo-cm
           name: {{ $settings.name }}-cm
           readOnly: true
-        startupProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          periodSeconds: 5
-          failureThreshold: 36 # Allow up to 3 minutes for Leo to startup
-          successThreshold: 1
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting in the
         # Leo Ingress's backendConfig that applies
@@ -149,16 +141,16 @@ spec:
             path: /status
             port: 8080
           timeoutSeconds: 5
-          initialDelaySeconds: 30
+          initialDelaySeconds: 15
           periodSeconds: 10
-          failureThreshold: 2 # 20 seconds before pod goes out of service
-          successThreshold: 2 # 20 seconds before pod goes back into service
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
         livenessProbe:
           httpGet:
             path: /status
             port: 8080
           timeoutSeconds: 5
-          initialDelaySeconds: 30
+          initialDelaySeconds: 15
           periodSeconds: 10
           failureThreshold: 30 # 5 minutes before restarted
           successThreshold: 1
