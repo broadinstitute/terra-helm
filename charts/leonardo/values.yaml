@@ -36,6 +36,7 @@ deployments:
 
 # Settings for Leonardo's Ingress & Service
 ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
   enabled: true
   # ingress.deployment -- Name of the deployment to associate with the ingress
   # Should correspond to the "name" field of a deployment, under the deployments key, above
@@ -50,8 +51,9 @@ ingress:
   # Leonardo has a large backend timeout to support long-lived websockets (see DDO-132 / IA-1665)
   timeoutSec: 28800
 
-# Settings for Promethes monitoring
+# Settings for Prometheus monitoring
 monitoring:
+  # monitoring.enabled -- Whether to enable Prometheus monitoring for Leonardo pods
   enabled: true
 
 commonCronjob:
