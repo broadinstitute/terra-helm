@@ -36,6 +36,7 @@ deployments:
 
 # Settings for Leonardo's Ingress & Service
 ingress:
+  enabled: true
   # ingress.deployment -- Name of the deployment to associate with the ingress
   # Should correspond to the "name" field of a deployment, under the deployments key, above
   deployment: leonardo
