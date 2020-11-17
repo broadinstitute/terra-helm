@@ -30,6 +30,7 @@ metadata:
   labels:
 {{ include "consent.labels" . | indent 4 }}
 spec:
+  timeoutSec: {{ .Values.ingressTimeout }}
   healthCheck:
     checkIntervalSec: 5
     timeoutSec: 5
