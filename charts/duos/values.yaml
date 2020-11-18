@@ -49,7 +49,7 @@ proxyLogLevel:
 proxyImageRepository:
 proxyImageVersion:
 
-replicas: 1
+replicas:
 
 vaultEnabled: true
 
