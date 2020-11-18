@@ -49,10 +49,6 @@ spec:
             - name: configs
               mountPath: /etc/{{ .Chart.Name }}-cm
               readOnly: true
-            - name: app-secrets
-              mountPath: /etc/service-account.json
-              subPath: service-account.json
-              readOnly: true
           readinessProbe:
             httpGet:
               path: /status
@@ -95,9 +91,6 @@ spec:
         - name: configs
           configMap:
             name: {{ .Chart.Name }}-configmap
-        - name: app-secrets
-          secret:
-            secretName: {{ .Chart.Name }}-secrets
         - name: proxy-secrets
           secret:
             secretName: {{ .Chart.Name }}-proxy-secrets
