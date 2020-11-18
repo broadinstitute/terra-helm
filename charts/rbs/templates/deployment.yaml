@@ -13,7 +13,7 @@ spec:
     metadata:
       name: terra-rbs-service
       labels:
-    {{ include "rbs.labels" . | indent 4 }}
+        app: {{ .Chart.Name }}
     spec:
       serviceAccountName: terra-rbs-service-sa
       containers:
