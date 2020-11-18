@@ -10,7 +10,7 @@ map $sent_http_content_type $expires {
 }
 
 server {
-  listen 8080;
+  listen 0.0.0.0:8080;
   expires $expires;
   location / {
     root   /usr/share/nginx/html;

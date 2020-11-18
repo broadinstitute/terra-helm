@@ -10,7 +10,6 @@ spec:
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
-      app.kubernetes.io/component: {{ .Chart.Name }}
   template:
     metadata:
       name: {{ .Chart.Name }}
