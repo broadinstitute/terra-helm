@@ -71,12 +71,12 @@ spec:
         - name: RBS_CRL_JANITOR_TRACK_RESOURCE_PROJECT_ID
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-track-resource-pubsub
+              name: rbs-crl-janitor-track-resource-pubsub
               key: project
         - name: RBS_CRL_JANITOR_TRACK_RESOURCE_TOPIC_ID
           valueFrom:
             secretKeyRef:
-              name: crl-janitor-track-resource-pubsub
+              name: rbs-crl-janitor-track-resource-pubsub
               key: topic
         {{- end }}
         # Environment variables for OpenCensus resource auto detection.
