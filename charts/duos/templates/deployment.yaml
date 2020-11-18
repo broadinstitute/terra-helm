@@ -38,9 +38,6 @@ spec:
           securityContext:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
-          env:
-            - name: PROMETHEUS_ARGS
-              value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/duos-cm/prometheusJmx.yaml"
           volumeMounts:
             - name: configs
               mountPath: /usr/share/nginx/html/config.json
