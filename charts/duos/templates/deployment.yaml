@@ -35,9 +35,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-            - name: metrics
-              containerPort: 9090
-              protocol: TCP
           securityContext:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
