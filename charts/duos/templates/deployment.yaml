@@ -43,7 +43,7 @@ spec:
               mountPath: /usr/share/nginx/html/config.json
               subPath: config.json
               readOnly: true
-            {{/* Required to run nginx as a non-root user */}}
+            {{/* non-root user configuration */}}
             - name: configs
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
