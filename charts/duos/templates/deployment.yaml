@@ -54,7 +54,7 @@ spec:
               subPath: nginx.default.conf
               readOnly: false
             {{/* overwrite docker-entrypoint.d */}}
-            - name: configs
+            - name: docker-entrypoint
               mountPath: /docker-entrypoint.d
               readOnly: true
 {{/*          readinessProbe:*/}}
@@ -96,6 +96,8 @@ spec:
               subPath: ca-bundle.crt
               readOnly: true
       volumes:
+        - name: docker-entrypoint
+          emptyDir: {}
         - name: configs
           configMap:
             name: {{ .Chart.Name }}-configmap
