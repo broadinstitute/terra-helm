@@ -9451,6 +9451,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/rbs-0.3.0/rbs-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2020-11-18T02:44:35.538538253Z"
+    description: Chart for Resource Buffering Service
+    digest: d924800cc90c16bb554ddc25982ca69ecf552d3d8e39073bc29d5a9d435362cc
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rbs
+    name: rbs
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-rbs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rbs-0.3.0-203.1605667469.283230/rbs-0.3.0-203.1605667469.283230.tgz
+    version: 0.3.0-203.1605667469.283230
+  - apiVersion: v2
     created: "2020-11-18T02:39:40.728706016Z"
     description: Chart for Resource Buffering Service
     digest: b534cbf1e01bef7e0b0be52f20017fd169ac260f3b7d2e60274ef8480bc0f0f3
