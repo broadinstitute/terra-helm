@@ -9,5 +9,7 @@ data:
 {{ include "duos.config.json" . | indent 4 }}
   nginx.conf: |
 {{ include "duos.nginx.conf" . | indent 4 }}
+  nginx.default.conf: |
+{{ include "duos.nginx.default.conf" . | indent 4 }}
   site.conf: |
 {{ include "duos.site.conf" . | indent 4 }}

@@ -39,6 +39,7 @@ spec:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
           volumeMounts:
+            {{/* override the empty app config.json in the base image */}}
             - name: configs
               mountPath: /usr/share/nginx/html/config.json
               subPath: config.json
@@ -48,6 +49,11 @@ spec:
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
               readOnly: true
+            {{/* override the nginx default conf in the base image */}}
+            - name: configs
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: nginx.default.conf
+              readOnly: true
           readinessProbe:
             httpGet:
               path: /status
@@ -55,7 +61,7 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 10
             timeoutSeconds: 1
-            failureThreshold: 6 # mark pod unavaible for traffic after 60s
+            failureThreshold: 6 # mark pod unavailable for traffic after 60s
             successThreshold: 1
           livenessProbe:
             httpGet:
