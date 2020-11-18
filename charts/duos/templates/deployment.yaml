@@ -43,8 +43,10 @@ spec:
               mountPath: /usr/share/nginx/html/config.json
               subPath: config.json
               readOnly: true
+            {{/* Required to run nginx as a non-root user */}}
             - name: configs
-              mountPath: /etc/{{ .Chart.Name }}-cm
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
               readOnly: true
           readinessProbe:
             httpGet:
