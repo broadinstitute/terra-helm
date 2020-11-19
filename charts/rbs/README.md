@@ -29,7 +29,7 @@ Chart for Resource Buffering Service
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-rbs"` | Image repository |
 | imageConfig.tag | string | The chart's appVersion value will be used | Image tag. |
-| pool.configPath | string | `nil` | The pool config path. Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/, for example: config/dev |
+| pool.configPath | string | `nil` | The configuration files pools and resources. Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/, for example: config/dev |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |

@@ -83,7 +83,7 @@ vaultCert:
     secretKey:
 
 pool:
-  # pool.configPath -- The pool config path.
+  # pool.configPath -- The configuration files pools and resources.
   # Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/,
   # for example: config/dev
   configPath:
