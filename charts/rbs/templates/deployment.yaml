@@ -13,7 +13,7 @@ spec:
     metadata:
       name: terra-rbs-service
       labels:
-    {{ include "rbs.labels" . | indent 4 }}
+        app: terra-rbs
     spec:
       serviceAccountName: terra-rbs-service-sa
       containers:
@@ -61,6 +61,33 @@ spec:
               key: db
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
+        # Janitor configs to enable RBS publish message to Janitor to cleanup resource.
+        # It is needed if RBS clients use the RBS for their integration test.
+        {{- if .Values.cleanupAfterHandout }}
+        - name: RBS_CRL_CLEAN_UP_AFTER_HANDOUT
+          value: 'true'
+        - name: RBS_CRL_JANITOR_CLIENT_CREDENTIAL_FILE_PATH
+          value: /secrets/app/janitor-client-sa.json
+        - name: RBS_CRL_JANITOR_TRACK_RESOURCE_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              name: rbs-crl-janitor-track-resource-pubsub
+              key: project
+        - name: RBS_CRL_JANITOR_TRACK_RESOURCE_TOPIC_ID
+          valueFrom:
+            secretKeyRef:
+              name: rbs-crl-janitor-track-resource-pubsub
+              key: topic
+        {{- end }}
+        # Environment variables for OpenCensus resource auto detection.
+        - name: CONTAINER_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['app']
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         volumeMounts:
           - name: app-sa-creds
             mountPath: /secrets/app
