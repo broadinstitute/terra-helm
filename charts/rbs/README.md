@@ -1,6 +1,6 @@
 # rbs
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -29,6 +29,7 @@ Chart for Resource Buffering Service
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-rbs"` | Image repository |
 | imageConfig.tag | string | The chart's appVersion value will be used | Image tag. |
+| pool.configPath | string | `nil` | The pool config path. Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/, for example: config/dev |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |

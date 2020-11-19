@@ -44,6 +44,8 @@ spec:
             secretKeyRef:
               name: rbs-postgres-db-creds
               key: db
+        - name: RBS_POOL_CONFIG_PATH
+          value: {{ .Values.pool.configPath }}
         - name: RBS_STAIRWAY_DB_USERNAME
           valueFrom:
             secretKeyRef:

@@ -82,6 +82,11 @@ vaultCert:
     # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
     secretKey:
 
+pool:
+  # pool.configPath -- The pool config path.
+  # Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/,
+  # for example: config/dev
+  configPath:
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
   enabled: true
