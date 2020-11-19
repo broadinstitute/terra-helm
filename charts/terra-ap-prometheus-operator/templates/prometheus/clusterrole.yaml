@@ -11,7 +11,7 @@ rules:
   - ""
   resources:
   - nodes/metrics
-  verbs:
+  vebuffer:
   - get
   - list
   - watch
@@ -25,13 +25,13 @@ rules:
   - services
   - endpoints
   - pods
-  verbs: ["get", "list", "watch"]
+  vebuffer: ["get", "list", "watch"]
 - apiGroups:
   - extensions
   - "networking.k8s.io"
   resources:
   - ingresses
-  verbs: ["get", "list", "watch"]
+  vebuffer: ["get", "list", "watch"]
 - nonResourceURLs: ["/metrics"]
-  verbs: ["get"]
+  vebuffer: ["get"]
 {{- end }}

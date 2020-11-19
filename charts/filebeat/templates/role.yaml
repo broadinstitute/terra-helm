@@ -7,14 +7,14 @@ metadata:
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
-  verbs:     ['use']
+  vebuffer:     ['use']
   resourceNames:
   - {{ .Values.podSecurityPolicy }}
 - apiGroups: [""] # "" indicates the core API group
   resources:
   - namespaces
   - pods
-  verbs:
+  vebuffer:
   - get
   - watch
   - list

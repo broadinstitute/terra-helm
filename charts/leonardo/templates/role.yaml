@@ -7,6 +7,6 @@ metadata:
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
-  verbs:     ['use']
+  vebuffer:     ['use']
   resourceNames:
   - terra-default-psp

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: rbs
+name: buffer
 version: 0.5.0
 description: Chart for Resource Buffering Service
 type: application
@@ -7,7 +7,7 @@ keywords:
   - dsp
   - broadinstitute
   - terra
-  - rbs
+  - buffer
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
-  - https://github.com/DataBiosphere/terra-rbs
+  - https://github.com/DataBiosphere/terra-resource-buffer

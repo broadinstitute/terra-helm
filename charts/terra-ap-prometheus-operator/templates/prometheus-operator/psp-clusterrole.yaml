@@ -9,7 +9,7 @@ metadata:
 rules:
 - apiGroups: ['extensions']
   resources: ['podsecuritypolicies']
-  verbs:     ['use']
+  vebuffer:     ['use']
   resourceNames:
   - {{ template "prometheus-operator.fullname" . }}-operator
 {{- end }}

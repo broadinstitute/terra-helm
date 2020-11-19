@@ -11,7 +11,7 @@ rules:
   - apiextensions.k8s.io
   resources:
   - customresourcedefinitions
-  verbs:
+  vebuffer:
   - '*'
 - apiGroups:
   - monitoring.coreos.com
@@ -26,26 +26,26 @@ rules:
   - podmonitors
   - prometheusrules
   - podmonitors
-  verbs:
+  vebuffer:
   - '*'
 - apiGroups:
   - apps
   resources:
   - statefulsets
-  verbs:
+  vebuffer:
   - '*'
 - apiGroups:
   - ""
   resources:
   - configmaps
   - secrets
-  verbs:
+  vebuffer:
   - '*'
 - apiGroups:
   - ""
   resources:
   - pods
-  verbs:
+  vebuffer:
   - list
   - delete
 - apiGroups:
@@ -54,7 +54,7 @@ rules:
   - services
   - services/finalizers
   - endpoints
-  verbs:
+  vebuffer:
   - get
   - create
   - update
@@ -63,14 +63,14 @@ rules:
   - ""
   resources:
   - nodes
-  verbs:
+  vebuffer:
   - list
   - watch
 - apiGroups:
   - ""
   resources:
   - namespaces
-  verbs:
+  vebuffer:
   - get
   - list
   - watch

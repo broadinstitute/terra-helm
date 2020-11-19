@@ -16,7 +16,7 @@ appVersion:
 
 imageConfig:
   # imageConfig.repository -- Image repository
-  repository: gcr.io/terra-kernel-k8s/terra-rbs
+  repository: gcr.io/terra-kernel-k8s/terra-buffer
   # imageConfig.tag -- (string) Image tag.
   # @default -- The chart's appVersion value will be used
   tag:
@@ -48,7 +48,7 @@ cleanupAfterHandout: false
 # DNS/TLS Values
 domain:
   # domain.hostname -- Hostname of this deployment
-  hostname: rbs
+  hostname: buffer
   # domain.namespaceEnv -- If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix
   namespaceEnv: true
   # domain.suffix -- Domain suffix
@@ -82,9 +82,9 @@ vaultCert:
     # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
     secretKey:
 
-rbs:
+buffer:
   pool:
-    # rbs.pool.configPath -- The configuration files pools and resources.
+    # buffer.pool.configPath -- The configuration files pools and resources.
     # Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/,
     # for example: config/dev
     configPath:

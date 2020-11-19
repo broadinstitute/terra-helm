@@ -8,6 +8,6 @@ rules:
 - apiGroups: ["extensions"]
   resources: ["podsecuritypolicies"]
   resourceNames: ["cert-manager-psp"]
-  verbs: ["use"]
+  vebuffer: ["use"]
 
 

@@ -15,7 +15,7 @@ rules:
       - ""
     resources:
       - secrets
-    verbs:
+    vebuffer:
       - get
       - create
 {{- end }}
