@@ -10,7 +10,7 @@ metadata:
 rules:
 - apiGroups: ['extensions']
   resources: ['podsecuritypolicies']
-  vebuffer:     ['use']
+  verbs:     ['use']
   resourceNames:
   - {{ template "prometheus-operator.fullname" . }}-alertmanager
 {{- end }}

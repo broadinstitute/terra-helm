@@ -15,13 +15,13 @@ rules:
     resources:
       - validatingwebhookconfigurations
       - mutatingwebhookconfigurations
-    vebuffer:
+    verbs:
       - get
       - update
 {{- if .Values.global.rbac.pspEnabled }}
   - apiGroups: ['extensions']
     resources: ['podsecuritypolicies']
-    vebuffer:     ['use']
+    verbs:     ['use']
     resourceNames:
     - {{ template "prometheus-operator.fullname" . }}-admission
 {{- end }}

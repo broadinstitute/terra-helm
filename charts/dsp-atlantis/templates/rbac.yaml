@@ -8,7 +8,7 @@ rules:
 - apiGroups: ["extensions"]
   resources: ["podsecuritypolicies"]
   resourceNames: ["atlantis-psp"]
-  vebuffer: ["use"]
+  verbs: ["use"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding

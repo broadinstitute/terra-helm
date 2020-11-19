@@ -10,6 +10,6 @@ metadata:
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
-  vebuffer: ['use']
+  verbs: ['use']
   resourceNames:
   - argocd-psp
