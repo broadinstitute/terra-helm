@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: terra-rbs-proxy-configmap
+  name: terra-buffer-proxy-configmap
   labels:
-    {{ template "rbs.labels" . }}
+    {{ template "buffer.labels" . }}
 data:
   apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}
-    ServerName {{ template "rbs.fqdn" . }}
+    ServerName {{ template "buffer.fqdn" . }}
     ServerTokens ProductOnly
     TraceEnable off
 
@@ -29,12 +29,12 @@ data:
     <VirtualHost _default_:${HTTPD_PORT}>
       ErrorLog /dev/stdout
       CustomLog "/dev/stdout" combined
-      Redirect / https://{{ template "rbs.fqdn" . }}/
+      Redirect / https://{{ template "buffer.fqdn" . }}/
     </VirtualHost>
 
     <VirtualHost _default_:${SSL_HTTPD_PORT}>
         ServerAdmin ${SERVER_ADMIN}
-        ServerName {{ template "rbs.fqdn" . }}
+        ServerName {{ template "buffer.fqdn" . }}
 
         SSLEngine On
         SSLProxyEngine On

@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: terra-rbs-service
+  name: terra-buffer-service
   labels:
-    {{ template "rbs.labels" . }}
+    {{ template "buffer.labels" . }}
 spec:
   type: LoadBalancer
   loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.serviceIP }}
   {{- if .Values.serviceFirewallEnabled }}
   loadBalancerSourceRanges:
-  {{- template "rbs.servicefirewall" . }}
+  {{- template "buffer.servicefirewall" . }}
   {{- end }}
   selector:
-    app: terra-rbs
+    app: terra-buffer
   {{- if .Values.proxy.enabled }}
   ports:
   - name: http

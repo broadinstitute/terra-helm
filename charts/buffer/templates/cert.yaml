@@ -4,12 +4,12 @@ kind: Certificate
 metadata:
   name: {{ .Chart.Name }}-cert
   labels:
-    {{ template "rbs.labels" . }}
+    {{ template "buffer.labels" . }}
 spec:
   secretName: {{ .Chart.Name }}-cert
   renewBefore: {{ .Values.certManager.renewBefore }}
   dnsNames:
-  - {{ template "rbs.fqdn" . }}
+  - {{ template "buffer.fqdn" . }}
   issuerRef:
     name: {{ .Values.certManager.issuerName }}
     kind: {{ .Values.certManager.issuerKind }}
@@ -19,7 +19,7 @@ kind: SecretDefinition
 metadata:
   name: secretdefinition-{{ .Chart.Name }}-cert
   labels:
-    {{ template "rbs.labels" . }}
+    {{ template "buffer.labels" . }}
 spec:
   name: {{ .Chart.Name }}-cert
   keysMap:
