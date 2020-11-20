@@ -44,6 +44,8 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: {{ $settings.name }}-proxy-security-logs
         emptyDir: {}
+      - name: {{ $settings.name }}-gc-logs
+        emptyDir: {}
       - name: rawls-prometheusjmx-jar
         emptyDir: {}
       - name: {{ $settings.name }}-cm
@@ -98,6 +100,8 @@ spec:
           subPath: billing-account.pem
           name: app-ctmpls
           readOnly: true
+        - mountPath: /var/log/gc
+          name: {{ $settings.name }}-gc-logs
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: rawls-prometheusjmx-jar
