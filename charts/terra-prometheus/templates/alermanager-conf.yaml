@@ -10,7 +10,7 @@ metadata:
 spec:
   name: {{ .Chart.Name }}-alertmanager-config
   keysMap:
-    data:
+    alertmanager.yaml:
       path: secret/devops/prometheus/alertmanager/config
       key: value
       encoding: base64
