@@ -1,7 +1,7 @@
 apiVersion: secrets-manager.tuenti.io/v1alpha1
 kind: SecretDefinition
 metadata:
-  name: secretdefinition-{{ .Chart.Name }}-cert
+  name: secretdefinition-{{ .Chart.Name }}-alertmanager-config
   {{- if ne .Values.namespaceOverride "" }}
   namespace: {{ .Values.namespaceOverride }}
   {{- end }}
