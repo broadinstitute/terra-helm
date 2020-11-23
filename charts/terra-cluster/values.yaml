@@ -71,6 +71,10 @@ terra-prometheus:
       enabled: false
     kubeProxy:
       enabled: false
+    kubelet:
+      serviceMonitor:
+        # not exposed in gke
+        resource: false
     # Metric relabelings for stackdriver filter
     kubeStateMetrics:
       serviceMonitor:
