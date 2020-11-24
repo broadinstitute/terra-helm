@@ -16,7 +16,7 @@ appVersion:
 
 imageConfig:
   # imageConfig.repository -- Image repository
-  repository: gcr.io/terra-kernel-k8s/terra-buffer
+  repository: gcr.io/terra-kernel-k8s/terra-resource-buffer
   # imageConfig.tag -- (string) Image tag.
   # @default -- The chart's appVersion value will be used
   tag:
