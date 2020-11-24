@@ -1,6 +1,6 @@
 apiVersion: v2
 name: buffer
-version: 0.7.0
+version: 0.8.0
 description: Chart for Resource Buffering Service
 type: application
 keywords:
