@@ -1,42 +1,35 @@
----
 apiVersion: v2
 name: terra-cluster
 description: A Helm chart to configure a k8s cluster for Terra
-
 type: application
-
-version: 0.2.1
-
+version: 0.3.0
 keywords:
-- dsp
-- broadinstitute
-- kernel
-- terra
-
+  - dsp
+  - broadinstitute
+  - kernel
+  - terra
 maintainers:
-- email: gmalkov@broadinstitute.org
-  name: Greg Malkov
-
+  - email: gmalkov@broadinstitute.org
+    name: Greg Malkov
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/master/charts
-
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
 dependencies:
-- name: terra-cluster-psps
-  version: 0.1.0
-  repository: https://broadinstitute.github.io/terra-helm/
-- name: install-secrets-manager
-  condition: install-secrets-manager.enabled
-  version: 0.0.6
-  repository: https://broadinstitute.github.io/datarepo-helm/
-- name: terra-cluster-networking
-  condition: terra-cluster-networking.enabled
-  version: 0.0.1
-  repository: https://broadinstitute.github.io/terra-helm/
-- name: terra-prometheus
-  condition: terra-prometheus.enabled
-  version: 0.2.1
-  repository: https://broadinstitute.github.io/terra-helm/
-- name: reloader
-  condition: reloader.enabled
-  version: v0.0.69
-  repository: https://stakater.github.io/stakater-charts
+  - name: terra-cluster-psps
+    version: 0.1.0
+    repository: https://broadinstitute.github.io/terra-helm/
+  - name: install-secrets-manager
+    condition: install-secrets-manager.enabled
+    version: 0.0.6
+    repository: https://broadinstitute.github.io/datarepo-helm/
+  - name: terra-cluster-networking
+    condition: terra-cluster-networking.enabled
+    version: 0.0.1
+    repository: https://broadinstitute.github.io/terra-helm/
+  - name: terra-prometheus
+    condition: terra-prometheus.enabled
+    version: 0.2.1
+    repository: https://broadinstitute.github.io/terra-helm/
+  - name: reloader
+    condition: reloader.enabled
+    version: v0.0.69
+    repository: https://stakater.github.io/stakater-charts
