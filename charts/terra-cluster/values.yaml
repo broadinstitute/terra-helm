@@ -41,8 +41,6 @@ terra-prometheus:
     namespaceOverride: monitoring
     defaultRules:
       rules:
-        # some gke internals in kube system cause this to flap
-        kubernetesResources: false
         prometheus: false
         prometheusOperator: false
     # Namespace overrides for sub charts
