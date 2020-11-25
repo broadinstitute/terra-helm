@@ -14869,6 +14869,30 @@ entries:
     version: 0.0.0
   terra-prometheus:
   - apiVersion: v2
+    created: "2020-11-25T17:24:41.542866508Z"
+    dependencies:
+    - name: prometheus-operator
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 8.15.6
+    description: a helm chart to deploy monitoring infrastructure
+    digest: dd898549685b58f61b540e3076bd4ba215563b7a0544d7811f392d8b692a90a2
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - monitoring
+    - prometheus
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: terra-prometheus
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.2.1/terra-prometheus-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     created: "2020-11-25T16:48:35.050505098Z"
     dependencies:
     - name: prometheus-operator
