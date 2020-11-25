@@ -7,5 +7,6 @@
     "poc":              {"dev_only": false},
     "rawls":            {"dev_only": false},
     "sam":              {"dev_only": false},
+    "buffer":           {"dev_only": false},
     "workspacemanager": {"dev_only": true}
 }
