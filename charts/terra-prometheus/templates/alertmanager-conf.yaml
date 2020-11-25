@@ -1,0 +1,62 @@
+apiVersion: secrets-manager.tuenti.io/v1alpha1
+kind: SecretDefinition
+metadata:
+  name: secretdefinition-{{ .Chart.Name }}-alertmanager-config
+  {{- if ne .Values.namespaceOverride "" }}
+  namespace: {{ .Values.namespaceOverride }}
+  {{- end }}
+  labels:
+    {{ template "prometheus.labels" . }}
+spec:
+  name: {{ .Chart.Name }}-alertmanager-config
+  keysMap:
+    alertmanager.yaml:
+      path: secret/devops/prometheus/alertmanager/config
+      key: value
+      encoding: base64
+
+# Prometheus maintainers are adamant that alertmanager must read config from files
+# and that those configs do not support reading in values from env vars.
+# this makes it so that is not possible to inject a secret like a slack webhook
+# into the config with out a supplemental templating layer which we currently don't have.
+
+# As temporary workaround the alertmanager config yaml is stored
+# entirely as a b64 encoded string in vault at secret/devops/prometheus/alertmanager/config
+# and mounted as a file to alertmanager
+# The prometheus operator currently has an alpha feature to support templating alert manager 
+# configs via crd but it doesn't support slack yet. 
+
+# Putting the contents of the alermanager-conf.yaml here so it is version controlled. 
+# If a change is made for now the vault value must be manually updated.
+# global:
+#   resolve_timeout: 5m
+#   slack_api_url: ${SLACK_WEBHOOK_URL}
+# route:
+#   group_by: ['job']
+#   group_wait: 30s
+#   group_interval: 5m
+#   repeat_interval: 12h
+#   receiver: 'slack'
+#   routes:
+#   - match:
+#       alertname: Watchdog
+#     receiver: 'null'
+#   - match:
+#     receiver: 'slack'
+#     continue: true
+# receivers:
+# - name: 'null'
+# - name: 'slack'
+#   slack_configs:
+#   - channel: '#terra-prometheus-alerts'
+#     send_resolved: true
+#     title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
+#     text: >-
+#       {{ range .Alerts }}
+#         *Alert:* `{{ .Labels.severity }}`
+#         *Description:* {{ .Annotations.message }}
+#         *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:> *Runbook:* <{{ .Annotations.runbook }}|:spiral_note_pad:>
+#         *Details:*
+#         {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+#         {{ end }}
+#       {{ end }}
