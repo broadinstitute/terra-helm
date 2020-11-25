@@ -14,3 +14,4 @@ spec:
       path: secret/devops/prometheus/alertmanager/config
       key: value
       encoding: base64
+      
