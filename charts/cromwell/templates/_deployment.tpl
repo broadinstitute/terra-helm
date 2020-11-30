@@ -79,7 +79,8 @@ spec:
             cpu: 7
             memory: 40Gi
           limits:
-            memory: 50Gi
+            cpu: 7
+            memory: 40Gi
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
