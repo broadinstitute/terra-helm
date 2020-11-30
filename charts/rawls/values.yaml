@@ -34,6 +34,9 @@ ingressIpName:
 # ingressServiceName -- (string) Name of the rawls service to associate with GKE ingress.
 ingressServiceName: rawls-frontend
 
+# ingressTimeout -- Number of seconds to timeout on requests to the ingress
+ingressTimeout: 120
+
 # sslPolicy -- (string) Name of an existing google ssl policy to associate with an ingress frontend-config
 sslPolicy: tls12-ssl-policy 
 

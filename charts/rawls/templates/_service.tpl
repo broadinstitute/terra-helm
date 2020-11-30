@@ -8,6 +8,7 @@ metadata:
   annotations:
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
     cloud.google.com/neg: '{"ingress": true}'
+    cloud.google.com/backend-config: '{"default": "{{ .Chart.Name }}-ingress-backendconfig"}'
   labels:
 {{ include "rawls.labels" . | indent 4 }}
 spec:
