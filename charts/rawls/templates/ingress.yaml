@@ -21,5 +21,24 @@ apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
   name: {{ .Chart.Name }}-frontend-config
+  labels:
+{{ include "rawls.labels" . | indent 4 }}
 spec:
   sslPolicy: {{ .Values.sslPolicy }}
+--- 
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: {{ .Chart.Name }}-ingress-backendconfig
+  labels:
+{{ include "rawls.labels" . | indent 4 }}
+spec:
+  timeoutSec: {{ .Values.ingressTimeout }}
+  healthCheck:
+    checkIntervalSec: 5
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 2
+    type: HTTPS
+    port: 443
+    requestPath: /status
