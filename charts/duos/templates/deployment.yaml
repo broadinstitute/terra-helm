@@ -54,9 +54,9 @@ spec:
               subPath: nginx.default.conf
               readOnly: false
             {{/* overwrite docker-entrypoint.d */}}
-{{/*            - name: docker-entrypoint*/}}
-{{/*              mountPath: /docker-entrypoint.d*/}}
-{{/*              readOnly: true*/}}
+            - name: docker-entrypoint
+              mountPath: /docker-entrypoint.d
+              readOnly: true
 {{/*          readinessProbe:*/}}
 {{/*            httpGet:*/}}
 {{/*              path: /status*/}}
