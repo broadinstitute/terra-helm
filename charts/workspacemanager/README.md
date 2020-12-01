@@ -22,6 +22,7 @@ Chart for Terra Workspace Manager
 | domain.hostname | string | `"workspace"` | Hostname of this deployment |
 | domain.namespaceEnv | bool | `true` | If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix |
 | domain.suffix | string | `"integ.envs.broadinstitute.org"` | Domain suffix |
+| google.folderId | string | `nil` | the id of the Google Folder to create projects for workspaces within. |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
 | global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |

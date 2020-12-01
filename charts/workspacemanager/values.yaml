@@ -118,6 +118,9 @@ postgres:
 # cloudTraceEnabled -- Whether to enable gcp cloud trace
 cloudTraceEnabled: true
 
+# google.folderId -- the id of the Google Folder to create projects for workspaces within.
+google.folderId:
+
 # initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
 initDB: false
 
