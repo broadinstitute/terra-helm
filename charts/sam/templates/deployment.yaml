@@ -6,11 +6,6 @@ metadata:
   name: {{ .Values.name }}-deployment
   labels:
 {{ include "sam.labels" . | indent 4 }}
-  {{- if and .Values.reloader.enabled }}
-  annotations:
-    # Use https://github.com/stakater/Reloader to reload deployment on config changes
-    reloader.stakater.com/auto: "true"
-  {{- end }}
 spec:
   revisionHistoryLimit: 0
   strategy:

@@ -1,9 +1,6 @@
 global:
   # global.applicationVersion -- What version of the Cromwell application to deploy
   applicationVersion: latest
-  # global.trustedAddresses -- A map of addresses that will be merged with allowedAddresses.
-  # Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
-  trustedAddresses: {}
 
 # name -- A name for the deployment that will be substituted into resuorce definitions
 name: sam
@@ -34,9 +31,6 @@ resources:
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 16Gi
 
-# allowedAddresses -- What source IPs to whitelist for access to the service
-allowedAddresses: {}
-
 # legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
 # @default .Chart.Name
 legacyResourcePrefix: null
@@ -56,10 +50,6 @@ ingressCert:
 # Requires deployment of Prometheus to cluster
 prometheus:
   enabled: true
-  initContainerImage: alpine:3.12.0
-  jmxJarRepo: https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent
+  initContainerImage: 'alpine:3.12.0'
+  jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
   jmxJarVersion: '0.13.0'
-
-# Requires deployment of https://github.com/stakater/Reloader to cluster
-reloader:
-  enabled: true
