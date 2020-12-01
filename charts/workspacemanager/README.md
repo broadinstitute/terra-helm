@@ -50,6 +50,8 @@ Chart for Terra Workspace Manager
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
 | serviceIP | string | `nil` | External IP of the service. Required. |
+| spend.billingAccountId | string | `nil` | the Google Billing account Id for WSM to use for workspace projects. |
+| spend.profileId | string | `nil` | the Spend Profile Id to associate with the billing account. |
 | terraDataRepoUrl | string | `"https://jade.datarepo-dev.broadinstitute.org"` | corresponding data repo instance for the environment |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |

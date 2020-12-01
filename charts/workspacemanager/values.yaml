@@ -132,3 +132,9 @@ samplingProbability: 1.0
 
 # terraDataRepoUrl -- corresponding data repo instance for the environment
 terraDataRepoUrl: https://jade.datarepo-dev.broadinstitute.org
+
+spend:
+  # spend.billingAccountId -- the Google Billing account Id for WSM to use for workspace projects.
+  billingAccountId:
+  # spend.profileId -- the Spend Profile Id to associate with the billing account.
+  profileId:

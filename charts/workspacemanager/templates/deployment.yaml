@@ -98,6 +98,10 @@ spec:
           value: "{{ .Values.cloudTraceEnabled }}"
         - name: TERRA_DATAREPO_URL
           value: "{{ .Values.terraDataRepoUrl }}"
+        - name: WORKSPACE_SPEND_SPENDPROFILES_0_ID
+          value: "{{ .Values.spend.profileId }}"  wm-connected-spend-profile
+        - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
+          value: "{{ .Values.spend.billingAccountId }}"01A82E-CA8A14-367457
         volumeMounts:
           - name: app-sa-creds
             mountPath: /secrets/app
