@@ -1,0 +1,14 @@
+apiVersion: v2
+name: cromiam
+version: 0.0.1
+appVersion: latest
+description: Chart for cromiam service in Terra [WIP]
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - cromiam
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/broadinstitute/cromiam
