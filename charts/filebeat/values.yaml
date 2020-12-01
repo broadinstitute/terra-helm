@@ -1,0 +1,10 @@
+# image -- (string) filebeat image to use
+image: docker.elastic.co/beats/filebeat-oss
+# imageTag -- (string) specify filebeat image version
+imageTag: 7.6.2
+# podSecurityPolicy -- (string) Psp to associate with the filebeat service account
+podSecurityPolicy: terra-default-psp
+# beatsPort -- (string) Required. Port on the logit ELK stack to export logs to. Should be the beats-ssl port
+beatsPort: 
+# environmentName -- (string) Required. Name of the environment ie dev, perf, ... Used to determine which namespace to export logs from
+environmentName:

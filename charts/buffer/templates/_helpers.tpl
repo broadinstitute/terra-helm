@@ -1,0 +1,39 @@
+{{/*
+Create labels to use for resources in this chart
+*/}}
+{{- define "buffer.labels" -}}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/component: buffer
+    app.kubernetes.io/part-of: terra
+{{- end }}
+
+{{/*
+FQDN template
+*/}}
+{{- define "buffer.fqdn" -}}
+    {{ .Values.domain.hostname -}}
+    {{ if .Values.domain.namespaceEnv -}}
+    	.{{.Values.global.terraEnv -}}
+    {{ end -}}
+    .{{ .Values.domain.suffix }}
+{{- end }}
+
+{{/*
+Service firewall
+*/}}
+{{- define "buffer.servicefirewall" -}}
+  {{- $addresses := merge .Values.serviceAllowedAddresses .Values.global.trustedAddresses -}}
+  {{- if $addresses | empty -}}
+    {{- fail "Please specify at least one allowed address" -}}
+  {{- end -}}
+
+  {{- range $nickname, $cidrs := $addresses }}
+  # {{ $nickname }}
+  {{- range $cidr := $cidrs }}
+  - {{ $cidr }}
+  {{- end -}}
+  {{- end -}}
+{{- end }}

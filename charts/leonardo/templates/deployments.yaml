@@ -1,0 +1,19 @@
+{{- /*
+  Generate Deployment and ConfigMap definitions for each declared deployment type.
+*/ -}}
+{{- $defaults := $.Values.deploymentDefaults -}}
+{{- range $deploymentType, $overrides := $.Values.deployments }}
+{{- $settings := mergeOverwrite ($defaults | deepCopy) ($overrides | deepCopy) -}}
+{{- $outputs := dict -}}
+{{- $templateScope := $ | deepCopy -}}
+{{- $_ := set $templateScope "_deploymentSettings" $settings -}}
+{{- $_ := set $templateScope "_deploymentOutputs" $outputs -}}
+{{- if $settings.enabled }}
+---
+# Leonardo {{ $deploymentType }} configmap
+{{ template "leonardo.configmap" $templateScope }}
+---
+# Leonardo {{ $deploymentType }} deployment
+{{ template "leonardo.deployment" $templateScope }}
+{{- end -}}
+{{- end -}}

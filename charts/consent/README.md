@@ -31,6 +31,7 @@ Current chart version is `0.1.0`
 | image | string | `nil` |  |
 | imageRepository | string | `nil` |  |
 | imageTag | string | `nil` |  |
+| ingressIpName | string | `nil` | Global static ip for ingress. Required. | 
 | proxyImageRepository | string | `nil` |  |
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |

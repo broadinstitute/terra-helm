@@ -41,6 +41,8 @@ terra-prometheus:
     namespaceOverride: monitoring
     defaultRules:
       rules:
+        # gke configuration causes these alerts to flap, will make custom versions that provided the same functionality
+        kubernetesResources: false
         prometheus: false
         prometheusOperator: false
     # Namespace overrides for sub charts

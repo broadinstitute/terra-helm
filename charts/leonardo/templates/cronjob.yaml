@@ -22,7 +22,7 @@ spec:
             args:
               - |
                 trap "touch /tmp/pod/main-terminated" EXIT
-                /opt/docker/bin/resource-validator --dryRun --all
+                /opt/docker/bin/resource-validator --all
             env:
             - name: JAVA_OPTS
               value: -Dconfig.file=/opt/docker/resource-validator-config/application.conf
@@ -91,5 +91,5 @@ spec:
             emptyDir: {}
           - name: application-config
             configMap:
-              name: resource-validator-cm
+              name: leonardo-resource-validator-cm
               

@@ -1,0 +1,13 @@
+apiVersion: v2
+name: buffer
+version: 0.9.0
+description: Chart for Resource Buffering Service
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - buffer
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/DataBiosphere/terra-resource-buffer
