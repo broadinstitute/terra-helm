@@ -3,6 +3,24 @@ entries:
   agora:
   - apiVersion: v2
     appVersion: latest
+    created: "2020-12-01T17:47:55.276006379Z"
+    description: Chart for Agora service in Terra [WIP]
+    digest: 5a1191acbd57a4e58bfe4661ad1986e0de394d9711212f60e2460c4e6fb31449
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.1.0/agora-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2020-12-01T17:34:18.125519798Z"
     description: Chart for Agora service in Terra [WIP]
     digest: c7040a5a6c73453919c79b7632c534e174c0ef4badeef641e0a965c2b598fbb1
@@ -2051,6 +2069,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.1.0/crljanitor-0.1.0.tgz
     version: 0.1.0
   cromiam:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-12-01T17:47:55.557810579Z"
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 84cc7630d64cfdfe824496f07f8e58e7a6d25452894148858554b251e695de28
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.1.0/cromiam-0.1.0.tgz
+    version: 0.1.0
   - apiVersion: v2
     appVersion: latest
     created: "2020-12-01T17:34:18.216957732Z"
