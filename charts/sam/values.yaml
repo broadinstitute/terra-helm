@@ -5,8 +5,33 @@ global:
 # name -- A name for the deployment that will be substituted into resuorce definitions
 name: sam
 
-# ingressIpName -- Name of GCP global static external IP address. Required.
-ingressIpName:
+ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
+  enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
+  timeoutSec: 120
+  cert:
+    # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    #   certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
+    vault:
+      enabled: true
+      cert:
+        # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
+        path: null
+        # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
+        secretKey: null
+      key:
+        # ingress.cert.vault.key.path -- (string) Path to secret containing .key
+        path: null
+        # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
+        secretKey: null
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
 
 imageConfig:
   # imageConfig.repository -- Image repository
@@ -34,18 +59,6 @@ resources:
 # legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
 # @default .Chart.Name
 legacyResourcePrefix: null
-
-ingressCert:
-  cert:
-    # ingressCert.cert.path -- (string) Path to secret containing .crt
-    path:
-    # ingressCert.cert.secretKey -- (string) Key in secret containing .crt
-    secretKey:
-  key:
-    # ingressCert.key.path -- (string) Path to secret containing .key
-    path:
-    # ingressCert.key.secretKey -- (string) Key in secret containing .key
-    secretKey:
 
 # Requires deployment of Prometheus to cluster
 prometheus:

@@ -1,0 +1,22 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}-ingress
+  labels:
+{{ include "sam.labels" . | indent 4 }}
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingress.staticIpName }}
+    kubernetes.io/ingress.allow-http: "false"
+{{- if not (empty .Values.ingress.cert.preSharedCerts) }}
+    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
+{{- end }}
+spec:
+{{- if empty .Values.ingress.cert.preSharedCerts }}
+  tls:
+  - secretName: {{ .Values.name }}-cert
+{{- end }}
+  backend:
+    serviceName: {{ .Values.name }}-service
+    servicePort: 443
+{{- end }}

@@ -4,6 +4,6 @@
     "leonardo":         {"dev_only": false},
     "ontology":         {"dev_only": false},
     "poc":              {"dev_only": false},
-    "sam":              {"dev_only": false},
+    "sam":              {"dev_only": true},
     "workspacemanager": {"dev_only": true}
 }
