@@ -100,6 +100,7 @@ spec:
           value: "{{ .Values.terraDataRepoUrl }}"
         - name: WORKSPACE_GOOGLE_FOLDERID
           # Prevent helm from turning our string that looks like an int into scientific notation.
+          # https://github.com/helm/helm/issues/1707
           value: "{{ int64 .Values.google.folderId | quote }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_ID
           value: "{{ .Values.spend.profileId }}"
