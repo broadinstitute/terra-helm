@@ -99,7 +99,8 @@ spec:
         - name: TERRA_DATAREPO_URL
           value: "{{ .Values.terraDataRepoUrl }}"
         - name: WORKSPACE_GOOGLE_FOLDERID
-          value: "{{ .Values.google.folderId }}"
+          # Prevent helm from turning our string that looks like an int into scientific notation.
+          value: "{{ int64 .Values.google.folderId | quote }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_ID
           value: "{{ .Values.spend.profileId }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
