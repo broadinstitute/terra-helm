@@ -62,11 +62,11 @@ spec:
           protocol: TCP
         resources: # Mimic existing GCE vm requirements
           requests:
-            cpu: 4
-            memory: 8Gi
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
           limits:
-            cpu: 4
-            memory: 8Gi
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
         envFrom:
         - secretRef:
             name: {{ .Chart.Name }}-app-env
