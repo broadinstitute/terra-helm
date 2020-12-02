@@ -3,6 +3,24 @@ entries:
   agora:
   - apiVersion: v2
     appVersion: latest
+    created: "2020-12-02T21:00:07.702393501Z"
+    description: Chart for Agora service in Terra
+    digest: 96ec91ce90ea2c49d240cb05dc5ddeae0bfb1e0d7af7691b0688efec3b5a5078
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.1.1-218.1606942800.116524/agora-0.1.1-218.1606942800.116524.tgz
+    version: 0.1.1-218.1606942800.116524
+  - apiVersion: v2
+    appVersion: latest
     created: "2020-12-01T17:47:55.276006379Z"
     description: Chart for Agora service in Terra [WIP]
     digest: 5a1191acbd57a4e58bfe4661ad1986e0de394d9711212f60e2460c4e6fb31449
