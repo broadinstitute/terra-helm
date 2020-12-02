@@ -1,0 +1,15 @@
+{{ if .Values.monitoring.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ .Chart.Name }}-jvm-monitor
+  labels:
+{{ include "leonardo.labels" . | indent 4 }}
+spec:
+  jobLabel: leonardo-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: {{ .Chart.Name | quote }}
+  podMetricsEndpoints:
+    - port: metrics
+{{- end }}

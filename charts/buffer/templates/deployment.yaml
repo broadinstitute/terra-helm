@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: terra-rbs-deployment
+  name: terra-buffer-deployment
   labels:
-    {{ template "rbs.labels" . }}
+    {{ template "buffer.labels" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: terra-rbs
+      app: terra-buffer
   template:
     metadata:
-      name: terra-rbs-service
+      name: terra-buffer-service
       labels:
-        {{ template "rbs.labels" . }}
+        app: terra-buffer
     spec:
-      serviceAccountName: terra-rbs-service-sa
+      serviceAccountName: terra-buffer-service-sa
       containers:
-      - name: terra-rbs
+      - name: terra-buffer
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
@@ -29,38 +29,67 @@ spec:
         - containerPort: 8080
         {{- end}}
         env:
-        - name: RBS_DB_USERNAME
+        - name: BUFFER_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: rbs-postgres-db-creds
+              name: buffer-postgres-db-creds
               key: username
-        - name: RBS_DB_PASSWORD
+        - name: BUFFER_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: rbs-postgres-db-creds
+              name: buffer-postgres-db-creds
               key: password
-        - name: RBS_DATABASE_NAME
+        - name: BUFFER_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: rbs-postgres-db-creds
+              name: buffer-postgres-db-creds
               key: db
-        - name: RBS_STAIRWAY_DB_USERNAME
+        - name: BUFFER_POOL_CONFIG_PATH
+          value: {{ .Values.buffer.pool.configPath }}
+        - name: BUFFER_STAIRWAY_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: rbs-stairway-db-creds
+              name: buffer-stairway-db-creds
               key: username
-        - name: RBS_STAIRWAY_DB_PASSWORD
+        - name: BUFFER_STAIRWAY_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: rbs-stairway-db-creds
+              name: buffer-stairway-db-creds
               key: password
-        - name: RBS_STAIRWAY_DATABASE_NAME
+        - name: BUFFER_STAIRWAY_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: rbs-stairway-db-creds
+              name: buffer-stairway-db-creds
               key: db
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
+        # Janitor configs to enable BUFFER publish message to Janitor to cleanup resource.
+        # It is needed if BUFFER clients use the BUFFER for their integration test.
+        {{- if .Values.cleanupAfterHandout }}
+        - name: BUFFER_CRL_CLEAN_UP_AFTER_HANDOUT
+          value: 'true'
+        - name: BUFFER_CRL_JANITOR_CLIENT_CREDENTIAL_FILE_PATH
+          value: /secrets/app/janitor-client-sa.json
+        - name: BUFFER_CRL_JANITOR_TRACK_RESOURCE_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              name: buffer-crl-janitor-track-resource-pubsub
+              key: project
+        - name: BUFFER_CRL_JANITOR_TRACK_RESOURCE_TOPIC_ID
+          valueFrom:
+            secretKeyRef:
+              name: buffer-crl-janitor-track-resource-pubsub
+              key: topic
+        {{- end }}
+        # Environment variables for OpenCensus resource auto detection.
+        - name: CONTAINER_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['app']
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         volumeMounts:
           - name: app-sa-creds
             mountPath: /secrets/app
@@ -71,17 +100,17 @@ spec:
         - name: SQL_INSTANCE_PROJECT
           valueFrom:
             secretKeyRef:
-              name: rbs-cloudsql-postgres-instance
+              name: buffer-cloudsql-postgres-instance
               key: project
         - name: SQL_INSTANCE_REGION
           valueFrom:
             secretKeyRef:
-              name: rbs-cloudsql-postgres-instance
+              name: buffer-cloudsql-postgres-instance
               key: region
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: rbs-cloudsql-postgres-instance
+              name: buffer-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
                   "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
@@ -102,7 +131,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/apache2/sites-available/site.conf
           name: apache-httpd-proxy-config
-          subPath: rbs-proxy.conf
+          subPath: buffer-proxy.conf
         - mountPath: /etc/ssl/certs/server.crt
           subPath: tls.crt
           name: cert
@@ -121,17 +150,17 @@ spec:
       volumes:
         - name: cloudsql-sa-creds
           secret:
-            secretName: rbs-cloudsql-sa
+            secretName: buffer-cloudsql-sa
         - name: app-sa-creds
           secret:
-            secretName: rbs-app-sa
+            secretName: buffer-app-sa
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
-            name: terra-rbs-proxy-configmap
+            name: terra-buffer-proxy-configmap
             items:
             - key: apache-httpd-proxy-config
-              path: rbs-proxy.conf
+              path: buffer-proxy.conf
         - name: cert
           secret:
             secretName: {{ .Chart.Name }}-cert

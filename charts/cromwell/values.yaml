@@ -10,7 +10,7 @@ global:
 deploymentDefaults:
   # deploymentDefaults.enabled -- Whether a declared deployment is enabled. If false, no resources will be created
   enabled: true
-  # deploymentDefaults.name -- A name for the deployment that will be substituted into resuorce definitions.
+  # deploymentDefaults.name -- A name for the deployment that will be substituted into resource definitions.
   # Example: `"cromwell1-reader"`
   name: null
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
@@ -29,6 +29,10 @@ deploymentDefaults:
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
   legacyResourcePrefix: null
+  # deploymentDefaults.nodeSelector -- (object) Optional nodeSelector map
+  nodeSelector: null
+  # deploymentDefaults.tolerations -- (array) Optional array of tolerations
+  tolerations: null
 
 # A map of Cromwell deployments. In Terra's production environment,
 # Cromwell is deployed as 4 separate services with different configurations.

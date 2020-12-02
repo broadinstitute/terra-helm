@@ -79,7 +79,8 @@ spec:
             cpu: 7
             memory: 40Gi
           limits:
-            memory: 50Gi
+            cpu: 7
+            memory: 40Gi
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
@@ -179,4 +180,12 @@ spec:
         volumeMounts:
         - mountPath: /cromwell-prometheusjmx-jar
           name: cromwell-prometheusjmx-jar
+      {{- if $settings.nodeSelector }}
+      nodeSelector:
+        {{ $settings.nodeSelector | toYaml | indent 8 | trim }}
+      {{- end -}}
+      {{- if $settings.tolerations }}
+      tolerations:
+        {{ $settings.tolerations | toYaml | indent 8 | trim }}
+      {{- end -}}
 {{- end -}}
