@@ -22,6 +22,9 @@ spec:
       labels:
         deployment: {{ .Values.name }}-deployment
 {{ include "sam.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name
