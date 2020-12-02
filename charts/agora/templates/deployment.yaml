@@ -101,7 +101,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /status
-            port: 8080
+            port: 8000
           timeoutSeconds: 5
           initialDelaySeconds: 15
           periodSeconds: 10
@@ -110,7 +110,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /status
-            port: 8080
+            port: 8000
           timeoutSeconds: 5
           initialDelaySeconds: 15
           periodSeconds: 10
