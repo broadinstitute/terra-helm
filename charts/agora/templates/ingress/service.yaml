@@ -15,7 +15,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    deployment: {{ .Values.ingress.deployment }}-deployment
+    deployment: {{ .Chart.Name }}-deployment
   ports:
   - name: https
     protocol: TCP
