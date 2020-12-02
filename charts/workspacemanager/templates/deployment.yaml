@@ -99,11 +99,11 @@ spec:
         - name: TERRA_DATAREPO_URL
           value: "{{ .Values.terraDataRepoUrl }}"
         - name: WORKSPACE_GOOGLE_FOLDERID
-          value: "{{ .Values.google.folderId }}"
+          value: "{{ .Values.googleFolderId }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_ID
-          value: "{{ .Values.spend.profileId }}"
+          value: "{{ .Values.spendProfileId }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
-          value: "{{ .Values.spend.billingAccountId }}"
+          value: "{{ .Values.spendBillingAccountId }}"
         volumeMounts:
           - name: app-sa-creds
             mountPath: /secrets/app

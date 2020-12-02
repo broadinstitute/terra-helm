@@ -118,8 +118,8 @@ postgres:
 # cloudTraceEnabled -- Whether to enable gcp cloud trace
 cloudTraceEnabled: true
 
-# google.folderId -- the id of the Google Folder to create projects for workspaces within.
-google.folderId:
+# googleFolderId -- the id of the Google Folder to create projects for workspaces within.
+googleFolderId:
 
 # initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
 initDB: false
@@ -136,8 +136,7 @@ samplingProbability: 1.0
 # terraDataRepoUrl -- corresponding data repo instance for the environment
 terraDataRepoUrl: https://jade.datarepo-dev.broadinstitute.org
 
-spend:
-  # spend.billingAccountId -- the Google Billing account Id for WSM to use for workspace projects.
-  billingAccountId:
-  # spend.profileId -- the Spend Profile Id to associate with the billing account.
-  profileId:
+# spendBillingAccountId -- the Google Billing account Id for WSM to use for workspace projects.
+spendBillingAccountId:
+# spendProfileId -- the Spend Profile Id to associate with the billing account.
+spendProfileId:
