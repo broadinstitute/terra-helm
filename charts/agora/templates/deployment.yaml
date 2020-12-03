@@ -24,7 +24,7 @@ spec:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ .Chart.Name }}-cm: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: agora-sa
+      serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts

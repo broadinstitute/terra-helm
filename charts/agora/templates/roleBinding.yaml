@@ -1,13 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: agora-sa-binding
+  name: {{ .Chart.Name }}-sa-binding
   labels:
 {{ include "agora.labels" . | indent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: agora-sa
+  name: {{ .Chart.Name }}-sa
 roleRef:
   kind: Role
-  name: agora-role
+  name: {{ .Chart.Name }}-role
   apiGroup: rbac.authorization.k8s.io
