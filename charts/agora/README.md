@@ -9,6 +9,7 @@ Chart for Agora service in Terra
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| extraHostAliases | list | `[]` | An array of additional hostAliases to add to the pod. See https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/ Currently this is used for replicating host aliases for MongoDB in Terra's dev environment (https://github.com/broadinstitute/dsp-puppet/blob/ba64214a81cf2abd9e0c5c21dc0294d3837481ce/hieradata/c.broad-dsde-dev.internal.eyaml#L308) |
 | global.applicationVersion | string | `"latest"` | What version of the agora application to deploy |
 | imageRepository | string | `"gcr.io/broad-dsp-gcr-public/agora"` | Image repo to pull agora images from |
 | imageTag | string | `nil` | Image tag to be used when deploying Pods @default global.applicationVersion |

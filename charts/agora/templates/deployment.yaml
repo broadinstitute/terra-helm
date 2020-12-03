@@ -33,6 +33,9 @@ spec:
         hostnames:
         - app
         - sqlproxy
+      {{- if .Values.extraHostAliases -}}
+        {{ .Values.extraHostAliases | toYaml | nindent 6 }}
+      {{- end }}
       volumes:
       - name: app-ctmpls
         secret:
