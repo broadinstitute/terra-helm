@@ -27,7 +27,7 @@ spec:
         deployment: {{ $settings.name }}
 {{ include "rawls.labels" . | indent 8 }}
       annotations:
-        {{- /* Automatically restart deployments on config map change: */ -}}
+        {{- /* Automatically restart deployments on config map change: */ }}
         checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
     spec: 
       serviceAccountName: rawls-sa
