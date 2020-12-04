@@ -10,6 +10,7 @@
 {{- $outputs := dict -}}
 {{- $templateScope := $ | deepCopy -}}
 {{- $_ := set $templateScope "_deploymentSettings" $settings -}}
+{{- $_ := set $templateScope "_deploymentOutputs" $outputs -}}
 {{- if $settings.enabled }}
 ---
 # Rawls {{ $deploymentType }} configMap
