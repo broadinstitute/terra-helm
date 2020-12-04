@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-cm
+  labels:
+{{ include "agora.labels" . | indent 4 }}
+data:
+  prometheusJmx.yaml: |
+{{ include "agora.config.prometheusJmx" . | indent 4 }}

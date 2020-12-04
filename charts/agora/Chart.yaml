@@ -1,8 +1,8 @@
 apiVersion: v2
 name: agora
-version: 0.1.0
+version: 0.1.1
 appVersion: latest
-description: Chart for Agora service in Terra [WIP]
+description: Chart for Agora service in Terra
 type: application
 keywords:
   - dsp
