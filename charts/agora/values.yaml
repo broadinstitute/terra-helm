@@ -29,12 +29,24 @@ ingress:
   enabled: true
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
-  # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
-  preSharedCerts: []
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
   timeoutSec: 120
+
+# Parameters to pull TLS cert used by Apache proxy and GKE ingress from Vault
+secrets:
+  tls:
+    cert:
+      # secrets.tls.cert.vaultPath -- (string) Path to Vault secret containing .crt
+      vaultPath: null
+      # secrets.tls.cert.vaultKey -- (string) Key in Vault secret containing .crt
+      vaultKey: null
+    key:
+      # secrets.tls.key.vaultPath -- (string) Path to Vault secret containing .key
+      vaultPath: null
+      # secrets.tls.key.vaultKey -- (string) Key in Vault secret containing .key
+      vaultKey: null
 
 # extraHostAliases -- An array of additional hostAliases to add to the pod. See https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
 # Currently this is used for replicating host aliases for MongoDB in Terra's dev environment (https://github.com/broadinstitute/dsp-puppet/blob/ba64214a81cf2abd9e0c5c21dc0294d3837481ce/hieradata/c.broad-dsde-dev.internal.eyaml#L308)
