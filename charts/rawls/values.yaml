@@ -15,30 +15,22 @@ resources:
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 16Gi
 
-# Parameters to pull cert for GKE ingress from vault
-ingressCert:
-  cert:
-    # ingressCert.cert.path -- (string) Path to secret containing .crt
-    path:
-    # ingressCert.cert.secretKey -- (string) Key in secret containing .crt
-    secretKey:
-  key:
-    # ingressCert.key.path -- (string) Path to secret containing .key
-    path:
-    # ingressCert.key.secretKey -- (string) Key in secret containing .key
-    secretKey:
 
-# ingressIpName -- (string) Required. GCP resource name for ingress static ip
-ingressIpName:
+ingress:
+  # ingress.staticIpName -- (string) Required. GCP resource name for ingress static ip
+  staticIpName:
 
-# ingressServiceName -- (string) Name of the rawls service to associate with GKE ingress.
-ingressServiceName: rawls-frontend
+  # ingress.serviceName -- (string) Name of the rawls service to associate with GKE ingress.
+  serviceName: rawls-frontend
 
-# ingressTimeout -- Number of seconds to timeout on requests to the ingress
-ingressTimeout: 120
+  # ingress.timeoutSec -- Number of seconds to timeout on requests to the ingress
+  timeoutSec: 120
 
-# sslPolicy -- (string) Name of an existing google ssl policy to associate with an ingress frontend-config
-sslPolicy: tls12-ssl-policy 
+  # ingress.sslPolicy -- (string) Name of an existing google ssl policy to associate with an ingress frontend-config
+  sslPolicy: tls12-ssl-policy
+
+  # ingress.preSharedCerts -- (string) List of pre existing gcp certs to use on ingress
+  preSharedCerts: []
 
 # rawls can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
