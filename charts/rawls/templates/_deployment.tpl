@@ -1,6 +1,7 @@
 {{- /* Generate a Rawls deployment */ -}}
 {{- define "rawls.deployment" -}}
 {{- $settings := ._deploymentSettings -}}
+{{- $outputs := ._deploymentOutputs -}}
 {{- $imageTag := $settings.imageTag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := $settings.legacyResourcePrefix | default $settings.name -}}
 apiVersion: apps/v1
@@ -25,6 +26,9 @@ spec:
       labels:
         deployment: {{ $settings.name }}
 {{ include "rawls.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
     spec: 
       serviceAccountName: rawls-sa
       hostAliases:
