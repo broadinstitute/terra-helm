@@ -18,12 +18,11 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.name }}
+      deployment: {{ .Values.name }}-deployment
   template:
     metadata:
-      name: {{ .Values.name }}-service
       labels:
-        app: {{ .Values.name }}
+        deployment: {{ .Values.name }}-deployment
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       containers:
