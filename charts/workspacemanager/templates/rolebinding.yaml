@@ -1,14 +1,14 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ .Chart.Name }}-service-role-binding
+  name: {{ .Values.name }}-service-role-binding
   labels:
     {{ template "workspacemanager.labels" . }}
 roleRef:
   kind: Role
-  name: {{ .Chart.Name }}-service-role
+  name: {{ .Values.name }}-service-role
   apiGroup: rbac.authorization.k8s.io
 subjects:
 # Authorize specific service accounts:
 - kind: ServiceAccount
-  name: {{ .Chart.Name }}-service-sa
+  name: {{ .Values.name }}-service-sa

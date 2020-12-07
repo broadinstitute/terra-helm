@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ .Values.name }}-deployment
   labels:
     {{ template "workspacemanager.labels" . }}
   {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
@@ -12,16 +12,16 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: {{ .Values.name }}
   template:
     metadata:
-      name: {{ .Chart.Name }}-service
+      name: {{ .Values.name }}-service
       labels:
-        app: {{ .Chart.Name }}
+        app: {{ .Values.name }}
     spec:
-      serviceAccountName: {{ .Chart.Name }}-service-sa
+      serviceAccountName: {{ .Values.name }}-service-sa
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ .Values.name }}
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
@@ -66,7 +66,7 @@ spec:
               key: db
         {{- else }}
         - name: DATABASE_HOSTNAME
-          value: {{ .Chart.Name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
+          value: {{ .Values.name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
         - name: DATABASE_USER
           value: postgres
         - name: DATABASE_USER_PASSWORD
@@ -228,7 +228,7 @@ spec:
           subPath: tls.key
           name: cert
           readOnly: true
-        {{- if .Values.vaultCert.enabled}}
+        {{- if .Values.ingress.cert.vault.enabled}}
         - mountPath: /etc/ssl/certs/ca-bundle.crt
           subPath: ca-bundle.crt
           name: cert
@@ -255,17 +255,17 @@ spec:
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
-            name: {{ .Chart.Name }}-proxy-configmap
+            name: {{ .Values.name }}-proxy-configmap
             items:
             - key: apache-httpd-proxy-config
               path: workspace-manager-proxy.conf
         - name: cert
           secret:
-            secretName: {{ .Chart.Name }}-cert
+            secretName: {{ .Values.name }}-cert
         {{- if .Values.proxy.tcell.enabled }}
         - name: tcell-config
           configMap:
-            name: {{ .Chart.Name }}-tcell-configmap
+            name: {{ .Values.name }}-tcell-configmap
             items:
             - key: tcell-config
               path: tcell-config.conf
@@ -276,7 +276,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-postgres-deployment
+  name: {{ .Values.name }}-postgres-deployment
   labels:
     {{ template "workspacemanager.labels" . }}
 {{- include "postgres.deployment.tpl" . }}

@@ -3,7 +3,7 @@ Create labels to use for resources in this chart
 */}}
 {{- define "workspacemanager.labels" -}}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/name: {{ .Values.name }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/component: workspacemanager
@@ -14,11 +14,11 @@ Create labels to use for resources in this chart
 FQDN template
 */}}
 {{- define "workspacemanager.fqdn" -}}
-    {{ .Values.domain.hostname -}}
-    {{ if .Values.domain.namespaceEnv -}}
+    {{ .Values.ingress.domain.hostname -}}
+    {{ if .Values.ingress.domain.namespaceEnv -}}
     	.{{.Values.global.terraEnv -}}
     {{ end -}}
-    .{{ .Values.domain.suffix }}
+    .{{ .Values.ingress.domain.suffix }}
 {{- end }}
 
 {{/*

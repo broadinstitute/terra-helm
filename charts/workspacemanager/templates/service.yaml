@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Chart.Name }}-service
+  name: {{ .Values.name }}-service
   labels:
     {{ template "workspacemanager.labels" . }}
 spec:
@@ -12,7 +12,7 @@ spec:
   {{- template "workspacemanager.servicefirewall" . }}
   {{- end }}
   selector:
-    app: {{ .Chart.Name }}
+    app: {{ .Values.name }}
   {{- if .Values.proxy.enabled }}
   ports:
   - name: http
@@ -31,7 +31,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Chart.Name }}-postgres-service
+  name: {{ .Values.name }}-postgres-service
   labels:
     {{ template "workspacemanager.labels" . }}
 {{- include "postgres.service.tpl" . }}
