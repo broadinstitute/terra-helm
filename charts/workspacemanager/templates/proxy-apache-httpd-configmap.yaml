@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-proxy-configmap
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
 data:
   apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}

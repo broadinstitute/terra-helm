@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: {{ .Values.name }}-service-role
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']

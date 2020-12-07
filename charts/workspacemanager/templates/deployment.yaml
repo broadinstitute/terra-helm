@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}-deployment
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
   {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
   annotations:
     reloader.stakater.com/auto: "true"
@@ -23,6 +23,7 @@ spec:
     metadata:
       labels:
         deployment: {{ .Values.name }}-deployment
+{{ include "workspacemanager.labels" . | indent 8 }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       containers:
@@ -283,6 +284,6 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}-postgres-deployment
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
 {{- include "postgres.deployment.tpl" . }}
 {{- end }}

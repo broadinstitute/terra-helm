@@ -3,7 +3,7 @@ kind: RoleBinding
 metadata:
   name: {{ .Values.name }}-service-role-binding
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
 roleRef:
   kind: Role
   name: {{ .Values.name }}-service-role

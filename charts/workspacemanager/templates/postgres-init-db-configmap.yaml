@@ -4,6 +4,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-postgres-initdb
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
 {{- template "postgres.init-db-configmap.tpl" . }}
 {{- end }}
