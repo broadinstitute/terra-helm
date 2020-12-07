@@ -24,6 +24,13 @@ spec:
       labels:
         deployment: {{ .Values.name }}-deployment
 {{ include "workspacemanager.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map changes: */}}
+        checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
+        {{- if .Values.postgres.enabled }}
+        checksum/{{ .Values.name }}-postgres-initdb: {{ include (print $.Template.BasePath "/configmaps/postgres-init-db-configmap.yaml") . | sha256sum }}
+        {{- end }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       containers:
