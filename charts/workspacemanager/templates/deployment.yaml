@@ -9,6 +9,12 @@ metadata:
     reloader.stakater.com/auto: "true"
   {{- end }}
 spec:
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
