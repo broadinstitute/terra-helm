@@ -1,7 +1,6 @@
 global:
   # global.applicationVersion -- What version of the Leonardo application to deploy
   applicationVersion: latest
-
 # Leonardo can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
@@ -19,7 +18,6 @@ deploymentDefaults:
   imageTag: null
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
-
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
 # with different configurations.
@@ -32,7 +30,6 @@ deployments:
     name: leonardo
     # deployments.standalone.replicas -- Number of replicas in the default standalone Leonardo deployment
     replicas: 1
-
 # Settings for Leonardo's Ingress & Service
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
@@ -49,12 +46,10 @@ ingress:
   # ingress.timeoutSec -- Load balancer backend timeout
   # (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665)
   timeoutSec: 28800
-
 # Settings for Prometheus monitoring
 monitoring:
   # monitoring.enabled -- Whether to enable Prometheus monitoring for Leonardo pods
   enabled: true
-
 commonCronjob:
   # this is defined in terra-helm repo
   reportDestinationBucket:
@@ -62,13 +57,13 @@ cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  imageTag: 4bbec1f
+  imageTag: 02f8edd
   googleProject:
 zombieMonitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-zombie-monitor-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
-  imageTag: 4bbec1f
+  imageTag: 02f8edd
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
