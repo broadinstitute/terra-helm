@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1alpha3
 kind: Certificate
 metadata:
-  name: argocd-certificate
+  name: dsp-argocd-certificate
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
@@ -17,7 +17,7 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt-prod
   renewBefore: 360h0m0s
-  secretName: argocd-cert
+  secretName: dsp-argocd-cert
   subject:
     organizations:
     - broad-institute
