@@ -34,6 +34,37 @@ spec:
         {{- end }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
+      volumes:
+      {{- if not .Values.postgres.enabled }}
+      - name: cloudsql-sa-creds
+        secret:
+          secretName: workspace-sqlproxy-sa
+      {{- end }}
+      - name: cloud-trace-sa-creds
+        secret:
+          secretName: workspace-cloud-trace-sa
+      - name: app-sa-creds
+        secret:
+          secretName: workspace-app-sa
+      {{- if .Values.proxy.enabled }}
+      - name: apache-httpd-proxy-config
+        configMap:
+          name: {{ .Values.name }}-proxy-configmap
+          items:
+          - key: apache-httpd-proxy-config
+            path: workspace-manager-proxy.conf
+      - name: cert
+        secret:
+          secretName: {{ .Values.name }}-cert
+      {{- if .Values.proxy.tcell.enabled }}
+      - name: tcell-config
+        configMap:
+          name: {{ .Values.name }}-tcell-configmap
+          items:
+          - key: tcell-config
+            path: tcell-config.conf
+      {{- end }}
+      {{- end }}
       containers:
       - name: {{ .Values.name }}
         image: "{{- if .Values.image -}}
@@ -254,37 +285,6 @@ spec:
           subPath: tcell-config.conf
         {{- end }}
       {{- end }}
-      volumes:
-        {{- if not .Values.postgres.enabled }}
-        - name: cloudsql-sa-creds
-          secret:
-            secretName: workspace-sqlproxy-sa
-        {{- end }}
-        - name: cloud-trace-sa-creds
-          secret:
-            secretName: workspace-cloud-trace-sa
-        - name: app-sa-creds
-          secret:
-            secretName: workspace-app-sa
-        {{- if .Values.proxy.enabled }}
-        - name: apache-httpd-proxy-config
-          configMap:
-            name: {{ .Values.name }}-proxy-configmap
-            items:
-            - key: apache-httpd-proxy-config
-              path: workspace-manager-proxy.conf
-        - name: cert
-          secret:
-            secretName: {{ .Values.name }}-cert
-        {{- if .Values.proxy.tcell.enabled }}
-        - name: tcell-config
-          configMap:
-            name: {{ .Values.name }}-tcell-configmap
-            items:
-            - key: tcell-config
-              path: tcell-config.conf
-        {{- end }}
-        {{- end }}
 ---
 {{- if .Values.postgres.enabled }}
 apiVersion: apps/v1
