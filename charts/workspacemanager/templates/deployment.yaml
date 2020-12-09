@@ -74,9 +74,9 @@ spec:
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
         ports:
-        {{- if not .Values.proxy.enabled }}
-        - containerPort: 8080
-        {{- end }}
+        - name: status
+          containerPort: 8080
+          protocol: TCP
         env:
         {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
@@ -156,6 +156,24 @@ spec:
           - name: cloud-trace-sa-creds
             mountPath: /secrets/cloudtrace
             readOnly: true
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
       {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
