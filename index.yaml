@@ -3498,6 +3498,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.0.1/cromwell-0.0.1.tgz
     version: 0.0.1
+  dsp-argocd:
+  - apiVersion: v2
+    created: "2020-12-09T19:27:07.854803369Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.9.2
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 74c9ef99d80fc30cdb071f060e51ecfa237fae080ce5442647861ae6e1c1486a
+    maintainers:
+    - email: chelsea@broadinstitute.org
+      name: Chelsea Hoover
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.2.0-226.1607542021.16c9e0/dsp-argocd-0.2.0-226.1607542021.16c9e0.tgz
+    version: 0.2.0-226.1607542021.16c9e0
   dsp-atlantis:
   - apiVersion: v2
     created: "2020-08-19T16:22:54.599763904Z"
