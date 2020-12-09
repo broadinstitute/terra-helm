@@ -77,6 +77,8 @@ spec:
         - name: status
           containerPort: 8080
           protocol: TCP
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
         env:
         {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
