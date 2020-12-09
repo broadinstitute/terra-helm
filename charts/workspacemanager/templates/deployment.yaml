@@ -1,3 +1,4 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,11 +39,11 @@ spec:
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
-            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+            {{ .Values.imageConfig.repository }}:{{ $imageTag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
-        {{- if not .Values.proxy.enabled }}
         ports:
+        {{- if not .Values.proxy.enabled }}
         - containerPort: 8080
         {{- end }}
         env:

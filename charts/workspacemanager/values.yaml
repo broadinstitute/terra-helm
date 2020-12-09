@@ -1,8 +1,10 @@
 # Global values used by this chart
 global:
+  # global.applicationVersion -- What version of the Cromwell application to deploy
+  applicationVersion: latest
   # global.terraEnv -- (string) Terget Terra environment name. Required.
   # @default -- Is set by Helmfile on deploy
-  terraEnv:
+  terraEnv: null
 
 # name -- A name for the deployment that will be substituted into resuorce definitions
 name: workspacemanager
@@ -11,16 +13,12 @@ name: workspacemanager
 # @default -- Is set by Skaffold on local deploys
 image:
 
-# appVersion -- (string) Workspace Manager image version/tag. Required unless using `image`.
-# @default -- Is set by Helmfile on deploy
-appVersion:
-
 imageConfig:
   # imageConfig.repository -- Image repository
   repository: gcr.io/terra-kernel-k8s/terra-workspace-manager
   # imageConfig.tag -- (string) Image tag.
-  # @default -- The chart's appVersion value will be used
-  tag:
+  # @default -- global.applicationVersion
+  tag: null
   imagePullPolicy: Always
 
 # replicas -- Number of replicas for the deployment
