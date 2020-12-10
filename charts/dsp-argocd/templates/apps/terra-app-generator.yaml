@@ -13,7 +13,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: terra-app-generator-new
+  name: terra-app-generator
 spec:
   destination:
     namespace:  {{ .Release.Namespace }}
