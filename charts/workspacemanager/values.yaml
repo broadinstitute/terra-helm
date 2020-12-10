@@ -27,14 +27,14 @@ replicas: 0
 resources:
   requests:
     # resources.requests.cpu -- Number of CPU units to request for the deployment
-    cpu: 4
+    cpu: 1
     # resources.requests.memory -- Memory to request for the deployment
-    memory: 16Gi
+    memory: 8Gi
   limits:
     # resources.limits.cpu -- Number of CPU units to limit the deployment to
-    cpu: 4
+    cpu: 1
     # resources.limits.memory -- Memory to limit the deployment to
-    memory: 16Gi
+    memory: 8Gi
 
 vault:
   # vault.enabled -- When enabled, syncs required secrets from Vault
@@ -87,6 +87,11 @@ ingress:
         path: null
         # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
         secretKey: null
+      chain:
+        # ingress.cert.vault.chain.path -- (string) Path to secret containing intermediate .crt
+        path:
+        # ingress.cert.vault.chain.secretKey -- (string) Key in secret containing intermediate .crt
+        secretKey:
 
     # If cert.certManager is enabled, it is used to configure the certificate and populate the k8s secret. Requires [cert-manager](https://github.com/jetstack/cert-manager)
     certManager:

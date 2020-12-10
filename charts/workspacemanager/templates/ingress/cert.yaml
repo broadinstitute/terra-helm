@@ -1,5 +1,5 @@
-apiVersion: certmanager.k8s.io/v1alpha1
 {{- if .Values.ingress.cert.certManager.enabled }}
+apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
   name: {{ .Values.name }}-cert
