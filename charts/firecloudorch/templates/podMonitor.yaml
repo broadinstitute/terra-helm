@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: firecloudorch-jvm-monitor
+  labels: 
+{{ include "firecloudorch.labels" . | indent 4 }}
+spec:
+  jobLabel: firecloudorch-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: firecloudorch
+  podMetricsEndpoints:
+    - port: metrics

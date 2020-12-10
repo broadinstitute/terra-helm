@@ -1,0 +1,106 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+{{ include "firecloudorch.labels" . | indent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    replicas: {{ .Values.replicas }}
+    selector:
+      matchLabels: 
+        deployment: {{ .Chart.Name }}-deployment
+    template:
+      metadata:
+        labels:
+          deployment: {{ .Chart.Name }}-deployment
+{{ include "firecloudorch.labels" . | indent 8 }}
+        annotations:
+          {{- /* Automatically restart deployments on config map change: */}}
+          checksum/{{ .Chart.Name }}-configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      spec:
+        serviceAccountName: {{ .Chart.Name }}-sa
+        # Containers are configured to talk to each other by name
+        # via docker-compose links; make corresponding aliases
+        # to loopback in /etc/hosts
+        hostAliases:
+        - ip: 127.0.0.1
+          hostnames:
+          - app
+        volumes:
+        - name: {{ .Chart.Name }}-cm
+          configMap:
+            name: {{ .Chart.Name }}-cm
+        - name: app-ctmpls
+          secret:
+            secretName: {{ $legacyResourcePrefix }}-app-ctmpls
+        - name: proxy-ctmpls
+          secret:
+            secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls 
+        - name: {{ .Chart.Name}}-gc-logs
+          emptyDir: {}
+        - name: {{ .Chart.Name }}-proxy-security-logs
+          emptyDir: {}
+        - name: {{ .Chart.Name }}-prometheusjmx-jar
+          emptyDir: {}
+        containers:
+        - name: {{ .Chart.Name }}-app
+          image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
+          ports:
+          - name: status
+            containerPort: 8080 
+            protocol: TCP
+          - name: metrics
+            containerPort: 9090
+            protocol: TCP
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-app-env
+        env: 
+        - name: K8S_NODE_NAME
+          valueFrom: 
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: PROMETHEUS_ARGS
+          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/firecloudorch-cm/prometheusJmx.yaml"
+        command: ["/bin/bash"]
+        args:
+        - '-c'
+        - >-
+          java ${JAVA_OPTS}
+          ${PROMETHEUS_ARGS}
+          -jar $(find /orch -name 'FireCloud-Orchestration*.jar')
+        - '--'
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        volumeMounts:
+        - mountPath: /etc/{{ .Chart.Name }}-cm
+          name: {{ .Chart.Name }}-cm
+          readOnly: true
+        - mountPath: /etc/firecloud-orchestration.conf
+          subPath: firecloud-orchestration.conf
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/firecloud-account.pem
+          subPath: firecloud-account.pem
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/firecloud-account.json
+          subPath: firecloud-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/rawls-account.pem
+          subPath: rawls-account.pem
+          name: app-ctmpls
+          readOnly: true
