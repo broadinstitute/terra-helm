@@ -71,10 +71,10 @@ spec:
         resources: # Mimic existing GCE vm requirements
           requests:
             cpu: 4
-            memory: 8Gi
+            memory: 9Gi
           limits:
             cpu: 4
-            memory: 8Gi
+            memory: 9Gi
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
@@ -147,7 +147,9 @@ spec:
           successThreshold: 1
         livenessProbe:
           httpGet:
-            path: /status
+            # poll /version instead of /status to avoid auto-restarting Leo
+            # when an upstream dependency, like Sam, goes down
+            path: /version
             port: 8080
           timeoutSeconds: 5
           initialDelaySeconds: 15
