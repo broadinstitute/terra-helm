@@ -105,3 +105,20 @@ spec:
           name: app-ctmpls
           readOnly: true
         - mountPath: /etc/rawls-account.json
+          subPath: rawls-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/trial-billing-account.pem
+          subPath: trial-billing-account.pem
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/trial-billing-account.json
+          subPath: trial-billing-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /var/log/gc
+          name: {{ .Chart.Name }}-gc-logs
+        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+          name: {{ .Chart.Name }}-prometheusjmx-jar
+          readOnly: true 
