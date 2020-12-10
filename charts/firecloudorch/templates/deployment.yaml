@@ -104,3 +104,4 @@ spec:
           subPath: rawls-account.pem
           name: app-ctmpls
           readOnly: true
+        - mountPath: /etc/rawls-account.json
