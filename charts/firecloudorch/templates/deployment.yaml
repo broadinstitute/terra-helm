@@ -60,140 +60,140 @@ spec:
           - name: metrics
             containerPort: 9090
             protocol: TCP
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-app-env
-        env: 
-        - name: K8S_NODE_NAME
-          valueFrom: 
-            fieldRef:
-              fieldPath: spec.nodeName
-        - name: K8S_POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        {{- if .Values.prometheus.enabled }}
-        - name: PROMETHEUS_ARGS
-          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/firecloudorch-cm/prometheusJmx.yaml"
-        {{- end }}
-        command: ["/bin/bash"]
-        args:
-        - '-c'
-        - >-
-          java ${JAVA_OPTS}
+          envFrom:
+          - secretRef:
+              name: {{ $legacyResourcePrefix }}-app-env
+          env: 
+          - name: K8S_NODE_NAME
+            valueFrom: 
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: K8S_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
           {{- if .Values.prometheus.enabled }}
-          ${PROMETHEUS_ARGS}
+          - name: PROMETHEUS_ARGS
+            value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/firecloudorch-cm/prometheusJmx.yaml"
           {{- end }}
-          -jar $(find /orch -name 'FireCloud-Orchestration*.jar')
-        - '--'
-        resources:
+          command: ["/bin/bash"]
+          args:
+          - '-c'
+          - >-
+            java ${JAVA_OPTS}
+            {{- if .Values.prometheus.enabled }}
+            ${PROMETHEUS_ARGS}
+            {{- end }}
+            -jar $(find /orch -name 'FireCloud-Orchestration*.jar')
+          - '--'
+          resources:
 {{ toYaml .Values.resources | indent 10 }}
-        volumeMounts:
-        - mountPath: /etc/{{ .Chart.Name }}-cm
-          name: {{ .Chart.Name }}-cm
-          readOnly: true
-        - mountPath: /etc/firecloud-orchestration.conf
-          subPath: firecloud-orchestration.conf
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/firecloud-account.pem
-          subPath: firecloud-account.pem
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/firecloud-account.json
-          subPath: firecloud-account.json
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/rawls-account.pem
-          subPath: rawls-account.pem
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/rawls-account.json
-          subPath: rawls-account.json
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/trial-billing-account.pem
-          subPath: trial-billing-account.pem
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/trial-billing-account.json
-          subPath: trial-billing-account.json
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /var/log/gc
-          name: {{ .Chart.Name }}-gc-logs
-        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
-          subPath: prometheusjmx.jar
-          name: {{ .Chart.Name }}-prometheusjmx-jar
-          readOnly: true 
-        readinessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 6 # 60 seconds before unready
-          successThreshold: 1
-        livenessProbe:
-          httpGet:
-            path: /version
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 30 # 5 minutes before restarted
-          successThreshold: 1
-      - name: {{ .Chart.Name }}-proxy
-        image: broadinstitute/openidc-proxy:tcell-mpm-big
-        ports:
-          - containerPort: 443
-          - containerPort: 80
-          - containerPort: 8888
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-proxy-env
-        volumeMounts: 
-        - mountPath: /etc/ssl/certs/server.crt
-          subPath: server.crt
-          name: proxy-ctmpls
-          readOnly: true
-        - mountPath: /etc/ssl/private/server.key
-          subPath: server.key
-          name: proxy-ctmpls
-          readOnly: true
-        - mountPath: /etc/ssl/certs/ca-bundle.crt
-          subPath: ca-bundle.crt
-          name: proxy-ctmpls
-          readOnly: true
-        - mountPath: /etc/apache2/sites-available/site.conf
-          subPath: site.conf
-          name: proxy-ctmpls
-          readOnly: true
-        - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
-          subPath: mod_security_logging.conf
-          name: proxy-ctmpls
-          readOnly: true
-        - mountPath: /etc/modsecurity/mod_security_ignore.conf
-          subPath: mod_security_ignore.conf
-          name: proxy-ctmpls
-          readOnly: true
-        - mountPath: /etc/apache2/tcell_agent.config
-          subPath: tcell_agent.config
-          name: proxy-ctmpls
-          readOnly: true
-        - mountPath: /var/log/modsecurity
-          name: {{ .Chart.Name }}-proxy-security-logs
-      {{- if .Values.prometheus.enabled }}
-      initContainers:
-      - name: download-prometheus-jmx-jar
-        image: {{ .Values.prometheus.initContainerImage }}
-        command: [
-          "wget",
-          "-O",
-          "/{{ .Chart.Name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
-        ]
-        volumeMounts:
-        - name: {{ .Chart.Name }}-prometheusjmx-jar
-          mountPath: /{{ .Chart.Name }}-prometheusjmx-jar
-      {{- end }}
+          volumeMounts:
+          - mountPath: /etc/{{ .Chart.Name }}-cm
+            name: {{ .Chart.Name }}-cm
+            readOnly: true
+          - mountPath: /etc/firecloud-orchestration.conf
+            subPath: firecloud-orchestration.conf
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/firecloud-account.pem
+            subPath: firecloud-account.pem
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/firecloud-account.json
+            subPath: firecloud-account.json
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/rawls-account.pem
+            subPath: rawls-account.pem
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/rawls-account.json
+            subPath: rawls-account.json
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/trial-billing-account.pem
+            subPath: trial-billing-account.pem
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/trial-billing-account.json
+            subPath: trial-billing-account.json
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /var/log/gc
+            name: {{ .Chart.Name }}-gc-logs
+          - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+            subPath: prometheusjmx.jar
+            name: {{ .Chart.Name }}-prometheusjmx-jar
+            readOnly: true 
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            timeoutSeconds: 5
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 6 # 60 seconds before unready
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /version
+              port: 8080
+            timeoutSeconds: 5
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 30 # 5 minutes before restarted
+            successThreshold: 1
+        - name: {{ .Chart.Name }}-proxy
+          image: broadinstitute/openidc-proxy:tcell-mpm-big
+          ports:
+            - containerPort: 443
+            - containerPort: 80
+            - containerPort: 8888
+          envFrom:
+          - secretRef:
+              name: {{ $legacyResourcePrefix }}-proxy-env
+          volumeMounts: 
+          - mountPath: /etc/ssl/certs/server.crt
+            subPath: server.crt
+            name: proxy-ctmpls
+            readOnly: true
+          - mountPath: /etc/ssl/private/server.key
+            subPath: server.key
+            name: proxy-ctmpls
+            readOnly: true
+          - mountPath: /etc/ssl/certs/ca-bundle.crt
+            subPath: ca-bundle.crt
+            name: proxy-ctmpls
+            readOnly: true
+          - mountPath: /etc/apache2/sites-available/site.conf
+            subPath: site.conf
+            name: proxy-ctmpls
+            readOnly: true
+          - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
+            subPath: mod_security_logging.conf
+            name: proxy-ctmpls
+            readOnly: true
+          - mountPath: /etc/modsecurity/mod_security_ignore.conf
+            subPath: mod_security_ignore.conf
+            name: proxy-ctmpls
+            readOnly: true
+          - mountPath: /etc/apache2/tcell_agent.config
+            subPath: tcell_agent.config
+            name: proxy-ctmpls
+            readOnly: true
+          - mountPath: /var/log/modsecurity
+            name: {{ .Chart.Name }}-proxy-security-logs
+        {{- if .Values.prometheus.enabled }}
+        initContainers:
+        - name: download-prometheus-jmx-jar
+          image: {{ .Values.prometheus.initContainerImage }}
+          command: [
+            "wget",
+            "-O",
+            "/{{ .Chart.Name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+          ]
+          volumeMounts:
+          - name: {{ .Chart.Name }}-prometheusjmx-jar
+            mountPath: /{{ .Chart.Name }}-prometheusjmx-jar
+        {{- end }}
