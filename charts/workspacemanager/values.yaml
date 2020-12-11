@@ -1,6 +1,6 @@
 # Global values used by this chart
 global:
-  # global.applicationVersion -- What version of the Cromwell application to deploy
+  # global.applicationVersion -- What version of the application to deploy
   applicationVersion: latest
   # global.terraEnv -- (string) Terget Terra environment name. Required.
   # @default -- Is set by Helmfile on deploy
