@@ -72,14 +72,18 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        {{- if .Values.prometheus.enabled }}
         - name: PROMETHEUS_ARGS
           value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/firecloudorch-cm/prometheusJmx.yaml"
+        {{- end }}
         command: ["/bin/bash"]
         args:
         - '-c'
         - >-
           java ${JAVA_OPTS}
+          {{- if .Values.prometheus.enabled }}
           ${PROMETHEUS_ARGS}
+          {{- end }}
           -jar $(find /orch -name 'FireCloud-Orchestration*.jar')
         - '--'
         resources:
@@ -122,3 +126,74 @@ spec:
           subPath: prometheusjmx.jar
           name: {{ .Chart.Name }}-prometheusjmx-jar
           readOnly: true 
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /version
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
+      - name: {{ .Chart.Name }}-proxy
+        image: broadinstitute/openidc-proxy:tcell-mpm-big
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-proxy-env
+        volumeMounts: 
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: server.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-available/site.conf
+          subPath: site.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
+          subPath: mod_security_logging.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/modsecurity/mod_security_ignore.conf
+          subPath: mod_security_ignore.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/tcell_agent.config
+          subPath: tcell_agent.config
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /var/log/modsecurity
+          name: {{ .Chart.Name }}-proxy-security-logs
+      {{- if .Values.prometheus.enabled }}
+      initContainers:
+      - name: download-prometheus-jmx-jar
+        image: {{ .Values.prometheus.initContainerImage }}
+        command: [
+          "wget",
+          "-O",
+          "/{{ .Chart.Name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+        ]
+        volumeMounts:
+        - name: {{ .Chart.Name }}-prometheusjmx-jar
+          mountPath: /{{ .Chart.Name }}-prometheusjmx-jar
+      {{- end }}
