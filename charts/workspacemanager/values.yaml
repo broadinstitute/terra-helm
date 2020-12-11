@@ -141,6 +141,13 @@ postgres:
     - workspace
     - stairway
 
+# Requires deployment of Prometheus to cluster
+prometheus:
+  enabled: true
+  initContainerImage: 'alpine:3.12.0'
+  jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
+  jmxJarVersion: '0.13.0'
+
 ###############################################################
 # Values that will be exposed to the running app via the env: #
 ###############################################################
