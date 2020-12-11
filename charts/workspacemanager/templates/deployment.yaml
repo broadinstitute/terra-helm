@@ -32,6 +32,9 @@ spec:
         {{- if .Values.postgres.enabled }}
         checksum/{{ .Values.name }}-postgres-initdb: {{ include (print $.Template.BasePath "/configmaps/postgres-init-db-configmap.yaml") . | sha256sum }}
         {{- end }}
+        {{- if .Values.prometheus.enabled }}
+        checksum/{{ .Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
+        {{- end }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       volumes:
