@@ -1,0 +1,14 @@
+apiVersion: v2
+name: dsp-argocd
+version: 0.4.0
+description: Helm Chart with extra resources for the DSP ArgoCD instance
+type: application
+maintainers:
+  - name: Chelsea Hoover
+    email: chelsea@broadinstitute.org
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+dependencies:
+  - name: argo-cd
+    version: 2.9.2
+    repository: https://argoproj.github.io/argo-helm

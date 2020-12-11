@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: argocd-pod-runner
+  name: dsp-argocd-pod-runner
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
@@ -12,4 +12,4 @@ rules:
   resources: ['podsecuritypolicies']
   verbs: ['use']
   resourceNames:
-  - argocd-psp
+  - dsp-argocd-psp
