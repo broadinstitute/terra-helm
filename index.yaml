@@ -4165,6 +4165,25 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: latest
+    created: "2020-12-11T17:23:54.809587321Z"
+    description: Chart for firecloud-orchestration service in Terra
+    digest: c86f5e72f167ae4a9b6b3e15edb597c818e52f462d0d08913676f3451672dfb3
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.1.0-230.1607707428.9e10dd/firecloudorch-0.1.0-230.1607707428.9e10dd.tgz
+    version: 0.1.0-230.1607707428.9e10dd
+  - apiVersion: v2
+    appVersion: latest
     created: "2020-12-11T17:16:48.752555101Z"
     description: Chart for firecloud-orchestration service in Terra
     digest: e82b1856f8456279c1182b50ca3709d3010e029ebf05b41f0252964673e6ce67
