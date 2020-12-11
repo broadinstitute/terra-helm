@@ -24,7 +24,7 @@ spec:
 {{ include "firecloudorch.labels" . | indent 8 }}
         annotations:
           {{- /* Automatically restart deployments on config map change: */}}
-          checksum/{{ .Chart.Name }}-configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+          checksum/{{ .Chart.Name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}
       spec:
         serviceAccountName: {{ .Chart.Name }}-sa
         # Containers are configured to talk to each other by name
