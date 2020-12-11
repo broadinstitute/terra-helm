@@ -147,9 +147,9 @@ spec:
       - name: {{ .Chart.Name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big
         ports:
-        - containerPort: 443
-        - containerPort: 80
-        - containerPort: 8888
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-proxy-env
