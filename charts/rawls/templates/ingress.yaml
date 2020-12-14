@@ -7,19 +7,37 @@ metadata:
   labels:
 {{ include "rawls.labels" . | indent 4 }}
   annotations:
-    networking.gke.io/v1beta1.FrontendConfig: {{ .Chart.Name }}-frontend-config
-    kubernetes.io/ingress.global-static-ip-name: {{ required "a valid gcp resource name for the ingress ip is required" .Values.ingressIpName }}
+    networking.gke.io/v1beta1.FrontendConfig: {{ .Chart.Name }}-ingress-frontendconfig
+    kubernetes.io/ingress.global-static-ip-name: {{ required "a valid gcp resource name for the ingress ip is required" .Values.ingress.staticIpName }}
+    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.preSharedCerts | join "," | quote }}
     kubernetes.io/ingress.allow-http: "false"
 spec:
-  tls:
-  - secretName: {{ .Chart.Name }}-cert
   backend:
-    serviceName: {{ .Values.ingressServiceName }}
+    serviceName: {{ .Values.ingress.serviceName }}
     servicePort: 443
 ---
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
-  name: {{ .Chart.Name }}-frontend-config
+  name: {{ .Chart.Name }}-ingress-frontendconfig
+  labels:
+{{ include "rawls.labels" . | indent 4 }}
 spec:
-  sslPolicy: {{ .Values.sslPolicy }}
+  sslPolicy: {{ .Values.ingress.sslPolicy }}
+--- 
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: {{ .Chart.Name }}-ingress-backendconfig
+  labels:
+{{ include "rawls.labels" . | indent 4 }}
+spec:
+  timeoutSec: {{ .Values.ingress.timeoutSec }}
+  healthCheck:
+    checkIntervalSec: 5
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 2
+    type: HTTPS
+    port: 443
+    requestPath: /status

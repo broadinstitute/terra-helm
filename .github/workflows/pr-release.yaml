@@ -6,6 +6,17 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up GCS Google Service Account
+        run: echo '${{ secrets.GCS_SA }}' > service_account.json
+
+      - name: Lock
+        uses: databiosphere/github-actions/actions/locker@locker-0.8.0
+        with:
+          operation: lock
+          lock_name: terra-helm-release
+          bucket: broad-dsp-locker-action
+          lock_timeout_ms: '120000'
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -22,3 +33,15 @@ jobs:
         uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
+
+      - name: Set up GCS Google Service Account
+        if: ${{ always() }}
+        run: echo '${{ secrets.GCS_SA }}' > service_account.json
+
+      - name: Unlock
+        uses: databiosphere/github-actions/actions/locker@locker-0.8.0
+        if: ${{ always() }}
+        with:
+          operation: unlock
+          lock_name: terra-helm-release
+          bucket: broad-dsp-locker-action

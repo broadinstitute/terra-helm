@@ -1,27 +1,19 @@
-
----
 apiVersion: v2
 name: terra-prometheus
 description: a helm chart to deploy monitoring infrastructure
-
 type: application
-
-version: 0.1.3
-
+version: 0.2.1
 keywords:
   - dsp
   - broad
   - terra
   - monitoring
   - prometheus
-
 maintainers:
   - email: mflinn@broadinstitute.org
     name: Michael Flinn
-
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
-
 dependencies:
   - name: prometheus-operator
     version: 8.15.6

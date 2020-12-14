@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: terra-app-generator
+spec:
+  description: Applications that populate ArgoCD with more Applications
+  destinations:
+  - namespace: {{ .Release.Namespace }} # Generate Apps in the same namespace where ArgoCD is deployed
+    server: https://kubernetes.default.svc # And in the same cluster
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: terra-app-generator
+spec:
+  destination:
+    namespace:  {{ .Release.Namespace }}
+    server: https://kubernetes.default.svc
+  project: terra-app-generator
+  source:
+    path: .
+    plugin:
+      name: terra-helmfile-argocd
+    repoURL: https://github.com/broadinstitute/terra-helmfile
+  syncPolicy: {}

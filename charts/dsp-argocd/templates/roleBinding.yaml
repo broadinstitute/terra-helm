@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dsp-argocd-pod-runner-binding
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: {{ .Chart.Name }}
+subjects:
+- kind: ServiceAccount
+  name: argocd-server
+  namespace: {{ .Release.Namespace }}
+- kind: ServiceAccount
+  name: argocd-application-controller
+  namespace: {{ .Release.Namespace }}
+- kind: ServiceAccount
+  name: argocd-dex-server
+  namespace: {{ .Release.Namespace }}
+- kind: ServiceAccount # Add default service account to this policy, so Redis pod can run w/o an SA.
+  name: default
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: dsp-argocd-pod-runner
+  apiGroup: rbac.authorization.k8s.io

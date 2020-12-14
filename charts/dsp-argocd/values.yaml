@@ -1,0 +1,90 @@
+argo-cd:
+  global:
+    image:
+      tag: v1.7.7 # TODO this must be removed the next time we update ArgoCD
+  server:
+    extraArgs:
+    - --insecure # Required to enable TLS termination at Ingress/LB
+    config: # SSO
+      url: https://ap-argocd.dsp-devops.broadinstitute.org
+      dex.config: |
+        connectors:
+          - type: github
+            id: github
+            name: GitHub
+            config:
+              clientID: 44eb2e55b99be9fef021
+              clientSecret: $dex.github.clientSecret
+              orgs:
+              - name: DataBiosphere
+              - name: broadinstitute
+      accounts.terra-ci: apiKey
+      accounts.fc-jenkins: apiKey
+      accounts.fcprod-jenkins: apiKey
+      accounts.local-notsuitable: login
+      accounts.local-suitable: login
+      configManagementPlugins: |
+        - name: legacy-configs
+          generate:
+            command: ["legacy-configs.sh"]
+        - name: helmfile
+          init:
+            command: ["helmfile.sh", "init"]
+          generate:
+            command: ["helmfile.sh", "generate"]
+        - name: helm-values
+          init:
+            command: ["helm-values.sh", "init"]
+          generate:
+            command: ["helm-values.sh", "generate"]
+        - name: terra-helmfile-argocd
+          generate:
+            command: ["terra-helmfile-argocd.sh", "generate"]
+        - name: terra-helmfile-app
+          generate:
+            command: ["terra-helmfile-app.sh", "generate"]
+    service:
+      type: NodePort # Required to enable forwarding from Ingress/LB to service
+      annotations:
+        cloud.google.com/backend-config: '{"default": "dsp-argocd-backendconfig"}'
+    ingress:
+      enabled: true
+      paths:
+        - /*
+      tls:
+      - hosts:
+        - ap-argocd.dsp-devops.broadinstitute.org
+        secretName: dsp-argocd-cert
+      annotations:
+        kubernetes.io/ingress.global-static-ip-name: ap-argocd-server
+        kubernetes.io/ingress.allow-http: "false" # https only
+    rbacConfig:
+      policy.default: role:readonly
+      # TODO - these need to be adjusted for suitability.
+      policy.csv: |
+        g, broadinstitute:DSP DevOps, role:admin
+        p, role:terra-ci, applications, sync, */*, allow
+        p, role:terra-ci, applications, action/apps/Deployment/restart, */*, allow
+        g, terra-ci, role:terra-ci
+  controller:
+    extraArgs:
+    - --repo-server-timeout-seconds=180
+  repoServer:
+    image:
+      repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
+      tag: main-4baefee
+    env:
+      - name: VAULT_ADDR
+        value: https://clotho.broadinstitute.org:8200
+      - name: VAULT_ROLE_ID
+        valueFrom:
+          secretKeyRef:
+            name: ap-argocd-reposerver-vault
+            key: roleid
+      - name: VAULT_SECRET_ID
+        valueFrom:
+          secretKeyRef:
+            name: ap-argocd-reposerver-vault
+            key: secretid
+      - name: ARGOCD_GIT_MODULES_ENABLED # Required for firecloud-develop clones to succeed
+        value: "false"

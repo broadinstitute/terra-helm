@@ -98,6 +98,12 @@ spec:
           value: "{{ .Values.cloudTraceEnabled }}"
         - name: TERRA_DATAREPO_URL
           value: "{{ .Values.terraDataRepoUrl }}"
+        - name: WORKSPACE_GOOGLE_FOLDERID
+          value: "{{ .Values.googleFolderId }}"
+        - name: WORKSPACE_SPEND_SPENDPROFILES_0_ID
+          value: "{{ .Values.spendProfileId }}"
+        - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
+          value: "{{ .Values.spendBillingAccountId }}"
         volumeMounts:
           - name: app-sa-creds
             mountPath: /secrets/app

@@ -4,12 +4,13 @@
 {{- /*
   Generate Deployment definitions for each deployment type
 */ -}}
-
 {{- $defaults := $.Values.deploymentDefaults -}}
 {{- range $deploymentType, $overrides := $.Values.deployments -}}
 {{- $settings := mergeOverwrite ($defaults | deepCopy) ($overrides | deepCopy) -}}
+{{- $outputs := dict -}}
 {{- $templateScope := $ | deepCopy -}}
 {{- $_ := set $templateScope "_deploymentSettings" $settings -}}
+{{- $_ := set $templateScope "_deploymentOutputs" $outputs -}}
 {{- if $settings.enabled }}
 ---
 # Rawls {{ $deploymentType }} configMap

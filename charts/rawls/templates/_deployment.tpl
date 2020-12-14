@@ -1,6 +1,7 @@
 {{- /* Generate a Rawls deployment */ -}}
 {{- define "rawls.deployment" -}}
 {{- $settings := ._deploymentSettings -}}
+{{- $outputs := ._deploymentOutputs -}}
 {{- $imageTag := $settings.imageTag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := $settings.legacyResourcePrefix | default $settings.name -}}
 apiVersion: apps/v1
@@ -25,6 +26,9 @@ spec:
       labels:
         deployment: {{ $settings.name }}
 {{ include "rawls.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
     spec: 
       serviceAccountName: rawls-sa
       hostAliases:
@@ -43,6 +47,8 @@ spec:
         secret:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: {{ $settings.name }}-proxy-security-logs
+        emptyDir: {}
+      - name: {{ $settings.name }}-gc-logs
         emptyDir: {}
       - name: rawls-prometheusjmx-jar
         emptyDir: {}
@@ -98,6 +104,8 @@ spec:
           subPath: billing-account.pem
           name: app-ctmpls
           readOnly: true
+        - mountPath: /var/log/gc
+          name: {{ $settings.name }}-gc-logs
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: rawls-prometheusjmx-jar

@@ -24,6 +24,7 @@ Chart for Terra Workspace Manager
 | domain.suffix | string | `"integ.envs.broadinstitute.org"` | Domain suffix |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
 | global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
+| googleFolderId | string | `nil` | the id of the Google Folder to create projects for workspaces within. |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-workspace-manager"` | Image repository |
@@ -50,6 +51,8 @@ Chart for Terra Workspace Manager
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
 | serviceIP | string | `nil` | External IP of the service. Required. |
+| spendBillingAccountId | string | `nil` | the Google Billing account Id for WSM to use for workspace projects. |
+| spendProfileId | string | `nil` | the Spend Profile Id to associate with the billing account. |
 | terraDataRepoUrl | string | `"https://jade.datarepo-dev.broadinstitute.org"` | corresponding data repo instance for the environment |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |

@@ -1,0 +1,12 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: {{ .Chart.Name }}-ingress-frontendconfig
+  labels:
+{{ include "agora.labels" . | indent 4 }}
+{{- if .Values.ingress.sslPolicy }}
+spec:
+  sslPolicy: {{ .Values.ingress.sslPolicy }}
+{{- end }}
+{{- end }}

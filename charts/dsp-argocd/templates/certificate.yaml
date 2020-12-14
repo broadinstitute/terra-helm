@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: dsp-argocd-certificate
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: {{ .Chart.Name }}
+spec:
+  dnsNames:
+  - ap-argocd.dsp-devops.broadinstitute.org
+  - argocd.dsp-devops.broadinstitute.org
+  duration: 2160h0m0s
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  renewBefore: 360h0m0s
+  secretName: dsp-argocd-cert
+  subject:
+    organizations:
+    - broad-institute
