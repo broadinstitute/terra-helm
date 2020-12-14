@@ -43,23 +43,23 @@ spec:
               mountPath: /usr/share/nginx/html/config.json
               subPath: config.json
               readOnly: true
-{{/*          readinessProbe:*/}}
-{{/*            httpGet:*/}}
-{{/*              path: /status*/}}
-{{/*              port: 8080*/}}
-{{/*            initialDelaySeconds: 60*/}}
-{{/*            periodSeconds: 10*/}}
-{{/*            timeoutSeconds: 1*/}}
-{{/*            failureThreshold: 6 # mark pod unavailable for traffic after 60s*/}}
-{{/*            successThreshold: 1*/}}
-{{/*          livenessProbe:*/}}
-{{/*            httpGet:*/}}
-{{/*              path: /status*/}}
-{{/*              port: 8080*/}}
-{{/*            timeoutSeconds: 5*/}}
-{{/*            initialDelaySeconds: 60*/}}
-{{/*            periodSeconds: 10*/}}
-{{/*            failureThreshold: 30 # Restart container after 5 minutes*/}}
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 6 # mark pod unavailable for traffic after 60s
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            timeoutSeconds: 5
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 30 # Restart container after 5 minutes
         - name: {{ .Chart.Name }}-proxy
           image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:
