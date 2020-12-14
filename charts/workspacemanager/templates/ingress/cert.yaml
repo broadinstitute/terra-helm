@@ -1,0 +1,35 @@
+{{- if .Values.ingress.cert.certManager.enabled }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: {{ .Values.name }}-cert
+  labels:
+{{ include "workspacemanager.labels" . | indent 4 }}
+spec:
+  secretName: {{ .Values.name }}-cert
+  renewBefore: {{ .Values.ingress.cert.certManager.renewBefore }}
+  dnsNames:
+  - {{ template "workspacemanager.fqdn" . }}
+  issuerRef:
+    name: {{ .Values.ingress.cert.certManager.issuerName }}
+    kind: {{ .Values.ingress.cert.certManager.issuerKind }}
+{{ else if .Values.ingress.cert.vault.enabled -}}
+apiVersion: secrets-manager.tuenti.io/v1alpha1
+kind: SecretDefinition
+metadata:
+  name: secretdefinition-{{ .Values.name }}-cert
+  labels:
+{{ include "workspacemanager.labels" . | indent 4 }}
+spec:
+  name: {{ .Values.name }}-cert
+  keysMap:
+    tls.crt:
+      path: {{ required "A valid ingress.cert.vault.cert.path value is required when ingress.cert.vault is enabled" .Values.ingress.cert.vault.cert.path }}
+      key: {{ required "A valid ingress.cert.vault.cert.secretKey value is required when ingress.cert.vault is enabled" .Values.ingress.cert.vault.cert.secretKey }}
+    tls.key:
+      path: {{ required "A valid ingress.cert.vault.key.path value is required when ingress.cert.vault is enabled" .Values.ingress.cert.vault.key.path }}
+      key: {{ required "A valid ingress.cert.vault.key.secretKey value is required when ingress.cert.vault is enabled" .Values.ingress.cert.vault.key.secretKey }}
+    ca-bundle.crt:
+      path: {{ required "A valid ingress.cert.vault.chain.path value is required when ingress.cert.vault is enabled" .Values.ingress.cert.vault.chain.path }}
+      key: {{ required "A valid ingress.cert.vault.chain.secretKey value is required when ingress.cert.vault is enabled" .Values.ingress.cert.vault.chain.secretKey }}
+{{ end -}}

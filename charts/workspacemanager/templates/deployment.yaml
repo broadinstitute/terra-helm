@@ -1,38 +1,104 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ .Values.name }}-deployment
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
   {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
   annotations:
     reloader.stakater.com/auto: "true"
   {{- end }}
 spec:
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      deployment: {{ .Values.name }}-deployment
   template:
     metadata:
-      name: {{ .Chart.Name }}-service
       labels:
-        app: {{ .Chart.Name }}
+        deployment: {{ .Values.name }}-deployment
+{{ include "workspacemanager.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map changes: */}}
+        checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
+        {{- if .Values.postgres.enabled }}
+        checksum/{{ .Values.name }}-postgres-initdb: {{ include (print $.Template.BasePath "/configmaps/postgres-init-db-configmap.yaml") . | sha256sum }}
+        {{- end }}
+        {{- if .Values.prometheus.enabled }}
+        checksum/{{ .Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
+        {{- end }}
     spec:
-      serviceAccountName: {{ .Chart.Name }}-service-sa
+      serviceAccountName: {{ .Values.name }}-service-sa
+      volumes:
+      {{- if not .Values.postgres.enabled }}
+      - name: cloudsql-sa-creds
+        secret:
+          secretName: workspace-sqlproxy-sa
+      {{- end }}
+      - name: cloud-trace-sa-creds
+        secret:
+          secretName: workspace-cloud-trace-sa
+      - name: app-sa-creds
+        secret:
+          secretName: workspace-app-sa
+      {{- if .Values.proxy.enabled }}
+      - name: apache-httpd-proxy-config
+        configMap:
+          name: {{ .Values.name }}-proxy-configmap
+          items:
+          - key: apache-httpd-proxy-config
+            path: workspace-manager-proxy.conf
+      - name: cert
+        secret:
+          secretName: {{ .Values.name }}-cert
+      {{- if .Values.proxy.tcell.enabled }}
+      - name: tcell-config
+        configMap:
+          name: {{ .Values.name }}-tcell-configmap
+          items:
+          - key: tcell-config
+            path: tcell-config.conf
+      {{- end }}
+      {{- end }}
+      {{- if .Values.prometheus.enabled }}
+      - name: {{ .Values.name }}-prometheusjmx-config
+        configMap:
+          name: {{ .Values.name }}-prometheus-configmap
+      - name: {{ .Values.name }}-prometheusjmx-jar
+        emptyDir: {}
+      {{- end }}
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ .Values.name }}
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
-            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+            {{ .Values.imageConfig.repository }}:{{ $imageTag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
-        {{- if not .Values.proxy.enabled }}
         ports:
-        - containerPort: 8080
+        - name: status
+          containerPort: 8080
+          protocol: TCP
+        {{- if .Values.prometheus.enabled }}
+        - name: metrics
+          containerPort: 9090
+          protocol: TCP
         {{- end }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
         env:
+        {{- if .Values.prometheus.enabled }}
+        - name: JAVA_TOOL_OPTIONS
+          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ .Values.name }}-prometheusjmx-config/prometheusJmx.yaml"
+        {{- end }}
         {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
           valueFrom:
@@ -66,7 +132,7 @@ spec:
               key: db
         {{- else }}
         - name: DATABASE_HOSTNAME
-          value: {{ .Chart.Name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
+          value: {{ .Values.name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
         - name: DATABASE_USER
           value: postgres
         - name: DATABASE_USER_PASSWORD
@@ -105,12 +171,37 @@ spec:
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
           value: "{{ .Values.spendBillingAccountId }}"
         volumeMounts:
-          - name: app-sa-creds
-            mountPath: /secrets/app
-            readOnly: true
-          - name: cloud-trace-sa-creds
-            mountPath: /secrets/cloudtrace
-            readOnly: true
+        - name: app-sa-creds
+          mountPath: /secrets/app
+          readOnly: true
+        - name: cloud-trace-sa-creds
+          mountPath: /secrets/cloudtrace
+          readOnly: true
+        {{- if .Values.prometheus.enabled }}
+        - name: {{ .Values.name }}-prometheusjmx-config
+          mountPath: /etc/{{ .Values.name }}-prometheusjmx-config
+        - name: {{ .Values.name }}-prometheusjmx-jar
+          mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+        {{- end }}
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /version
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
       {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
@@ -228,7 +319,7 @@ spec:
           subPath: tls.key
           name: cert
           readOnly: true
-        {{- if .Values.vaultCert.enabled}}
+        {{- if .Values.ingress.cert.vault.enabled}}
         - mountPath: /etc/ssl/certs/ca-bundle.crt
           subPath: ca-bundle.crt
           name: cert
@@ -240,44 +331,26 @@ spec:
           subPath: tcell-config.conf
         {{- end }}
       {{- end }}
-      volumes:
-        {{- if not .Values.postgres.enabled }}
-        - name: cloudsql-sa-creds
-          secret:
-            secretName: workspace-sqlproxy-sa
-        {{- end }}
-        - name: cloud-trace-sa-creds
-          secret:
-            secretName: workspace-cloud-trace-sa
-        - name: app-sa-creds
-          secret:
-            secretName: workspace-app-sa
-        {{- if .Values.proxy.enabled }}
-        - name: apache-httpd-proxy-config
-          configMap:
-            name: {{ .Chart.Name }}-proxy-configmap
-            items:
-            - key: apache-httpd-proxy-config
-              path: workspace-manager-proxy.conf
-        - name: cert
-          secret:
-            secretName: {{ .Chart.Name }}-cert
-        {{- if .Values.proxy.tcell.enabled }}
-        - name: tcell-config
-          configMap:
-            name: {{ .Chart.Name }}-tcell-configmap
-            items:
-            - key: tcell-config
-              path: tcell-config.conf
-        {{- end }}
-        {{- end }}
+      {{- if .Values.prometheus.enabled }}
+      initContainers:
+      - name: download-prometheus-jmx-jar
+        image: {{ .Values.prometheus.initContainerImage }}
+        command: [
+          "wget",
+          "-O",
+          "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+        ]
+        volumeMounts:
+        - name: {{ .Values.name }}-prometheusjmx-jar
+          mountPath: /{{ .Values.name }}-prometheusjmx-jar
+      {{- end }}
 ---
 {{- if .Values.postgres.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-postgres-deployment
+  name: {{ .Values.name }}-postgres-deployment
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
 {{- include "postgres.deployment.tpl" . }}
 {{- end }}

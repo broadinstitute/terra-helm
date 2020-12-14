@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Chart.Name }}-postgres-initdb
+  name: {{ .Values.name }}-postgres-initdb
   labels:
-    {{ template "workspacemanager.labels" . }}
+{{ include "workspacemanager.labels" . | indent 4 }}
 {{- template "postgres.init-db-configmap.tpl" . }}
 {{- end }}
