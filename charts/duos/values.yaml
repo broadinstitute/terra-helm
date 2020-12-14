@@ -20,6 +20,9 @@ ontologyApiUrl:
 # googleClientId -- (string) The OAuth google client id
 googleClientId:
 
+# errorApiKey -- (string) The StackDriver API client id
+errorApiKey:
+
 # firecloudUrl -- (string) The FireCloud API url
 firecloudUrl:
 
