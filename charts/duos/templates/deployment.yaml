@@ -43,20 +43,6 @@ spec:
               mountPath: /usr/share/nginx/html/config.json
               subPath: config.json
               readOnly: true
-            {{/* non-root user configuration */}}
-            - name: configs
-              mountPath: /etc/nginx/nginx.conf
-              subPath: nginx.conf
-              readOnly: false
-            {{/* override the nginx default conf in the base image */}}
-            - name: configs
-              mountPath: /etc/nginx/conf.d/default.conf
-              subPath: nginx.default.conf
-              readOnly: false
-            {{/* overwrite docker-entrypoint.d */}}
-            - name: docker-entrypoint
-              mountPath: /docker-entrypoint.d
-              readOnly: true
 {{/*          readinessProbe:*/}}
 {{/*            httpGet:*/}}
 {{/*              path: /status*/}}
