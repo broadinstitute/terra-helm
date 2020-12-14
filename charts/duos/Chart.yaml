@@ -1,0 +1,14 @@
+apiVersion: v2
+name: duos
+version: 0.1.0
+type: application
+description: A Helm chart for DUOS
+keywords:
+  - dsp
+  - broadinstitute
+  - duos
+  - consent
+  - ontology
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/DataBiosphere/duos-ui

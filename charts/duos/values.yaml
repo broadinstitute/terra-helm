@@ -1,0 +1,65 @@
+global:
+  # global.applicationVersion -- What version of the DUOS application to deploy
+  applicationVersion: latest
+
+# Should be set to true when deploying locally with Skaffold
+devDeploy: false
+
+# serviceIP -- (string) External IP of the service. Required.
+serviceIP:
+
+# environment -- (string) The environment of the service. Required
+environment:
+
+# apiUrl -- (string) The Consent API url
+apiUrl:
+
+# ontologyApiUrl -- (string) The Ontology API url
+ontologyApiUrl:
+
+# googleClientId -- (string) The OAuth google client id
+googleClientId:
+
+# errorApiKey -- (string) The StackDriver API client id
+errorApiKey:
+
+# firecloudUrl -- (string) The FireCloud API url
+firecloudUrl:
+
+# gwasUrl -- (string) The GWAS url, currently unused
+gwasUrl:
+
+# profileUrl -- (string) The eRA Auth Profile URL
+profileUrl:
+
+# nihUrl -- (string) The eRA Auth Redirect URL
+nihUrl:
+
+# powerBiUrl -- (string) The PowerBI url
+powerBiUrl:
+
+# gaId -- (string) The Google Analytics ID
+gaId:
+
+# newDarUi -- (string) Feature Flag for the new DAR UI
+newDarUi:
+
+image:
+imageRepository:
+imageTag:
+
+proxyLogLevel:
+proxyImageRepository:
+proxyImageVersion:
+
+replicas:
+
+vaultEnabled: true
+
+vaultCertPath:
+vaultCertSecretKey:
+vaultKeyPath:
+vaultKeySecretKey:
+vaultChain:
+vaultChainPath:
+vaultChainSecretKey:

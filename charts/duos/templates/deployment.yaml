@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+{{ include "duos.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      name: {{ .Chart.Name }}
+      labels:
+{{ include "duos.labels" . | indent 8 }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+        - ip: 127.0.0.1
+          hostnames:
+            - app
+      containers:
+        - name: {{ .Chart.Name }}-app
+          image: "{{- if .Values.image -}}
+          {{ .Values.image }}
+          {{- else -}}
+          {{ .Values.imageRepository }}:{{ default .Values.global.applicationVersion .Values.imageTag }}
+          {{- end }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            {{/* override the empty app config.json in the base image */}}
+            - name: configs
+              mountPath: /usr/share/nginx/html/config.json
+              subPath: config.json
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 6 # mark pod unavailable for traffic after 60s
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            timeoutSeconds: 5
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 30 # Restart container after 5 minutes
+        - name: {{ .Chart.Name }}-proxy
+          image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - name: configs
+              mountPath: /etc/apache2/sites-available/site.conf
+              subPath: site.conf
+              readOnly: true
+            - name: proxy-secrets
+              mountPath: /etc/ssl/certs/server.crt
+              subPath: server.crt
+              readOnly: true
+            - name: proxy-secrets
+              mountPath: /etc/ssl/private/server.key
+              subPath: server.key
+              readOnly: true
+            - name: proxy-secrets
+              mountPath: /etc/ssl/certs/ca-bundle.crt
+              subPath: ca-bundle.crt
+              readOnly: true
+      volumes:
+        - name: configs
+          configMap:
+            name: {{ .Chart.Name }}-configmap
+        - name: proxy-secrets
+          secret:
+            secretName: {{ .Chart.Name }}-proxy-secrets
+
