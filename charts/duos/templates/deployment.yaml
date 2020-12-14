@@ -82,8 +82,6 @@ spec:
               subPath: ca-bundle.crt
               readOnly: true
       volumes:
-        - name: docker-entrypoint
-          emptyDir: {}
         - name: configs
           configMap:
             name: {{ .Chart.Name }}-configmap
