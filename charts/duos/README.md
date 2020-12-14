@@ -16,6 +16,7 @@ A Helm chart for DUOS
 | apiUrl | string | `nil` | The Consent API url |
 | devDeploy | bool | `false` |  |
 | environment | string | `nil` | The environment of the service. Required |
+| errorApiKey | string | `nil` | The StackDriver API key. Required |
 | firecloudUrl | string | `nil` | The FireCloud API url |
 | gaId | string | `nil` | The Google Analytics ID |
 | global.applicationVersion | string | `"latest"` | What version of the DUOS application to deploy |
