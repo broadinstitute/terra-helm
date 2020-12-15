@@ -14,5 +14,5 @@ spec:
     unhealthyThreshold: 2
     type: HTTPS
     port: 443
-    requestPath: /status
+    requestPath: /engine/latest/version
 {{- end }}

@@ -32,10 +32,6 @@ spec:
       - ip: 127.0.0.1
         hostnames:
         - app
-        - sqlproxy
-      {{- if .Values.extraHostAliases -}}
-        {{ .Values.extraHostAliases | toYaml | nindent 6 }}
-      {{- end }}
       volumes:
       - name: app-ctmpls
         secret:
@@ -43,9 +39,6 @@ spec:
       - name: proxy-ctmpls
         secret:
           secretName: {{ .Chart.Name }}-proxy-ctmpls
-      - name: sqlproxy-ctmpls
-        secret:
-          secretName: {{ .Chart.Name }}-sqlproxy-ctmpls
       - name: {{ .Chart.Name }}-cm
         configMap:
           name: {{ .Chart.Name }}-cm
@@ -87,10 +80,6 @@ spec:
         - mountPath: /etc/cromiam.conf
           subPath: cromiam.conf
           name: app-ctmpls
-        - mountPath: /etc/cromiam-account.pem
-          subPath: cromiam-account.pem
-          readOnly: true
-          name: app-ctmpls
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: prometheusjmx-jar
@@ -103,7 +92,7 @@ spec:
         # Cromiam's Ingress / GCP load balancer in the Ingress's backendConfig
         readinessProbe:
           httpGet:
-            path: /status
+            path: /engine/latest/version
             port: 8000
           timeoutSeconds: 5
           initialDelaySeconds: 15
@@ -112,7 +101,7 @@ spec:
           successThreshold: 1
         livenessProbe:
           httpGet:
-            path: /status
+            path: /engine/latest/version
             port: 8000
           timeoutSeconds: 5
           initialDelaySeconds: 15
@@ -149,22 +138,16 @@ spec:
           subPath: mod_security_logging.conf
           name: proxy-ctmpls
           readOnly: true
+        - mountPath: /etc/apache2/sites-enabled/mod_security_ignore.conf
+          subPath: mod_security_ignore.conf
+          name: proxy-ctmpls
+          readOnly: true
         - mountPath: /etc/apache2/tcell_agent.config
           subPath: tcell_agent.config
           name: proxy-ctmpls
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ .Chart.Name }}-modsecurity-logs
-      - name: {{ .Chart.Name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_20180808
-        envFrom:
-        - secretRef:
-            name: {{ .Chart.Name }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       initContainers:
       - name: download-prometheusjmx-jar
         image: alpine:3.12.0

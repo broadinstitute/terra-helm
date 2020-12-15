@@ -3,7 +3,7 @@ global:
   applicationVersion: latest
 
 # imageRepository -- Image repo to pull cromiam images from
-imageRepository: gcr.io/broad-dsp-gcr-public/cromiam
+imageRepository: broadinstitute/cromiam
 # imageTag -- Image tag to be used when deploying Pods
 # @default global.applicationVersion
 imageTag: null
