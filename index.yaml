@@ -2269,6 +2269,24 @@ entries:
   cromiam:
   - apiVersion: v2
     appVersion: latest
+    created: "2020-12-15T21:18:10.474089397Z"
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 3f2697f8c2f69034195693f616dac9c23d1de184798ad814600f3bd25038c10b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.2.0-234.1608067084.f222a0/cromiam-0.2.0-234.1608067084.f222a0.tgz
+    version: 0.2.0-234.1608067084.f222a0
+  - apiVersion: v2
+    appVersion: latest
     created: "2020-12-15T20:55:51.772115137Z"
     description: Chart for cromiam service in Terra [WIP]
     digest: a4267031060e7e31b43358566c10c00e97887947c1ca8b8f190f0376901403b8
