@@ -1,9 +1,32 @@
 global:
-  # global.applicationVersion -- What version of the Cromwell application to deploy
+  # global.applicationVersion -- What version of the Sam application to deploy
   applicationVersion: latest
 
 # name -- A name for the deployment that will be substituted into resuorce definitions
 name: sam
+
+imageConfig:
+  # imageConfig.repository -- Image repository
+  repository: gcr.io/broad-dsp-gcr-public/sam
+  # imageConfig.tag -- (string) Image tag.
+  # @default -- global.applicationVersion
+  tag:
+  imagePullPolicy: Always
+
+# replicas -- Number of replicas for the deployment
+replicas: 0
+
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 4
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 16Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 4
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 16Gi
 
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
@@ -32,29 +55,6 @@ ingress:
         secretKey: null
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
     preSharedCerts: []
-
-imageConfig:
-  # imageConfig.repository -- Image repository
-  repository: gcr.io/broad-dsp-gcr-public/sam
-  # imageConfig.tag -- (string) Image tag.
-  # @default -- global.applicationVersion
-  tag:
-  imagePullPolicy: Always
-
-# replicas -- Number of replicas for the deployment
-replicas: 0
-
-resources:
-  requests:
-    # resources.requests.cpu -- Number of CPU units to request for the deployment
-    cpu: 4
-    # resources.requests.memory -- Memory to request for the deployment
-    memory: 16Gi
-  limits:
-    # resources.limits.cpu -- Number of CPU units to limit the deployment to
-    cpu: 4
-    # resources.limits.memory -- Memory to limit the deployment to
-    memory: 16Gi
 
 # legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
 # @default .Chart.Name
