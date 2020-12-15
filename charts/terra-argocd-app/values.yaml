@@ -28,6 +28,12 @@ purgeDeployedResourcesOnDelete: false
 # helmfileRepo -- Terra's helmfile repo
 helmfileRepo: https://github.com/broadinstitute/terra-helmfile
 
+# helmfileRepoRevision -- Target revision of terra-helmfile to deploy.
+# We follow GitOps, so HEAD/master branch of terra-helmfile is "the desired
+# state of the world", but occasionally it is useful to deploy off a terra-helmfile
+# PR branch
+helmfileRepoRevision: HEAD
+
 # legacyConfigsEnabled -- Whether to create a separate application to sync values from firecloud-develop
 legacyConfigsEnabled: false
 
