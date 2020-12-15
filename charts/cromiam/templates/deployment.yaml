@@ -1,0 +1,174 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+{{ include "cromiam.labels" . | indent 4 }}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      deployment: {{ .Chart.Name }}-deployment
+  template:
+    metadata:
+      labels:
+        deployment: {{ .Chart.Name }}-deployment
+{{ include "cromiam.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ .Chart.Name }}-cm: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - app
+        - sqlproxy
+      {{- if .Values.extraHostAliases -}}
+        {{ .Values.extraHostAliases | toYaml | nindent 6 }}
+      {{- end }}
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ .Chart.Name }}-app-ctmpls
+      - name: proxy-ctmpls
+        secret:
+          secretName: {{ .Chart.Name }}-proxy-ctmpls
+      - name: sqlproxy-ctmpls
+        secret:
+          secretName: {{ .Chart.Name }}-sqlproxy-ctmpls
+      - name: {{ .Chart.Name }}-cm
+        configMap:
+          name: {{ .Chart.Name }}-cm
+      - name: {{ .Chart.Name }}-modsecurity-logs
+        emptyDir: {}
+      - name: prometheusjmx-jar
+        emptyDir: {}
+      containers:
+      - name: {{ .Chart.Name }}-app
+        image: "{{ .Values.imageRepository }}:{{ .Values.imageTag | default .Values.global.applicationVersion }}"
+        ports:
+        - name: app
+          containerPort: 8000
+          protocol: TCP
+        - name: metrics
+          containerPort: 9090
+          protocol: TCP
+        resources: # Mimic existing GCE vm requirements
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+        envFrom:
+        - secretRef:
+            name: {{ .Chart.Name }}-app-env
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /etc/cromiam.conf
+          subPath: cromiam.conf
+          name: app-ctmpls
+        - mountPath: /etc/cromiam-account.pem
+          subPath: cromiam-account.pem
+          readOnly: true
+          name: app-ctmpls
+        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+          name: prometheusjmx-jar
+          readOnly: true
+        - mountPath: /etc/cromiam-cm
+          name: {{ .Chart.Name }}-cm
+          readOnly: true
+        # Note: These readiness settings only apply to Kubernetes' internal load
+        # balancing mechanism -- there's a separate health check setting for
+        # Cromiam's Ingress / GCP load balancer in the Ingress's backendConfig
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8000
+          timeoutSeconds: 5
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8000
+          timeoutSeconds: 5
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
+      - name: {{ .Chart.Name }}-proxy
+        image: broadinstitute/openidc-proxy:tcell-mpm-big
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        envFrom:
+        - secretRef:
+            name: {{ .Chart.Name }}-proxy-env
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: server.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-available/site.conf
+          subPath: site.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
+          subPath: mod_security_logging.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/tcell_agent.config
+          subPath: tcell_agent.config
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /var/log/modsecurity
+          name: {{ .Chart.Name }}-modsecurity-logs
+      - name: {{ .Chart.Name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
+        envFrom:
+        - secretRef:
+            name: {{ .Chart.Name }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
+      initContainers:
+      - name: download-prometheusjmx-jar
+        image: alpine:3.12.0
+        command: ["wget", "-O", "/prometheusjmx-jar/prometheusjmx.jar", "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar"]
+        volumeMounts:
+        - mountPath: /prometheusjmx-jar
+          name: prometheusjmx-jar
