@@ -134,7 +134,7 @@ spec:
           subPath: mod_security_logging.conf
           name: proxy-ctmpls
           readOnly: true
-        - mountPath: /etc/apache2/sites-enabled/mod_security_ignore.conf
+        - mountPath: /etc/modsecurity/mod_security_ignore.conf
           subPath: mod_security_ignore.conf
           name: proxy-ctmpls
           readOnly: true
