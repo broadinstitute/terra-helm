@@ -130,10 +130,6 @@ spec:
           subPath: ca-bundle.crt
           name: proxy-ctmpls
           readOnly: true
-        - mountPath: /etc/apache2/sites-available/site.conf
-          subPath: site.conf
-          name: proxy-ctmpls
-          readOnly: true
         - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
           subPath: mod_security_logging.conf
           name: proxy-ctmpls
