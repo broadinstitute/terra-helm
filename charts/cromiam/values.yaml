@@ -23,10 +23,8 @@ resources:
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 13Gi
 
-# Settings for Agora's Ingress & Service
+# Settings for Cromiam's Ingress & Service
 ingress:
-  # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig
-  enabled: true
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
   # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
