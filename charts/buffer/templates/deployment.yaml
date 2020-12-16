@@ -66,7 +66,7 @@ spec:
         # Janitor configs to enable BUFFER publish message to Janitor to cleanup resource.
         # It is needed if BUFFER clients use the BUFFER for their integration test.
         {{- if .Values.cleanupAfterHandout }}
-        - name: BUFFER_CRL_CLEAN_UP_AFTER_HANDOUT
+        - name: BUFFER_CRL_CLEANUP_AFTER_HANDOUT
           value: 'true'
         - name: BUFFER_CRL_JANITOR_CLIENT_CREDENTIAL_FILE_PATH
           value: /secrets/app/janitor-client-sa.json
