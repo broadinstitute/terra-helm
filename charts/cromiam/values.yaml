@@ -25,6 +25,8 @@ resources:
 
 # Settings for Cromiam's Ingress & Service
 ingress:
+  # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig
+  enabled: true
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
   # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
@@ -33,3 +35,5 @@ ingress:
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
   timeoutSec: 120
+  # ingress.securityPolicy -- (string) Name of a GCP CloudArmor policy to associate with this Ingress
+  securityPolicy: null
