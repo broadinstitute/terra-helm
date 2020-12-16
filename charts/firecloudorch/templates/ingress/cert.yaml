@@ -6,7 +6,7 @@ metadata:
   labels:
 {{ include "firecloudorch.labels" . | indent 4 }}
 spec:
-  name: {{ .Chart.Name }}-cert
+  name: {{ .Values.name }}-cert
   keysMap:
     tls.crt:
       path: {{ required "A valid ingress.cert.vault.cert.path value is required when ingress.cert.vault is enabled" .Values.ingress.cert.vault.cert.path }}

@@ -2,6 +2,8 @@ global:
   # global.applicationVersion -- What version of the Cromwell application to deploy
   applicationVersion: latest
 
+name: firecloudorch
+
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
   enabled: true
