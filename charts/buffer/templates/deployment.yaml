@@ -128,6 +128,23 @@ spec:
         ports:
         - containerPort: 443
         - containerPort: 80
+        env:
+        - name: REMOTE_USER_CLAIM
+          value: sub
+        {{- if .Values.proxy.tcell.enabled }}
+        - name: TCELL_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: proxy-tcell-secrets
+              key: app-id
+        - name: TCELL_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: proxy-tcell-secrets
+              key: api-key
+        - name: ENABLE_TCELL
+          value: 'yes'
+        {{- end }}
         volumeMounts:
         - mountPath: /etc/apache2/sites-available/site.conf
           name: apache-httpd-proxy-config
@@ -164,4 +181,12 @@ spec:
         - name: cert
           secret:
             secretName: {{ .Chart.Name }}-cert
+        {{- if .Values.proxy.tcell.enabled }}
+        - name: tcell-config
+          configMap:
+            name: buffer-tcell-configmap
+            items:
+            - key: tcell-config
+              path: tcell-config.conf
+        {{- end }}
         {{- end }}
