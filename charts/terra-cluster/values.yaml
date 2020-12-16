@@ -43,6 +43,7 @@ terra-prometheus:
       rules:
         # gke configuration causes these alerts to flap, will make custom versions that provided the same functionality
         kubernetesResources: false
+        kubernetesApps: false # creating own version of theses rules so they can be adjusted declaratively
         prometheus: false
         prometheusOperator: false
     # Namespace overrides for sub charts
