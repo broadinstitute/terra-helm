@@ -3640,6 +3640,24 @@ entries:
     version: 0.0.1
   dsp-argocd:
   - apiVersion: v2
+    created: "2020-12-16T19:51:55.052704462Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.9.2
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 23b7e14d243c72f3c3215e5eb4a9f08ef17f72d23860d6d8852da5803cc9c91a
+    maintainers:
+    - email: chelsea@broadinstitute.org
+      name: Chelsea Hoover
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.5.0/dsp-argocd-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2020-12-10T16:41:39.462946Z"
     dependencies:
     - name: argo-cd
@@ -12844,6 +12862,20 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-ap-prometheus-operator-0.0.2/terra-ap-prometheus-operator-0.0.2.tgz
     version: 0.0.2
   terra-argocd-app:
+  - apiVersion: v2
+    created: "2020-12-16T19:51:55.139772818Z"
+    dependencies:
+    - name: terra-argocd-templates
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.0.4
+    description: A Helm chart for generating ArgoCD resources for a Terra app in an
+      environment
+    digest: 5222f2607f1adf8d40861e8bba0083b8660086338c08cae71bf996eca4a33a8c
+    name: terra-argocd-app
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.4.0/terra-argocd-app-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     created: "2020-12-16T19:25:38.319398708Z"
     dependencies:
