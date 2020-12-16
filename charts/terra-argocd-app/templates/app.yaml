@@ -21,6 +21,9 @@ spec:
     server: {{ quote .clusterAddress }}
   source:
     repoURL: {{ quote .helmfileRepo }}
+{{- if .helmfileRepoRevision }}
+    targetRevision: {{ quote .helmfileRepoRevision }}
+{{- end }}
     path: .
     plugin:
       name: helmfile

@@ -9,6 +9,11 @@ spec:
     server: https://kubernetes.default.svc # And in the same cluster
   sourceRepos:
   - '*'
+  syncWindows:
+  - kind: allow
+    schedule: '0 22 * * *' # Schedule a 10-minute window during which the terra-app-generator job will automatically sync
+    duration: 10m
+    manualSync: true # Allow manual syncs outside window
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -24,4 +29,6 @@ spec:
     plugin:
       name: terra-helmfile-argocd
     repoURL: https://github.com/broadinstitute/terra-helmfile
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      selfHeal: true
