@@ -39,14 +39,11 @@ vaultCert:
 
 
 # Promethues-Operator values
-prometheus-operator:
+kube-prometheus-stack:
   # promtheus-operator.fullnameOverride -- (string) Use the name of this chart rather than prometheus operator built in templating.
   fullnameOverride: "terra-prometheus-operator"
   # prometheus-operator.namespaceOverride -- (string) For use with argocd to ensure prometheus resources are installed to monitoring namespace
   namespaceOverride: ""
-  prometheusOperator:
-    # prometheusOperator.createCustomResource -- Older versions of prometheus-operator had issues installing crds properly, this may no longer be needed.
-    createCustomResource: false
 
   prometheus:
     ingress:
