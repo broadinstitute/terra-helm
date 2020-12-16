@@ -14,6 +14,8 @@ spec:
     schedule: '0 22 * * *' # Schedule a 10-minute window during which the terra-app-generator job will automatically sync
     duration: 10m
     manualSync: true # Allow manual syncs outside window
+    applications:
+    - terra-app-generator
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
