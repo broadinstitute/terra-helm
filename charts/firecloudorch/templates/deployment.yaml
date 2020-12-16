@@ -1,0 +1,199 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Values.name -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  labels:
+{{ include "firecloudorch.labels" . | indent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels: 
+      deployment: {{ .Values.name }}-deployment
+  template:
+    metadata:
+      labels:
+        deployment: {{ .Values.name }}-deployment
+{{ include "firecloudorch.labels" . | indent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - app
+      volumes:
+      - name: {{ .Values.name }}-cm
+        configMap:
+          name: {{ .Values.name }}-cm
+      - name: app-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
+      - name: proxy-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls 
+      - name: {{ .Values.name}}-gc-logs
+        emptyDir: {}
+      - name: {{ .Values.name }}-proxy-security-logs
+        emptyDir: {}
+      - name: {{ .Values.name }}-prometheusjmx-jar
+        emptyDir: {}
+      containers:
+      - name: {{ .Values.name }}-app
+        image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
+        ports:
+        - name: status
+          containerPort: 8080 
+          protocol: TCP
+        - name: metrics
+          containerPort: 9090
+          protocol: TCP
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-app-env
+        env: 
+        - name: K8S_NODE_NAME
+          valueFrom: 
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        {{- if .Values.prometheus.enabled }}
+        - name: PROMETHEUS_ARGS
+          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/firecloudorch-cm/prometheusJmx.yaml"
+        {{- end }}
+        command: ["/bin/bash"]
+        args:
+        - '-c'
+        - >-
+          java ${JAVA_OPTS}
+          {{- if .Values.prometheus.enabled }}
+          ${PROMETHEUS_ARGS}
+          {{- end }}
+          -jar $(find /orch -name 'FireCloud-Orchestration*.jar')
+        - '--'
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        volumeMounts:
+        - mountPath: /etc/{{ .Values.name }}-cm
+          name: {{ .Values.name }}-cm
+          readOnly: true
+        - mountPath: /etc/firecloud-orchestration.conf
+          subPath: firecloud-orchestration.conf
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/firecloud-account.pem
+          subPath: firecloud-account.pem
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/firecloud-account.json
+          subPath: firecloud-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/rawls-account.pem
+          subPath: rawls-account.pem
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/rawls-account.json
+          subPath: rawls-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/trial-billing-account.pem
+          subPath: trial-billing-account.pem
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/trial-billing-account.json
+          subPath: trial-billing-account.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /var/log/gc
+          name: {{ .Values.name }}-gc-logs
+        - mountPath: /etc/prometheusjmx/prometheusjmx.jar
+          subPath: prometheusjmx.jar
+          name: {{ .Values.name }}-prometheusjmx-jar
+          readOnly: true 
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /version
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 30 # 5 minutes before restarted
+          successThreshold: 1
+      - name: {{ .Values.name }}-proxy
+        image: broadinstitute/openidc-proxy:tcell-mpm-big
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-proxy-env
+        volumeMounts: 
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: server.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-available/site.conf
+          subPath: site.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
+          subPath: mod_security_logging.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/modsecurity/mod_security_ignore.conf
+          subPath: mod_security_ignore.conf
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /etc/apache2/tcell_agent.config
+          subPath: tcell_agent.config
+          name: proxy-ctmpls
+          readOnly: true
+        - mountPath: /var/log/modsecurity
+          name: {{ .Values.name }}-proxy-security-logs
+      {{- if .Values.prometheus.enabled }}
+      initContainers:
+      - name: download-prometheus-jmx-jar
+        image: {{ .Values.prometheus.initContainerImage }}
+        command: [
+          "wget",
+          "-O",
+          "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+        ]
+        volumeMounts:
+        - name: {{ .Values.name }}-prometheusjmx-jar
+          mountPath: /{{ .Values.name }}-prometheusjmx-jar
+      {{- end }}
