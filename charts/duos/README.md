@@ -1,6 +1,6 @@
 # duos
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for DUOS
 
@@ -16,7 +16,7 @@ A Helm chart for DUOS
 | apiUrl | string | `nil` | The Consent API url |
 | devDeploy | bool | `false` |  |
 | environment | string | `nil` | The environment of the service. Required |
-| errorApiKey | string | `nil` | The StackDriver API key. Required |
+| errorApiKey | string | `nil` | The StackDriver API client id |
 | firecloudUrl | string | `nil` | The FireCloud API url |
 | gaId | string | `nil` | The Google Analytics ID |
 | global.applicationVersion | string | `"latest"` | What version of the DUOS application to deploy |
@@ -25,6 +25,16 @@ A Helm chart for DUOS
 | image | string | `nil` |  |
 | imageRepository | string | `nil` |  |
 | imageTag | string | `nil` |  |
+| ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
+| ingress.cert.vault.cert.path | string | `nil` | Path to secret containing .crt |
+| ingress.cert.vault.cert.secretKey | string | `nil` | Key in secret containing .crt |
+| ingress.cert.vault.enabled | bool | `false` |  |
+| ingress.cert.vault.key.path | string | `nil` | Path to secret containing .key |
+| ingress.cert.vault.key.secretKey | string | `nil` | Key in secret containing .key |
+| ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
+| ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
+| ingress.timeoutSec | int | `120` |  |
 | newDarUi | string | `nil` | Feature Flag for the new DAR UI |
 | nihUrl | string | `nil` | The eRA Auth Redirect URL |
 | ontologyApiUrl | string | `nil` | The Ontology API url |
@@ -33,8 +43,7 @@ A Helm chart for DUOS
 | proxyImageRepository | string | `nil` |  |
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |
-| replicas | int | `1` |  |
-| serviceIP | string | `nil` | External IP of the service. Required. |
+| replicas | string | `nil` |  |
 | vaultCertPath | string | `nil` |  |
 | vaultCertSecretKey | string | `nil` |  |
 | vaultChain | string | `nil` |  |
