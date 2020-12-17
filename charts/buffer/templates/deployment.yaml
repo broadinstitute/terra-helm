@@ -163,6 +163,11 @@ spec:
           name: cert
           readOnly: true
         {{- end }}
+        {{- if .Values.proxy.tcell.enabled }}
+        - mountPath: /etc/apache2/tcell_agent.config
+          name: tcell-config
+          subPath: tcell-config.conf
+        {{- end }}
       {{- end }}
       volumes:
         - name: cloudsql-sa-creds
