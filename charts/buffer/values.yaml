@@ -88,6 +88,7 @@ buffer:
     # Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/,
     # for example: config/dev
     configPath:
+
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
   enabled: true
@@ -98,3 +99,15 @@ proxy:
     repository: broadinstitute/openidc-proxy
     # proxy.image.version -- Proxy image tag
     version: bernick_tcell
+  tcell:
+    # proxy.tcell.enabled -- Enables TCell
+    enabled: true
+    # proxy.tcell.vaultPrefix -- Prefix for TCell secrets in vault. Required if proxy.tcell.enabled is true.
+    vaultPrefix:
+    # proxy.tcell.hostIdentifier -- Identifier used for logging to TCell. Required if proxy.tcell.enabled is true
+    hostIdentifier:
+  whitelist:
+    # proxy.whitelist.enabled -- Enables proxy client email whitelisting
+    enabled: true
+    # proxy.whitelist.email -- (string) Required if whitelisting is enabled. Email of buffer client Google service account
+    email: null
