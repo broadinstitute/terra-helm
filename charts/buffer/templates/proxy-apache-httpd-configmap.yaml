@@ -22,12 +22,6 @@ data:
 
     Header unset X-Frame-Options
     Header always set X-Frame-Options SAMEORIGIN
-    Header unset X-XSS-Protection
-    Header always set X-XSS-Protection "1; mode=block"
-    Header unset X-Content-Type-Options
-    Header always set X-Content-Type-Options: nosniff
-    Header unset Strict-Transport-Security
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
     ProxyTimeout ${PROXY_TIMEOUT}
     OIDCOAuthTokenIntrospectionInterval 60
@@ -69,14 +63,6 @@ data:
         </Location>
 
         <Location ${PROXY_PATH2}>
-          Header unset Access-Control-Allow-Origin
-          Header always set Access-Control-Allow-Origin "*"
-          Header unset Access-Control-Allow-Headers
-          Header always set Access-Control-Allow-Headers "authorization,content-type,accept,origin,x-app-id"
-          Header unset Access-Control-Allow-Methods
-          Header always set Access-Control-Allow-Methods "GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD"
-          Header unset Access-Control-Max-Age
-          Header always set Access-Control-Max-Age 1728000
 
           RewriteEngine On
           RewriteCond %{REQUEST_METHOD} OPTIONS
@@ -86,7 +72,12 @@ data:
               Require all granted
           </Limit>
 
+          ${AUTH_TYPE2}
+
           <RequireAll>
+            <RequireAll>
+              ${AUTH_REQUIRE2}
+            </RequireAll>
             {{ if .Values.proxy.whitelist.enabled -}}
             <RequireAny>
               Require claims_expr '((.email == "{{ required "Whitelist email is required when whitelisting is enabled" .Values.proxy.whitelist.email }}"))'
