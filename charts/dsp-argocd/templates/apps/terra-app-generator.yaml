@@ -11,7 +11,7 @@ spec:
   - '*'
   syncWindows:
   - kind: allow
-    schedule: '0 22 * * *' # Schedule a 10-minute window during which the terra-app-generator job will automatically sync
+    schedule: '0 3 * * *' # Schedule a 10-minute window at 10 pm EST (3 am UTC) during which the terra-app-generator job will automatically sync
     duration: 10m
     manualSync: true # Allow manual syncs outside window
     applications:
