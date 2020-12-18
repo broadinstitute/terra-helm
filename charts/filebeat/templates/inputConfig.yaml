@@ -16,9 +16,9 @@ data:
             in_cluster: true
         - drop_event:
             when:
-              and:
+              or:
               - not:
                   equals:
                     kubernetes.namespace: terra-{{ required "a valid environment name is required ie: dev, perf, etc..." .Values.environmentName }}
               - regexp:
-                  kubernetes.pod.name: "^workspacemanage.*"
+                  kubernetes.pod.name: "^workspacemanager.*"
