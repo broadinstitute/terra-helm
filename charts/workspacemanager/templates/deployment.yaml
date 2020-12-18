@@ -43,9 +43,6 @@ spec:
         secret:
           secretName: workspace-sqlproxy-sa
       {{- end }}
-      - name: cloud-trace-sa-creds
-        secret:
-          secretName: workspace-cloud-trace-sa
       - name: app-sa-creds
         secret:
           secretName: workspace-app-sa
@@ -158,8 +155,6 @@ spec:
           value: "{{ .Values.samplingProbability }}"
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
-        - name: CLOUD_TRACE_SA_PATH
-          value: /secrets/cloudtrace/service-account.json
         - name: CLOUD_TRACE_ENABLED
           value: "{{ .Values.cloudTraceEnabled }}"
         - name: TERRA_DATAREPO_URL
@@ -173,9 +168,6 @@ spec:
         volumeMounts:
         - name: app-sa-creds
           mountPath: /secrets/app
-          readOnly: true
-        - name: cloud-trace-sa-creds
-          mountPath: /secrets/cloudtrace
           readOnly: true
         {{- if .Values.prometheus.enabled }}
         - name: {{ .Values.name }}-prometheusjmx-config
