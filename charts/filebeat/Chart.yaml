@@ -1,6 +1,6 @@
 apiVersion: v2
 name: terra-filebeat
-version: 0.1.0
+version: 0.1.1
 description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
 type: application
 keywords:
