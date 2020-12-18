@@ -21,4 +21,4 @@ data:
                   equals:
                     kubernetes.namespace: terra-{{ required "a valid environment name is required ie: dev, perf, etc..." .Values.environmentName }}
               - regexp:
-                  kubernetes.pod.name: *workspacemanager*
+                  kubernetes.pod.name: "^workspacemanage.*"
