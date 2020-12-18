@@ -17,8 +17,8 @@ data:
         - drop_event:
             when:
               and:
-                - not:
-                    equals:
-                      kubernetes.namespace: terra-{{ required "a valid environment name is required ie: dev, perf, etc..." .Values.environmentName }}
-                - equals:
-                    kubernetes.pod.name: *workspacemanager*
+              - not:
+                  equals:
+                    kubernetes.namespace: terra-{{ required "a valid environment name is required ie: dev, perf, etc..." .Values.environmentName }}
+              - equals:
+                  kubernetes.pod.name: *workspacemanager*
