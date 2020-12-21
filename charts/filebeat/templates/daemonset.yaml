@@ -5,6 +5,7 @@ metadata:
   labels:
 {{ include "filebeat.labels" . | indent 4 }}
 spec:
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Chart.Name }}
