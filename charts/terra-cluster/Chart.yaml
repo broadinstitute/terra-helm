@@ -27,7 +27,7 @@ dependencies:
     repository: https://broadinstitute.github.io/terra-helm/
   - name: terra-prometheus
     condition: terra-prometheus.enabled
-    version: 0.3.0-245.1608586393.15e7da
+    version: 0.3.0-245.1608587178.38e724
     repository: https://broadinstitute.github.io/terra-helm/
   - name: reloader
     condition: reloader.enabled
