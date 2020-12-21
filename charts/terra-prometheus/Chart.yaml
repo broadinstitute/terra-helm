@@ -16,5 +16,5 @@ sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
 dependencies:
   - name: kube-prometheus-stack
-    version: 12.8.0
+    version: 9.3.4
     repository: https://prometheus-community.github.io/helm-charts/
