@@ -22,3 +22,7 @@ data:
                     kubernetes.namespace: terra-{{ required "a valid environment name is required ie: dev, perf, etc..." .Values.environmentName }}
               - regexp:
                   kubernetes.pod.name: "^workspacemanager.*"
+              - regexp:
+                  kubernetes.pod.name: "^.*-cronjob-.*$"
+              - regexp:
+                  kubernetes.pod.name: "^terra-bufer.*"
