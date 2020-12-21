@@ -27,9 +27,10 @@ dependencies:
     repository: https://broadinstitute.github.io/terra-helm/
   - name: terra-prometheus
     condition: terra-prometheus.enabled
-    version: 0.2.1
+    version: 0.3.0
     repository: https://broadinstitute.github.io/terra-helm/
   - name: reloader
     condition: reloader.enabled
     version: v0.0.69
     repository: https://stakater.github.io/stakater-charts
+    
