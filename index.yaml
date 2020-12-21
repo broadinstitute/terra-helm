@@ -15955,6 +15955,25 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.1.1/terra-filebeat-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
+    created: "2020-12-21T14:45:11.352906151Z"
+    description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+    digest: 94bec6b746637daabbe56001b007f3a92efb746931feb43c8b25b8135ca031cf
+    keywords:
+    - dsp
+    - broadinstitute
+    - logs
+    - logging
+    - log
+    - filebeat
+    - kibana
+    name: terra-filebeat
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.1.1-242.1608561905.b6b719/terra-filebeat-0.1.1-242.1608561905.b6b719.tgz
+    version: 0.1.1-242.1608561905.b6b719
+  - apiVersion: v2
     created: "2020-12-21T14:41:48.409868586Z"
     description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
     digest: 0ebcd51b396d39c4ed7a90f0beafb7b9f42db25eeb2cbafb1065b86fa7ef70bd
