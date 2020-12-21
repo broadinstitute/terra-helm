@@ -15,6 +15,6 @@ maintainers:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
 dependencies:
-  - name: prometheus-operator
-    version: 8.15.6
-    repository: https://kubernetes-charts.storage.googleapis.com/
+  - name: kube-prometheus-stack
+    version: 9.3.4
+    repository: https://prometheus-community.github.io/helm-charts/
