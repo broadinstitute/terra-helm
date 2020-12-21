@@ -36,7 +36,7 @@ terra-cluster-psps:
 terra-prometheus:
   enabled: true
   namespaceOverride: monitoring
-  prometheus-operator:
+  kube-prometheus-stack:
     # passing override to stable/prometheus-operator dependency
     namespaceOverride: monitoring
     defaultRules:
