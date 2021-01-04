@@ -25,7 +25,7 @@ Chart for Terra Workspace Manager
 | ingress.cert.certManager.enabled | bool | `false` | Enable creating certificate secret with cert-manager |
 | ingress.cert.certManager.issuerKind | string | `"ClusterIssuer"` |  |
 | ingress.cert.certManager.issuerName | string | `"cert-manager-letsencrypt-prod"` |  |
-| ingress.cert.certManager.renewBefore | string | `"360h0m0s"` | When to renew the cert. Defaults to 15 days before expiry. |
+| ingress.cert.certManager.renewBefore | string | `"720h0m0s"` | When to renew the cert. Defaults to 30 days before expiry. |
 | ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.cert.vault.cert.path | string | `nil` | Path to secret containing .crt |
 | ingress.cert.vault.cert.secretKey | string | `nil` | Key in secret containing .crt |
@@ -38,6 +38,7 @@ Chart for Terra Workspace Manager
 | ingress.domain.namespaceEnv | bool | `true` |  |
 | ingress.domain.suffix | string | `"integ.envs.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.securityPolicy | string | `nil` | Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
