@@ -122,7 +122,7 @@ spec:
       annotations:
         message: Job {{`{{`}} $labels.namespace {{`}}`}}/{{`{{`}} $labels.job_name {{`}}`}} failed to complete.
         runbook_url: alert-name-kubejobfailed
-      expr: kube_job_status_failed{job="kube-state-metrics"}  > 0
+      expr: kube_job_status_failed{job="kube-state-metrics"{{- if .Values.resourceValidator.ignore }},job_name!~".*leonardo-resource-validator.*"{{- end }}}  > 0
       for: 1h
       labels:
         severity: warning
