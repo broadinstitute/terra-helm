@@ -1,15 +1,14 @@
-# buffer
-
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-
+buffer
+======
 Chart for Resource Buffering Service
 
-## Source Code
+Current chart version is `0.11.0`
 
-* <https://github.com/broadinstitute/terra-helm/tree/master/charts>
-* <https://github.com/DataBiosphere/terra-resource-buffer>
 
-## Values
+
+
+
+## Chart Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -19,7 +18,7 @@ Chart for Resource Buffering Service
 | certManager.enabled | bool | `false` | Enable to create certificate secret with cert-manager |
 | certManager.issuerKind | string | `"ClusterIssuer"` |  |
 | certManager.issuerName | string | `"cert-manager-letsencrypt-prod"` |  |
-| certManager.renewBefore | string | `"360h0m0s"` | When to renew the cert. Defaults to 15 days before expiry. |
+| certManager.renewBefore | string | `"720h0m0s"` | When to renew the cert. Defaults to 30 days before expiry. |
 | cleanupAfterHandout | bool | `false` | Whether to publish message to Janitor after resource is handed out. |
 | domain.hostname | string | `"buffer"` | Hostname of this deployment |
 | domain.namespaceEnv | bool | `true` | If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix |
@@ -28,12 +27,17 @@ Chart for Resource Buffering Service
 | global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
-| imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-buffer"` | Image repository |
+| imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-resource-buffer"` | Image repository |
 | imageConfig.tag | string | The chart's appVersion value will be used | Image tag. |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |
 | proxy.logLevel | string | `"debug"` | Proxy log level |
+| proxy.tcell.enabled | bool | `true` | Enables TCell |
+| proxy.tcell.hostIdentifier | string | `nil` | Identifier used for logging to TCell. Required if proxy.tcell.enabled is true |
+| proxy.tcell.vaultPrefix | string | `nil` | Prefix for TCell secrets in vault. Required if proxy.tcell.enabled is true. |
+| proxy.whitelist.email | string | `nil` | Required if whitelisting is enabled. Email of buffer client Google service account |
+| proxy.whitelist.enabled | bool | `true` | Enables proxy client email whitelisting |
 | replicas | int | `1` |  |
 | serviceAllowedAddresses | object | `{}` | A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
