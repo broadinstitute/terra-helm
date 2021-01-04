@@ -5,8 +5,8 @@ namespaceOverride: "" # Must match value for prometheus-operator.namespaceOverri
 # prometheusRuleSelector -- (string) used to create a label that prometheus selcts to determine which rules to alert on
 prometheusRuleSelector: prometheus-operator
 
-# enableCronjobAlerts -- (bool) flag to disable alerting on failed cronjob runs in a terra environment.
-enableCronjobAlerts: true
+resourceValidator:
+  ignore: false
 
 # TLS Values
 certManager:
