@@ -2,60 +2,15 @@ terra-prometheus
 ================
 a helm chart to deploy monitoring infrastructure
 
-Current chart version is `0.1.1`
+Current chart version is `0.4.0`
 
-Prometheus maintainers are adamant that alertmanager must read config from files
-and that those configs do not support reading in values from env vars.
-this makes it so that is not possible to inject a secret like a slack webhook
-into the config with out a supplemental templating layer which we currently don't have.
 
-As temporary workaround the alertmanager config yaml is stored
-entirely as a b64 encoded string in vault at secret/devops/prometheus/alertmanager/config
-and mounted as a file to alertmanager
-The prometheus operator currently has an alpha feature to support templating alert manager 
-configs via crd but it doesn't support slack yet. 
 
-Putting the contents of the alermanager-conf.yaml here so it is version controlled. 
-If a change is made for now the vault value must be manually updated.
-```
-global:
-  resolve_timeout: 5m
-  slack_api_url: ${SLACK_WEBHOOK_URL}
-route:
-  group_by: ['job']
-  group_wait: 30s
-  group_interval: 5m
-  repeat_interval: 12h
-  receiver: 'slack'
-  routes:
-  - match:
-      alertname: Watchdog
-    receiver: 'null'
-  - match:
-    receiver: 'slack'
-    continue: true
-receivers:
-- name: 'null'
-- name: 'slack'
-  slack_configs:
-  - channel: '#terra-prometheus-alerts'
-    send_resolved: true
-    title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
-    text: >-
-      {{ range .Alerts }}
-        *Alert:* `{{ .Labels.severity }}`
-        *Description:* {{ .Annotations.message }}
-        *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:> *Runbook:* <{{ .Annotations.runbook }}|:spiral_note_pad:>
-        *Details:*
-        {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-        {{ end }}
-      {{ end }}
-```
 ## Chart Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://kubernetes-charts.storage.googleapis.com/ | prometheus-operator | 8.15.6 |
+| https://prometheus-community.github.io/helm-charts/ | kube-prometheus-stack | 9.3.4 |
 
 ## Chart Values
 
@@ -66,19 +21,22 @@ receivers:
 | certManager.issuerKind | string | `"ClusterIssuer"` |  |
 | certManager.issuerName | string | `"cert-manager-letsencrypt-prod"` | (string) Name of the Issuer or ClusterIssuer resource that will be used to obtain the tls certificate |
 | certManager.renewBefore | string | `"720h"` | (string) Time before expiration when cert-manager will auto renew tls. Default is 30 days. Must be specified in hours |
+| enableCronjobAlerts | bool | `true` | (bool) flag to disable alerting on failed cronjob runs in a terra environment. |
+| kube-prometheus-stack.fullnameOverride | string | `"terra-prometheus-operator"` |  |
+| kube-prometheus-stack.namespaceOverride | string | `""` |  |
+| kube-prometheus-stack.prometheus.ingress.annotations."kubernetes.io/ingress.allow-http" | string | `"false"` |  |
+| kube-prometheus-stack.prometheus.ingress.annotations."kubernetes.io/ingress.global-static-ip-name" | string | `nil` |  |
+| kube-prometheus-stack.prometheus.ingress.enabled | bool | `true` |  |
+| kube-prometheus-stack.prometheus.ingress.hosts | list | `[]` |  |
+| kube-prometheus-stack.prometheus.ingress.paths[0] | string | `"/*"` |  |
+| kube-prometheus-stack.prometheus.ingress.tls[0].secretName | string | `"terra-prometheus-cert"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.containers | string | `nil` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.externalUrl | string | `nil` |  |
+| kube-prometheus-stack.prometheus.service.annotations."cloud.google.com/backend-config" | string | `nil` |  |
+| kube-prometheus-stack.prometheus.service.type | string | `"NodePort"` |  |
+| kube-prometheus-stack.prometheusOperator.createCustomResource | bool | `false` |  |
 | namespaceOverride | string | `""` | (string) enables installing to monitoring namespace when deployed as dependency via argoCd |
-| prometheus-operator.fullnameOverride | string | `"terra-prometheus-operator"` |  |
-| prometheus-operator.namespaceOverride | string | `""` | (string) For use with argocd to ensure prometheus resources are installed to monitoring namespace |
-| prometheus-operator.prometheus.ingress.annotations | object | `{"kubernetes.io/ingress.allow-http":"false","kubernetes.io/ingress.global-static-ip-name":null}` | annotations to attache to prometheus ingress resource. |
-| prometheus-operator.prometheus.ingress.enabled | bool | `true` | expose prometheus web ui through gke ingress |
-| prometheus-operator.prometheus.ingress.hosts | list | `[]` | ([string]) List of domain host(s) that the ingress should be accessible from  |
-| prometheus-operator.prometheus.ingress.paths[0] | string | `"/*"` |  |
-| prometheus-operator.prometheus.ingress.tls | list | `[{"secretName":"terra-prometheus-cert"}]` | ([string]) List of k8s secret names containing tls credentials. |
-| prometheus-operator.prometheus.prometheusSpec.containers | [object] | `nil` | Used to inject the stackdriver exporter into prometheus pods. |
-| prometheus-operator.prometheus.prometheusSpec.externalUrl | string | `nil` | URL at which prometheus UI will be available. |
-| prometheus-operator.prometheus.service.annotations | object | `{"cloud.google.com/backend-config":null}` | (object) Used for attaching backend-config resources to prometheus service  |
-| prometheus-operator.prometheus.service.type | string | `"NodePort"` | (string) Service type for prometheus, must be NodePort for ingress to work. |
-| prometheus-operator.prometheusOperator.createCustomResource | bool | `false` |  |
+| prometheusRuleSelector | string | `"prometheus-operator"` | (string) used to create a label that prometheus selcts to determine which rules to alert on |
 | vaultCert.cert.path | string | `nil` | Path to secret containing .crt |
 | vaultCert.cert.secretKey | string | `nil` | Key in secret containing .crt |
 | vaultCert.chain.path | string | `nil` | Path to secret containing intermediate .crt |

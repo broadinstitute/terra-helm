@@ -118,6 +118,7 @@ spec:
       for: 10m
       labels:
         severity: warning
+    {{- if .Values.enableCronjobAlerts }}
     - alert: KubeJobFailed
       annotations:
         message: Job {{`{{`}} $labels.namespace {{`}}`}}/{{`{{`}} $labels.job_name {{`}}`}} failed to complete.
@@ -126,3 +127,4 @@ spec:
       for: 1h
       labels:
         severity: warning
+    {{- end }}
