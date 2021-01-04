@@ -381,6 +381,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.11.0/buffer-0.11.0.tgz
     version: 0.11.0
   - apiVersion: v2
+    created: "2021-01-04T16:37:33.579642899Z"
+    description: Chart for Resource Buffering Service
+    digest: 4a546efcf991a26f65583d1607f4eb7cc8a0e9313b21b3f274556083644b9ca6
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.11.0-247.1609778243.5a9cde/buffer-0.11.0-247.1609778243.5a9cde.tgz
+    version: 0.11.0-247.1609778243.5a9cde
+  - apiVersion: v2
     created: "2020-12-16T21:43:39.889460915Z"
     description: Chart for Resource Buffering Service
     digest: 0ca0b6f2361b02d531cd79b9fbf84fdf41b52dd54295366950a76270171f1f1a
@@ -1603,6 +1620,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.1.11/crljanitor-0.1.11.tgz
     version: 0.1.11
+  - apiVersion: v2
+    created: "2021-01-04T16:37:33.668316975Z"
+    description: Chart for Cloud Resource Manager Janitor
+    digest: 96d01bd05fc25e0f35fcf2600909ce027e32027a8f3d64218cfd1d66e6bc3f20
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.1.11-247.1609778243.5a9cde/crljanitor-0.1.11-247.1609778243.5a9cde.tgz
+    version: 0.1.11-247.1609778243.5a9cde
   - apiVersion: v2
     created: "2020-11-19T22:51:20.085304977Z"
     description: Chart for Cloud Resource Manager Janitor
@@ -18562,6 +18596,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.15.0/workspacemanager-0.15.0.tgz
     version: 0.15.0
+  - apiVersion: v2
+    created: "2021-01-04T16:37:33.765073441Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 7ad094e81150883c71cfc511f2ab3c8cced2f987db02179b44235f7ea40b9a59
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.15.0-247.1609778243.5a9cde/workspacemanager-0.15.0-247.1609778243.5a9cde.tgz
+    version: 0.15.0-247.1609778243.5a9cde
   - apiVersion: v2
     created: "2020-12-14T21:52:38.170373254Z"
     dependencies:
