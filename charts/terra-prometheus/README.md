@@ -67,7 +67,6 @@ receivers:
 | certManager.issuerKind | string | `"ClusterIssuer"` |  |
 | certManager.issuerName | string | `"cert-manager-letsencrypt-prod"` | (string) Name of the Issuer or ClusterIssuer resource that will be used to obtain the tls certificate |
 | certManager.renewBefore | string | `"720h"` | (string) Time before expiration when cert-manager will auto renew tls. Default is 30 days. Must be specified in hours |
-| enableCronjobAlerts | bool | `true` | (bool) flag to disable alerting on failed cronjob runs in a terra environment. |
 | kube-prometheus-stack.fullnameOverride | string | `"terra-prometheus-operator"` |  |
 | kube-prometheus-stack.namespaceOverride | string | `""` |  |
 | kube-prometheus-stack.prometheus.ingress.annotations."kubernetes.io/ingress.allow-http" | string | `"false"` |  |
@@ -83,6 +82,7 @@ receivers:
 | kube-prometheus-stack.prometheusOperator.createCustomResource | bool | `false` |  |
 | namespaceOverride | string | `""` | (string) enables installing to monitoring namespace when deployed as dependency via argoCd |
 | prometheusRuleSelector | string | `"prometheus-operator"` | (string) used to create a label that prometheus selcts to determine which rules to alert on |
+| resourceValidator.ignore | bool | `false` | (bool) flag to modify the cronjob alert query to ignore failures of Leonardo's resource-validator. |
 | vaultCert.cert.path | string | `nil` | Path to secret containing .crt |
 | vaultCert.cert.secretKey | string | `nil` | Key in secret containing .crt |
 | vaultCert.chain.path | string | `nil` | Path to secret containing intermediate .crt |

@@ -6,6 +6,7 @@ namespaceOverride: "" # Must match value for prometheus-operator.namespaceOverri
 prometheusRuleSelector: prometheus-operator
 
 resourceValidator:
+  # resourceValidator.ignore -- (bool) flag to modify the cronjob alert query to ignore failures of Leonardo's resource-validator.
   ignore: false
 
 # TLS Values
