@@ -57,13 +57,13 @@ cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  imageTag: 8b28335
+  imageTag: a89277b
   googleProject:
 zombieMonitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-zombie-monitor-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
-  imageTag: 8b28335
+  imageTag: a89277b
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
