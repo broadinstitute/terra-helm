@@ -101,8 +101,8 @@ ingress:
       enabled: false
       # ingress.cert.certManager.duration -- Certificate duration. Defaults to 3 months.
       duration: 2160h0m0s
-      # ingress.cert.certManager.renewBefore -- When to renew the cert. Defaults to 15 days before expiry.
-      renewBefore: 360h0m0s
+      # ingress.cert.certManager.renewBefore -- When to renew the cert. Defaults to 30 days before expiry.
+      renewBefore: 720h0m0s
       issuerName: cert-manager-letsencrypt-prod
       issuerKind: ClusterIssuer
 
