@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ .Chart.Name }}-jvm-monitor
+  labels:
+{{ include "cromiam.labels" . | indent 4 }}
+spec:
+  jobLabel: {{ .Chart.Name }}-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: {{ .Chart.Name }}
+  podMetricsEndpoints:
+    - port: metrics
