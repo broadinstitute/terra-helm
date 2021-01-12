@@ -10086,6 +10086,22 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.1/opendj-0.0.1.tgz
     version: 0.0.1
   - apiVersion: v2
+    created: "2021-01-12T18:27:28.20447443Z"
+    description: Chart for OpenDJ, used by Sam, the Terra IAM application
+    digest: df6a4ee027d295636f9b5a35f06fc03d3475c532d39134537cb0af4ff5f77326
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - opendj
+    name: opendj
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.1-255.1610476041.e63ead/opendj-0.0.1-255.1610476041.e63ead.tgz
+    version: 0.0.1-255.1610476041.e63ead
+  - apiVersion: v2
     created: "2020-11-19T22:51:20.92350646Z"
     description: Chart for OpenDJ, used by Sam, the Terra IAM application
     digest: a05b45458bffa9f04b6a74bc82a879824ff3bf416f75a808e8f5cd8b089b102d
@@ -12288,6 +12304,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.2.1/sam-0.2.1.tgz
     version: 0.2.1
+  - apiVersion: v2
+    created: "2021-01-12T18:27:28.320424775Z"
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: 7e89a05e2312d4f8ea7af8a9a5d6320f4ff78a6ec22385f21b9cf772c5711ae8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.2.1-255.1610476041.e63ead/sam-0.2.1-255.1610476041.e63ead.tgz
+    version: 0.2.1-255.1610476041.e63ead
   - apiVersion: v2
     appVersion: develop
     created: "2020-12-02T18:16:32.408894586Z"
