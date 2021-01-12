@@ -1,15 +1,12 @@
 apiVersion: v2
 name: opendj
-version: 0.0.1
-
+version: 0.1.0
 description: Chart for OpenDJ, used by Sam, the Terra IAM application
 type: application
-
 keywords:
-- dsp
-- broadinstitute
-- terra
-- opendj
-
+  - dsp
+  - broadinstitute
+  - terra
+  - opendj
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts

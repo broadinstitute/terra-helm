@@ -1,16 +1,13 @@
 apiVersion: v2
 name: sam
-version: 0.2.1
-
+version: 0.3.0
 description: Chart for Sam, the Terra Identity and Access Management application
 type: application
-
 keywords:
   - dsp
   - broadinstitute
   - terra
   - sam
-
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/broadinstitute/sam
