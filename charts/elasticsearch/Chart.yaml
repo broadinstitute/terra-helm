@@ -1,0 +1,22 @@
+apiVersion: v2
+name: elasticsearch
+description: a helm chart to deploy monitoring infrastructure
+type: application
+version: 0.0.0
+keywords:
+  - dsp
+  - broad
+  - terra
+  - elasticsearch
+  - ontology
+  - consent
+  - firecloudorch
+maintainers:
+  - email: mflinn@broadinstitute.org
+    name: Michael Flinn
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+dependencies:
+  - name: elasticsearch
+    version: 6.8.13
+    repository: https://helm.elastic.co
