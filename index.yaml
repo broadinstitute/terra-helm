@@ -4688,6 +4688,33 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/duos-consent-ontology-0.1.0-98.1596562720.a14e6f/duos-consent-ontology-0.1.0-98.1596562720.a14e6f.tgz
     version: 0.1.0-98.1596562720.a14e6f
+  elasticsearch:
+  - apiVersion: v2
+    created: "2021-01-12T20:29:17.656129425Z"
+    dependencies:
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      version: 6.8.13
+    description: a helm chart to deploy monitoring infrastructure
+    digest: f6ef6ef37b0a1457d26c2b7198b220ec97f1e7132762c150fd17931465cddd88
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - elasticsearch
+    - ontology
+    - consent
+    - firecloudorch
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: elasticsearch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/elasticsearch-0.0.0-256.1610483351.e3b327/elasticsearch-0.0.0-256.1610483351.e3b327.tgz
+    version: 0.0.0-256.1610483351.e3b327
   firecloudorch:
   - apiVersion: v2
     appVersion: latest
