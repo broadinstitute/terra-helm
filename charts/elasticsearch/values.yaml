@@ -5,3 +5,6 @@ elasticsearch:
 
   podSecurityPolicy:
     create: true
+
+  rbac:
+    create: true
