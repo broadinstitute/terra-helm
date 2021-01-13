@@ -1,1 +1,7 @@
-# dummy comment
+# Set default values on chart from elastic.co
+elasticsearch:
+
+  image: "docker.elastic.co/elasticsearch/elasticsearch-oss"
+
+  podSecurityPolicy:
+    create: true
