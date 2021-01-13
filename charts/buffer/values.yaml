@@ -1,27 +1,41 @@
 # Global values used by this chart
 global:
-  # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
-  trustedAddresses: {}
+  # global.applicationVersion -- What version of the application to deploy
+  applicationVersion: latest
   # global.terraEnv -- (string) Terget Terra environment name. Required.
   # @default -- Is set by Helmfile on deploy
-  terraEnv:
+  terraEnv: null
+
+# name -- A name for the deployment that will be substituted into resuorce definitions
+name: buffer
 
 # image -- (string) Used for local Skaffold deploys
 # @default -- Is set by Skaffold on local deploys
 image:
 
-# appVersion -- (string) Service image version/tag. Required unless using `image`.
-# @default -- Is set by Helmfile on deploy
-appVersion:
-
 imageConfig:
   # imageConfig.repository -- Image repository
   repository: gcr.io/terra-kernel-k8s/terra-resource-buffer
   # imageConfig.tag -- (string) Image tag.
-  # @default -- The chart's appVersion value will be used
-  tag:
+  # @default -- global.applicationVersion
+  tag: null
   imagePullPolicy: Always
-replicas: 1
+
+# replicas -- Number of replicas for the deployment
+replicas: 0
+
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 500m
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 4Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 500m
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 4Gi
+
 vault:
   # vault.enabled -- When enabled, syncs required secrets from Vault
   enabled: true
@@ -33,61 +47,67 @@ vault:
   # vault.janitorClientCredentialPath -- (string) Vault path where Janitor client credential is stored.
   janitorClientCredentialPath:
 
-# serviceIP -- (string) External IP of the service. Required.
-serviceIP:
+ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
+  enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingress.securityPolicy -- (string) Name of a GCP Cloud Armor security policy
+  securityPolicy: null
+  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
+  timeoutSec: 120
 
-# serviceFirewallEnabled -- Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses
-serviceFirewallEnabled: false
+  domain:
+    # domain.hostname -- Hostname of this deployment
+    hostname: buffer
+    # domain.namespaceEnv -- If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix
+    namespaceEnv: true
+    # domain.suffix -- Domain suffix
+    suffix: integ.envs.broadinstitute.org
 
-# serviceAllowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
-serviceAllowedAddresses: {}
-
-# cleanupAfterHandout -- Whether to publish message to Janitor after resource is handed out.
-cleanupAfterHandout: false
-
-# DNS/TLS Values
-domain:
-  # domain.hostname -- Hostname of this deployment
-  hostname: buffer
-  # domain.namespaceEnv -- If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix
-  namespaceEnv: true
-  # domain.suffix -- Domain suffix
-  suffix: integ.envs.broadinstitute.org
-# Either certManager or vaultCert must be enabled to ensure a certificate secret exists:
-certManager:
-  # certManager.enabled -- Enable to create certificate secret with cert-manager
-  enabled: false
-  # certManager.duration -- Certificate duration. Defaults to 3 months.
-  duration: 2160h0m0s
-  # certManager.renewBefore -- When to renew the cert. Defaults to 30 days before expiry.
-  renewBefore: 720h0m0s
-  issuerName: cert-manager-letsencrypt-prod
-  issuerKind: ClusterIssuer
-vaultCert:
-  # vaultCert.enabled -- Enable to sync certificate secret from Vault with secrets-manager
-  enabled: false
   cert:
-    # vaultCert.cert.path -- (string) Path to secret containing .crt
-    path:
-    # vaultCert.cert.secretKey -- (string) Key in secret containing .crt
-    secretKey:
-  key:
-    # vaultCert.key.path -- (string) Path to secret containing .key
-    path:
-    # vaultCert.key.secretKey -- (string) Key in secret containing .key
-    secretKey:
-  chain:
-    # vaultCert.chain.path -- (string) Path to secret containing intermediate .crt
-    path:
-    # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
-    secretKey:
+    # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
+    # If preSharedCerts is not empty, its contents are used for the GKE ingress. Otherwise a secret with the cert is expected.
+    # The cert secret is required if the OIDC proxy is enabled.
+    # This secret can be
+    #   - synced from Vault
+    #   - created/managed with cert-manager
+    #   - created manually before the chart is applied
 
-buffer:
-  pool:
-    # buffer.pool.configPath -- The configuration files pools and resources.
-    # Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/,
-    # for example: config/dev
-    configPath:
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
+
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    #   certificate from Vault to a k8s secret.
+    vault:
+      # ingress.cert.vault.enabled -- Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager)
+      enabled: true
+      cert:
+        # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
+        path: null
+        # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
+        secretKey: null
+      key:
+        # ingress.cert.vault.key.path -- (string) Path to secret containing .key
+        path: null
+        # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
+        secretKey: null
+      chain:
+        # ingress.cert.vault.chain.path -- (string) Path to secret containing intermediate .crt
+        path:
+        # ingress.cert.vault.chain.secretKey -- (string) Key in secret containing intermediate .crt
+        secretKey:
+
+    # If cert.certManager is enabled, it is used to configure the certificate and populate the k8s secret. Requires [cert-manager](https://github.com/jetstack/cert-manager)
+    certManager:
+      # ingress.cert.certManager.enabled -- Enable creating certificate secret with cert-manager
+      enabled: false
+      # ingress.cert.certManager.renewBefore -- When to renew the cert. Defaults to 30 days before expiry.
+      renewBefore: 720h0m0s
+      issuerName: cert-manager-letsencrypt-prod
+      issuerKind: ClusterIssuer
 
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
@@ -111,3 +131,13 @@ proxy:
     enabled: true
     # proxy.whitelist.email -- (string) Required if whitelisting is enabled. Email of buffer client Google service account
     email: null
+
+buffer:
+  pool:
+    # buffer.pool.configPath -- The configuration files pools and resources.
+    # Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/,
+    # for example: config/dev
+    configPath:
+
+# cleanupAfterHandout -- Whether to publish message to Janitor after resource is handed out.
+cleanupAfterHandout: false

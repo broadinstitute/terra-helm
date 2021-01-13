@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: terra-buffer-deployment
+  name: {{ .Values.name }}-deployment
   labels:
-    {{ template "buffer.labels" . }}
+    {{- include "buffer.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: terra-buffer
+      {{- include "buffer.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      name: terra-buffer-service
+      name: {{ .Values.name }}-service
       labels:
-        app: terra-buffer
+        {{- include "buffer.labels" . | nindent 8 }}
     spec:
-      serviceAccountName: terra-buffer-service-sa
+      serviceAccountName: {{ .Values.name }}-service-sa
       containers:
-      - name: terra-buffer
+      - name: {{ .Values.name }}
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
@@ -32,34 +32,34 @@ spec:
         - name: BUFFER_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: buffer-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: username
         - name: BUFFER_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: buffer-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: password
         - name: BUFFER_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: buffer-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: db
         - name: BUFFER_POOL_CONFIG_PATH
           value: {{ .Values.buffer.pool.configPath }}
         - name: BUFFER_STAIRWAY_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: buffer-stairway-db-creds
+              name: {{ .Values.name }}-stairway-db-creds
               key: username
         - name: BUFFER_STAIRWAY_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: buffer-stairway-db-creds
+              name: {{ .Values.name }}-stairway-db-creds
               key: password
         - name: BUFFER_STAIRWAY_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: buffer-stairway-db-creds
+              name: {{ .Values.name }}-stairway-db-creds
               key: db
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
@@ -73,12 +73,12 @@ spec:
         - name: BUFFER_CRL_JANITOR_TRACK_RESOURCE_PROJECT_ID
           valueFrom:
             secretKeyRef:
-              name: buffer-crl-janitor-track-resource-pubsub
+              name: {{ .Values.name }}-crl-janitor-track-resource-pubsub
               key: project
         - name: BUFFER_CRL_JANITOR_TRACK_RESOURCE_TOPIC_ID
           valueFrom:
             secretKeyRef:
-              name: buffer-crl-janitor-track-resource-pubsub
+              name: {{ .Values.name }}-crl-janitor-track-resource-pubsub
               key: topic
         {{- end }}
         # Environment variables for OpenCensus resource auto detection.
@@ -94,23 +94,23 @@ spec:
           - name: app-sa-creds
             mountPath: /secrets/app
             readOnly: true
-      - name: cloudsql-proxy
+      - name: {{ .Values.name }}-cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
         - name: SQL_INSTANCE_PROJECT
           valueFrom:
             secretKeyRef:
-              name: buffer-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: project
         - name: SQL_INSTANCE_REGION
           valueFrom:
             secretKeyRef:
-              name: buffer-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: region
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: buffer-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
                   "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
@@ -123,7 +123,7 @@ spec:
           mountPath: /secrets/cloudsql
           readOnly: true
       {{- if .Values.proxy.enabled }}
-      - name: oidc-proxy
+      - name: {{ .Values.name }}-oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
         ports:
         - containerPort: 443
@@ -157,7 +157,7 @@ spec:
           subPath: tls.key
           name: cert
           readOnly: true
-        {{- if .Values.vaultCert.enabled}}
+        {{- if .Values.ingress.cert.vault.enabled}}
         - mountPath: /etc/ssl/certs/ca-bundle.crt
           subPath: ca-bundle.crt
           name: cert
@@ -179,7 +179,7 @@ spec:
         {{- if .Values.proxy.enabled }}
         - name: apache-httpd-proxy-config
           configMap:
-            name: terra-buffer-proxy-configmap
+            name: {{ .Values.name }}-proxy-configmap
             items:
             - key: apache-httpd-proxy-config
               path: buffer-proxy.conf
@@ -189,7 +189,7 @@ spec:
         {{- if .Values.proxy.tcell.enabled }}
         - name: tcell-config
           configMap:
-            name: buffer-tcell-configmap
+            name: {{ .Values.name }}-tcell-configmap
             items:
             - key: tcell-config
               path: tcell-config.conf

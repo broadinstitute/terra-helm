@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: terra-buffer-proxy-configmap
+  name: {{ .Values.name }}-proxy-configmap
   labels:
     {{ template "buffer.labels" . }}
 data:
@@ -46,7 +46,7 @@ data:
         SSLProxyEngine On
         SSLCertificateFile /etc/ssl/certs/server.crt
         SSLCertificateKeyFile /etc/ssl/private/server.key
-        {{ if .Values.vaultCert.enabled -}}
+        {{ if .Values.ingress.cert.vault.enabled -}}
           SSLCertificateChainFile /etc/ssl/certs/ca-bundle.crt
         {{- end }}
 
