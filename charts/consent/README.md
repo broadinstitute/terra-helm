@@ -20,6 +20,7 @@ Current chart version is `0.1.0`
 | elasticSearchServer2 | string | `nil` |  |
 | elasticSearchServer3 | string | `nil` |  |
 | environment | string | `nil` |  |
+| emailNotificationsEnabled | bool | `nil` |  |
 | gcsAccountKey | string | `nil` |  |
 | gcsAccountPath | string | `nil` |  |
 | global.applicationVersion | string | `"latest"` | What version of the Ontology application to deploy |
