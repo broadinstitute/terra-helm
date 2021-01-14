@@ -1,10 +1,21 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.name }}-deployment
   labels:
     {{- include "buffer.labels" . | nindent 4 }}
+  {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
+  annotations:
+    reloader.stakater.com/auto: "true"
+  {{- end }}
 spec:
+  revisionHistoryLimit: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
@@ -14,8 +25,38 @@ spec:
       name: {{ .Values.name }}-service
       labels:
         {{- include "buffer.labels" . | nindent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map changes: */}}
+        checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
+      volumes:
+      - name: cloudsql-sa-creds
+        secret:
+          secretname: {{ .Values.name }}-cloudsql-sa
+      - name: app-sa-creds
+        secret:
+          secretname: {{ .Values.name }}-app-sa
+      {{- if .Values.proxy.enabled }}
+      - name: apache-httpd-proxy-config
+        configMap:
+          name: {{ .Values.name }}-proxy-configmap
+          items:
+          - key: apache-httpd-proxy-config
+            path: {{ .Values.name }}-proxy.conf
+      - name: cert
+        secret:
+          secretName: {{ .Chart.Name }}-cert
+      {{- if .Values.proxy.tcell.enabled }}
+      - name: tcell-config
+        configMap:
+          name: {{ .Values.name }}-tcell-configmap
+          items:
+          - key: tcell-config
+            path: tcell-config.conf
+      {{- end }}
+      {{- end }}
       containers:
       - name: {{ .Values.name }}
         image: "{{- if .Values.image -}}
@@ -24,10 +65,12 @@ spec:
             {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
           {{- end }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
-        {{- if not .Values.proxy.enabled }}
         ports:
-        - containerPort: 8080
-        {{- end}}
+        - name: status
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
         env:
         - name: BUFFER_DB_USERNAME
           valueFrom:
@@ -91,9 +134,18 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         volumeMounts:
-          - name: app-sa-creds
-            mountPath: /secrets/app
-            readOnly: true
+        - name: app-sa-creds
+          mountPath: /secrets/app
+          readOnly: true
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6 # 60 seconds before unready
+          successThreshold: 1
       - name: {{ .Values.name }}-cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -148,7 +200,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/apache2/sites-available/site.conf
           name: apache-httpd-proxy-config
-          subPath: buffer-proxy.conf
+          subPath: {{ .Values.name }}-proxy.conf
         - mountPath: /etc/ssl/certs/server.crt
           subPath: tls.crt
           name: cert
@@ -169,29 +221,3 @@ spec:
           subPath: tcell-config.conf
         {{- end }}
       {{- end }}
-      volumes:
-        - name: cloudsql-sa-creds
-          secret:
-            secretName: buffer-cloudsql-sa
-        - name: app-sa-creds
-          secret:
-            secretName: buffer-app-sa
-        {{- if .Values.proxy.enabled }}
-        - name: apache-httpd-proxy-config
-          configMap:
-            name: {{ .Values.name }}-proxy-configmap
-            items:
-            - key: apache-httpd-proxy-config
-              path: buffer-proxy.conf
-        - name: cert
-          secret:
-            secretName: {{ .Chart.Name }}-cert
-        {{- if .Values.proxy.tcell.enabled }}
-        - name: tcell-config
-          configMap:
-            name: {{ .Values.name }}-tcell-configmap
-            items:
-            - key: tcell-config
-              path: tcell-config.conf
-        {{- end }}
-        {{- end }}

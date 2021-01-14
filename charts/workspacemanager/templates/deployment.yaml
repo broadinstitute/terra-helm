@@ -10,7 +10,7 @@ metadata:
     reloader.stakater.com/auto: "true"
   {{- end }}
 spec:
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:

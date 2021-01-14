@@ -8,7 +8,7 @@ metadata:
 spec:
   timeoutSec: {{ .Values.ingress.timeoutSec }}
   healthCheck:
-    checkIntervalSec: 5
+    checkIntervalSec: 10
     timeoutSec: 5
     healthyThreshold: 2
     unhealthyThreshold: 2
