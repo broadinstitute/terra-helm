@@ -28,7 +28,7 @@ spec:
       annotations:
         {{- /* Automatically restart deployments on config map changes: */}}
         checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
-        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-tcell-configmap.yaml") . | sha256sum }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       volumes:
