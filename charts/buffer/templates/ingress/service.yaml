@@ -15,7 +15,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    deployment: {{ .Values.name }}-deployment
+    {{- include "buffer.selectorLabels" . | nindent 4 }}
   ports:
   - name: https
     protocol: TCP
