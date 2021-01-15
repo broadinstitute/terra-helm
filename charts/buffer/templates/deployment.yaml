@@ -34,10 +34,10 @@ spec:
       volumes:
       - name: cloudsql-sa-creds
         secret:
-          secretname: {{ .Values.name }}-cloudsql-sa
+          secretName: {{ .Values.name }}-cloudsql-sa
       - name: app-sa-creds
         secret:
-          secretname: {{ .Values.name }}-app-sa
+          secretName: {{ .Values.name }}-app-sa
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:

@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-proxy-configmap
   labels:
-    {{ template "buffer.labels" . }}
+    {{- include "buffer.labels" . | nindent 4 }}
 data:
   apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}
