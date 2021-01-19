@@ -30,7 +30,7 @@ elasticsearch:
   extraVolumeMounts:
     - name: es-memory-cm
       mountPath: /etc/security/limits.conf
-      subPath: /etc/security/limits.conf
+      subPath: limits.conf
       readOnly: true
 
   esConfig:
