@@ -29,17 +29,6 @@ elasticsearch:
         cors:
           enabled: true
           allow-origin: '*'
-      xpack:
-        graph:
-          enabled: false
-        ml:
-          enabled: false
-        monitoring:
-          enabled: false
-        security:
-          enabled: false
-        watcher:
-          enabled: false
       reindex:
         remote:
           whitelist: elasticsearch5a1.dsde-dev.broadinstitute.org:9200
