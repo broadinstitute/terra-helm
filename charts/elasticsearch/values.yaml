@@ -20,6 +20,18 @@ elasticsearch:
     limits:
       cpu: 2
       memory: 8Gi
+  
+  # Used to enable JVM heap mem locking
+  extraVolumes:
+    - name: es-memory-cm
+      configMap:
+        namme: es-memory-cm
+
+  extraVolumeMounts:
+    - name: es-memory-cm
+      mountPath: /etc/security/limits.conf
+      subPath: /etc/security/limits.conf
+      readOnly: true
 
   esConfig:
     elasticsearch.yml: |
