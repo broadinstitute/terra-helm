@@ -25,7 +25,7 @@ elasticsearch:
   extraVolumes:
     - name: es-memory-cm
       configMap:
-        namme: es-memory-cm
+        name: es-memory-cm
 
   extraVolumeMounts:
     - name: es-memory-cm
