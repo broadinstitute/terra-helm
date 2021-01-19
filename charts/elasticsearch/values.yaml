@@ -20,5 +20,27 @@ elasticsearch:
     limits:
       cpu: 2
       memory: 8Gi
-      
+
+  esConfig:
+    elasticsearch.yaml: |
+      bootstrap:
+        memory_lock: true
+      http:
+        cors:
+          enabled: true
+          allow-origin: '*'
+      xpack:
+        graph:
+          enabled: false
+        ml:
+          enabled: false
+        monitoring:
+          enabled: false
+        security:
+          enabled: false
+        watcher:
+          enabled: false
+      reindex:
+        remote:
+          whitelist: elasticsearch5a1.dsde-dev.broadinstitute.org:9200
     
