@@ -22,7 +22,7 @@ elasticsearch:
       memory: 8Gi
 
   esConfig:
-    elasticsearch.yaml: |
+    elasticsearch.yml: |
       bootstrap:
         memory_lock: true
       http:
