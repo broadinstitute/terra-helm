@@ -187,12 +187,12 @@ spec:
         - name: TCELL_APP_ID
           valueFrom:
             secretKeyRef:
-              name: proxy-tcell-secrets
+              name: {{ .Values.name }}-proxy-tcell-secrets
               key: app-id
         - name: TCELL_API_KEY
           valueFrom:
             secretKeyRef:
-              name: proxy-tcell-secrets
+              name: {{ .Values.name }}-proxy-tcell-secrets
               key: api-key
         - name: ENABLE_TCELL
           value: 'yes'
