@@ -4,13 +4,11 @@ version: 0.1.0
 
 description: Chart for OpenDJ, used by Sam(Terra IAM service) as well as various Terra applications' OIDC proxy deploys
 type: application
-
 keywords:
-- dsp
-- broadinstitute
-- terra
-- opendj
-
+  - dsp
+  - broadinstitute
+  - terra
+  - opendj
 sources:
 - https://github.com/broadinstitute/firecloud-opendj
 - https://github.com/broadinstitute/terra-helm/tree/master/charts/opendj

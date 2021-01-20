@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: buffer-tcell-configmap
+  name: {{ .Values.name }}-tcell-configmap
   labels:
-    {{ template "buffer.labels" . }}
+    {{- include "buffer.labels" . | nindent 4 }}
 data:
   tcell-config: |-
     {
