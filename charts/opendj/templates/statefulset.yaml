@@ -1,6 +1,6 @@
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
-apiVersion: v1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ .Values.name }}-statefulset
