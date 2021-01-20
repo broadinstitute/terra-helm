@@ -47,7 +47,7 @@ spec:
               - --baseDN
               - cn=monitor
               - (cn=userRoot backend)
-            initialDelaySeconds: 60
+          initialDelaySeconds: 60
         readinessProbe:
           exec:
             command:
@@ -57,7 +57,7 @@ spec:
               - --baseDN
               - cn=monitor
               - (cn=userRoot backend)
-            initialDelaySeconds: 30
+          initialDelaySeconds: 30
         volumeMounts:
           - mountPath: /opt/opendj/data/
             name: {{ .Values.name }}-data
