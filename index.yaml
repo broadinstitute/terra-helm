@@ -381,6 +381,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.13.0/buffer-0.13.0.tgz
     version: 0.13.0
   - apiVersion: v2
+    created: "2021-01-20T21:22:28.447269239Z"
+    description: Chart for Resource Buffering Service
+    digest: 8304641d98e11c1b52df8f7a6e63f5e1b32b8d4db837e5765d43566abaab7231
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.13.0-265.1611177740.d8485f/buffer-0.13.0-265.1611177740.d8485f.tgz
+    version: 0.13.0-265.1611177740.d8485f
+  - apiVersion: v2
     created: "2021-01-04T16:44:23.540934381Z"
     description: Chart for Resource Buffering Service
     digest: 492eac7637e6b5cea054f6a5c829c53dbb6e12ff566b3eda19482c0a902ed950
@@ -20045,6 +20062,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.17.0/workspacemanager-0.17.0.tgz
     version: 0.17.0
+  - apiVersion: v2
+    created: "2021-01-20T21:22:28.556384698Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: babdb62f4de1ba6e6fcda908847454144618c366047cb8065e192a9d3ba45330
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.17.0-265.1611177740.d8485f/workspacemanager-0.17.0-265.1611177740.d8485f.tgz
+    version: 0.17.0-265.1611177740.d8485f
   - apiVersion: v2
     created: "2021-01-04T16:44:23.732772763Z"
     dependencies:
