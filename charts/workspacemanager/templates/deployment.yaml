@@ -165,6 +165,12 @@ spec:
           value: "{{ .Values.spendProfileId }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
           value: "{{ .Values.spendBillingAccountId }}"
+        - name: WORKSPACE_BUFFER_INSTANCE_URL
+          value: "{{ .Values.bufferInstanceUrl }}"
+        - name: WORKSPACE_BUFFER_POOL_ID
+          value: "{{ .Values.bufferPoolId }}"
+        - name: WORKSPACE_BUFFER_CLIENT_CREDENTIAL_FILE_PATH
+          value: /secrets/app/buffer-client-sa.json
         volumeMounts:
         - name: app-sa-creds
           mountPath: /secrets/app
