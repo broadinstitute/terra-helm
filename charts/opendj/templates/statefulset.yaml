@@ -1,4 +1,5 @@
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -19,17 +20,14 @@ spec:
         {{- include "opendj.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
-      terminationGracePeriodSeconds: 1800
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.imageConfig.repository }}:{{ $imageTag }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
