@@ -2,7 +2,7 @@ apiVersion: v2
 name: terra-cluster
 description: A Helm chart to configure a k8s cluster for Terra
 type: application
-version: 0.3.3
+version: 0.3.4
 keywords:
   - dsp
   - broadinstitute
