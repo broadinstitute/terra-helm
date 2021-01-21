@@ -1,9 +1,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: terra-buffer-service-role
+  name: {{ .Values.name }}-service-role
   labels:
-    {{ template "buffer.labels" . }}
+    {{- include "buffer.labels" . | nindent 4 }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
