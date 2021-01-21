@@ -120,7 +120,6 @@ spec:
       for: 15m
       labels:
         severity: warning
-{{- if .Values.prometheusOperator.kubeletService.enabled }}
     - alert: KubeletDown
       annotations:
         description: Kubelet has disappeared from Prometheus target discovery.
@@ -130,4 +129,3 @@ spec:
       for: 15m
       labels:
         severity: critical
-{{- end }}
