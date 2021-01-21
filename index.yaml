@@ -364,6 +364,23 @@ entries:
     version: 0.0.1
   buffer:
   - apiVersion: v2
+    created: "2021-01-21T19:03:26.962041259Z"
+    description: Chart for Resource Buffering Service
+    digest: c90620e06cf1a325971ba8e6ee42c009e3bf1aef9a09ea061618198d7e3cc8c8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.14.0/buffer-0.14.0.tgz
+    version: 0.14.0
+  - apiVersion: v2
     created: "2021-01-19T18:54:34.732107378Z"
     description: Chart for Resource Buffering Service
     digest: 6e899d3b11a6f5272719c296f8858b3b5fcdf0558ae517ab1c97994763e42dad
@@ -20185,6 +20202,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   workspacemanager:
+  - apiVersion: v2
+    created: "2021-01-21T19:03:27.080825611Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 192b8d9116f4f8f96e64b38936c7a708f822292abfd39659e9b5919737a88239
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.19.0/workspacemanager-0.19.0.tgz
+    version: 0.19.0
   - apiVersion: v2
     created: "2021-01-21T16:34:25.073862912Z"
     dependencies:
