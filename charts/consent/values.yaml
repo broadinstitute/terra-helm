@@ -23,6 +23,8 @@ elasticSearchServer3:
 
 environment:
 
+emailNotificationsEnabled:
+
 gcsAccountPath:
 gcsAccountKey:
 
