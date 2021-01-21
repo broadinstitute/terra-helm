@@ -4322,6 +4322,24 @@ entries:
     version: 0.0.0
   duos:
   - apiVersion: v2
+    created: "2021-01-21T14:36:41.565621436Z"
+    description: A Helm chart for DUOS
+    digest: 5765fce9116c08dcdc126f108ae27977baf9d7ff7a036ad26b8a02a7018f28ab
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: duos
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/duos-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.4.0/duos-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     created: "2021-01-20T21:47:38.894042502Z"
     description: A Helm chart for DUOS
     digest: ee5dbae47e6d5a0a7cb53fe94e2cb286b9f00df76d7cc8b333fae4798d7823d2
