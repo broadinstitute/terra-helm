@@ -45,7 +45,7 @@ services:
   localURL: {{ .Values.servicesLocalUrl }}
   ontologyURL: {{ .Values.servicesOntologyUrl }}
 mailConfiguration:
-  activateEmailNotifications: false
+  activateEmailNotifications: {{ .Values.emailNotificationsEnabled }}
   googleAccount: duos@broadinstitute.org
   sendGridApiKey: foo {{/* Override on the command line */}}
 freeMarkerConfiguration:
