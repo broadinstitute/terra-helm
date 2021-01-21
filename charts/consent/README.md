@@ -1,8 +1,9 @@
 DUOS Consent
 ========
-A Helm chart for DUOS Consent
 
-Current chart version is `0.1.0`
+![Version: 0.6.3](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+
+A Helm chart for DUOS Consent
 
 ## Chart Values
 
