@@ -38,26 +38,26 @@ spec:
         - name: ldaps
           containerPort: 636
           protocol: TCP
-        livenessProbe:
-          exec:
-            command:
-              - ldapsearch
-              - --port
-              - "389"
-              - --baseDN
-              - cn=monitor
-              - (cn=userRoot backend)
-          initialDelaySeconds: 60
-        readinessProbe:
-          exec:
-            command:
-              - ldapsearch
-              - --port
-              - "389"
-              - --baseDN
-              - cn=monitor
-              - (cn=userRoot backend)
-          initialDelaySeconds: 30
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #       - ldapsearch
+        #       - --port
+        #       - "389"
+        #       - --baseDN
+        #       - cn=monitor
+        #       - (cn=userRoot backend)
+        #   initialDelaySeconds: 60
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #       - ldapsearch
+        #       - --port
+        #       - "389"
+        #       - --baseDN
+        #       - cn=monitor
+        #       - (cn=userRoot backend)
+        #   initialDelaySeconds: 30
         volumeMounts:
           - mountPath: /opt/opendj/data/
             name: {{ .Values.name }}-data
@@ -67,7 +67,7 @@ spec:
             readOnly: true
           - mountPath: /var/secrets/opendj/server.pin
             name: app-ctmpls
-            subPath: server.pin
+            subPath: keystore.pin
             readOnly: true
           - mountPath: /var/secrets/opendj/dirmanager.pw
             name: app-ctmpls
