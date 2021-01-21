@@ -165,7 +165,6 @@ spec:
           value: "{{ .Values.spendProfileId }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
           value: "{{ .Values.spendBillingAccountId }}"
-
         - name: WORKSPACE_BUFFER_ENABLED
           value: "{{.Values.buffer.enabled }}"
         {{- if .Values.buffer.enabled }}

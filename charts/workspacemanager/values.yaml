@@ -41,6 +41,9 @@ vault:
   enabled: true
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
+  # bufferClientCredentialPath - the credentials to use for talking to buffer service. Required once
+  # Workspace Manager always uses Buffer Service.
+  bufferClientCredentialPath:
 
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
@@ -190,3 +193,10 @@ terraDataRepoUrl: https://jade.datarepo-dev.broadinstitute.org
 spendBillingAccountId:
 # spendProfileId -- the Spend Profile Id to associate with the billing account.
 spendProfileId:
+
+# bufferInstanceUrl - the Buffer Service instance to use in a given environment.
+bufferInstanceUrl: https://buffer.dsde-dev.broadinstitute.org
+
+# bufferPoolId - pool in Buffer Service to use. Must include version information and match
+# a poolId in the buffer service config in the environment given above.
+bufferPoolId: workspace_manager_v1
