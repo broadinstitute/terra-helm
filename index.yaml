@@ -381,6 +381,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.13.0/buffer-0.13.0.tgz
     version: 0.13.0
   - apiVersion: v2
+    created: "2021-01-21T18:23:13.337205914Z"
+    description: Chart for Resource Buffering Service
+    digest: 09c9b3c1ddabafe98d94eeb98fbf25710481183022a809f923ef99feb54aca42
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.13.0-265.1611253385.fbaffa/buffer-0.13.0-265.1611253385.fbaffa.tgz
+    version: 0.13.0-265.1611253385.fbaffa
+  - apiVersion: v2
     created: "2021-01-20T21:22:28.447269239Z"
     description: Chart for Resource Buffering Service
     digest: 8304641d98e11c1b52df8f7a6e63f5e1b32b8d4db837e5765d43566abaab7231
@@ -20156,6 +20173,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.18.0/workspacemanager-0.18.0.tgz
     version: 0.18.0
+  - apiVersion: v2
+    created: "2021-01-21T18:23:13.44280321Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 31cfcb176b643f4cde7f929000b8e93016e1ecaa4cf2770560ad40b10989619f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.18.0-265.1611253385.fbaffa/workspacemanager-0.18.0-265.1611253385.fbaffa.tgz
+    version: 0.18.0-265.1611253385.fbaffa
   - apiVersion: v2
     created: "2021-01-20T15:32:11.344281173Z"
     dependencies:
