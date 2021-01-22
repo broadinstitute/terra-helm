@@ -1,12 +1,28 @@
 # vaultSecretsPath -- Where in Vault to find secrets used in this chart. Required keys: `replicaSetKey`, `rootPassword`, `userPassword`
 vaultSecretsPath:
 
-# These values are passed to the upstream bitnami chart
+# name -- the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the nested bitnami values to match!
+name: mongodb
+
+# These values are passed to the upstream bitnami chart.
 bitnami:
+  image:
+    tag: 4.4.3-bionic
+  arbiter: # Disable arbiter since the dataset is small & we can run 3 replicas
+    enabled: false
+  architecture: replicaset
+  replicaCount: 3
   auth:
-    existingSecret: mongodb-secrets
+    existingSecret: mongodb-secrets # Update to match .Values.name if changed
   serviceAccount:
     create: false
-    name: mongodb-sa
-initConfigMap:
-  name: mongodb-init-cm
+    name: mongodb-sa # Update to match .Values.name if changed
+  resources:
+    limits:
+      cpu: 4
+      memory: 25Gi
+    requests:
+      cpu: 4
+      memory: 25Gi
+  volumePermissions:
+    enabled: true
