@@ -3,7 +3,7 @@ kind: RoleBinding
 metadata:
   name: {{ .Values.name }}-service-role-binding
   labels:
-{{ include "opendj.labels" . | indent 4 }}
+    {{- include "opendj.labels" . | nindent 4 }}
 roleRef:
   kind: Role
   name: {{ .Values.name }}-service-role

@@ -99,6 +99,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: {{ .Values.name }}-data
+      labels:
+        {{- include "opendj.labels" . | nindent 8 }}
     spec:
       accessModes:
         - ReadWriteOnce

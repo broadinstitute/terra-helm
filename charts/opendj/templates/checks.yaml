@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-checks
   labels:
-{{ include "opendj.labels" . | indent 4 }}
+    {{- include "opendj.labels" . | nindent 4 }}
 data:
   readiness.sh: |-
     #!/bin/sh
