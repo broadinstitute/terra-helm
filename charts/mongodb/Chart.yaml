@@ -2,7 +2,7 @@ apiVersion: v2
 name: mongodb
 version: 0.0.1
 type: application
-description: A Helm chart for MongoDB, used by Terra's Agora application
+description: A Helm chart for MongoDB, used by Terra's Agora application. This chart depends heavily on the Bitnami MongoDB chart
 
 keywords:
   - dsp
