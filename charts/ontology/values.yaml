@@ -27,7 +27,7 @@ proxyLogLevel:
 proxyImageRepository:
 proxyImageVersion:
 
-replicas: 1
+replicas:
 
 sentryDsnPath:
 sentryDsnKey:

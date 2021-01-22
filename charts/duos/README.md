@@ -43,7 +43,7 @@ A Helm chart for DUOS
 | proxyImageRepository | string | `nil` |  |
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |
-| replicas | string | `nil` |  |
+| replicas | int | `nil` |  |
 | vaultCertPath | string | `nil` |  |
 | vaultCertSecretKey | string | `nil` |  |
 | vaultChain | string | `nil` |  |

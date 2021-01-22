@@ -37,7 +37,7 @@ A Helm chart for DUOS Consent
 | proxyImageRepository | string | `nil` |  |
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |
-| replicas | int | `1` |  |
+| replicas | int | `nil` |  |
 | sendgridApiKey | string | `nil` |  |
 | sendgridApiKeyKey | string | `nil` |  |
 | sentryDsnKey | string | `nil` |  |
