@@ -9,6 +9,7 @@ metadata:
 spec:
   serviceName: {{ .Values.name }}-service
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       {{- include "opendj.selectorLabels" . | nindent 6 }}
@@ -54,7 +55,7 @@ spec:
             command:
             - /checks/readiness.sh
           timeoutSeconds: 5
-          initialDelaySeconds: 150
+          initialDelaySeconds: 120
           periodSeconds: 10
           failureThreshold: 6
           successThreshold: 1
