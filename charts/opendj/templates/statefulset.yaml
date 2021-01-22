@@ -24,6 +24,10 @@ spec:
       - name: app-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-app-ctmpls
+      - name: checks
+        configMap:
+          name: {{ .Values.name }}-checks
+          defaultMode: 0744
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.imageConfig.repository }}:{{ $imageTag }}
@@ -38,26 +42,22 @@ spec:
         - name: ldaps
           containerPort: 636
           protocol: TCP
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #       - ldapsearch
-        #       - --port
-        #       - "389"
-        #       - --baseDN
-        #       - cn=monitor
-        #       - (cn=userRoot backend)
-        #   initialDelaySeconds: 60
-        # readinessProbe:
-        #   exec:
-        #     command:
-        #       - ldapsearch
-        #       - --port
-        #       - "389"
-        #       - --baseDN
-        #       - cn=monitor
-        #       - (cn=userRoot backend)
-        #   initialDelaySeconds: 30
+        livenessProbe:
+          tcpSocket:
+            port: 389
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          failureThreshold: 30
+          successThreshold: 1
+        readinessProbe:
+          exec:
+            command:
+            - /checks/readiness.sh
+          timeoutSeconds: 5
+          initialDelaySeconds: 150
+          periodSeconds: 10
+          failureThreshold: 6
+          successThreshold: 1
         volumeMounts:
           - mountPath: /opt/opendj/data/
             name: {{ .Values.name }}-data
@@ -79,6 +79,8 @@ spec:
           - mountPath: /opt/example-v1.json
             name: app-ctmpls
             subPath: example-v1.json
+          - name: checks
+            mountPath: /checks
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
       {{- with .Values.nodeSelector }}

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-checks
+  labels:
+{{ include "opendj.labels" . | indent 4 }}
+data:
+  readiness.sh: |-
+    #!/bin/sh
+    ldapsearch -LLL -D "cn=Directory Manager" -w $(cat /var/secrets/opendj/dirmanager.pw) -b "{{ .Values.baseDn }}"
