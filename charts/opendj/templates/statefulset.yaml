@@ -1,0 +1,109 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}-statefulset
+  labels:
+    {{- include "opendj.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ .Values.name }}-service
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "opendj.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    type: OnDelete
+  template:
+    metadata:
+      labels:
+        {{- include "opendj.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-service-sa
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
+      - name: checks
+        configMap:
+          name: {{ .Values.name }}-checks
+          defaultMode: 0744
+      containers:
+      - name: {{ .Values.name }}
+        image: {{ .Values.imageConfig.repository }}:{{ $imageTag }}
+        imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-app-env
+        ports:
+        - name: ldap
+          containerPort: 389
+          protocol: TCP
+        - name: ldaps
+          containerPort: 636
+          protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: 389
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          failureThreshold: 30
+          successThreshold: 1
+        readinessProbe:
+          exec:
+            command:
+            - /checks/readiness.sh
+          timeoutSeconds: 5
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          failureThreshold: 6
+          successThreshold: 1
+        volumeMounts:
+          - mountPath: /opt/opendj/data/
+            name: {{ .Values.name }}-data
+          - mountPath: /var/secrets/opendj/server.p12
+            name: app-ctmpls
+            subPath: server.p12
+            readOnly: true
+          - mountPath: /var/secrets/opendj/server.pin
+            name: app-ctmpls
+            subPath: keystore.pin
+            readOnly: true
+          - mountPath: /var/secrets/opendj/dirmanager.pw
+            name: app-ctmpls
+            subPath: dirmanager.pw
+            readOnly: true
+          - mountPath: /opt/opendj/bootstrap/setup.sh
+            name: app-ctmpls
+            subPath: setup.sh
+          - mountPath: /opt/example-v1.json
+            name: app-ctmpls
+            subPath: example-v1.json
+          - name: checks
+            mountPath: /checks
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.name }}-data
+      labels:
+        {{- include "opendj.labels" . | nindent 8 }}
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: {{ .Values.persistence.capacity }}
