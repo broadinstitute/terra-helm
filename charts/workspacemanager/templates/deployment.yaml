@@ -41,18 +41,18 @@ spec:
       {{- if not .Values.postgres.enabled }}
       - name: cloudsql-sa-creds
         secret:
-          secretName: workspace-sqlproxy-sa
+          secretName: {{ .Values.name }}-sqlproxy-sa
       {{- end }}
       - name: app-sa-creds
         secret:
-          secretName: workspace-app-sa
+          secretName: {{ .Values.name }}-app-sa
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
           name: {{ .Values.name }}-proxy-configmap
           items:
           - key: apache-httpd-proxy-config
-            path: workspace-manager-proxy.conf
+            path: {{ .Values.name }}-proxy.conf
       - name: cert
         secret:
           secretName: {{ .Values.name }}-cert
@@ -100,32 +100,32 @@ spec:
         - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
-              name: workspace-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: username
         - name: DATABASE_USER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: workspace-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: password
         - name: DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: workspace-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: db
         - name: STAIRWAY_DATABASE_USER
           valueFrom:
             secretKeyRef:
-              name: workspace-stairway-db-creds
+              name: {{ .Values.name }}-stairway-db-creds
               key: username
         - name: STAIRWAY_DATABASE_USER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: workspace-stairway-db-creds
+              name: {{ .Values.name }}-stairway-db-creds
               key: password
         - name: STAIRWAY_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: workspace-stairway-db-creds
+              name: {{ .Values.name }}-stairway-db-creds
               key: db
         {{- else }}
         - name: DATABASE_HOSTNAME
@@ -167,12 +167,16 @@ spec:
           value: "{{ .Values.spendProfileId }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_BILLINGACCOUNTID
           value: "{{ .Values.spendBillingAccountId }}"
+        - name: WORKSPACE_BUFFER_ENABLED
+          value: "{{.Values.buffer.enabled }}"
+        {{- if .Values.buffer.enabled }}
         - name: WORKSPACE_BUFFER_INSTANCE_URL
-          value: "{{ .Values.bufferInstanceUrl }}"
+          value: "{{ .Values.buffer.instanceUrl }}"
         - name: WORKSPACE_BUFFER_POOL_ID
-          value: "{{ .Values.bufferPoolId }}"
+          value: "{{ .Values.buffer.poolId }}"
         - name: WORKSPACE_BUFFER_CLIENT_CREDENTIAL_FILE_PATH
           value: /secrets/app/buffer-client-sa.json
+        {{- end }}
         volumeMounts:
         - name: app-sa-creds
           mountPath: /secrets/app
@@ -209,17 +213,17 @@ spec:
         - name: SQL_INSTANCE_PROJECT
           valueFrom:
             secretKeyRef:
-              name: workspace-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: project
         - name: SQL_INSTANCE_REGION
           valueFrom:
             secretKeyRef:
-              name: workspace-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: region
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: workspace-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
                   "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
@@ -239,37 +243,37 @@ spec:
         - name: AOU_PREPROD_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-whitelist
+              name: {{ .Values.name }}-proxy-oauth-whitelist
               key: aou-preprod
         - name: AOU_PERF_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-whitelist
+              name: {{ .Values.name }}-proxy-oauth-whitelist
               key: aou-perf
         - name: AOU_PROD_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-whitelist
+              name: {{ .Values.name }}-proxy-oauth-whitelist
               key: aou-prod
         - name: AOU_DEV_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-whitelist
+              name: {{ .Values.name }}-proxy-oauth-whitelist
               key: aou-dev
         - name: AOU_STABLE_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-whitelist
+              name: {{ .Values.name }}-proxy-oauth-whitelist
               key: aou-stable
         - name: AOU_STAGING_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-whitelist
+              name: {{ .Values.name }}-proxy-oauth-whitelist
               key: aou-staging
         - name: TERRA_ID_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: proxy-oauth-whitelist
+              name: {{ .Values.name }}-proxy-oauth-whitelist
               key: terra
         - name: REMOTE_USER_CLAIM
           value: sub
@@ -287,19 +291,19 @@ spec:
         - name: PROXY_LDAP_BIND_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: proxy-ldap-bind-password
+              name: {{ .Values.name }}-proxy-ldap-bind-password
               key: password
         {{- end }}
         {{- if .Values.proxy.tcell.enabled }}
         - name: TCELL_APP_ID
           valueFrom:
             secretKeyRef:
-              name: proxy-tcell-secrets
+              name: {{ .Values.name }}-proxy-tcell-secrets
               key: app-id
         - name: TCELL_API_KEY
           valueFrom:
             secretKeyRef:
-              name: proxy-tcell-secrets
+              name: {{ .Values.name }}-proxy-tcell-secrets
               key: api-key
         - name: ENABLE_TCELL
           value: 'yes'
@@ -310,7 +314,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/apache2/sites-available/site.conf
           name: apache-httpd-proxy-config
-          subPath: workspace-manager-proxy.conf
+          subPath: {{ .Values.name }}-proxy.conf
         - mountPath: /etc/ssl/certs/server.crt
           subPath: tls.crt
           name: cert
