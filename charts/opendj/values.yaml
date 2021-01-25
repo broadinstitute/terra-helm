@@ -33,9 +33,9 @@ resources:
 service:
   # service.staticIp -- (string) External IP of the service. Required.
   staticIp: null
-  # serviceFirewallEnabled -- Whether to restrict access to the service to the IPs supplied via service.allowedAddresses
+  # service.firewallEnabled -- Whether to restrict access to the service to the IPs supplied via service.allowedAddresses
   firewallEnabled: true
-  # service.llowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  # service.allowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   allowedAddresses: {}
 
 # nodeSelector -- nodeSelector map
@@ -55,5 +55,5 @@ persistence:
 # @default .Chart.Name
 legacyResourcePrefix: null
 
-# base dn used for health checks. If left empty a base dn of "" is used.
+# baseDn -- Base dn used for health checks. If left empty a base dn of "" is used.
 baseDn: null
