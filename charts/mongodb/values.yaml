@@ -17,7 +17,7 @@ bitnami:
   serviceAccount:
     create: false
     name: mongodb-sa # Update to match .Values.name if changed
-  resources:
+  resources: # Match existing prod MongoDB instances
     limits:
       cpu: 4
       memory: 25Gi
@@ -26,3 +26,5 @@ bitnami:
       memory: 25Gi
   volumePermissions:
     enabled: true
+  persistence:
+    size: 50Gi
