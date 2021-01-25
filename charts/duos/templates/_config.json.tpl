@@ -1,8 +1,8 @@
 {{- define "duos.config.json" -}}
 {
   "env": "{{ .Values.environment }}",
-  "hash": "{{ .Values.imageTag }}",
-  "tag": "{{ .Values.imageTag }}",
+  "hash": "{{ .Values.global.applicationVersion }}",
+  "tag": "{{ .Chart.AppVersion }}",
   "apiUrl": "{{ .Values.apiUrl }}",
   "ontologyApiUrl": "{{ .Values.ontologyApiUrl }}",
   "clientId": "{{ .Values.googleClientId }}",
