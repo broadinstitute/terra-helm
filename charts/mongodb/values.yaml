@@ -7,7 +7,7 @@ name: mongodb
 # These values are passed to the upstream bitnami chart.
 bitnami:
   image:
-    tag: 4.4.3-bionic
+    tag: 4.4.3
   arbiter: # Disable arbiter since the dataset is small & we can run 3 replicas
     enabled: false
   architecture: replicaset
