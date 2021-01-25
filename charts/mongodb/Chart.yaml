@@ -17,5 +17,5 @@ sources:
 dependencies:
 - name: mongodb
   alias: bitnami
-  version: 9.2.2
+  version: 10.5.1
   repository: https://charts.bitnami.com/bitnami
