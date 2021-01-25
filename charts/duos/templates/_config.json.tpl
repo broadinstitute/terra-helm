@@ -2,7 +2,7 @@
 {
   "env": "{{ .Values.environment }}",
   "hash": "{{ .Values.global.applicationVersion }}",
-  "tag": "{{ .Chart.Version }}",
+  "tag": "{{ .Values.global.applicationVersion }}",
   "apiUrl": "{{ .Values.apiUrl }}",
   "ontologyApiUrl": "{{ .Values.ontologyApiUrl }}",
   "clientId": "{{ .Values.googleClientId }}",
