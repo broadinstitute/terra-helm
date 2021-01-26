@@ -24,8 +24,6 @@ elasticsearch:
 
   esConfig:
     elasticsearch.yml: |
-      bootstrap:
-        memory_lock: true
       http:
         cors:
           enabled: true
