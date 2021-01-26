@@ -1,0 +1,59 @@
+global:
+  # global.applicationVersion -- What version of the application to deploy
+  applicationVersion: opendj600
+  # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  trustedAddresses: {}
+
+# name -- A name for the deployment that will be substituted into resuorce definitions
+name: opendj
+
+imageConfig:
+  # imageConfig.repository -- Image repository
+  repository: broadinstitute/openam
+  # imageConfig.tag -- (string) Image tag.
+  # @default -- global.applicationVersion
+  tag:
+  imagePullPolicy: Always
+
+# replicas -- Number of replicas for the deployment
+replicas: 1
+
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 64
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 60Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 64
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 60Gi
+
+service:
+  # service.staticIp -- (string) External IP of the service. Required.
+  staticIp: null
+  # service.firewallEnabled -- Whether to restrict access to the service to the IPs supplied via service.allowedAddresses
+  firewallEnabled: true
+  # service.allowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  allowedAddresses: {}
+
+# nodeSelector -- nodeSelector map
+nodeSelector: {}
+# affinity -- affinity map
+affinity: {}
+# tolerations -- Array of tolerations
+tolerations: []
+
+persistence:
+  # persistence.gcpDisk -- (string) If not null, the chart will attempt to use a GCP disk with the provided name for the data volume
+  gcpDisk: null
+  # persistence.capacity -- Capacity of persistent data volume
+  capacity: 200Gi
+
+# legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
+# @default .Chart.Name
+legacyResourcePrefix: null
+
+# baseDn -- Base dn used for health checks. If left empty a base dn of "" is used.
+baseDn: null

@@ -1,0 +1,18 @@
+{{- if .Values.persistence.gcpDisk }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.name }}-pv
+  labels:
+    {{- include "opendj.labels" . | nindent 4 }}
+spec:
+  capacity:
+    storage: 200Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    name: {{ .Values.name }}-data-{{ .Values.name }}-statefulset-0
+  gcePersistentDisk:
+    pdName: {{ .Values.persistence.gcpDisk }}
+    fsType: ext4
+{{- end }}
