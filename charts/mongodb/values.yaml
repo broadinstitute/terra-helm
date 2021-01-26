@@ -19,7 +19,7 @@ bitnami:
   architecture: replicaset
   auth:
     existingSecret: mongodb-secrets # Update to match .Values.name if changed
-    user: agora
+    username: agora
     database: agora
   fullnameOverride: mongodb # Update to match .Values.name if changed
   persistence:
