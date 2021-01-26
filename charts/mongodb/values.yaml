@@ -18,10 +18,10 @@ bitnami:
     enabled: false
   architecture: replicaset
   auth:
-    existingSecret: mongodb-secrets # Update to match .Values.name if changed
+    existingSecret: mongodb-secrets # Update to match .Values.name if changed!
     username: agora
     database: agora
-  fullnameOverride: mongodb # Update to match .Values.name if changed
+  fullnameOverride: mongodb # Update to match .Values.name if changed!
   persistence:
     size: 50Gi
   replicaCount: 3
@@ -34,6 +34,6 @@ bitnami:
       memory: 25Gi
   serviceAccount:
     create: false
-    name: mongodb-sa # Update to match .Values.name if changed
+    name: mongodb-sa # Update to match .Values.name if changed!
   volumePermissions:
     enabled: true
