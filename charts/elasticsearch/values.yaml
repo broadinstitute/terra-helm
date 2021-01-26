@@ -21,12 +21,6 @@ elasticsearch:
     limits:
       cpu: 2
       memory: 8Gi
-  
-  # Used to enable JVM heap mem locking
-  extraVolumes:
-    - name: es-memory-cm
-      configMap:
-        name: es-memory-cm
 
   esConfig:
     elasticsearch.yml: |
