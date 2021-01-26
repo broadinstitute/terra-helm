@@ -1,7 +1,13 @@
-# vaultSecretsPath -- Where in Vault to find secrets used in this chart. Required keys: `replicaSetKey`, `rootPassword`, `userPassword`
+# vaultSecretsPath -- Where in Vault to find secrets used by MongoDB chart. Required keys: `replicaSetKey`, `rootPassword`, `userPassword`
 vaultSecretsPath:
 
-# name -- the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the nested bitnami values to match!
+# vaultAgoraPasswordPath -- Where in Vault the agora user's MongoDB password is stored
+vaultAgoraPasswordPath:
+
+# vaultAgoraPasswordKey -- What key in Vault contains agora user's MongoDB password
+vaultAgoraPasswordKey:
+
+# name -- the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values to match!
 name: mongodb
 
 # These values are passed to the upstream bitnami chart.
@@ -11,12 +17,14 @@ bitnami:
   arbiter: # Disable arbiter since the dataset is small & we can run 3 replicas
     enabled: false
   architecture: replicaset
-  replicaCount: 3
   auth:
     existingSecret: mongodb-secrets # Update to match .Values.name if changed
-  serviceAccount:
-    create: false
-    name: mongodb-sa # Update to match .Values.name if changed
+    user: agora
+    database: agora
+  fullnameOverride: mongodb # Update to match .Values.name if changed
+  persistence:
+    size: 50Gi
+  replicaCount: 3
   resources: # Match existing prod MongoDB instances
     limits:
       cpu: 4
@@ -24,7 +32,8 @@ bitnami:
     requests:
       cpu: 4
       memory: 25Gi
+  serviceAccount:
+    create: false
+    name: mongodb-sa # Update to match .Values.name if changed
   volumePermissions:
     enabled: true
-  persistence:
-    size: 50Gi
