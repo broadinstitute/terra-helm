@@ -8950,6 +8950,30 @@ entries:
     version: 0.0.1-110.1598878366.f39927
   mongodb:
   - apiVersion: v2
+    created: "2021-01-26T11:27:17.95259236Z"
+    dependencies:
+    - alias: bitnami
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.5.1
+    description: |
+      A Helm chart for MongoDB, used by Terra's Agora application.
+      This chart is heavily customized to Terra's needs and is a thin wrapper around Bitnami's MongoDB Helm chart.
+    digest: 7570507c9b96a11280136cf41eaf7fbc791f6bb309b8c3fe18a06f979d9c5179
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - mongodb
+    - agora
+    name: mongodb
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/mongodb-0.0.1-152.1611660429.c06818/mongodb-0.0.1-152.1611660429.c06818.tgz
+    version: 0.0.1-152.1611660429.c06818
+  - apiVersion: v2
     created: "2021-01-26T11:12:46.352906095Z"
     dependencies:
     - alias: bitnami
