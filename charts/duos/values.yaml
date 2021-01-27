@@ -38,8 +38,11 @@ powerBiUrl:
 # gaId -- (string) The Google Analytics ID
 gaId:
 
-# newDarUi -- (string) Feature Flag for the new DAR UI
+# newDarUi -- (bool) Feature Flag for the new DAR UI
 newDarUi:
+
+# newChairConsole -- (bool) Feature Flag for the new DAC Chair Console
+newChairConsole:
 
 image:
 imageRepository:

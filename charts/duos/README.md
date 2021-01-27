@@ -35,7 +35,8 @@ A Helm chart for DUOS
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
-| newDarUi | string | `nil` | Feature Flag for the new DAR UI |
+| newDarUi | bool | `nil` | Feature Flag for the new DAR UI |
+| newChairConsole | bool | `nil` | Feature Flag for the new DAC Chair Console |
 | nihUrl | string | `nil` | The eRA Auth Redirect URL |
 | ontologyApiUrl | string | `nil` | The Ontology API url |
 | powerBiUrl | string | `nil` | The PowerBI url |
