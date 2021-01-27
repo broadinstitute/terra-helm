@@ -13,6 +13,6 @@ metadata:
 {{- end }}
 spec:
   backend:
-    serviceName: {{ .Values.name }}-service
+    serviceName: {{ .Values.name }}-master
     servicePort: 9200
 {{- end }}
