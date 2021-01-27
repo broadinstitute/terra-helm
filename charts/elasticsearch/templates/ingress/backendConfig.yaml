@@ -14,5 +14,5 @@ spec:
     unhealthyThreshold: 2
     type: HTTP
     port: 9200
-    requestPath: /status
+    requestPath: /_cluster/health
 {{- end }}
