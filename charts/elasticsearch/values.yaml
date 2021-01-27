@@ -1,4 +1,19 @@
 # Set default values on chart from elastic.co
+name: elasticsearch
+
+ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
+  enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
+  timeoutSec: 120
+  cert:
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
+
 elasticsearch:
 
   image: "docker.io/broadinstitute/elasticsearch"
@@ -10,6 +25,12 @@ elasticsearch:
   rbac:
     create: true
   
+  service:
+    annotations: 
+      # Associate a backend config with the ingress: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#associating_backendconfig_with_your_ingress
+      cloud.google.com/backend-config: '{"default": "elasticsearch-ingress-backendconfig"}'
+      # Enable container-native load balancing https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing
+      cloud.google.com/neg: '{"ingress": true}'
   # same as GCE VMS
   esJavaOpts: "-Xms3500m -Xmx3500m"
 
@@ -39,7 +60,4 @@ elasticsearch:
           enabled: false
         watcher:
           enabled: false
-      reindex:
-        remote:
-          whitelist: elasticsearch5a1.dsde-dev.broadinstitute.org:9200
     
