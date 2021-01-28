@@ -28,11 +28,6 @@ elasticsearch:
   service:
     type: LoadBalancer
     loadBalancerIP: null
-    annotations: 
-      # Associate a backend config with the ingress: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#associating_backendconfig_with_your_ingress
-      cloud.google.com/backend-config: '{"default": "elasticsearch-ingress-backendconfig"}'
-      # Enable container-native load balancing https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing
-      cloud.google.com/neg: '{"ingress": true}'
   # same as GCE VMS
   esJavaOpts: "-Xms3500m -Xmx3500m"
 
