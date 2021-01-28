@@ -15591,6 +15591,45 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.3.4/terra-cluster-0.3.4.tgz
     version: 0.3.4
   - apiVersion: v2
+    created: "2021-01-28T22:17:53.177723711Z"
+    dependencies:
+    - name: terra-cluster-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.6
+    - condition: terra-cluster-networking.enabled
+      name: terra-cluster-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    - condition: terra-prometheus.enabled
+      name: terra-prometheus
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.6.0
+    - condition: reloader.enabled
+      name: reloader
+      repository: https://stakater.github.io/stakater-charts
+      version: v0.0.69
+    description: A Helm chart to configure a k8s cluster for Terra
+    digest: a6e447e662d9046f156acc3bedd025d1d500c7f1c380f4d327652508ef040dbc
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.3.4-276.1611872264.06f96d/terra-cluster-0.3.4-276.1611872264.06f96d.tgz
+    version: 0.3.4-276.1611872264.06f96d
+  - apiVersion: v2
     created: "2021-01-04T21:44:37.399475901Z"
     dependencies:
     - name: terra-cluster-psps
@@ -18691,6 +18730,26 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-psps-0.0.2/terra-cluster-psps-0.0.2.tgz
     version: 0.0.2
+  terra-cluster-storage:
+  - apiVersion: v2
+    created: "2021-01-28T22:17:53.272593283Z"
+    description: |
+      A Helm chart to deploy cluster-wide storage resources for Terra.
+    digest: 87a7c7cda9cb83ae59ede33eee664f5d73971fd7db4867c11e057d4e3d5fb456
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    maintainers:
+    - email: ap-devops@broadinstitute.org
+      name: AP DevOps
+    name: terra-cluster-storage
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-storage-0.1.0-276.1611872264.06f96d/terra-cluster-storage-0.1.0-276.1611872264.06f96d.tgz
+    version: 0.1.0-276.1611872264.06f96d
   terra-filebeat:
   - apiVersion: v2
     created: "2020-12-21T16:12:44.497191708Z"
