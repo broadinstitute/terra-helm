@@ -1,19 +1,6 @@
 # Set default values on chart from elastic.co
 name: elasticsearch
 
-ingress:
-  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
-  enabled: true
-  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
-  staticIpName: null
-  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
-  sslPolicy: null
-  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
-  timeoutSec: 120
-  cert:
-    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
-    preSharedCerts: []
-
 elasticsearch:
 
   image: "docker.io/broadinstitute/elasticsearch"
@@ -30,6 +17,16 @@ elasticsearch:
     loadBalancerIP: null
   # same as GCE VMS
   esJavaOpts: "-Xms3500m -Xmx3500m"
+
+  volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 200Gi
+  
+  persistence:
+    annotations:
+      bio.terra/snapshot-policy: terra-snapshot-policy
 
   #set resources to be same as GCEs
   resources:
