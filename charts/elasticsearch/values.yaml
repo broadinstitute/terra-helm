@@ -19,10 +19,10 @@ elasticsearch:
   esJavaOpts: "-Xms3500m -Xmx3500m"
 
   volumeClaimTemplate:
-  accessModes: [ "ReadWriteOnce" ]
-  resources:
-    requests:
-      storage: 200Gi
+    accessModes: [ "ReadWriteOnce" ]
+    resources:
+      requests:
+        storage: 200Gi
   
   persistence:
     annotations:
