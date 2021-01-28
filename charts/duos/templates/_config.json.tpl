@@ -14,7 +14,8 @@
   "powerBiUrl": "{{ .Values.powerBiUrl }}",
   "gaId": "{{ .Values.gaId }}",
   "features": {
-    "newDarUi": {{ .Values.newDarUi }}
+    "newDarUi": {{ .Values.newDarUi }},
+    "newChairConsole": {{ .Values.newChairConsole }}
   }
 }
 {{- end -}}
