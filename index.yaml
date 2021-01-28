@@ -21290,6 +21290,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.19.0/workspacemanager-0.19.0.tgz
     version: 0.19.0
   - apiVersion: v2
+    created: "2021-01-28T21:56:37.389144931Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: bbe607b93ddcc3a2bdb25b9b2074122082bf5410bfd59b539c5e9f734205d55b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.19.0-275.1611870990.3e8ca0/workspacemanager-0.19.0-275.1611870990.3e8ca0.tgz
+    version: 0.19.0-275.1611870990.3e8ca0
+  - apiVersion: v2
     created: "2021-01-21T16:34:25.073862912Z"
     dependencies:
     - condition: postgres.enabled
