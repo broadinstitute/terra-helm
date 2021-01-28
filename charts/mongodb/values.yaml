@@ -23,6 +23,8 @@ bitnami:
     database: agora
   fullnameOverride: mongodb # Update to match .Values.name if changed!
   persistence:
+    annotations:
+      bio.terra/snapshot-policy: terra-snapshot-policy
     size: 50Gi
   replicaCount: 3
   resources: # Match existing prod MongoDB instances
