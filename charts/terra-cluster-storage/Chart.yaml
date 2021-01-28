@@ -1,0 +1,21 @@
+---
+apiVersion: v2
+name: terra-cluster-storage
+description: >
+  A Helm chart to deploy cluster-wide storage resources for Terra.
+
+type: application
+
+version: 0.1.0
+
+keywords:
+- dsp
+- broadinstitute
+- terra
+
+maintainers:
+- email: ap-devops@broadinstitute.org
+  name: AP DevOps
+
+sources:
+- https://github.com/broadinstitute/terra-helm/tree/master/charts
