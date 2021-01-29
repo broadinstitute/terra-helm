@@ -107,3 +107,6 @@ spec:
       resources:
         requests:
           storage: {{ .Values.persistence.capacity }}
+      {{- if .Values.persistence.storageClassName }}
+      storageClassName: {{ .Values.persistence.storageClassName }}
+      {{- end }}
