@@ -7,11 +7,11 @@ A Helm chart to install cluster-wide resources for Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-|  | terra-cluster-storage | 0.2.0 |
 | https://broadinstitute.github.io/datarepo-helm/ | install-secrets-manager | 0.0.6 |
 | https://broadinstitute.github.io/terra-helm/ | terra-cluster-networking | 0.0.1 |
 | https://broadinstitute.github.io/terra-helm/ | terra-cluster-psps | 0.1.0 |
 | https://broadinstitute.github.io/terra-helm/ | terra-prometheus | 0.6.0 |
+| https://broadinstitute.github.io/terra-helm | terra-cluster-storage | 0.2.0 |
 | https://stakater.github.io/stakater-charts | reloader | v0.0.69 |
 
 ## Chart Values
@@ -41,6 +41,7 @@ A Helm chart to install cluster-wide resources for Terra
 | terra-cluster-psps.serviceAccounts.istio[6] | string | `"istio-security-post-install-account"` |  |
 | terra-cluster-psps.serviceAccounts.istio[7] | string | `"istio-sidecar-injector-service-account"` |  |
 | terra-cluster-psps.serviceAccounts.istio[8] | string | `"promsd"` |  |
+| terra-cluster-storage.enabled | bool | `true` |  |
 | terra-prometheus.enabled | bool | `true` |  |
 | terra-prometheus.kube-prometheus-stack.alertmanager.serviceMonitor.metricRelabelings[0].replacement | string | `"false"` |  |
 | terra-prometheus.kube-prometheus-stack.alertmanager.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
