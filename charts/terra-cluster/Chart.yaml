@@ -36,3 +36,4 @@ dependencies:
   - name: terra-cluster-storage
     condition: terra-cluster-storage.enabled
     version: 0.2.0
+    repository: https://broadinstitute.github.io/terra-helm
