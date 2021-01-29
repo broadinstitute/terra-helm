@@ -134,3 +134,6 @@ reloader:
   reloader:
     serviceAccount:
       name: reloader
+
+terra-cluster-storage:
+  enabled: true
