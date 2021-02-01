@@ -20,6 +20,7 @@ elasticsearch:
 
   volumeClaimTemplate:
     accessModes: [ "ReadWriteOnce" ]
+    storageClassName: "terra-ssd"
     resources:
       requests:
         storage: 200Gi
@@ -32,7 +33,7 @@ elasticsearch:
   resources:
     requests:
       cpu: 2
-      memory: 8Gi
+      memory: 8Gis
     limits:
       cpu: 2
       memory: 8Gi
