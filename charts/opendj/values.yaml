@@ -46,8 +46,6 @@ affinity: {}
 tolerations: []
 
 persistence:
-  # persistence.gcpDisk -- (string) If not null, the chart will attempt to use a GCP disk with the provided name for the data volume
-  gcpDisk: null
   # persistence.storageClassName -- (string) If not null, the volume will be restricted to the specified storage class
   storageClassName: null
   # persistence.capacity -- Capacity of persistent data volume

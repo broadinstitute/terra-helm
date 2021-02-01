@@ -107,9 +107,6 @@ spec:
       resources:
         requests:
           storage: {{ .Values.persistence.capacity }}
-      {{- if .Values.persistence.gcpDisk }}
-      volumeName: {{ .Values.name }}-pv
-      {{- end }}
       {{- if .Values.persistence.storageClassName }}
       storageClassName: {{ .Values.persistence.storageClassName }}
       {{- end }}
