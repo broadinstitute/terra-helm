@@ -15,6 +15,7 @@ spec:
     - ReadWriteOnce
   claimRef:
     name: {{ .Values.name }}-data-{{ .Values.name }}-statefulset-0
+    namespace: {{ .Release.Namespace }}
   gcePersistentDisk:
     pdName: {{ .Values.persistence.gcpDisk }}
     fsType: ext4
