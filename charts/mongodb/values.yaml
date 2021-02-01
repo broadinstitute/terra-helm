@@ -1,3 +1,7 @@
+# global.storageClassName -- Storage class to use for dynamically-provisioned persistent volumes
+global:
+  storageClassName: terra-standard
+
 # vaultSecretsPath -- Where in Vault to find secrets used by MongoDB chart. Required keys: `replicaSetKey`, `rootPassword`, `userPassword`
 vaultSecretsPath:
 
