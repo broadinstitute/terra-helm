@@ -37,6 +37,13 @@ service:
   firewallEnabled: true
   # service.allowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   allowedAddresses: {}
+  ports:
+    # service.ports.ldaps -- Whether to enable the LDAPS(636) port
+    ldaps: true
+    # service.ports.ldap -- Whether to enable the LDAP(389) port
+    ldap: false
+    # service.ports.admin -- Whether to enable the admin(4444) port
+    admin: false
 
 # nodeSelector -- nodeSelector map
 nodeSelector: {}

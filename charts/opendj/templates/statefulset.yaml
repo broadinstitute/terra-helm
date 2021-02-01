@@ -37,11 +37,14 @@ spec:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
         ports:
+        - name: ldaps
+          containerPort: 636
+          protocol: TCP
         - name: ldap
           containerPort: 389
           protocol: TCP
-        - name: ldaps
-          containerPort: 636
+        - name: admin
+          containerPort: 4444
           protocol: TCP
         livenessProbe:
           tcpSocket:
