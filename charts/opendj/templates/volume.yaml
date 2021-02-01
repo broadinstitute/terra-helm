@@ -18,5 +18,5 @@ spec:
     namespace: {{ .Release.Namespace }}
   gcePersistentDisk:
     pdName: {{ .Values.persistence.gcpDisk }}
-    fsType: ext4
+    fsType: xfs
 {{- end }}
