@@ -20,7 +20,6 @@ elasticsearch:
 
   volumeClaimTemplate:
     accessModes: [ "ReadWriteOnce" ]
-    # storageClassName: "terra-ssd"
     resources:
       requests:
         storage: 200Gi
