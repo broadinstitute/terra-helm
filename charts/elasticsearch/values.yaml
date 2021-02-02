@@ -32,7 +32,7 @@ elasticsearch:
   resources:
     requests:
       cpu: 2
-      memory: 8Gis
+      memory: 8Gi
     limits:
       cpu: 2
       memory: 8Gi
