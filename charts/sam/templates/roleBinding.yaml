@@ -3,7 +3,7 @@ kind: RoleBinding
 metadata:
   name: {{ .Values.name }}-sa-binding
   labels:
-{{ include "sam.labels" . | indent 4 }}
+    {{- include "sam.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.name }}-sa

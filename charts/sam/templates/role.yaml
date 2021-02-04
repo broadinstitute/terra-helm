@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: {{ .Values.name }}-role
   labels:
-{{ include "sam.labels" . | indent 4 }}
+    {{- include "sam.labels" . | nindent 4 }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']

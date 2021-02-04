@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}-deployment
   labels:
-{{ include "sam.labels" . | indent 4 }}
+    {{- include "sam.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -16,12 +16,11 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.name }}-deployment
+      {{- include "sam.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        deployment: {{ .Values.name }}-deployment
-{{ include "sam.labels" . | indent 8 }}
+        {{- include "sam.labels" . | nindent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}

@@ -4,7 +4,7 @@ kind: PodMonitor
 metadata:
   name: {{ .Values.name }}-jvm-monitor
   labels:
-{{ include "sam.labels" . | indent 4 }}
+    {{- include "sam.labels" . | nindent 4 }}
 spec:
   jobLabel: {{ .Values.name }}-jvm
   selector:
