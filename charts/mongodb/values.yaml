@@ -1,23 +1,53 @@
-# global.storageClassName -- Storage class to use for dynamically-provisioned persistent volumes
-global:
-  storageClass: terra-standard
-
-# vaultSecretsPath -- Where in Vault to find secrets used by MongoDB chart. Required keys: `replicaSetKey`, `rootPassword`, `userPassword`
-vaultSecretsPath:
-
-# vaultAgoraPasswordPath -- Where in Vault the agora user's MongoDB password is stored
-vaultAgoraPasswordPath:
-
-# vaultAgoraPasswordKey -- What key in Vault contains agora user's MongoDB password
-vaultAgoraPasswordKey:
-
-# name -- the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values to match!
+# name -- the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match!
 name: mongodb
 
-# These values are passed to the upstream bitnami chart.
+# vaultSecrets -- Where in Vault to find secrets used by MongoDB chart.
+vaultSecrets:
+  rootPassword:
+    # vaultSecrets.rootPassword.path -- Path in Vault the MongoDB root password is stored
+    path:
+    # vaultSecrets.rootPassword.key -- Key in Vault where the MongoDB root password is stored
+    key:
+  replicaSetKey:
+    # vaultSecrets.replicaSetKey.path -- Path in Vault the MongoDB replica set key is stored
+    path:
+    # vaultSecrets.replicaSetKey.key -- Key in Vault where the MongoDB replica set key is stored
+    key:
+  agoraPassword:
+    # vaultSecrets.agoraPassword.path -- Path in Vault the Agora password is stored
+    path:
+    # vaultSecrets.agoraPassword.key -- Key in Vault where the Agora password is stored
+    key:
+  backupCredentials:
+    # vaultSecrets.backupCredentials.path -- Path in Vault where base64-encoded GCP service account key for backups is stored
+    path:
+    # vaultSecrets.backupCredentials.key -- Key in Vault where base64-encoded GCP service account key for backups is stored
+    key:
+
+backup:
+  # backup.enabled -- Whether to automatically back up MongoDB with a nightly mongodump + copy to GCP bucket
+  enabled: false
+  # backup.nodeSelector -- NodeSelector for backup CronJob pods
+  nodeSelector: {}
+  # backup.tolerations -- Tolerations for backup CronJob pods
+  tolerations: []
+  # backup.timeoutSeconds -- How many seconds to wait before assuming job is hung and killing it
+  timeoutSeconds: 7200 # 2 hrs
+  gcp:
+    # backup.gcp.uploadBucket -- Name of the GCP bucket where backups should be copied
+    uploadBucket:
+    cloudsdkImage:
+      # backup.gcp.cloudsdkImage.repository -- Image repository to use for Cloud SDK
+      repository: gcr.io/google.com/cloudsdktool/cloud-sdk
+      # backup.gcp.cloudsdkImage.repository -- Image tag to use for Cloud SDK
+      tag: 326.0.0-alpine
+
+# These values are passed to the upstream bitnami chart. See documentation here:
+#   https://github.com/bitnami/charts/tree/master/bitnami/mongodb
 bitnami:
   image:
-    tag: 4.4.3
+    repository: bitnami/mongodb
+    tag: 4.4.3-debian-10-r31
   arbiter: # Disable arbiter since the dataset is small & we can run 3 replicas
     enabled: false
   architecture: replicaset
@@ -27,7 +57,7 @@ bitnami:
     database: agora
   fullnameOverride: mongodb # Update to match .Values.name if changed!
   persistence:
-    annotations:
+    annotations: # This annotation tells disk-manager to configure a snapshot policy on the disks
       bio.terra/snapshot-policy: terra-snapshot-policy
     size: 50Gi
   replicaCount: 3
