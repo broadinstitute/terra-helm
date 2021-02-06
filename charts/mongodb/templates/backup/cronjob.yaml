@@ -1,0 +1,38 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}-backup-cronjob
+  labels:
+{{ include "mongodb.labels" . | indent 4 }}
+spec:
+  schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          initContainers:
+          - name: {{ .Values.name }}-backup-dump
+            image: {{ include "_mongodb.image" . | quote }}
+            command: ['sh', '-c', "mongodump --help | tee /backup/output.test"]
+            volumeMounts:
+            - mountPath: /backup
+              name: mongodb-backup
+          containers:
+          - name: {{ .Values.name }}-backup-upload
+            image: "{{ .Values.backup.upload.image.repository }}:{{ .Values.backup.upload.image.tag }}"
+            command: ['/bin/sh', '-c', 'ls -l /backup']
+            volumeMounts:
+            - mountPath: /backup
+              name: mongodb-backup
+          restartPolicy: OnFailure
+          concurrencyPolicy: Replace
+          activeDeadlineSeconds: {{ .Values.backup.timeoutSeconds }}
+          {{- if .Values.backup.nodeSelector }}
+          nodeSelector: {{ .Values.backup.nodeSelector | toYaml | nindent 12 }}
+          {{- end }}
+          {{- if .Values.tolerations }}
+          tolerations: {{ .Values.backup.tolerations | toYaml | nindent 12 }}
+          {{- end }}
+          volumes:
+            - name: mongodb-backup
+              emptyDir: {}
