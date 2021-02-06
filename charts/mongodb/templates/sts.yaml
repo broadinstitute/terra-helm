@@ -1,0 +1,183 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}-sts
+  labels:
+{{ include "mongodb.labels" . | indent 4 }}
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: mongodb
+      app.kubernetes.io/instance: mongodb
+      app.kubernetes.io/name: bitnami
+  serviceName: mongodb-headless
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: mongodb
+        app.kubernetes.io/instance: mongodb
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: bitnami
+        helm.sh/chart: bitnami-10.5.1
+    spec:
+      affinity:
+        nodeAffinity: null
+        podAffinity: null
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/component: mongodb
+                    app.kubernetes.io/instance: mongodb
+                    app.kubernetes.io/name: bitnami
+                namespaces:
+                  - terra-dev
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      containers:
+        - command:
+            - /scripts/setup.sh
+          env:
+            - name: BITNAMI_DEBUG
+              value: 'false'
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8S_SERVICE_NAME
+              value: mongodb-headless
+            - name: MONGODB_INITIAL_PRIMARY_HOST
+              value: >-
+                mongodb-0.$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
+            - name: MONGODB_REPLICA_SET_NAME
+              value: rs0
+            - name: MONGODB_ADVERTISED_HOSTNAME
+              value: >-
+                $(MY_POD_NAME).$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
+            - name: MONGODB_USERNAME
+              value: agora
+            - name: MONGODB_DATABASE
+              value: agora
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mongodb-password
+                  name: mongodb-secrets
+            - name: MONGODB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mongodb-root-password
+                  name: mongodb-secrets
+            - name: MONGODB_REPLICA_SET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: mongodb-replica-set-key
+                  name: mongodb-secrets
+            - name: ALLOW_EMPTY_PASSWORD
+              value: 'no'
+            - name: MONGODB_SYSTEM_LOG_VERBOSITY
+              value: '0'
+            - name: MONGODB_DISABLE_SYSTEM_LOG
+              value: 'no'
+            - name: MONGODB_ENABLE_IPV6
+              value: 'no'
+            - name: MONGODB_ENABLE_DIRECTORY_PER_DB
+              value: 'no'
+          image: 'docker.io/bitnami/mongodb:4.4.3'
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - mongo
+                - '--disableImplicitSessions'
+                - '--eval'
+                - db.adminCommand('ping')
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: mongodb
+          ports:
+            - containerPort: 27017
+              name: mongodb
+          readinessProbe:
+            exec:
+              command:
+                - bash
+                - '-ec'
+                - >
+                  mongo --disableImplicitSessions $TLS_OPTIONS --eval
+                  'db.hello().isWritablePrimary || db.hello().secondary' | grep
+                  -q 'true'
+            failureThreshold: 6
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 4
+              memory: 25Gi
+            requests:
+              cpu: 4
+              memory: 25Gi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+          volumeMounts:
+            - mountPath: /bitnami/mongodb
+              name: datadir
+              subPath: null
+            - mountPath: /scripts/setup.sh
+              name: scripts
+              subPath: setup.sh
+      initContainers:
+        - args:
+            - |
+              mkdir -p /bitnami/mongodb
+              chown -R "1001:1001" "/bitnami/mongodb"
+          command:
+            - /bin/bash
+            - '-ec'
+          image: 'docker.io/bitnami/minideb:buster'
+          imagePullPolicy: Always
+          name: volume-permissions
+          resources:
+            limits: {}
+            requests: {}
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - mountPath: /bitnami/mongodb
+              name: datadir
+      securityContext:
+        fsGroup: 1001
+        sysctls: []
+      serviceAccountName: mongodb-sa
+      volumes:
+        - configMap:
+            defaultMode: 493
+            name: mongodb-scripts
+          name: scripts
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        annotations:
+          bio.terra/snapshot-policy: terra-snapshot-policy
+        name: datadir
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi
+        storageClassName: terra-standard
