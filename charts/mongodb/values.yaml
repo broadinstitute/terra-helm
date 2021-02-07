@@ -1,3 +1,7 @@
+# global.storageClass -- storageClass to use when provisioning persistent disks (passed to Bitnami chart)
+global:
+  storageClass: terra-standard
+
 # name -- the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match!
 name: mongodb
 
