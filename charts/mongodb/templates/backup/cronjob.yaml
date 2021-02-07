@@ -6,6 +6,8 @@ metadata:
 {{ include "mongodb.labels" . | indent 4 }}
 spec:
   schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
+  concurrencyPolicy: Replace
+  activeDeadlineSeconds: {{ .Values.backup.timeoutSeconds }}
   jobTemplate:
     spec:
       template:
@@ -25,8 +27,6 @@ spec:
             - mountPath: /backup
               name: mongodb-backup
           restartPolicy: OnFailure
-          concurrencyPolicy: Replace
-          activeDeadlineSeconds: {{ .Values.backup.timeoutSeconds }}
           {{- if .Values.backup.nodeSelector }}
           nodeSelector: {{ .Values.backup.nodeSelector | toYaml | nindent 12 }}
           {{- end }}
