@@ -19,6 +19,7 @@ spec:
           initContainers:
           - name: {{ .Values.name }}-backup-dump
             image: {{ include "_mongodb.image" . }}
+            # TODO: mongo "mongodb://agora@mongodb-0.mongodb-headless.terra-dev.svc.cluster.local:27017,mongodb-1.mongodb-headless.terra-dev.svc.cluster.local:27017,mongodb-2.mongodb-headless.terra-dev.svc.cluster.local:27017/agora?replicaSet=rs0"
             command: ['sh', '-c', "mongodump --help | tee /backup/output.test"]
             volumeMounts:
             - mountPath: /backup
