@@ -15,16 +15,17 @@ spec:
         metadata:
           labels: {{ include "mongodb.labels" . | nindent 12 }}
         spec:
+          serviceAccountName: {{ .Values.name }}-sa
           initContainers:
           - name: {{ .Values.name }}-backup-dump
-            image: {{ include "_mongodb.image" . | quote }}
+            image: {{ include "_mongodb.image" . }}
             command: ['sh', '-c', "mongodump --help | tee /backup/output.test"]
             volumeMounts:
             - mountPath: /backup
               name: mongodb-backup
           containers:
           - name: {{ .Values.name }}-backup-upload
-            image: {{ include "_mongodb.backup.cloudsdk.image" . | quote }}
+            image: {{ include "_mongodb.backup.cloudsdk.image" . }}
             command: ['/bin/sh', '-c', 'ls -l /backup']
             volumeMounts:
             - mountPath: /backup
