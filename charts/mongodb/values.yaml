@@ -33,14 +33,13 @@ backup:
   tolerations: []
   # backup.timeoutSeconds -- How many seconds to wait before assuming job is hung and killing it
   timeoutSeconds: 7200 # 2 hrs
-  gcp:
-    # backup.gcp.uploadBucket -- Name of the GCP bucket where backups should be copied
-    uploadBucket:
-    cloudsdkImage:
-      # backup.gcp.cloudsdkImage.repository -- Image repository to use for Cloud SDK
-      repository: gcr.io/google.com/cloudsdktool/cloud-sdk
-      # backup.gcp.cloudsdkImage.repository -- Image tag to use for Cloud SDK
-      tag: 326.0.0-alpine
+  # backup.gcsBucket -- Name of the GCS bucket where backups should be copied
+  gcsBucket:
+  cloudsdkImage:
+    # backup.cloudsdkImage.repository -- Image repository to use for Cloud SDK
+    repository: gcr.io/google.com/cloudsdktool/cloud-sdk
+    # backup.cloudsdkImage.repository -- Image tag to use for Cloud SDK
+    tag: 326.0.0-alpine
 
 # These values are passed to the upstream bitnami chart. See documentation here:
 #   https://github.com/bitnami/charts/tree/master/bitnami/mongodb
