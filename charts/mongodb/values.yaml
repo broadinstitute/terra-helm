@@ -1,6 +1,6 @@
 # global.storageClass -- storageClass to use when provisioning persistent disks (passed to Bitnami chart)
 global:
-  # XFS filesystems are recommended for production deployments
+  # XFS filesystems are recommended for production mongodb installations
   # http://dochub.mongodb.org/core/prodnotes-filesystem
   storageClass: terra-standard-xfs
 
