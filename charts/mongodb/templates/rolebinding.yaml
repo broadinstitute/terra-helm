@@ -2,8 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ .Values.name }}-sa-binding
-  labels:
-{{ include "mongodb.labels" . | indent 4 }}
+  labels: {{ include "mongodb.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.name }}-sa
