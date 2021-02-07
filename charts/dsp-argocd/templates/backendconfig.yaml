@@ -8,5 +8,6 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/part-of: {{ .Chart.Name }}
 spec:
+  timeoutSec: 150 # 2.5 minutes -- 30s default caused some API calls to timeout
   securityPolicy:
     name: "argocd-cloud-armor" # Configure ArgoCD ingress to use CloudArmor policy
