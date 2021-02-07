@@ -2,15 +2,18 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ .Values.name }}-backup-cronjob
-  labels:
-{{ include "mongodb.labels" . | indent 4 }}
+  labels: {{ include "mongodb.labels" . | nindent 4 }}
 spec:
   schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
   concurrencyPolicy: Replace
-  activeDeadlineSeconds: {{ .Values.backup.timeoutSeconds }}
   jobTemplate:
+    metadata:
+      labels: {{ include "mongodb.labels" . | nindent 8 }}
     spec:
+      activeDeadlineSeconds: {{ .Values.backup.timeoutSeconds }}
       template:
+        metadata:
+          labels: {{ include "mongodb.labels" . | nindent 12 }}
         spec:
           initContainers:
           - name: {{ .Values.name }}-backup-dump
@@ -27,12 +30,8 @@ spec:
             - mountPath: /backup
               name: mongodb-backup
           restartPolicy: OnFailure
-          {{- if .Values.backup.nodeSelector }}
           nodeSelector: {{ .Values.backup.nodeSelector | toYaml | nindent 12 }}
-          {{- end }}
-          {{- if .Values.tolerations }}
           tolerations: {{ .Values.backup.tolerations | toYaml | nindent 12 }}
-          {{- end }}
           volumes:
             - name: mongodb-backup
               emptyDir: {}
