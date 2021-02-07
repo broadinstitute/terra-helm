@@ -40,6 +40,7 @@ This chart is heavily customized to Terra's needs and is a thin wrapper around B
 | bitnami.serviceAccount.create | bool | `false` |  |
 | bitnami.serviceAccount.name | string | `"mongodb-sa"` |  |
 | bitnami.volumePermissions.enabled | bool | `true` |  |
+| global.storageClass | string | `"terra-standard"` | storageClass to use when provisioning persistent disks (passed to Bitnami chart) |
 | name | string | `"mongodb"` | the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match! |
 | vaultSecrets | object | `{"agoraPassword":{"key":null,"path":null},"backupCredentials":{"key":null,"path":null},"replicaSetKey":{"key":null,"path":null},"rootPassword":{"key":null,"path":null}}` | Where in Vault to find secrets used by MongoDB chart. |
 | vaultSecrets.agoraPassword.key | string | `nil` | Key in Vault where the Agora password is stored |
