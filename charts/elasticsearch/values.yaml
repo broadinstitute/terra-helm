@@ -11,9 +11,6 @@ elasticsearch:
 
   keystore:
     - secretName: elasticsearch-gcs-sa
-      items:
-      - key: gcs.client.default.credentials_file
-        path: gcs.client.default.credentials_file
 
   podSecurityPolicy:
     create: true
