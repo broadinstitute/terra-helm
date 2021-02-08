@@ -4089,6 +4089,24 @@ entries:
     version: 0.0.1
   dsp-argocd:
   - apiVersion: v2
+    created: "2021-02-08T20:00:29.14050249Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.9.2
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: b4a833bc99b85924e3c70d112d8b6163d814fb5f5d1b6ed1bdfd64cdceb9c832
+    maintainers:
+    - email: chelsea@broadinstitute.org
+      name: Chelsea Hoover
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.8.0/dsp-argocd-0.8.0.tgz
+    version: 0.8.0
+  - apiVersion: v2
     created: "2020-12-17T16:50:19.35058193Z"
     dependencies:
     - name: argo-cd
