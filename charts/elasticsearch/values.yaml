@@ -1,10 +1,16 @@
 # Set default values on chart from elastic.co
 name: elasticsearch
 
+vault:
+  pathPrefix:
+
 elasticsearch:
 
   image: "docker.io/broadinstitute/elasticsearch"
   imageTag: 5.4.0_6
+
+  keystore:
+    - secretName: elasticsearch-gcs-sa
 
   podSecurityPolicy:
     create: true
