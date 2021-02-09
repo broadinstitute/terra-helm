@@ -73,10 +73,10 @@ bitnami:
   resources: # Match existing prod MongoDB instances
     limits:
       cpu: 4
-      memory: 25Gi
+      memory: 23Gi
     requests:
       cpu: 4
-      memory: 25Gi
+      memory: 23Gi
   serviceAccount:
     create: false
     name: mongodb-sa # Update to match .Values.name if changed!
