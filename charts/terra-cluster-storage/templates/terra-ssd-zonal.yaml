@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: terra-ssd-regional
+  name: terra-ssd-zonal
   labels: {{ include "terra-cluster-storage.labels" . | nindent 4 }}
 allowVolumeExpansion: true
 provisioner: kubernetes.io/gce-pd
