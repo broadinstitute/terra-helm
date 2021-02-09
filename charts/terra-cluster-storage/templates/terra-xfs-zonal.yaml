@@ -1,11 +1,12 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: terra-ssd
+  name: terra-xfs-zonal
   labels: {{ include "terra-cluster-storage.labels" . | nindent 4 }}
 allowVolumeExpansion: true
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd
+  fsType: xfs
 reclaimPolicy: Retain
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
