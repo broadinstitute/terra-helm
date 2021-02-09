@@ -72,10 +72,10 @@ bitnami:
   replicaCount: 3
   resources: # Match existing prod MongoDB instances
     limits:
-      cpu: 4
+      cpu: 3.5
       memory: 23Gi
     requests:
-      cpu: 4
+      cpu: 3.5
       memory: 23Gi
   serviceAccount:
     create: false
