@@ -68,15 +68,15 @@ bitnami:
   persistence:
     annotations: # This annotation tells disk-manager to configure a snapshot policy on the disks
       bio.terra/snapshot-policy: terra-snapshot-policy
-    size: 50Gi
+    size: 125Gi # Size impacts disk performance -- see DDO-992
   replicaCount: 3
-  resources: # Match existing prod MongoDB instances
+  resources: # Match pre-GKE click-to-deploy MongoDB instances
     limits:
-      cpu: 3.5
-      memory: 23Gi
+      cpu: 3250m
+      memory: 21Gi
     requests:
-      cpu: 3.5
-      memory: 23Gi
+      cpu: 3250m
+      memory: 21Gi
   serviceAccount:
     create: false
     name: mongodb-sa # Update to match .Values.name if changed!
