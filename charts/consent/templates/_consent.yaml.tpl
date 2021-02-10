@@ -6,12 +6,19 @@ server:
   connector:
     type: http
     port: 8080
+  requestLog:
+    appenders:
+      - type: console
+        layout:
+          type: access-json
 logging:
   level: INFO
   appenders:
     - type: console
       threshold: INFO
       target: stdout
+      layout:
+        type: json
     - type: sentry
       dsn: https://foo:bar@sentry.io/baz {{/* Override on the command line */}}
       threshold: ERROR
