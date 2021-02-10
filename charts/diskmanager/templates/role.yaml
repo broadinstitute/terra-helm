@@ -10,3 +10,6 @@ rules:
   verbs:     ['use']
   resourceNames:
   - terra-default-psp
+- apiGroups: [""]
+  resources: ['persistentVolumeClaims', 'persistentVolumes']
+  verbs: ['list', 'get']
