@@ -19,6 +19,7 @@ spec:
           serviceAccountName: {{ .Values.name }}-sa
           containers:
           - image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag }}"
+            imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
             name: {{ .Values.name }}
             # env:
             # - name: GOOGLE_APPLICATION_CREDENTIALS

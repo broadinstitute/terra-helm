@@ -9,5 +9,6 @@ config:
 imageConfig:
   repository: us-central1-docker.pkg.dev/dsp-artifact-registry/disk-manager/disk-manager
   tag: main
+  pullPolicy: Always
 
 schedule: "0 1 * * *"
