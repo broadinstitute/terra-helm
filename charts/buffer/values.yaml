@@ -22,7 +22,7 @@ imageConfig:
   imagePullPolicy: Always
 
 # replicas -- Number of replicas for the deployment
-replicas: 0
+replicas: 3
 
 resources:
   requests:
