@@ -39,5 +39,5 @@ dependencies:
     repository: https://broadinstitute.github.io/terra-helm
   - name: diskmanager
     condition: diskmanager.enabled
-    version: 0.0.0-288.1612993773.63fcaa
+    version: 0.0.0-288.1612994266.40efcb
     repository: https://broadinstitute.github.io/terra-helm
