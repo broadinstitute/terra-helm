@@ -11,5 +11,5 @@ rules:
   resourceNames:
   - terra-default-psp
 - apiGroups: [""]
-  resources: ['persistentvolumevlaims', 'persistentvolumes']
+  resources: ['persistentvolumeclaims', 'persistentvolumes']
   verbs: ['list', 'get']
