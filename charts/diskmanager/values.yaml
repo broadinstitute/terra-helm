@@ -1,0 +1,7 @@
+name: diskmanager
+
+config:
+  targetAnnotation: "bio.terra/snapshot-policy"
+  googleProject:
+  region: us-central1
+  zone: us-central1-a

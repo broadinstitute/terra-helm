@@ -1,0 +1,34 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}-cronjob
+  labels:
+    {{ include "diskmanager.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.schedule }}
+  startingDeadlineSeconds: 100
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{ include "diskmanager.labels" . | nindent 8 }}
+        spec:
+          restartPolicy: Never
+          serviceAccountName: {{ .Values.name }}-sa
+          containers:
+          - image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag }}"
+            name: {{ .Values.name }}
+            # env:
+            # - name: GOOGLE_APPLICATION_CREDENTIALS
+            #   value: /app/application_default_credentials.json
+            volumeMounts:
+            - mountPath: /etc/disk-manager/config.yaml
+              subPath: config.yaml
+              name: {{ .Values.name }}-config
+              readOnly: true
+          volumes:
+          - name: {{ .Values.name }}-config
+            configMap:
+              name: {{ .Values.name }}-cm
