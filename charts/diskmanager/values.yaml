@@ -5,3 +5,7 @@ config:
   googleProject:
   region: us-central1
   zone: us-central1-a
+
+imageConfig:
+  repository: us-central1-docker.pkg.dev/dsp-artifact-registry/disk-manager/disk-manager
+  tag: main
