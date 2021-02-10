@@ -13,7 +13,7 @@ spec:
       template:
         metadata:
           labels:
-            {{ include "diskmanager.labels" . | nindent 8 }}
+            {{ include "diskmanager.labels" . | nindent 12 }}
         spec:
           restartPolicy: Never
           serviceAccountName: {{ .Values.name }}-sa
