@@ -154,8 +154,6 @@ prometheus:
   jmxJarVersion: '0.13.0'
 
 buffer:
-  # buffer.enabled - When enabled, use Buffer service to create projects.
-  enabled: false
   # clientCredentialPath - the credentials to use for talking to buffer service. Required if enabled is true.
   clientCredentialPath:
   # instanceUrl - the Buffer Service instance to use in a given environment.
@@ -170,9 +168,6 @@ buffer:
 
 # cloudTraceEnabled -- Whether to enable gcp cloud trace
 cloudTraceEnabled: true
-
-# googleFolderId -- the id of the Google Folder to create projects for workspaces within.
-googleFolderId:
 
 # initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
 initDB: false
