@@ -19,21 +19,52 @@ spec:
           initContainers:
           - name: {{ .Values.name }}-backup-dump
             image: {{ include "_mongodb.image" . }}
-            # TODO: mongo "mongodb://agora@mongodb-0.mongodb-headless.terra-dev.svc.cluster.local:27017,mongodb-1.mongodb-headless.terra-dev.svc.cluster.local:27017,mongodb-2.mongodb-headless.terra-dev.svc.cluster.local:27017/agora?replicaSet=rs0"
-            command: ['sh', '-c', "mongodump --help | tee /backup/output.test"]
+            command: ['sh', '-c']
+            args:
+            - |-
+              mongodump --oplog \
+                --out /backup/dump \
+                --password "$MONGODUMP_PASSWORD" \
+                "$MONGODUMP_CONNECTION_STRING"
+            env:
+            - name: MONGODUMP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: mongodb-root-password
+            - name: MONGODUMP_CONNECTION_STRING
+              value: {{ include "_mongodb.backup.replicaset.url" . | quote }}
             volumeMounts:
             - mountPath: /backup
-              name: mongodb-backup
+              name: backup-data
           containers:
           - name: {{ .Values.name }}-backup-upload
             image: {{ include "_mongodb.backup.cloudsdk.image" . }}
-            command: ['/bin/sh', '-c', 'ls -l /backup']
+            command: ['sh', '-c']
+            args:
+            - |-
+              TIMESTAMP=$( date "+%Y%m%d.%H%M%S" ) && \
+              gcloud auth activate-service-account --key-file=/sa-key.json && \
+                tar -C /backup -cvzf dump.tgz dump && \
+                gsutil cp dump.tgz "gs://${GCS_BUCKET}/${TIMESTAMP}/dump.tgz"
+            env:
+            - name: GCS_BUCKET
+              value: {{ .Values.backup.gcsBucket | quote }}
             volumeMounts:
             - mountPath: /backup
-              name: mongodb-backup
+              name: backup-data
+            - mountPath: /sa-key.json
+              name: gcp-sa
+              subPath: sa-key.json
           restartPolicy: OnFailure
           nodeSelector: {{ .Values.backup.nodeSelector | toYaml | nindent 12 }}
           tolerations: {{ .Values.backup.tolerations | toYaml | nindent 12 }}
           volumes:
-            - name: mongodb-backup
-              emptyDir: {}
+          - name: backup-data
+            emptyDir: {}
+          - name: gcp-sa
+            secret:
+              secretName: {{ .Values.name }}-secrets
+              items:
+              - key: mongodb-backup-credentials
+                path: sa-key.json
