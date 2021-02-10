@@ -46,7 +46,7 @@ spec:
               TIMESTAMP=$( date "+%Y%m%d.%H%M%S" ) && \
               gcloud auth activate-service-account --key-file=/sa-key.json && \
                 tar -C /backup -cvzf dump.tgz dump && \
-                gsutil cp dump.tgz "gs://${GCS_BUCKET}/${TIMESTAMP}/dump.tgz"
+                gsutil cp dump.tgz "gs://${GCS_BUCKET}/dump-${TIMESTAMP}.tgz"
             env:
             - name: GCS_BUCKET
               value: {{ .Values.backup.gcsBucket | quote }}
