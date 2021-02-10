@@ -159,8 +159,6 @@ spec:
           value: "{{ .Values.cloudTraceEnabled }}"
         - name: TERRA_DATAREPO_URL
           value: "{{ .Values.terraDataRepoUrl }}"
-        - name: WORKSPACE_GOOGLE_FOLDERID
-          value: "{{ .Values.googleFolderId }}"
         - name: WORKSPACE_INGRESS_DOMAIN_NAME
           value: "{{ template "workspacemanager.fqdn" . }}"
         - name: WORKSPACE_SPEND_SPENDPROFILES_0_ID
