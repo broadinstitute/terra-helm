@@ -133,11 +133,13 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        # Environment variables for OpenCensus resource auto detection.
+        # Environment variables for Kubernetes config
         - name: BUFFER_KUBERNETES_POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        - name: BUFFER_KUBERNETES_POD_NAME_FILTER
+          value: {{ .Values.name }}-service
         - name: BUFFER_KUBERNETES_IN_KUBERNETES
           value: 'true'
         volumeMounts:
