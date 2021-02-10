@@ -133,6 +133,13 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        # Environment variables for OpenCensus resource auto detection.
+        - name: BUFFER_KUBENETERS_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: BUFFER_KUBENETERS_IN_KUBENETERS
+          value: 'true'
         volumeMounts:
         - name: app-sa-creds
           mountPath: /secrets/app
