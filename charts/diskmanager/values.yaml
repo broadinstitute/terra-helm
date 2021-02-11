@@ -1,17 +1,27 @@
+# name -- A name for the deployment that will be substituted into resuorce definitions
 name: diskmanager
 
 config:
+  # config.targetAnnotation -- The annotation that must be present on pvcs in order to attach snapshot policy to the associated disk
   targetAnnotation: "bio.terra/snapshot-policy"
+  # config.googleProject -- google project id of the cluster diskmanager is deployed in
   googleProject:
+  # config.region -- gcp region of cluster
   region: us-central1
+  # config.zone -- zone of cluster
   zone: us-central1-a
 
 imageConfig:
+  # imageConfig.repository -- docker image repository hosting diskmanager images
   repository: us-central1-docker.pkg.dev/dsp-artifact-registry/disk-manager/disk-manager
+  # imageConfig.tag -- image tag version of diskmanager to deploy
   tag: main
+  # imageConfig.pullPolicy -- determines if the image is pulled on pod startup or not
   pullPolicy: Always
 
+# schedule -- cron format schedule for the diskmanager cronjob, default is everyday at 01:00
 schedule: "0 1 * * *"
 
 vault:
+  # vault.pathPrefix -- vault path containing diskmanager's google service account
   pathPrefix:
