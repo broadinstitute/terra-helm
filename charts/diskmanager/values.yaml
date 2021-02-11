@@ -12,3 +12,6 @@ imageConfig:
   pullPolicy: Always
 
 schedule: "0 1 * * *"
+
+vault:
+  pathPrefix:
