@@ -27,6 +27,7 @@ A helm chart to deploy a cronjob to manage backups of stateful set persistent di
 | imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/disk-manager/disk-manager"` | docker image repository hosting diskmanager images |
 | imageConfig.tag | string | `"main"` | image tag version of diskmanager to deploy |
 | name | string | `"diskmanager"` | A name for the deployment that will be substituted into resuorce definitions |
+| nodeSelector | object | `{}` | selector for node pool to run diskmanager cronjob on |
 | schedule | string | `"0 1 * * *"` | cron format schedule for the diskmanager cronjob, default is everyday at 01:00 |
 | vault.pathPrefix | string | `nil` | vault path containing diskmanager's google service account |
 
