@@ -4160,6 +4160,28 @@ entries:
     version: 0.0.1
   diskmanager:
   - apiVersion: v2
+    created: "2021-02-11T16:27:20.308749314Z"
+    description: A helm chart to deploy a cronjob to manage backups of stateful set
+      persistent disks
+    digest: 36da6a6e31163bba884d70d131e5eb4ad02023a67be4fe2b011b6117dd337527
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - disk
+    - tools
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Mike Flinn
+    name: diskmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/disk-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/diskmanager-0.0.0-288.1613060834.43e8b5/diskmanager-0.0.0-288.1613060834.43e8b5.tgz
+    version: 0.0.0-288.1613060834.43e8b5
+  - apiVersion: v2
     created: "2021-02-10T21:57:52.258613447Z"
     description: A helm chart to deploy a cronjob to manage backups of stateful set
       persistent disks
