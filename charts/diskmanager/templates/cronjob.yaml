@@ -17,6 +17,7 @@ spec:
         spec:
           restartPolicy: Never
           nodeSelector: {{ .Values.nodeSelector | toYaml | nindent 12 }}
+          tolerations: {{ .Values.tolerations | toYaml | nindent 12}}
           serviceAccountName: {{ .Values.name }}-sa
           containers:
           - image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag }}"

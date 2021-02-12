@@ -22,6 +22,8 @@ imageConfig:
 # nodeSelector -- selector for node pool to run diskmanager cronjob on
 nodeSelector: {}
 
+# tolerations -- tolerations to enable runnning on particular nodes
+tolerations: {}
 # schedule -- cron format schedule for the diskmanager cronjob, default is everyday at 01:00
 schedule: "0 1 * * *"
 
