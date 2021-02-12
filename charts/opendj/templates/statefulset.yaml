@@ -101,6 +101,10 @@ spec:
       name: {{ .Values.name }}-data
       labels:
         {{- include "opendj.labels" . | nindent 8 }}
+      {{- if .Values.snapshot.enable }}
+      annotations:
+        bio.terra/snapshot-policy: {{ .Values.snapshot.policy }}
+      {{- end }}
     spec:
       accessModes:
         - ReadWriteOnce
