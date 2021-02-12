@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: {{ .Values.name }}-cronjob
   labels:
-    {{ include "diskmanager.labels" . | nindent 4 }}
+    {{- include "diskmanager.labels" . | nindent 4 }}
 spec:
   schedule: {{ .Values.schedule }}
   startingDeadlineSeconds: 100
@@ -13,7 +13,7 @@ spec:
       template:
         metadata:
           labels:
-            {{ include "diskmanager.labels" . | nindent 12 }}
+            {{- include "diskmanager.labels" . | nindent 12 }}
         spec:
           restartPolicy: Never
           nodeSelector: {{ .Values.nodeSelector | toYaml | nindent 12 }}

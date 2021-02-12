@@ -3,7 +3,7 @@ kind: ClusterRoleBinding
 metadata:
   name: {{ .Values.name }}-sa-binding
   labels:
-    {{ include "diskmanager.labels" . | nindent 4 }}
+    {{- include "diskmanager.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.name }}-sa

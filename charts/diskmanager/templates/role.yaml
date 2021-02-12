@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata:
   name: {{ .Values.name }}-role
   labels:
-    {{ include "diskmanager.labels" . | nindent 4 }}
+    {{- include "diskmanager.labels" . | nindent 4 }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
