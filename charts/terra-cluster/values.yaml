@@ -137,3 +137,7 @@ reloader:
 
 terra-cluster-storage:
   enabled: true
+
+diskmanager:
+  enabled: true
+
