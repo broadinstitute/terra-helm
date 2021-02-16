@@ -9,9 +9,6 @@ elasticsearch:
   image: "docker.io/broadinstitute/elasticsearch"
   imageTag: 5.4.0_6
 
-  keystore:
-    - secretName: elasticsearch-gcs-sa
-
   podSecurityPolicy:
     create: true
     spec:
