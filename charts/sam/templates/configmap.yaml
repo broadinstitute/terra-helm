@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-configmap
   labels:
-{{ include "sam.labels" . | indent 4 }}
+    {{- include "sam.labels" . | nindent 4 }}
 data:
 {{- if .Values.prometheus.enabled }}
   prometheusJmx.yaml: |
-{{ include "sam.config.prometheusJmx" . | indent 4 }}
+    {{- include "sam.config.prometheusJmx" . | nindent 4 }}
 {{- end }}

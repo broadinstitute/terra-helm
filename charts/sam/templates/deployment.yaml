@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}-deployment
   labels:
-{{ include "sam.labels" . | indent 4 }}
+    {{- include "sam.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -16,12 +16,11 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.name }}-deployment
+      {{- include "sam.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        deployment: {{ .Values.name }}-deployment
-{{ include "sam.labels" . | indent 8 }}
+        {{- include "sam.labels" . | nindent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
@@ -125,18 +124,18 @@ spec:
             path: /status
             port: 8080
           timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 6 # 60 seconds before unready
+          initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+          failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
           successThreshold: 1
         livenessProbe:
           httpGet:
             path: /version
             port: 8080
           timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 30 # 5 minutes before restarted
+          initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+          failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
           successThreshold: 1
       - name: {{ .Values.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_2018117

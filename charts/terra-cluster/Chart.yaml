@@ -1,8 +1,8 @@
 apiVersion: v2
 name: terra-cluster
-description: A Helm chart to configure a k8s cluster for Terra
+description: A Helm chart to install cluster-wide resources for Terra
 type: application
-version: 0.3.4
+version: 0.5.0
 keywords:
   - dsp
   - broadinstitute
@@ -33,3 +33,11 @@ dependencies:
     condition: reloader.enabled
     version: v0.0.69
     repository: https://stakater.github.io/stakater-charts
+  - name: terra-cluster-storage
+    condition: terra-cluster-storage.enabled
+    version: 0.2.0
+    repository: https://broadinstitute.github.io/terra-helm
+  - name: diskmanager
+    condition: diskmanager.enabled
+    version: 0.1.0
+    repository: https://broadinstitute.github.io/terra-helm

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-cm
+  labels:
+    {{- include "diskmanager.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+    {{ include "diskmanager.config" . | nindent 4 }}

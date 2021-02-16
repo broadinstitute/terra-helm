@@ -4,7 +4,7 @@ kind: FrontendConfig
 metadata:
   name: {{ .Values.name }}-ingress-frontendconfig
   labels:
-{{ include "sam.labels" . | indent 4 }}
+    {{- include "sam.labels" . | nindent 4 }}
 {{- if .Values.ingress.sslPolicy }}
 spec:
   sslPolicy: {{ .Values.ingress.sslPolicy }}

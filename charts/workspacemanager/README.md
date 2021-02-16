@@ -1,22 +1,24 @@
-workspacemanager
-================
+# workspacemanager
 
 Chart for Terra Workspace Manager
 
-## Chart Requirements
+## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy | postgres | 0.1.0 |
 
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| buffer.clientCredentialPath | string | `nil` | the credentials to use for talking to buffer service. Required if enabled is true. |
+| buffer.enabled | bool | `false` | When enabled, use Buffer service to create projects. |
+| buffer.instanceUrl | string | `nil` | the Buffer Service instance to use in a given environment. |
+| buffer.poolId | string | `nil` | pool in Buffer Service to use. Must include version information and match a poolId in the buffer service config in the environment given above. |
 | cloudTraceEnabled | bool | `true` | Whether to enable gcp cloud trace |
 | global.applicationVersion | string | `"latest"` | What version of the application to deploy |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
-| googleFolderId | string | `nil` | the id of the Google Folder to create projects for workspaces within. |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-workspace-manager"` | Image repository |
