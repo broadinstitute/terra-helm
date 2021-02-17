@@ -30,17 +30,20 @@ This chart is heavily customized to Terra's needs and is a thin wrapper around B
 | bitnami.fullnameOverride | string | `"mongodb"` |  |
 | bitnami.image.repository | string | `"bitnami/mongodb"` |  |
 | bitnami.image.tag | string | `"4.4.3-debian-10-r31"` |  |
+| bitnami.labels."app.kubernetes.io/instance" | string | `"mongodb"` |  |
+| bitnami.labels."app.kubernetes.io/name" | string | `"mongodb"` |  |
+| bitnami.labels."app.kubernetes.io/part-of" | string | `"terra"` |  |
 | bitnami.persistence.annotations."bio.terra/snapshot-policy" | string | `"terra-snapshot-policy"` |  |
-| bitnami.persistence.size | string | `"50Gi"` |  |
+| bitnami.persistence.size | string | `"125Gi"` |  |
 | bitnami.replicaCount | int | `3` |  |
-| bitnami.resources.limits.cpu | int | `4` |  |
-| bitnami.resources.limits.memory | string | `"25Gi"` |  |
-| bitnami.resources.requests.cpu | int | `4` |  |
-| bitnami.resources.requests.memory | string | `"25Gi"` |  |
+| bitnami.resources.limits.cpu | string | `"3250m"` |  |
+| bitnami.resources.limits.memory | string | `"21Gi"` |  |
+| bitnami.resources.requests.cpu | string | `"3250m"` |  |
+| bitnami.resources.requests.memory | string | `"21Gi"` |  |
 | bitnami.serviceAccount.create | bool | `false` |  |
 | bitnami.serviceAccount.name | string | `"mongodb-sa"` |  |
 | bitnami.volumePermissions.enabled | bool | `true` |  |
-| global.storageClass | string | `"terra-standard"` | storageClass to use when provisioning persistent disks (passed to Bitnami chart) |
+| global.storageClass | string | `"terra-xfs-zonal"` | storageClass to use when provisioning persistent disks (passed to Bitnami chart) |
 | name | string | `"mongodb"` | the name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match! |
 | vaultSecrets | object | `{"agoraPassword":{"key":null,"path":null},"backupCredentials":{"key":null,"path":null},"replicaSetKey":{"key":null,"path":null},"rootPassword":{"key":null,"path":null}}` | Where in Vault to find secrets used by MongoDB chart. |
 | vaultSecrets.agoraPassword.key | string | `nil` | Key in Vault where the Agora password is stored |
