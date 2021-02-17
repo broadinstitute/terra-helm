@@ -156,6 +156,10 @@ spec:
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-proxy-env
+        # env overwrites duplicate values in envFrom
+        env:
+        - name: LOG_LEVEL
+          value: {{ .Values.proxy.logLevel }}
         volumeMounts:
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
