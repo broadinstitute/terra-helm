@@ -1,12 +1,11 @@
 apiVersion: v2
 name: mongodb
-version: 0.0.1
+version: 0.1.0
 type: application
 description: >
   A Helm chart for MongoDB, used by Terra's Agora application.
 
-  This chart is heavily customized to Terra's needs and is a thin
-  wrapper around Bitnami's MongoDB Helm chart.
+  This chart is heavily customized to Terra's needs and is a thin wrapper around Bitnami's MongoDB Helm chart.
 
 keywords:
   - dsp
@@ -14,12 +13,10 @@ keywords:
   - terra
   - mongodb
   - agora
-
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
-
 dependencies:
-- name: mongodb
-  alias: bitnami
-  version: 10.5.1
-  repository: https://charts.bitnami.com/bitnami
+  - name: mongodb
+    alias: bitnami
+    version: 10.5.1
+    repository: https://charts.bitnami.com/bitnami
