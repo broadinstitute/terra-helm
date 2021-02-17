@@ -55,6 +55,7 @@ elasticsearch:
     limits:
       cpu: 2
         memory: 8Gi
+        
   # Extra volume to mount gcs credentials for snapshots
   extraVolumes:
   - name: snapshot-sa
