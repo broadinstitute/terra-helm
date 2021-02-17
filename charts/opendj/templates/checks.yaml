@@ -7,4 +7,4 @@ metadata:
 data:
   readiness.sh: |-
     #!/bin/sh
-    ldapsearch -LLL -D "cn=Directory Manager" -w $(cat /var/secrets/opendj/dirmanager.pw) -b "{{ .Values.baseDn }}"
+    ldapsearch -LLL -D "cn=Directory Manager" -w $(cat /var/secrets/opendj/dirmanager.pw) -b "" -s base "(objectClass=*)" 1.1
