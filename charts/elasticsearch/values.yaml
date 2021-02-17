@@ -54,8 +54,17 @@ elasticsearch:
       memory: 8Gi
     limits:
       cpu: 2
-      memory: 8Gi
-
+        memory: 8Gi
+  # Extra volume to mount gcs credentials for snapshots
+  extraVolumes:
+    - name: snapshot-sa
+      secret:
+        secretName: elasticsearch-gcs-sa
+  extraVolumeMounts:
+    - mountPath: /usr/share/elasticsearch/config/snapshot_credentials.json
+      subPath: snapshot_credentials.json
+      name: snapshot-sa
+      readOnly: true
   esConfig:
     elasticsearch.yml: |
       http:
