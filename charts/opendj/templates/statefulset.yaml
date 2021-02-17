@@ -37,11 +37,14 @@ spec:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
         ports:
+        - name: ldaps
+          containerPort: 636
+          protocol: TCP
         - name: ldap
           containerPort: 389
           protocol: TCP
-        - name: ldaps
-          containerPort: 636
+        - name: admin
+          containerPort: 4444
           protocol: TCP
         livenessProbe:
           tcpSocket:
@@ -101,9 +104,16 @@ spec:
       name: {{ .Values.name }}-data
       labels:
         {{- include "opendj.labels" . | nindent 8 }}
+      {{- if .Values.snapshot.enable }}
+      annotations:
+        bio.terra/snapshot-policy: {{ .Values.snapshot.policy }}
+      {{- end }}
     spec:
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
           storage: {{ .Values.persistence.capacity }}
+      {{- if .Values.persistence.storageClassName }}
+      storageClassName: {{ .Values.persistence.storageClassName }}
+      {{- end }}

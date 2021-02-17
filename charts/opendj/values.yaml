@@ -37,6 +37,13 @@ service:
   firewallEnabled: true
   # service.allowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   allowedAddresses: {}
+  ports:
+    # service.ports.ldaps -- Whether to enable the LDAPS(636) port
+    ldaps: true
+    # service.ports.ldap -- Whether to enable the LDAP(389) port
+    ldap: false
+    # service.ports.admin -- Whether to enable the admin(4444) port
+    admin: false
 
 # nodeSelector -- nodeSelector map
 nodeSelector: {}
@@ -46,8 +53,8 @@ affinity: {}
 tolerations: []
 
 persistence:
-  # persistence.gcpDisk -- (string) If not null, the chart will attempt to use a GCP disk with the provided name for the data volume
-  gcpDisk: null
+  # persistence.storageClassName -- (string) If not null, the volume will be restricted to the specified storage class
+  storageClassName: null
   # persistence.capacity -- Capacity of persistent data volume
   capacity: 200Gi
 
@@ -57,3 +64,9 @@ legacyResourcePrefix: null
 
 # baseDn -- Base dn used for health checks. If left empty a base dn of "" is used.
 baseDn: null
+
+snapshot:
+  # snapshot.enable -- Whether to enable a gcp snapshot policy for the data disk
+  enable: true
+  # snapshot.policy -- Name of the snapshot policy to use on data disk
+  policy: terra-snapshot-policy

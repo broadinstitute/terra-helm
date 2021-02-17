@@ -2,7 +2,7 @@ sam
 ===
 Chart for Sam, the Terra Identity and Access Management application
 
-Current chart version is `0.4.0`
+Current chart version is `0.6.0`
 
 
 
@@ -38,6 +38,7 @@ Current chart version is `0.4.0`
 | prometheus.initContainerImage | string | `"alpine:3.12.0"` |  |
 | prometheus.jmxJarRepo | string | `"https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent"` |  |
 | prometheus.jmxJarVersion | string | `"0.13.0"` |  |
+| proxy.logLevel | string | `"warn"` |  |
 | replicas | int | `0` | Number of replicas for the deployment |
 | resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"16Gi"` | Memory to limit the deployment to |

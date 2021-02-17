@@ -1,0 +1,70 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}-backup-cronjob
+  labels: {{ include "mongodb.labels" . | nindent 4 }}
+spec:
+  schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
+  concurrencyPolicy: Replace
+  jobTemplate:
+    metadata:
+      labels: {{ include "mongodb.labels" . | nindent 8 }}
+    spec:
+      activeDeadlineSeconds: {{ .Values.backup.timeoutSeconds }}
+      template:
+        metadata:
+          labels: {{ include "mongodb.labels" . | nindent 12 }}
+        spec:
+          serviceAccountName: {{ .Values.name }}-sa
+          initContainers:
+          - name: {{ .Values.name }}-backup-dump
+            image: {{ include "_mongodb.image" . }}
+            command: ['sh', '-c']
+            args:
+            - |-
+              mongodump --oplog \
+                --out /backup/dump \
+                --password "$MONGODUMP_PASSWORD" \
+                "$MONGODUMP_CONNECTION_STRING"
+            env:
+            - name: MONGODUMP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: mongodb-root-password
+            - name: MONGODUMP_CONNECTION_STRING
+              value: {{ include "_mongodb.backup.replicaset.url" . | quote }}
+            volumeMounts:
+            - mountPath: /backup
+              name: backup-data
+          containers:
+          - name: {{ .Values.name }}-backup-upload
+            image: {{ include "_mongodb.backup.cloudsdk.image" . }}
+            command: ['sh', '-c']
+            args:
+            - |-
+              TIMESTAMP=$( date "+%Y%m%d.%H%M%S" ) && \
+              gcloud auth activate-service-account --key-file=/sa-key.json && \
+                tar -C /backup -cvzf dump.tgz dump && \
+                gsutil cp dump.tgz "gs://${GCS_BUCKET}/dump-${TIMESTAMP}.tgz"
+            env:
+            - name: GCS_BUCKET
+              value: {{ .Values.backup.gcsBucket | quote }}
+            volumeMounts:
+            - mountPath: /backup
+              name: backup-data
+            - mountPath: /sa-key.json
+              name: gcp-sa
+              subPath: sa-key.json
+          restartPolicy: OnFailure
+          nodeSelector: {{ .Values.backup.nodeSelector | toYaml | nindent 12 }}
+          tolerations: {{ .Values.backup.tolerations | toYaml | nindent 12 }}
+          volumes:
+          - name: backup-data
+            emptyDir: {}
+          - name: gcp-sa
+            secret:
+              secretName: {{ .Values.name }}-secrets
+              items:
+              - key: mongodb-backup-credentials
+                path: sa-key.json

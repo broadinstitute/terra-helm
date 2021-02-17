@@ -14,11 +14,21 @@ spec:
   selector:
     {{- include "opendj.selectorLabels" . | nindent 4 }}
   ports:
-  - name: ldap
-    port: 389
-    protocol: TCP
-    targetPort: ldap
+  {{- if .Values.service.ports.ldaps }}
   - name: ldaps
     port: 636
     protocol: TCP
     targetPort: ldaps
+  {{- end }}
+  {{- if .Values.service.ports.ldap }}
+  - name: ldap
+    port: 389
+    protocol: TCP
+    targetPort: ldap
+  {{- end }}
+  {{- if .Values.service.ports.admin }}
+  - name: admin
+    port: 4444
+    protocol: TCP
+    targetPort: admin
+  {{- end }}
