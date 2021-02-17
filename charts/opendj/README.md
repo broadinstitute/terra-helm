@@ -13,7 +13,6 @@ Current chart version is `0.3.0`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity map |
-| baseDn | string | `nil` | Base dn used for health checks. If left empty a base dn of "" is used. |
 | global.applicationVersion | string | `"opendj600"` | What version of the application to deploy |
 | global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |

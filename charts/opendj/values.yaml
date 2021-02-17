@@ -62,9 +62,6 @@ persistence:
 # @default .Chart.Name
 legacyResourcePrefix: null
 
-# baseDn -- Base dn used for health checks. If left empty a base dn of "" is used.
-baseDn: null
-
 snapshot:
   # snapshot.enable -- Whether to enable a gcp snapshot policy for the data disk
   enable: true
