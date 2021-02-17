@@ -21308,6 +21308,25 @@ entries:
     version: 0.0.2
   terra-cluster-storage:
   - apiVersion: v2
+    created: "2021-02-17T13:24:50.899704552Z"
+    description: |
+      A Helm chart to deploy cluster-wide storage resources for Terra.
+    digest: ba9e7ae73f5ec1fabc3ee770babc770bb5c65b2364fca679fbc289f751a41bce
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    maintainers:
+    - email: ap-devops@broadinstitute.org
+      name: AP DevOps
+    name: terra-cluster-storage
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-storage-0.3.0/terra-cluster-storage-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2021-01-28T22:39:01.496458119Z"
     description: |
       A Helm chart to deploy cluster-wide storage resources for Terra.
