@@ -50,7 +50,7 @@ ingress:
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.securityPolicy -- (string) Name of a GCP Cloud Armor security policy
-  securityPolicy: null
+  securityPolicy: ""
   # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
   timeoutSec: 120
 
