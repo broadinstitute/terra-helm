@@ -119,7 +119,7 @@ spec:
         {{- end }}
         {{- if $settings.probes.liveness.enabled }}
         livenessProbe:
-          {{- toYaml $settings.probes.readiness.spec | nindent 10 }}
+          {{- toYaml $settings.probes.liveness.spec | nindent 10 }}
         {{- end }}
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
