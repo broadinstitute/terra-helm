@@ -28,12 +28,22 @@ Current chart version is `0.6.0`
 | ingress.timeoutSec | int | `120` |  |
 | legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default .Chart.Name |
 | name | string | `"sam"` | A name for the deployment that will be substituted into resuorce definitions |
-| probes.liveness.failureThreshold | int | `30` | How many times the liveness check can fail before the container is restarted |
-| probes.liveness.initialDelaySeconds | int | `60` | Initial delay before attempting to check liveness |
-| probes.liveness.periodSeconds | int | `10` | How often to check liveness |
-| probes.readiness.failureThreshold | int | `6` | How many times the readiness check can fail before the container is marked unhealthy |
-| probes.readiness.initialDelaySeconds | int | `60` | Initial delay before attempting to check readiness |
-| probes.readiness.periodSeconds | int | `10` | How often to check if the app is ready |
+| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.spec.failureThreshold | int | `30` |  |
+| probes.liveness.spec.httpGet.path | string | `"/version"` |  |
+| probes.liveness.spec.httpGet.port | int | `8080` |  |
+| probes.liveness.spec.initialDelaySeconds | int | `20` |  |
+| probes.liveness.spec.periodSeconds | int | `10` |  |
+| probes.liveness.spec.successThreshold | int | `1` |  |
+| probes.liveness.spec.timeoutSeconds | int | `5` |  |
+| probes.readiness.enabled | bool | `true` |  |
+| probes.readiness.spec.failureThreshold | int | `6` |  |
+| probes.readiness.spec.httpGet.path | string | `"/status"` |  |
+| probes.readiness.spec.httpGet.port | int | `8080` |  |
+| probes.readiness.spec.initialDelaySeconds | int | `20` |  |
+| probes.readiness.spec.periodSeconds | int | `10` |  |
+| probes.readiness.spec.successThreshold | int | `1` |  |
+| probes.readiness.spec.timeoutSeconds | int | `5` |  |
 | prometheus.enabled | bool | `true` |  |
 | prometheus.initContainerImage | string | `"alpine:3.12.0"` |  |
 | prometheus.jmxJarRepo | string | `"https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent"` |  |

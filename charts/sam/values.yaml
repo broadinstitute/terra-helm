@@ -34,8 +34,8 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /engine/latest/version
-        port: 8000
+        path: /status
+        port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 20
       periodSeconds: 10
@@ -43,11 +43,11 @@ probes:
       successThreshold: 1
   liveness:
     # probes.liveness.enable -- Whether to configure a liveness probe
-    enabled: true
+    enabled: false
     spec:
       httpGet:
-        path: /engine/latest/version
-        port: 8000
+        path: /version
+        port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 20
       periodSeconds: 10

@@ -39,6 +39,31 @@ image:
 imageRepository:
 imageTag:
 
+probes:
+  readiness:
+    # probes.readiness.enable -- Whether to configure a readiness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 1
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      failureThreshold: 10
+      successThreshold: 1
+  liveness:
+    # probes.liveness.enable -- Whether to configure a liveness probe
+    enabled: false
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      failureThreshold: 30
+
 # GKE ingress requires certificate in a slightly different format from the apache proxy
 # This is used to set tls for the GKE ingress
 ingressCert:

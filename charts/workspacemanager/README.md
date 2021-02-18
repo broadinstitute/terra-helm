@@ -1,14 +1,15 @@
-# workspacemanager
+workspacemanager
+================
 
 Chart for Terra Workspace Manager
 
-## Requirements
+## Chart Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy | postgres | 0.1.0 |
 
-## Values
+## Chart Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -40,7 +41,7 @@ Chart for Terra Workspace Manager
 | ingress.domain.namespaceEnv | bool | `true` |  |
 | ingress.domain.suffix | string | `"integ.envs.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
-| ingress.securityPolicy | string | `nil` | Name of a GCP Cloud Armor security policy |
+| ingress.securityPolicy | string | `""` | (string) Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
@@ -48,6 +49,22 @@ Chart for Terra Workspace Manager
 | name | string | `"workspacemanager"` | A name for the deployment that will be substituted into resuorce definitions |
 | postgres.dbs | list | `["workspace","stairway"]` | (array(string)) List of databases to create. |
 | postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
+| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.spec.failureThreshold | int | `30` |  |
+| probes.liveness.spec.httpGet.path | string | `"/version"` |  |
+| probes.liveness.spec.httpGet.port | int | `8080` |  |
+| probes.liveness.spec.initialDelaySeconds | int | `20` |  |
+| probes.liveness.spec.periodSeconds | int | `10` |  |
+| probes.liveness.spec.successThreshold | int | `1` |  |
+| probes.liveness.spec.timeoutSeconds | int | `5` |  |
+| probes.readiness.enabled | bool | `true` |  |
+| probes.readiness.spec.failureThreshold | int | `6` |  |
+| probes.readiness.spec.httpGet.path | string | `"/status"` |  |
+| probes.readiness.spec.httpGet.port | int | `8080` |  |
+| probes.readiness.spec.initialDelaySeconds | int | `20` |  |
+| probes.readiness.spec.periodSeconds | int | `10` |  |
+| probes.readiness.spec.successThreshold | int | `1` |  |
+| probes.readiness.spec.timeoutSeconds | int | `5` |  |
 | prometheus.enabled | bool | `true` |  |
 | prometheus.initContainerImage | string | `"alpine:3.12.0"` |  |
 | prometheus.jmxJarRepo | string | `"https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent"` |  |

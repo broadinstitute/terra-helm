@@ -69,23 +69,14 @@ spec:
             - name: ontology-prometheusjmx-jar
               mountPath: /etc/prometheusjmx/prometheusjmx.jar
               subPath: prometheusjmx.jar
+          {{- if .Values.probes.readiness.enabled }}
           readinessProbe:
-            httpGet:
-              path: /status
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 1
-            failureThreshold: 6 # mark pod unavaible for traffic after 60s
-            successThreshold: 1
+            {{- toYaml .Values.probes.readiness.spec | nindent 12 }}
+          {{- end }}
+          {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
-            httpGet:
-              path: /status
-              port: 8080
-            timeoutSeconds: 5
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            failureThreshold: 30 # Restart container after 5 minutes
+            {{- toYaml .Values.probes.readiness.spec | nindent 12 }}
+          {{- end }}
         - name: {{ .Chart.Name }}-proxy
           image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:

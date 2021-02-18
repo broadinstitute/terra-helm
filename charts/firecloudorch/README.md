@@ -2,7 +2,7 @@ firecloudorch
 =============
 Chart for firecloud-orchestration service in Terra
 
-Current chart version is `0.1.0`
+Current chart version is `0.2.0`
 
 
 
@@ -27,6 +27,22 @@ Current chart version is `0.1.0`
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
 | name | string | `"firecloudorch"` |  |
+| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.spec.failureThreshold | int | `30` |  |
+| probes.liveness.spec.httpGet.path | string | `"/version"` |  |
+| probes.liveness.spec.httpGet.port | int | `8080` |  |
+| probes.liveness.spec.initialDelaySeconds | int | `20` |  |
+| probes.liveness.spec.periodSeconds | int | `10` |  |
+| probes.liveness.spec.successThreshold | int | `1` |  |
+| probes.liveness.spec.timeoutSeconds | int | `5` |  |
+| probes.readiness.enabled | bool | `true` |  |
+| probes.readiness.spec.failureThreshold | int | `6` |  |
+| probes.readiness.spec.httpGet.path | string | `"/status"` |  |
+| probes.readiness.spec.httpGet.port | int | `8080` |  |
+| probes.readiness.spec.initialDelaySeconds | int | `20` |  |
+| probes.readiness.spec.periodSeconds | int | `10` |  |
+| probes.readiness.spec.successThreshold | int | `1` |  |
+| probes.readiness.spec.timeoutSeconds | int | `5` |  |
 | prometheus.enabled | bool | `true` |  |
 | prometheus.initContainerImage | string | `"alpine:3.12.0"` |  |
 | prometheus.jmxJarRepo | string | `"https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent"` |  |

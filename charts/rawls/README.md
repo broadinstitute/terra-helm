@@ -2,7 +2,7 @@ rawls
 =====
 Chart for Rawls service in Terra
 
-Current chart version is `0.2.0`
+Current chart version is `0.3.0`
 
 
 
@@ -17,6 +17,10 @@ Current chart version is `0.2.0`
 | deploymentDefaults.imageTag | string | `nil` | Image tag to be used when deploying Pods @defautl global.applicationVersion |
 | deploymentDefaults.legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default deploymentDefaults.name |
 | deploymentDefaults.name | string | `nil` | A name for the deployment that will be substituted into resuorce definitions. Example: `"rawls1-reader"` |
+| deploymentDefaults.probes.liveness.enabled | bool | `false` |  |
+| deploymentDefaults.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/status","port":8080},"initialDelaySeconds":20,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the liveness probe to deploy, if enabled |
+| deploymentDefaults.probes.readiness.enabled | bool | `true` |  |
+| deploymentDefaults.probes.readiness.spec | object | `{"failureThreshold":6,"httpGet":{"path":"/status","port":8080},"initialDelaySeconds":20,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the readiness probe to deploy, if enabled |
 | deploymentDefaults.replicas | int | `0` | Number of replicas for the deployment |
 | deploymentDefaults.serviceIP | string | `nil` | Static IP to use for the Service. If set, service will be of type LoadBalancer |
 | deploymentDefaults.serviceName | string | `nil` | What to call the Service |

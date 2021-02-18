@@ -15,6 +15,10 @@ A Helm chart for Cromwell, the Terra Workflow Management System
 | deploymentDefaults.legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default deploymentDefaults.name |
 | deploymentDefaults.name | string | `nil` | A name for the deployment that will be substituted into resource definitions. Example: `"cromwell1-reader"` |
 | deploymentDefaults.nodeSelector | object | `nil` | Optional nodeSelector map |
+| deploymentDefaults.probes.liveness.enabled | bool | `false` |  |
+| deploymentDefaults.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/engine/latest/version","port":8080},"initialDelaySeconds":20,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the liveness probe to deploy, if enabled |
+| deploymentDefaults.probes.readiness.enabled | bool | `true` |  |
+| deploymentDefaults.probes.readiness.spec | object | `{"failureThreshold":6,"httpGet":{"path":"/engine/latest/version","port":8080},"initialDelaySeconds":20,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the readiness probe to deploy, if enabled |
 | deploymentDefaults.replicas | int | `0` | Number of replicas for the deployment |
 | deploymentDefaults.serviceAllowedAddresses | object | `{}` | What source IPs to whitelist for access to the service |
 | deploymentDefaults.serviceIP | string | `nil` | Static IP to use for the Service. If set, service will be of type LoadBalancer |

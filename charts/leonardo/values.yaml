@@ -18,6 +18,33 @@ deploymentDefaults:
   imageTag: null
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
+  probes:
+    readiness:
+      # deploymentDefaults.probes.readiness.enable -- Whether to configure a readiness probe
+      enabled: true
+      # deploymentDefaults.probes.readiness.spec -- k8s spec of the readiness probe to deploy, if enabled
+      spec:
+        httpGet:
+          path: /status
+          port: 8080
+        timeoutSeconds: 5
+        initialDelaySeconds: 15
+        periodSeconds: 10
+        failureThreshold: 6
+        successThreshold: 1
+    liveness:
+      # deploymentDefaults.probes.liveness.enable -- Whether to configure a liveness probe
+      enabled: false
+      # deploymentDefaults.probes.liveness.spec -- k8s spec of the liveness probe to deploy, if enabled
+      spec:
+        httpGet:
+          path: /version
+          port: 8080
+        timeoutSeconds: 5
+        initialDelaySeconds: 15
+        periodSeconds: 10
+        failureThreshold: 30 # 5 minutes before restarted
+        successThreshold: 1
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
 # with different configurations.

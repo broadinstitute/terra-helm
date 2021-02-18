@@ -54,3 +54,30 @@ deploymentDefaults:
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
   legacyResourcePrefix: null
+  probes:
+    readiness:
+      # deploymentDefaults.probes.readiness.enable -- Whether to configure a readiness probe
+      enabled: true
+      # deploymentDefaults.probes.readiness.spec -- k8s spec of the readiness probe to deploy, if enabled
+      spec:
+        httpGet:
+          path: /status
+          port: 8080
+        timeoutSeconds: 5
+        initialDelaySeconds: 20
+        periodSeconds: 10
+        failureThreshold: 6
+        successThreshold: 1
+    liveness:
+      # deploymentDefaults.probes.liveness.enable -- Whether to configure a liveness probe
+      enabled: false
+      # deploymentDefaults.probes.liveness.spec -- k8s spec of the liveness probe to deploy, if enabled
+      spec:
+        httpGet:
+          path: /status
+          port: 8080
+        timeoutSeconds: 5
+        initialDelaySeconds: 20
+        periodSeconds: 10
+        failureThreshold: 30 # 5 minutes before restarted
+        successThreshold: 1
