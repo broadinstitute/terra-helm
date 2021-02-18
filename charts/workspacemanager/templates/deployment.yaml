@@ -192,7 +192,7 @@ spec:
         {{- end }}
         {{- if .Values.probes.liveness.enabled }}
         livenessProbe:
-          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
       {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy

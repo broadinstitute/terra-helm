@@ -107,7 +107,7 @@ spec:
         {{- end }}
         {{- if .Values.probes.liveness.enabled }}
         livenessProbe:
-          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
       - name: {{ .Chart.Name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big

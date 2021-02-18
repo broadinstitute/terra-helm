@@ -106,7 +106,7 @@ spec:
           {{- end }}
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
-            {{- toYaml .Values.probes.readiness.spec | nindent 12 }}
+            {{- toYaml .Values.probes.liveness.spec | nindent 12 }}
           {{- end }}
           securityContext:
             runAsUser: 2  # non-root user
