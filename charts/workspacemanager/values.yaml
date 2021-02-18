@@ -51,7 +51,7 @@ probes:
       successThreshold: 1
   liveness:
     # probes.liveness.enable -- Whether to configure a liveness probe
-    enabled: false
+    enabled: true
     spec:
       httpGet:
         path: /version

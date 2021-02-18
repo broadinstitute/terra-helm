@@ -70,7 +70,7 @@ deploymentDefaults:
         successThreshold: 1
     liveness:
       # deploymentDefaults.probes.liveness.enable -- Whether to configure a liveness probe
-      enabled: false
+      enabled: true
       # deploymentDefaults.probes.liveness.spec -- k8s spec of the liveness probe to deploy, if enabled
       spec:
         httpGet:
