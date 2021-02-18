@@ -1,14 +1,10 @@
-consent
-=======
+# consent
+
 A Helm chart for DUOS Consent
 
-Current chart version is `0.8.0`
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
-
-
-
-
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -77,3 +73,41 @@ Current chart version is `0.8.0`
 | vaultEnabled | bool | `true` |  |
 | vaultKeyPath | string | `nil` |  |
 | vaultKeySecretKey | string | `nil` |  |
+
+## Cheat Sheet
+
+* `gcloud container clusters get-credentials terra-dev --zone us-central1-a --project broad-dsde-dev`
+* `k get secrets -n terra-dev`
+* `k describe secret consent-secrets -n terra-dev`
+* `k get configmap -n terra-dev`
+* `k describe configmap consent-configmap -n terra-dev`
+* `helmfile -e dev --selector group=terra,app=consent template`
+
+## Storing JSON Secrets in Vault
+Our k8s json secrets in vault are first base64 encoded and then written to
+the path. To pull them back out, we pull them using secrets.yaml and
+base64 decode them before writing to the pod's file system.
+
+Convert standard vault json secret to a k8s friendly base64 text file:.
+```
+vault read -format=json secret/path/secret.json | jq '.data' | base64 -o base64.txt
+``` 
+Decide on a new secret path and create it:
+```
+docker run -it --rm \
+    -v $HOME:/root \
+    broadinstitute/dsde-toolbox:dev vault-edit secret/path/secret-k8s.json
+```
+That drops you into vim. Edit the file to look like:
+```
+{ "key": "<paste contents of base64.txt>" }
+```
+and save. Now you can refer to this in your `secrets.yaml` like so
+```
+...
+    secret-k8s.json:
+      path: secret/path/secret-k8s.json
+      encoding: base64
+      key: key
+...
+```
