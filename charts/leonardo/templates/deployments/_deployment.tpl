@@ -136,26 +136,14 @@ spec:
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
         # Leo's Ingress / GCP load balancer in the Ingress's backendConfig
+        {{- if $settings.probes.readiness.enabled }}
         readinessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 15
-          periodSeconds: 10
-          failureThreshold: 6 # 60 seconds before unready
-          successThreshold: 1
+          {{- toYaml $settings.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if $settings.probes.liveness.enabled }}
         livenessProbe:
-          httpGet:
-            # poll /version instead of /status to avoid auto-restarting Leo
-            # when an upstream dependency, like Sam, goes down
-            path: /version
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 15
-          periodSeconds: 10
-          failureThreshold: 30 # 5 minutes before restarted
-          successThreshold: 1
+          {{- toYaml $settings.probes.readiness.spec | nindent 10 }}
+        {{- end }}
       - name: {{ $settings.name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big
         ports:

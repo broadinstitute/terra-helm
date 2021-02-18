@@ -113,24 +113,14 @@ spec:
         - mountPath: /etc/rawls-cm
           name: {{ $settings.name }}-cm
           readOnly: true
+        {{- if $settings.probes.readiness.enabled }}
         readinessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 6 # 60 seconds before unready
-          successThreshold: 1
+          {{- toYaml $settings.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if $settings.probes.liveness.enabled }}
         livenessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 30 # 5 minutes before restarted
-          successThreshold: 1
+          {{- toYaml $settings.probes.readiness.spec | nindent 10 }}
+        {{- end }}
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
         envFrom:

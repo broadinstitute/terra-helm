@@ -12,12 +12,16 @@ A Helm chart for Leonardo, Terra's Jupyter notebook integration service
 | commonCronjob.reportDestinationBucket | string | `nil` |  |
 | cronjob.googleProject | string | `nil` |  |
 | cronjob.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/resource-validator"` |  |
-| cronjob.imageTag | string | `"4bbec1f"` |  |
+| cronjob.imageTag | string | `"ed126d1"` |  |
 | cronjob.name | string | `"leonardo-resource-validator-cronjob"` |  |
 | deploymentDefaults.enabled | bool | `true` | Whether a declared deployment is enabled. If false, no resources will be created |
 | deploymentDefaults.imageRepository | string | `"gcr.io/broad-dsp-gcr-public/leonardo"` | Image repo to pull Leonardo images from |
 | deploymentDefaults.imageTag | string | `nil` | Image tag to be used when deploying Pods @default global.applicationVersion |
 | deploymentDefaults.name | Required | `nil` | A name for the deployment that will be substituted into resource definitions. Example: `"leonardo-backend"`. The deployment name will be substituted into Deployment and ConfigMap names.   Eg. "leonardo-frontend" -> "leonardo-frontend-deployment", "leonardo-frontend-cm" |
+| deploymentDefaults.probes.liveness.enabled | bool | `false` |  |
+| deploymentDefaults.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/version","port":8080},"initialDelaySeconds":15,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the liveness probe to deploy, if enabled |
+| deploymentDefaults.probes.readiness.enabled | bool | `true` |  |
+| deploymentDefaults.probes.readiness.spec | object | `{"failureThreshold":6,"httpGet":{"path":"/status","port":8080},"initialDelaySeconds":15,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the readiness probe to deploy, if enabled |
 | deploymentDefaults.replicas | int | `0` | Number of replicas for the deployment |
 | deployments.standalone.name | string | `"leonardo"` | Name to use for the default standalone Leonardo deployment |
 | deployments.standalone.replicas | int | `1` | Number of replicas in the default standalone Leonardo deployment |
@@ -31,5 +35,5 @@ A Helm chart for Leonardo, Terra's Jupyter notebook integration service
 | monitoring.enabled | bool | `true` | Whether to enable Prometheus monitoring for Leonardo pods |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
 | zombieMonitorCron.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/zombie-monitor"` |  |
-| zombieMonitorCron.imageTag | string | `"4bbec1f"` |  |
+| zombieMonitorCron.imageTag | string | `"5188eb3"` |  |
 | zombieMonitorCron.name | string | `"leonardo-zombie-monitor-cronjob"` |  |

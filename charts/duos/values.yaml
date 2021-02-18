@@ -76,6 +76,31 @@ ingress:
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
     preSharedCerts: []
 
+probes:
+  readiness:
+    # probes.readiness.enable -- Whether to configure a readiness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 1
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      failureThreshold: 6
+      successThreshold: 1
+  liveness:
+    # probes.liveness.enable -- Whether to configure a liveness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      failureThreshold: 30 # 5 minutes before restarted
+
 proxyLogLevel:
 proxyImageRepository:
 proxyImageVersion:

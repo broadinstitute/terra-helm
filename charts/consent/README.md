@@ -1,11 +1,10 @@
-DUOS Consent
-========
-
-![Version: 0.6.3](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+# consent
 
 A Helm chart for DUOS Consent
 
-## Chart Values
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -16,12 +15,13 @@ A Helm chart for DUOS Consent
 | databasePasswordKey | string | `nil` |  |
 | databaseUrl | string | `nil` |  |
 | databaseUserKey | string | `nil` |  |
+| databaseUserPath | string | `nil` |  |
 | devDeploy | bool | `false` |  |
 | elasticSearchServer1 | string | `nil` |  |
 | elasticSearchServer2 | string | `nil` |  |
 | elasticSearchServer3 | string | `nil` |  |
+| emailNotificationsEnabled | string | `nil` |  |
 | environment | string | `nil` |  |
-| emailNotificationsEnabled | bool | `nil` |  |
 | gcsAccountKey | string | `nil` |  |
 | gcsAccountPath | string | `nil` |  |
 | global.applicationVersion | string | `"latest"` | What version of the Ontology application to deploy |
@@ -33,7 +33,27 @@ A Helm chart for DUOS Consent
 | image | string | `nil` |  |
 | imageRepository | string | `nil` |  |
 | imageTag | string | `nil` |  |
-| ingressIpName | string | `nil` | Global static ip for ingress. Required. | 
+| ingressCert.cert.path | string | `nil` | Path to secret containing .crt |
+| ingressCert.cert.secretKey | string | `nil` | Key in secret containing .crt |
+| ingressCert.key.path | string | `nil` | Path to secret containing .key |
+| ingressCert.key.secretKey | string | `nil` | Key in secret containing .key |
+| ingressIpName | string | `nil` |  |
+| ingressTimeout | int | `120` | (number) number of seconds requests on the https loadbalancer will time out after |
+| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.spec.failureThreshold | int | `30` |  |
+| probes.liveness.spec.httpGet.path | string | `"/status"` |  |
+| probes.liveness.spec.httpGet.port | int | `8080` |  |
+| probes.liveness.spec.initialDelaySeconds | int | `60` |  |
+| probes.liveness.spec.periodSeconds | int | `10` |  |
+| probes.liveness.spec.timeoutSeconds | int | `5` |  |
+| probes.readiness.enabled | bool | `true` |  |
+| probes.readiness.spec.failureThreshold | int | `10` |  |
+| probes.readiness.spec.httpGet.path | string | `"/status"` |  |
+| probes.readiness.spec.httpGet.port | int | `8080` |  |
+| probes.readiness.spec.initialDelaySeconds | int | `60` |  |
+| probes.readiness.spec.periodSeconds | int | `10` |  |
+| probes.readiness.spec.successThreshold | int | `1` |  |
+| probes.readiness.spec.timeoutSeconds | int | `1` |  |
 | proxyImageRepository | string | `nil` |  |
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |
@@ -42,9 +62,9 @@ A Helm chart for DUOS Consent
 | sendgridApiKeyKey | string | `nil` |  |
 | sentryDsnKey | string | `nil` |  |
 | sentryDsnPath | string | `nil` |  |
-| serviceIP | string | `nil` | External IP of the service. Required. |
 | servicesLocalUrl | string | `nil` |  |
 | servicesOntologyUrl | string | `nil` |  |
+| sslPolicy | string | `"tls12-ssl-policy"` |  |
 | vaultCertPath | string | `nil` |  |
 | vaultCertSecretKey | string | `nil` |  |
 | vaultChain | string | `nil` |  |
@@ -64,14 +84,14 @@ A Helm chart for DUOS Consent
 * `helmfile -e dev --selector group=terra,app=consent template`
 
 ## Storing JSON Secrets in Vault
-Our k8s json secrets in vault are first base64 encoded and then written to 
-the path. To pull them back out, we pull them using secrets.yaml and 
+Our k8s json secrets in vault are first base64 encoded and then written to
+the path. To pull them back out, we pull them using secrets.yaml and
 base64 decode them before writing to the pod's file system.
 
 Convert standard vault json secret to a k8s friendly base64 text file:.
 ```
 vault read -format=json secret/path/secret.json | jq '.data' | base64 -o base64.txt
-```  
+``` 
 Decide on a new secret path and create it:
 ```
 docker run -it --rm \

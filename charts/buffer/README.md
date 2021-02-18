@@ -2,7 +2,7 @@ buffer
 ======
 Chart for Resource Buffering Service
 
-Current chart version is `0.12.0`
+Current chart version is `0.14.0`
 
 
 
@@ -41,6 +41,14 @@ Current chart version is `0.12.0`
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
 | name | string | `"buffer"` | A name for the deployment that will be substituted into resuorce definitions |
+| probes.readiness.enabled | bool | `true` |  |
+| probes.readiness.spec.failureThreshold | int | `6` |  |
+| probes.readiness.spec.httpGet.path | string | `"/status"` |  |
+| probes.readiness.spec.httpGet.port | int | `8080` |  |
+| probes.readiness.spec.initialDelaySeconds | int | `20` |  |
+| probes.readiness.spec.periodSeconds | int | `10` |  |
+| probes.readiness.spec.successThreshold | int | `1` |  |
+| probes.readiness.spec.timeoutSeconds | int | `5` |  |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |

@@ -30,19 +30,29 @@ resources:
 
 probes:
   readiness:
-    # probes.readiness.initialDelaySeconds -- Initial delay before attempting to check readiness
-    initialDelaySeconds: 60
-    # probes.readiness.failureThreshold -- How many times the readiness check can fail before the container is marked unhealthy
-    failureThreshold: 6
-    # probes.readiness.periodSeconds -- How often to check if the app is ready
-    periodSeconds: 10
+    # probes.readiness.enable -- Whether to configure a readiness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 6
+      successThreshold: 1
   liveness:
-    # probes.liveness.initialDelaySeconds -- Initial delay before attempting to check liveness
-    initialDelaySeconds: 60
-    # probes.liveness.failureThreshold -- How many times the liveness check can fail before the container is restarted
-    failureThreshold: 30
-    # probes.liveness.periodSeconds -- How often to check liveness
-    periodSeconds: 10
+    # probes.liveness.enable -- Whether to configure a liveness probe
+    enabled: false
+    spec:
+      httpGet:
+        path: /version
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 30 # 5 minutes before restarted
+      successThreshold: 1
 
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources

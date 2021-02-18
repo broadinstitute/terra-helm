@@ -23,6 +23,32 @@ resources:
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 13Gi
 
+probes:
+  readiness:
+    # probes.readiness.enable -- Whether to configure a readiness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 6
+      successThreshold: 1
+  liveness:
+    # probes.liveness.enable -- Whether to configure a liveness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /version
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 30 # 5 minutes before restarted
+      successThreshold: 1
+
 # Settings for Cromiam's Ingress & Service
 ingress:
   # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig

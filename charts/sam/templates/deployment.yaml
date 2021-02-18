@@ -78,7 +78,7 @@ spec:
           -jar $(find /sam -name 'sam*.jar')
         - '--'
         resources:
-{{ toYaml .Values.resources | indent 10 }}
+          {{- toYaml .Values.resources | nindent 10 }}
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
@@ -119,24 +119,14 @@ spec:
           mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
         {{- end }}
+        {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
-          failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
-          successThreshold: 1
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.probes.liveness.enabled }}
         livenessProbe:
-          httpGet:
-            path: /version
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
-          failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
-          successThreshold: 1
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+        {{- end }}
       - name: {{ .Values.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:

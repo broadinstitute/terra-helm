@@ -115,24 +115,14 @@ spec:
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: cromwell-prometheusjmx-jar
+        {{- if $settings.probes.readiness.enabled }}
         readinessProbe:
-          httpGet:
-            path: /engine/latest/version
-            port: 8000
-          timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 6 # 60 seconds before unready
-          successThreshold: 1
+          {{- toYaml $settings.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if $settings.probes.liveness.enabled }}
         livenessProbe:
-          httpGet:
-            path: /engine/latest/version
-            port: 8000
-          timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 30 # 5 minutes before restarted
-          successThreshold: 1
+          {{- toYaml $settings.probes.readiness.spec | nindent 10 }}
+        {{- end }}
       - name: {{ $settings.name }}-proxy
         image: broadinstitute/openidc-proxy:modsecurity_2_9_2
         ports:

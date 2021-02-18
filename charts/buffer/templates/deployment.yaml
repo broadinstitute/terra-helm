@@ -137,15 +137,10 @@ spec:
         - name: app-sa-creds
           mountPath: /secrets/app
           readOnly: true
+        {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
-          httpGet:
-            path: /status
-            port: 8080
-          timeoutSeconds: 5
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 6 # 60 seconds before unready
-          successThreshold: 1
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+        {{- end }}
       - name: {{ .Values.name }}-cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
