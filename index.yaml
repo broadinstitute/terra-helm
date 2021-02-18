@@ -24239,6 +24239,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
+  thurloe:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-02-18T17:44:25.759552619Z"
+    description: Chart for Thurloe service in Terra
+    digest: 6b6b9f3f3f318a65a601829887f3742719f275186dd3b42454a03499884a2dd0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.0.0-296.1613670260.1d08f2/thurloe-0.0.0-296.1613670260.1d08f2.tgz
+    version: 0.0.0-296.1613670260.1d08f2
   workspacemanager:
   - apiVersion: v2
     created: "2021-02-18T16:13:43.300566258Z"
