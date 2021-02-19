@@ -41,7 +41,7 @@ deploymentDefaults:
       spec:
         httpGet:
           path: /engine/latest/version
-          port: 8080
+          port: 8000
         timeoutSeconds: 5
         initialDelaySeconds: 20
         periodSeconds: 10
@@ -54,7 +54,7 @@ deploymentDefaults:
       spec:
         httpGet:
           path: /engine/latest/version
-          port: 8080
+          port: 8000
         timeoutSeconds: 5
         initialDelaySeconds: 20
         periodSeconds: 10
