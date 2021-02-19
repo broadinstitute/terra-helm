@@ -139,7 +139,7 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: BUFFER_KUBERNETES_POD_NAME_FILTER
-          value: {{ .Values.name }}
+          value: {{ .Values.name }}-deployment
         - name: BUFFER_KUBERNETES_IN_KUBERNETES
           value: 'true'
         volumeMounts:
