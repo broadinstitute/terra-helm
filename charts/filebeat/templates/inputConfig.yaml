@@ -14,7 +14,7 @@ data:
       multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
       multiline.negate: false
       multiline.match: after
-        containers.ids:
+      containers.ids:
       - "*"
       processors:
         - add_kubernetes_metadata:
