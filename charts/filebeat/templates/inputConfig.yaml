@@ -10,10 +10,11 @@ data:
     - type: docker
       enabled: true
       # Handle JVM stackstraces
-      multiline.type: pattern
-      multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
-      multiline.negate: false
-      multiline.match: after
+      multiline: 
+        type: pattern
+        pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
+        negate: false
+        match: after
       containers.ids:
       - "*"
       processors:
