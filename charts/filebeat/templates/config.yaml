@@ -17,12 +17,6 @@ data:
         # Reload module configs as they change:
         reload.enabled: false
 
-    # Handle JVM stackstraces
-    multiline.type: pattern
-    multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
-    multiline.negate: false
-    multiline.match: after
-
     processors:
       - add_cloud_metadata:
 
