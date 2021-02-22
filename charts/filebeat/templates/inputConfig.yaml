@@ -9,7 +9,12 @@ data:
   kubernetes.yml: |-
     - type: docker
       enabled: true
-      containers.ids:
+      # Handle JVM stackstraces
+      multiline.type: pattern
+      multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
+      multiline.negate: false
+      multiline.match: after
+        containers.ids:
       - "*"
       processors:
         - add_kubernetes_metadata:
