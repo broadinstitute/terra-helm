@@ -83,6 +83,9 @@ spec:
           - mountPath: /opt/example-v1.json
             name: app-ctmpls
             subPath: example-v1.json
+          - mountPath: /opt/proxy_user.ldif
+            name: app-ctmpls
+            subPath: proxy_user.ldif
           - name: checks
             mountPath: /checks
         resources:
