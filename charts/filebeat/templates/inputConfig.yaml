@@ -9,6 +9,12 @@ data:
   kubernetes.yml: |-
     - type: docker
       enabled: true
+      # Handle JVM stackstraces
+      multiline: 
+        type: pattern
+        pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
+        negate: false
+        match: after
       containers.ids:
       - "*"
       processors:
