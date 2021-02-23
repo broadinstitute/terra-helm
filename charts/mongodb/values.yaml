@@ -75,8 +75,9 @@ bitnami:
       bio.terra/snapshot-policy: terra-snapshot-policy
     size: 125Gi # Size impacts disk performance -- see DDO-992
   podLabels:
+    # Note: don't try to set app.kubernetes.io/name here -- the Bitnami chart uses
+    # it in the StatefulSet selector
     app.kubernetes.io/instance: mongodb # Update to match .Values.name if changed!
-    app.kubernetes.io/name: mongodb
     app.kubernetes.io/part-of: terra
   replicaCount: 3
   resources: # Match pre-GKE click-to-deploy MongoDB instances
