@@ -33,6 +33,7 @@ elasticsearch:
   service:
     type: LoadBalancer
     loadBalancerIP: null
+    loadBalancerSourceRanges: []
   # same as GCE VMS
   esJavaOpts: "-Xms3500m -Xmx3500m"
 
