@@ -1,9 +1,9 @@
-# global.storageClass -- Storage class to use when provisioning persistent disks (passed to Bitnami chart)
 global:
   # XFS filesystems are recommended for production mongodb installations
   # http://dochub.mongodb.org/core/prodnotes-filesystem
+  # global.storageClass -- Storage class to use when provisioning persistent disks (passed to Bitnami chart)
   storageClass: terra-xfs-zonal
-  # -- (DEPRECATED) A map of addesses that should be permitted to connect to MongoDB (see `expose` value). Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
+  # global.trustedAddresses -- A map of addesses that should be permitted to connect to MongoDB (see `expose` value). Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   trustedAddresses: {}
 
 # name -- The name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match!

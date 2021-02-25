@@ -48,7 +48,7 @@ This chart is heavily customized to Terra's needs and is a thin wrapper around B
 | expose | bool | `false` | Whether to expose MongoDB outside the cluster. This is only for backwards-compatibility with existing Terra dev workflows; avoid enabling in new environments |
 | exposeIPs | list | `[]` | Static public IPs to assign to replicas. Required if expose is `true`; must match the number of replicas. Eg. ["1.2.3.4", "5.6.7.8", "9.10.11.12"]. |
 | global.storageClass | string | `"terra-xfs-zonal"` | Storage class to use when provisioning persistent disks (passed to Bitnami chart) |
-| global.trustedAddresses | object | `{}` |  |
+| global.trustedAddresses | object | `{}` | A map of addesses that should be permitted to connect to MongoDB (see `expose` value). Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | name | string | `"mongodb"` | The name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match! |
 | vaultSecrets | object | `{"agoraPassword":{"key":null,"path":null},"backupCredentials":{"key":null,"path":null},"replicaSetKey":{"key":null,"path":null},"rootPassword":{"key":null,"path":null}}` | Where in Vault to find secrets used by MongoDB chart. |
 | vaultSecrets.agoraPassword.key | string | `nil` | Key in Vault where the Agora password is stored |
