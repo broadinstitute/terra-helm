@@ -9,8 +9,11 @@ global:
 # name -- The name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match!
 name: mongodb
 
-# expose -- (DEPRECATED) Whether to expose MongoDB outside the cluster. This is only for backwards-compatibility with existing Terra dev workflows; avoid enabling in new environments
+# expose -- Whether to expose MongoDB outside the cluster. This is only for backwards-compatibility with existing Terra dev workflows; avoid enabling in new environments
 expose: false
+
+# exposeIPs -- Static public IPs to assign to replicas. Required if expose is `true`; must match the number of replicas. Eg. ["1.2.3.4", "5.6.7.8", "9.10.11.12"].
+exposeIPs: []
 
 # vaultSecrets -- Where in Vault to find secrets used by MongoDB chart.
 vaultSecrets:

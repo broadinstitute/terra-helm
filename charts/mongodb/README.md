@@ -36,7 +36,6 @@ This chart is heavily customized to Terra's needs and is a thin wrapper around B
 | bitnami.persistence.annotations."bio.terra/snapshot-policy" | string | `"terra-snapshot-policy"` |  |
 | bitnami.persistence.size | string | `"125Gi"` |  |
 | bitnami.podLabels."app.kubernetes.io/instance" | string | `"mongodb"` |  |
-| bitnami.podLabels."app.kubernetes.io/name" | string | `"mongodb"` |  |
 | bitnami.podLabels."app.kubernetes.io/part-of" | string | `"terra"` |  |
 | bitnami.replicaCount | int | `3` |  |
 | bitnami.resources.limits.cpu | string | `"3250m"` |  |
@@ -46,7 +45,8 @@ This chart is heavily customized to Terra's needs and is a thin wrapper around B
 | bitnami.serviceAccount.create | bool | `false` |  |
 | bitnami.serviceAccount.name | string | `"mongodb-sa"` |  |
 | bitnami.volumePermissions.enabled | bool | `true` |  |
-| expose | bool | `false` | (DEPRECATED) Whether to expose MongoDB outside the cluster. This is only for backwards-compatibility with existing Terra dev workflows; avoid enabling in new environments |
+| expose | bool | `false` | Whether to expose MongoDB outside the cluster. This is only for backwards-compatibility with existing Terra dev workflows; avoid enabling in new environments |
+| exposeIPs | list | `[]` | Static public IPs to assign to replicas. Required if expose is `true`; must match the number of replicas. Eg. ["1.2.3.4", "5.6.7.8", "9.10.11.12"]. |
 | global.storageClass | string | `"terra-xfs-zonal"` | Storage class to use when provisioning persistent disks (passed to Bitnami chart) |
 | global.trustedAddresses | object | `{}` |  |
 | name | string | `"mongodb"` | The name of the service deployed by this chart. Defaults to "mongodb". If this value is overridden, be careful to also update the bitnami subchart values below to match! |
