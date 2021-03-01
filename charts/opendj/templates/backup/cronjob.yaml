@@ -1,3 +1,4 @@
+{{- if .Values.backup.enabled }}
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 apiVersion: batch/v1beta1
 kind: CronJob
@@ -72,3 +73,4 @@ spec:
               items:
               - key: backup-credentials
                 path: sa-key.json
+{{- end }}
