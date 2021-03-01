@@ -17,7 +17,7 @@ spec:
         metadata:
           labels: {{ include "opendj.labels" . | nindent 12 }}
         spec:
-          serviceAccountName: {{ .Values.name }}-sa
+          serviceAccountName: {{ .Values.name }}-service-sa
           initContainers:
           - name: {{ .Values.name }}-backup
             image: {{ .Values.imageConfig.repository }}:{{ $imageTag }}
