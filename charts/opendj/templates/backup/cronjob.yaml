@@ -1,0 +1,74 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}-backup-cronjob
+  labels: {{ include "opendj.labels" . | nindent 4 }}
+spec:
+  schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
+  concurrencyPolicy: Replace
+  jobTemplate:
+    metadata:
+      labels: {{ include "opendj.labels" . | nindent 8 }}
+    spec:
+      activeDeadlineSeconds: {{ .Values.backup.timeoutSeconds }}
+      template:
+        metadata:
+          labels: {{ include "opendj.labels" . | nindent 12 }}
+        spec:
+          serviceAccountName: {{ .Values.name }}-sa
+          initContainers:
+          - name: {{ .Values.name }}-backup
+            image: {{ .Values.imageConfig.repository }}:{{ $imageTag }}
+            command: ['sh', '-c']
+            args:
+            - |-
+              /opt/opendj/bin/backup \
+                --hostname {{ .Values.name }}-backup.{{ .Release.Namespace }}.svc.cluster.local \
+                --port 4444 \
+                --bindDN "cn=Directory Manager" \
+                --bindPassword "$DIR_MANAGER_PASSWORD" \
+                --backUpAll \
+                --backupDirectory /backup \
+                --compress \
+                --trustAll
+            env:
+            - name: DIR_MANAGER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-app-ctmpls
+                  key: dirmanager.pw
+            volumeMounts:
+            - mountPath: /backup
+              name: backup-data
+          containers:
+          - name: {{ .Values.name }}-backup-upload
+            image: {{ .Values.backup.cloudsdkImage.repository }}:{{ .Values.backup.cloudsdkImage.tag }}
+            command: ['sh', '-c']
+            args:
+            - |-
+              TIMESTAMP=$( date "+%Y%m%d.%H%M%S" ) && \
+              gcloud auth activate-service-account --key-file=/sa-key.json && \
+                tar -cvzf backup.tgz /backup && \
+                gsutil cp dump.tgz "gs://${GCS_BUCKET}/dump-${TIMESTAMP}.tgz"
+            env:
+            - name: GCS_BUCKET
+              value: {{ .Values.backup.gcsBucket | quote }}
+            volumeMounts:
+            - mountPath: /backup
+              name: backup-data
+            - mountPath: /sa-key.json
+              name: gcp-sa
+              subPath: sa-key.json
+          restartPolicy: OnFailure
+          nodeSelector: {{ .Values.backup.nodeSelector | toYaml | nindent 12 }}
+          tolerations: {{ .Values.backup.tolerations | toYaml | nindent 12 }}
+          volumes:
+          - name: backup-data
+            emptyDir: {}
+          - name: gcp-sa
+            secret:
+              secretName: {{ .Values.name }}-secrets
+              items:
+              - key: backup-credentials
+                path: sa-key.json
