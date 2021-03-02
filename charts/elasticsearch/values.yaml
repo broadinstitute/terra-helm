@@ -18,9 +18,14 @@ backup:
   hostname: null
   #backup.snapshotRepository -- name of the snapshot repo backed by a GCS bucket to create snapshot in
   snapshotRpository: null
+
 vault:
+  # vault.pathPrefix -- path where elasticsearch secrets are stored in vault
   pathPrefix:
 
+# This section sets a bunch of default values on the elastic search chart provided by elastic.co
+# Currently this ensures that elasticsearch is configured to mirror Terra's gce elasticsearch
+# Documentation on these values can be found at https://github.com/elastic/helm-charts/tree/master/elasticsearch
 elasticsearch:
 
   image: "docker.io/broadinstitute/elasticsearch"
