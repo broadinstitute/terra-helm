@@ -1,0 +1,29 @@
+{{- if .Values.backup.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-backup-setup
+data:
+  setup.sh: |
+    #!/usr/bin/env sh
+
+    echo "Performing minimal setup and running backup..."
+
+    INIT_OPTION="--addBaseEntry"
+
+    # todo: We may want to specify a keystore using --usePkcs12keyStore, --useJavaKeystore
+    /opt/opendj/setup directory-server \
+      --adminConnectorPort 4444 \
+      --rootUserPassword foo \
+      --acceptLicense
+    
+    /opt/opendj/bin/backup]
+      --hostname {{ .Values.name }}-backup.{{ .Release.Namespace }}.svc.cluster.local \
+      --port 4444 \
+      --bindDN "cn=Directory Manager" \
+      --bindPassword "$DIR_MANAGER_PASSWORD" \
+      --backUpAll \
+      --backupDirectory /backup \
+      --compress \
+      --trustAll
+{{- end }}
