@@ -1,6 +1,23 @@
 # Set default values on chart from elastic.co
 name: elasticsearch
 
+backup:
+  # backup.enabled -- Whether to run nightly snapshots of the ES cluster backed up to GCS
+  enabled: false
+  # backup.nodeSelector -- NodeSelector for backup Cronjob pods
+  nodeSelector: {}
+  # backup.tolerations -- Tolerations for backup Cronjob pods
+  tolerations: []
+  # backup.timeoutSeconds -- amount of time after which job automatically fails
+  timeoutSeconds: 7200 # 2 hrs
+  # backup.imageRepo -- specify an image repository for the backup job
+  imageRepo: alpine
+  # backup.imageTag -- specify a tag for the image running the backup job
+  imageTag: "3.13"
+  # backup.hostname -- hostname of the elasticsearch server the backup job will snapshot
+  hostname: null
+  #backup.snapshotRepository -- name of the snapshot repo backed by a GCS bucket to create snapshot in
+  snapshotRpository: null
 vault:
   pathPrefix:
 
