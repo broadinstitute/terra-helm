@@ -30,7 +30,7 @@ spec:
               curl -X PUT "${ELASTICSEARCH_HOSTNAME}:9200/_snapshot/${SNAPSHOT_REPOSITORY}/es-snapshot-${TIMESTAMP}?wait_for_completion=true"
             env: 
             - name: ELASTICSEARCH_HOSTNAME
-              value: {{ .Values.backup.hostname }}
+              value: {{ required "A valid backup.hostname value is required when backup is enabled" .Values.backup.hostname }}
             - name: SNAPSHOT_REPOSITORY
-              value: {{ .Values.backup.snapshotRepository }}
+              value: {{ required "A valid backup.snapshotRepository value is required when backup is enabled" .Values.backup.snapshotRepository }}
 {{ end -}}
