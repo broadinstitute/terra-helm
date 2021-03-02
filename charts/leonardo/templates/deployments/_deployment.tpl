@@ -103,8 +103,16 @@ spec:
         - mountPath: /etc/jupyter-server.crt
           subPath: jupyter-server.crt
           readOnly: true
+          name: app-ctmpls        
+        - mountPath: /leonardo/terra-app-setup/tls.crt
+          subPath: jupyter-server.crt
+          readOnly: true
           name: app-ctmpls
         - mountPath: /etc/jupyter-server.key
+          subPath: jupyter-server.key
+          readOnly: true
+          name: app-ctmpls        
+        - mountPath: /leonardo/terra-app-setup/tls.key
           subPath: jupyter-server.key
           readOnly: true
           name: app-ctmpls
@@ -117,6 +125,10 @@ spec:
           readOnly: true
           name: app-ctmpls
         - mountPath: /etc/rootCA.pem
+          subPath: rootCA.pem
+          readOnly: true
+          name: app-ctmpls       
+        - mountPath: /leonardo/terra-app-setup/ca.crt
           subPath: rootCA.pem
           readOnly: true
           name: app-ctmpls
