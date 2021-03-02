@@ -1,1 +1,110 @@
-# dummy comment
+# Set default values on chart from elastic.co
+name: elasticsearch
+
+backup:
+  # backup.enabled -- Whether to run nightly snapshots of the ES cluster backed up to GCS
+  enabled: false
+  # backup.nodeSelector -- NodeSelector for backup Cronjob pods
+  nodeSelector: {}
+  # backup.tolerations -- Tolerations for backup Cronjob pods
+  tolerations: []
+  # backup.timeoutSeconds -- amount of time after which job automatically fails
+  timeoutSeconds: 7200 # 2 hrs
+  # backup.imageRepo -- specify an image repository for the backup job
+  imageRepo: alpine
+  # backup.imageTag -- specify a tag for the image running the backup job
+  imageTag: "3.13"
+  # backup.hostname -- hostname of the elasticsearch server the backup job will snapshot
+  hostname: null
+  #backup.snapshotRepository -- name of the snapshot repo backed by a GCS bucket to create snapshot in
+  snapshotRpository: null
+
+vault:
+  # vault.pathPrefix -- path where elasticsearch secrets are stored in vault
+  pathPrefix:
+
+# This section sets a bunch of default values on the elastic search chart provided by elastic.co
+# Currently this ensures that elasticsearch is configured to mirror Terra's gce elasticsearch
+# Documentation on these values can be found at https://github.com/elastic/helm-charts/tree/master/elasticsearch
+elasticsearch:
+
+  image: "docker.io/broadinstitute/elasticsearch"
+  imageTag: 5.4.0_6
+
+  podSecurityPolicy:
+    create: true
+    spec:
+      privileged: true
+      fsGroup:
+        rule: RunAsAny
+      runAsUser:
+        rule: RunAsAny
+      seLinux:
+        rule: RunAsAny
+      supplementalGroups:
+        rule: RunAsAny
+      volumes:
+        - secret
+        - configMap
+        - persistentVolumeClaim
+        - emptyDir
+
+  rbac:
+    create: true
+  
+  service:
+    type: LoadBalancer
+    loadBalancerIP: null
+    loadBalancerSourceRanges: []
+  # same as GCE VMS
+  esJavaOpts: "-Xms3500m -Xmx3500m"
+
+  volumeClaimTemplate:
+    accessModes: [ "ReadWriteOnce" ]
+    storageClassName: "terra-ssd-zonal"
+    resources:
+      requests:
+        storage: 200Gi
+  
+  persistence:
+    annotations:
+      bio.terra/snapshot-policy: terra-snapshot-policy
+
+  #set resources to be same as GCEs
+  resources:
+    requests:
+      cpu: 2
+      memory: 8Gi
+    limits:
+      cpu: 2
+      memory: 8Gi
+
+  # Extra volume to mount gcs credentials for snapshots
+  extraVolumes:
+    - name: snapshot-sa
+      secret:
+        secretName: elasticsearch-gcs-sa
+  extraVolumeMounts:
+    - mountPath: /usr/share/elasticsearch/config/snapshot_credentials.json
+      subPath: snapshot_credentials.json
+      name: snapshot-sa
+      readOnly: true
+      
+  esConfig:
+    elasticsearch.yml: |
+      http:
+        cors:
+          enabled: true
+          allow-origin: '*'
+      xpack:
+        graph:
+          enabled: false
+        ml:
+          enabled: false
+        monitoring:
+          enabled: false
+        security:
+          enabled: false
+        watcher:
+          enabled: false
+    
