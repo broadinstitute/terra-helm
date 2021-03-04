@@ -24915,6 +24915,30 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.6.0/terra-prometheus-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v2
+    created: "2021-03-04T17:44:57.987474488Z"
+    dependencies:
+    - name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts/
+      version: 9.3.4
+    description: a helm chart to deploy monitoring infrastructure
+    digest: 612237f23da8fb5d7870ebbe635eb2245e824d0782b0910a82f51dfd4ad26dfa
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - monitoring
+    - prometheus
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: terra-prometheus
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.6.0-308.1614879891.e78de9/terra-prometheus-0.6.0-308.1614879891.e78de9.tgz
+    version: 0.6.0-308.1614879891.e78de9
+  - apiVersion: v2
     created: "2021-01-04T20:00:43.015741775Z"
     dependencies:
     - name: kube-prometheus-stack
