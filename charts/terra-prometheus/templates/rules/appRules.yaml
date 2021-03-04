@@ -126,3 +126,11 @@ spec:
       for: 1h
       labels:
         severity: warning
+    - alert: CronJobNotRunning
+      annotations:
+        message: Job {{`{{`}} $labels.namespace {{`}}`}}/{{`{{`}} $labels.job_name {{`}}`}} failed to complete.
+        runbook_url: alert-name-kubejobfailed
+      expr: time() - kube_cronjob_status_last_schedule_time{job="kube-state-metrics"} > 86400
+      for: 2h
+      labels:
+        severity: warning
