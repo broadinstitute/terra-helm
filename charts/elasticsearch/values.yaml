@@ -5,6 +5,8 @@ replicaCount: 3
 # expose -- If true will create a loadbalancer service for each pod, enables using the transport client from outside the cluster
 expose: false
 
+exposeIps: []
+
 backup:
   # backup.enabled -- Whether to run nightly snapshots of the ES cluster backed up to GCS
   enabled: false
