@@ -18,21 +18,6 @@ spec:
           labels: {{ include "opendj.labels" . | nindent 12 }}
         spec:
           serviceAccountName: {{ .Values.name }}-service-sa
-          initContainers:
-          - name: {{ .Values.name }}-backup
-            image: {{ .Values.imageConfig.repository }}:{{ $imageTag }}
-            env:
-            - name: DIR_MANAGER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.name }}-app-ctmpls
-                  key: dirmanager.pw
-            volumeMounts:
-            - mountPath: /backup
-              name: backup-data
-            - mountPath: /opt/opendj/bootstrap/setup.sh
-              name: setup-script
-              subPath: setup.sh
           containers:
           - name: {{ .Values.name }}-backup-upload
             image: {{ .Values.backup.cloudsdkImage.repository }}:{{ .Values.backup.cloudsdkImage.tag }}
@@ -41,8 +26,17 @@ spec:
             - |-
               TIMESTAMP=$( date "+%Y%m%d.%H%M%S" ) && \
               gcloud auth activate-service-account --key-file=/sa-key.json && \
-                tar -cvzf backup.tgz /backup && \
-                gsutil cp dump.tgz "gs://${GCS_BUCKET}/dump-${TIMESTAMP}.tgz"
+              gcloud container clusters get-credentials {{ .Release.Namespace }} --zone us-central1-a --project broad-dsde-{{ .Values.backup.terraEnv }} && \
+              kubectl cp \
+                "{{ .Release.Namespace }}/opendj-statefulset-0:/opt/opendj/data/bak"
+                "backup" && \
+              tar -cvzf backup.tgz /backup && \
+              gsutil cp dump.tgz "gs://${GCS_BUCKET}/backup-${TIMESTAMP}.tgz" && \
+              kubectl exec \
+                --namespace "{{ .Release.Namespace }}" \
+                opendj-statefulset-0 \
+                -c opendj -- /bin/bash -c \
+                  "rm -rf /opt/opendj/data/bak/*"
             env:
             - name: GCS_BUCKET
               value: {{ .Values.backup.gcsBucket | quote }}
@@ -64,7 +58,4 @@ spec:
               items:
               - key: backup-credentials
                 path: sa-key.json
-          - name: setup-script
-            configMap:
-              name: {{ .Values.name }}-backup-setup
 {{- end }}
