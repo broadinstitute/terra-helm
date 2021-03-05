@@ -15,6 +15,8 @@ LogLevel {{ .Values.proxyLogLevel }}
 Header unset Server
 Header unset X-Content-Type-Options
 Header always set X-Content-Type-Options nosniff
+Header unset Strict-Transport-Security
+Header always set Strict-Transport-Security: max-age=86400; includeSubDomains
 Header unset X-Frame-Options
 Header always set X-Frame-Options SAMEORIGIN
 
