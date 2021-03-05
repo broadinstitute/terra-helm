@@ -1,6 +1,6 @@
 {{- if .Values.expose -}}
 {{- /* Create an LB service for each ES replica */ -}}
-{{- if ne ( len .Values.exposeIps ) (.Values.replicaCount | int ) -}}
+{{- if ne ( len .Values.exposeIPs ) (.Values.replicaCount | int ) -}}
 {{- fail "Number of IPs must match replica count" -}}
 {{- end -}}
 {{- range $index, $_ := until ( .Values.replicaCount | int ) -}}
