@@ -12,6 +12,7 @@ CustomLog "/dev/stdout" combined env=!forwarded
 CustomLog "/dev/stdout" proxy env=forwarded
 LogLevel {{ .Values.proxyLogLevel }}
 
+Header unset Server
 Header unset X-Frame-Options
 Header always set X-Frame-Options SAMEORIGIN
 
