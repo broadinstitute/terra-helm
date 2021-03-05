@@ -1,6 +1,6 @@
 # elasticsearch
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a helm chart to deploy monitoring infrastructure
 
@@ -64,7 +64,9 @@ a helm chart to deploy monitoring infrastructure
 | elasticsearch.volumeClaimTemplate.accessModes[0] | string | `"ReadWriteOnce"` |  |
 | elasticsearch.volumeClaimTemplate.resources.requests.storage | string | `"200Gi"` |  |
 | elasticsearch.volumeClaimTemplate.storageClassName | string | `"terra-ssd-zonal"` |  |
+| expose | bool | `false` | If true will create a loadbalancer service for each pod, enables using the transport client from outside the cluster |
 | name | string | `"elasticsearch"` |  |
+| replicaCount | int | `3` | number of elasticsearch replicas to expose. |
 | vault.pathPrefix | string | `nil` | path where elasticsearch secrets are stored in vault |
 
 ----------------------------------------------
