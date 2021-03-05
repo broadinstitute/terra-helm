@@ -26,9 +26,9 @@ spec:
             - |-
               TIMESTAMP=$( date "+%Y%m%d.%H%M%S" ) && \
               gcloud auth activate-service-account --key-file=/sa-key.json && \
-              gcloud container clusters get-credentials {{ .Release.Namespace }} --zone us-central1-a --project broad-dsde-{{ .Values.backup.terraEnv }} && \
+              gcloud container clusters get-credentials --internal-ip {{ .Release.Namespace }} --zone us-central1-a --project broad-dsde-{{ trimPrefix "terra-" .Release.Namespace }} && \
               kubectl cp \
-                "{{ .Release.Namespace }}/opendj-statefulset-0:/opt/opendj/data/bak"
+                "{{ .Release.Namespace }}/opendj-statefulset-0:/opt/opendj/data/bak" \
                 "backup" && \
               tar -cvzf backup.tgz /backup && \
               gsutil cp dump.tgz "gs://${GCS_BUCKET}/backup-${TIMESTAMP}.tgz" && \
