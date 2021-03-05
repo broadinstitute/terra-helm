@@ -13,7 +13,7 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: {{ index ( $.Values.exposeIPs ) $index }}
-  loadBalancerSourceRanges: {{ .Values.elasticsearch.service.loadBalancerSourceRanges | toYaml | nindent 4 }}
+  loadBalancerSourceRanges: {{ $.Values.elasticsearch.service.loadBalancerSourceRanges | toYaml | nindent 4 }}
   ports:
   - name: http
     port: 9200
