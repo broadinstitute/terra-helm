@@ -9,7 +9,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ $.Values.name }}-{{ $index }}
-  labels: {{ include "elasticsearch.labels" . | nindent 4 }}
+  labels: {{ include "elasticsearch.labels" $ | nindent 4 }}
 spec:
   type: LoadBalancer
   loadBalancerIP: {{ index ( $.Values.exposeIPs ) $index }}
