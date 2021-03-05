@@ -15081,6 +15081,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.4.0/opendj-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
+    created: "2021-03-05T19:23:19.319073241Z"
+    description: Chart for OpenDJ, used by Sam(Terra IAM service) as well as various
+      Terra applications' OIDC proxy deploys
+    digest: bcea7b6955c247e1c2dcc63bc528c944954e60457f2442226a2a38747d5ae815
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - opendj
+    name: opendj
+    sources:
+    - https://github.com/broadinstitute/firecloud-opendj
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/opendj
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.4.0-305.1614972193.4c1460/opendj-0.4.0-305.1614972193.4c1460.tgz
+    version: 0.4.0-305.1614972193.4c1460
+  - apiVersion: v2
     created: "2021-03-05T18:51:08.776714941Z"
     description: Chart for OpenDJ, used by Sam(Terra IAM service) as well as various
       Terra applications' OIDC proxy deploys
