@@ -1,5 +1,11 @@
 # Set default values on chart from elastic.co
 name: elasticsearch
+# replicaCount -- number of elasticsearch replicas to expose.
+replicaCount: 3
+# expose -- If true will create a loadbalancer service for each pod, enables using the transport client from outside the cluster
+expose: false
+# exposeIPs -- List of ips to associate with each ES pod
+exposeIPs: []
 
 backup:
   # backup.enabled -- Whether to run nightly snapshots of the ES cluster backed up to GCS

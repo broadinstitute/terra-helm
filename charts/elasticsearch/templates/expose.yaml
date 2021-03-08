@@ -1,0 +1,32 @@
+{{- if .Values.expose -}}
+{{- /* Create an LB service for each ES replica */ -}}
+{{- if ne ( len .Values.exposeIPs ) (.Values.replicaCount | int ) -}}
+{{- fail "Number of IPs must match replica count" -}}
+{{- end -}}
+{{- range $index, $_ := until ( .Values.replicaCount | int ) }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Values.name }}-{{ $index }}
+  labels: {{ include "elasticsearch.labels" $ | nindent 4 }}
+spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ index ( $.Values.exposeIPs ) $index }}
+  loadBalancerSourceRanges: {{ $.Values.elasticsearch.service.loadBalancerSourceRanges | toYaml | nindent 4 }}
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+    targetPort: http
+  - name: transport
+    port: 9300
+    protocol: TCP
+    targetPort: transport
+  publishNotReadyAddresses: true
+  selector:
+    app: elasticsearch-master
+    statefulset.kubernetes.io/pod-name: elasticsearch-master-{{ $index }}
+  sessionAffinity: None
+{{- end -}}
+{{- end -}}
