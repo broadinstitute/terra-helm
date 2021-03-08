@@ -26,6 +26,7 @@ spec:
             command: ['sh', '-c']
             args:
             - |-
+              apk --no-cacher add curl && \
               TIMESTAMP=$( date +'%Y%m%d.%H%M%S' ) && \
               curl -X PUT "${ELASTICSEARCH_HOSTNAME}:9200/_snapshot/${SNAPSHOT_REPOSITORY}/es-snapshot-${TIMESTAMP}?wait_for_completion=true"
             env: 
