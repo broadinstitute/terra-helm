@@ -30,6 +30,9 @@ spec:
               kubectl cp \
                 "{{ .Release.Namespace }}/opendj-statefulset-0:/opt/opendj/data/bak" \
                 "backup" && \
+              kubectl cp \
+                "{{ .Release.Namespace }}/opendj-statefulset-0:/opt/opendj/data/config" \
+                "backup/config" && \
               tar -cvzf backup.tgz /backup && \
               gsutil cp backup.tgz "gs://${GCS_BUCKET}/backup-${TIMESTAMP}.tgz" && \
               kubectl exec \
