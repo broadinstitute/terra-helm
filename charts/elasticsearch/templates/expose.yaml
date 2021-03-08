@@ -3,7 +3,7 @@
 {{- if ne ( len .Values.exposeIPs ) (.Values.replicaCount | int ) -}}
 {{- fail "Number of IPs must match replica count" -}}
 {{- end -}}
-{{- range $index, $_ := until ( .Values.replicaCount | int ) -}}
+{{- range $index, $_ := until ( .Values.replicaCount | int ) }}
 ---
 apiVersion: v1
 kind: Service
@@ -29,4 +29,4 @@ spec:
     statefulset.kubernetes.io/pod-name: elasticsearch-master-{{ $index }}
   sessionAffinity: None
 {{- end -}}
-{{- end }}
+{{- end -}}
