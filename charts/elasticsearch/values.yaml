@@ -4,7 +4,7 @@ name: elasticsearch
 replicaCount: 3
 # expose -- If true will create a loadbalancer service for each pod, enables using the transport client from outside the cluster
 expose: false
-
+# exposeIPs -- List of ips to associate with each ES pod
 exposeIPs: []
 
 backup:

@@ -65,6 +65,7 @@ a helm chart to deploy monitoring infrastructure
 | elasticsearch.volumeClaimTemplate.resources.requests.storage | string | `"200Gi"` |  |
 | elasticsearch.volumeClaimTemplate.storageClassName | string | `"terra-ssd-zonal"` |  |
 | expose | bool | `false` | If true will create a loadbalancer service for each pod, enables using the transport client from outside the cluster |
+| exposeIPs | list | `[]` | List of ips to associate with each ES pod |
 | name | string | `"elasticsearch"` |  |
 | replicaCount | int | `3` | number of elasticsearch replicas to expose. |
 | vault.pathPrefix | string | `nil` | path where elasticsearch secrets are stored in vault |
