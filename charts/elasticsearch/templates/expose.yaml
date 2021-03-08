@@ -29,4 +29,4 @@ spec:
     statefulset.kubernetes.io/pod-name: elasticsearch-master-{{ $index }}
   sessionAffinity: None
 {{- end -}}
-{{- end -}}
+{{- end }}
