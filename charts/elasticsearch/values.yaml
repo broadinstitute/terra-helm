@@ -34,6 +34,8 @@ vault:
 # Documentation on these values can be found at https://github.com/elastic/helm-charts/tree/master/elasticsearch
 elasticsearch:
 
+  clusterName: elasticsearch5a # Use the same name as GCE terra elasticsearch
+
   image: "docker.io/broadinstitute/elasticsearch"
   imageTag: 5.4.0_6
 
