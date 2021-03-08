@@ -23,7 +23,7 @@ spec:
     port: 9300
     protocol: TCP
     targetPort: transport
-  publishNotReadAddresses: true
+  publishNotReadyAddresses: true
   selector:
     app: elasticsearch-master
     statefulset.kubernetes.io/pod-name: elasticsearch-master-{{ $index }}
