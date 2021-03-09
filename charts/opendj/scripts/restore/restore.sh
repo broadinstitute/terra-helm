@@ -1,6 +1,6 @@
 # Below are the steps to restore a Terra OpenDJ from a backup. This script is not meant to
-#   be run, but to be used as a reference, since it does not have any error handling or any 
-#   other fancy stuff like that.
+#   be run all at once, but to be used as a reference and copy-pasted from, since it does 
+#   not have any error handling or any other fancy stuff like that.
 
 #####################
 # On local machine: #
