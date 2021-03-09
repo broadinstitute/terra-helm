@@ -33,6 +33,8 @@ deploymentDefaults:
   nodeSelector: null
   # deploymentDefaults.tolerations -- (array) Optional array of tolerations
   tolerations: null
+  # deploymentDefaults.proxyImage -- Image that the OIDC proxy uses
+  proxyImage: broadinstitute/openidc-proxy:tcell-mpm-big
   probes:
     readiness:
       # deploymentDefaults.probes.readiness.enable -- Whether to configure a readiness probe

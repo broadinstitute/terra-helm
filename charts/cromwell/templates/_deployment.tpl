@@ -124,7 +124,7 @@ spec:
           {{- toYaml $settings.probes.liveness.spec | nindent 10 }}
         {{- end }}
       - name: {{ $settings.name }}-proxy
-        image: broadinstitute/openidc-proxy:modsecurity_2_9_2
+        image: {{ $settings.proxyImage }}
         ports:
           - containerPort: 443
           - containerPort: 80
