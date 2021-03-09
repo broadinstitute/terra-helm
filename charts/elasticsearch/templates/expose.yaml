@@ -25,8 +25,8 @@ spec:
     targetPort: transport
   publishNotReadyAddresses: true
   selector:
-    app: elasticsearch-master
-    statefulset.kubernetes.io/pod-name: elasticsearch-master-{{ $index }}
+    app: {{ $.Values.elasticsearch.clusterName }}-master
+    statefulset.kubernetes.io/pod-name: {{ $.Values.elasticsearch.clusterName }}-master-{{ $index }}
   sessionAffinity: None
 {{- end -}}
 {{- end -}}
