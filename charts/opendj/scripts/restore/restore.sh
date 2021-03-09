@@ -1,6 +1,6 @@
 # On local machine:
 
-TERRA_ENV=dev
+TERRA_ENV="[environment (dev/perf/alpha/staging/prod)]"
 OPENDJ_PASSWORD=$(docker run \
   --rm \
   --cap-add IPC_LOCK \
@@ -23,9 +23,9 @@ kubectl exec \
 
 # In the container:
 
-TERRA_ENV=dev
-BACKUP_NAME="backup-20210308.182024.tgz"
-OPENDJ_PASSWORD="[Insert value from local var]"
+BACKUP_NAME="[name of backup archive from bucket]"
+export TERRA_ENV="[environment (dev/perf/alpha/staging/prod)]"
+export OPENDJ_PASSWORD="[Insert value from local machine var above]"
 
 gcloud auth activate-service-account --key-file=/sa-key.json
 
@@ -70,18 +70,6 @@ kubectl exec \
     --bindPassword ${OPENDJ_PASSWORD} \
     --backupDirectory /opt/opendj/data/restore/schema \
     --trustAll"
-
-# Restore config files
-kubectl exec \
-  --namespace "terra-${TERRA_ENV}" \
-  --tty \
-  --stdin \
-  opendj-statefulset-0 \
-  -c opendj -- /bin/bash -c "cp -R /opt/opendj/data/restore/config /opt/opendj/data"
-
-# Restart OpenDJ
-kubectl --namespace "terra-${TERRA_ENV}" scale --replicas=0 sts opendj-statefulset
-kubectl --namespace "terra-${TERRA_ENV}" scale --replicas=1 sts opendj-statefulset
 
 # Re-create (if needed) and re-build indexes
 curl -LJO https://raw.githubusercontent.com/broadinstitute/terra-helm/master/charts/opendj/scripts/restore/indexes.sh
