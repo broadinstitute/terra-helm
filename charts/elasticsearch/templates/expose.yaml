@@ -26,7 +26,7 @@ spec:
   publishNotReadyAddresses: true
   selector:
     app: {{ $.Values.elasticsearch.clusterName }}-master
-    statefulset.kubernetes.io/pod-name: {{ $.Values.elasticsearch.clusterName }}-{{ $index }}
+    statefulset.kubernetes.io/pod-name: {{ $.Values.elasticsearch.clusterName }}-master-{{ $index }}
   sessionAffinity: None
 {{- end -}}
 {{- end -}}
