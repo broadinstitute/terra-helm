@@ -1,0 +1,2 @@
+# Don't package the scripts folder into the chart
+scripts/
