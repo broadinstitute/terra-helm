@@ -87,6 +87,7 @@ chmod +x indexes.sh
 ./indexes.sh
 
 # Set up backup to run daily at 2 AM
+# Ideally we would just restore the tasks backend but that is not possible without stopping OpenDJ
 kubectl exec \
   --namespace "terra-${TERRA_ENV}" \
   --tty \
@@ -104,6 +105,20 @@ kubectl exec \
     --backupId $(date "+%m%d%Y") \
     --trustAll"
 
+# Make sure backup task is scheduled
+kubectl exec \
+  --namespace "terra-${TERRA_ENV}" \
+  --tty \
+  --stdin \
+  opendj-statefulset-0 \
+  -c opendj -- /bin/bash -c "/opt/opendj/bin/manage-tasks \
+    --hostname localhost  \
+    --port 4444  \
+    --bindDN \"cn=Directory Manager\" \
+    --bindPassword ${OPENDJ_PASSWORD} \
+    --summary \
+    --trustAll"
+
 # Leave container
 exit
 
@@ -113,5 +128,33 @@ exit
 
 # Clean up the Cloud SDK pod
 kubectl -n "terra-${TERRA_ENV}" delete pod gcloud-temp
+
+# Sanity checks:
+
+# Count people
+ldapsearch \
+  -LLL \
+  -H "ldaps://opendj-k8s.dsde-${TERRA_ENV}.broadinstitute.org" \
+  -D "cn=Directory Manager" \
+  -w "${OPENDJ_PASSWORD}" \
+  -b "ou=people,dc=dsde-${TERRA_ENV},dc=broadinstitute,dc=org" \
+| egrep -c '^dn'
+
+# Make sure proxy user can look do ldapsearch
+PROXY_PASSWORD=$(docker run \
+  --rm \
+  --cap-add IPC_LOCK \
+  -e "VAULT_TOKEN=$(cat ~/.vault-token)" \
+  -e "VAULT_ADDR=https://clotho.broadinstitute.org:8200" \
+  vault:1.1.0 vault read \
+    -field=proxy_ldap_bind_password \
+    "secret/dsde/firecloud/${TERRA_ENV}/common/proxy-ldap")
+ldapsearch \
+  -LLL \
+  -H "ldaps://opendj-k8s.dsde-${TERRA_ENV}.broadinstitute.org" \
+  -D "cn=proxy-ro,ou=people,dc=dsde-${TERRA_ENV},dc=broadinstitute,dc=org" \
+  -w "${PROXY_PASSWORD}" \
+  -b "ou=people,dc=dsde-${TERRA_ENV},dc=broadinstitute,dc=org" \
+  "(googleSubjectId=103858679565563386175)"
 
 # All done!
