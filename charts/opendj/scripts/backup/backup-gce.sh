@@ -69,7 +69,7 @@ gcloud beta compute ssh \
 gcloud init
 
 # Copy backup to bucket
-TERRA_ENV=perf
+TERRA_ENV="[Terra environment (dev/perf/alpha/staging/prod)]"
 TIMESTAMP=$( date "+%Y%m%d.%H%M%S" )
 gsutil cp /local/opendj_data/bak/backup.tgz "gs://opendj-backups-dsp-terra-${TERRA_ENV}/backup-${TIMESTAMP}.tgz"
 
