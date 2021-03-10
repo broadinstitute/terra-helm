@@ -81,6 +81,12 @@ kubectl exec \
     --backupDirectory /opt/opendj/data/restore/schema \
     --trustAll"
 
+# Restart OpenDJ
+kubectl --namespace "terra-${TERRA_ENV}" scale --replicas=0 sts opendj-statefulset
+kubectl --namespace "terra-${TERRA_ENV}" scale --replicas=1 sts opendj-statefulset
+
+# Wait for it to start up and become healthy in ArgoCD
+
 # Re-create (if needed) and re-build indexes
 curl -LJO https://raw.githubusercontent.com/broadinstitute/terra-helm/master/charts/opendj/scripts/restore/indexes.sh
 chmod +x indexes.sh
