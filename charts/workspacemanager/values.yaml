@@ -141,7 +141,7 @@ proxy:
     # proxy.image.repository -- Proxy image repository
     repository: broadinstitute/openidc-proxy
     # proxy.image.version -- Proxy image tag
-    version: bernick_tcell
+    version: tcell_3_1_0
   tcell:
     # proxy.tcell.enabled -- Enables TCell
     enabled: true
