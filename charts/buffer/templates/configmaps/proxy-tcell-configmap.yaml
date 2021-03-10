@@ -11,8 +11,6 @@ data:
       "version": 1,
       "applications": [
         {
-          "app_id": "$(TCELL_APP_ID)",
-          "api_key": "$(TCELL_API_KEY)",
           "tcell_api_url": "https://us.agent.tcell.insight.rapid7.com/api/v1",
           "tcell_input_url": "https://us.input.tcell.insight.rapid7.com/api/v1",
           "js_agent_api_base_url": "https://us.agent.tcell.insight.rapid7.com/api/v1",
