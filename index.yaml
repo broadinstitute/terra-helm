@@ -507,6 +507,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.16.0/buffer-0.16.0.tgz
     version: 0.16.0
   - apiVersion: v2
+    created: "2021-03-10T18:58:05.554528941Z"
+    description: Chart for Resource Buffering Service
+    digest: 591c0807c1c96e5212a48789a69d947f76e7e1630625f2fb6872a44a9f196f3c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.16.0-323.1615402679.3c3df3/buffer-0.16.0-323.1615402679.3c3df3.tgz
+    version: 0.16.0-323.1615402679.3c3df3
+  - apiVersion: v2
     created: "2021-03-10T18:25:23.529963504Z"
     description: Chart for Resource Buffering Service
     digest: 89614b41a76c6e334526dbd6108b8ad3f43a2eccc70de7cec2aad93b95d69aeb
