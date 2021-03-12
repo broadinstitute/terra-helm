@@ -200,8 +200,8 @@ initDB: false
 # samAddress -- Address of SAM instance this deploy will talk to
 samAddress: https://sam.dsde-dev.broadinstitute.org/
 
-# serviceGoogleProject -- the id of the google project which the instance is associated with
-serviceGoogleProject: broad-dsde-dev
+# serviceGoogleProject -- Deprecated. TODO(PF-568) remove me when safe.
+serviceGoogleProject: deprecated
 
 # samplingProbability -- the frequency with which calls should be traced.
 samplingProbability: 1.0

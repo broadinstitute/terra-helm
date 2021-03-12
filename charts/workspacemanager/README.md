@@ -88,7 +88,7 @@ Chart for Terra Workspace Manager
 | resources.requests.memory | string | `"8Gi"` | Memory to request for the deployment |
 | samAddress | string | `"https://sam.dsde-dev.broadinstitute.org/"` | Address of SAM instance this deploy will talk to |
 | samplingProbability | float | `1` | the frequency with which calls should be traced. |
-| serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
+| serviceGoogleProject | string | `"deprecated"` | Deprecated. TODO(PF-568) remove me when safe. |
 | spendBillingAccountId | string | `nil` | the Google Billing account Id for WSM to use for workspace projects. |
 | spendProfileId | string | `nil` | the Spend Profile Id to associate with the billing account. |
 | terraDataRepoUrl | string | `"https://jade.datarepo-dev.broadinstitute.org"` | corresponding data repo instance for the environment |
