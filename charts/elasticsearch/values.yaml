@@ -39,6 +39,13 @@ elasticsearch:
   image: "docker.io/broadinstitute/elasticsearch"
   imageTag: 5.4.0_6
 
+  nodeSelector:
+    bio.terra/node-pool: elasticsearch
+  tolerations:
+  - key: "bio.terra/workload"
+    operator: Equal
+    value: elasticsearch
+    effect: NoSchedule
   podSecurityPolicy:
     create: true
     spec:
