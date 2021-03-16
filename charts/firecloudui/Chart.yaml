@@ -1,0 +1,13 @@
+apiVersion: v2
+name: firecloudui
+version: 0.0.0
+description: Chart for Firecloud UI service in Terra
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - firecloudui
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/broadinstitute/firecloud-ui
