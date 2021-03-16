@@ -9217,6 +9217,23 @@ entries:
     version: 0.0.0-225.1607530695.c4bf85
   firecloudui:
   - apiVersion: v2
+    created: "2021-03-16T18:10:53.320654369Z"
+    description: Chart for Firecloud UI service in Terra
+    digest: d52614aaefd582572f82b676ea1be03d2bad002057636dbcaa208a089aa09fcf
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.1.0/firecloudui-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
     created: "2021-03-16T17:58:50.510558574Z"
     description: Chart for Firecloud UI service in Terra
     digest: 4e23bdfb69ed7b9ae8214593d4d4126c434cd4cd527772782e20e5846ac120ee
@@ -9482,6 +9499,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/istioconfig-0.0.1/istioconfig-0.0.1.tgz
     version: 0.0.1
   jobmanager:
+  - apiVersion: v2
+    created: "2021-03-16T18:10:53.446791082Z"
+    description: Chart for Job Manager service in Terra
+    digest: 1f449b58c35cb4aa930409d95b50557eb479b956280e1485e4426cd247707253
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.1.0/jobmanager-0.1.0.tgz
+    version: 0.1.0
   - apiVersion: v2
     created: "2021-03-16T17:58:50.592355759Z"
     description: Chart for Job Manager service in Terra
@@ -13625,6 +13659,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/mongodb-0.0.1-152.1602098503.69881c/mongodb-0.0.1-152.1602098503.69881c.tgz
     version: 0.0.1-152.1602098503.69881c
   ncbiaccess:
+  - apiVersion: v2
+    created: "2021-03-16T18:10:53.545094448Z"
+    description: Chart for NCBI Access service in Terra
+    digest: aba02db97873abbfd04fe086902abbee2256fe8443dd99033a370c91297ae670
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - ncbiaccess
+    name: ncbiaccess
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/ncbiaccess
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ncbiaccess-0.1.0/ncbiaccess-0.1.0.tgz
+    version: 0.1.0
   - apiVersion: v2
     created: "2021-03-16T17:58:50.686359717Z"
     description: Chart for NCBI Access service in Terra
@@ -27794,6 +27845,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   thurloe:
+  - apiVersion: v2
+    created: "2021-03-16T18:10:53.643074213Z"
+    description: Chart for Thurloe service in Terra
+    digest: 9a8495e35ef2627d71b71a60e015c0f678b11cae7311efff653d4f72c6239e5a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.1.0/thurloe-0.1.0.tgz
+    version: 0.1.0
   - apiVersion: v2
     created: "2021-03-16T17:58:50.776602452Z"
     description: Chart for Thurloe service in Terra
