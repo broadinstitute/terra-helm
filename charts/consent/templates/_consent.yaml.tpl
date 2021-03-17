@@ -19,10 +19,6 @@ logging:
       target: stdout
       layout:
         type: json
-    - type: sentry
-      dsn: https://foo:bar@sentry.io/baz {{/* Override on the command line */}}
-      threshold: ERROR
-      environment: {{ .Values.environment }}
   loggers:
     "org.reflections.Reflections": ERROR
     "org.apache.pdfbox": ERROR

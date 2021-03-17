@@ -43,11 +43,6 @@ spec:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
           env:
-            - name: SENTRY_DSN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}-secrets
-                  key: dsn
             - name: PROMETHEUS_ARGS
               value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/consent-cm/prometheusJmx.yaml"
             - name: BASIC_AUTH_USER
@@ -77,8 +72,6 @@ spec:
                   key: sendgridApiKey
           command: ["java"]
           args:
-          - -Dsentry.stacktrace.app.packages=org.broadinstitute
-          - -Dsentry.dsn=$(SENTRY_DSN)
           - -Ddw.basicAuthentication.users[0].user=$(BASIC_AUTH_USER)
           - -Ddw.basicAuthentication.users[0].password=$(BASIC_AUTH_USER_PASSWORD)
           - -Ddw.database.user=$(DB_USER)
