@@ -86,3 +86,8 @@ prometheus:
   initContainerImage: 'alpine:3.12.0'
   jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
   jmxJarVersion: '0.13.0'
+
+elasticsearch:
+  transportProbe:
+    enabled: true
+    initContainerImage: 'ubuntu:20.04'

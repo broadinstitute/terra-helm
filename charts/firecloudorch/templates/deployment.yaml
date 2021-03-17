@@ -207,3 +207,4 @@ spec:
         volumeMounts: 
         - name: {{ .Values.name }}-es-probe-tools
           mountPath: /{{ .Values.name }}-es-probe-tools
+      {{- end }}
