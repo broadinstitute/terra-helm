@@ -50,6 +50,8 @@ spec:
         emptyDir: {}
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
+      - name: {{ .Values.name }}-es-probe-tools
+        emptyDir: {}
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
@@ -80,7 +82,6 @@ spec:
         args:
         - '-c'
         - >-
-          apt-get install jq
           java ${JAVA_OPTS}
           {{- if .Values.prometheus.enabled }}
           ${PROMETHEUS_ARGS}
@@ -127,6 +128,9 @@ spec:
           subPath: prometheusjmx.jar
           name: {{ .Values.name }}-prometheusjmx-jar
           readOnly: true 
+        - mountPath: /usr/bin/jq
+          subPath: jq
+          name: {{ .Values.name }}-es-probe-tools
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
@@ -188,3 +192,18 @@ spec:
         - name: {{ .Values.name }}-prometheusjmx-jar
           mountPath: /{{ .Values.name }}-prometheusjmx-jar
       {{- end }}
+      {{- if .Values.elasticsearch.transportProbe.enabled }}
+      - name: install-jq
+        image: {{ .Values.elasticsearch.transportProbe.initContainerImage }}
+        command:
+        - sh
+        - -c
+        - |
+          #!/usr/bin/env bash
+          apt-get update
+          apt-get install -y jq
+
+          cp /usr/bin/jq /{{ .Values.name }}-es-probe-tools
+        volumeMounts: 
+        - name: {{ .Values.name }}-es-probe-tools
+          mountPath: /{{ .Values.name }}-es-probe-tools
