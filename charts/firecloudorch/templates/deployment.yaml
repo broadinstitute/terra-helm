@@ -201,7 +201,6 @@ spec:
         - |
           #!/usr/bin/env bash
           wget -O /{{ .Values.name }}-es-probe-tools https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-
         volumeMounts: 
         - name: {{ .Values.name }}-es-probe-tools
           mountPath: /{{ .Values.name }}-es-probe-tools

@@ -90,4 +90,4 @@ prometheus:
 elasticsearch:
   transportProbe:
     enabled: true
-    initContainerImage: 'ubuntu:20.04'
+    initContainerImage: ''alpine:3.12.0'
