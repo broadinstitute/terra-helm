@@ -82,6 +82,7 @@ spec:
         args:
         - '-c'
         - >-
+          apt-get update && apt-get install -y jq
           java ${JAVA_OPTS}
           {{- if .Values.prometheus.enabled }}
           ${PROMETHEUS_ARGS}
@@ -192,19 +193,23 @@ spec:
         - name: {{ .Values.name }}-prometheusjmx-jar
           mountPath: /{{ .Values.name }}-prometheusjmx-jar
       {{- end }}
-      {{- if .Values.elasticsearch.transportProbe.enabled }}
-      - name: install-jq
-        image: {{ .Values.elasticsearch.transportProbe.initContainerImage }}
-        command:
-        - sh
-        - -c
-        - |
-          #!/usr/bin/env bash
-          apt-get update
-          apt-get install -y jq
+      # {{- if .Values.elasticsearch.transportProbe.enabled }}
+      # - name: install-jq
+      #   image: {{ .Values.elasticsearch.transportProbe.initContainerImage }}
+      #   command:
+      #   - sh
+      #   - -c
+      #   - |
+      #     #!/usr/bin/env bash
+      #     apt-get update
+      #     apt-get install -y jq
 
-          cp /usr/bin/jq /{{ .Values.name }}-es-probe-tools
-        volumeMounts: 
-        - name: {{ .Values.name }}-es-probe-tools
-          mountPath: /{{ .Values.name }}-es-probe-tools
-      {{- end }}
+      #     cp /usr/bin/jq /{{ .Values.name }}-es-probe-tools
+      #     cp /usr/lib/x86_64-linux-gnu/libjq.so.1.0.4 /{{ .Values.name }}-es-probe-tools
+      #     cp /usr/lib/x86_64-linux-gnu/libjq.so.1 /{{ .Values.name }}-es-probe-tools
+      #     cp /usr/lib/x86_64-linux-gnu/libonig.so.5.0.0 /{{ .Values.name }}-es-probe-tools
+
+      #   volumeMounts: 
+      #   - name: {{ .Values.name }}-es-probe-tools
+      #     mountPath: /{{ .Values.name }}-es-probe-tools
+      # {{- end }}
