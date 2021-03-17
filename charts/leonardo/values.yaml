@@ -48,7 +48,7 @@ deploymentDefaults:
     startup:
       # deploymentDefaults.probes.startup.enable -- Whether to configure a startup probe
       enabled: true
-      # deploymentDefaults.probes.startup.spec -- k8s spec of the liveness probe to deploy, if enabled
+      # deploymentDefaults.probes.startup.spec -- k8s spec of the startup probe to deploy, if enabled
       spec:
         httpGet:
           path: /version
