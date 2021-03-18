@@ -1,6 +1,5 @@
 {{- define "ontology.config.yaml" -}}
 server:
-  type: simple
   applicationContextPath: /
   adminContextPath: /admin
   applicationConnectors:
