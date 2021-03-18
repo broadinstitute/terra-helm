@@ -1,0 +1,161 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  labels: {{- include "jobmanager.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      deployment: {{ .Values.name }}-deployment
+  template:
+    metadata:
+      labels:
+        deployment: {{ .Values.name }}-deployment
+        {{- include "jobmanager.labels" . | nindent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ .Values.name }}-cm: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - ui
+        - api
+      volumes:
+      - name: ui-ctmpls
+        secret:
+          secretName: {{ .Values.name }}-ui-ctmpls
+      - name: api-ctmpls
+        secret:
+          secretName: {{ .Values.name }}-api-ctmpls
+      - name: proxy-ctmpls
+        secret:
+          secretName: {{ .Values.name }}-proxy-ctmpls
+      - name: {{ .Values.name }}-modsecurity-logs
+        emptyDir: {}
+      containers:
+      - name: {{ .Values.name }}-api
+        image: "{{ .Values.api.imageRepository }}:{{ .Values.api.imageTag | default .Values.global.applicationVersion }}"
+        ports:
+        - containerPort: 8190
+        resources: # Mimic existing GCE vm requirements
+          requests:
+            cpu: {{ .Values.api.resources.requests.cpu }}
+            memory: {{ .Values.api.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.api.resources.limits.cpu }}
+            memory: {{ .Values.api.resources.limits.memory }}
+        envFrom:
+        - secretRef:
+            name: {{ .Values.name }}-api-env
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /etc/api-config.json
+          subPath: api-config.json
+          name: api-ctmpls
+        - mountPath: /etc/capabilities-config.json
+          subPath: capabilities-config.json
+          name: api-ctmpls
+        # Note: These readiness settings only apply to Kubernetes' internal load
+        # balancing mechanism -- there's a separate health check setting for
+        # Agora's Ingress / GCP load balancer in the Ingress's backendConfig
+        {{- if .Values.probes.readiness.enabled }}
+        readinessProbe:
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.probes.liveness.enabled }}
+        livenessProbe:
+          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
+        {{- end }}
+      - name: {{ .Values.name }}-ui
+        image: "{{ .Values.ui.imageRepository }}:{{ .Values.ui.imageTag | default .Values.global.applicationVersion }}"
+        ports:
+        - containerPort: 443
+        resources: # Mimic existing GCE vm requirements
+          requests:
+            cpu: {{ .Values.ui.resources.requests.cpu }}
+            memory: {{ .Values.ui.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.ui.resources.limits.cpu }}
+            memory: {{ .Values.ui.resources.limits.memory }}
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /app/ui-config.json:/ui/dist/assets/environments/environment.json
+          subPath: ui-config.json
+          name: ui-ctmpls
+        - mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          name: ui-ctmpls
+        # Note: These readiness settings only apply to Kubernetes' internal load
+        # balancing mechanism -- there's a separate health check setting for
+        # Agora's Ingress / GCP load balancer in the Ingress's backendConfig
+        {{- if .Values.ui.probes.readiness.enabled }}
+        readinessProbe:
+          {{- toYaml .Values.ui.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.ui.probes.liveness.enabled }}
+        livenessProbe:
+          {{- toYaml .Values.ui.probes.liveness.spec | nindent 10 }}
+        {{- end }}
+      - name: {{ .Values.name }}-proxy
+        image: "{{ .Values.proxy.imageRepository }}:{{ .Values.proxy.imageTag }}"
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        envFrom:
+        - secretRef:
+            name: {{ .Values.name }}-proxy-env
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: server.crt
+          name: proxy-ctmpls
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: proxy-ctmpls
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: proxy-ctmpls
+        - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
+          subPath: mod_security_logging.conf
+          name: proxy-ctmpls
+        - mountPath: /etc/apache2/sites-enabled/mod_security_ignore.conf
+          subPath: mod_security_ignore.conf
+          name: proxy-ctmpls
+        - mountPath: /etc/apache2/tcell_agent.config
+          subPath: tcell_agent.config
+          name: proxy-ctmpls
+        - mountPath: /etc/apache2/sites-available/site.conf
+          subPath: site.conf
+          name: proxy-ctmpls
+        - mountPath: /var/log/modsecurity
+          name: {{ .Values.name }}-modsecurity-logs
