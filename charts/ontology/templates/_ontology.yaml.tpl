@@ -3,9 +3,12 @@ server:
   type: simple
   applicationContextPath: /
   adminContextPath: /admin
-  connector:
-    type: http
-    port: 8080
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
   requestLog:
     appenders:
       - type: console
