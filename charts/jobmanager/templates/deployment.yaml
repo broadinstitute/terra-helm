@@ -79,13 +79,13 @@ spec:
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
         # the Ingress / GCP load balancer in the Ingress's backendConfig
-        {{- if .Values.probes.readiness.enabled }}
+        {{- if .Values.api.probes.readiness.enabled }}
         readinessProbe:
-          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+          {{- toYaml .Values.api.probes.readiness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.liveness.enabled }}
+        {{- if .Values.api.probes.liveness.enabled }}
         livenessProbe:
-          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
+          {{- toYaml .Values.api.probes.liveness.spec | nindent 10 }}
         {{- end }}
       - name: {{ .Values.name }}-ui
         image: "{{ .Values.ui.imageRepository }}:{{ .Values.ui.imageTag | default .Values.global.applicationVersion }}"
