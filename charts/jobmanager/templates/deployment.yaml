@@ -47,6 +47,7 @@ spec:
       containers:
       - name: {{ .Values.name }}-api
         image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Values.global.applicationVersion }}"
+        args: ["-b", ":8190", "-t", "60"]
         ports:
         - containerPort: 8190
         resources: # Mimic existing GCE vm requirements
@@ -90,7 +91,7 @@ spec:
       - name: {{ .Values.name }}-ui
         image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Values.global.applicationVersion }}"
         ports:
-        - containerPort: 443
+        - containerPort: 8000
         resources: # Mimic existing GCE vm requirements
           requests:
             cpu: {{ .Values.ui.resources.requests.cpu }}

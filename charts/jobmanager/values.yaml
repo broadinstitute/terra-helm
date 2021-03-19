@@ -50,7 +50,7 @@ ui:
       spec:
         httpGet:
           path: /health
-          port: 443
+          port: 8000
         timeoutSeconds: 5
         periodSeconds: 10
         failureThreshold: 6
@@ -62,7 +62,7 @@ ui:
       spec:
         httpGet:
           path: /health
-          port: 443
+          port: 8000
         timeoutSeconds: 5
         periodSeconds: 10
         failureThreshold: 30
