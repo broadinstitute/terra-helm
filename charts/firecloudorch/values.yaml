@@ -93,3 +93,12 @@ elasticsearch:
     initContainerImage: 'alpine:3.12.0'
     appHostname: 'localhost:8080'
     elasticHostname: 'elasticsearch5a-master-0.elasticsearch5a-master-headless:9200'
+    spec:
+      exec:
+        command:
+        - ./etc/probe/probe.sh
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 60
+      failureThreshold: 5 # 5 minutes before restarted
+      successThreshold: 1

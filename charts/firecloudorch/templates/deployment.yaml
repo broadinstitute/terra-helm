@@ -148,7 +148,11 @@ spec:
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.liveness.enabled }}
+        {{- if .Values.elasticsearch.transportProbe.enabled }}
+        livenessProbe:
+          {{- toYaml .Values.elasticsearch.transportProbe.spec | nindent 10 }}
+        {{- end }}
+        {{- elif .Values.probes.liveness.enabled }}
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
