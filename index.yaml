@@ -9761,6 +9761,23 @@ entries:
     version: 0.0.1
   jobmanager:
   - apiVersion: v2
+    created: "2021-03-19T13:07:19.636527646Z"
+    description: Chart for Job Manager service in Terra
+    digest: 9838466c743b56b0daa83302e2d64a60fda614d7ee063033b8b6667ffeee3ecf
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.2.0-332.1616159234.7c037a/jobmanager-0.2.0-332.1616159234.7c037a.tgz
+    version: 0.2.0-332.1616159234.7c037a
+  - apiVersion: v2
     created: "2021-03-16T18:10:53.446791082Z"
     description: Chart for Job Manager service in Terra
     digest: 1f449b58c35cb4aa930409d95b50557eb479b956280e1485e4426cd247707253
