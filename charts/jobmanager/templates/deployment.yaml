@@ -113,7 +113,7 @@ spec:
           subPath: ui-config.json
           name: ui-ctmpls
         - mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
+          subPath: nginx.json # TODO rename to nginx.conf when templates are moved out of firecloud-develop
           name: ui-ctmpls
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
