@@ -127,7 +127,7 @@ spec:
           {{- toYaml .Values.ui.probes.liveness.spec | nindent 10 }}
         {{- end }}
       - name: {{ .Values.name }}-proxy
-        image: "{{ .Values.proxy.imageRepository }}:{{ .Values.proxy.imageTag }}"
+        image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}"
         ports:
           - containerPort: 443
           - containerPort: 80

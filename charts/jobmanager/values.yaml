@@ -114,9 +114,8 @@ api:
         successThreshold: 1
 
 proxy:
-  imageConfig:
+  image:
     # proxy.imageConfig.repository -- Image repository
     repository: broadinstitute/openidc-proxy
     # proxy.imageConfig.tag -- (string) Image tag.
     tag: modsecurity_2_9_2
-    imagePullPolicy: Always
