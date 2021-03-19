@@ -109,7 +109,7 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         volumeMounts:
-        - mountPath: /app/ui-config.json:/ui/dist/assets/environments/environment.json
+        - mountPath: /ui/dist/assets/environments/environment.json
           subPath: ui-config.json
           name: ui-ctmpls
         - mountPath: /etc/nginx/nginx.conf
