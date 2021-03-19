@@ -25,13 +25,12 @@ ingress:
 #        To minimize changes during the migration, this chart deploys both containers as part of the same pod. Eventually we should think about breaking them into separate deployments with separate ingresses.
 # Settings for the UI container
 ui:
-  imageConfig:
+  image:
     # ui.imageConfig.repository -- Image repository
     repository: databiosphere/job-manager-ui
     # ui.imageConfig.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
-    imagePullPolicy: Always
   resources:
     requests:
       # ui.resources.requests.cpu -- Number of CPU units to request for the deployment
@@ -71,13 +70,12 @@ ui:
 
 # Settings for the API container
 api:
-  imageConfig:
+  image:
     # api.imageConfig.repository -- Image repository
     repository: databiosphere/job-manager-api-cromwell
     # api.imageConfig.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
-    imagePullPolicy: Always
   resources:
     requests:
       # api.resources.requests.cpu -- Number of CPU units to request for the deployment

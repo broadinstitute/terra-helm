@@ -46,7 +46,7 @@ spec:
         emptyDir: {}
       containers:
       - name: {{ .Values.name }}-api
-        image: "{{ .Values.api.imageRepository }}:{{ .Values.api.imageTag | default .Values.global.applicationVersion }}"
+        image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Values.global.applicationVersion }}"
         ports:
         - containerPort: 8190
         resources: # Mimic existing GCE vm requirements
@@ -88,7 +88,7 @@ spec:
           {{- toYaml .Values.api.probes.liveness.spec | nindent 10 }}
         {{- end }}
       - name: {{ .Values.name }}-ui
-        image: "{{ .Values.ui.imageRepository }}:{{ .Values.ui.imageTag | default .Values.global.applicationVersion }}"
+        image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Values.global.applicationVersion }}"
         ports:
         - containerPort: 443
         resources: # Mimic existing GCE vm requirements
