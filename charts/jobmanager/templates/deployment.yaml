@@ -113,7 +113,7 @@ spec:
           subPath: ui-config.json
           name: ui-ctmpls
         - mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.json # TODO rename to nginx.conf when templates are moved out of firecloud-develop
+          subPath: nginx.json # TODO rename to nginx.conf when templates are moved out of firecloud-develop?
           name: ui-ctmpls
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
@@ -148,7 +148,7 @@ spec:
         - mountPath: /etc/apache2/sites-enabled/mod_security_logging.conf
           subPath: mod_security_logging.conf
           name: proxy-ctmpls
-        - mountPath: /etc/apache2/sites-enabled/mod_security_ignore.conf
+        - mountPath: /etc/modsecurity/mod_security_ignore.conf
           subPath: mod_security_ignore.conf
           name: proxy-ctmpls
         - mountPath: /etc/apache2/tcell_agent.config
