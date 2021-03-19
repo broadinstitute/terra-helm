@@ -52,6 +52,10 @@ spec:
         emptyDir: {}
       - name: {{ .Values.name }}-es-probe-tools
         emptyDir: {}
+      - name: {{ .Values.name }}-es-probe-cm
+        configMap:
+          name: {{ .Values.name }}-es-probe-cm
+          defaultMode: 0777
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
@@ -131,6 +135,9 @@ spec:
         - mountPath: /usr/bin/jq
           subPath: jq
           name: {{ .Values.name }}-es-probe-tools
+        - mountPath: /etc/probe
+          subPath: probe.sh
+          name: {{ .Values.name }}-es-probe-cm
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}

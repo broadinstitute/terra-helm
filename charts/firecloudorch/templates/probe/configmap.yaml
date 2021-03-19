@@ -79,4 +79,4 @@ data:
             exit 0
         fi 
     fi
-{{-end }}
+{{- end }}
