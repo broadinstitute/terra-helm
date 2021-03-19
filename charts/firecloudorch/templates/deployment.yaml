@@ -151,7 +151,6 @@ spec:
         {{- if .Values.elasticsearch.transportProbe.enabled }}
         livenessProbe:
           {{- toYaml .Values.elasticsearch.transportProbe.spec | nindent 10 }}
-        {{- end }}
         {{- else if .Values.probes.liveness.enabled }}
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
