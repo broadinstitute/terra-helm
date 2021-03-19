@@ -78,7 +78,7 @@ spec:
           name: api-ctmpls
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
-        # Agora's Ingress / GCP load balancer in the Ingress's backendConfig
+        # the Ingress / GCP load balancer in the Ingress's backendConfig
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
@@ -117,7 +117,7 @@ spec:
           name: ui-ctmpls
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
-        # Agora's Ingress / GCP load balancer in the Ingress's backendConfig
+        # the Ingress / GCP load balancer in the Ingress's backendConfig
         {{- if .Values.ui.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.ui.probes.readiness.spec | nindent 10 }}
