@@ -135,7 +135,7 @@ spec:
         - mountPath: /usr/bin/jq
           subPath: jq
           name: {{ .Values.name }}-es-probe-tools
-        - mountPath: /etc/probe
+        - mountPath: /etc/probe/probe.sh
           subPath: probe.sh
           name: {{ .Values.name }}-es-probe-cm
         {{- if .Values.probes.readiness.enabled }}
