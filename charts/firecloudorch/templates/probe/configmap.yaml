@@ -1,0 +1,82 @@
+{{- if .Values.elasticsearch.transportProbe.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-es-probe-cm
+  labels: {{ include "firecloudorch.labels" . | nindent 4 }}
+data:
+  probe.sh: |
+    #!/bin/bash
+
+    # output http response code for url passed as arg
+    check_status() {
+        status=$(curl -s -o /dev/null -w "%{http_code}" $1)
+        echo $status
+    }
+
+    # Check to see if the app is responsive.
+    # This reproduces functionality of the standard liveness probe
+    app_unresponsive() {
+        alive=$(check_status "${1}/version")
+        if [ $alive -ne 200 ]
+        then
+            # return true if check fails
+            return 0
+        fi
+        return 1
+    }
+
+    # Check if orchestration is able to connect to elasticsearch
+    check_es_connection_status() {
+        status=$(curl -s -X GET "${1}/status")
+        es_index_status=$(echo $status | jq '.systems.OntologyIndex.ok, .systems.LibraryIndex.ok')
+
+        # Convert json response with ES index health to arrat
+        es_index_statuses=(` echo ${es_index_status}`)
+
+        for i in ${es_index_statuses[@]} 
+        do
+            if [ "${i}" == "false" ]
+            then
+                return 1
+            # check for jq inserting null strings when a field is absent
+            elif [ "${i}" == "null" ]
+            then
+                return 1
+            fi
+        done
+        return 0
+    }
+
+    # If Elasticsearch cluster is actually down then don't trigger orch restart. 
+    check_es_cluster_health() {
+        cluster_status=$(curl -s -X GET "${1}/_cluster/health" | jq '.status')
+        if [ "${cluster_status}" == "\"green\"" ]
+        then
+            return 0
+        fi
+        return 1
+    }
+
+    # If orchestration itself is unresponsive probe should fail
+    if app_unresponsive $APP_HOSTNAME
+    then
+        exit 1
+    fi
+
+    # Check if orch is able to connect to elastic search
+    if check_es_connection_status $APP_HOSTNAME
+    then 
+        # If elasticsearch connection healthy, nothing else to do
+        exit 0
+    else 
+        # Only trigger an orch restart when it is not connected to ES and the ES cluster is healthy
+        if check_es_cluster_health $ELASTIC_HOSTNAME
+        then
+            exit 1
+        # If Elasticsearch is actually down then don't restart orch as this will take all orch APIs offline
+        else
+            exit 0
+        fi 
+    fi
+{{-end }}
