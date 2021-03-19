@@ -78,6 +78,12 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        {{- if .Values.elasticsearch.transportProbe.enabled }}
+        - name: APP_HOSTNAME
+          value: {{ .Values.elasticsearch.transportProbe.appHostname }}
+        - name: ELASTIC_HOSTNAME
+          value: {{ .Values.elasticsearch.transportProbe.elasticHostname }}
+        {{- end }}
         {{- if .Values.prometheus.enabled }}
         - name: PROMETHEUS_ARGS
           value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/firecloudorch-cm/prometheusJmx.yaml"

@@ -91,3 +91,5 @@ elasticsearch:
   transportProbe:
     enabled: true
     initContainerImage: 'alpine:3.12.0'
+    appHostname: 'localhost:8080'
+    elasticHostname: 'elasticsearch5a-master-0.elasticsearch5a-master-headless:9200'
