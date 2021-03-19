@@ -52,7 +52,6 @@ spec:
         emptyDir: {}
       - name: {{ .Values.name }}-es-probe-tools
         emptyDir: {}
-        defaultMode: 0777
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
