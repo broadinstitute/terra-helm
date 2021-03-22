@@ -106,6 +106,6 @@ elasticsearch:
         - ./etc/probe/probe.sh
       timeoutSeconds: 5
       initialDelaySeconds: 20
-      periodSeconds: 60
-      failureThreshold: 5 # 5 minutes before restarted
+      periodSeconds: 90
+      failureThreshold: 3 # 270 seconds before restart
       successThreshold: 1
