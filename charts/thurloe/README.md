@@ -10,13 +10,13 @@ Chart for Thurloe service in Terra
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/broad-dsp-gcr-public/thurloe"` | Image repository |
 | imageConfig.tag | string | global.applicationVersion | Image tag. |
-| ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.cert.vault.cert.path | string | `nil` | Path to secret containing .crt |
 | ingress.cert.vault.cert.secretKey | string | `nil` | Key in secret containing .crt |
 | ingress.cert.vault.enabled | bool | `false` |  |
 | ingress.cert.vault.key.path | string | `nil` | Path to secret containing .key |
 | ingress.cert.vault.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |

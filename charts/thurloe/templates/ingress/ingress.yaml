@@ -9,11 +9,11 @@ metadata:
     networking.gke.io/v1beta1.FrontendConfig: "{{ .Values.name }}-ingress-frontendconfig"
     kubernetes.io/ingress.global-static-ip-name: {{ required "ingress.staticIpName value is required" .Values.ingress.staticIpName | quote }}
     kubernetes.io/ingress.allow-http: "false"
-{{- if not (empty .Values.ingress.cert.preSharedCerts) }}
-    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
+{{- if not (empty .Values.ingress.preSharedCerts) }}
+    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.preSharedCerts | join "," | quote }}
 {{- end }}
 spec:
-{{- if empty .Values.ingress.cert.preSharedCerts }}
+{{- if empty .Values.ingress.preSharedCerts }}
   tls:
   - secretName: {{ .Values.name }}-cert
 {{- end }}
