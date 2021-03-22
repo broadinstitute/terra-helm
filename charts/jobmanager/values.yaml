@@ -26,9 +26,9 @@ ingress:
 # Settings for the UI container
 ui:
   image:
-    # ui.imageConfig.repository -- Image repository
+    # ui.image.repository -- Image repository
     repository: databiosphere/job-manager-ui
-    # ui.imageConfig.tag -- (string) Image tag.
+    # ui.image.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
   resources:
@@ -71,9 +71,9 @@ ui:
 # Settings for the API container
 api:
   image:
-    # api.imageConfig.repository -- Image repository
+    # api.image.repository -- Image repository
     repository: databiosphere/job-manager-api-cromwell
-    # api.imageConfig.tag -- (string) Image tag.
+    # api.image.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
   resources:
@@ -115,7 +115,7 @@ api:
 
 proxy:
   image:
-    # proxy.imageConfig.repository -- Image repository
+    # proxy.image.repository -- Image repository
     repository: broadinstitute/openidc-proxy
-    # proxy.imageConfig.tag -- (string) Image tag.
+    # proxy.image.tag -- (string) Image tag.
     tag: modsecurity_2_9_2

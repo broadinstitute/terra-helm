@@ -9,8 +9,8 @@ Chart for Job Manager service in Terra
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| api.image.repository | string | `"databiosphere/job-manager-api-cromwell"` |  |
-| api.image.tag | string | `nil` |  |
+| api.image.repository | string | `"databiosphere/job-manager-api-cromwell"` | Image repository |
+| api.image.tag | string | global.applicationVersion | Image tag. |
 | api.probes.liveness.enabled | bool | `true` |  |
 | api.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/api/v1/health","port":8190},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for liveness probe |
 | api.probes.readiness.enabled | bool | `true` |  |
@@ -26,11 +26,11 @@ Chart for Job Manager service in Terra
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
 | name | string | `"jobmanager"` | Name for this deployment |
-| proxy.image.repository | string | `"broadinstitute/openidc-proxy"` |  |
-| proxy.image.tag | string | `"modsecurity_2_9_2"` |  |
+| proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Image repository |
+| proxy.image.tag | string | `"modsecurity_2_9_2"` | (string) Image tag. |
 | replicas | int | `3` | Number of API replicas to spin up in the deployment |
-| ui.image.repository | string | `"databiosphere/job-manager-ui"` |  |
-| ui.image.tag | string | `nil` |  |
+| ui.image.repository | string | `"databiosphere/job-manager-ui"` | Image repository |
+| ui.image.tag | string | global.applicationVersion | Image tag. |
 | ui.probes.liveness.enabled | bool | `true` |  |
 | ui.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/health","port":8000},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for liveness probe |
 | ui.probes.readiness.enabled | bool | `true` |  |
