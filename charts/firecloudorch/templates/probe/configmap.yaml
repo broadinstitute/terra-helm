@@ -8,9 +8,12 @@ data:
   probe.sh: |
     #!/bin/bash
 
+    # Set timeout for curl
+    TIMEOUT={{ .Values.elasticsearch.transportProbe.timeout }}
+
     # output http response code for url passed as arg
     check_status() {
-        status=$(curl -s -o /dev/null -w "%{http_code}" $1)
+        status=$(curl -s -m $TIMEOUT -o /dev/null -w "%{http_code}" $1)
         echo $status
     }
 
@@ -28,7 +31,7 @@ data:
 
     # Check if orchestration is able to connect to elasticsearch
     check_es_connection_status() {
-        status=$(curl -s -X GET "${1}/status")
+        status=$(curl -m $TIMEOUT -s -X GET "${1}/status")
         es_index_status=$(echo $status | jq '.systems.OntologyIndex.ok, .systems.LibraryIndex.ok')
 
         # Convert json response with ES index health to arrat
@@ -50,7 +53,7 @@ data:
 
     # If Elasticsearch cluster is actually down then don't trigger orch restart. 
     check_es_cluster_health() {
-        cluster_status=$(curl -s -X GET "${1}/_cluster/health" | jq '.status')
+        cluster_status=$(curl -s -m $TIMEOUT -X GET "${1}/_cluster/health" | jq '.status')
         if [ "${cluster_status}" == "\"green\"" ]
         then
             return 0

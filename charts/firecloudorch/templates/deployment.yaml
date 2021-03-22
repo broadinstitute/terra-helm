@@ -55,7 +55,7 @@ spec:
       - name: {{ .Values.name }}-es-probe-cm
         configMap:
           name: {{ .Values.name }}-es-probe-cm
-          defaultMode: 0777
+          defaultMode: 0555
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
@@ -216,6 +216,7 @@ spec:
         - -c
         - |
           #!/usr/bin/env bash
+          set -e
           wget -O /{{ .Values.name }}-es-probe-tools/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
           chmod +x /{{ .Values.name }}-es-probe-tools/jq
         volumeMounts: 

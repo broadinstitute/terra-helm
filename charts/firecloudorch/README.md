@@ -17,7 +17,8 @@ Chart for firecloud-orchestration service in Terra
 | elasticsearch.transportProbe.elasticHostname | string | `"elasticsearch5a-master-0.elasticsearch5a-master-headless:9200"` | hostname for querying the status of the Elasticsearch cluster |
 | elasticsearch.transportProbe.enabled | bool | `true` | Enables a custom liveness probe to account for ES transport client losing connection when elasticsearch restarts. |
 | elasticsearch.transportProbe.initContainerImage | string | `"alpine:3.12.0"` | Docker image to use to install tools needed for custom probe |
-| elasticsearch.transportProbe.spec | object | `{"exec":{"command":["./etc/probe/probe.sh"]},"failureThreshold":5,"initialDelaySeconds":20,"periodSeconds":60,"successThreshold":1,"timeoutSeconds":5}` | Spec for the custom liveness probe  |
+| elasticsearch.transportProbe.spec | object | `{"exec":{"command":["./etc/probe/probe.sh"]},"failureThreshold":5,"initialDelaySeconds":20,"periodSeconds":60,"successThreshold":1,"timeoutSeconds":5}` | Spec for the custom liveness probe |
+| elasticsearch.transportProbe.timeout | int | `10` | timeout in seconds for probe requests |
 | global.applicationVersion | string | `"latest"` | What version of the Cromwell application to deploy |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/broad-dsp-gcr-public/firecloud-orchestration"` | Image repository |

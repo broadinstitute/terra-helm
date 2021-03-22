@@ -97,7 +97,9 @@ elasticsearch:
     appHostname: 'localhost:8080'
     # elasticsearch.transportProbe.elasticHostname -- hostname for querying the status of the Elasticsearch cluster
     elasticHostname: 'elasticsearch5a-master-0.elasticsearch5a-master-headless:9200'
-    # elasticsearch.transportProbe.spec -- Spec for the custom liveness probe 
+    # elasticsearch.transportProbe.timeout -- timeout in seconds for probe requests
+    timeout: 10
+    # elasticsearch.transportProbe.spec -- Spec for the custom liveness probe
     spec:
       exec:
         command:
