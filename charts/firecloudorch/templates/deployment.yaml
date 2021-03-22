@@ -50,6 +50,12 @@ spec:
         emptyDir: {}
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
+      - name: {{ .Values.name }}-es-probe-tools
+        emptyDir: {}
+      - name: {{ .Values.name }}-es-probe-cm
+        configMap:
+          name: {{ .Values.name }}-es-probe-cm
+          defaultMode: 0555
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
@@ -72,6 +78,12 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        {{- if .Values.elasticsearch.transportProbe.enabled }}
+        - name: APP_HOSTNAME
+          value: {{ .Values.elasticsearch.transportProbe.appHostname }}
+        - name: ELASTIC_HOSTNAME
+          value: {{ .Values.elasticsearch.transportProbe.elasticHostname }}
+        {{- end }}
         {{- if .Values.prometheus.enabled }}
         - name: PROMETHEUS_ARGS
           value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/firecloudorch-cm/prometheusJmx.yaml"
@@ -126,11 +138,20 @@ spec:
           subPath: prometheusjmx.jar
           name: {{ .Values.name }}-prometheusjmx-jar
           readOnly: true 
+        - mountPath: /usr/bin/jq
+          subPath: jq
+          name: {{ .Values.name }}-es-probe-tools
+        - mountPath: /etc/probe/probe.sh
+          subPath: probe.sh
+          name: {{ .Values.name }}-es-probe-cm
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.liveness.enabled }}
+        {{- if .Values.elasticsearch.transportProbe.enabled }}
+        livenessProbe:
+          {{- toYaml .Values.elasticsearch.transportProbe.spec | nindent 10 }}
+        {{- else if .Values.probes.liveness.enabled }}
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
@@ -186,4 +207,19 @@ spec:
         volumeMounts:
         - name: {{ .Values.name }}-prometheusjmx-jar
           mountPath: /{{ .Values.name }}-prometheusjmx-jar
+      {{- end }}
+      {{- if .Values.elasticsearch.transportProbe.enabled }}
+      - name: install-jq
+        image: {{ .Values.elasticsearch.transportProbe.initContainerImage }}
+        command:
+        - sh
+        - -c
+        - |
+          #!/usr/bin/env bash
+          set -e
+          wget -O /{{ .Values.name }}-es-probe-tools/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+          chmod +x /{{ .Values.name }}-es-probe-tools/jq
+        volumeMounts: 
+        - name: {{ .Values.name }}-es-probe-tools
+          mountPath: /{{ .Values.name }}-es-probe-tools
       {{- end }}
