@@ -15,10 +15,10 @@ Chart for Job Manager service in Terra
 | api.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/api/v1/health","port":8190},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for liveness probe |
 | api.probes.readiness.enabled | bool | `true` |  |
 | api.probes.readiness.spec | object | `{"failureThreshold":6,"httpGet":{"path":"/api/v1/health","port":8190},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for readiness probe |
-| api.resources.limits.cpu | int | `2` | Number of CPU units to limit the deployment to |
-| api.resources.limits.memory | string | `"2Gi"` | Memory to limit the deployment to |
-| api.resources.requests.cpu | int | `2` | Number of CPU units to request for the deployment |
-| api.resources.requests.memory | string | `"2Gi"` | Memory to request for the deployment |
+| api.resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
+| api.resources.limits.memory | string | `"4Gi"` | Memory to limit the deployment to |
+| api.resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
+| api.resources.requests.memory | string | `"4Gi"` | Memory to request for the deployment |
 | global.applicationVersion | string | `"latest"` | What version of the jobmanager application to deploy |
 | ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
 | ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |

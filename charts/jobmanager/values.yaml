@@ -79,14 +79,14 @@ api:
   resources:
     requests:
       # api.resources.requests.cpu -- Number of CPU units to request for the deployment
-      cpu: 2
+      cpu: 4
       # api.resources.requests.memory -- Memory to request for the deployment
-      memory: 2Gi
+      memory: 4Gi
     limits:
       # api.resources.limits.cpu -- Number of CPU units to limit the deployment to
-      cpu: 2
+      cpu: 4
       # api.resources.limits.memory -- Memory to limit the deployment to
-      memory: 2Gi
+      memory: 4Gi
   probes:
     readiness:
       # api.probes.readiness.enable -- Whether to configure a readiness probe
