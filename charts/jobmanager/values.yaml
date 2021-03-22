@@ -1,1 +1,121 @@
-# No values yet!
+global:
+  # global.applicationVersion -- What version of the jobmanager application to deploy
+  applicationVersion: latest
+
+# replicas -- Number of API replicas to spin up in the deployment
+replicas: 3
+
+# name -- Name for this deployment
+name: jobmanager
+
+# Settings for Job Manager's Ingress & Service
+ingress:
+  # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig
+  enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+  preSharedCerts: []
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingress.timeoutSec -- Load balancer backend timeout
+  timeoutSec: 120
+
+# TODO - At the time we migrated from VMs to GKE, Job Manager's API and UI containers were deployed to the same VM, with the UI acting as a frontend for the API.
+#        To minimize changes during the migration, this chart deploys both containers as part of the same pod. Eventually we should think about breaking them into separate deployments with separate ingresses.
+# Settings for the UI container
+ui:
+  image:
+    # ui.image.repository -- Image repository
+    repository: databiosphere/job-manager-ui
+    # ui.image.tag -- (string) Image tag.
+    # @default -- global.applicationVersion
+    tag:
+  resources:
+    requests:
+      # ui.resources.requests.cpu -- Number of CPU units to request for the deployment
+      cpu: 4
+      # ui.resources.requests.memory -- Memory to request for the deployment
+      memory: 3.6Gi
+    limits:
+      # ui.resources.limits.cpu -- Number of CPU units to limit the deployment to
+      cpu: 4
+      # ui.resources.limits.memory -- Memory to limit the deployment to
+      memory: 3.6Gi
+  probes:
+    readiness:
+      # ui.probes.readiness.enable -- Whether to configure a readiness probe
+      enabled: true
+      # ui.probes.readiness.spec -- Kubernetes spec for readiness probe
+      spec:
+        httpGet:
+          path: /health
+          port: 8000
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 6
+        successThreshold: 1
+    liveness:
+      # ui.probes.liveness.enable -- Whether to configure a liveness probe
+      enabled: true
+      # ui.probes.liveness.spec -- Kubernetes spec for liveness probe
+      spec:
+        httpGet:
+          path: /health
+          port: 8000
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 30
+        successThreshold: 1
+
+# Settings for the API container
+api:
+  image:
+    # api.image.repository -- Image repository
+    repository: databiosphere/job-manager-api-cromwell
+    # api.image.tag -- (string) Image tag.
+    # @default -- global.applicationVersion
+    tag:
+  resources:
+    requests:
+      # api.resources.requests.cpu -- Number of CPU units to request for the deployment
+      cpu: 4
+      # api.resources.requests.memory -- Memory to request for the deployment
+      memory: 3.6Gi
+    limits:
+      # api.resources.limits.cpu -- Number of CPU units to limit the deployment to
+      cpu: 4
+      # api.resources.limits.memory -- Memory to limit the deployment to
+      memory: 3.6Gi
+  probes:
+    readiness:
+      # api.probes.readiness.enable -- Whether to configure a readiness probe
+      enabled: true
+      # api.probes.readiness.spec -- Kubernetes spec for readiness probe
+      spec:
+        httpGet:
+          path: /api/v1/health
+          port: 8190
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 6
+        successThreshold: 1
+    liveness:
+      # api.probes.liveness.enable -- Whether to configure a liveness probe
+      enabled: true
+      # api.probes.liveness.spec -- Kubernetes spec for liveness probe
+      spec:
+        httpGet:
+          path: /api/v1/health
+          port: 8190
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 30 # 5 minutes before restarted
+        successThreshold: 1
+
+proxy:
+  image:
+    # proxy.image.repository -- Image repository
+    repository: broadinstitute/openidc-proxy
+    # proxy.image.tag -- (string) Image tag.
+    tag: modsecurity_2_9_2
