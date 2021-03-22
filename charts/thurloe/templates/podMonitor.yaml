@@ -1,0 +1,15 @@
+{{- if .Values.prometheus.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: thurloe-jvm-monitor
+  labels: 
+{{ include "thurloe.labels" . | indent 4 }}
+spec:
+  jobLabel: thurloe-jvm
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: thurloe
+  podMetricsEndpoints:
+    - port: metrics
+{{- end }}
