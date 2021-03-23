@@ -52,10 +52,12 @@ spec:
         emptyDir: {}
       - name: {{ .Values.name }}-es-probe-tools
         emptyDir: {}
+      {{- if .Values.elasticsearch.transportProbe.enabled }}
       - name: {{ .Values.name }}-es-probe-cm
         configMap:
           name: {{ .Values.name }}-es-probe-cm
           defaultMode: 0555
+      {{- end }}
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
