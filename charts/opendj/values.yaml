@@ -84,6 +84,8 @@ backup:
     repository: gcr.io/google.com/cloudsdktool/cloud-sdk
     # backup.cloudsdkImage.repository -- Image tag to use for Cloud SDK
     tag: '326.0.0'
+  # backup.clusterLocation -- Where the GKE cluster is located
+  clusterLocation: "--zone us-central1-a"
 
 # vaultSecrets -- Where in Vault to find secrets used by this chart.
 vaultSecrets:
