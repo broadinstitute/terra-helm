@@ -14,7 +14,7 @@ LogLevel {{ .Values.proxyLogLevel }}
 
 Header unset Server
 Header unset Strict-Transport-Security
-Header always set Strict-Transport-Security: max-age=86400; includeSubDomains
+Header always set Strict-Transport-Security: "max-age=86400; includeSubDomains"
 Header unset X-Frame-Options
 Header always set X-Frame-Options SAMEORIGIN
 
