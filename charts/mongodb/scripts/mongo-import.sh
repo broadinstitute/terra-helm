@@ -5,6 +5,8 @@
 set -e
 set -o pipefail
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 PROMPT=${PROMPT:-true}
 
 prompt(){
@@ -67,6 +69,11 @@ trap "set -x; echo killing $PODNAME; kubectl -n ${NAMESPACE} delete --now pod ${
 echo "Waiting 15s for the pod to start"
 sleep 15
 
+
+echo "Uploading collectionCounts.js to pod"
+kubectl -n "${NAMESPACE}" \
+  cp "${DIR}/collectionCounts.js" "${PODNAME}:/tmp/collectionCounts.js"
+
 echo "Downloading dump file to /tmp/${DUMPFILE} from ${GCS_UPLOAD_PATH}"
 gsutil cp "${GCS_UPLOAD_PATH}" "${LOCAL_DUMPFILE}"
 
@@ -85,5 +92,11 @@ prompt kubectl -n "${NAMESPACE}" \
   exec "${PODNAME}" -- \
   bash -c \
   "mongorestore --password \$MONGODB_PASSWORD --drop --authenticationDatabase agora --dir dump/agora 'mongodb://agora@mongodb-0.mongodb-headless:27017,mongodb-1.mongodb-headless:27017,mongodb-2.mongodb-headless:27017/agora?replicaSet=rs0'"
+
+echo "Running collectionCounts.js..."
+kubectl -n "${NAMESPACE}" \
+  exec "${PODNAME}" -- \
+  bash -c \
+  "mongo --password \$MONGODB_PASSWORD 'mongodb://agora@mongodb-0.mongodb-headless:27017,mongodb-1.mongodb-headless:27017,mongodb-2.mongodb-headless:27017/agora?replicaSet=rs0' /tmp/collectionCounts.js"
 
 echo "Import completed."

@@ -7,6 +7,8 @@ set -o pipefail
 
 PROMPT=${PROMPT:-true}
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 prompt(){
   if [[ "${PROMPT}" != "false" ]]; then
     echo "> $@"
@@ -122,6 +124,16 @@ trap "set -x; echo killing $PODNAME; kubectl -n ${NAMESPACE} delete --now pod ${
 
 echo "Waiting 30s for the pod to start"
 sleep 30
+
+echo "Uploading collectionCounts.js to pod"
+kubectl -n "${NAMESPACE}" \
+  cp "${DIR}/collectionCounts.js" "${PODNAME}:/tmp/collectionCounts.js"
+
+echo "Running collectionCounts.js..."
+kubectl -n "${NAMESPACE}" \
+  exec "${PODNAME}" -- \
+  bash -c \
+  "mongo --password \$MONGODB_PASSWORD 'mongodb://agora@mongodb01.${TLD}:27017,mongodb02.${TLD}:27017/agora?replicaSet=rs0' /tmp/collectionCounts.js"
 
 echo "Dumping Agora MongoDB data"
 prompt kubectl -n "${NAMESPACE}" \
