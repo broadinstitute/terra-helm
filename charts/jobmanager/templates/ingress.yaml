@@ -1,0 +1,18 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}-ingress
+  labels: {{- include "jobmanager.labels" . | nindent 4 }}
+  annotations:
+    networking.gke.io/v1beta1.FrontendConfig: "{{ .Values.name }}-ingress-frontendconfig"
+    kubernetes.io/ingress.global-static-ip-name: {{ required "ingress.staticIpName value is required" .Values.ingress.staticIpName | quote }}
+    {{- if not (empty .Values.ingress.preSharedCerts) }}
+    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.preSharedCerts | join "," | quote }}
+    {{- end }}
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  backend:
+    serviceName: {{ .Values.name }}-service
+    servicePort: 443
+{{- end }}

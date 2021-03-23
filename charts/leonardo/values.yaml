@@ -45,6 +45,18 @@ deploymentDefaults:
         periodSeconds: 10
         failureThreshold: 30 # 5 minutes before restarted
         successThreshold: 1
+    startup:
+      # deploymentDefaults.probes.startup.enable -- Whether to configure a startup probe
+      enabled: true
+      # deploymentDefaults.probes.startup.spec -- k8s spec of the startup probe to deploy, if enabled
+      spec:
+        httpGet:
+          path: /version
+          port: 8080
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
+        successThreshold: 1
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
 # with different configurations.
@@ -84,13 +96,13 @@ cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  imageTag: ed126d1
+  imageTag: 59b370b
   googleProject:
 zombieMonitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-zombie-monitor-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
-  imageTag: 5188eb3
+  imageTag: 59b370b
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:

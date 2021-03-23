@@ -2,7 +2,7 @@ apiVersion: v2
 name: elasticsearch
 description: a helm chart to deploy monitoring infrastructure
 type: application
-version: 0.3.0
+version: 0.8.0
 keywords:
   - dsp
   - broad

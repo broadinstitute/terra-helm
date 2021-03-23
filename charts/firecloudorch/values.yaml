@@ -86,3 +86,26 @@ prometheus:
   initContainerImage: 'alpine:3.12.0'
   jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
   jmxJarVersion: '0.13.0'
+
+elasticsearch:
+  transportProbe:
+    # elasticsearch.transportProbe.enabled -- Enables a custom liveness probe to account for ES transport client losing connection when elasticsearch restarts.
+    enabled: true
+    # elasticsearch.transportProbe.initContainerImage -- Docker image to use to install tools needed for custom probe
+    initContainerImage: 'alpine:3.12.0'
+    # elasticsearch.transportProbe.appHostname -- hostname used for querying orch's status
+    appHostname: 'localhost:8080'
+    # elasticsearch.transportProbe.elasticHostname -- hostname for querying the status of the Elasticsearch cluster
+    elasticHostname: 'elasticsearch5a-master-0.elasticsearch5a-master-headless:9200'
+    # elasticsearch.transportProbe.timeout -- timeout in seconds for probe requests
+    timeout: 10
+    # elasticsearch.transportProbe.spec -- Spec for the custom liveness probe
+    spec:
+      exec:
+        command:
+        - ./etc/probe/probe.sh
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 90
+      failureThreshold: 3 # 270 seconds before restart
+      successThreshold: 1

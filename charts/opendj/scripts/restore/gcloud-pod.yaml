@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gcloud-temp
+spec:
+  containers:
+  - image: gcr.io/google.com/cloudsdktool/cloud-sdk:326.0.0
+    name: gcloud
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+    - mountPath: /sa-key.json
+      name: gcp-sa
+      subPath: sa-key.json
+  serviceAccountName: opendj-service-sa
+  volumes:
+  - name: gcp-sa
+    secret:
+      secretName: opendj-secrets
+      items:
+      - key: backup-credentials
+        path: sa-key.json

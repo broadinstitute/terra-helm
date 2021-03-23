@@ -283,12 +283,12 @@ spec:
               key: password
         {{- end }}
         {{- if .Values.proxy.tcell.enabled }}
-        - name: TCELL_APP_ID
+        - name: TCELL_AGENT_APP_ID
           valueFrom:
             secretKeyRef:
               name: {{ .Values.name }}-proxy-tcell-secrets
               key: app-id
-        - name: TCELL_API_KEY
+        - name: TCELL_AGENT_API_KEY
           valueFrom:
             secretKeyRef:
               name: {{ .Values.name }}-proxy-tcell-secrets

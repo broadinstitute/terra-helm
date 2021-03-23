@@ -103,7 +103,7 @@ spec:
         - mountPath: /etc/jupyter-server.crt
           subPath: jupyter-server.crt
           readOnly: true
-          name: app-ctmpls        
+          name: app-ctmpls
         - mountPath: /leonardo/terra-app-setup/tls.crt
           subPath: jupyter-server.crt
           readOnly: true
@@ -111,7 +111,7 @@ spec:
         - mountPath: /etc/jupyter-server.key
           subPath: jupyter-server.key
           readOnly: true
-          name: app-ctmpls        
+          name: app-ctmpls
         - mountPath: /leonardo/terra-app-setup/tls.key
           subPath: jupyter-server.key
           readOnly: true
@@ -127,7 +127,7 @@ spec:
         - mountPath: /etc/rootCA.pem
           subPath: rootCA.pem
           readOnly: true
-          name: app-ctmpls       
+          name: app-ctmpls
         - mountPath: /leonardo/terra-app-setup/ca.crt
           subPath: rootCA.pem
           readOnly: true
@@ -155,6 +155,10 @@ spec:
         {{- if $settings.probes.liveness.enabled }}
         livenessProbe:
           {{- toYaml $settings.probes.liveness.spec | nindent 10 }}
+        {{- end }}
+        {{- if $settings.probes.startup.enabled }}
+        startupProbe:
+          {{- toYaml $settings.probes.startup.spec | nindent 10 }}
         {{- end }}
       - name: {{ $settings.name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big

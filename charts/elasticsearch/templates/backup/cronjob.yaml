@@ -7,6 +7,7 @@ metadata:
 spec:
   schedule: "0 8 * * *" # Backup every day at 3 am EST
   concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
   jobTemplate:
     metadata:
       labels: {{ include "elasticsearch.labels" . | nindent 8 }}
@@ -26,6 +27,7 @@ spec:
             command: ['sh', '-c']
             args:
             - |-
+              apk --no-cache add curl && \
               TIMESTAMP=$( date +'%Y%m%d.%H%M%S' ) && \
               curl -X PUT "${ELASTICSEARCH_HOSTNAME}:9200/_snapshot/${SNAPSHOT_REPOSITORY}/es-snapshot-${TIMESTAMP}?wait_for_completion=true"
             env: 

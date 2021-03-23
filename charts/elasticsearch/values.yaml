@@ -1,5 +1,11 @@
 # Set default values on chart from elastic.co
 name: elasticsearch
+# replicaCount -- number of elasticsearch replicas to expose.
+replicaCount: 3
+# expose -- If true will create a loadbalancer service for each pod, enables using the transport client from outside the cluster
+expose: false
+# exposeIPs -- List of ips to associate with each ES pod
+exposeIPs: []
 
 backup:
   # backup.enabled -- Whether to run nightly snapshots of the ES cluster backed up to GCS
@@ -28,9 +34,18 @@ vault:
 # Documentation on these values can be found at https://github.com/elastic/helm-charts/tree/master/elasticsearch
 elasticsearch:
 
+  clusterName: elasticsearch5a
+
   image: "docker.io/broadinstitute/elasticsearch"
   imageTag: 5.4.0_6
 
+  nodeSelector:
+    bio.terra/node-pool: elasticsearch
+  tolerations:
+  - key: "bio.terra/workload"
+    operator: Equal
+    value: elasticsearch
+    effect: NoSchedule
   podSecurityPolicy:
     create: true
     spec:
