@@ -50,9 +50,9 @@ spec:
         emptyDir: {}
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
+      {{- if .Values.elasticsearch.transportProbe.enabled }}  
       - name: {{ .Values.name }}-es-probe-tools
         emptyDir: {}
-      {{- if .Values.elasticsearch.transportProbe.enabled }}
       - name: {{ .Values.name }}-es-probe-cm
         configMap:
           name: {{ .Values.name }}-es-probe-cm
