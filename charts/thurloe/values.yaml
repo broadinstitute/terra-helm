@@ -1,1 +1,88 @@
-# No values yet!
+global:
+  # global.applicationVersion -- What version of the Thurloe application to deploy
+  applicationVersion: latest
+
+name: thurloe
+
+ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
+  enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
+  timeoutSec: 120
+  # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+  preSharedCerts: []
+  cert:
+    # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    #   certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
+    vault:
+      enabled: false
+      cert:
+        # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
+        path: null
+        # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
+        secretKey: null
+      key:
+        # ingress.cert.vault.key.path -- (string) Path to secret containing .key
+        path: null
+        # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
+        secretKey: null    
+
+imageConfig:
+  # imageConfig.repository -- Image repository
+  repository: gcr.io/broad-dsp-gcr-public/thurloe
+  # imageConfig.tag -- (string) Image tag.
+  # @default -- global.applicationVersion
+  tag:
+  imagePullPolicy: Always
+
+replicas: 0
+
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 4
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 8Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 4
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 8Gi
+
+probes:
+  readiness:
+    # probes.readiness.enable -- Whether to configure a readiness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8000
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 6
+      successThreshold: 1
+  liveness:
+    # probes.liveness.enable -- Whether to configure a liveness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8000
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 30 # 5 minutes before restarted
+      successThreshold: 1
+
+# Requires deployment of Prometheus to cluster
+prometheus:
+  enabled: true
+  initContainerImage: 'alpine:3.12.0'
+  jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
+  jmxJarVersion: '0.13.0'
