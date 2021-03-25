@@ -1,1 +1,91 @@
-# No values yet!
+global:
+  # global.applicationVersion -- What version of the firecloudui application to deploy
+  applicationVersion: latest
+
+# replicas -- Number of replicas to spin up in the deployment
+replicas: 2
+
+# name -- Name for this deployment
+name: firecloudui
+
+# Settings for Firecloud UI's Ingress & Service
+ingress:
+  # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig
+  enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+  preSharedCerts: []
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingress.timeoutSec -- Load balancer backend timeout
+  timeoutSec: 120
+  healthCheck:
+    requestPath: /health
+  cert:
+    # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    # certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
+    vault:
+      enabled: false
+      cert:
+        # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
+        path: null
+        # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
+        secretKey: null
+      key:
+        # ingress.cert.vault.key.path -- (string) Path to secret containing .key
+        path: null
+        # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
+        secretKey: null
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+
+# Settings for the Firecloud UI container
+app:
+  image:
+    # app.image.repository -- Image repository
+    repository: gcr.io/broad-dsp-gcr-public/firecloud-ui
+    # app.image.tag -- (string) Image tag.
+    # @default -- global.applicationVersion
+    tag:
+    imagePullPolicy: Always
+
+  resources:
+    requests:
+      # app.resources.requests.cpu -- Number of CPU units to request for the deployment
+      cpu: 1
+      # app.resources.requests.memory -- Memory to request for the deployment
+      memory: 3.75Gi
+    limits:
+      # app.resources.limits.cpu -- Number of CPU units to limit the deployment to
+      cpu: 1
+      # app.resources.limits.memory -- Memory to limit the deployment to
+      memory: 3.75Gi
+  probes:
+    readiness:
+      # app.probes.readiness.enable -- Whether to configure a readiness probe
+      enabled: true
+      # app.probes.readiness.spec -- Kubernetes spec for readiness probe
+      spec:
+        httpGet:
+          path: /health
+          port: 443
+          scheme: HTTPS
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 6
+        successThreshold: 1
+    liveness:
+      # app.probes.liveness.enable -- Whether to configure a liveness probe
+      enabled: true
+      # app.probes.liveness.spec -- Kubernetes spec for liveness probe
+      spec:
+        httpGet:
+          path: /health
+          port: 443
+          scheme: HTTPS
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 30
+        successThreshold: 1
+
