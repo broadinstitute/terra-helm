@@ -1,0 +1,11 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: {{ .Values.name }}-ingress-frontendconfig
+  labels:
+{{ include "firecloudui.labels" . | indent 4 }}
+spec:
+  sslPolicy: {{ .Values.ingress.sslPolicy }}
+
+{{- end }}
