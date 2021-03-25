@@ -1,1 +1,10 @@
-# No values yet!
+global:
+  # global.applicationVersion -- What version of the firecloudui application to deploy
+  applicationVersion: latest
+
+# replicas -- Number of replicas to spin up in the deployment
+replicas: 2
+
+# name -- Name for this deployment
+name: firecloudui
+
