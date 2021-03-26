@@ -26,32 +26,32 @@ spec:
       containers:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
-      resources:
-        {{- toYaml .Values.resources | nindent 10 }}
-      env:
-      # Make node, pod name accessible to app as env vars
-      - name: K8S_NODE_NAME
-        valueFrom:
-          fieldRef:
-            fieldPath: spec.nodeName
-      - name: K8S_POD_NAME
-        valueFrom:
-          fieldRef:
-            fieldPath: metadata.name
-      volumeMounts:
-      - mountPath: /etc/config.sh
-        subPath: config.sh
-        name: app-ctmpls
-        readOnly: true
-      - mountPath: /etc/whitelists.tsv
-        subPath: whitelists.tsv
-        name: app-ctmpls
-        readOnly: true
-      - mountPath: /etc/firecloud-account.pem
-        subPath: firecloud-account.pem
-        name: app-ctmpls
-        readOnly: true
-      - mountPath: /local/crontab
-        subPath: crontab
-        name: app-ctmpls
-        readOnly: true
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /etc/config.sh
+          subPath: config.sh
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/whitelists.tsv
+          subPath: whitelists.tsv
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/firecloud-account.pem
+          subPath: firecloud-account.pem
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /local/crontab
+          subPath: crontab
+          name: app-ctmpls
+          readOnly: true
