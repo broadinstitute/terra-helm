@@ -134,21 +134,12 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         # Environment variables for Kubernetes config
-        - name: BUFFER_KUBERNETES_POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
         - name: TERRA_COMMON_KUBERNETES_POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-
-        - name: BUFFER_KUBERNETES_POD_NAME_FILTER
-          value: {{ .Values.name }}-deployment
         - name: TERRA_COMMON_KUBERNETES_POD_NAME_FILTER
           value: {{ .Values.name }}-deployment
-        - name: BUFFER_KUBERNETES_IN_KUBERNETES
-          value: 'true'
         - name: TERRA_COMMON_KUBERNETES_IN_KUBERNETES
           value: 'true'
         volumeMounts:
