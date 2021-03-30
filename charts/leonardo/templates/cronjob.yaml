@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.cronjob.name }}"
   labels: {}
 spec:
-  schedule: "30 4 * * *"
+  schedule: "30 8 * * *"
   startingDeadlineSeconds: 100
   successfulJobsHistoryLimit: 1
   jobTemplate:
