@@ -2,14 +2,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: thurloe-jvm-monitor
+  name: firecloudui-jvm-monitor
   labels: 
-{{ include "thurloe.labels" . | indent 4 }}
+{{ include "firecloudui.labels" . | indent 4 }}
 spec:
-  jobLabel: thurloe-jvm
+  jobLabel: firecloudui-jvm
   selector:
     matchLabels:
-      app.kubernetes.io/component: thurloe
+      app.kubernetes.io/component: firecloudui
   podMetricsEndpoints:
     - port: metrics
 {{- end }}
