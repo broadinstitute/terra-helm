@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: {{ .Chart.Name }}-cm
   labels:
-{{ include "thurloe.labels" . | indent 4 }}
+{{ include "firecloudui.labels" . | indent 4 }}
 data:
 {{- if .Values.prometheus.enabled }}
   prometheusJmx.yaml: |
-{{ include "thurloe.config.prometheusJmx" . | indent 4 }}
+{{ include "firecloudui.config.prometheusJmx" . | indent 4 }}
 {{- end }}

@@ -1,5 +1,5 @@
 {{- /* Configuration for Prometheus JMX exporter javaagent */ -}}
-{{- define "thurloe.config.prometheusJmx" -}}
+{{- define "firecloudui.config.prometheusJmx" -}}
 rules:
 - pattern: ".*"
 {{ end -}}

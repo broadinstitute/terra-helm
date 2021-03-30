@@ -4,7 +4,7 @@ kind: SecretDefinition
 metadata:
   name: secretdefinition-{{ .Values.name }}-cert
   labels:
-{{ include "thurloe.labels" . | indent 4 }}
+{{ include "firecloudui.labels" . | indent 4 }}
 spec:
   name: {{ .Values.name }}-cert
   keysMap:
