@@ -20,15 +20,34 @@ ingress:
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
   timeoutSec: 120
+  cert:
+    # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    # certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
+    vault:
+      enabled: false
+      cert:
+        # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
+        path: null
+        # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
+        secretKey: null
+      key:
+        # ingress.cert.vault.key.path -- (string) Path to secret containing .key
+        path: null
+        # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
+        secretKey: null
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
 
 # Settings for the Firecloud UI container
 ui:
   image:
     # ui.image.repository -- Image repository
-    repository: broadinstitute/firecloud-ui
+    repository: gcr.io/broad-dsp-gcr-public/firecloud-ui
     # ui.image.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
+    imagePullPolicy: Always
+
   resources:
     requests:
       # ui.resources.requests.cpu -- Number of CPU units to request for the deployment
