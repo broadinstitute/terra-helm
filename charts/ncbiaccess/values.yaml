@@ -9,4 +9,7 @@ imageConfig:
   repository: broadinstitute/ncbiaccess
   tag:
   imagePullPolicy: Always
-  
+
+vault:
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix: 
