@@ -14887,6 +14887,23 @@ entries:
     version: 0.0.1-152.1602098503.69881c
   ncbiaccess:
   - apiVersion: v2
+    created: "2021-03-31T17:18:21.780006008Z"
+    description: Chart for NCBI Access service in Terra
+    digest: 56eb1fc1baf533b7b831cc1365a1773a13424238c8c87f39da36007737aea655
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - ncbiaccess
+    name: ncbiaccess
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/ncbiaccess
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ncbiaccess-0.1.1-341.1617211096.5a811c/ncbiaccess-0.1.1-341.1617211096.5a811c.tgz
+    version: 0.1.1-341.1617211096.5a811c
+  - apiVersion: v2
     created: "2021-03-31T17:15:09.398028244Z"
     description: Chart for NCBI Access service in Terra
     digest: bbbc0fc2e49c8163f9ec168197b8bc0179c8c31f9491ad18dc797238ed335bd2
