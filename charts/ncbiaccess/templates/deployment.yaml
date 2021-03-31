@@ -19,15 +19,15 @@ spec:
       labels: {{- include "ncbiaccess.labels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ .Values.name }}-sa
-      
+      imagePullSecrets:
+      - name: {{ .Values.name }}-dockerhub-creds
       volumes:
       - name: app-ctmpls
         secret:
           secretName: {{ .Values.name }}-app-ctmpls
       containers:
       - name: {{ .Values.name }}-app
-        imagePullSecrets:
-        - name: {{ .Values.name }}-dockerhub-creds
+      
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
