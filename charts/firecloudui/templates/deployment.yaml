@@ -33,35 +33,28 @@ spec:
       hostAliases:
       - ip: 127.0.0.1
         hostnames:
-        - ui
+        - app
       volumes:
-      - name: {{ .Values.name }}-cm
-        configMap:
-          name: {{ .Values.name }}-cm
-      - name: ui-ctmpls
+      - name: app-ctmpls
         secret:
-          secretName: {{ $legacyResourcePrefix }}-ui-ctmpls
-      - name: {{ .Values.name }}-gc-logs
-        emptyDir: {}
-      - name: {{ .Values.name }}-prometheusjmx-jar
-        emptyDir: {}
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       containers:
-      - name: {{ .Values.name }}-ui
-        image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Values.global.applicationVersion }}"
+      - name: {{ .Values.name }}-app
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Values.global.applicationVersion }}"
         ports:
           - containerPort: 443
           - containerPort: 80
           - containerPort: 8888
         resources: # Mimic existing GCE vm requirements
           requests:
-            cpu: {{ .Values.ui.resources.requests.cpu }}
-            memory: {{ .Values.ui.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
           limits:
-            cpu: {{ .Values.ui.resources.limits.cpu }}
-            memory: {{ .Values.ui.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
         envFrom:
         - secretRef:
-            name: {{ $legacyResourcePrefix }}-ui-env
+            name: {{ $legacyResourcePrefix }}-app-env
         env:
         # Make node, pod name accessible to app as env vars
         - name: K8S_NODE_NAME
@@ -74,37 +67,30 @@ spec:
               fieldPath: metadata.name
         volumeMounts:
         # Unclear if this next stanza is required.
-        - mountPath: /etc/{{ .Values.name }}-cm
-          name: {{ .Values.name }}-cm
-          readOnly: true
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
-          name: ui-ctmpls
+          name: app-ctmpls
           readOnly: true
         - mountPath: /etc/ssl/private/server.key
           subPath: server.key
-          name: ui-ctmpls
+          name: app-ctmpls
           readOnly: true
         - mountPath: /etc/ssl/certs/ca-bundle.crt
           subPath: ca-bundle.crt
-          name: ui-ctmpls
+          name: app-ctmpls
           readOnly: true
-        - mountPath: /etc/firecloudui.conf
-          subPath: firecloudui.conf
-          name: ui-ctmpls
-          readOnly: true
-        - mountPath: /etc/firecloudui-account.pem
-          subPath: firecloudui-account.pem
-          name: ui-ctmpls
+        - mountPath: /config
+          subPath: config
+          name: app-ctmpls
           readOnly: true
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
         # the Ingress / GCP load balancer in the Ingress's backendConfig
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
-          {{- toYaml .Values.ui.probes.readiness.spec | nindent 10 }}
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.ui.probes.liveness.enabled }}
+        {{- if .Values.probes.liveness.enabled }}
         livenessProbe:
-          {{- toYaml .Values.ui.probes.liveness.spec | nindent 10 }}
+          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
