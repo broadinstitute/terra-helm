@@ -20,7 +20,7 @@ spec:
     spec:
       serviceAccountName: {{ .Values.name }}-sa
       imagePullSecrets:
-      - name: {{ .Values.name }}-dockerhub-creds
+        - name: {{ .Values.name }}-dockerhub-creds
       volumes:
       - name: app-ctmpls
         secret:
