@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}-deployment
   labels:
-{{ include "thurloe.labels" . | indent 4 }}
+{{ include "firecloudui.labels" . | indent 4 }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -21,7 +21,7 @@ spec:
     metadata:
       labels:
         deployment: {{ .Values.name }}-deployment
-{{ include "thurloe.labels" . | indent 8 }}
+{{ include "firecloudui.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}
@@ -34,7 +34,6 @@ spec:
       - ip: 127.0.0.1
         hostnames:
         - app
-        - sqlproxy
       volumes:
       - name: {{ .Values.name }}-cm
         configMap:
@@ -45,12 +44,7 @@ spec:
       - name: proxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
-      - name: sqlproxy-ctmpls
-        secret:
-          secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls     
       - name: {{ .Values.name }}-gc-logs
-        emptyDir: {}
-      - name: {{ .Values.name }}-proxy-security-logs
         emptyDir: {}
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
@@ -88,7 +82,7 @@ spec:
           {{- if .Values.prometheus.enabled }}
           ${PROMETHEUS_ARGS}
           {{- end }}
-          -jar $(find /thurloe -name 'thurloe*.jar')
+          -jar $(find /firecloudui -name 'firecloudui*.jar')
         - '--'
         resources:
 {{ toYaml .Values.resources | indent 10 }}
@@ -96,12 +90,12 @@ spec:
         - mountPath: /etc/{{ .Values.name }}-cm
           name: {{ .Values.name }}-cm
           readOnly: true
-        - mountPath: /etc/thurloe.conf
-          subPath: thurloe.conf
+        - mountPath: /etc/firecloudui.conf
+          subPath: firecloudui.conf
           name: app-ctmpls
           readOnly: true
-        - mountPath: /etc/thurloe-account.pem
-          subPath: thurloe-account.pem
+        - mountPath: /etc/firecloudui-account.pem
+          subPath: firecloudui-account.pem
           name: app-ctmpls
           readOnly: true
         - mountPath: /var/log/gc
@@ -154,16 +148,6 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ .Values.name }}-proxy-security-logs
-      - name: {{ .Values.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_20180808
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts: 
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       {{- if .Values.prometheus.enabled }}
       initContainers:
       - name: download-prometheus-jmx-jar
