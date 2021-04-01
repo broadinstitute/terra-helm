@@ -68,6 +68,7 @@ app:
         httpGet:
           path: /config.json
           port: 443
+          scheme: HTTPS
         timeoutSeconds: 5
         periodSeconds: 10
         failureThreshold: 6
@@ -80,6 +81,7 @@ app:
         httpGet:
           path: /config.json
           port: 443
+          scheme: HTTPS
         timeoutSeconds: 5
         periodSeconds: 10
         failureThreshold: 30
