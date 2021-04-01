@@ -79,8 +79,12 @@ spec:
           subPath: ca-bundle.crt
           name: app-ctmpls
           readOnly: true
-        - mountPath: /config
-          subPath: config
+        - mountPath: /config/config.json
+          subPath: config.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /config/tcell.js
+          subPath: tcell.js
           name: app-ctmpls
           readOnly: true
         # Note: These readiness settings only apply to Kubernetes' internal load
