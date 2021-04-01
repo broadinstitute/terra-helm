@@ -39,31 +39,31 @@ ingress:
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
 
 # Settings for the Firecloud UI container
-ui:
+app:
   image:
-    # ui.image.repository -- Image repository
+    # app.image.repository -- Image repository
     repository: gcr.io/broad-dsp-gcr-public/firecloud-ui
-    # ui.image.tag -- (string) Image tag.
+    # app.image.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
     imagePullPolicy: Always
 
   resources:
     requests:
-      # ui.resources.requests.cpu -- Number of CPU units to request for the deployment
+      # app.resources.requests.cpu -- Number of CPU units to request for the deployment
       cpu: 1
-      # ui.resources.requests.memory -- Memory to request for the deployment
+      # app.resources.requests.memory -- Memory to request for the deployment
       memory: 3.75Gi
     limits:
-      # ui.resources.limits.cpu -- Number of CPU units to limit the deployment to
+      # app.resources.limits.cpu -- Number of CPU units to limit the deployment to
       cpu: 1
-      # ui.resources.limits.memory -- Memory to limit the deployment to
+      # app.resources.limits.memory -- Memory to limit the deployment to
       memory: 3.75Gi
   probes:
     readiness:
-      # ui.probes.readiness.enable -- Whether to configure a readiness probe
+      # app.probes.readiness.enable -- Whether to configure a readiness probe
       enabled: true
-      # ui.probes.readiness.spec -- Kubernetes spec for readiness probe
+      # app.probes.readiness.spec -- Kubernetes spec for readiness probe
       spec:
         httpGet:
           path: /config.json
@@ -73,9 +73,9 @@ ui:
         failureThreshold: 6
         successThreshold: 1
     liveness:
-      # ui.probes.liveness.enable -- Whether to configure a liveness probe
+      # app.probes.liveness.enable -- Whether to configure a liveness probe
       enabled: true
-      # ui.probes.liveness.spec -- Kubernetes spec for liveness probe
+      # app.probes.liveness.spec -- Kubernetes spec for liveness probe
       spec:
         httpGet:
           path: /config.json
