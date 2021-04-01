@@ -10,6 +10,14 @@ imageConfig:
   tag:
   imagePullPolicy: Always
 
+resources: 
+  requests:
+    cpu: 1
+    memory: 2Gi
+  limits:
+    cpu: 1
+    memory: 2Gi
+
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix: 
