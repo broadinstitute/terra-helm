@@ -1,4 +1,4 @@
-{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+{{- $imageTag := .Values.app.image.tag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Values.name -}}
 apiVersion: apps/v1
 kind: Deployment
@@ -40,18 +40,18 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       containers:
       - name: {{ .Values.name }}-app
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Values.global.applicationVersion }}"
+        image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Values.global.applicationVersion }}"
         ports:
           - containerPort: 443
           - containerPort: 80
           - containerPort: 8888
         resources: # Mimic existing GCE vm requirements
           requests:
-            cpu: {{ .Values.resources.requests.cpu }}
-            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.app.resources.requests.cpu }}
+            memory: {{ .Values.app.resources.requests.memory }}
           limits:
-            cpu: {{ .Values.resources.limits.cpu }}
-            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.app.resources.limits.cpu }}
+            memory: {{ .Values.app.resources.limits.memory }}
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
@@ -86,11 +86,11 @@ spec:
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
         # the Ingress / GCP load balancer in the Ingress's backendConfig
-        {{- if .Values.probes.readiness.enabled }}
+        {{- if .Values.app.probes.readiness.enabled }}
         readinessProbe:
-          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+          {{- toYaml .Values.app.probes.readiness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.liveness.enabled }}
+        {{- if .Values.app.probes.liveness.enabled }}
         livenessProbe:
-          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
+          {{- toYaml .Values.app.probes.liveness.spec | nindent 10 }}
         {{- end }}
