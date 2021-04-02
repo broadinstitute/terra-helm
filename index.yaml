@@ -10048,6 +10048,23 @@ entries:
     version: 0.0.0-225.1607530695.c4bf85
   firecloudui:
   - apiVersion: v2
+    created: "2021-04-02T16:32:23.508720979Z"
+    description: Chart for Firecloud UI service in Terra
+    digest: b43963b647d9ba167823771c819afa609faae707d9616c8276734c6810791699
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.2.0-339.1617381138.1387c7/firecloudui-0.2.0-339.1617381138.1387c7.tgz
+    version: 0.2.0-339.1617381138.1387c7
+  - apiVersion: v2
     created: "2021-04-02T16:23:03.697325794Z"
     description: Chart for Firecloud UI service in Terra
     digest: 42ec1e8614a3cf00501f7cc06680dd899d9888ddb7089cb4aefdd3411ba7c0d4
