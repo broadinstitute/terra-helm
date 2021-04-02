@@ -7,13 +7,5 @@ metadata:
 {{ include "firecloudui.labels" . | indent 4 }}
 spec:
   sslPolicy: {{ .Values.ingress.sslPolicy }}
-  timeoutSec: {{ .Values.ingress.timeoutSec }}
-  healthCheck:
-    checkIntervalSec: 5
-    timeoutSec: 5
-    healthyThreshold: 2
-    unhealthyThreshold: 2
-    type: HTTPS
-    port: 443
-    requestPath: {{ .Values.ingress.healthCheck.requestPath }}
+
 {{- end }}
