@@ -123,6 +123,10 @@ spec:
         livenessProbe:
           {{- toYaml $settings.probes.liveness.spec | nindent 10 }}
         {{- end }}
+        {{- if $settings.probes.startup.enabled }}
+        startupProbe:
+          {{- toYaml $settings.probes.startup.spec | nindent 10 }}
+        {{- end }}
       - name: {{ $settings.name }}-proxy
         image: {{ $settings.proxyImage }}
         ports:
