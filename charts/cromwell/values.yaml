@@ -37,7 +37,7 @@ deploymentDefaults:
   proxyImage: broadinstitute/openidc-proxy:tcell-mpm-big
   probes:
     readiness:
-      # deploymentDefaults.probes.readiness.enable -- Whether to configure a readiness probe
+      # deploymentDefaults.probes.readiness.enabled -- Whether to configure a readiness probe
       enabled: true
       # deploymentDefaults.probes.readiness.spec -- k8s spec of the readiness probe to deploy, if enabled
       spec:
@@ -50,7 +50,7 @@ deploymentDefaults:
         failureThreshold: 6
         successThreshold: 1
     liveness:
-      # deploymentDefaults.probes.liveness.enable -- Whether to configure a liveness probe
+      # deploymentDefaults.probes.liveness.enabled -- Whether to configure a liveness probe
       enabled: true
       # deploymentDefaults.probes.liveness.spec -- k8s spec of the liveness probe to deploy, if enabled
       spec:
@@ -62,7 +62,18 @@ deploymentDefaults:
         periodSeconds: 10
         failureThreshold: 30 # 5 minutes before restarted
         successThreshold: 1
-
+    startup:
+      # deploymentDefaults.probes.startup.enabled -- Whether to configure a startup probe
+      enabled: true
+      # deploymentDefaults.probes.startup.spec -- k8s spec of the startup probe to deploy, if enabled
+      spec:
+        httpGet:
+          path: /engine/latest/version
+          port: 8000
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
+        successThreshold: 1
 # A map of Cromwell deployments. In Terra's production environment,
 # Cromwell is deployed as 4 separate services with different configurations.
 #
