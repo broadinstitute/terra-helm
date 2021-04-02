@@ -20,6 +20,8 @@ ingress:
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
   timeoutSec: 120
+  healthCheck:
+    requestPath: /config.json
   cert:
     # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
     # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
