@@ -27,3 +27,4 @@ resources:
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix: 
+  
