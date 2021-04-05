@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ncbiaccess
-version: 0.1.1
+version: 0.2.0
 description: Chart for NCBI Access service in Terra
 type: application
 keywords:
