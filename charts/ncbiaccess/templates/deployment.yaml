@@ -1,0 +1,58 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  labels: {{ include "ncbiaccess.labels" . | nindent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels: {{- include "ncbiaccess.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "ncbiaccess.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-sa
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ .Values.name }}-app-ctmpls
+      containers:
+      - name: {{ .Values.name }}-app
+      
+        image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /etc/config.sh
+          subPath: config.sh
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/whitelists.tsv
+          subPath: whitelists.tsv
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/firecloud-account.pem
+          subPath: firecloud-account.pem
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /local/crontab
+          subPath: crontab
+          name: app-ctmpls
+          readOnly: true

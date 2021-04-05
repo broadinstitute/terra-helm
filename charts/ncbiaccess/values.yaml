@@ -1,1 +1,30 @@
-# No values yet!
+global:
+  # global.applicationVersion -- What version of the Sam application to deploy
+  applicationVersion: latest
+
+# name -- prefix for k8s resource names
+name: ncbiaccess
+# replicas -- number of pods to run
+replicas: 1
+
+imageConfig:
+  # imageConfig.repository -- Image repo to use
+  repository: broadinstitute/ncbiaccess
+  # imageConfig.tag -- Image tag to run
+  # @default -- global.applicationVersion
+  tag:
+  # imageConfig.imagePull Policy
+  imagePullPolicy: Always
+
+resources: 
+  requests:
+    cpu: 1
+    memory: 2Gi
+  limits:
+    cpu: 1
+    memory: 2Gi
+
+vault:
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix: 
+  
