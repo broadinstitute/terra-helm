@@ -187,6 +187,12 @@ buffer:
   # a poolId in the buffer service config in the environment given above.
   poolId:
 
+backup:
+  # backup.nodeSelector -- NodeSelector for backup CronJob pods
+  nodeSelector: {}
+  # backup.tolerations -- Tolerations for backup CronJob pods
+  tolerations: []
+
 ###############################################################
 # Values that will be exposed to the running app via the env: #
 ###############################################################
