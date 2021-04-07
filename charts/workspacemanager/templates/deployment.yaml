@@ -203,6 +203,10 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
+        {{- if .Values.probes.startup.enabled }}
+        startupProbe:
+          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
+        {{- end }}
       {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
