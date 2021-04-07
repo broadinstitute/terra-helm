@@ -46,12 +46,7 @@ spec:
           - containerPort: 80
           - containerPort: 8888
         resources: # Mimic existing GCE vm requirements
-          requests:
-            cpu: {{ .Values.app.resources.requests.cpu }}
-            memory: {{ .Values.app.resources.requests.memory }}
-          limits:
-            cpu: {{ .Values.app.resources.limits.cpu }}
-            memory: {{ .Values.app.resources.limits.memory }}
+        {{ toYaml .Values.resources | nindent 10 }}
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
