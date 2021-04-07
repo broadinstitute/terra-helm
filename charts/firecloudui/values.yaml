@@ -88,4 +88,3 @@ app:
         periodSeconds: 10
         failureThreshold: 30
         successThreshold: 1
-

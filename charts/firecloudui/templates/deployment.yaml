@@ -15,7 +15,7 @@ spec:
       maxUnavailable: 1
   replicas: {{ .Values.replicas }}
   selector:
-    matchLabels: 
+    matchLabels:
       deployment: {{ .Values.name }}-deployment
   template:
     metadata:
@@ -58,7 +58,7 @@ spec:
         env:
         # Make node, pod name accessible to app as env vars
         - name: K8S_NODE_NAME
-          valueFrom: 
+          valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
         - name: K8S_POD_NAME
@@ -66,7 +66,6 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         volumeMounts:
-        # Unclear if this next stanza is required.
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
           name: app-ctmpls
