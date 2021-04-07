@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: {{ .Values.name }}-ingress
   labels:
-{{ include "firecloudui.labels" . | indent 4 }}
+{{ include "firecloudui.labels" . | nindent 4 }}
   annotations:
     networking.gke.io/v1beta1.FrontendConfig: "{{ .Values.name }}-ingress-frontendconfig"
     kubernetes.io/ingress.global-static-ip-name: {{ required "ingress.staticIpName value is required" .Values.ingress.staticIpName | quote }}

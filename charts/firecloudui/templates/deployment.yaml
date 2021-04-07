@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}-deployment
   labels:
-{{ include "firecloudui.labels" . | indent 4 }}
+{{ include "firecloudui.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -21,7 +21,7 @@ spec:
     metadata:
       labels:
         deployment: {{ .Values.name }}-deployment
-{{ include "firecloudui.labels" . | indent 8 }}
+{{ include "firecloudui.labels" . | nindent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}

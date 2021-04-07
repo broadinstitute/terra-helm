@@ -4,7 +4,7 @@ kind: BackendConfig
 metadata:
   name: {{ .Values.name }}-ingress-backendconfig
   labels:
-{{ include "firecloudui.labels" . | indent 4 }}
+{{ include "firecloudui.labels" . | nindent 4 }}
 spec:
   timeoutSec: {{ .Values.ingress.timeoutSec }}
   healthCheck:
