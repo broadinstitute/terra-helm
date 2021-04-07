@@ -1,15 +1,14 @@
-workspacemanager
-================
+# workspacemanager
 
 Chart for Terra Workspace Manager
 
-## Chart Requirements
+## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy | postgres | 0.1.0 |
 
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -49,7 +48,7 @@ Chart for Terra Workspace Manager
 | name | string | `"workspacemanager"` | A name for the deployment that will be substituted into resuorce definitions |
 | postgres.dbs | list | `["workspace","stairway"]` | (array(string)) List of databases to create. |
 | postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
-| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |
 | probes.liveness.spec.httpGet.port | int | `8080` |  |
@@ -65,13 +64,20 @@ Chart for Terra Workspace Manager
 | probes.readiness.spec.periodSeconds | int | `10` |  |
 | probes.readiness.spec.successThreshold | int | `1` |  |
 | probes.readiness.spec.timeoutSeconds | int | `5` |  |
+| probes.startup.enabled | bool | `true` |  |
+| probes.startup.spec.failureThreshold | int | `1080` |  |
+| probes.startup.spec.httpGet.path | string | `"/version"` |  |
+| probes.startup.spec.httpGet.port | int | `8080` |  |
+| probes.startup.spec.periodSeconds | int | `10` |  |
+| probes.startup.spec.successThreshold | int | `1` |  |
+| probes.startup.spec.timeoutSeconds | int | `5` |  |
 | prometheus.enabled | bool | `true` |  |
 | prometheus.initContainerImage | string | `"alpine:3.12.0"` |  |
 | prometheus.jmxJarRepo | string | `"https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent"` |  |
 | prometheus.jmxJarVersion | string | `"0.13.0"` |  |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
-| proxy.image.version | string | `"bernick_tcell"` | Proxy image tag |
+| proxy.image.version | string | `"tcell_3_1_0"` | Proxy image tag |
 | proxy.ldap.baseDomain | string | `nil` | Base domain for LDAP. Required if proxy.ldap.enabled is true |
 | proxy.ldap.enabled | bool | `true` | Enables LDAP authorization checks in the proxy |
 | proxy.ldap.passwordVaultPath | string | `nil` | Vault path for LDAP binding password. Required if proxy.ldap.enabled is true |
