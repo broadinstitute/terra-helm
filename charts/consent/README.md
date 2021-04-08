@@ -2,7 +2,7 @@
 
 A Helm chart for DUOS Consent
 
-![Version: 0.9.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.11.0](https://img.shields.io/badge/Version-0.11.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Values
 
@@ -39,7 +39,7 @@ A Helm chart for DUOS Consent
 | ingressCert.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingressIpName | string | `nil` |  |
 | ingressTimeout | int | `120` | (number) number of seconds requests on the https loadbalancer will time out after |
-| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |
 | probes.liveness.spec.httpGet.port | int | `8080` |  |
@@ -54,6 +54,13 @@ A Helm chart for DUOS Consent
 | probes.readiness.spec.periodSeconds | int | `10` |  |
 | probes.readiness.spec.successThreshold | int | `1` |  |
 | probes.readiness.spec.timeoutSeconds | int | `1` |  |
+| probes.startup.enabled | bool | `true` |  |
+| probes.startup.spec.failureThreshold | int | `1080` |  |
+| probes.startup.spec.httpGet.path | string | `"/version"` |  |
+| probes.startup.spec.httpGet.port | int | `8080` |  |
+| probes.startup.spec.periodSeconds | int | `10` |  |
+| probes.startup.spec.successThreshold | int | `1` |  |
+| probes.startup.spec.timeoutSeconds | int | `5` |  |
 | proxyImageRepository | string | `nil` |  |
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |
