@@ -1,0 +1,94 @@
+{{- $imageTag := .Values.app.image.tag | default .Values.global.applicationVersion -}}
+{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Values.name -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  labels:
+{{ include "firecloudui.labels" . | nindent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      deployment: {{ .Values.name }}-deployment
+  template:
+    metadata:
+      labels:
+        deployment: {{ .Values.name }}-deployment
+{{ include "firecloudui.labels" . | nindent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-sa
+      # Containers are configured to talk to each other by name
+      # via docker-compose links; make corresponding aliases
+      # to loopback in /etc/hosts
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - app
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ $legacyResourcePrefix }}-app-ctmpls
+      containers:
+      - name: {{ .Values.name }}-app
+        image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Values.global.applicationVersion }}"
+        ports:
+          - containerPort: 443
+          - containerPort: 80
+          - containerPort: 8888
+        resources: # Mimic existing GCE vm requirements
+        {{ toYaml .Values.resources | nindent 10 }}
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-app-env
+        env:
+        # Make node, pod name accessible to app as env vars
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: server.crt
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: server.key
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /config/config.json
+          subPath: config.json
+          name: app-ctmpls
+          readOnly: true
+        - mountPath: /config/tcell.js
+          subPath: tcell.js
+          name: app-ctmpls
+          readOnly: true
+        # Note: These readiness settings only apply to Kubernetes' internal load
+        # balancing mechanism -- there's a separate health check setting for
+        # the Ingress / GCP load balancer in the Ingress's backendConfig
+        {{- if .Values.app.probes.readiness.enabled }}
+        readinessProbe:
+          {{- toYaml .Values.app.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.app.probes.liveness.enabled }}
+        livenessProbe:
+          {{- toYaml .Values.app.probes.liveness.spec | nindent 10 }}
+        {{- end }}
