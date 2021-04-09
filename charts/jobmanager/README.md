@@ -1,11 +1,8 @@
-jobmanager
-==========
+# jobmanager
 
 Chart for Job Manager service in Terra
 
-
-
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -39,3 +36,10 @@ Chart for Job Manager service in Terra
 | ui.resources.limits.memory | string | `"3.6Gi"` | Memory to limit the deployment to |
 | ui.resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | ui.resources.requests.memory | string | `"3.6Gi"` | Memory to request for the deployment |
+| ui.startup.enabled | bool | `true` |  |
+| ui.startup.spec.failureThreshold | int | `1080` |  |
+| ui.startup.spec.httpGet.path | string | `"/health"` |  |
+| ui.startup.spec.httpGet.port | int | `8000` |  |
+| ui.startup.spec.periodSeconds | int | `10` |  |
+| ui.startup.spec.successThreshold | int | `1` |  |
+| ui.startup.spec.timeoutSeconds | int | `5` |  |

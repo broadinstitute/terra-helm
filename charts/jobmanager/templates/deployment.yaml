@@ -127,6 +127,9 @@ spec:
         livenessProbe:
           {{- toYaml .Values.ui.probes.liveness.spec | nindent 10 }}
         {{- end }}
+        startupProbe:
+          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
+        {{- end }}
       - name: {{ .Values.name }}-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}"
         ports:
