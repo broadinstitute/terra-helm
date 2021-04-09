@@ -48,7 +48,17 @@ probes:
       periodSeconds: 10
       failureThreshold: 30 # 5 minutes before restarted
       successThreshold: 1
-
+  startup:
+    # probes.startup.enable -- Whether to configure a startup probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /version
+        port: 8080
+      timeoutSeconds: 5
+      periodSeconds: 10
+      failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running db migrations
+      successThreshold: 1
 # Settings for Cromiam's Ingress & Service
 ingress:
   # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig

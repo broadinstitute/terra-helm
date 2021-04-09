@@ -1,11 +1,8 @@
-cromiam
-=======
+# cromiam
 
 Chart for cromiam service in Terra [WIP]
 
-
-
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -18,7 +15,7 @@ Chart for cromiam service in Terra [WIP]
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
-| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |
 | probes.liveness.spec.httpGet.port | int | `8080` |  |
@@ -34,6 +31,13 @@ Chart for cromiam service in Terra [WIP]
 | probes.readiness.spec.periodSeconds | int | `10` |  |
 | probes.readiness.spec.successThreshold | int | `1` |  |
 | probes.readiness.spec.timeoutSeconds | int | `5` |  |
+| probes.startup.enabled | bool | `true` |  |
+| probes.startup.spec.failureThreshold | int | `1080` |  |
+| probes.startup.spec.httpGet.path | string | `"/version"` |  |
+| probes.startup.spec.httpGet.port | int | `8080` |  |
+| probes.startup.spec.periodSeconds | int | `10` |  |
+| probes.startup.spec.successThreshold | int | `1` |  |
+| probes.startup.spec.timeoutSeconds | int | `5` |  |
 | replicas | int | `3` | Number of replicas for the deployment |
 | resources.limits.cpu | int | `2` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"13Gi"` | Memory to limit the deployment to |
