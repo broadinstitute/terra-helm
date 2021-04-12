@@ -157,8 +157,8 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
-        startProbe:
-          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
+        startupProbe:
+          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
         {{- end }}
       - name: {{ .Values.name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big
