@@ -1,7 +1,6 @@
 apiVersion: v2
 name: workspacemanager
 version: 0.30.0
->>>>>>> e7fddd6 (Fix merge conflict)
 description: Chart for Terra Workspace Manager
 type: application
 keywords:
