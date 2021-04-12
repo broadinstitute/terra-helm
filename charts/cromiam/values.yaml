@@ -29,7 +29,7 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /status
+        path: /engine/latest/
         port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 20
@@ -41,7 +41,7 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /version
+        path: /engine/latest/version
         port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 20
@@ -53,7 +53,7 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /version
+        path: /engine/latest/version
         port: 8080
       timeoutSeconds: 5
       periodSeconds: 10
