@@ -20,8 +20,8 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      deployment: {{ $settings.name}} 
-  template: 
+      deployment: {{ $settings.name}}
+  template:
     metadata:
       labels:
         deployment: {{ $settings.name }}
@@ -29,10 +29,10 @@ spec:
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
-    spec: 
+    spec:
       serviceAccountName: rawls-sa
       hostAliases:
-      - ip: 127.0.0.1 
+      - ip: 127.0.0.1
         hostnames:
         - app
         - sqlproxy
@@ -61,16 +61,16 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         ports:
-          - containerPort: 8080 
+          - containerPort: 8080
           - name: metrics
             containerPort: 9090
             protocol: TCP
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
-        env: 
+        env:
         - name: K8S_NODE_NAME
-          valueFrom: 
+          valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
         - name: K8S_POD_NAME
@@ -120,6 +120,10 @@ spec:
         {{- if $settings.probes.liveness.enabled }}
         livenessProbe:
           {{- toYaml $settings.probes.liveness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.probes.startup.enabled }}
+        startupProbe:
+          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
         {{- end }}
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
@@ -179,4 +183,3 @@ spec:
         - mountPath: /rawls-prometheusjmx-jar
           name: rawls-prometheusjmx-jar
 {{- end -}}
-
