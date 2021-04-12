@@ -53,8 +53,8 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /version
-        port: 8080
+        path: /status
+        port: 8000
       timeoutSeconds: 5
       periodSeconds: 10
       failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
