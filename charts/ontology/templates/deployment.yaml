@@ -80,6 +80,7 @@ spec:
           livenessProbe:
             {{- toYaml .Values.probes.liveness.spec | nindent 12 }}
           {{- end }}
+          {{- if .Values.probes.startup.enabled }}
           startupProbe:
             {{- toYaml .Values.probes.startup.spec | nindent 12 }}
           {{- end }}
