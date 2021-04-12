@@ -127,6 +127,9 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
+        startupProbe:
+          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
+        {{- end }}
       - name: {{ .Values.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         envFrom:

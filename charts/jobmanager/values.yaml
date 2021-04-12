@@ -112,7 +112,17 @@ api:
         periodSeconds: 10
         failureThreshold: 30 # 5 minutes before restarted
         successThreshold: 1
-
+    startup:
+      # probes.startup.enable -- Whether to configure a startup probe
+      enabled: true
+      spec:
+        httpGet:
+          path: /api/v1/health
+          port: 8190
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
+        successThreshold: 1
 proxy:
   image:
     # proxy.image.repository -- Image repository
