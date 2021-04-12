@@ -56,7 +56,7 @@ A Helm chart for DUOS Consent
 | probes.readiness.spec.timeoutSeconds | int | `1` |  |
 | probes.startup.enabled | bool | `true` |  |
 | probes.startup.spec.failureThreshold | int | `1080` |  |
-| probes.startup.spec.httpGet.path | string | `"/status"` |  |
+| probes.startup.spec.httpGet.path | string | `"/version"` |  |
 | probes.startup.spec.httpGet.port | int | `8080` |  |
 | probes.startup.spec.periodSeconds | int | `10` |  |
 | probes.startup.spec.successThreshold | int | `1` |  |

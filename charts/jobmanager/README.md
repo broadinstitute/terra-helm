@@ -1,11 +1,8 @@
-jobmanager
-==========
+# jobmanager
 
 Chart for Job Manager service in Terra
 
-
-
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
