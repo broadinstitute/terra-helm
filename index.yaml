@@ -1360,6 +1360,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.11.0/consent-0.11.0.tgz
     version: 0.11.0
   - apiVersion: v2
+    created: "2021-04-12T13:43:59.273903336Z"
+    description: A Helm chart for DUOS Consent
+    digest: 7a12a33096ace161009a977df1596f259053f2cb57c5f10601da2244e01096e7
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.11.0-361.1618235033.e588c6/consent-0.11.0-361.1618235033.e588c6.tgz
+    version: 0.11.0-361.1618235033.e588c6
+  - apiVersion: v2
     created: "2021-04-08T19:26:36.830801688Z"
     description: A Helm chart for DUOS Consent
     digest: bebae27b383c7310fdb470482c648e347b9521222c97bdc316a61f3ecee6224a
@@ -9299,6 +9317,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.6.0/firecloudorch-0.6.0.tgz
     version: 0.6.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-04-12T13:43:59.363384364Z"
+    description: Chart for firecloud-orchestration service in Terra
+    digest: 40a232d4032379ee548c246c4a5940b6749d1058e06e622fc6ae916b94d40089
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.6.0-361.1618235033.e588c6/firecloudorch-0.6.0-361.1618235033.e588c6.tgz
+    version: 0.6.0-361.1618235033.e588c6
   - apiVersion: v2
     appVersion: latest
     created: "2021-04-12T13:36:30.76199377Z"
