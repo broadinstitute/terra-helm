@@ -88,9 +88,6 @@ spec:
         livenessProbe:
           {{- toYaml .Values.api.probes.liveness.spec | nindent 10 }}
         {{- end }}
-        startupProbe:
-          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
-        {{- end }}
       - name: {{ .Values.name }}-ui
         image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Values.global.applicationVersion }}"
         ports:

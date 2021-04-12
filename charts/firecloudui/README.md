@@ -17,13 +17,6 @@ Chart for Firecloud UI service in Terra
 | app.resources.limits.memory | string | `"3.75Gi"` | Memory to limit the deployment to |
 | app.resources.requests.cpu | int | `1` | Number of CPU units to request for the deployment |
 | app.resources.requests.memory | string | `"3.75Gi"` | Memory to request for the deployment |
-| app.startup.enabled | bool | `true` |  |
-| app.startup.spec.failureThreshold | int | `1080` |  |
-| app.startup.spec.httpGet.path | string | `"/health"` |  |
-| app.startup.spec.httpGet.port | int | `443` |  |
-| app.startup.spec.periodSeconds | int | `10` |  |
-| app.startup.spec.successThreshold | int | `1` |  |
-| app.startup.spec.timeoutSeconds | int | `5` |  |
 | global.applicationVersion | string | `"latest"` | What version of the firecloudui application to deploy |
 | ingress.cert.vault.cert.path | string | `nil` | Path to secret containing .crt |
 | ingress.cert.vault.cert.secretKey | string | `nil` | Key in secret containing .crt |

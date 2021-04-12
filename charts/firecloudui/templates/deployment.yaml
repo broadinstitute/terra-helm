@@ -92,7 +92,3 @@ spec:
         livenessProbe:
           {{- toYaml .Values.app.probes.liveness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.startup.enabled }}
-        startupProbe:
-          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
-        {{- end }}

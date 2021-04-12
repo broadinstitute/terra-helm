@@ -1,8 +1,11 @@
-# jobmanager
+jobmanager
+==========
 
 Chart for Job Manager service in Terra
 
-## Values
+
+
+## Chart Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -12,13 +15,6 @@ Chart for Job Manager service in Terra
 | api.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/api/v1/health","port":8190},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for liveness probe |
 | api.probes.readiness.enabled | bool | `true` |  |
 | api.probes.readiness.spec | object | `{"failureThreshold":6,"httpGet":{"path":"/api/v1/health","port":8190},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for readiness probe |
-| api.probes.startup.enabled | bool | `true` |  |
-| api.probes.startup.spec.failureThreshold | int | `1080` |  |
-| api.probes.startup.spec.httpGet.path | string | `"/api/v1/health"` |  |
-| api.probes.startup.spec.httpGet.port | int | `8190` |  |
-| api.probes.startup.spec.periodSeconds | int | `10` |  |
-| api.probes.startup.spec.successThreshold | int | `1` |  |
-| api.probes.startup.spec.timeoutSeconds | int | `5` |  |
 | api.resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
 | api.resources.limits.memory | string | `"3.6Gi"` | Memory to limit the deployment to |
 | api.resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
