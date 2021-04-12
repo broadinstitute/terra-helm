@@ -80,6 +80,9 @@ spec:
           livenessProbe:
             {{- toYaml .Values.probes.liveness.spec | nindent 12 }}
           {{- end }}
+          startupProbe:
+            {{- toYaml .Values.probes.startup.spec | nindent 12 }}
+          {{- end }}
         - name: {{ .Chart.Name }}-proxy
           image: "{{ .Values.proxyImageRepository }}:{{ .Values.proxyImageVersion }}"
           ports:
@@ -120,4 +123,3 @@ spec:
         volumeMounts:
         - name: ontology-prometheusjmx-jar
           mountPath: /ontology-prometheusjmx-jar
-

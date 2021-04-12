@@ -111,7 +111,7 @@ probes:
       periodSeconds: 10
       failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
       successThreshold: 1
-      
+
 proxyLogLevel:
 proxyImageRepository:
 proxyImageVersion:
