@@ -68,7 +68,7 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /version
+        path: /status
         port: 8080
       timeoutSeconds: 5
       periodSeconds: 10
