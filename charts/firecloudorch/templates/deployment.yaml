@@ -15,7 +15,7 @@ spec:
       maxUnavailable: 1
   replicas: {{ .Values.replicas }}
   selector:
-    matchLabels:
+    matchLabels: 
       deployment: {{ .Values.name }}-deployment
   template:
     metadata:
@@ -43,14 +43,14 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       - name: proxy-ctmpls
         secret:
-          secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
+          secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls 
       - name: {{ .Values.name}}-gc-logs
         emptyDir: {}
       - name: {{ .Values.name }}-proxy-security-logs
         emptyDir: {}
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
-      {{- if .Values.elasticsearch.transportProbe.enabled }}
+      {{- if .Values.elasticsearch.transportProbe.enabled }}  
       - name: {{ .Values.name }}-es-probe-tools
         emptyDir: {}
       - name: {{ .Values.name }}-es-probe-cm
@@ -63,7 +63,7 @@ spec:
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
         - name: status
-          containerPort: 8080
+          containerPort: 8080 
           protocol: TCP
         - name: metrics
           containerPort: 9090
@@ -71,9 +71,9 @@ spec:
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
-        env:
+        env: 
         - name: K8S_NODE_NAME
-          valueFrom:
+          valueFrom: 
             fieldRef:
               fieldPath: spec.nodeName
         - name: K8S_POD_NAME
@@ -139,7 +139,7 @@ spec:
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
           name: {{ .Values.name }}-prometheusjmx-jar
-          readOnly: true
+          readOnly: true 
         - mountPath: /usr/bin/jq
           subPath: jq
           name: {{ .Values.name }}-es-probe-tools
@@ -157,10 +157,6 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.startup.enabled }}
-        startupProbe:
-          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
-        {{- end }}
       - name: {{ .Values.name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big
         ports:
@@ -170,7 +166,7 @@ spec:
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-proxy-env
-        volumeMounts:
+        volumeMounts: 
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
           name: proxy-ctmpls
@@ -225,7 +221,7 @@ spec:
           set -e
           wget -O /{{ .Values.name }}-es-probe-tools/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
           chmod +x /{{ .Values.name }}-es-probe-tools/jq
-        volumeMounts:
+        volumeMounts: 
         - name: {{ .Values.name }}-es-probe-tools
           mountPath: /{{ .Values.name }}-es-probe-tools
       {{- end }}
