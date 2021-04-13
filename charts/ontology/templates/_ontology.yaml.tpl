@@ -21,6 +21,10 @@ logging:
       target: stdout
       layout:
         type: json
+        customFieldNames:
+          level: "severity"
+        additionalFields:
+          service-name: "ontology"
     - type: sentry
       dsn: https://foo:bar@sentry.io/baz {{/* Override on the command line */}}
       threshold: ERROR
