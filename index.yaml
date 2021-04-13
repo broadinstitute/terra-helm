@@ -1680,6 +1680,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.12.0/consent-0.12.0.tgz
     version: 0.12.0
   - apiVersion: v2
+    created: "2021-04-13T19:35:34.249983981Z"
+    description: A Helm chart for DUOS Consent
+    digest: 5c7702adbfaef4679ba6acea6071041cc18c86336debf4ebc11bc775284789ab
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.12.0-362.1618342528.7adceb/consent-0.12.0-362.1618342528.7adceb.tgz
+    version: 0.12.0-362.1618342528.7adceb
+  - apiVersion: v2
     created: "2021-04-13T17:51:18.956934394Z"
     description: A Helm chart for DUOS Consent
     digest: 4895bc9cfc2fbff5f7f9571c39163ad963ce38ed335b25a19cd34c5201f15d97
@@ -17454,6 +17472,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.11.0/ontology-0.11.0.tgz
     version: 0.11.0
+  - apiVersion: v2
+    created: "2021-04-13T19:35:34.328319122Z"
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: fde738467a58ce1fb2c2d0b9a60ac0db3185bcb2f61f13f69b12b4c041c10979
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.11.0-362.1618342528.7adceb/ontology-0.11.0-362.1618342528.7adceb.tgz
+    version: 0.11.0-362.1618342528.7adceb
   - apiVersion: v2
     created: "2021-04-13T17:51:19.219164901Z"
     description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
