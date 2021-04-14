@@ -29,7 +29,7 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /engine/latest/
+        path: /engine/latest/version
         port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 20
