@@ -121,9 +121,9 @@ spec:
         livenessProbe:
           {{- toYaml $settings.probes.liveness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.startup.enabled }}
+        {{- if $settings.probes.startup.enabled }}
         startupProbe:
-          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
+          {{- toYaml $settings.probes.startup.spec | nindent 10 }}
         {{- end }}
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
