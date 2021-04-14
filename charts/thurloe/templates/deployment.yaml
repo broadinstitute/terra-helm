@@ -15,7 +15,7 @@ spec:
       maxUnavailable: 1
   replicas: {{ .Values.replicas }}
   selector:
-    matchLabels: 
+    matchLabels:
       deployment: {{ .Values.name }}-deployment
   template:
     metadata:
@@ -47,7 +47,7 @@ spec:
           secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
       - name: sqlproxy-ctmpls
         secret:
-          secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls     
+          secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
       - name: {{ .Values.name }}-gc-logs
         emptyDir: {}
       - name: {{ .Values.name }}-proxy-security-logs
@@ -67,9 +67,9 @@ spec:
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-app-env
-        env: 
+        env:
         - name: K8S_NODE_NAME
-          valueFrom: 
+          valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
         - name: K8S_POD_NAME
@@ -118,6 +118,10 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
+        {{- if .Values.probes.startup.enabled }}
+        startupProbe:
+          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
+        {{- end }}
       - name: {{ .Values.name }}-proxy
         image: broadinstitute/openidc-proxy:tcell-mpm-big
         ports:
@@ -127,7 +131,7 @@ spec:
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-proxy-env
-        volumeMounts: 
+        volumeMounts:
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
           name: proxy-ctmpls
@@ -159,7 +163,7 @@ spec:
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts: 
+        volumeMounts:
         - mountPath: /etc/sqlproxy-service-account.json
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
