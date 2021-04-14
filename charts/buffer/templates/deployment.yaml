@@ -146,10 +146,6 @@ spec:
         - name: app-sa-creds
           mountPath: /secrets/app
           readOnly: true
-        {{- if .Values.probes.readiness.enabled }}
-        readinessProbe:
-          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
-        {{- end }}
       - name: {{ .Values.name }}-cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -223,6 +219,10 @@ spec:
         - mountPath: /etc/apache2/tcell_agent.config
           name: tcell-config
           subPath: tcell-config.conf
+        {{- end }}
+        {{- if .Values.probes.readiness.enabled }}
+        readinessProbe:
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
         {{- end }}
         {{- if .Values.probes.liveness.enabled }}
         livenessProbe:
