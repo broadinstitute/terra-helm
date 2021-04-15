@@ -69,6 +69,13 @@ argo-cd:
   controller:
     extraArgs:
     - --repo-server-timeout-seconds=180
+    resources:
+      limits:
+        cpu: 4
+        memory: 4Gi
+      requests:
+        cpu: 4
+        memory: 4Gi
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
@@ -90,8 +97,8 @@ argo-cd:
         value: "false"
     resources:
       limits:
-        cpu: 1
-        memory: 2Gi
+        cpu: 4
+        memory: 4Gi
       requests:
-        cpu: 1
-        memory: 2Gi
+        cpu: 4
+        memory: 4Gi
