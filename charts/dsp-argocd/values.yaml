@@ -71,7 +71,7 @@ argo-cd:
     - --repo-server-timeout-seconds=180
     resources:
       requests:
-        cpu: 4
+        cpu: 3.2
         memory: 4Gi
   repoServer:
     image:
@@ -94,5 +94,5 @@ argo-cd:
         value: "false"
     resources:
       requests:
-        cpu: 4
+        cpu: 3.2
         memory: 4Gi
