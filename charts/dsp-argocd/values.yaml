@@ -69,6 +69,10 @@ argo-cd:
   controller:
     extraArgs:
     - --repo-server-timeout-seconds=180
+    resources:
+      requests:
+        cpu: 4
+        memory: 4Gi
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
@@ -88,3 +92,7 @@ argo-cd:
             key: secretid
       - name: ARGOCD_GIT_MODULES_ENABLED # Required for firecloud-develop clones to succeed
         value: "false"
+    resources:
+      requests:
+        cpu: 4
+        memory: 4Gi
