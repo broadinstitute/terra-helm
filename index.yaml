@@ -8662,6 +8662,32 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/elasticsearch-0.9.0/elasticsearch-0.9.0.tgz
     version: 0.9.0
   - apiVersion: v2
+    created: "2021-04-21T17:27:47.501768837Z"
+    dependencies:
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      version: 6.8.13
+    description: a helm chart to deploy monitoring infrastructure
+    digest: e0c66798d1f52c63a787c6b2f648a1ac173f241370325b087f7b1b588ddba3d0
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - elasticsearch
+    - ontology
+    - consent
+    - firecloudorch
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: elasticsearch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/elasticsearch-0.9.0-369.1619026061.84e80a/elasticsearch-0.9.0-369.1619026061.84e80a.tgz
+    version: 0.9.0-369.1619026061.84e80a
+  - apiVersion: v2
     created: "2021-03-15T18:37:50.671983037Z"
     dependencies:
     - name: elasticsearch
