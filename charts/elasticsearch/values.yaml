@@ -17,9 +17,9 @@ backup:
   # backup.timeoutSeconds -- amount of time after which job automatically fails
   timeoutSeconds: 7200 # 2 hrs
   # backup.imageRepo -- specify an image repository for the backup job
-  imageRepo: alpine
+  imageRepo: us-central1-docker.pkg.dev/dsp-artifact-registry/elasticsearch-backup/elasticsearch-backup
   # backup.imageTag -- specify a tag for the image running the backup job
-  imageTag: "3.13"
+  imageTag: "1.0.0"
   # backup.hostname -- hostname of the elasticsearch server the backup job will snapshot
   hostname: null
   #backup.snapshotRepository -- name of the snapshot repo backed by a GCS bucket to create snapshot in
