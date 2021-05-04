@@ -1,0 +1,146 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  labels:
+    {{- include "calhoun.labels" . | nindent 4 }}
+  {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
+  annotations:
+    reloader.stakater.com/auto: "true"
+  {{- end }}
+spec:
+  revisionHistoryLimit: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "calhoun.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      name: {{ .Values.name }}-service
+      labels:
+        {{- include "calhoun.labels" . | nindent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map changes: */}}
+        checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-tcell-configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-service-sa
+      volumes:
+      - name: cloudsql-sa-creds
+        secret:
+          secretName: {{ .Values.name }}-cloudsql-sa
+      - name: app-sa-creds
+        secret:
+          secretName: {{ .Values.name }}-app-sa
+      {{- if .Values.proxy.enabled }}
+      - name: apache-httpd-proxy-config
+        configMap:
+          name: {{ .Values.name }}-proxy-configmap
+          items:
+          - key: apache-httpd-proxy-config
+            path: {{ .Values.name }}-proxy.conf
+      - name: cert
+        secret:
+          secretName: {{ .Chart.Name }}-cert
+      {{- if .Values.proxy.tcell.enabled }}
+      - name: tcell-config
+        configMap:
+          name: {{ .Values.name }}-tcell-configmap
+          items:
+          - key: tcell-config
+            path: tcell-config.conf
+      {{- end }}
+      {{- end }}
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{- if .Values.image -}}
+            {{ .Values.image }}
+          {{- else -}}
+            {{ .Values.imageConfig.repository }}:{{ default .Values.appVersion .Values.imageConfig.tag }}
+          {{- end }}"
+        imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+        ports:
+        - name: status
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        env:
+        - name: SAM_URL_ROOT
+          value: {{ .Values.calhoun.samUrlRoot }}
+        - name: SWAGGER_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-swagger-client
+              key: id
+        - name: SWAGGER_REALM
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-swagger-client
+              key: realm
+      {{- if .Values.proxy.enabled }}
+      - name: {{ .Values.name }}-oidc-proxy
+        image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+        ports:
+        - containerPort: 443
+        - containerPort: 80
+        env:
+        - name: REMOTE_USER_CLAIM
+          value: sub
+        {{- if .Values.proxy.tcell.enabled }}
+        - name: TCELL_AGENT_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-proxy-tcell-secrets
+              key: app-id
+        - name: TCELL_AGENT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-proxy-tcell-secrets
+              key: api-key
+        - name: ENABLE_TCELL
+          value: 'yes'
+        {{- end }}
+        volumeMounts:
+        - mountPath: /etc/apache2/sites-available/site.conf
+          name: apache-httpd-proxy-config
+          subPath: {{ .Values.name }}-proxy.conf
+        - mountPath: /etc/ssl/certs/server.crt
+          subPath: tls.crt
+          name: cert
+          readOnly: true
+        - mountPath: /etc/ssl/private/server.key
+          subPath: tls.key
+          name: cert
+          readOnly: true
+        {{- if .Values.ingress.cert.vault.enabled}}
+        - mountPath: /etc/ssl/certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+          name: cert
+          readOnly: true
+        {{- end }}
+        {{- if .Values.proxy.tcell.enabled }}
+        - mountPath: /etc/apache2/tcell_agent.config
+          name: tcell-config
+          subPath: tcell-config.conf
+        {{- end }}
+        {{- if .Values.probes.readiness.enabled }}
+        readinessProbe:
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.probes.liveness.enabled }}
+        livenessProbe:
+          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.probes.startup.enabled }}
+        startupProbe:
+          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
+        {{- end }}
+
+      {{- end }}
