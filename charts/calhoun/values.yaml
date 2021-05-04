@@ -127,6 +127,15 @@ ingress:
         path:
         # ingress.cert.vault.chain.secretKey -- (string) Key in secret containing intermediate .crt
         secretKey:
+    
+    # If cert.certManager is enabled, it is used to configure the certificate and populate the k8s secret. Requires [cert-manager](https://github.com/jetstack/cert-manager)
+    certManager:
+      # ingress.cert.certManager.enabled -- Enable creating certificate secret with cert-manager
+      enabled: false
+      # ingress.cert.certManager.renewBefore -- When to renew the cert. Defaults to 30 days before expiry.
+      renewBefore: 720h0m0s
+      issuerName: cert-manager-letsencrypt-prod
+      issuerKind: ClusterIssuer
 
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
