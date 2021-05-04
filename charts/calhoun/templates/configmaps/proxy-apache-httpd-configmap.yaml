@@ -4,11 +4,11 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-proxy-configmap
   labels:
-    {{- include "buffer.labels" . | nindent 4 }}
+    {{- include "calhoun.labels" . | nindent 4 }}
 data:
   apache-httpd-proxy-config: |-
     ServerAdmin ${SERVER_ADMIN}
-    ServerName {{ template "buffer.fqdn" . }}
+    ServerName {{ template "calhoun.fqdn" . }}
     ServerTokens ProductOnly
     TraceEnable off
 
@@ -35,12 +35,12 @@ data:
     <VirtualHost _default_:${HTTPD_PORT}>
       ErrorLog /dev/stdout
       CustomLog "/dev/stdout" combined
-      Redirect / https://{{ template "buffer.fqdn" . }}/
+      Redirect / https://{{ template "calhoun.fqdn" . }}/
     </VirtualHost>
 
     <VirtualHost _default_:${SSL_HTTPD_PORT}>
         ServerAdmin ${SERVER_ADMIN}
-        ServerName {{ template "buffer.fqdn" . }}
+        ServerName {{ template "calhoun.fqdn" . }}
 
         SSLEngine On
         SSLProxyEngine On
