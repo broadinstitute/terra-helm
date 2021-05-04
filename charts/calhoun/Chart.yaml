@@ -1,0 +1,13 @@
+apiVersion: v2
+name: calhoun
+version: 0.1.0
+type: application
+description: A Helm chart for Calhoun, Terra's Jupyter notebook preview service
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - calhoun
+sources:
+  - https://github.com/broadinstitute/terra-helm/
+  - https://github.com/DataBiosphere/calhoun
