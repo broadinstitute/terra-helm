@@ -1,0 +1,22 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: {{ .Values.name }}-ingress-backendconfig
+  labels:
+    {{- include "calhoun.labels" . | nindent 4 }}
+spec:
+  timeoutSec: {{ .Values.ingress.timeoutSec }}
+  healthCheck:
+    checkIntervalSec: 10
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 2
+    type: HTTPS
+    port: 443
+    requestPath: /status
+  {{- if .Values.ingress.securityPolicy }}
+  securityPolicy:
+    name: {{ .Values.ingress.securityPolicy }}
+  {{- end }}
+{{- end }}
