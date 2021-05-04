@@ -34,7 +34,7 @@ resources:
 
 probes:
   readiness:
-    # probes.readiness.enable -- Whether to configure a readiness probe
+    # probes.readiness.enabled -- Whether to configure a readiness probe
     enabled: true
     spec:
       httpGet:
@@ -46,7 +46,7 @@ probes:
       failureThreshold: 6
       successThreshold: 1
   liveness:
-    # probes.liveness.enable -- Whether to configure a liveness probe
+    # probes.liveness.enabled -- Whether to configure a liveness probe
     enabled: true
     spec:
       httpGet:
@@ -56,6 +56,17 @@ probes:
       initialDelaySeconds: 15
       periodSeconds: 10
       failureThreshold: 30 # 5 minutes before restarted
+      successThreshold: 1
+  startup:
+    # probes.startup.enabled -- Whether to configure a startup probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8000
+      timeoutSeconds: 5
+      periodSeconds: 10
+      failureThreshold: 6
       successThreshold: 1
 
 vault:
