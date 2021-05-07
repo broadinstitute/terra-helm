@@ -39,7 +39,7 @@ probes:
     spec:
       httpGet:
         path: /status
-        port: 8000
+        port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 20
       periodSeconds: 10
@@ -51,7 +51,7 @@ probes:
     spec:
       httpGet:
         path: /status
-        port: 8000
+        port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 15
       periodSeconds: 10
@@ -63,7 +63,7 @@ probes:
     spec:
       httpGet:
         path: /status
-        port: 8000
+        port: 8080
       timeoutSeconds: 5
       periodSeconds: 10
       failureThreshold: 6
