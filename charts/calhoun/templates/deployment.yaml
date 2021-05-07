@@ -75,7 +75,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ .Values.name }}-swagger-client
-              key: id
+              key: client-id
         - name: SWAGGER_REALM
           valueFrom:
             secretKeyRef:
