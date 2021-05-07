@@ -156,7 +156,7 @@ proxy:
     hostIdentifier:
   whitelist:
     # proxy.whitelist.enabled -- Enables proxy client email whitelisting
-    enabled: true
+    enabled: false
     # proxy.whitelist.email -- (string) Required if whitelisting is enabled. Email of buffer client Google service account
     email: null
   # proxy.reloadOnCertUpdate -- Whether to reload the deployment when the cert is updated. Requires stakater/Reloader service to be running in the cluster.
