@@ -163,4 +163,4 @@ proxy:
   reloadOnCertUpdate: false
 
 calhoun:
-  samUrlRoot:
+  samRoot:
