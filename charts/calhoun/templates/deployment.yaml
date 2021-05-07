@@ -32,9 +32,6 @@ spec:
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       volumes:
-      - name: cloudsql-sa-creds
-        secret:
-          secretName: {{ .Values.name }}-cloudsql-sa
       - name: app-sa-creds
         secret:
           secretName: {{ .Values.name }}-app-sa
@@ -72,7 +69,7 @@ spec:
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
         env:
-        - name: SAM_URL_ROOT
+        - name: SAM_ROOT
           value: {{ .Values.calhoun.samUrlRoot }}
         - name: SWAGGER_CLIENT_ID
           valueFrom:
