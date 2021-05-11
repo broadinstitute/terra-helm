@@ -75,12 +75,6 @@ terra-prometheus:
     kubeProxy:
       enabled: false
     # Metric relabelings for stackdriver filter
-    kubeStateMetrics:
-      serviceMonitor:
-        metricRelabelings:
-          - sourceLabels: [__name__]
-            targetLabel: sd_export
-            replacement: 'false'
     prometheusOperator:
       serviceMonitor:
         metricRelabelings:
