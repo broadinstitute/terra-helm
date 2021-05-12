@@ -45,7 +45,7 @@ vaultCert:
 prometheusToSD:
   # prometheusToSD.imageRepo -- (string) image repo for prometheus-to-sd-exporter
   imageRepo: gcr.io/google-containers/prometheus-to-sd
-  # prometheusToSD.imageRepo -- (string) image tag for prometheus-to-sd-exporter
+  # prometheusToSD.imageTag -- (string) image tag for prometheus-to-sd-exporter
   imageTag: v0.5.2
   # prometheusToSD.monitoredResourceTypes -- (string) used internally by stackdriver, don't change this
   monitoredResourceTypes: k8s

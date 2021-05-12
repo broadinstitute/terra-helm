@@ -82,8 +82,8 @@ receivers:
 | kube-prometheus-stack.prometheusOperator.createCustomResource | bool | `false` |  |
 | namespaceOverride | string | `""` | (string) enables installing to monitoring namespace when deployed as dependency via argoCd |
 | prometheusRuleSelector | string | `"prometheus-operator"` | (string) used to create a label that prometheus selcts to determine which rules to alert on |
-| prometheusToSD.imageRepo | string | `"gcr.io/google-containers/prometheus-to-sd"` | (string) image tag for prometheus-to-sd-exporter |
-| prometheusToSD.imageTag | string | `"v0.5.2"` |  |
+| prometheusToSD.imageRepo | string | `"gcr.io/google-containers/prometheus-to-sd"` | (string) image repo for prometheus-to-sd-exporter |
+| prometheusToSD.imageTag | string | `"v0.5.2"` | (string) image tag for prometheus-to-sd-exporter |
 | prometheusToSD.metricsSources | object | `{}` | (object) map of prometheus scrape targets to export to SD |
 | prometheusToSD.monitoredResourceTypes | string | `"k8s"` | (string) used internally by stackdriver, don't change this |
 | prometheusToSD.replicaCount | int | `1` | (int) number of prometheus-to-sd replicas to run |
