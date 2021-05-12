@@ -17,8 +17,9 @@ spec:
       app: promethues-to-sd-deployment
   template:
     metadata:
-      labels: {{ include "prometheus.labels" . | nindent 8 }}
+      labels: 
         app: prometheus-to-sd-deployment
+        {{ include "prometheus.labels" . | indent 8 }}
     spec:
       serviceAccountName: prometheus-to-sd-sa
       containers:
