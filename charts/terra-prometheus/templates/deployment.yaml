@@ -14,7 +14,7 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: promethues-to-sd-deployment
+      app: prometheus-to-sd-deployment
   template:
     metadata:
       labels: {{ include "prometheus.labels" . | nindent 8 }}
