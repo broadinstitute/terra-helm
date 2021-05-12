@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-to-sd-deployment
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.prometheusToSD.replicaCount }}
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: promethues-to-sd-deployment
+  template:
+    metadata:
+      labels: {{ include "prometheus.labels" . | nindent 8 }}
+        app: prometheus-to-sd-deployment
+    spec:
+      servicceAccountName: prometheus-to-sd-sa
+      containers:
+      - name: prometheus-to-sd
+        image: {{ .Values.prometheusToSD.imageRepo }}:{{ .Values.prometheusToSD.imageTag }}
+        ports:
+        - name: profiler
+            containerPort: 6060
+        command:
+        - /monitor
+        - --stackdriver-prefix=custom.googleapis.com
+        {{- range $key, $value := .Values.prometheusToSD.metricsSources }}
+        - --source={{ $key }}:{{ $value }}
+        {{- end }}
+        {{- with .Values.prometheusToSD.monitoredResourceTypes }}
+        - --monitored-resource-types={{ . }}
+        {{- end }}
+        - --pod-id=$(POD_NAME)
+        - --namespace-id=$(POD_NAMESPACE)
+        env:
+        - name: POD_NAME
+            valueFrom:
+            fieldRef:
+                fieldPath: metadata.name
+        - name: POD_NAMESPACE
+            valueFrom:
+            fieldRef:
+                fieldPath: metadata.namespace

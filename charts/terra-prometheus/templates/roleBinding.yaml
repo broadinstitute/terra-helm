@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prometheus-to-sd-sa-binding
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
+subjects:
+- kind: ServiceAccount
+  name: prometheus-to-sd-sa
+roleRef:
+  kind: Role
+  name: prometheus-to-sd-role
+  apiGroup: rbac.authorization.k8s.io
