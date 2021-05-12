@@ -45,7 +45,7 @@ vaultCert:
 prometheusToSD:
   imageRepo: gcr.io/google-containers/prometheus-to-sd
   imageTag: v0.5.2
-  monitoredResourceTypes: k8s_container
+  monitoredResourceTypes: k8s
   replicaCount: 1
   metricsSources: {}
     # kube-state-metrics: null
