@@ -20,7 +20,7 @@ spec:
       labels: {{ include "prometheus.labels" . | nindent 8 }}
         app: prometheus-to-sd-deployment
     spec:
-      servicceAccountName: prometheus-to-sd-sa
+      serviceAccountName: prometheus-to-sd-sa
       containers:
       - name: prometheus-to-sd
         image: {{ .Values.prometheusToSD.imageRepo }}:{{ .Values.prometheusToSD.imageTag }}

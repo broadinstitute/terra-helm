@@ -5,8 +5,7 @@ metadata:
   {{- if ne .Values.namespaceOverride "" }}
   namespace: {{ .Values.namespaceOverride }}
   {{- end }}
-  labels:
-    {{ template "prometheus.labels" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
-    securityPolicy:
-      name: broad-cloud-armor
+  securityPolicy:
+    name: broad-cloud-armor
