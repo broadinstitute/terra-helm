@@ -17,17 +17,16 @@ spec:
       app: promethues-to-sd-deployment
   template:
     metadata:
-      labels: 
+      labels: {{ include "prometheus.labels" . | nindent 8 }}
         app: prometheus-to-sd-deployment
-        {{ include "prometheus.labels" . | indent 8 }}
     spec:
       serviceAccountName: prometheus-to-sd-sa
       containers:
       - name: prometheus-to-sd
-        image: {{ .Values.prometheusToSD.imageRepo }}:{{ .Values.prometheusToSD.imageTag }}
+        image: "{{ .Values.prometheusToSD.imageRepo }}:{{ .Values.prometheusToSD.imageTag }}"
         ports:
-        - name: profiler
-          containerPort: 6060
+          - name: profiler
+            containerPort: 6060
         command:
         - /monitor
         - --stackdriver-prefix=custom.googleapis.com
