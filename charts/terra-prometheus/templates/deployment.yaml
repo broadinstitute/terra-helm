@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-to-sd-deployment
-  labels: 
-{{ include "prometheus.labels" . | indent 4 }}
+  namespace: {{ .Values.namespaceOverride }}
+  labels: {{ include "prometheus.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.prometheusToSD.replicaCount }}
   revisionHistoryLimit: 0
