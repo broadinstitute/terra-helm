@@ -26159,6 +26159,53 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.6.0/terra-cluster-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v2
+    created: "2021-05-12T15:30:12.909240174Z"
+    dependencies:
+    - name: terra-cluster-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.6
+    - condition: terra-cluster-networking.enabled
+      name: terra-cluster-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    - condition: terra-prometheus.enabled
+      name: terra-prometheus
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.7.0-372.1620833165.3559e0
+    - condition: reloader.enabled
+      name: reloader
+      repository: https://stakater.github.io/stakater-charts
+      version: v0.0.69
+    - condition: terra-cluster-storage.enabled
+      name: terra-cluster-storage
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.3.0
+    - condition: diskmanager.enabled
+      name: diskmanager
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.1.0
+    description: A Helm chart to install cluster-wide resources for Terra
+    digest: 854c23f8d2191e655d0a01b7dc040dc13f429847890a732989cf67ad1acd70de
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.6.0-372.1620833396.bdbe46/terra-cluster-0.6.0-372.1620833396.bdbe46.tgz
+    version: 0.6.0-372.1620833396.bdbe46
+  - apiVersion: v2
     created: "2021-05-12T15:26:16.633337043Z"
     dependencies:
     - name: terra-cluster-psps
@@ -31984,6 +32031,30 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.7.0/terra-prometheus-0.7.0.tgz
     version: 0.7.0
+  - apiVersion: v2
+    created: "2021-05-12T15:30:13.078868508Z"
+    dependencies:
+    - name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts/
+      version: 9.3.4
+    description: a helm chart to deploy monitoring infrastructure
+    digest: 64ba0214245e60d3fa4fd5577f7cc79665d764453b55338118feada609b08ba0
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - monitoring
+    - prometheus
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: terra-prometheus
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.7.0-372.1620833401.bdbe46/terra-prometheus-0.7.0-372.1620833401.bdbe46.tgz
+    version: 0.7.0-372.1620833401.bdbe46
   - apiVersion: v2
     created: "2021-05-12T15:26:16.823457175Z"
     dependencies:
