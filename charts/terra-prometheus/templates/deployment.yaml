@@ -26,7 +26,7 @@ spec:
         image: {{ .Values.prometheusToSD.imageRepo }}:{{ .Values.prometheusToSD.imageTag }}
         ports:
         - name: profiler
-            containerPort: 6060
+          containerPort: 6060
         command:
         - /monitor
         - --stackdriver-prefix=custom.googleapis.com
@@ -39,11 +39,11 @@ spec:
         - --pod-id=$(POD_NAME)
         - --namespace-id=$(POD_NAMESPACE)
         env:
-        - name: POD_NAME
+          - name: POD_NAME
             valueFrom:
-            fieldRef:
+              fieldRef:
                 fieldPath: metadata.name
-        - name: POD_NAMESPACE
+          - name: POD_NAMESPACE
             valueFrom:
-            fieldRef:
+              fieldRef:
                 fieldPath: metadata.namespace
