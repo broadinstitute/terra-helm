@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: prometheus-to-sd-deployment
   namespace: {{ .Values.namespaceOverride }}
-  labels: {{ include "prometheus.labels" . | indent 4 }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.prometheusToSD.replicaCount }}
   revisionHistoryLimit: 0
@@ -22,28 +22,28 @@ spec:
     spec:
       servicceAccountName: prometheus-to-sd-sa
       containers:
-        - name: prometheus-to-sd
-            image: {{ .Values.prometheusToSD.imageRepo }}:{{ .Values.prometheusToSD.imageTag }}
-            ports:
-            - name: profiler
-              containerPort: 6060
-            command:
-            - /monitor
-            - --stackdriver-prefix=custom.googleapis.com
-            {{- range $key, $value := .Values.prometheusToSD.metricsSources }}
-            - --source={{ $key }}:{{ $value }}
-            {{- end }}
-            {{- with .Values.prometheusToSD.monitoredResourceTypes }}
-            - --monitored-resource-types={{ . }}
-            {{- end }}
-            - --pod-id=$(POD_NAME)
-            - --namespace-id=$(POD_NAMESPACE)
-            env:
-            - name: POD_NAME
-                valueFrom:
-                fieldRef:
-                    fieldPath: metadata.name
-            - name: POD_NAMESPACE
-                valueFrom:
-                fieldRef:
-                    fieldPath: metadata.namespace
+      - name: prometheus-to-sd
+        image: {{ .Values.prometheusToSD.imageRepo }}:{{ .Values.prometheusToSD.imageTag }}
+        ports:
+        - name: profiler
+            containerPort: 6060
+        command:
+        - /monitor
+        - --stackdriver-prefix=custom.googleapis.com
+        {{- range $key, $value := .Values.prometheusToSD.metricsSources }}
+        - --source={{ $key }}:{{ $value }}
+        {{- end }}
+        {{- with .Values.prometheusToSD.monitoredResourceTypes }}
+        - --monitored-resource-types={{ . }}
+        {{- end }}
+        - --pod-id=$(POD_NAME)
+        - --namespace-id=$(POD_NAMESPACE)
+        env:
+        - name: POD_NAME
+            valueFrom:
+            fieldRef:
+                fieldPath: metadata.name
+        - name: POD_NAMESPACE
+            valueFrom:
+            fieldRef:
+                fieldPath: metadata.namespace
