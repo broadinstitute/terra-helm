@@ -1,6 +1,6 @@
 global:
   # global.applicationVersion -- What version of the application to deploy
-  applicationVersion: opendj600
+  applicationVersion: opendj_3
   # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   trustedAddresses: {}
 
