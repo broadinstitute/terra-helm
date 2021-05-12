@@ -26159,7 +26159,7 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.6.0/terra-cluster-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v2
-    created: "2021-05-12T15:37:04.354360979Z"
+    created: "2021-05-12T15:38:08.147469302Z"
     dependencies:
     - name: terra-cluster-psps
       repository: https://broadinstitute.github.io/terra-helm/
@@ -26189,7 +26189,7 @@ entries:
       repository: https://broadinstitute.github.io/terra-helm
       version: 0.1.0
     description: A Helm chart to install cluster-wide resources for Terra
-    digest: ef013b7988619b1769c53f2b37a9928b60876de5b9cc84f5242f0bb60efc4e47
+    digest: b41f94ce14d4455144dbf115c9a191ce44268dd9d92e4a95dd138d52df080539
     keywords:
     - dsp
     - broadinstitute
@@ -26203,8 +26203,8 @@ entries:
     - https://github.com/broadinstitute/terra-helm/tree/master/charts
     type: application
     urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.6.0-372.1620833813.878d53/terra-cluster-0.6.0-372.1620833813.878d53.tgz
-    version: 0.6.0-372.1620833813.878d53
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.6.0-372.1620833873.d2189b/terra-cluster-0.6.0-372.1620833873.d2189b.tgz
+    version: 0.6.0-372.1620833873.d2189b
   - apiVersion: v2
     created: "2021-05-12T15:30:12.909240174Z"
     dependencies:
@@ -32079,13 +32079,13 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.7.0/terra-prometheus-0.7.0.tgz
     version: 0.7.0
   - apiVersion: v2
-    created: "2021-05-12T15:37:04.553003344Z"
+    created: "2021-05-12T15:38:08.348278464Z"
     dependencies:
     - name: kube-prometheus-stack
       repository: https://prometheus-community.github.io/helm-charts/
       version: 9.3.4
     description: a helm chart to deploy monitoring infrastructure
-    digest: 68f41294332e51e32c1e5f415863152e17d9355ecec9c342cb1db795225458ef
+    digest: 9245decdda3f329e561019a905bc49ee3dff4596fe14f33c7cea48e507b13423
     keywords:
     - dsp
     - broad
@@ -32100,8 +32100,8 @@ entries:
     - https://github.com/broadinstitute/terra-helm/tree/master/charts
     type: application
     urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.7.0-372.1620833817.878d53/terra-prometheus-0.7.0-372.1620833817.878d53.tgz
-    version: 0.7.0-372.1620833817.878d53
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.7.0-372.1620833878.d2189b/terra-prometheus-0.7.0-372.1620833878.d2189b.tgz
+    version: 0.7.0-372.1620833878.d2189b
   - apiVersion: v2
     created: "2021-05-12T15:30:13.078868508Z"
     dependencies:
