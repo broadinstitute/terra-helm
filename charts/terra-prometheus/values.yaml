@@ -47,8 +47,8 @@ prometheusToSD:
   imageTag: v0.5.2
   monitoredResourceTypes: k8s_container
   replicaCount: 1
-  metricsSources:
-    kube-state-metrics: null
+  metricsSources: {}
+    # kube-state-metrics: null
 # Promethues-Operator values
 kube-prometheus-stack:
   # promtheus-operator.fullnameOverride -- (string) Use the name of this chart rather than prometheus operator built in templating.
