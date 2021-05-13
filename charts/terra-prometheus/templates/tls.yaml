@@ -7,8 +7,7 @@ metadata:
   {{- if ne .Values.namespaceOverride "" }}
   namespace: {{ .Values.namespaceOverride }}
   {{- end }}
-  labels:
-    {{ template "prometheus.labels" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
   secretName: {{ .Chart.Name }}-cert
   renewBefore: {{ .Values.certManager.renewBefore }}
@@ -25,8 +24,7 @@ metadata:
   {{- if ne .Values.namespaceOverride "" }}
   namespace: {{ .Values.namespaceOverride }}
   {{- end }}
-  labels:
-    {{ template "prometheus.labels" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
   name: {{ .Chart.Name }}-cert
   keysMap:
