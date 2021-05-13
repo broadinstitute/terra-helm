@@ -21,7 +21,7 @@ Current chart version is `0.10.0`
 | backup.nodeSelector | object | `{}` | NodeSelector for backup CronJob pods |
 | backup.timeoutSeconds | int | `7200` | How many seconds to wait before assuming job is hung and killing it |
 | backup.tolerations | list | `[]` | Tolerations for backup CronJob pods |
-| global.applicationVersion | string | `"opendj600"` | What version of the application to deploy |
+| global.applicationVersion | string | `"opendj_3"` | What version of the application to deploy |
 | global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"broadinstitute/openam"` | Image repository |
