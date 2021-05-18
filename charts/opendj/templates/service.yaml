@@ -6,7 +6,7 @@ metadata:
     {{- include "opendj.labels" . | nindent 4 }}
 spec:
   type: LoadBalancer
-  loadBalancerIP: {{ required "A valid serviceIP value is required!" .Values.service.staticIp }}
+  loadBalancerIP: {{ required "A valid .service.staticIp value is required!" .Values.service.staticIp }}
   {{- if .Values.service.firewallEnabled }}
   loadBalancerSourceRanges:
   {{- template "opendj.firewall" . }}
