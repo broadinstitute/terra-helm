@@ -1,4 +1,3 @@
-{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
 apiVersion: apps/v1
 kind: StatefulSet
@@ -31,7 +30,7 @@ spec:
           defaultMode: 0744
       containers:
       - name: {{ .Values.name }}
-        image: {{ .Values.imageConfig.repository }}:{{ $imageTag }}
+        image: {{ .Values.imageConfig.repository }}:{{  .Values.imageConfig.tag }}
         imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
         envFrom:
         - secretRef:
