@@ -12,8 +12,6 @@ spec:
   selector:
     matchLabels:
       {{- include "opendj.selectorLabels" . | nindent 6 }}
-  updateStrategy:
-    type: OnDelete
   template:
     metadata:
       labels:
