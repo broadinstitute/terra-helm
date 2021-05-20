@@ -1,0 +1,94 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: "{{ .Values.janitorCron.name }}"
+  labels: {}
+spec:
+  schedule: "0 */4 * * *"
+  startingDeadlineSeconds: 100
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          serviceAccountName: leonardo-sa
+          containers:
+          - image: "{{ .Values.janitorCron.imageRepository }}:{{ .Values.janitorCron.imageTag }}"
+            name: "{{ .Values.janitorCron.name }}"
+            command: ["/bin/bash", "-c"]
+            # This is workaround for terminating sidecar container when the main container terminates
+            # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
+            args:
+              - |
+                trap "touch /tmp/pod/main-terminated" EXIT
+                /opt/docker/bin/janitor --all
+            env:
+            - name: JAVA_OPTS
+              value: -Dconfig.file=/opt/docker/janitor-config/application.conf
+            - name: LEONARDO_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: username
+            - name: LEONARDO_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: password
+            - name: LEONARDO_PATH_TO_CREDENTIAL
+              value: /secrets/service-account.json
+            volumeMounts:
+            - name: leonardo-sa-json-file
+              mountPath: /secrets
+              readOnly: true
+            - name: tmp-pod
+              mountPath: /tmp/pod
+            - mountPath: /opt/docker/janitor-config
+              name: application-config
+          - name: leonardo-cloudsql-proxy
+            image: gcr.io/cloudsql-docker/gce-proxy:1.15
+            env:
+            - name: SQL_INSTANCE_PROJECT
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: instance_project
+            - name: SQL_INSTANCE_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: instance_region
+            - name: SQL_INSTANCE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: leonardo-db-creds
+                  key: instance_name
+            command: ["/bin/sh", "-c"]
+            # This is workaround for terminating sidecar container when the main container terminates
+            # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
+            args:
+            - |
+              /cloud_sql_proxy --dir=/cloudsql -instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:0.0.0.0:3306 -credential_file=/secrets/service-account.json &
+              CHILD_PID=$!
+              (while true; do if [[ -f "/tmp/pod/main-terminated" ]]; then kill $CHILD_PID; echo "Killed $CHILD_PID as the main container terminated."; fi; sleep 1; done) &
+              wait $CHILD_PID
+              if [[ -f "/tmp/pod/main-terminated" ]]; then exit 0; echo "Job completed. Exiting..."; fi
+            volumeMounts:
+            - name: leonardo-sa-json-file
+              mountPath: /secrets
+              readOnly: true
+            - mountPath: /tmp/pod
+              name: tmp-pod
+              readOnly: true
+          volumes:
+          - name: leonardo-sa-json-file
+            secret:
+              secretName: leonardo-sa-json
+          # This is workaround for terminating sidecar container when the main container terminates
+          # See https://github.com/kubernetes/kubernetes/issues/25908#issuecomment-597799679
+          - name: tmp-pod
+            emptyDir: {}
+          - name: application-config
+            configMap:
+              name: leonardo-janitor-cm

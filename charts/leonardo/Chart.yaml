@@ -2,7 +2,7 @@ apiVersion: v2
 name: leonardo
 version: 0.38.0
 type: application
-description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
+description: A Helm chart for Leonardo, a Terra service for interactive analysis applications
 keywords:
   - dsp
   - broadinstitute
