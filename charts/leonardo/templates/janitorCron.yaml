@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.janitorCron.name }}"
   labels: {}
 spec:
-  schedule: "0 */4 * * *"
+  schedule: "0 */1 * * *"
   startingDeadlineSeconds: 100
   successfulJobsHistoryLimit: 1
   jobTemplate:
