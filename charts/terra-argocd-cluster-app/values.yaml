@@ -1,0 +1,38 @@
+# Default values for terra-argocd-cluster-app
+
+# releaseName-- Name of the release that is being deployed. Eg. "prometheus"
+releaseName: null
+
+# clusterName -- The name of the cluster that is being deployed to. Eg. "terra-dev"
+clusterName: null
+
+# clusterAddress -- The address of the cluster that is being deployed to. Eg. "https://35.238.186.116"
+clusterAddress: null
+
+# projectName -- The name of the ArgoCD project this application belongs to
+projectName: null
+
+# namespace -- Namespace that is is being deployed to. Eg. "monitoring"
+destinationNamespace: null
+
+# syncPolicy -- Optional: Sync policy for the app.
+# See https://argoproj.github.io/argo-cd/user-guide/auto_sync/
+# @default -- No sync policy (manual)
+syncPolicy: null
+
+# extraLabels -- Optional: Additional set of labels to apply to the ArgoCD app
+extraLabels: {}
+
+# purgeDeployedResourcesOnDelete -- If an ArgoCD Application is deleted,
+# purge deployed resources as well. Eg. if the `prometheus`
+# ArgoCD app is deleted, delete all the deployed prometheus pods/ingress/etc as well
+purgeDeployedResourcesOnDelete: false
+
+# helmfileRepo -- Terra's helmfile repo
+helmfileRepo: https://github.com/broadinstitute/terra-helmfile
+
+# helmfileRepoRevision -- Target revision of terra-helmfile to deploy.
+# We follow GitOps, so HEAD/master branch of terra-helmfile is "the desired
+# state of the world", but occasionally it is useful to deploy off a terra-helmfile
+# PR branch
+helmfileRepoRevision: HEAD

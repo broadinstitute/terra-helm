@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ required "A valid releaseName is required" .Values.releaseName }}-{{ required "A valid clusterName is required" .Values.clusterName }}"
+  labels:
+    release: {{ .Values.releaseName | quote }}
+    cluster: {{ .Values.clusterName | quote }}
+    type: cluster
+    {{- if .Values.extraLabels }}
+    {{- .Values.extraLabels | toYaml | nindent 4 }}
+    {{- end }}
+  {{- if .Values.purgeDeployedResourcesOnDelete }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  project: {{ required "A valid projectName is required" .Values.projectName | quote }}
+  destination:
+    namespace: {{ required "A valid destinationNamespace is required" .Values.destinationNamespace | quote }}
+    server: {{ required "A valid clusterAddress is required" .Values.clusterAddress | quote }}
+  source:
+    repoURL: {{ .Values.helmfileRepo | quote }}
+    {{- if .Values.helmfileRepoRevision }}
+    targetRevision: {{ .Values.helmfileRepoRevision | quote }}
+    {{- end }}
+    path: .
+    plugin:
+      name: th-render
+      env:
+      - name: TERRA_CLUSTER
+        value: {{ .Values.clusterName | quote }}
+      - name: TERRA_RELEASE
+        value: {{ .Values.releaseName | quote }}
+    {{- if .Values.syncPolicy }}
+    syncPolicy: {{ .Values.syncPolicy | toYaml | nindent 6 }}
+    {{- end }}
