@@ -1,3 +1,4 @@
+name: atlantis
 serviceAccount: atlantis
 cert:
   secretName: atlantis-cert
@@ -12,3 +13,9 @@ atlantis:
   fullnameOverride: atlantis
   serviceAccount:
     name: atlantis
+azure:
+  enabled: true
+  certificateFile: atlantis-test-sp.pfx
+vault:
+  azure:
+    pathPrefix: secret/devops/terraform/azure
