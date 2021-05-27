@@ -16,4 +16,4 @@ sources:
 dependencies:
 - name: atlantis
   version: 3.12.2
-  repository: https://runatlantis.github.io/helm-charts
+  repository: https://runatlantis.github.io/helm-charts/
