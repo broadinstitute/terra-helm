@@ -14,8 +14,8 @@ atlantis:
   serviceAccount:
     name: atlantis
 azure:
-  enabled: true
-  certificateFile: atlantis-test-sp.pfx
+  enabled: false
+  certificateFile: "azure-cert.pfx"
 vault:
   azure:
-    pathPrefix: secret/devops/terraform/azure
+    pathPrefix: /path/to/azure/secrets
