@@ -1,19 +1,15 @@
 apiVersion: v2
 name: dsp-atlantis
-version: 0.1.0
-
+version: 0.2.0
 description: Chart for DSP Atlantis deployment
 type: application
-
 keywords:
-- dsp
-- broadinstitute
-- atlantis
-
+  - dsp
+  - broadinstitute
+  - atlantis
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/master/charts
-
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
 dependencies:
-- name: atlantis
-  version: 3.12.4
-  repository: https://runatlantis.github.io/helm-charts
+  - name: atlantis
+    version: 3.12.4
+    repository: https://runatlantis.github.io/helm-charts
