@@ -1,0 +1,6 @@
+dependencies:
+- name: postgres
+  repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+  version: 0.1.0
+digest: sha256:b89a9afdb4d50ef6205ae0bab849d76c22de654421fef5e4b91fb808d33237af
+generated: "2020-12-10T11:53:32.793202-05:00"

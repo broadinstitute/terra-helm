@@ -1,0 +1,34 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-service
+  labels:
+{{ include "externalcreds.labels" . | indent 4 }}
+  annotations:
+    # Associate a backend config with the ingress: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#associating_backendconfig_with_your_ingress
+    cloud.google.com/backend-config: '{"default": "{{ .Values.name }}-ingress-backendconfig"}'
+    # Enable container-native load balancing https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing
+    cloud.google.com/neg: '{"ingress": true}'
+    # Enable TLS between LB and apache proxy https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb
+    cloud.google.com/app-protocols: '{"https":"HTTPS"}'
+spec:
+  type: ClusterIP
+  selector:
+    deployment: {{ .Values.name }}-deployment
+  ports:
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 443
+{{- end }}
+{{- if .Values.postgres.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-postgres-service
+  labels:
+{{ include "externalcreds.labels" . | indent 4 }}
+{{- include "postgres.service.tpl" . }}
+{{- end }}
