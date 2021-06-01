@@ -12,3 +12,17 @@ atlantis:
   fullnameOverride: atlantis
   serviceAccount:
     name: atlantis
+
+cleanup:
+  # cleanup.enabled -- Whether to automatically clear provider cache
+  enabled: false
+  # cleanup.clusterLocation -- Where the GKE cluster is located 
+  clusterLocation: "--zone us-central1-a"
+
+# vaultSecrets -- Where in Vault to find secrets used by this chart.
+vaultSecrets:
+  cleanupCredentials:
+    # vaultSecrets.cleanupCredentials.path -- Path in Vault where base64-encoded GCP service account key for pod cleanup is stored
+    path:
+    # vaultSecrets.cleanupCredentials.key -- Key in Vault where base64-encoded GCP service account key for pod cleanup is stored
+    key:
