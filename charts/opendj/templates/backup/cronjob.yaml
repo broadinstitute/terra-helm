@@ -6,7 +6,8 @@ metadata:
   name: {{ .Values.name }}-backup-cronjob
   labels: {{ include "opendj.labels" . | nindent 4 }}
 spec:
-  schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
+  schedule: "15,45 * * * *" # Run at :15 and :45 for testing
+  # schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
   concurrencyPolicy: Replace
   jobTemplate:
     metadata:
