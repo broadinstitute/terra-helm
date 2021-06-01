@@ -83,6 +83,7 @@ spec:
         args:
         - '-c'
         - >-
+          sleep 30 &&
           java ${JAVA_OPTS}
           ${PROMETHEUS_ARGS}
           -jar $(find /rawls -name 'rawls*.jar')
