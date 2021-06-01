@@ -24,8 +24,21 @@ vault:
 cleanup:
   # cleanup.enabled -- Whether to automatically clear provider cache
   enabled: false
+  # cleanup.atlantisPod -- Static name of the atlantis pod
+  atlantisPod: "atlantis-0"
+  # cleanup.clusterName -- Name for the GKE cluster
+  clusterName: "dsp-tools"
   # cleanup.clusterLocation -- Where the GKE cluster is located 
-  clusterLocation: "--zone us-central1-a"
+  clusterLocation: "us-central1-a"
+  # cleanup.clusterProject -- Project the GKE cluster is in
+  clusterProject: "dsp-tools-k8s"
+  # cleanup.timeoutSeconds -- How many seconds to wait before assuming job is hung and killing it
+  timeoutSeconds: 3600 # 1 hr
+  cloudsdkImage:
+    # cleanup.cloudsdkImage.repository -- Image repository to use for Cloud SDK
+    repository: gcr.io/google.com/cloudsdktool/cloud-sdk
+    # cleanup.cloudsdkImage.repository -- Image tag to use for Cloud SDK
+    tag: '342.0.0'
 
 # vaultSecrets -- Where in Vault to find secrets used by this chart.
 vaultSecrets:
