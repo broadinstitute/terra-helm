@@ -4,9 +4,9 @@ kind: CronJob
 metadata:
   name: atlantis-cleanup-cronjob
   labels: 
-    {{- template "dsp-atlantis.labels" }}
+    {{- include "dsp-atlantis.labels" . | nindent 4 }}
 spec:
-  schedule: "25 * * * *" # Run at :25 for testing
+  schedule: "37 * * * *" # Run at :37 for testing
   # schedule: "30 9 * * 1" # Run every Monday at 9:30 am UTC / 4:30 am EST
   concurrencyPolicy: Replace
   jobTemplate:
