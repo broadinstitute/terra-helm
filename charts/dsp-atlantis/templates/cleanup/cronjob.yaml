@@ -6,7 +6,7 @@ metadata:
   labels: 
     {{- include "dsp-atlantis.labels" . | nindent 4 }}
 spec:
-  schedule: "0 * * * *" # Run at :00 for testing
+  schedule: "20 * * * *" # Run at :00 for testing
   # schedule: "30 9 * * 1" # Run every Monday at 9:30 am UTC / 4:30 am EST
   concurrencyPolicy: Replace
   jobTemplate:
@@ -33,7 +33,8 @@ spec:
                 --zone {{ .Values.cleanup.clusterLocation }} \
                 --project {{ .Values.cleanup.clusterProject }} && \
               kubectl exec --namespace {{ .Release.Namespace }} {{ .Values.cleanup.atlantisPod }} \
-                -- echo "foobar"
+                -- echo "foobar" && \
+              date +"%T"
             volumeMounts:
             - mountPath: /sa-key.json
               name: gcp-sa
