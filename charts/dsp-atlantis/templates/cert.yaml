@@ -3,7 +3,7 @@ kind: Certificate
 metadata:
   name: atlantis-cert
   labels:
-    {{- template "dsp-atlantis.labels" }}
+    {{- include "dsp-atlantis.labels" . | nindent 4 }}
 spec:
   secretName: {{ .Values.cert.secretName }}
   duration: {{ .Values.cert.duration }}

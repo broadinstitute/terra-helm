@@ -10,14 +10,14 @@ spec:
   concurrencyPolicy: Replace
   jobTemplate:
     metdata:
-      labels:
-        {{- template "dsp-atlantis.labels" }}
+      labels: 
+        {{- include "dsp-atlantis.labels" . | nindent 8 }}
     spec:
       activeDeadlineSeconds: {{ .Values.cleanup.timeoutSeconds }}
       template:
         metadata:
           labels:
-            {{- template "dsp-atlantis.labels" }}
+            {{- include "dsp-atlantis.labels" . | nindent 12 }}
         spec:
           serviceAccountName: atlantis-cleanup-sa
           containers:
