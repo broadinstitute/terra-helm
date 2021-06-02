@@ -3,7 +3,7 @@ kind: PodSecurityPolicy
 metadata:
   name: atlantis-psp
   labels:
-    {{- template "dsp-atlantis.labels" }}
+    {{- include "dsp-atlantis.labels" . | nindent 4 }}
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
 spec:

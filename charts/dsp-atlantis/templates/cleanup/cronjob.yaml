@@ -1,0 +1,50 @@
+{{- if .Values.cleanup.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: atlantis-cleanup-cronjob
+  labels: 
+    {{- include "dsp-atlantis.labels" . | nindent 4 }}
+spec:
+  schedule: "30 9 * * 1" # Run every Monday at 9:30 am UTC / 4:30 am EST
+  concurrencyPolicy: Replace
+  jobTemplate:
+    metadata:
+      labels: 
+        {{- include "dsp-atlantis.labels" . | nindent 8 }}
+    spec:
+      activeDeadlineSeconds: {{ .Values.cleanup.timeoutSeconds }}
+      template:
+        metadata:
+          labels:
+            {{- include "dsp-atlantis.labels" . | nindent 12 }}
+        spec:
+          serviceAccountName: {{ .Values.cleanup.saName }}
+          containers:
+          - name: atlantis-cleanup
+            image: {{ .Values.cleanup.cloudsdkImage.repository }}:{{ .Values.cleanup.cloudsdkImage.tag }}
+            command: ['sh', '-c']
+            args:
+            - |-
+              gcloud --no-user-output-enabled \
+                auth activate-service-account --key-file=/sa-key.json && \
+              gcloud --no-user-output-enabled \
+                container clusters get-credentials {{ .Values.cleanup.clusterName }} \
+                --internal-ip \
+                --zone {{ .Values.cleanup.clusterLocation }} \
+                --project {{ .Values.cleanup.clusterProject }} && \
+              kubectl exec --namespace {{ .Release.Namespace }} {{ .Values.cleanup.atlantisPod }} \
+                -- find /atlantis-data/plugin-cache/linux_amd64/ -type f -mtime +7 -delete
+            volumeMounts:
+            - mountPath: /sa-key.json
+              name: gcp-sa
+              subPath: sa-key.json
+          restartPolicy: OnFailure
+          volumes:
+          - name: gcp-sa
+            secret:
+              secretName: atlantis-cleanup-secrets
+              items:
+              - key: cleanup-credentials
+                path: sa-key.json
+{{- end }}
