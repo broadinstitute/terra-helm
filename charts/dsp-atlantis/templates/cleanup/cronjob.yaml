@@ -6,7 +6,7 @@ metadata:
   labels: 
     {{- include "dsp-atlantis.labels" . | nindent 4 }}
 spec:
-  schedule: "0 * * * *" # Run at :47 for testing
+  schedule: "35 * * * *" # Run at :35 for testing
   # schedule: "30 9 * * 1" # Run every Monday at 9:30 am UTC / 4:30 am EST
   concurrencyPolicy: Replace
   jobTemplate:
@@ -20,7 +20,7 @@ spec:
           labels:
             {{- include "dsp-atlantis.labels" . | nindent 12 }}
         spec:
-          serviceAccountName: atlantis-cleanup-sa
+          serviceAccountName: {{ .Values.cleanup.saName }}
           containers:
           - name: atlantis-cleanup-container
             image: {{ .Values.cleanup.cloudsdkImage.repository }}:{{ .Values.cleanup.cloudsdkImage.tag }}

@@ -26,6 +26,8 @@ cleanup:
   enabled: false
   # cleanup.atlantisPod -- Static name of the atlantis pod
   atlantisPod: "atlantis-0"
+  # saName -- Name of the k8s SA to make for running the job
+  saName: "atlantis-cleanup-sa"
   # cleanup.clusterName -- Name for the GKE cluster
   clusterName: "dsp-tools"
   # cleanup.clusterLocation -- Where the GKE cluster is located 
