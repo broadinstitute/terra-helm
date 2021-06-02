@@ -7426,25 +7426,6 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.2.0/dsp-atlantis-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
-    created: "2021-06-02T17:15:44.48494649Z"
-    dependencies:
-    - name: atlantis
-      repository: https://runatlantis.github.io/helm-charts
-      version: 3.12.4
-    description: Chart for DSP Atlantis deployment
-    digest: b6aa05efa17dfa8ce7ead2ceb194158050d950054e07293e92714630b6fbdec1
-    keywords:
-    - dsp
-    - broadinstitute
-    - atlantis
-    name: dsp-atlantis
-    sources:
-    - https://github.com/broadinstitute/terra-helm/tree/master/charts
-    type: application
-    urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.2.0-382.1622654138.f9b80d/dsp-atlantis-0.2.0-382.1622654138.f9b80d.tgz
-    version: 0.2.0-382.1622654138.f9b80d
-  - apiVersion: v2
     created: "2021-06-02T16:52:48.769421251Z"
     dependencies:
     - name: atlantis
@@ -13811,6 +13792,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.39.0/leonardo-0.39.0.tgz
     version: 0.39.0
+  - apiVersion: v2
+    created: "2021-06-02T17:16:02.270032182Z"
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 0c21154800dcd030d6c53fe74533d8345cbe54e3edc68a7907b2e344d66cdc83
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.39.0-379.1622654156.6ca1d8/leonardo-0.39.0-379.1622654156.6ca1d8.tgz
+    version: 0.39.0-379.1622654156.6ca1d8
   - apiVersion: v2
     created: "2021-04-09T21:40:43.859082238Z"
     description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
