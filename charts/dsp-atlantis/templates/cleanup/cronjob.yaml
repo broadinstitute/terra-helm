@@ -34,7 +34,7 @@ spec:
                 --zone {{ .Values.cleanup.clusterLocation }} \
                 --project {{ .Values.cleanup.clusterProject }} && \
               kubectl exec --namespace {{ .Release.Namespace }} {{ .Values.cleanup.atlantisPod }} \
-                -- find /atlantis-data/plugin-cache/linux_amd64/ -type f -mtime +30 -delete
+                -- find /atlantis-data/plugin-cache/linux_amd64/ -type f -mtime +7 -delete
             volumeMounts:
             - mountPath: /sa-key.json
               name: gcp-sa
