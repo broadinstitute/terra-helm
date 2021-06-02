@@ -82,7 +82,8 @@ spec:
         command: ["/bin/bash"]
         args:
         - '-c'
-        - >-
+        - >- # Sleep 30 seconds to CloudSQL proxy time to start up. See DDO-1284
+          sleep 30 &&
           java ${JAVA_OPTS}
           ${PROMETHEUS_ARGS}
           -jar $(find /rawls -name 'rawls*.jar')
