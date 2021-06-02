@@ -21,7 +21,7 @@ spec:
         spec:
           serviceAccountName: {{ .Values.cleanup.saName }}
           containers:
-          - name: atlantis-cleanup-container
+          - name: atlantis-cleanup
             image: {{ .Values.cleanup.cloudsdkImage.repository }}:{{ .Values.cleanup.cloudsdkImage.tag }}
             command: ['sh', '-c']
             args:
