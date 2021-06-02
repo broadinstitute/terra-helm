@@ -6,8 +6,7 @@ metadata:
   labels: 
     {{- include "dsp-atlantis.labels" . | nindent 4 }}
 spec:
-  schedule: "20 * * * *" # Run at :00 for testing
-  # schedule: "30 9 * * 1" # Run every Monday at 9:30 am UTC / 4:30 am EST
+  schedule: "30 9 * * 1" # Run every Monday at 9:30 am UTC / 4:30 am EST
   concurrencyPolicy: Replace
   jobTemplate:
     metadata:
@@ -27,14 +26,15 @@ spec:
             command: ['sh', '-c']
             args:
             - |-
-              gcloud auth activate-service-account --key-file=/sa-key.json && \
-              gcloud container clusters get-credentials {{ .Values.cleanup.clusterName }} \
+              gcloud --no-user-output-enabled \
+                auth activate-service-account --key-file=/sa-key.json && \
+              gcloud --no-user-output-enabled \
+                container clusters get-credentials {{ .Values.cleanup.clusterName }} \
                 --internal-ip \
                 --zone {{ .Values.cleanup.clusterLocation }} \
                 --project {{ .Values.cleanup.clusterProject }} && \
               kubectl exec --namespace {{ .Release.Namespace }} {{ .Values.cleanup.atlantisPod }} \
-                -- echo "foobar" && \
-              date +"%T"
+                -- find /atlantis-data/plugin-cache/linux_amd64/ -type f -mtime +30 -delete
             volumeMounts:
             - mountPath: /sa-key.json
               name: gcp-sa
