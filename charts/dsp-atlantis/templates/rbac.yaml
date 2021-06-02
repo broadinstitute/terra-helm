@@ -24,8 +24,3 @@ subjects:
 - kind: ServiceAccount
   name: {{ .Values.serviceAccount }}
   namespace: {{ .Release.Namespace }}
-{{- if .Values.cleanup.enabled }}
-- kind: ServiceAccount
-  name: {{ .Values.cleanup.saName }}
-  namespace: {{ .Release.Namespace }}
-{{- end }}
