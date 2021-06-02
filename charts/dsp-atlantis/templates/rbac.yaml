@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata:
   name: atlantis-clusterrole
   labels:
-    {{- template "dsp-atlantis.labels" }}
+    {{- include "dsp-atlantis.labels" . | nindent 4 }}
 rules:
 - apiGroups: ["extensions"]
   resources: ["podsecuritypolicies"]
@@ -15,7 +15,7 @@ kind: ClusterRoleBinding
 metadata:
   name: atlantis-rolebinding
   labels:
-    {{- template "dsp-atlantis.labels" }}
+    {{- include "dsp-atlantis.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
