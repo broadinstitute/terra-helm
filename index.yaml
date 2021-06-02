@@ -7426,6 +7426,25 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.2.0/dsp-atlantis-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
+    created: "2021-06-02T15:11:49.38283372Z"
+    dependencies:
+    - name: atlantis
+      repository: https://runatlantis.github.io/helm-charts
+      version: 3.12.4
+    description: Chart for DSP Atlantis deployment
+    digest: 93b55f288593aac03ef94eef966a0eed502223ffaab4780185304a4a59f05d4d
+    keywords:
+    - dsp
+    - broadinstitute
+    - atlantis
+    name: dsp-atlantis
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.2.0-382.1622646702.843a60/dsp-atlantis-0.2.0-382.1622646702.843a60.tgz
+    version: 0.2.0-382.1622646702.843a60
+  - apiVersion: v2
     created: "2021-06-01T21:13:01.011887684Z"
     dependencies:
     - name: atlantis
@@ -21093,6 +21112,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.14.0/opendj-0.14.0.tgz
     version: 0.14.0
+  - apiVersion: v2
+    created: "2021-06-02T15:11:49.477473219Z"
+    description: Chart for OpenDJ, used by Sam(Terra IAM service) as well as various
+      Terra applications' OIDC proxy deploys
+    digest: 2d37c1893a3b571be606b599583b879fdd7969f395aa455b745b7f7217be5063
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - opendj
+    name: opendj
+    sources:
+    - https://github.com/broadinstitute/firecloud-opendj
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/opendj
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.14.0-382.1622646703.843a60/opendj-0.14.0-382.1622646703.843a60.tgz
+    version: 0.14.0-382.1622646703.843a60
   - apiVersion: v2
     created: "2021-06-01T21:13:01.144969026Z"
     description: Chart for OpenDJ, used by Sam(Terra IAM service) as well as various
