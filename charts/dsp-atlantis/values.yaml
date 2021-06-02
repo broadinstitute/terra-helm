@@ -20,6 +20,11 @@ azure:
 vault:
   azure:
     pathPrefix: /path/to/azure/secrets
+  cleanup:
+    # vault.cleanup.path -- Path in Vault where base64-encoded GCP service account key for pod cleanup is stored
+    path:
+    # vault.cleanup.key -- Key in Vault where base64-encoded GCP service account key for pod cleanup is stored
+    key:
 
 cleanup:
   # cleanup.enabled -- Whether to automatically clear provider cache
@@ -41,11 +46,3 @@ cleanup:
     repository: gcr.io/google.com/cloudsdktool/cloud-sdk
     # cleanup.cloudsdkImage.repository -- Image tag to use for Cloud SDK
     tag: '342.0.0'
-
-# vaultSecrets -- Where in Vault to find secrets used by this chart.
-vaultSecrets:
-  cleanupCredentials:
-    # vaultSecrets.cleanupCredentials.path -- Path in Vault where base64-encoded GCP service account key for pod cleanup is stored
-    path:
-    # vaultSecrets.cleanupCredentials.key -- Key in Vault where base64-encoded GCP service account key for pod cleanup is stored
-    key:
