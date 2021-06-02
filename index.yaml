@@ -7426,6 +7426,25 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.2.0/dsp-atlantis-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
+    created: "2021-06-02T18:54:15.714983726Z"
+    dependencies:
+    - name: atlantis
+      repository: https://runatlantis.github.io/helm-charts
+      version: 3.12.4
+    description: Chart for DSP Atlantis deployment
+    digest: 755c4b933dda0a82248adf67bbc3306aeb1dd07af0ec23e223d9bd1aeb14dc27
+    keywords:
+    - dsp
+    - broadinstitute
+    - atlantis
+    name: dsp-atlantis
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.2.0-382.1622660049.40e5cf/dsp-atlantis-0.2.0-382.1622660049.40e5cf.tgz
+    version: 0.2.0-382.1622660049.40e5cf
+  - apiVersion: v2
     created: "2021-06-02T18:02:54.215560393Z"
     dependencies:
     - name: atlantis
