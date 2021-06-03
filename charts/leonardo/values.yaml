@@ -98,6 +98,11 @@ cronjob:
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
   imageTag: 04fd12c
   googleProject:
+janitorCron:
+  # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
+  name: leonardo-janitor-cronjob
+  imageRepository: us.gcr.io/broad-dsp-gcr-public/janitor
+  imageTag: "3bc76e2"
 zombieMonitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-zombie-monitor-cronjob

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: leonardo-janitor-cm
+  labels:
+{{ include "leonardo.labels" . | indent 4 }}
+data:
+  application.conf: |
+    leonardo-pubsub.google-project = {{ .Values.cronjob.googleProject }}
+    report-destination-bucket = {{ .Values.commonCronjob.reportDestinationBucket }}
