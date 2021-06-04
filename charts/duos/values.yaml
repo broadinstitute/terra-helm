@@ -11,6 +11,9 @@ environment:
 # apiUrl -- (string) The Consent API url
 apiUrl:
 
+# metricApiUrl -- (string) The Consent Metrics API url
+metricApiUrl:
+
 # ontologyApiUrl -- (string) The Ontology API url
 ontologyApiUrl:
 

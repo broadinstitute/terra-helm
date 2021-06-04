@@ -4,6 +4,7 @@
   "hash": "{{ .Values.global.applicationVersion }}",
   "tag": "{{ .Values.global.applicationVersion }}",
   "apiUrl": "{{ .Values.apiUrl }}",
+  "metricApiUrl": "{{ .Values.metricApiUrl }}",
   "ontologyApiUrl": "{{ .Values.ontologyApiUrl }}",
   "clientId": "{{ .Values.googleClientId }}",
   "errorApiKey": "{{ .Values.errorApiKey }}",

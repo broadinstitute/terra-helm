@@ -13,6 +13,7 @@ Current chart version is `0.6.0`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | apiUrl | string | `nil` | The Consent API url |
+| metricApiUrl | string | `nil` | The Consent Metrics API url |
 | devDeploy | bool | `false` |  |
 | environment | string | `nil` | The environment of the service. Required |
 | errorApiKey | string | `nil` | The StackDriver API client id |
