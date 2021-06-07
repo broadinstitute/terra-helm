@@ -8,13 +8,13 @@ metadata:
     argocd.argoproj.io/hook: PreSync
     argocr.argoproj.io/hook-delete-policy: BeforeHookCreation
   labels: 
-    {{- include "rawls.labels" . | indent 4 }}
+    {{- include "rawls.labels" . | nindent 4 }}
 spec:
   template:
     metadata:
       name: rawls-liquibase-migration
       labels:
-        {{- include "rawls.labels" . | indent 8 }}
+        {{- include "rawls.labels" . | nindent 8 }}
     spec:
       restartPolicy: Never
       serviceAccountName: rawls-migration-sa

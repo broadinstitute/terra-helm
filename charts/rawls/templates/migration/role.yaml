@@ -4,7 +4,7 @@ kind: Role
 metadata:
   name: rawls-migration-role
   labels:
-    {{- include "rawls.labels" . | indent 4 }}
+    {{- include "rawls.labels" . | nindent 4 }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']

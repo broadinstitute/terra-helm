@@ -4,7 +4,7 @@ kind: RoleBinding
 metadata:
   name: rawls-migration-sa-binding
   labels:
-    {{- include "rawls.labels" . | indent 4 }}
+    {{- include "rawls.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: rawls-migration-sa
