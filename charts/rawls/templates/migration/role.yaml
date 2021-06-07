@@ -1,0 +1,14 @@
+{{- if .Values.migration.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: rawls-migration-role
+  labels:
+    {{- include "rawls.labels" . | indent 4 }}
+rules:
+- apiGroups: ['policy']
+  resources: ['podsecuritypolicies']
+  verbs:     ['use']
+  resourceNames:
+  - terra-default-psp
+{{- end -}}

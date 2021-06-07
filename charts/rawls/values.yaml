@@ -41,7 +41,7 @@ deploymentDefaults:
   # Example: `"rawls1-reader"`
   name: null
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
-  # @defautl global.applicationVersion
+  # @default global.applicationVersion
   imageTag: null
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
@@ -92,3 +92,26 @@ deploymentDefaults:
         periodSeconds: 10
         failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
         successThreshold: 1
+
+vault:
+  # Migration credentials only referenced if migration.enabled == true
+  migration:
+    # vault.migration.path -- Vault path to secret containing DB credentials
+    path: null
+    # vault.migration.dbUsernameKey -- Key in Vault secret to DB username
+    dbUsernameKey: "slick_db_user"
+    # vault.migration.DbPasswordKey -- Key in Vault secret to DB password
+    dbPasswordKey: "slick_db_password"
+
+migration:
+  # migration.enabled -- Whether to run a Liquibase migration job pre-sync
+  enabled: false
+  # migration.dbUrl -- JDBC URL to connect to local CloudSQL proxy
+  dbUrl: "jdbc:mysql://sqlproxy:3306/rawls?requireSSL=false&useSSL=false&rewriteBatchedStatements=true"
+  # migration.imageTag -- Override the image tag to run the migration on
+  # @default global.applicationVersion
+  # WARNING: App may behave unexpectedly if its database has been migrated to a different version than the app
+  imageTag: null
+  # migration.sqlProxySecretPrefix -- Prefix for ctmpl and env secrets necessary for the desired Cloud SQL connection
+  # NOTE: Generally equals some deploymentDefaults.name, as secrets are per-deployment but migrations are per-namespace
+  sqlProxySecretPrefix: "rawls-backend"
