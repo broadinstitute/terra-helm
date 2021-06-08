@@ -50,7 +50,7 @@ spec:
             updateSQL; \
           EXIT=$?; \
           pkill -SIGTERM cloud_sql_proxy; \
-          return $EXIT
+          exit $EXIT
         env:
         - name: DB_URL
           value: {{ .Values.migration.dbUrl }}
