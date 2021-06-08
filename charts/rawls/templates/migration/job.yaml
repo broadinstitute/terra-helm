@@ -16,6 +16,7 @@ spec:
       labels:
         {{- include "rawls.labels" . | nindent 8 }}
     spec:
+      shareProcessNamespace: true
       restartPolicy: Never
       serviceAccountName: rawls-migration-sa
       volumes:
