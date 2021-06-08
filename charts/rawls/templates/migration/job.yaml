@@ -10,6 +10,7 @@ metadata:
   labels: 
     {{- include "rawls.labels" . | nindent 4 }}
 spec:
+  backoffLimit: 2
   template:
     metadata:
       name: rawls-liquibase-migration
@@ -18,7 +19,6 @@ spec:
     spec:
       # Allow migration-liquibase to kill migration-sqlproxy's process
       shareProcessNamespace: true
-      backoffLimit: 2
       restartPolicy: Never
       serviceAccountName: rawls-migration-sa
       hostAliases:
