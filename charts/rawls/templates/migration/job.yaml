@@ -19,6 +19,10 @@ spec:
       shareProcessNamespace: true
       restartPolicy: Never
       serviceAccountName: rawls-migration-sa
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - sqlproxy
       volumes:
       - name: sqlproxy-ctmpls
         secret:
