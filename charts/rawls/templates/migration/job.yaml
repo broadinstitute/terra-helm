@@ -27,12 +27,14 @@ spec:
       - name: migration-liquibase
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
         command: ['bash', '-c']
+        # Sleep for 30s to allow CloudSQL proxy time to start up. See DDO-1284 / BT-296
         # The `find /rawls -name 'rawls*.jar'` is from Rawls's own Dockerfile CMD
         # The `--driver` is the underlying JDBC driver, e.g. not Slick, see https://doc.akka.io/docs/alpakka/current/slick.html#artifacts
         # The `--url` is hardcoded pending DDO-1297
         # Command is a no-op `updateSQL` during development
         args:
         - |-
+          sleep 30 && \
           java -cp $(find /rawls -name 'rawls*.jar') liquibase.integration.commandline.Main \
             --driver='com.mysql.jdbc.Driver' \
             --classpath="$(find /rawls -name 'rawls*.jar')" \
