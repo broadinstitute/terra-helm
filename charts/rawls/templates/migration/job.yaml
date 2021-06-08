@@ -16,6 +16,7 @@ spec:
       labels:
         {{- include "rawls.labels" . | nindent 8 }}
     spec:
+      # Allow migration-liquibase to kill migration-sqlproxy's process
       shareProcessNamespace: true
       restartPolicy: Never
       serviceAccountName: rawls-migration-sa
@@ -46,7 +47,10 @@ spec:
             --url="$DB_URL" \
             --username="$DB_USERNAME" \
             --password="$DB_PASSWORD" \
-            updateSQL
+            updateSQL; \
+          EXIT=$?; \
+          pkill -SIGTERM cloud_sql_proxy; \
+          return $EXIT
         env:
         - name: DB_URL
           value: {{ .Values.migration.dbUrl }}
