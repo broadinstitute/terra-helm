@@ -48,8 +48,8 @@ spec:
             --url="$DB_URL" \
             --username="$DB_USERNAME" \
             --password="$DB_PASSWORD" \
-            updateSQL; \
-          EXIT=$?; \
+            {{ .Values.migration.dryRun | ternary "updateSQL" "update" }}; \
+          EXIT={{ .Values.migration.failBasedOnLiquibase | ternary "$?" "0" }}; \
           pkill -SIGTERM cloud_sql_proxy; \
           exit $EXIT
         env:
