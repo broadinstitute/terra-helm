@@ -26,9 +26,12 @@ spec:
         hostnames:
         - sqlproxy
       volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ .Values.migration.secretPrefix }}-app-ctmpls
       - name: sqlproxy-ctmpls
         secret:
-          secretName: {{ .Values.migration.sqlProxySecretPrefix }}-sqlproxy-ctmpls
+          secretName: {{ .Values.migration.secretPrefix }}-sqlproxy-ctmpls
       containers:
       - name: migration-liquibase
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
@@ -42,10 +45,8 @@ spec:
         - |-
           sleep 15 && \
           java -cp $(find /rawls -name 'rawls*.jar') liquibase.integration.commandline.Main \
-            --driver='com.mysql.jdbc.Driver' \
-            --classpath="$(find /rawls -name 'rawls*.jar')" \
-            --changeLogFile='org/broadinstitute/dsde/rawls/liquibase/changelog.xml' \
-            --url="$DB_URL" \
+            --defaultsFile='/etc/liquibase.properties'
+            --classpath="$(find /rawls -name 'rawls*.jar')"
             --username="$DB_USERNAME" \
             --password="$DB_PASSWORD" \
             {{ .Values.migration.dryRun | ternary "updateSQL" "update" }}; \
@@ -65,11 +66,16 @@ spec:
             secretKeyRef:
               name: rawls-sql-secrets
               key: db-password
+        volumeMounts:
+        - mountPath: /etc/liquibase.properties
+          subPath: liquibase.properties
+          name: app-ctmpls
+          readOnly: true
       - name: migration-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
         envFrom:
         - secretRef:
-            name: {{ .Values.migration.sqlProxySecretPrefix }}-sqlproxy-env
+            name: {{ .Values.migration.secretPrefix }}-sqlproxy-env
         volumeMounts:
         - mountPath: /etc/sqlproxy-service-account.json
           subPath: sqlproxy-service-account.json

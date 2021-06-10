@@ -116,6 +116,6 @@ migration:
   # @default global.applicationVersion
   # WARNING: App may behave unexpectedly if its database has been migrated to a different version than the app
   imageTag: null
-  # migration.sqlProxySecretPrefix -- Prefix for ctmpl and env secrets necessary for the desired Cloud SQL connection
+  # migration.secretPrefix -- Prefix for ctmpl and env secrets
   # NOTE: Generally equals some deploymentDefaults.name, as secrets are per-deployment but migrations are per-namespace
-  sqlProxySecretPrefix: "rawls-backend"
+  secretPrefix: "rawls-backend"
