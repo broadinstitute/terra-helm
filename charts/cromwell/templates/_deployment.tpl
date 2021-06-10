@@ -99,6 +99,10 @@ spec:
           subPath: cromwell.conf
           name: app-ctmpls
           readOnly: true
+        - mountPath: /etc/cromwell_papi_v2_beta_config.conf
+          subPath: cromwell_papi_v2_beta_config.conf
+          name: app-ctmpls
+          readOnly: true
         - mountPath: /etc/cromwell-account.json
           subPath: cromwell-account.json
           name: app-ctmpls
