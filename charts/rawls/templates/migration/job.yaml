@@ -38,9 +38,7 @@ spec:
         command: ['bash', '-c']
         # Sleep for 15s to allow CloudSQL proxy time to start up. See DDO-1284 / BT-296
         # The `find /rawls -name 'rawls*.jar'` is from Rawls's own Dockerfile CMD
-        # The `--driver` is the underlying JDBC driver, e.g. not Slick, see https://doc.akka.io/docs/alpakka/current/slick.html#artifacts
-        # The `--url` is hardcoded pending DDO-1297
-        # Command is a no-op `updateSQL` during development
+        # References templated liquibase.properties, see https://docs.google.com/document/d/19ethQWyH29H-jUWwgFoCxKfjmzcG-NCmSgXNAUJAYaU/edit#
         args:
         - |-
           sleep 15 && \
@@ -54,8 +52,6 @@ spec:
           pkill -SIGTERM cloud_sql_proxy; \
           exit $EXIT
         env:
-        - name: DB_URL
-          value: {{ .Values.migration.dbUrl }}
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:

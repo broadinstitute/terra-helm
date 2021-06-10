@@ -110,8 +110,6 @@ migration:
   dryRun: true
   # migration.failBasedOnLiquibase -- When true, fail the job (and ArgoCD sync!) if the Liquibase command fails
   failBasedOnLiquibase: true
-  # migration.dbUrl -- JDBC URL to connect to local CloudSQL proxy
-  dbUrl: "jdbc:mysql://sqlproxy:3306/rawls?requireSSL=false&useSSL=false&rewriteBatchedStatements=true"
   # migration.imageTag -- Override the image tag to run the migration on
   # @default global.applicationVersion
   # WARNING: App may behave unexpectedly if its database has been migrated to a different version than the app
