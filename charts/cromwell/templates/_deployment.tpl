@@ -103,6 +103,10 @@ spec:
           subPath: cromwell_papi_v2_beta_config.conf
           name: app-ctmpls
           readOnly: true
+        - mountPath: /etc/cromwell-reference-images.conf
+          subPath: cromwell-reference-images.conf
+          name: app-ctmpls
+          readOnly: true
         - mountPath: /etc/cromwell-account.json
           subPath: cromwell-account.json
           name: app-ctmpls
