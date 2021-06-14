@@ -43,8 +43,8 @@ spec:
         - |-
           sleep 15 && \
           java -cp $(find /rawls -name 'rawls*.jar') liquibase.integration.commandline.Main \
-            --defaultsFile='/etc/liquibase.properties'
-            --classpath="$(find /rawls -name 'rawls*.jar')"
+            --defaultsFile='/etc/liquibase.properties' \
+            --classpath="$(find /rawls -name 'rawls*.jar')" \
             --username="$DB_USERNAME" \
             --password="$DB_PASSWORD" \
             {{ .Values.migration.dryRun | ternary "updateSQL" "update" }}; \
