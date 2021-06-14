@@ -31,7 +31,7 @@ spec:
         secret:
           secretName: {{ .Values.migration.secretPrefix }}-sqlproxy-ctmpls
       containers:
-      - name: migration-liquibase
+      - name: rawls-migration-liquibase
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
         command: ['bash', '-c']
         # Sleep for 15s to allow CloudSQL proxy time to start up. See DDO-1284 / BT-296
@@ -65,7 +65,7 @@ spec:
           subPath: liquibase.properties
           name: app-ctmpls
           readOnly: true
-      - name: migration-sqlproxy
+      - name: rawls-migration-sqlproxy
         # alpine provides `sh`
         image: gcr.io/cloudsql-docker/gce-proxy:1.23.0-alpine
         envFrom:
