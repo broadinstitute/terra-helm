@@ -3,8 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: rawls-migration-sa-binding
-  labels:
-    {{- include "rawls.labels" . | nindent 4 }}
+  labels: {{- include "rawls.labels" . | nindent 4 }}
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocr.argoproj.io/hook-delete-policy: BeforeHookCreation

@@ -7,15 +7,13 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocr.argoproj.io/hook-delete-policy: BeforeHookCreation
-  labels: 
-    {{- include "rawls.labels" . | nindent 4 }}
+  labels: {{- include "rawls.labels" . | nindent 4 }}
 spec:
   backoffLimit: 2
   template:
     metadata:
       name: rawls-liquibase-migration
-      labels:
-        {{- include "rawls.labels" . | nindent 8 }}
+      labels: {{- include "rawls.labels" . | nindent 8 }}
     spec:
       # Allow migration-liquibase to kill migration-sqlproxy's process
       shareProcessNamespace: true
