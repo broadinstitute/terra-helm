@@ -1,10 +1,11 @@
+{{ if .Values.janitorCron.enabled -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: "{{ .Values.janitorCron.name }}"
   labels: {}
 spec:
-  schedule: "0 */1 * * *"
+  schedule: "0 */3 * * *"
   startingDeadlineSeconds: 100
   successfulJobsHistoryLimit: 1
   jobTemplate:
@@ -92,3 +93,4 @@ spec:
           - name: application-config
             configMap:
               name: leonardo-janitor-cm
+{{- end }}
