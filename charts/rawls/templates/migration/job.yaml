@@ -80,7 +80,7 @@ spec:
         command: ['bash', '-c']
         args:
         - |-
-          exec /cloud_sql_proxy ${CLOUDSQL_LOGGING:-"-verbose"} \
+          /cloud_sql_proxy ${CLOUDSQL_LOGGING:-"-verbose"} \
             -max_connections=${CLOUDSQL_MAXCONNS:-0} \
             -instances="${CLOUDSQL_CONNECTION_LIST:-${GOOGLE_PROJECT}:${CLOUDSQL_ZONE}:${CLOUDSQL_INSTANCE}=tcp:0.0.0.0:${PORT:-3306}}" \
             -credential_file=${CLOUDSQL_CREDENTIAL_FILE:-"/etc/sqlproxy-service-account.json"}
