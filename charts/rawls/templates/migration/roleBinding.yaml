@@ -6,7 +6,7 @@ metadata:
   labels: {{- include "rawls.labels" . | nindent 4 }}
   annotations:
     argocd.argoproj.io/hook: PreSync
-    argocr.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+    argocr.argoproj.io/hook-delete-policy: BeforeHookCreation
     argocd.argoproj.io/sync-wave: "-1"
 subjects:
 - kind: ServiceAccount
