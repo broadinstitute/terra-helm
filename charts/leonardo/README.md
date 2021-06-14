@@ -14,6 +14,7 @@ A Helm chart for Leonardo, Terra's Jupyter notebook integration service
 | cronjob.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/resource-validator"` |  |
 | cronjob.imageTag | string | `"59b370b"` |  |
 | cronjob.name | string | `"leonardo-resource-validator-cronjob"` |  |
+| deploymentDefaults.annotation | object | `nil` | Additational metadata to attach |
 | deploymentDefaults.enabled | bool | `true` | Whether a declared deployment is enabled. If false, no resources will be created |
 | deploymentDefaults.imageRepository | string | `"gcr.io/broad-dsp-gcr-public/leonardo"` | Image repo to pull Leonardo images from |
 | deploymentDefaults.imageTag | string | `nil` | Image tag to be used when deploying Pods @default global.applicationVersion |
