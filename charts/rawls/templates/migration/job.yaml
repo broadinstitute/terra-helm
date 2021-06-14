@@ -41,7 +41,7 @@ spec:
         # References templated liquibase.properties, see https://docs.google.com/document/d/19ethQWyH29H-jUWwgFoCxKfjmzcG-NCmSgXNAUJAYaU/edit#
         args:
         - |-
-          sleep 15m && \
+          sleep 15s && \
           java -cp $(find /rawls -name 'rawls*.jar') liquibase.integration.commandline.Main \
             --defaultsFile='/etc/liquibase.properties' \
             --classpath="$(find /rawls -name 'rawls*.jar')" \
@@ -68,7 +68,7 @@ spec:
           name: app-ctmpls
           readOnly: true
       - name: migration-sqlproxy
-        image: gcr.io/cloudsql-docker/gce-proxy:1.23
+        image: gcr.io/cloudsql-docker/gce-proxy:1.23.0
         envFrom:
         - secretRef:
             name: {{ .Values.migration.secretPrefix }}-sqlproxy-env
