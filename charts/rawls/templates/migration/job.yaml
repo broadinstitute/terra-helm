@@ -41,7 +41,7 @@ spec:
         # References templated liquibase.properties, see https://docs.google.com/document/d/19ethQWyH29H-jUWwgFoCxKfjmzcG-NCmSgXNAUJAYaU/edit#
         args:
         - |-
-          sleep 15 && \
+          sleep 15m && \
           java -cp $(find /rawls -name 'rawls*.jar') liquibase.integration.commandline.Main \
             --defaultsFile='/etc/liquibase.properties' \
             --classpath="$(find /rawls -name 'rawls*.jar')" \
