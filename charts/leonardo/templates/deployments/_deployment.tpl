@@ -33,7 +33,7 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: leonardo-sa
+      serviceAccountName: {{ $settings.name }}-deployment-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts

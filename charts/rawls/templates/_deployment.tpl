@@ -33,7 +33,7 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: rawls-sa
+      serviceAccountName: {{ $settings.name}}-deployment-sa
       hostAliases:
       - ip: 127.0.0.1
         hostnames:

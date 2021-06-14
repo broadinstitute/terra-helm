@@ -7,7 +7,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $settings.name }}
+  name: {{ $settings.name }}-deployment
   labels:
 {{ include "cromwell.labels" . | indent 4 }}
 spec:
@@ -33,7 +33,7 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: cromwell-sa
+      serviceAccountName: {{ $settings.name }}-deployment-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts

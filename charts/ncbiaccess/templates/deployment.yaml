@@ -18,14 +18,14 @@ spec:
     metadata:
       labels: {{- include "ncbiaccess.labels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ .Values.name }}-sa
+      serviceAccountName: {{ .Values.name }}-deployment-sa
       volumes:
       - name: app-ctmpls
         secret:
           secretName: {{ .Values.name }}-app-ctmpls
       containers:
       - name: {{ .Values.name }}-app
-      
+
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         resources:
           {{- toYaml .Values.resources | nindent 10 }}

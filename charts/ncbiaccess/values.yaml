@@ -6,6 +6,8 @@ global:
 name: ncbiaccess
 # replicas -- number of pods to run
 replicas: 1
+annotations:
+  bio.terra.linter/replicas_exception: disabled"
 
 imageConfig:
   # imageConfig.repository -- Image repo to use
@@ -16,7 +18,7 @@ imageConfig:
   # imageConfig.imagePull Policy
   imagePullPolicy: Always
 
-resources: 
+resources:
   requests:
     cpu: 1
     memory: 2Gi
@@ -26,5 +28,4 @@ resources:
 
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
-  pathPrefix: 
-  
+  pathPrefix:
