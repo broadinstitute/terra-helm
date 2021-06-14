@@ -1,3 +1,4 @@
+{{ if .Values.cronjob.enabled -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -92,4 +93,4 @@ spec:
           - name: application-config
             configMap:
               name: leonardo-resource-validator-cm
-              
+{{- end }}

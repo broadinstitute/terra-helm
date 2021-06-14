@@ -1,3 +1,4 @@
+{{ if .Values.zombieMonitorCron.enabled -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -92,3 +93,4 @@ spec:
           - name: application-config
             configMap:
               name: leonardo-zombie-monitor-cm
+{{- end }}
