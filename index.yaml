@@ -5374,6 +5374,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.16.0/cromwell-0.16.0.tgz
     version: 0.16.0
   - apiVersion: v2
+    created: "2021-06-14T18:53:09.54345448Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 1376e86ca37572f17db348f3f84cc3a3a6f5e0e54eab19a693fff76f807f0d8b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.16.0-392.1623696782.921e5d/cromwell-0.16.0-392.1623696782.921e5d.tgz
+    version: 0.16.0-392.1623696782.921e5d
+  - apiVersion: v2
     created: "2021-06-10T13:28:57.8600596Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
     digest: 9648c49d878894d55bd3d421de345a8c7f1b460f4409da5832a2fc0937e7705f
@@ -14224,6 +14241,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.38.0/leonardo-0.38.0.tgz
     version: 0.38.0
+  - apiVersion: v2
+    created: "2021-06-14T18:53:09.639537677Z"
+    description: A Helm chart for Leonardo, Terra's Jupyter notebook integration service
+    digest: 9e8f96a910c2d90efe413368bc65358e4d6bbdaf4d48d72b7066b2f48337d87a
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.38.0-392.1623696782.921e5d/leonardo-0.38.0-392.1623696782.921e5d.tgz
+    version: 0.38.0-392.1623696782.921e5d
   - apiVersion: v2
     created: "2021-05-24T20:29:47.46586144Z"
     description: A Helm chart for Leonardo, a Terra service for interactive analysis
@@ -23650,6 +23684,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.7.0/rawls-0.7.0.tgz
     version: 0.7.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-06-14T18:53:09.747071654Z"
+    description: Chart for Rawls service in Terra
+    digest: b208a86f8f891cc210c4d504ad23a91d93290cf43728e868c491fcb19892f908
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.7.0-392.1623696782.921e5d/rawls-0.7.0-392.1623696782.921e5d.tgz
+    version: 0.7.0-392.1623696782.921e5d
   - apiVersion: v2
     appVersion: latest
     created: "2021-06-02T14:04:04.954421595Z"
