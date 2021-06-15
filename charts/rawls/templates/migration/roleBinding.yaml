@@ -1,5 +1,4 @@
 {{- if .Values.migration.enabled }}
-{{- if .Values.migration.rbacEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -16,5 +15,4 @@ roleRef:
   kind: Role
   name: {{ .Values.migration.serviceAccount }}-role
   apiGroup: rbac.authorization.k8s.io
-{{- end -}}
 {{- end -}}
