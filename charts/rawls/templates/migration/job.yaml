@@ -5,8 +5,9 @@ kind: Job
 metadata:
   name: rawls-liquibase-migration
   annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocr.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: {{ .Values.migration.syncWave }}
   labels: {{- include "rawls.labels" . | nindent 4 }}
 spec:
   backoffLimit: 2

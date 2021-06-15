@@ -118,6 +118,7 @@ migration:
   # NOTE: Generally equals some deploymentDefaults.name, as secrets are per-deployment but migrations are per-namespace
   secretPrefix: "rawls-backend"
   # migration.serviceAccount -- Name of the k8s SA to use for the job
-  serviceAccount: "rawls-migration-sa"
-  # migration.rbacEnabled -- Whether to create SA/RBAC for the migration.serviceAccount at pre-sync (otherwise, assume it exists)
-  rbacEnabled: false
+  serviceAccount: "rawls-sa"
+  # migration.syncWave -- Wave to run migration as a sync hook (presumably after SA's RBAC wave)
+  # NOTE: Sync hook, not PreSync, so that SA/RBAC can be made normally via an earlier wave
+  syncWave: "-1"
