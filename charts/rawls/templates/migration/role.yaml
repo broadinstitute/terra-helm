@@ -1,8 +1,9 @@
 {{- if .Values.migration.enabled }}
+{{- if .Values.migration.rbacEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: rawls-migration-role
+  name: {{ .Values.migration.serviceAccount }}-role
   labels: {{- include "rawls.labels" . | nindent 4 }}
   annotations:
     argocd.argoproj.io/hook: PreSync
@@ -14,4 +15,5 @@ rules:
   verbs:     ['use']
   resourceNames:
   - terra-default-psp
+{{- end -}}
 {{- end -}}

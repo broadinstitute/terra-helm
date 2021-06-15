@@ -18,7 +18,7 @@ spec:
       # Allow migration-liquibase to kill migration-sqlproxy's process
       shareProcessNamespace: true
       restartPolicy: Never
-      serviceAccountName: rawls-migration-sa
+      serviceAccountName: {{ .Values.migration.serviceAccount }}
       hostAliases:
       - ip: 127.0.0.1
         hostnames:

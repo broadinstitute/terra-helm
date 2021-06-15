@@ -42,7 +42,9 @@ Chart for Rawls service in Terra
 | migration.enabled | bool | `false` | Whether to run a Liquibase migration job pre-sync |
 | migration.failBasedOnLiquibase | bool | `true` | When true, fail the job (and ArgoCD sync!) if the Liquibase command fails |
 | migration.imageTag | string | `nil` | Override the image tag to run the migration on @default global.applicationVersion WARNING: App may behave unexpectedly if its database has been migrated to a different version than the app |
+| migration.rbacEnabled | bool | `false` | Whether to create SA/RBAC for the migration.serviceAccount at pre-sync (otherwise, assume it exists) |
 | migration.secretPrefix | string | `"rawls-backend"` | Prefix for ctmpl and env secrets NOTE: Generally equals some deploymentDefaults.name, as secrets are per-deployment but migrations are per-namespace |
+| migration.serviceAccount | string | `"rawls-sa"` | Name of the k8s SA to use for the job |
 | resources.limits.cpu | int | `8` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"16Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `8` | Number of CPU units to request for the deployment |

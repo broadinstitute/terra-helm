@@ -1,4 +1,5 @@
 {{- if .Values.migration.enabled }}
+{{- if .Values.migration.rbacEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -10,9 +11,10 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 subjects:
 - kind: ServiceAccount
-  name: rawls-migration-sa
+  name: {{ .Values.migration.serviceAccount }}
 roleRef:
   kind: Role
-  name: rawls-migration-role
+  name: {{ .Values.migration.serviceAccount }}-role
   apiGroup: rbac.authorization.k8s.io
+{{- end -}}
 {{- end -}}
