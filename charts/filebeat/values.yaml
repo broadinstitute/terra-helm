@@ -8,5 +8,5 @@ podSecurityPolicy: terra-default-psp
 beatsPort: 
 # environmentName -- (string) Required. Name of the environment ie dev, perf, ... Used to determine which namespace to export logs from
 environmentName:
-#ignore -- (list(string)) Optional. A list of application names which filebeat will ignore logs from. used to selectively disable log forwarding for particular services.
+#ignore -- (list) Optional. A list of application names which filebeat will ignore logs from. used to selectively disable log forwarding for particular services.
 ignore: []
