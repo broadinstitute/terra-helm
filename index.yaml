@@ -830,6 +830,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.21.0-393.1623704334.9c0f4e/buffer-0.21.0-393.1623704334.9c0f4e.tgz
     version: 0.21.0-393.1623704334.9c0f4e
   - apiVersion: v2
+    created: "2021-06-16T15:13:53.975405763Z"
+    description: Chart for Resource Buffering Service
+    digest: c4fa33d0d6d1fb3091ce384940627f7502a66e2375968d18b095263675e66fda
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.21.0-392.1623856425.d6a19e/buffer-0.21.0-392.1623856425.d6a19e.tgz
+    version: 0.21.0-392.1623856425.d6a19e
+  - apiVersion: v2
     created: "2021-04-14T18:41:58.157645132Z"
     description: Chart for Resource Buffering Service
     digest: 59d76a97f37630dedbce07c9be07cc6fe2f34c959b1e52d82c1f8e9da144abd2
@@ -5356,6 +5373,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.18.0/cromwell-0.18.0.tgz
     version: 0.18.0
+  - apiVersion: v2
+    created: "2021-06-16T15:13:54.0567747Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: d82fe9cb99a5b43af30011d348af69b2d099530dfa4f3ab51dffc762e81c4e2f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.18.0-392.1623856425.d6a19e/cromwell-0.18.0-392.1623856425.d6a19e.tgz
+    version: 0.18.0-392.1623856425.d6a19e
   - apiVersion: v2
     created: "2021-06-10T13:33:37.019438496Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
@@ -14116,6 +14150,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.42.0/leonardo-0.42.0.tgz
     version: 0.42.0
   - apiVersion: v2
+    created: "2021-06-16T15:13:54.143923946Z"
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 945301714b1674c498fc7b68b91487aa58251d0d2888150fd2d2ddb0263fe6e5
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.42.0-392.1623856425.d6a19e/leonardo-0.42.0-392.1623856425.d6a19e.tgz
+    version: 0.42.0-392.1623856425.d6a19e
+  - apiVersion: v2
     created: "2021-06-04T15:01:42.206375344Z"
     description: A Helm chart for Leonardo, a Terra service for interactive analysis
       applications
@@ -18810,6 +18862,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/ncbiaccess-0.2.0-393.1623704335.9c0f4e/ncbiaccess-0.2.0-393.1623704335.9c0f4e.tgz
     version: 0.2.0-393.1623704335.9c0f4e
   - apiVersion: v2
+    created: "2021-06-16T15:13:54.259873741Z"
+    description: Chart for NCBI Access service in Terra
+    digest: f6cf87ce2c013fd7dc97edfdf484d4e2b49e3c4971323c16b751699a3261cf51
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - ncbiaccess
+    name: ncbiaccess
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/ncbiaccess
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ncbiaccess-0.2.0-392.1623856425.d6a19e/ncbiaccess-0.2.0-392.1623856425.d6a19e.tgz
+    version: 0.2.0-392.1623856425.d6a19e
+  - apiVersion: v2
     created: "2021-04-02T13:57:05.003201528Z"
     description: Chart for NCBI Access service in Terra
     digest: c82b41da35c082ed73fad5cac1e6cf9ce513a184e6bec45773ecf37d1c16bdcd
@@ -23393,6 +23462,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.9.0/rawls-0.9.0.tgz
     version: 0.9.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-06-16T15:13:54.350654688Z"
+    description: Chart for Rawls service in Terra
+    digest: 736cad48d1cf2385e9a93b7e1d6d2b24e07e3404906209458fabb35118b0a248
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.9.0-392.1623856426.d6a19e/rawls-0.9.0-392.1623856426.d6a19e.tgz
+    version: 0.9.0-392.1623856426.d6a19e
   - apiVersion: v2
     appVersion: latest
     created: "2021-06-15T16:31:00.847140335Z"
