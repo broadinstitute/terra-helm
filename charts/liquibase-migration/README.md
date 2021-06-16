@@ -16,6 +16,7 @@ Library chart to run Liquibase migrations before Terra app startup
 |-----|------|---------|-------------|
 | migration.appContainerShell | string | `"bash"` | (string) Shell executable to use in the app's container |
 | migration.appName | string | Set to .Release.Name | Name of the application being deployed, for deriving other values |
+| migration.enabled | bool | `false` | (bool) Whether to run a Liquibase migration during sync |
 | migration.ignoreLiquibaseFailures | bool | `false` | (bool) If the Liquibase CLI's exit code should be ignored |
 | migration.imageName | string | `nil` | Required full app image name, without trailing tag Like "gcr.io/broad-dsp-gcr-public/rawls" |
 | migration.imageTag | string | Set to global.applicationVersion | Tag of the migration.imageName to use WARNING: App may behave unexpectedly if its database has been migrated on a different version than the app itself |
