@@ -16,7 +16,7 @@ spec:
       labels:
 {{ include "duos.labels" . | indent 8 }}
     spec:
-      serviceAccountName: {{ .Chart.Name }}-sa
+      serviceAccountName: {{ .Chart.Name }}-deployment-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts
@@ -79,4 +79,3 @@ spec:
         - name: proxy-secrets
           secret:
             secretName: {{ .Chart.Name }}-proxy-secrets
-

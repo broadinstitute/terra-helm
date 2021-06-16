@@ -36,7 +36,7 @@ spec:
         checksum/{{ .Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
         {{- end }}
     spec:
-      serviceAccountName: {{ .Values.name }}-service-sa
+      serviceAccountName: {{ .Values.name }}-deployment-sa
       volumes:
       {{- if not .Values.postgres.enabled }}
       - name: cloudsql-sa-creds
