@@ -33,7 +33,7 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: {{ $settings.name}}-sa
+      serviceAccountName: {{ $settings.name }}-sa
       hostAliases:
       - ip: 127.0.0.1
         hostnames:
