@@ -20,7 +20,7 @@ spec:
   replicas: {{ $settings.replicas }}
   selector:
     matchLabels:
-      deployment: {{ $settings.name }}-deployment
+      deployment: {{ $settings.name }}
   template:
     metadata:
       labels:
