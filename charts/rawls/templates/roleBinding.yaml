@@ -2,6 +2,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: rawls-sa-binding
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
   labels:
 {{ include "rawls.labels" . | indent 4 }}
 subjects:
