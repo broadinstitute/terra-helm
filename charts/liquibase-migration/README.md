@@ -4,7 +4,7 @@
 
 Library chart to run Liquibase migrations before Terra app startup
 
-> All values with a default of `nil` must be set in values files at the usage site, see below
+> When `migration.enable` is `true`, all values below that default to `nil` must also be set.
 
 ## Source Code
 
