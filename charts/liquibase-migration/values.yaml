@@ -47,6 +47,3 @@ migration:
   liquibaseCommand: "update"
   # migration.ignoreLiquibaseFailures -- (bool) If the Liquibase CLI's exit code should be ignored
   ignoreLiquibaseFailures: false
-
-
-  
