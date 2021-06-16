@@ -1919,6 +1919,23 @@ entries:
     version: 0.5.0-206.1605826244.a9cfc8
   calhoun:
   - apiVersion: v2
+    created: "2021-06-16T18:50:01.890769068Z"
+    description: A Helm chart for Calhoun, Terra's Jupyter notebook preview service
+    digest: 2b6a16e4b51b42e763f12bd5372be5ab8801f833aadc27af97596c684f875c8d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - calhoun
+    name: calhoun
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/calhoun
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/calhoun-0.1.0-370.1623869396.983a44/calhoun-0.1.0-370.1623869396.983a44.tgz
+    version: 0.1.0-370.1623869396.983a44
+  - apiVersion: v2
     created: "2021-06-16T18:10:01.738836169Z"
     description: A Helm chart for Calhoun, Terra's Jupyter notebook preview service
     digest: 82e13304a98fd4b8f769aa50f41330790be9af3eafb99f32eb04eb52e5c0f31f
