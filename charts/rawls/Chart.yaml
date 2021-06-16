@@ -12,3 +12,8 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/broadinstitute/rawls
+dependencies:
+  - name: liquibase-migration
+    condition: migration.enabled
+    version: "~>0.1.0-395"
+    repository: https://broadinstitute.github.io/terra-helm/
