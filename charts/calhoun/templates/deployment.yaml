@@ -32,9 +32,6 @@ spec:
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       volumes:
-      - name: app-sa-creds
-        secret:
-          secretName: {{ .Values.name }}-app-sa
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
@@ -71,16 +68,6 @@ spec:
         env:
         - name: SAM_ROOT
           value: {{ .Values.calhoun.samUrlRoot }}
-        - name: SWAGGER_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.name }}-swagger-client
-              key: client-id
-        - name: SWAGGER_REALM
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.name }}-swagger-client
-              key: realm
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
