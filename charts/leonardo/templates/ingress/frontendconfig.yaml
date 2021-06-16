@@ -5,10 +5,6 @@ metadata:
   name: {{ .Chart.Name }}-ingress-frontendconfig
   labels:
 {{ include "leonardo.labels" . | indent 4 }}
-  annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-    {{ $key }}: {{ $value }}
-    {{- end }}
 {{- if .Values.ingress.sslPolicy }}
 spec:
   sslPolicy: {{ .Values.ingress.sslPolicy }}
