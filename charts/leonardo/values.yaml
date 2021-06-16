@@ -72,7 +72,6 @@ deployments:
     replicas: 1
 # Settings for Leonardo's Ingress & Service
 ingress:
-  annotations:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
   enabled: true
   # ingress.deployment -- Name of the deployment to associate with the Ingress
