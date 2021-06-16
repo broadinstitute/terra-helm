@@ -11,7 +11,7 @@ deploymentDefaults:
   # The deployment name will be substituted into Deployment and ConfigMap names.
   #   Eg. "leonardo-frontend" -> "leonardo-frontend-deployment", "leonardo-frontend-cm"
   name:
-  annotations:
+  annotations: {}
   # deploymentDefaults.imageRepository -- Image repo to pull Leonardo images from
   imageRepository: gcr.io/broad-dsp-gcr-public/leonardo
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods

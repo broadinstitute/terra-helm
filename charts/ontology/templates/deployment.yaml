@@ -17,7 +17,7 @@ spec:
 {{ include "ontology.labels" . | indent 8 }}
         app: {{ .Chart.Name }}
     spec:
-      serviceAccountName: {{ .Chart.Name }}-deployment-sa
+      serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts

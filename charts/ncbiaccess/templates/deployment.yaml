@@ -17,8 +17,12 @@ spec:
   template:
     metadata:
       labels: {{- include "ncbiaccess.labels" . | nindent 8 }}
+      annotations:
+          {{- range $key, $value := .Values.annotations }}
+          {{ $key }}: {{ $value }}
+          {{- end }}
     spec:
-      serviceAccountName: {{ .Values.name }}-deployment-sa
+      serviceAccountName: {{ .Values.name }}-sa
       volumes:
       - name: app-ctmpls
         secret:

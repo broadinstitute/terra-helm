@@ -43,7 +43,7 @@ deploymentDefaults:
   name: null
   # arbitraty metadata
   # Example: bio.terra.linter/replicas_exception: true
-  annotations:
+  annotations: {}
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
   # @default global.applicationVersion
   imageTag: null

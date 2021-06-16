@@ -6,8 +6,8 @@ global:
 name: ncbiaccess
 # replicas -- number of pods to run
 replicas: 1
-annotations:
-  bio.terra.linter/replicas_exception: disabled
+
+annotations: {}
 
 imageConfig:
   # imageConfig.repository -- Image repo to use

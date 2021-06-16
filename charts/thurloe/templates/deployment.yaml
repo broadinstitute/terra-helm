@@ -26,7 +26,7 @@ spec:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: {{ .Values.name }}-deployment-sa
+      serviceAccountName: {{ .Values.name }}-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts

@@ -8,7 +8,7 @@ global:
 # Cromwell can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
-  annotations:
+  annotations: {}
   # deploymentDefaults.enabled -- Whether a declared deployment is enabled. If false, no resources will be created
   enabled: true
   # deploymentDefaults.name -- A name for the deployment that will be substituted into resource definitions.
