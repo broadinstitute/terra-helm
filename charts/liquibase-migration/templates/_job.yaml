@@ -10,7 +10,7 @@
 {{- $serviceAccount := .Values.migration.serviceAccount | default (printf "%s-sa" $appName) -}}
 {{- $appContainerShell := .Values.migration.appContainerShell | default "bash" -}}
 {{- $liquibaseCommand := .Values.migration.liquibaseCommand | default "update" -}}
-{{- $liquibaseExitCode := .Values.migration.ignoreLiquibaseFailures | ternary "0" "$?" -}}
+{{- $liquibaseExitCode := .Values.migration.ignoreLiquibaseFailures | default false | ternary "0" "$?" -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
