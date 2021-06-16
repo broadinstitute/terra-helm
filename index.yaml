@@ -813,6 +813,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.21.0/buffer-0.21.0.tgz
     version: 0.21.0
   - apiVersion: v2
+    created: "2021-06-16T16:01:18.649798453Z"
+    description: Chart for Resource Buffering Service
+    digest: 02e89aa95fa5e4681c91b5f4b30dc2c63727c37046245b2d4b02f824a39d03ef
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.21.0-393.1623859261.9c9cf1/buffer-0.21.0-393.1623859261.9c9cf1.tgz
+    version: 0.21.0-393.1623859261.9c9cf1
+  - apiVersion: v2
     created: "2021-06-16T15:56:22.72879538Z"
     description: Chart for Resource Buffering Service
     digest: cce73592a4d43b3c382f24bab80b50a46eb9f20fb1afe111034fa9a9be0c790e
@@ -2039,6 +2056,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.14.0/consent-0.14.0.tgz
     version: 0.14.0
+  - apiVersion: v2
+    created: "2021-06-16T16:01:18.804357701Z"
+    description: A Helm chart for DUOS Consent
+    digest: d1b2cae10fe7fe897119211eb94c2ecb33c895560e9e5d34c6b2332759836ba4
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.14.0-393.1623859261.9c9cf1/consent-0.14.0-393.1623859261.9c9cf1.tgz
+    version: 0.14.0-393.1623859261.9c9cf1
   - apiVersion: v2
     created: "2021-06-16T15:56:22.846586303Z"
     description: A Helm chart for DUOS Consent
@@ -4763,6 +4798,24 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-06-16T16:01:18.921864894Z"
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 2d3011917273639aac0dde6800b1075f351aa0567912e42e91d1586699bcf912
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.7.0-393.1623859261.9c9cf1/cromiam-0.7.0-393.1623859261.9c9cf1.tgz
+    version: 0.7.0-393.1623859261.9c9cf1
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-16T15:56:22.962003617Z"
     description: Chart for cromiam service in Terra [WIP]
     digest: 258f51046b6862468c11266a41fdf5b47190e23ea527a3e03550d1e62580ccc5
@@ -5426,6 +5479,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.18.0/cromwell-0.18.0.tgz
     version: 0.18.0
+  - apiVersion: v2
+    created: "2021-06-16T16:01:19.018748468Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: fc757ffc212da81e7dad0eece62b3175e2995e10b47c208158f9eb70eb36e5e7
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.18.0-393.1623859261.9c9cf1/cromwell-0.18.0-393.1623859261.9c9cf1.tgz
+    version: 0.18.0-393.1623859261.9c9cf1
   - apiVersion: v2
     created: "2021-06-16T15:56:23.06305298Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
@@ -8220,6 +8290,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.11.0/duos-0.11.0.tgz
     version: 0.11.0
+  - apiVersion: v2
+    created: "2021-06-16T16:01:19.109625818Z"
+    description: A Helm chart for DUOS
+    digest: 15ced88c1817e3d05b3929ad90253f570a4a9531ac7a83e752511a194253b0d8
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: duos
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/duos-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.11.0-393.1623859261.9c9cf1/duos-0.11.0-393.1623859261.9c9cf1.tgz
+    version: 0.11.0-393.1623859261.9c9cf1
   - apiVersion: v2
     created: "2021-06-16T15:56:23.164125043Z"
     description: A Helm chart for DUOS
@@ -13017,6 +13105,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.2.0/firecloudui-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
+    created: "2021-06-16T16:01:19.19908704Z"
+    description: Chart for Firecloud UI service in Terra
+    digest: df05d320a5d584fded6ff4f1b1ac028ec28e740ee83f6b0e838901ed68c0521b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.2.0-393.1623859261.9c9cf1/firecloudui-0.2.0-393.1623859261.9c9cf1.tgz
+    version: 0.2.0-393.1623859261.9c9cf1
+  - apiVersion: v2
     created: "2021-06-16T15:56:23.289266892Z"
     description: Chart for Firecloud UI service in Terra
     digest: db1878f6e06033b818291c41a4716b507dd4716921e97ebe7063a078b4fcd96e
@@ -13844,6 +13949,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.3.0/jobmanager-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2021-06-16T16:01:19.299559387Z"
+    description: Chart for Job Manager service in Terra
+    digest: 45684220ad62736f1dd772d3eb84100b9a5458f5c4addd552038f1c23f588842
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.3.0-393.1623859262.9c9cf1/jobmanager-0.3.0-393.1623859262.9c9cf1.tgz
+    version: 0.3.0-393.1623859262.9c9cf1
+  - apiVersion: v2
     created: "2021-06-16T15:56:23.401133994Z"
     description: Chart for Job Manager service in Terra
     digest: c9be1fbc612654c7fc3be2672067b07839a75ab03e83db0a469f18aef4cd0b8b
@@ -14271,6 +14393,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.42.0/leonardo-0.42.0.tgz
     version: 0.42.0
+  - apiVersion: v2
+    created: "2021-06-16T16:01:19.397532882Z"
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 641bb7d3df4e7d37d8be3779f9880cd8cfb923560a818ca8f8ebfd81a166d6dd
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.42.0-393.1623859262.9c9cf1/leonardo-0.42.0-393.1623859262.9c9cf1.tgz
+    version: 0.42.0-393.1623859262.9c9cf1
   - apiVersion: v2
     created: "2021-06-16T15:56:23.502143056Z"
     description: A Helm chart for Leonardo, a Terra service for interactive analysis
@@ -19001,6 +19141,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/ncbiaccess-0.2.0/ncbiaccess-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
+    created: "2021-06-16T16:01:19.503594442Z"
+    description: Chart for NCBI Access service in Terra
+    digest: be87e7e21ab8b7759e0d27c3950820d3b030196029522f779b712d47a1722ed8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - ncbiaccess
+    name: ncbiaccess
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/ncbiaccess
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ncbiaccess-0.2.0-393.1623859262.9c9cf1/ncbiaccess-0.2.0-393.1623859262.9c9cf1.tgz
+    version: 0.2.0-393.1623859262.9c9cf1
+  - apiVersion: v2
     created: "2021-06-16T15:56:23.614072658Z"
     description: Chart for NCBI Access service in Terra
     digest: 5a4520be8f9cf06257791424ae94891a44f21a9c768e6bb84cb630f084f277b2
@@ -19359,6 +19516,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.12.0/ontology-0.12.0.tgz
     version: 0.12.0
+  - apiVersion: v2
+    created: "2021-06-16T16:01:19.600953525Z"
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: ce408fad6eddc70dadd7a3499b193be21c215f7c1c4bbccf7356a7dcd7b9966c
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.12.0-393.1623859262.9c9cf1/ontology-0.12.0-393.1623859262.9c9cf1.tgz
+    version: 0.12.0-393.1623859262.9c9cf1
   - apiVersion: v2
     created: "2021-06-16T15:56:23.725712059Z"
     description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
@@ -23655,6 +23830,24 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-06-16T16:01:19.723365318Z"
+    description: Chart for Rawls service in Terra
+    digest: 78bce039e4db3531f23064468c580de3ff05c816574414276bc7315e29b05845
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.9.0-393.1623859262.9c9cf1/rawls-0.9.0-393.1623859262.9c9cf1.tgz
+    version: 0.9.0-393.1623859262.9c9cf1
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-16T15:56:23.835549753Z"
     description: Chart for Rawls service in Terra
     digest: d99a377b6168e74624f000da8543fb4e42dffe3a0be5894b12c992e032ab1126
@@ -26362,6 +26555,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.8.0/sam-0.8.0.tgz
     version: 0.8.0
+  - apiVersion: v2
+    created: "2021-06-16T16:01:19.887237856Z"
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: 29524127ee846c4135982c9238e590814ef53c0d5191190707af1501cfb56673
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.8.0-393.1623859262.9c9cf1/sam-0.8.0-393.1623859262.9c9cf1.tgz
+    version: 0.8.0-393.1623859262.9c9cf1
   - apiVersion: v2
     created: "2021-06-16T15:56:23.92945639Z"
     description: Chart for Sam, the Terra Identity and Access Management application
@@ -37218,6 +37428,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.3.0/thurloe-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2021-06-16T16:01:19.97928043Z"
+    description: Chart for Thurloe service in Terra
+    digest: f6f8697f3a7d6c190bcd77f9a8a61d4bfe917aa779d19246672a8bb99e2b2eec
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.3.0-393.1623859262.9c9cf1/thurloe-0.3.0-393.1623859262.9c9cf1.tgz
+    version: 0.3.0-393.1623859262.9c9cf1
+  - apiVersion: v2
     created: "2021-06-16T15:56:24.05757005Z"
     description: Chart for Thurloe service in Terra
     digest: 13f2a9db8d21ad46c06b576cc999950182c048374f2d82bb104b59543c5cc9c6
@@ -37598,6 +37825,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.30.0/workspacemanager-0.30.0.tgz
     version: 0.30.0
+  - apiVersion: v2
+    created: "2021-06-16T16:01:20.073938258Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: ab06d703c7ee300e5fd351ebef8fe5e0917603538293b263084b3f963d516fbe
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.30.0-393.1623859263.9c9cf1/workspacemanager-0.30.0-393.1623859263.9c9cf1.tgz
+    version: 0.30.0-393.1623859263.9c9cf1
   - apiVersion: v2
     created: "2021-06-16T15:56:24.165821238Z"
     dependencies:
