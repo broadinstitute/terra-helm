@@ -54,7 +54,7 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /version
+        path: /status
         port: 8080
       timeoutSeconds: 5
       initialDelaySeconds: 20
@@ -66,7 +66,7 @@ probes:
     enabled: true
     spec:
       httpGet:
-        path: /version
+        path: /status
         port: 8080
       timeoutSeconds: 5
       periodSeconds: 10
@@ -193,7 +193,7 @@ prometheus:
 # cloudTraceEnabled -- Whether to enable gcp cloud trace
 cloudTraceEnabled: true
 
-# initDB -- Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments.
+# initDB -- Whether the ECM should be initialized on startup. Used for preview environments.
 initDB: false
 
 # samAddress -- Address of SAM instance this deploy will talk to
