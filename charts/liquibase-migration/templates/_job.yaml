@@ -66,12 +66,12 @@ spec:
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: {{ $appName }}-sql-secrets
+              name: {{ $appName }}-migration-sql-secrets
               key: db-username
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ $appName }}-sql-secrets
+              name: {{ $appName }}-migration-sql-secrets
               key: db-password
         volumeMounts:
         - mountPath: /etc/liquibase.properties
