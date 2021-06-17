@@ -1,0 +1,14 @@
+apiVersion: v2
+name: azurepoc
+version: 0.0.0
+appVersion: latest
+description: Chart for azurepoc service in Terra
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - azurepoc
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/databiosphere/azurepoc

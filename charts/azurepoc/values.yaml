@@ -1,0 +1,59 @@
+# name -- name of the application to template into k8s resources
+name: azurepoc
+# replicas -- number of app replicas to run
+replicas: 3
+
+imageRepository: gcr.io/terra-kernel-k8s/azurepoc
+imageTag: null
+
+global:
+  applicationVersion: latest
+
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 1
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 4Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 1
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 4Gi
+
+probes:
+  readiness:
+    # probes.readiness.enable -- Whether to configure a readiness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8000
+      timeoutSeconds: 5
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      failureThreshold: 6
+      successThreshold: 1
+  liveness:
+    # probes.liveness.enable -- Whether to configure a liveness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8000
+      timeoutSeconds: 5
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      failureThreshold: 30 # 5 minutes before restarted
+      successThreshold: 1
+  startup:
+    # probes.startup.enable -- Whether to configure a startup probe
+    enabled: false
+    spec:
+      httpGet:
+        path: /status
+        port: 8000
+      timeoutSeconds: 5
+      periodSeconds: 10
+      failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
+      successThreshold: 1
