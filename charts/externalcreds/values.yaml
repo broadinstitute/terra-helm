@@ -1,0 +1,203 @@
+# Global values used by this chart
+global:
+  # global.applicationVersion -- What version of the application to deploy
+  applicationVersion: latest
+  # global.terraEnv -- (string) Terget Terra environment name. Required.
+  # @default -- Is set by Helmfile on deploy
+  terraEnv: null
+
+# name -- A name for the deployment that will be substituted into resuorce definitions
+name: externalcreds
+
+# image -- (string) Used for local Skaffold deploys
+# @default -- Is set by Skaffold on local deploys
+image:
+
+imageConfig:
+  # imageConfig.repository -- Image repository
+  repository: gcr.io/terra-kernel-k8s/terra-external-credentials-manager
+  # imageConfig.tag -- (string) Image tag.
+  # @default -- global.applicationVersion
+  tag: null
+  imagePullPolicy: Always
+
+# replicas -- Number of replicas for the deployment
+replicas: 0
+
+resources:
+  requests:
+    # resources.requests.cpu -- Number of CPU units to request for the deployment
+    cpu: 1
+    # resources.requests.memory -- Memory to request for the deployment
+    memory: 8Gi
+  limits:
+    # resources.limits.cpu -- Number of CPU units to limit the deployment to
+    cpu: 1
+    # resources.limits.memory -- Memory to limit the deployment to
+    memory: 8Gi
+
+probes:
+  readiness:
+    # probes.readiness.enable -- Whether to configure a readiness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 6
+      successThreshold: 1
+  liveness:
+    # probes.liveness.enable -- Whether to configure a liveness probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 5
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      failureThreshold: 30 # 5 minutes before restarted
+      successThreshold: 1
+  startup:
+    # probes.startup.enable -- Whether to configure a startup probe
+    enabled: true
+    spec:
+      httpGet:
+        path: /status
+        port: 8080
+      timeoutSeconds: 5
+      periodSeconds: 10
+      failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
+      successThreshold: 1
+
+vault:
+  # vault.enabled -- When enabled, syncs required secrets from Vault
+  enabled: true
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix:
+
+ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
+  enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingress.securityPolicy -- (string) Name of a GCP Cloud Armor security policy
+  securityPolicy: ""
+  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
+  timeoutSec: 120
+
+  domain:
+    # domain.hostname -- Hostname of this deployment
+    hostname: externalcreds
+    # domain.namespaceEnv -- If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix
+    namespaceEnv: true
+    # domain.suffix -- Domain suffix
+    suffix: integ.envs.broadinstitute.org
+
+  cert:
+    # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
+    # If preSharedCerts is not empty, its contents are used for the GKE ingress. Otherwise a secret with the cert is expected.
+    # The cert secret is required if the OIDC proxy is enabled.
+    # This secret can be
+    #   - synced from Vault
+    #   - created/managed with cert-manager
+    #   - created manually before the chart is applied
+
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
+
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    #   certificate from Vault to a k8s secret.
+    vault:
+      # ingress.cert.vault.enabled -- Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager)
+      enabled: true
+      cert:
+        # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
+        path: null
+        # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
+        secretKey: null
+      key:
+        # ingress.cert.vault.key.path -- (string) Path to secret containing .key
+        path: null
+        # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
+        secretKey: null
+      chain:
+        # ingress.cert.vault.chain.path -- (string) Path to secret containing intermediate .crt
+        path:
+        # ingress.cert.vault.chain.secretKey -- (string) Key in secret containing intermediate .crt
+        secretKey:
+
+    # If cert.certManager is enabled, it is used to configure the certificate and populate the k8s secret. Requires [cert-manager](https://github.com/jetstack/cert-manager)
+    certManager:
+      # ingress.cert.certManager.enabled -- Enable creating certificate secret with cert-manager
+      enabled: false
+      # ingress.cert.certManager.duration -- Certificate duration. Defaults to 3 months.
+      duration: 2160h0m0s
+      # ingress.cert.certManager.renewBefore -- When to renew the cert. Defaults to 30 days before expiry.
+      renewBefore: 720h0m0s
+      issuerName: cert-manager-letsencrypt-prod
+      issuerKind: ClusterIssuer
+
+proxy:
+  # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Requires a certificate secret Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
+  enabled: true
+  # proxy.logLevel -- Proxy log level
+  logLevel: debug
+  image:
+    # proxy.image.repository -- Proxy image repository
+    repository: broadinstitute/openidc-proxy
+    # proxy.image.version -- Proxy image tag
+    version: tcell_3_1_0
+  tcell:
+    # proxy.tcell.enabled -- Enables TCell
+    enabled: true
+    # proxy.tcell.vaultPrefix -- Prefix for TCell secrets in vault. Required if proxy.tcell.enabled is true.
+    vaultPrefix:
+    # proxy.tcell.hostIdentifier -- Identifier used for logging to TCell. Required if proxy.tcell.enabled is true
+    hostIdentifier:
+  ldap:
+    # proxy.ldap.enabled -- Enables LDAP authorization checks in the proxy
+    enabled: true
+    # proxy.ldap.passwordVaultPath -- Vault path for LDAP binding password. Required if proxy.ldap.enabled is true
+    passwordVaultPath:
+    # proxy.ldap.url -- URL of LDAP server to use for auth. Required if proxy.ldap.enabled is true
+    url:
+    # proxy.ldap.baseDomain -- Base domain for LDAP. Required if proxy.ldap.enabled is true
+    baseDomain:
+  # proxy.reloadOnCertUpdate -- Whether to reload the deployment when the cert is updated. Requires stakater/Reloader service to be running in the cluster.
+  reloadOnCertUpdate: true
+
+postgres:
+  # postgres.enabled -- Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options.
+  enabled: false
+  # postgres.dbs -- (array(string)) List of databases to create.
+  dbs:
+    - externalcreds
+
+# Requires deployment of Prometheus to cluster
+prometheus:
+  enabled: true
+  initContainerImage: 'alpine:3.12.0'
+  jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
+  jmxJarVersion: '0.13.0'
+
+###############################################################
+# Values that will be exposed to the running app via the env: #
+###############################################################
+
+# cloudTraceEnabled -- Whether to enable gcp cloud trace
+cloudTraceEnabled: true
+
+# initDB -- Whether the ECM should be initialized on startup. Used for preview environments.
+initDB: false
+
+# samAddress -- Address of SAM instance this deploy will talk to
+samAddress: https://sam.dsde-dev.broadinstitute.org/
+
+# samplingProbability -- the frequency with which calls should be traced.
+samplingProbability: 1.0
