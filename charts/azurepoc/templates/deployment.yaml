@@ -48,4 +48,3 @@ spec:
         startupProbe:
           {{- toYaml .Values.probes.startup.spec | nindent 10 }}
         {{- end }}
-      
