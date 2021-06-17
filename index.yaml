@@ -794,6 +794,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ap-argocd-preinstall-0.0.1/ap-argocd-preinstall-0.0.1.tgz
     version: 0.0.1
+  azurepoc:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-06-17T16:30:01.567128919Z"
+    description: Chart for azurepoc service in Terra
+    digest: 4a6f0e7b73669b3d982cdfd9b9b903b73c05bb5e92b0df36a551c2b84f1c6cbc
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - azurepoc
+    name: azurepoc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/databiosphere/azurepoc
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/azurepoc-0.0.0-398.1623947395.3dab38/azurepoc-0.0.0-398.1623947395.3dab38.tgz
+    version: 0.0.0-398.1623947395.3dab38
   buffer:
   - apiVersion: v2
     created: "2021-04-15T14:06:24.491902835Z"
