@@ -68,6 +68,10 @@ spec:
         env:
         - name: SAM_ROOT
           value: {{ .Values.calhoun.samUrlRoot }}
+        - name: SWAGGER_CLIENT_ID
+          value: {{ .Values.calhoun.swaggerClientId }}
+        - name: SWAGGER_REALM
+          value: {{ .Values.calhoun.swaggerRealm }}
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
