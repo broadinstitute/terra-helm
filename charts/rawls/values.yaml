@@ -104,21 +104,13 @@ vault:
     dbPasswordKey: "slick_db_password"
 
 migration:
-  # migration.enabled -- Whether to run a Liquibase migration job pre-sync
+  # migration.enabled -- (bool) Whether to run a Liquibase migration during sync
   enabled: false
-  # migration.dryRun -- When true, merely print migration SQL; when false, execute it
-  dryRun: true
-  # migration.failBasedOnLiquibase -- When true, fail the job (and ArgoCD sync!) if the Liquibase command fails
-  failBasedOnLiquibase: true
-  # migration.imageTag -- Override the image tag to run the migration on
-  # @default global.applicationVersion
-  # WARNING: App may behave unexpectedly if its database has been migrated to a different version than the app
-  imageTag: null
-  # migration.secretPrefix -- Prefix for ctmpl and env secrets
-  # NOTE: Generally equals some deploymentDefaults.name, as secrets are per-deployment but migrations are per-namespace
+  # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run
+  liquibaseCommand: "updateSQL"
+  # migration.imageName -- (string) Required full app image name, without trailing tag
+  imageName: "gcr.io/broad-dsp-gcr-public/rawls"
+  # migration.jarLocation -- (string) Required jar location in app image, expanded by migration.appContainerShell
+  jarLocation: "$(find /rawls -name 'rawls*.jar')"
+  # migration.secretPrefix -- (string) Required prefix of -app-ctmpls, -sqlproxy-ctmpls, -sqlproxy-env secrets
   secretPrefix: "rawls-backend"
-  # migration.serviceAccount -- Name of the k8s SA to use for the job
-  serviceAccount: "rawls-sa"
-  # migration.syncWave -- Wave to run migration as a sync hook (presumably after SA's RBAC wave)
-  # NOTE: Sync hook, not PreSync, so that SA/RBAC can be made normally via an earlier wave
-  syncWave: "-1"

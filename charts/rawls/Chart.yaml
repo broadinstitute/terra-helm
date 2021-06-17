@@ -1,6 +1,6 @@
 apiVersion: v2
 name: rawls
-version: 0.9.0
+version: 0.9.1
 appVersion: latest
 description: Chart for Rawls service in Terra
 type: application
@@ -12,3 +12,8 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/broadinstitute/rawls
+dependencies:
+  - name: liquibase-migration
+    condition: migration.enabled
+    version: 0.2.0
+    repository: https://broadinstitute.github.io/terra-helm/
