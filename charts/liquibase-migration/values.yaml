@@ -16,6 +16,8 @@ vault:
     dbPasswordKey:
 
 migration:
+  # migration.enabled -- (bool) Whether to run a Liquibase migration during sync
+  enabled: false
   # migration.imageName -- (string) Required full app image name, without trailing tag
   # Like "gcr.io/broad-dsp-gcr-public/rawls"
   imageName:

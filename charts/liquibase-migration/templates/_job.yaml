@@ -55,10 +55,10 @@ spec:
           sleep 15s && \
           java -cp {{ $jarLocation }} liquibase.integration.commandline.Main \
             --defaultsFile='/etc/liquibase.properties' \
-            --classpath="{{ $jarLocation }}" \
+            --classpath={{ $jarLocation }} \
             --username="$DB_USERNAME" \
             --password="$DB_PASSWORD" \
-            {{ $liquibaseCommand }}; \\
+            {{ $liquibaseCommand }}; \
           EXIT={{ $liquibaseExitCode }}; \
           pkill -SIGTERM cloud_sql_proxy; \
           exit $EXIT
