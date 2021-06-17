@@ -1,9 +1,11 @@
-#
-# DEMONSTRATION: This file is NOT used because this is a library chart.
-# The source of truth is in the templates themselves, this file is documentation.
-#
-# All unset values are required.
-#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                                                                                     #
+#   DEMONSTRATION: This file is NOT used because this is a library chart.             #
+#   The source of truth is in the templates themselves, this file is documentation.   #
+#                                                                                     #
+#   All unset values are required.                                                    #
+#                                                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 vault:
   # Migration credentials only referenced if migration.enabled == true
