@@ -19001,6 +19001,21 @@ entries:
     version: 0.0.1-110.1598878366.f39927
   liquibase-migration:
   - apiVersion: v2
+    created: "2021-06-17T14:59:12.25155676Z"
+    description: Library chart to run Liquibase migrations before Terra app startup
+    digest: c994a541f2f401f066424cf0cf9a2fe2002814707b03452091f32308697a7755
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: liquibase-migration
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/liquibase-migration-0.2.0/liquibase-migration-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2021-06-17T14:57:31.597262642Z"
     description: Library chart to run Liquibase migrations before Terra app startup
     digest: 5d3d7c2d8859d3aa247fff6851c913fa54c55687b69af5fd604a8c77da28cc77
