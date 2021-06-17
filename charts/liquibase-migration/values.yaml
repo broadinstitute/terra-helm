@@ -1,0 +1,53 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                                                                                     #
+#   DEMONSTRATION: This file is NOT used because this is a library chart.             #
+#   The source of truth is in the templates themselves, this file is documentation.   #
+#                                                                                     #
+#   All unset values are required.                                                    #
+#                                                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+vault:
+  # Migration credentials only referenced if migration.enabled == true
+  migration:
+    # vault.migration.path -- (string) Required Vault path to secret containing DB credentials
+    path:
+    # vault.migration.dbUsernameKey -- (string) Required key in Vault secret to DB username
+    dbUsernameKey:
+    # vault.migration.DbPasswordKey -- (string) Required key in Vault secret to DB password
+    dbPasswordKey:
+
+migration:
+  # migration.enabled -- (bool) Whether to run a Liquibase migration during sync
+  enabled: false
+  # migration.imageName -- (string) Required full app image name, without trailing tag
+  # Like "gcr.io/broad-dsp-gcr-public/rawls"
+  imageName:
+  # migration.jarLocation -- (string) Required jar location in app image, expanded by migration.appContainerShell
+  # Like "$(find /rawls -name 'rawls*.jar')"
+  jarLocation:
+  # migration.secretPrefix -- (string) Required prefix of -app-ctmpls, -sqlproxy-ctmpls, -sqlproxy-env secrets
+  # Like "rawls-backend"
+  secretPrefix:
+  # migration.appName -- (string) Name of the application being deployed, for deriving other values
+  # @default -- Set to .Release.Name
+  appName: null
+  # migration.labelRef -- (string) Template reference to `include` in resource labels
+  # @default -- Set to "${appName}.labels"
+  labelRef: null
+  # migration.syncWave -- (string) ArgoCD wave to apply these resources in
+  syncWave: "-1"
+  # migration.imageTag -- (string) Tag of the migration.imageName to use
+  # WARNING: App may behave unexpectedly if its database has been migrated on a different version than the app itself
+  # @default -- Set to global.applicationVersion
+  imageTag: null
+  # migration.serviceAccount -- (string) App's k8s service account
+  # WARNING: If not applied earlier than migration.syncWave, selective sync may be necessary in cold-start scenarios
+  # @default -- Set to "${appName}-sa"
+  serviceAccount: null
+  # migration.appContainerShell -- (string) Shell executable to use in the app's container
+  appContainerShell: "bash"
+  # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run 
+  liquibaseCommand: "update"
+  # migration.ignoreLiquibaseFailures -- (bool) If the Liquibase CLI's exit code should be ignored
+  ignoreLiquibaseFailures: false

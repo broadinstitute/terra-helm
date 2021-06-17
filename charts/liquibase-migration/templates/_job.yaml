@@ -1,0 +1,102 @@
+{{- define "liquibase-migration.job" -}}
+{{- if .Values.migration.enabled }}
+{{- $imageName := .Values.migration.imageName | required "A valid migration.imageName is required (without trailing tag)" -}}
+{{- $jarLocation := .Values.migration.jarLocation | required "A valid migration.jarLocation is required (read by migration.appContainerShell)" -}}
+{{- $secretPrefix := .Values.migration.secretPrefix | required "A valid migration.secretPrefix is required (usually some deploymentDefaults.name)" -}}
+{{- $appName := .Values.migration.appName | default .Release.Name -}}
+{{- $labelRef := .Values.migration.labelRef | default (printf "%s.labels" $appName) -}}
+{{- $syncWave := .Values.migration.syncWave | default "-1" -}}
+{{- $imageTag := .Values.migration.imageTag | default .Values.global.applicationVersion -}}
+{{- $serviceAccount := .Values.migration.serviceAccount | default (printf "%s-sa" $appName) -}}
+{{- $appContainerShell := .Values.migration.appContainerShell | default "bash" -}}
+{{- $liquibaseCommand := .Values.migration.liquibaseCommand | default "update" -}}
+{{- $liquibaseExitCode := .Values.migration.ignoreLiquibaseFailures | default false | ternary "0" "$?" -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ $appName }}-liquibase-migration
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: {{ $syncWave | quote }}
+  labels: {{- include $labelRef . | nindent 4 }}
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: {{ $appName }}-liquibase-migration
+      labels: {{- include $labelRef . | nindent 8 }}
+    spec:
+      # Allow migration-liquibase to kill migration-sqlproxy's process
+      shareProcessNamespace: true
+      restartPolicy: Never
+      serviceAccountName: {{ $serviceAccount }}
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - sqlproxy
+      volumes:
+      - name: app-ctmpls
+        secret:
+          secretName: {{ $secretPrefix }}-app-ctmpls
+      - name: sqlproxy-ctmpls
+        secret:
+          secretName: {{ $secretPrefix }}-sqlproxy-ctmpls
+      containers:
+      - name: {{ $appName }}-migration-liquibase
+        image: "{{ $imageName }}:{{ $imageTag }}"
+        command:
+        - {{ $appContainerShell | squote }}
+        - '-c'
+        # Sleep for 15s to allow CloudSQL proxy time to start up. See DDO-1284 / BT-296
+        # References templated liquibase.properties, see https://docs.google.com/document/d/19ethQWyH29H-jUWwgFoCxKfjmzcG-NCmSgXNAUJAYaU/edit#
+        args:
+        - |-
+          sleep 15s && \
+          java -cp {{ $jarLocation }} liquibase.integration.commandline.Main \
+            --defaultsFile='/etc/liquibase.properties' \
+            --classpath={{ $jarLocation }} \
+            --username="$DB_USERNAME" \
+            --password="$DB_PASSWORD" \
+            {{ $liquibaseCommand }}; \
+          EXIT={{ $liquibaseExitCode }}; \
+          pkill -SIGTERM cloud_sql_proxy; \
+          exit $EXIT
+        env:
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ $appName }}-migration-sql-secrets
+              key: db-username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ $appName }}-migration-sql-secrets
+              key: db-password
+        volumeMounts:
+        - mountPath: /etc/liquibase.properties
+          subPath: liquibase.properties
+          name: app-ctmpls
+          readOnly: true
+      - name: {{ $appName }}-migration-sqlproxy
+        # alpine provides `sh`
+        image: gcr.io/cloudsql-docker/gce-proxy:1.23.0-alpine
+        envFrom:
+        - secretRef:
+            name: {{ $secretPrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
+        command:
+        - 'sh'
+        - '-c'
+        args:
+        - |-
+          /cloud_sql_proxy ${CLOUDSQL_LOGGING:-"-verbose"} \
+            -max_connections=${CLOUDSQL_MAXCONNS:-0} \
+            -instances="${CLOUDSQL_CONNECTION_LIST:-${GOOGLE_PROJECT}:${CLOUDSQL_ZONE}:${CLOUDSQL_INSTANCE}=tcp:0.0.0.0:${PORT:-3306}}" \
+            -credential_file=${CLOUDSQL_CREDENTIAL_FILE:-"/etc/sqlproxy-service-account.json"}
+{{- end -}}
+{{- end -}}
