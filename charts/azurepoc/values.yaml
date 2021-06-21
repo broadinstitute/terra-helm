@@ -12,6 +12,7 @@ global:
 
 ingress:
   enabled: true
+  hostName: "azurepoc.mflinn.azure.dev.envs-terra.bio"
 
 resources:
   requests:

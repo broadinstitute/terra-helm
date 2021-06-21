@@ -5,11 +5,11 @@ metadata:
   labels: {{ include "azurepoc.labels" . | nindent 4 }}
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
-    appgw.ingress.kubernetes..io/backend-protocol: http
+    appgw.ingress.kubernetes.io/backend-protocol: http
     kubernetes.io/ingress.allow-http: "true"
 spec:
   rules:
-  - host: {{ .Values.hostName }}
+  - host: {{ .Values.ingress.hostName }}
     http:
       paths:
       - path: /
