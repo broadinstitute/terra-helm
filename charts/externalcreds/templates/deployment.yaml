@@ -144,7 +144,7 @@ spec:
           mountPath: /secrets/app
           readOnly: true
         - name: externalcreds-providers
-          mountPath: /secrets/app
+          mountPath: /secrets/providers
           readOnly: true
         {{- if .Values.prometheus.enabled }}
         - name: {{ .Values.name }}-prometheusjmx-config
