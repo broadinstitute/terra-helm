@@ -59,7 +59,7 @@ probes:
       successThreshold: 1
   startup:
     # probes.startup.enabled -- Whether to configure a startup probe
-    enabled: true
+    enabled: false
     spec:
       httpGet:
         path: /status
@@ -111,7 +111,7 @@ ingress:
     #   certificate from Vault to a k8s secret.
     vault:
       # ingress.cert.vault.enabled -- Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager)
-      enabled: true
+      enabled: false
       cert:
         # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
         path: null
