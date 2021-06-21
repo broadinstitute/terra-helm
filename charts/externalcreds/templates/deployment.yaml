@@ -46,6 +46,9 @@ spec:
       - name: app-sa-creds
         secret:
           secretName: {{ .Values.name }}-app-sa
+      - name: externalcreds-providers
+        secret:
+          secretName: externalcreds-providers
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
@@ -138,6 +141,9 @@ spec:
           value: "{{ template "externalcreds.fqdn" . }}"
         volumeMounts:
         - name: app-sa-creds
+          mountPath: /secrets/app
+          readOnly: true
+        - name: externalcreds-providers
           mountPath: /secrets/app
           readOnly: true
         {{- if .Values.prometheus.enabled }}
