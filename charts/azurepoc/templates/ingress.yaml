@@ -9,10 +9,9 @@ metadata:
     kubernetes.io/ingress.allow-http: "true"
 spec:
   rules:
-  - host: {{ .Values.ingress.hostName }}
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /*
         backend:
           serviceName: {{ .Values.name }}-service
           servicePort: 80
