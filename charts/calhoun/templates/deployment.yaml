@@ -10,7 +10,7 @@ metadata:
     reloader.stakater.com/auto: "true"
   {{- end }}
 spec:
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -85,7 +85,7 @@ spec:
           {{- toYaml .Values.probes.startup.spec | nindent 10 }}
         {{- end }}
       {{- if .Values.proxy.enabled }}
-      - name: {{ .Values.name }}-oidc-proxy
+      - name: {{ .Values.name }}-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
         ports:
         - containerPort: 443

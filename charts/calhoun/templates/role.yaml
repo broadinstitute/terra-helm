@@ -10,12 +10,3 @@ rules:
   verbs:     ['use']
   resourceNames:
   - terra-default-psp
-- apiGroups: ['']
-  resources: ['secrets']
-  verbs: ['get', 'create']
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["extensions", "apps"]
-  resources: ["deployments"]
-  verbs: ["get", "list", "watch"]
