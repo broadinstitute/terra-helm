@@ -10,6 +10,9 @@ imagePullSecret: null
 global:
   applicationVersion: latest
 
+ingress:
+  enabled: true
+
 resources:
   requests:
     # resources.requests.cpu -- Number of CPU units to request for the deployment
