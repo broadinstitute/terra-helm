@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.Name }}-service
+  name: {{ .Values.name }}-service
   labels:
 {{ include "azurepoc.labels" . | indent 4 }}
 spec:
   type: ClusterIP
   selector:
-    deployment: {{ .Values.Name }}-deployment
+    deployment: {{ .Values.name }}-deployment
   ports:
   - name: app
     protocol: TCP
