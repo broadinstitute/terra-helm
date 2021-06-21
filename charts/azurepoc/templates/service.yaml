@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ .Values.Name }}-service
   labels:
-{{ include "azure.labels" . | indent 4 }}
+{{ include "azurepoc.labels" . | indent 4 }}
 spec:
   type: ClusterIP
   selector:
