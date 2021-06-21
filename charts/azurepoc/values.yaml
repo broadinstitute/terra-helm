@@ -5,6 +5,7 @@ replicas: 3
 
 imageRepository: gcr.io/terra-kernel-k8s/azurepoc
 imageTag: null
+imagePullSecret: null
 
 global:
   applicationVersion: latest

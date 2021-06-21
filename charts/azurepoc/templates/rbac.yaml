@@ -3,3 +3,5 @@ kind: ServiceAccount
 metadata:
   name: {{ .Chart.Name }}-sa
   labels: {{ include "azurepoc.labels" . | nindent 4 }}
+imagePullSecrets:
+- name: {{ .Values.imagePullSecret }}
