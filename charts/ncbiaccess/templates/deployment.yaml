@@ -18,9 +18,9 @@ spec:
     metadata:
       labels: {{- include "ncbiaccess.labels" . | nindent 8 }}
       annotations:
-          {{- range $key, $value := .Values.annotations }}
-          {{ $key }}: {{ $value }}
-          {{- end }}
+        {{- range $key, $value := .Values.annotations }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
     spec:
       serviceAccountName: {{ .Values.name }}-sa
       volumes:
