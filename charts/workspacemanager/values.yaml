@@ -9,6 +9,7 @@ global:
 # name -- A name for the deployment that will be substituted into resuorce definitions
 name: workspacemanager
 
+annotations: {}
 # image -- (string) Used for local Skaffold deploys
 # @default -- Is set by Skaffold on local deploys
 image:
