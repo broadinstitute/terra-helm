@@ -21,7 +21,7 @@ vault:
   azure:
     pathPrefix: /path/to/azure/secrets
   github:
-    pathPrefix: /path/to/github/secrets
+    pathPrefix: #/path/to/github/secrets
   cleanup:
     # vault.cleanup.path -- Path in Vault where base64-encoded GCP service account key for pod cleanup is stored
     path:
