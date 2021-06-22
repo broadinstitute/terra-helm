@@ -8,11 +8,12 @@ metadata:
     appgw.ingress.kubernetes.io/backend-protocol: http
     appgw.ingress.kubernetes.io/ssl-redirect: true
     kubernetes.io/ingress.allow-http: "false"
-    certmanager.io/cluster-issuer: {{ .Values.tlsIssuer }}
+    certmanager.io/cluster-issuer: {{ .Values.ingress.tlsIssuer }}
 spec:
   tls:
-  - hosts: {{ .Values.ingress.hostName }}
-    secretname: ingress-tls-secret
+  - hosts: 
+    - {{ .Values.ingress.hostName }}
+    secretName: ingress-tls-secret
   rules:
   - host: {{ .Values.ingress.hostName }}
     http:

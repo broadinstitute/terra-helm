@@ -13,6 +13,7 @@ global:
 ingress:
   enabled: true
   hostName: "azurepoc.mflinn.azure.dev.envs-terra.bio"
+  tlsIssuer: letsencrypt-prod-issuer
 
 resources:
   requests:
