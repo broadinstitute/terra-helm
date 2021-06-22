@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.ingress.tlsSecretName}}
 spec:
   secretName: tls-secret
-  renewBefore: 720h # 30 days before expiration
+  renewBefore: 720h0m0s # 30 days before expiration
   dnsNames:
   - {{ .Values.ingress.hostName }}
   issuerRef:
