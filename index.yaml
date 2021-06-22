@@ -797,6 +797,24 @@ entries:
   azurepoc:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-06-22T17:17:58.765969737Z"
+    description: Chart for azurepoc service in Terra
+    digest: e58415393b93379e46183978045d3f691843f357b8f9cd12b04ac4f2464c7259
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - azurepoc
+    name: azurepoc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/databiosphere/azurepoc
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/azurepoc-0.0.1-398.1624382272.f61758/azurepoc-0.0.1-398.1624382272.f61758.tgz
+    version: 0.0.1-398.1624382272.f61758
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-22T17:06:01.797116078Z"
     description: Chart for azurepoc service in Terra
     digest: dce76c7eec6eeb412360dff33276f92dd84472121fc2f35a77196cc0a42b469b
