@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ .Values.ingress.tlsSecretName}}
+spec:
+  secretName: tls-secret
+  renewBefore: 720h # 30 days before expiration
+  dnsNames:
+  - {{ .Values.ingress.hostName }}
+  issuerRef:
+    name: letsencrypt-prod-issuer
+    kind: ClusterIssuer
