@@ -9,7 +9,8 @@ metadata:
     kubernetes.io/ingress.allow-http: "true"
 spec:
   rules:
-  - http:
+  - host: {{ .Values.ingress.hostName }}
+    http:
       paths:
       - path: /*
         backend:
