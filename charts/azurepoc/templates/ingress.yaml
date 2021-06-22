@@ -6,8 +6,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
     appgw.ingress.kubernetes.io/backend-protocol: http
-    kubernetes.io/ingress.allow-http: "true"
+    appgw.ingress.kubernetes.io/ssl-redirect: true
+    kubernetes.io/ingress.allow-http: "false"
+    certmanager.io/cluster-issuer: {{ .Values.tlsIssuer }}
 spec:
+  tls:
+  - hosts: {{ .Values.ingress.hostName }}
+    secretname: ingress-tls-secret
   rules:
   - host: {{ .Values.ingress.hostName }}
     http:
