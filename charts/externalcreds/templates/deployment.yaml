@@ -46,9 +46,9 @@ spec:
       - name: app-sa-creds
         secret:
           secretName: {{ .Values.name }}-app-sa
-      - name: app-providers
-        secret:
-          secretName: {{ .Values.name }}-providers
+{{/*      - name: app-providers*/}}
+{{/*        secret:*/}}
+{{/*          secretName: {{ .Values.name }}-providers*/}}
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
@@ -143,9 +143,9 @@ spec:
         - name: app-sa-creds
           mountPath: /secrets/app
           readOnly: true
-        - name: app-providers
-          mountPath: /secrets/providers
-          readOnly: true
+{{/*        - name: app-providers*/}}
+{{/*          mountPath: /secrets/providers*/}}
+{{/*          readOnly: true*/}}
         {{- if .Values.prometheus.enabled }}
         - name: {{ .Values.name }}-prometheusjmx-config
           mountPath: /etc/{{ .Values.name }}-prometheusjmx-config
