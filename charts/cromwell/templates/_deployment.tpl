@@ -7,7 +7,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $settings.name }}-deployment
+  name: {{ $settings.name }}
   labels:
 {{ include "cromwell.labels" . | indent 4 }}
 spec:
