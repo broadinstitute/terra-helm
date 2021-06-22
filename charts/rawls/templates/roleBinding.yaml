@@ -8,7 +8,7 @@ metadata:
 {{ include "rawls.labels" . | indent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: rawls-sa
+  name: rawls-service-sa
 roleRef:
   kind: Role
   name: rawls-role
