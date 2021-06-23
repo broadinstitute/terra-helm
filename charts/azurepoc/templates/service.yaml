@@ -1,3 +1,7 @@
+# Services are used for internal routing of requests within the cluster
+# It ensures that requests received by the ingress are then relayed to
+# the correct pods running the application serving the request
+
 {{ if .Values.ingress.enabled -}}
 apiVersion: v1
 kind: Service
@@ -6,12 +10,18 @@ metadata:
   labels:
 {{ include "azurepoc.labels" . | indent 4 }}
 spec:
+  # This means the service will use a dynamic ip from the cluster's assigned cidr ranges
+  # It is only accessible from within the cluster or via kubectl port-forward
   type: ClusterIP
+  # same concecpt as the selector block in deployment.yaml
+  # determines which pods should serve requests received by this service
   selector:
     deployment: {{ .Values.name }}-deployment
   ports:
   - name: app
     protocol: TCP
+    # port the service listens on for requests
     port: 80
+    # port on the pod that requests will be passed to
     targetPort: 8080
 {{- end }}

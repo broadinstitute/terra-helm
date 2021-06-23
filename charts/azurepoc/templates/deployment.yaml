@@ -6,21 +6,33 @@ metadata:
 {{ include "azurepoc.labels" . | indent 4 }}
 spec:
   strategy:
+    # Ensures that whenever the k8s pods for this application
+    # are restarted it is done in a rolling fashion. Only 1 application instance will 
+    # be unavailable at a given time. If any of the restarts fail for any reasons the
+    # rollout is automatically halted.
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
+  # Ensures that any rollback operations must be done via git in our helmfile repo
+  # rather than using kubectl rollback undo which could result in potential mismatch
+  # between an application and it's configuration
   revisionHistoryLimit: 0
   replicas: {{ .Values.replicas }}
   selector:
+    # This is how the k8s deployment resource determines which pods it manages and monitors
+    # any pods with the label below will be managed by this deployment
     matchLabels:
       deployment: {{ .Values.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.name }}-deployment
+        deployment: {{ .Values.name }}-deployment # corresponding label on the pod from the selector section above
 {{ include "azurepoc.labels" . | indent 8 }}
     spec:
+      # defined in rbac.yaml
+      # This is a k8s service account which is not the same as a GCP service account. 
+      # It determines which k8s api resources/methods the pod has access to.
       serviceAccountName: {{ .Values.name }}-sa
       containers:
       - name: {{ .Values.name }}-app
@@ -29,21 +41,36 @@ spec:
         - name: app
           containerPort: 8080
           protocol: TCP
-        resources: # Mimic existing GCE vm requirements
+        resources:
+          # These determine number of cpu cores and RAM 
+          # available to a container. Requests are expected normal resource
+          # consumption for a service. Limits are maximum available before
+          # throttling kicks in
           requests:
             cpu: {{ .Values.resources.requests.cpu }}
             memory: {{ .Values.resources.requests.memory }}
           limits:
             cpu: {{ .Values.resources.limits.cpu }}
             memory: {{ .Values.resources.limits.memory }}
+        # A readiness probe polls a health check endpoint on
+        # for each replica of an application. If the probe fails for the
+        # defined amount of time, that pod will be removed from the loadbalancer
+        # pool and stop receiving new requests (1st line of defense against failures)
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
         {{- end }}
+        # A liveness probe is similar to a readiness probe execept instead of preventing
+        # a pod from receiving requests, it will automatically restart the failed pod
+        # the time frame before this triggers is set to longer than the readiness probe
+        # (2nd line of defense against failures)
         {{- if .Values.probes.liveness.enabled }}
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
+        # For applications that need to run a long startup process
+        # this will disable the 2 probes above for a set amount of time
+        # on pod startup
         {{- if .Values.probes.startup.enabled }}
         startupProbe:
           {{- toYaml .Values.probes.startup.spec | nindent 10 }}

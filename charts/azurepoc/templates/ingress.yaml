@@ -1,3 +1,5 @@
+# More info on implemenation of ingress in azure
+# https://docs.microsoft.com/en-us/azure/application-gateway/ingress-controller-overview
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -9,14 +11,24 @@ metadata:
     appgw.ingress.kubernetes.io/ssl-redirect: "true"
     kubernetes.io/ingress.allow-http: "false"
 spec:
+  # Handle tls termination at the cluster ingress
+  # can use either http or https when forwarding 
+  # requests to internal services in the cluster
   tls:
   - hosts: 
     - {{ .Values.ingress.hostName }}
+    # references the secret containing tls cert created by 
+    # certificate.yaml
     secretName: {{ .Values.ingress.tlsSecretName }}
   rules:
+  # The host value can be used to route requests to the correct backend service 
+  # This enables a single ip / application Gateway(https://docs.microsoft.com/en-us/azure/application-gateway/overview)
+  # to serve as a single entrypoint to the cluster
   - host: {{ .Values.ingress.hostName }}
     http:
       paths:
+      # requests for all paths for the hostname above are passed to
+      # the target service here, defined in service.yaml
       - path: /*
         backend:
           serviceName: {{ .Values.name }}-service
