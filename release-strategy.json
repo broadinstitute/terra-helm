@@ -2,6 +2,7 @@
     "consent":          {"dev_only": false},
     "crljanitor":       {"dev_only": false},
     "cromwell":         {"dev_only": false},
+    "externalcreds":    {"dev_only": false},
     "firecloudorch":    {"dev_only": false},
     "leonardo":         {"dev_only": false},
     "ontology":         {"dev_only": false},
