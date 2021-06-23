@@ -23,6 +23,9 @@ spec:
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ .Chart.Name }}-cm: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- range $key, $value := .Values.annotations }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
       # Containers are configured to talk to each other by name

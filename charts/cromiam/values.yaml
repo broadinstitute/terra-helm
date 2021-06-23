@@ -1,7 +1,6 @@
 global:
   # global.applicationVersion -- What version of the cromiam application to deploy
   applicationVersion: latest
-
 # imageRepository -- Image repo to pull cromiam images from
 imageRepository: broadinstitute/cromiam
 # imageTag -- Image tag to be used when deploying Pods
@@ -10,6 +9,7 @@ imageTag: null
 # replicas -- Number of replicas for the deployment
 replicas: 3
 
+annotations: {}
 # Resource limits for cromiam containers
 resources:
   requests:
