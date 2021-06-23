@@ -29,6 +29,9 @@ spec:
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
+        {{- range $key, $value := $settings.annotations }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
     spec:
       serviceAccountName: cromwell-sa
       # Containers are configured to talk to each other by name

@@ -2,6 +2,7 @@ global:
   # global.applicationVersion -- What version of the rawls application to deploy
   applicationVersion: latest
 
+
 # Resource limits for rawls containers
 resources:
   requests:
@@ -37,9 +38,12 @@ ingress:
 deploymentDefaults:
   # deploymentDefaults.enabled -- Whether a declared deployment is enabled. If false, no resources will be created
   enabled: true
-  # deploymentDefaults.name -- A name for the deployment that will be substituted into resuorce definitions.
+  # deploymentDefaults.name -- A name for the deployment that will be substituted into resource definitions.
   # Example: `"rawls1-reader"`
   name: null
+  # arbitraty metadata
+  # Example: bio.terra.linter/replicas_exception: true
+  annotations: {}
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
   # @default global.applicationVersion
   imageTag: null

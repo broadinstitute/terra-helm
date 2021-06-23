@@ -79,4 +79,3 @@ spec:
         - name: proxy-secrets
           secret:
             secretName: {{ .Chart.Name }}-proxy-secrets
-

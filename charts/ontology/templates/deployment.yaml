@@ -120,4 +120,3 @@ spec:
         volumeMounts:
         - name: ontology-prometheusjmx-jar
           mountPath: /ontology-prometheusjmx-jar
-

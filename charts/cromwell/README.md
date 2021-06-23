@@ -6,6 +6,7 @@ A Helm chart for Cromwell, the Terra Workflow Management System
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| deploymentDefaults.annotation | object | `nil` | Additational metadata to attach |
 | deploymentDefaults.enabled | bool | `true` | Whether a declared deployment is enabled. If false, no resources will be created |
 | deploymentDefaults.expose | bool | `false` | Whether to create a Service for this deployment |
 | deploymentDefaults.imageTag | string | `nil` | Image tag to be used when deploying Pods @defautl global.applicationVersion |

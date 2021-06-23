@@ -7,6 +7,8 @@ name: ncbiaccess
 # replicas -- number of pods to run
 replicas: 1
 
+annotations: {}
+
 imageConfig:
   # imageConfig.repository -- Image repo to use
   repository: broadinstitute/ncbiaccess
@@ -16,7 +18,7 @@ imageConfig:
   # imageConfig.imagePull Policy
   imagePullPolicy: Always
 
-resources: 
+resources:
   requests:
     cpu: 1
     memory: 2Gi
@@ -26,5 +28,4 @@ resources:
 
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
-  pathPrefix: 
-  
+  pathPrefix:
