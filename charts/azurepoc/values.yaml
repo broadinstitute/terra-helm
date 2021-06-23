@@ -3,17 +3,24 @@ name: azurepoc
 # replicas -- number of app replicas to run
 replicas: 3
 
+# imageRepository -- url for repo hosting the image deployed in this chart
 imageRepository: gcr.io/terra-kernel-k8s/azurepoc
+# imageTag  -- used to specify which version of the image to deploy
 imageTag: null
+# imagePullSecret -- name of k8s secret containing credentials to authenticate to a private image repo
 imagePullSecret: null
 
 global:
   applicationVersion: latest
 
 ingress:
+  # ingress.enabled -- (bool) whether to provision an ingress and expose this application to traffic from outside the cluster
   enabled: true
+  # ingress.hostName -- hostname for this application. Used for host based routing in the ingress
   hostName: "azurepoc.mflinn.azure.dev.envs-terra.bio"
+  # ingress.tlsIssuer -- when multiple CAs are configured for a cluster can be used to select a specfic one
   tlsIssuer: letsencrypt-prod-issuer
+  # ingress.tlsSecretName -- name of the k8s secret the tls cert will be stored in
   tlsSecretName: tls-secret
 
 resources:

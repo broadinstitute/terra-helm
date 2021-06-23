@@ -10,6 +10,8 @@ spec:
   renewBefore: 720h0m0s # 30 days before expiration
   dnsNames:
   - {{ .Values.ingress.hostName }}
+  # This is configured externally to this chart.
+  # more info at https://cert-manager.io/docs/configuration/acme/dns01/ 
   issuerRef:
     name: letsencrypt-prod-issuer
     kind: ClusterIssuer
