@@ -1,6 +1,6 @@
 apiVersion: v2
 name: sam
-version: 0.8.0
+version: 0.9.0
 description: Chart for Sam, the Terra Identity and Access Management application
 type: application
 keywords:
