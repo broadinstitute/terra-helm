@@ -6,7 +6,7 @@ metadata:
 {{ include "azurepoc.labels" . | indent 4 }}
 spec:
   strategy:
-    # Ensures that whenever the k8s pods for this application
+    # RollingUpdate ensures that whenever the k8s pods for this application
     # are restarted it is done in a rolling fashion. Only 1 application instance will 
     # be unavailable at a given time. If any of the restarts fail for any reasons the
     # rollout is automatically halted.
@@ -14,7 +14,7 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  # Ensures that any rollback operations must be done via git in our helmfile repo
+  #  Setting to 0 ensures that any rollback operations must be done via git in our helmfile repo
   # rather than using kubectl rollback undo which could result in potential mismatch
   # between an application and it's configuration
   revisionHistoryLimit: 0
