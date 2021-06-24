@@ -1,15 +1,1 @@
-{
-    "consent":          {"dev_only": false},
-    "crljanitor":       {"dev_only": false},
-    "cromwell":         {"dev_only": false},
-    "externalcreds":    {"dev_only": false},
-    "firecloudorch":    {"dev_only": false},
-    "leonardo":         {"dev_only": false},
-    "ontology":         {"dev_only": false},
-    "poc":              {"dev_only": false},
-    "rawls":            {"dev_only": false},
-    "sam":              {"dev_only": false},
-    "opendj":           {"dev_only": false},
-    "buffer":           {"dev_only": false},
-    "workspacemanager": {"dev_only": false}
-}
+{}
