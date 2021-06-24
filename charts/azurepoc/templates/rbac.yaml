@@ -1,0 +1,11 @@
+# Pod Security Policies are not supported in azure so the only
+# rbac resource needed is a service account.
+# More info on k8s RBAC (Role-based access control)
+# https://kubernetes.io/docs/reference/access-authn-authz/rbac/ 
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Chart.Name }}-sa
+  labels: {{ include "azurepoc.labels" . | nindent 4 }}
+imagePullSecrets:
+- name: {{ .Values.imagePullSecret }}
