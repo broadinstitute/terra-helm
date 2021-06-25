@@ -13,8 +13,10 @@ annotations: {}
 # image -- (string) Used for local Skaffold deploys
 # @default -- Is set by Skaffold on local deploys
 image:
-  
+
+# set environment variables for the containers
 env: {}
+
 imageConfig:
   # imageConfig.repository -- Image repository
   repository: gcr.io/terra-kernel-k8s/terra-workspace-manager
