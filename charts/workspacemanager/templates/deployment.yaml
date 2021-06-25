@@ -82,6 +82,10 @@ spec:
           {{- else -}}
             {{ .Values.imageConfig.repository }}:{{ $imageTag }}
           {{- end }}"
+        env:
+          {{- range $key, $value := .Values.env }}
+          {{ $key }}: {{ $value }}
+          {{- end }}
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
         ports:
         - name: status
