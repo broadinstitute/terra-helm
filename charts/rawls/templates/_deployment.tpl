@@ -10,6 +10,10 @@ metadata:
   name: {{ $settings.name }}-deployment
   labels:
 {{ include "rawls.labels" . | indent 4 }}
+  annotations:
+    {{- range $key, $value := $settings.annotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
 spec:
   replicas: {{ $settings.replicas }}
   revisionHistoryLimit: 0
@@ -29,9 +33,6 @@ spec:
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
         checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
-        {{- range $key, $value := $settings.annotations }}
-        {{ $key }}: {{ $value }}
-        {{- end }}
     spec:
       serviceAccountName: rawls-sa
       hostAliases:

@@ -5,10 +5,13 @@ metadata:
   name: {{ .Values.name }}-deployment
   labels:
 {{ include "workspacemanager.labels" . | indent 4 }}
-  {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
   annotations:
-    reloader.stakater.com/auto: "true"
-  {{- end }}
+    {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
+      reloader.stakater.com/auto: "true"
+    {{- end }}
+    {{- range $key, $value := .Values.annotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -34,9 +37,6 @@ spec:
         {{- end }}
         {{- if .Values.prometheus.enabled }}
         checksum/{{ .Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
-        {{- end }}
-        {{- range $key, $value := .Values.annotations }}
-        {{ $key }}: {{ $value }}
         {{- end }}
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa

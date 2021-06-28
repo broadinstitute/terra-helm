@@ -10,6 +10,10 @@ metadata:
   name: {{ $settings.name }}
   labels:
 {{ include "cromwell.labels" . | indent 4 }}
+  annotations:
+    {{- range $key, $value := $settings.annotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
 spec:
   revisionHistoryLimit: 0 # Cromwell is resource-intensive
   strategy:
@@ -28,10 +32,7 @@ spec:
 {{ include "cromwell.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }}
-        {{- range $key, $value := $settings.annotations }}
-        {{ $key }}: {{ $value }}
-        {{- end }}
+        checksum/{{ $settings.name }}-cm: {{ $outputs.configmapChecksum }
     spec:
       serviceAccountName: cromwell-sa
       # Containers are configured to talk to each other by name

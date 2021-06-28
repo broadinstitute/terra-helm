@@ -4,6 +4,10 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}-deployment
   labels: {{ include "ncbiaccess.labels" . | nindent 4 }}
+  annotations:
+    {{- range $key, $value := .Values.annotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -17,10 +21,6 @@ spec:
   template:
     metadata:
       labels: {{- include "ncbiaccess.labels" . | nindent 8 }}
-      annotations:
-        {{- range $key, $value := .Values.annotations }}
-        {{ $key }}: {{ $value }}
-        {{- end }}
     spec:
       serviceAccountName: {{ .Values.name }}-sa
       volumes:
