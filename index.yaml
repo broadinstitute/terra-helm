@@ -14192,6 +14192,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.34.0/externalcreds-0.34.0.tgz
     version: 0.34.0
   - apiVersion: v2
+    created: "2021-06-29T19:32:52.365552683Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra External Credentials Manager
+    digest: 459c672753915104dfad5efec1113ea7ca8a9df08a969b36a52216f6ed502ce2
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.34.0-408.1624995165.542e11/externalcreds-0.34.0-408.1624995165.542e11.tgz
+    version: 0.34.0-408.1624995165.542e11
+  - apiVersion: v2
     created: "2021-06-23T19:21:58.087813814Z"
     dependencies:
     - condition: postgres.enabled
