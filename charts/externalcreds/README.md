@@ -1,6 +1,6 @@
 # externalcreds
 
-![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.34.0](https://img.shields.io/badge/Version-0.34.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Terra External Credentials Manager
 
@@ -47,7 +47,7 @@ Chart for Terra External Credentials Manager
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
-| initDB | bool | `false` | Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments. |
+| initDB | bool | `false` | Whether the ECM should be initialized on startup. Used for preview environments. |
 | name | string | `"externalcreds"` | A name for the deployment that will be substituted into resuorce definitions |
 | postgres.dbs | list | `["externalcreds"]` | (array(string)) List of databases to create. |
 | postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
@@ -69,7 +69,7 @@ Chart for Terra External Credentials Manager
 | probes.readiness.spec.timeoutSeconds | int | `5` |  |
 | probes.startup.enabled | bool | `true` |  |
 | probes.startup.spec.failureThreshold | int | `1080` |  |
-| probes.startup.spec.httpGet.path | string | `"/version"` |  |
+| probes.startup.spec.httpGet.path | string | `"/status"` |  |
 | probes.startup.spec.httpGet.port | int | `8080` |  |
 | probes.startup.spec.periodSeconds | int | `10` |  |
 | probes.startup.spec.successThreshold | int | `1` |  |
