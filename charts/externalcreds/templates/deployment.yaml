@@ -49,6 +49,9 @@ spec:
       - name: app-providers
         secret:
           secretName: {{ .Values.name }}-providers
+      - name: app-swagger-client-id
+        secret:
+          secretName: {{ .Values.name }}-swagger-client-id
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
@@ -144,6 +147,8 @@ spec:
           mountPath: /secrets/app
           readOnly: true
         - name: app-providers
+          mountPath: /app/resources/rendered
+        - name: app-swagger-client-id
           mountPath: /app/resources/rendered
         {{- if .Values.prometheus.enabled }}
         - name: {{ .Values.name }}-prometheusjmx-config
