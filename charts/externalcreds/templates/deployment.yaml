@@ -148,8 +148,10 @@ spec:
           readOnly: true
         - name: app-providers
           mountPath: /app/resources/rendered/providers.yaml
+          subPath: providers.yaml
         - name: app-swagger-client-id
           mountPath: /app/resources/rendered/swagger-client-id
+          subPath: swagger-client-id
         {{- if .Values.prometheus.enabled }}
         - name: {{ .Values.name }}-prometheusjmx-config
           mountPath: /etc/{{ .Values.name }}-prometheusjmx-config
