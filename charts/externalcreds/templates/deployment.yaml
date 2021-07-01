@@ -147,9 +147,9 @@ spec:
           mountPath: /secrets/app
           readOnly: true
         - name: app-providers
-          mountPath: /app/resources/rendered
+          mountPath: /app/resources/rendered/providers.yaml
         - name: app-swagger-client-id
-          mountPath: /app/resources/rendered
+          mountPath: /app/resources/rendered/swagger-client-id
         {{- if .Values.prometheus.enabled }}
         - name: {{ .Values.name }}-prometheusjmx-config
           mountPath: /etc/{{ .Values.name }}-prometheusjmx-config
