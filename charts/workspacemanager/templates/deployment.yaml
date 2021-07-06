@@ -82,6 +82,14 @@ spec:
           {{- else -}}
             {{ .Values.imageConfig.repository }}:{{ $imageTag }}
           {{- end }}"
+        ##  dynamically populates environment variables
+        env:
+        {{- if .Values.env }}
+        {{- range $key, $value := .Values.env }}
+        - name: "{{ $key }}"
+          value: "{{ $value }}"
+        {{- end }}
+        {{- end }}
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
         ports:
         - name: status
