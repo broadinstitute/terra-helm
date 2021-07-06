@@ -27,12 +27,12 @@ replicas: 0
 resources:
   requests:
     # resources.requests.cpu -- Number of CPU units to request for the deployment
-    cpu: 1
+    cpu: 4
     # resources.requests.memory -- Memory to request for the deployment
     memory: 8Gi
   limits:
     # resources.limits.cpu -- Number of CPU units to limit the deployment to
-    cpu: 1
+    cpu: 4
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 8Gi
 
