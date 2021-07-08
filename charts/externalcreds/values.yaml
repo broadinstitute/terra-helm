@@ -15,7 +15,7 @@ image:
 
 imageConfig:
   # imageConfig.repository -- Image repository
-  repository: gcr.io/terra-kernel-k8s/terra-external-credentials-manager
+  repository: gcr.io/broad-dsp-gcr-public/terra-external-credentials-manager
   # imageConfig.tag -- (string) Image tag.
   # @default -- global.applicationVersion
   tag: null
