@@ -24,7 +24,7 @@ Chart for Terra External Credentials Manager
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
-| imageConfig.repository | string | `"gcr.io/terra-kernel-k8s/terra-external-credentials-manager"` | Image repository |
+| imageConfig.repository | string | `"gcr.io/broad-dsp-gcr-public/terra-external-credentials-manager"` | Image repository |
 | imageConfig.tag | string | global.applicationVersion | Image tag. |
 | ingress.cert.certManager.duration | string | `"2160h0m0s"` | Certificate duration. Defaults to 3 months. |
 | ingress.cert.certManager.enabled | bool | `false` | Enable creating certificate secret with cert-manager |
