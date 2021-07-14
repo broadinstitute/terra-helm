@@ -6747,6 +6747,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.19.0/cromwell-0.19.0.tgz
     version: 0.19.0
   - apiVersion: v2
+    created: "2021-07-14T18:31:58.222629593Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: d7e929dd5af887c65a2db42add504ee3d771d4e1488facec914280821150209b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.19.0-416.1626287511.21b91a/cromwell-0.19.0-416.1626287511.21b91a.tgz
+    version: 0.19.0-416.1626287511.21b91a
+  - apiVersion: v2
     created: "2021-07-14T18:11:37.090936994Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
     digest: b23a02aa16407b7a54f170c38bdf0d41b8f22982f07689109b50429f451bebe2
@@ -17927,6 +17944,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.44.0/leonardo-0.44.0.tgz
     version: 0.44.0
+  - apiVersion: v2
+    created: "2021-07-14T18:31:58.316060189Z"
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 87c950e13b5648f1e7ad2127bf3e1b17ec020d502ba3e1f8bba3dfc96baea6c3
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.44.0-416.1626287512.21b91a/leonardo-0.44.0-416.1626287512.21b91a.tgz
+    version: 0.44.0-416.1626287512.21b91a
   - apiVersion: v2
     created: "2021-07-14T18:11:37.206004589Z"
     description: A Helm chart for Leonardo, a Terra service for interactive analysis
