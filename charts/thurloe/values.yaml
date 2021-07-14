@@ -3,7 +3,8 @@ global:
   applicationVersion: latest
 
 name: thurloe
-
+# Allows CloudSQL proxy time to start up. See DDO-1352
+startupSleep: 30
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources
   enabled: true
