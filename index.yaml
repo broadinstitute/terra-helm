@@ -17911,6 +17911,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.44.0/leonardo-0.44.0.tgz
     version: 0.44.0
   - apiVersion: v2
+    created: "2021-07-14T15:50:16.808708708Z"
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: a99500b6762e782591738c42629c5b7461a8308f36659b68bf037325a57262ae
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.44.0-415.1626277809.ac21a3/leonardo-0.44.0-415.1626277809.ac21a3.tgz
+    version: 0.44.0-415.1626277809.ac21a3
+  - apiVersion: v2
     created: "2021-07-09T19:32:51.758020547Z"
     dependencies:
     - condition: migration.enabled
@@ -43052,6 +43070,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.4.0/thurloe-0.4.0.tgz
     version: 0.4.0
+  - apiVersion: v2
+    created: "2021-07-14T15:50:16.995943953Z"
+    description: Chart for Thurloe service in Terra
+    digest: 2eb35490501bb5314d57225bbc715c73c90c8ad305f6972a5904e1f93947b0c8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.4.0-415.1626277810.ac21a3/thurloe-0.4.0-415.1626277810.ac21a3.tgz
+    version: 0.4.0-415.1626277810.ac21a3
   - apiVersion: v2
     created: "2021-04-14T18:41:58.50878956Z"
     description: Chart for Thurloe service in Terra
