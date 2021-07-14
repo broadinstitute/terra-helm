@@ -16,7 +16,7 @@ deploymentDefaults:
   imageRepository: gcr.io/broad-dsp-gcr-public/leonardo
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
   # @default global.applicationVersion
-  imageTag: null
+  imageTag: tcell_3_1_0
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
   probes:

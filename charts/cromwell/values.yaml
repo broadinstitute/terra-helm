@@ -16,7 +16,7 @@ deploymentDefaults:
   name: null
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
   # @defautl global.applicationVersion
-  imageTag: null
+  imageTag: tcell_3_1_0
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
   # deploymentDefaults.expose -- Whether to create a Service for this deployment
