@@ -139,7 +139,7 @@ spec:
           {{- toYaml $settings.probes.startup.spec | nindent 10 }}
         {{- end }}
       - name: {{ $settings.name }}-proxy
-        image: {{ $settings.sourceProxyImage }}:{{ $settings.imageTag }}
+        image: {{ $settings.proxyImage }}
         ports:
           - containerPort: 443
           - containerPort: 80

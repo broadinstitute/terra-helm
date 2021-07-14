@@ -16,7 +16,7 @@ deploymentDefaults:
   imageRepository: gcr.io/broad-dsp-gcr-public/leonardo
   # deploymentDefaults.imageTag -- Image tag to be used when deploying Pods
   # @default global.applicationVersion
-  imageTag: tcell_3_1_0
+  imageTag: null
   # deploymentDefaults.replicas -- Number of replicas for the deployment
   replicas: 0
   probes:
@@ -59,7 +59,7 @@ deploymentDefaults:
         failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
         successThreshold: 1
   # deploymentDefaults.proxyImage -- Image that the OIDC proxy uses
-  sourceProxyImage: broadinstitute/openidc-proxy
+  proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
 # with different configurations.
