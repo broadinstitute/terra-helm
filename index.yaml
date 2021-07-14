@@ -6730,6 +6730,23 @@ entries:
     version: 0.0.1-216.1606844050.9cb410
   cromwell:
   - apiVersion: v2
+    created: "2021-07-14T18:59:14.312592244Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 3b1c34b5aac0b80cafe8a35afcf59cfa7b83a08968ada1de871a564be10bae3d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.20.0/cromwell-0.20.0.tgz
+    version: 0.20.0
+  - apiVersion: v2
     created: "2021-06-23T13:14:03.26019569Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
     digest: 8b5f3d71757392fdc5ee36aa6ff0fb9a8966a42c3f65a545fed0098c7a09cb14
@@ -17943,6 +17960,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-09-15-20-120.1600181187.32a2cb/leonardo-09-15-20-120.1600181187.32a2cb.tgz
     version: 09-15-20-120.1600181187.32a2cb
+  - apiVersion: v2
+    created: "2021-07-14T18:59:14.403530854Z"
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 3ed2997b8ef3ae3d82d15b296285f0fe10c6422fd689eb8d30978d0d38f57b62
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.45.0/leonardo-0.45.0.tgz
+    version: 0.45.0
   - apiVersion: v2
     created: "2021-06-24T13:35:30.993962899Z"
     description: A Helm chart for Leonardo, a Terra service for interactive analysis
