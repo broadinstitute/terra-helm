@@ -127,7 +127,8 @@ vault:
 migration:
   # migration.enabled -- (bool) Whether to run a Liquibase migration during sync
   enabled: false
-  # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run
+  # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run, "update" for normal operation
+  # See https://docs.liquibase.com/commands/home.html
   liquibaseCommand: "updateSQL"
   # migration.imageName -- (string) Required full app image name, without trailing tag
   imageName: "gcr.io/broad-dsp-gcr-public/leonardo"
