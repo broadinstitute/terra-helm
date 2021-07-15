@@ -125,7 +125,7 @@ vault:
     dbPasswordKey: "db_password"
 
 migration:
-  # migration.enabled -- (bool) Whether to run a Liquibase migration during sync
+  # migration.enabled -- (bool) Whether to run a Liquibase migration during sync (when enabled, creates K8s resources)
   enabled: false
   # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run, "update" for normal operation
   # See https://docs.liquibase.com/commands/home.html
