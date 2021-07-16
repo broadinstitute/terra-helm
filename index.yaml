@@ -32226,6 +32226,23 @@ entries:
     version: 0.0.1-137.1601039930.d3575b
   sam:
   - apiVersion: v2
+    created: "2021-07-16T15:06:42.181778281Z"
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: efea28137b87796ca7310d64570bc86379fcd5d7c94a5e7da5624c3252f29cc5
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.10.0/sam-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
     created: "2021-06-24T13:35:31.185447442Z"
     description: Chart for Sam, the Terra Identity and Access Management application
     digest: 0035377aeb77101e449ef303b340dfd2afae53649481caf866ca2508f38fdd98
