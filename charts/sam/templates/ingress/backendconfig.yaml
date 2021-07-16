@@ -15,4 +15,8 @@ spec:
     type: HTTPS
     port: 443
     requestPath: /status
+{{- if .Values.ingress.securityPolicy }}
+  securityPolicy:
+    name {{ .Values.ingress.securityPolicy }}
+{{- end }}
 {{- end }}
