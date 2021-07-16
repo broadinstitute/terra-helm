@@ -17,6 +17,6 @@ spec:
     requestPath: /status
 {{- if .Values.ingress.securityPolicy }}
   securityPolicy:
-    name {{ .Values.ingress.securityPolicy }}
+    name: {{ .Values.ingress.securityPolicy }}
 {{- end }}
 {{- end }}
