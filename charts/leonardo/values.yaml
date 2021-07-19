@@ -119,3 +119,24 @@ zombieMonitorCron:
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
+  # Migration credentials only referenced if migration.enabled == true
+  migration:
+    # vault.migration.path -- Vault path to secret containing DB credentials
+    path: null
+    # vault.migration.dbUsernameKey -- Key in Vault secret to DB username
+    dbUsernameKey: "db_user"
+    # vault.migration.DbPasswordKey -- Key in Vault secret to DB password
+    dbPasswordKey: "db_password"
+
+migration:
+  # migration.enabled -- (bool) Whether to run a Liquibase migration during sync (when enabled, creates K8s resources)
+  enabled: false
+  # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run, "update" for normal operation
+  # See https://docs.liquibase.com/commands/home.html
+  liquibaseCommand: "updateSQL"
+  # migration.imageName -- (string) Required full app image name, without trailing tag
+  imageName: "gcr.io/broad-dsp-gcr-public/leonardo"
+  # migration.jarLocation -- (string) Required jar location in app image, expanded by migration.appContainerShell
+  jarLocation: "$(find /leonardo -name 'leonardo*.jar')"
+  # migration.secretPrefix -- (string) Required prefix of -app-ctmpls, -sqlproxy-ctmpls, -sqlproxy-env secrets
+  secretPrefix: "leonardo-backend"
