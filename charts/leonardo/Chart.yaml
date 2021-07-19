@@ -11,3 +11,8 @@ sources:
   - https://github.com/broadinstitute/terra-helm/
   - https://github.com/DataBiosphere/leonardo
   - https://github.com/broadinstitute/leonardo-cron-jobs
+dependencies:
+  - name: liquibase-migration
+    condition: migration.enabled
+    version: 0.2.0
+    repository: https://broadinstitute.github.io/terra-helm/
