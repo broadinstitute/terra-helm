@@ -58,6 +58,8 @@ deploymentDefaults:
         periodSeconds: 10
         failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
         successThreshold: 1
+  # deploymentDefaults.proxyImage -- Image that the OIDC proxy uses
+  proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 # A map of Leonardo deployments. In Terra's production environment,
 # Leonardo is deployed as two services (backend and frontend)
 # with different configurations.
