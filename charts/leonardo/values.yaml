@@ -130,7 +130,7 @@ migration:
   enabled: false
   # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run, "update" for normal operation
   # See https://docs.liquibase.com/commands/home.html
-  liquibaseCommand: "updateSQL"
+  liquibaseCommand: "update"
   # migration.imageName -- (string) Required full app image name, without trailing tag
   imageName: "gcr.io/broad-dsp-gcr-public/leonardo"
   # migration.jarLocation -- (string) Required jar location in app image, expanded by migration.appContainerShell
