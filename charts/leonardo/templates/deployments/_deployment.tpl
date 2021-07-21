@@ -207,7 +207,7 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ $settings.name }}-modsecurity-logs
-      {{ if not $settings.annotations.disable_sqlproxy }}
+      {{- if not $settings.annotations.disable_sqlproxy }}
       - name: {{ $settings.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
         envFrom:
@@ -218,7 +218,7 @@ spec:
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
           readOnly: true
-      {{ end }}
+      {{- end }}
       initContainers:
       - name: download-prometheusjmx-jar
         image: alpine:3.12.0
