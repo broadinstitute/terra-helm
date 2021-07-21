@@ -17984,6 +17984,29 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.48.0/leonardo-0.48.0.tgz
     version: 0.48.0
   - apiVersion: v2
+    created: "2021-07-21T21:32:12.939906503Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 88173b337b95a3315f42d054a5b4077bcd290d0f8e91016b9a8de89ba68d97d2
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.48.0-421.1626903126.c1ad19/leonardo-0.48.0-421.1626903126.c1ad19.tgz
+    version: 0.48.0-421.1626903126.c1ad19
+  - apiVersion: v2
     created: "2021-07-19T20:28:08.458711302Z"
     dependencies:
     - condition: migration.enabled
