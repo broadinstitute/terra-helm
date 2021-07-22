@@ -7,17 +7,19 @@ metadata:
     {{- include "helm.labels" . | nindent 4 }}
   annotations:
     networking.gke.io/v1beta1.FrontendConfig: "{{ .Chart.Name }}-ingress-frontendconfig"
-    {{- range $key, $value := .Values.ingress.annotations }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
+    kubernetes.io/ingress.allow-http: "false"
 {{- if not (empty .Values.ingress.cert.preSharedCerts) }}
     ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
 {{- end }}
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
 spec:
   tls:
   - secretName: {{ .Chart.Name }}-cert
   backend:
     serviceName: {{ .Chart.Name }}-service
+
 {{- end -}}
 # {{- define "ingresslibchart.configmap" -}}
 # # {{- include "ingresslibchart.util.merge" (append . "ingresslibchart.configmap.tpl") -}}
