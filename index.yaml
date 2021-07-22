@@ -1264,6 +1264,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.23.0/buffer-0.23.0.tgz
     version: 0.23.0
   - apiVersion: v2
+    created: "2021-07-22T17:58:49.714600087Z"
+    dependencies:
+    - name: ingresslibchart
+      repository: file://../../ingresslibchart
+      version: 0.1.0
+    description: Chart for Resource Buffering Service
+    digest: 699b92616c731bed88e93fcd71ee94f19670a76e991e3c9b3d8e4d00dca25109
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.23.0-422.1626976723.97d960/buffer-0.23.0-422.1626976723.97d960.tgz
+    version: 0.23.0-422.1626976723.97d960
+  - apiVersion: v2
     created: "2021-07-22T17:53:56.89876253Z"
     dependencies:
     - name: ingresslibchart
