@@ -13,7 +13,7 @@ This takes an array of three values:
 {{- end -}}
 
 {{/*
-Common annotation labels
+Common labels
 */}}
 {{- define "helm.labels" -}}
 helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
