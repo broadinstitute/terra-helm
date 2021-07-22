@@ -11,3 +11,7 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/DataBiosphere/terra-resource-buffer
+dependencies:
+- name: ingresslibchart
+  version: 0.1.0
+  repository: file://../../ingresslibchart
