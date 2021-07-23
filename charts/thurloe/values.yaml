@@ -90,6 +90,8 @@ probes:
       periodSeconds: 10
       failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
       successThreshold: 1
+# proxyImage- Image that the OIDC proxy uses
+proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 
 # Requires deployment of Prometheus to cluster
 prometheus:

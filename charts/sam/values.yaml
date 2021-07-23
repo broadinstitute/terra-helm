@@ -53,6 +53,8 @@ probes:
       periodSeconds: 10
       failureThreshold: 30 # 5 minutes before restarted
       successThreshold: 1
+# proxyImage- Image that the OIDC proxy uses
+proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources

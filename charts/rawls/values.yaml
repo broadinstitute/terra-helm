@@ -58,6 +58,8 @@ deploymentDefaults:
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
   legacyResourcePrefix: null
+   # deploymentDefaults.proxyImage -- Image that the OIDC proxy uses
+  proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
   probes:
     readiness:
       # deploymentDefaults.probes.readiness.enable -- Whether to configure a readiness probe
