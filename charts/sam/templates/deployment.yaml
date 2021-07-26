@@ -138,7 +138,7 @@ spec:
           name: sqlproxy-ctmpls
           readOnly: true
       - name: {{ .Values.name }}-proxy
-        image: broadinstitute/openidc-proxy:tcell-mpm-big
+        image: {{ .Values.proxyImage }}
         ports:
           - containerPort: 443
           - containerPort: 80

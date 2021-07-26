@@ -123,7 +123,7 @@ spec:
           {{- toYaml .Values.probes.startup.spec | nindent 10 }}
         {{- end }}
       - name: {{ .Values.name }}-proxy
-        image: broadinstitute/openidc-proxy:tcell-mpm-big
+        image: {{ .Values.proxyImage }}
         ports:
           - containerPort: 443
           - containerPort: 80

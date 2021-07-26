@@ -22,7 +22,8 @@ resources:
     cpu: 2
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 13Gi
-
+# proxyImage -- Image that the OIDC proxy uses
+proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 probes:
   readiness:
     # probes.readiness.enable -- Whether to configure a readiness probe

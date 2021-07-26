@@ -31,7 +31,7 @@ ingress:
         secretKey: null
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
     preSharedCerts: []
-
+proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 imageConfig:
   # imageConfig.repository -- Image repository
   repository: gcr.io/broad-dsp-gcr-public/firecloud-orchestration

@@ -10,6 +10,9 @@ imageTag: null
 # replicas -- Number of replicas for the deployment
 replicas: 3
 
+# deploymentDefaults.proxyImage -- Image that the OIDC proxy uses
+proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
+
 # Resource limits for agora containers
 resources:
   requests:
