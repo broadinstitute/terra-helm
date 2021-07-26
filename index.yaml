@@ -3,6 +3,24 @@ entries:
   agora:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-07-26T13:57:26.2543027Z"
+    description: Chart for Agora service in Terra
+    digest: 70fdc70d739aa4edee6799cd3431ef384cb464c4ea16450175c085523f11231d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.7.0/agora-0.7.0.tgz
+    version: 0.7.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-24T13:35:30.178020542Z"
     description: Chart for Agora service in Terra
     digest: 6a255710b71b516d87484eb05dbd318af720e0b1686a702f72b913ccee2a8634
@@ -5944,6 +5962,24 @@ entries:
   cromiam:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-07-26T13:57:26.407630568Z"
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 779a5a03360b7a6b74dc9315005cbb8d15b18aad8e1fb7dbb805ccd029ddd6ad
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.10.0/cromiam-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-23T21:25:39.716012652Z"
     description: Chart for cromiam service in Terra [WIP]
     digest: 6f725e553f30b8fe663964636b4520a34f49a1f80a9aefade17ea5bcedf1ebed
@@ -6807,6 +6843,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.0.1-216.1606844050.9cb410/cromiam-0.0.1-216.1606844050.9cb410.tgz
     version: 0.0.1-216.1606844050.9cb410
   cromwell:
+  - apiVersion: v2
+    created: "2021-07-26T13:57:26.574816468Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 59a8d5fe94cfc2ba92b30405370efa4bc6c3b87db35a6670ceddec44dfb5db59
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.21.0/cromwell-0.21.0.tgz
+    version: 0.21.0
   - apiVersion: v2
     created: "2021-07-14T18:59:14.312592244Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
@@ -15279,6 +15332,25 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.30.0-397.1623942436.489a64/externalcreds-0.30.0-397.1623942436.489a64.tgz
     version: 0.30.0-397.1623942436.489a64
   firecloudorch:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-07-26T13:57:26.779523869Z"
+    description: Chart for firecloud-orchestration service in Terra
+    digest: 437a59632e40df1596160b104c7ebf1ce481133fea78da6f0aea470067e8c902
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.8.0/firecloudorch-0.8.0.tgz
+    version: 0.8.0
   - apiVersion: v2
     appVersion: latest
     created: "2021-06-24T13:35:30.718121246Z"
@@ -29174,6 +29246,29 @@ entries:
   rawls:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-07-26T13:57:26.948618479Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: Chart for Rawls service in Terra
+    digest: e39f846c921284c94699bc165767750c9a40a5e5e0671c4578a5a430eb347cfe
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.13.0/rawls-0.13.0.tgz
+    version: 0.13.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-24T13:35:31.088587476Z"
     dependencies:
     - condition: migration.enabled
@@ -32564,6 +32659,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/rbs-0.0.1-137.1601039930.d3575b/rbs-0.0.1-137.1601039930.d3575b.tgz
     version: 0.0.1-137.1601039930.d3575b
   sam:
+  - apiVersion: v2
+    created: "2021-07-26T13:57:27.103325711Z"
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: 3bb9f0809fb269aba386ce133b50fcb156ec3234d62482c63f6e96129eef952f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.12.0/sam-0.12.0.tgz
+    version: 0.12.0
   - apiVersion: v2
     created: "2021-07-16T18:30:38.058414651Z"
     description: Chart for Sam, the Terra Identity and Access Management application
@@ -43640,6 +43752,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   thurloe:
+  - apiVersion: v2
+    created: "2021-07-26T13:57:27.333028147Z"
+    description: Chart for Thurloe service in Terra
+    digest: c2ccfdc4930f794f6bf44b3650fa953e80abe5e0536b486137ec888d9d6d3afe
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.5.0/thurloe-0.5.0.tgz
+    version: 0.5.0
   - apiVersion: v2
     created: "2021-06-24T13:35:31.274102036Z"
     description: Chart for Thurloe service in Terra
