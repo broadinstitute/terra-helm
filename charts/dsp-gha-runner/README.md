@@ -20,6 +20,7 @@ Chart for DSP self-hosted GitHub Actions runners
 |-----|------|---------|-------------|
 | actions-runner-controller.authSecret.name | string | `"gha-controller-secret"` | (string) Name of the secret to create containing GitHub credentials from .vault.github |
 | actions-runner-controller.nameOverride | string | `"gha-runner"` | (string) Name part to use in resources |
+| actions-runner-controller.serviceAccount.name | string | `"gha-runner-sa"` | (string) Name of the service account to create to use for runner pods |
 | defaultReplicas | int | `1` | (number) Default number of runners to make for an individual repository |
 | runnerSpecOverrides | object | `nil` | Default overrides for the runner spec, documented at https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks |
 | runners | list | `[{"name":"example","replicas":2,"repository":"broadinstitute/example-repo","specOverrides":{"dockerEnabled":false}}]` | (list) Sets of runners to create |

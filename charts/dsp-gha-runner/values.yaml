@@ -7,6 +7,9 @@ actions-runner-controller:
   authSecret:
     # -- (string) Name of the secret to create containing GitHub credentials from .vault.github
     name: gha-controller-secret
+  serviceAccount:
+    # -- (string) Name of the service account to create to use for runner pods
+    name: gha-runner-sa
 
 vault:
   # Vault secret for GitHub credentials to add/configure runners;
