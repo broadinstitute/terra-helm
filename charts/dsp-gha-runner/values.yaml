@@ -21,11 +21,11 @@ vault:
       # -- (string) Path within Vault to access app authentication fields
       path:
       # -- (string) Field name for GitHub app ID
-      appIdField: id
+      appIdField: app-id
       # -- (string) Field name for GitHub app installation ID
-      appInstallationIdField: installation_id
+      appInstallationIdField: installation-id
       # -- (string) Field name for GitHub app private key
-      appPrivateKeyField: private_key
+      appPrivateKeyField: private-key
       # -- (string) Encoding of field values, either `text` or `base64`
       encoding: text
     # PAT authentication, INCOMPATIBLE WITH .vault.github.appSecret
