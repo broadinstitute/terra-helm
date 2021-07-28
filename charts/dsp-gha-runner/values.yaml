@@ -1,0 +1,56 @@
+# Values used by the underlying actions-runner-controller chart,
+# descriptions here are in addition to documentation at
+# https://github.com/actions-runner-controller/actions-runner-controller/tree/master/charts/actions-runner-controller#values
+actions-runner-controller:
+  # -- (string) Name part to use in resources
+  nameOverride: gha-runner
+  authSecret:
+    # -- (string) Name of the secret to create containing GitHub credentials from .vault.github
+    name: gha-controller-secret
+
+vault:
+  # Vault secret for GitHub credentials to add/configure runners;
+  # supply exactly one secret path should be supplied
+  github:
+    # App authentication, INCOMPATIBLE WITH .vault.github.tokenSecret
+    # https://github.com/actions-runner-controller/actions-runner-controller#deploying-using-github-app-authentication
+    appSecret:
+      # -- (string) Path within Vault to access app authentication fields
+      path:
+      # -- (string) Field name for GitHub app ID
+      appIdField: id
+      # -- (string) Field name for GitHub app installation ID
+      appInstallationIdField: installation_id
+      # -- (string) Field name for GitHub app private key
+      appPrivateKeyField: private_key
+      # -- (string) Encoding of field values, either `text` or `base64`
+      encoding: text
+    # PAT authentication, INCOMPATIBLE WITH .vault.github.appSecret
+    # https://github.com/actions-runner-controller/actions-runner-controller#deploying-using-pat-authentication
+    tokenSecret:
+      # -- (string) Path within Vault to access personal access token field
+      path:
+      # -- (string) Field name for GitHub personal access token
+      tokenField: token
+      # -- (string) Encoding of field values, either `text` or `base64`
+      encoding: text
+
+# -- (number) Default number of runners to make for an individual repository
+defaultReplicas: 1
+
+# -- (object) Default overrides for the runner spec, documented at
+# https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks
+runnerSpecOverrides:
+
+# -- (list) Sets of runners to create
+runners:
+    # (string) required; used in K8s resource names
+  - name: example
+    # (string) required; should be organization/repository
+    repository: broadinstitute/example-repo
+    # (number) optional; overrides .defaultReplicas if provided
+    replicas: 2
+    # (object) optional; like .runnerSpecOverrides but takes precedence
+    specOverrides:
+      # dockerEnabled is true by default, changed here for demo
+      dockerEnabled: false

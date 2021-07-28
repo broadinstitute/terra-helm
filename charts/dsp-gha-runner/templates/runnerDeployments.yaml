@@ -1,0 +1,19 @@
+{{- range .Values.runners }}
+{{- $defaultSpec := $.Values.runnerSpecOverrides | default dict -}}
+{{- $runnerSpec := $defaultSpec | deepCopy | mustMerge (.spec | default dict) -}}
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: {{ index $.Values "actions-runner-controller" "nameOverride" }}-{{ .name }}-deployment
+  labels: 
+    {{- include "dsp-gha-runner.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ .replicas | default $.Values.defaultReplicas }}
+  template:
+    spec:
+      repository: {{ .repository }}
+      {{- if not $runnerSpec -}}
+      {{- $runnerSpec | toYaml | nindent 6 }}
+      {{- end -}}
+{{- end }}
