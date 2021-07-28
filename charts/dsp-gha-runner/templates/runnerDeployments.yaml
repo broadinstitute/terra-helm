@@ -13,7 +13,7 @@ spec:
   template:
     spec:
       repository: {{ .repository }}
-      {{- if not $runnerSpec -}}
+      {{- if $runnerSpec -}}
       {{- $runnerSpec | toYaml | nindent 6 }}
       {{- end -}}
 {{- end }}
