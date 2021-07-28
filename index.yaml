@@ -10254,6 +10254,27 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-0.0.0/dsp-cert-manager-0.0.0.tgz
     version: 0.0.0
+  dsp-gha-runner:
+  - apiVersion: v2
+    created: "2021-07-28T14:47:00.677476714Z"
+    dependencies:
+    - name: actions-runner-controller
+      repository: https://actions-runner-controller.github.io/actions-runner-controller
+      version: 0.12.7
+    description: Chart for DSP self-hosted GitHub Actions runners
+    digest: a0ef8835fbf6ea2e986aa2e07fd7fff333f8173651b36bb76a1ae42dbc7d7d69
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-0.1.0-424.1627483615.54d42c/dsp-gha-runner-0.1.0-424.1627483615.54d42c.tgz
+    version: 0.1.0-424.1627483615.54d42c
   dsp-tools:
   - apiVersion: v2
     created: "2020-04-13T17:51:59.153100473Z"
