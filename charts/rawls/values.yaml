@@ -120,3 +120,6 @@ migration:
   jarLocation: "$(find /rawls -name 'rawls*.jar')"
   # migration.secretPrefix -- (string) Required prefix of -app-ctmpls, -sqlproxy-ctmpls, -sqlproxy-env secrets
   secretPrefix: "rawls-backend"
+
+buffer:
+  enabled: true
