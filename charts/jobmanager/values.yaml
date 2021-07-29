@@ -27,7 +27,7 @@ ingress:
 ui:
   image:
     # ui.image.repository -- Image repository
-    repository: databiosphere/job-manager-ui
+    repository: us.gcr.io/broad-dsp-gcr-public/job-manager-ui
     # ui.image.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
@@ -72,7 +72,7 @@ ui:
 api:
   image:
     # api.image.repository -- Image repository
-    repository: databiosphere/job-manager-api-cromwell
+    repository: us.gcr.io/broad-dsp-gcr-public/job-manager-api-cromwell
     # api.image.tag -- (string) Image tag.
     # @default -- global.applicationVersion
     tag:
