@@ -7,12 +7,27 @@ cert-manager:
   extraArgs:
   - --enable-certificate-owner-ref=true
 
-# Email that will be used to register issuer with lets encrypt
-# Will receive communications from lets encrypt here
+# -- (string) Email that will be used to register issuer with lets encrypt,
+# will receive communications from lets encrypt here
 issuerAccountEmail: dsp-devops@broadinstitute.org
 dnsProject:
-  # id: GOOGLE_PROJECT_ID
-  serviceAccount: 
-    # secretName: SA_CREDENTIAL_SECRET_NAME
-    # secretKey: SA_CREDENTIAL_SECRET_KEY
- 
+  # -- (string) Project to create DNS records in
+  id: dsp-devops
+  serviceAccount:
+    # -- (string) Name of the K8s secret containing the SA key
+    secretName: cert-manager-dnsadmin-secret
+    # -- (string) Key within the K8s secret containing the SA key
+    secretKey: sa-key.json
+    # -- (boolean) If this K8s secret should be created by secrets-manager from Vault
+    createSecret: false
+
+vault:
+  # If dnsProject.serviceAccount.createSecret, use the following for the source of truth
+  # for the credentials
+  serviceAccountSecret:
+    # -- (string) Path within Vault to the secret containing credentials
+    path:
+    # -- (string) Field in the Vault secret containing the SA key
+    saKeyField: key
+    # -- (string) Encoding of the value in the Vault field, either `text` or `base64`
+    encoding: base64
