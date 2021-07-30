@@ -15,7 +15,7 @@ spec:
     # {} Means this all certificate requests will use this dns challenge solver
     - selector: {}
       dns01:
-        clouddns:
+        cloudDNS:
           # Id for project that handles dns provisioning
           project: {{ required "A GCP project id is required for .Values.dnsProject.id " .Values.dnsProject.id }}
           #used to access dns-solver service-account in GCP
