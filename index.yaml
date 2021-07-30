@@ -10207,6 +10207,30 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-0.0.1/dsp-cert-manager-0.0.1.tgz
     version: 0.0.1
   - apiVersion: v2
+    created: "2021-07-30T17:59:21.746620769Z"
+    dependencies:
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v0.10.1
+    description: Installs cert-manager, configures psps and creates Let's encrypt
+      cluster issuers
+    digest: 0146ca3a53821b48ed47de19317e204cdfcc6dc37c185494e401501d572001dc
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - tools
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: dsp-cert-manager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-0.0.1-427.1627667956.effe3d/dsp-cert-manager-0.0.1-427.1627667956.effe3d.tgz
+    version: 0.0.1-427.1627667956.effe3d
+  - apiVersion: v2
     created: "2020-11-19T22:51:20.384741992Z"
     dependencies:
     - name: cert-manager
