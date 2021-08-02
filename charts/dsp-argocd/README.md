@@ -12,7 +12,7 @@ This chart declares the official ArgoCD chart as a subchart, supplies custom val
 
 3. Update the version of the `argo-cd` chart dependency in Chart.yaml and follow the "Deploying Changes" steps described below.
 
-## Deploying Changes to this Chart
+## Deploying Changes to This Chart
 
 Install the [helm-diff](https://github.com/databus23/helm-diff) plugin.
 
@@ -22,13 +22,33 @@ Authenticate to the dsp-tools cluster:
 
 Compare local copy of the chart to the deployed version of the chart:
 
-  helm diff upgrade ap-argocd . --namespace=ap-argocd
+    helm diff upgrade ap-argocd . --namespace=ap-argocd
 
 If everything looks as expected, perform the upgrade:
 
-  helm upgrade ap-argocd . --namespace=ap-argocd
+    helm upgrade ap-argocd . --namespace=ap-argocd
 
 Be sure to commit any changes you make back to master!
+
+## Adding a New Cluster
+
+Download [the ArgoCD CLI](https://argoproj.github.io/argo-cd/cli_installation/).
+
+Authenticate the CLI to the ArgoCD web app
+
+    argocd login --sso --grpc-web ap-argocd.dsp-devops.broadinstitute.org:443
+
+Authenticate to the cluster with `gcloud` if you have not yet done so:
+
+    gcloud container clusters get-credentials --project=<project> <cluster name>
+
+Add the cluster to ArgoCD:
+
+    argocd cluster add <gke-cluster-name> --name <cluster name>
+
+where <gke-cluster-name> is the name of the cluster entry that `gcloud`, and <cluster name
+
+    argocd cluster add gke_broad-dsde-perf_us-central1-a_terra-perf --name=terra-perf
 
 ## Initial Installation
 
@@ -44,34 +64,9 @@ Create namespace
 
     kubectl create namespace ap-argocd
 
-Create Vault secret for repo server (pull values from secret/suitable/ap-argocd/approle)
+Deploy this chart
 
-    kubectl -n ap-argocd create secret generic ap-argocd-reposerver-vault \
-      --from-literal=roleid=<role id>
-      --from-literal=secretid=<secret id>
-
-Deploy preinstall chart (no values file needed)
-
-    helm install ap-argocd-preinstall ap-argocd-preinstall \
-      --repo https://broadinstitute.github.io/terra-helm \
-      --version 0.1.1 \
-      --namespace ap-argocd
-
-Deploy official ArgoCD chart
-
-    helm install ap-argocd argo-cd \
-      --repo https://argoproj.github.io/argo-helm \
-      --version 2.2.2 \
-      --namespace ap-argocd \
-      -f ./values.yaml
-
-Configure [GitHub OAuth](https://argoproj.github.io/argo-cd/operator-manual/user-management/#dex)
-
-    # Base64-encode the GitHub OAuth client secret
-    echo -n <client secret> | base64
-
-    # Take output and add to argocd-secret under the key dex.github.clientSecret
-    kubectl edit secret -n ap-argocd argocd-secret
+    helm install ap-argocd . --namespace=ap-argocd
 
 ### Change Local Admin password
 
