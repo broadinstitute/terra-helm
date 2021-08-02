@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dsp-cert-manager
-version: 0.0.1
+version: 1.0.0
 
 keywords:
 - dsp
@@ -20,5 +20,5 @@ sources:
 
 dependencies:
 - name: cert-manager
-  version: v0.10.1
+  version: v1.4
   repository: https://charts.jetstack.io
