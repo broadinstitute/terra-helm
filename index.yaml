@@ -10412,6 +10412,26 @@ entries:
     version: 0.0.0
   dsp-gha-runner:
   - apiVersion: v2
+    created: "2021-08-02T19:24:05.660951209Z"
+    dependencies:
+    - name: actions-runner-controller
+      repository: https://actions-runner-controller.github.io/actions-runner-controller
+      version: 0.12.7
+    description: Chart for DSP self-hosted GitHub Actions runners
+    digest: f9c285fe0da660e595b295287c3824f3b24f08003daebb53f08c7b78126f6519
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-0.1.0-424.1627932239.72b8e9/dsp-gha-runner-0.1.0-424.1627932239.72b8e9.tgz
+    version: 0.1.0-424.1627932239.72b8e9
+  - apiVersion: v2
     created: "2021-07-28T17:54:41.848376723Z"
     dependencies:
     - name: actions-runner-controller
