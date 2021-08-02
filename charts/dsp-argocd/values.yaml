@@ -54,7 +54,7 @@ argo-cd:
       tls:
       - hosts:
         - ap-argocd.dsp-devops.broadinstitute.org
-        secretName: dsp-argocd-cert
+        secretName: dsp-argocd-cert # This is populated by certificate-manager (see certificate.yaml)
       annotations:
         kubernetes.io/ingress.global-static-ip-name: ap-argocd-server
         kubernetes.io/ingress.allow-http: "false" # https only
@@ -76,7 +76,7 @@ argo-cd:
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
-      tag: main-4baefee
+      tag: main-6b05f48
     env:
       - name: VAULT_ADDR
         value: https://clotho.broadinstitute.org:8200
@@ -96,3 +96,6 @@ argo-cd:
       requests:
         cpu: 3.2
         memory: 4Gi
+# Path in Vault where ArgoCD secrets live
+vault:
+  pathPrefix: secret/suitable/argocd
