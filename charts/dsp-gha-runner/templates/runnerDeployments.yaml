@@ -1,6 +1,6 @@
 {{- range .Values.runners }}
-{{- $defaultSpec := $.Values.runnerSpecOverrides | default dict -}}
-{{- $runnerSpec := $defaultSpec | deepCopy | mustMerge (.specOverrides | default dict) -}}
+{{ $defaultSpec := $.Values.runnerSpecOverrides | default dict }}
+{{ $runnerSpec := $defaultSpec | deepCopy | mustMerge (.specOverrides | default dict) }}
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
