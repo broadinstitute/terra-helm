@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ .Values.name }}-rolebinding
+  labels: {{- include "dsp-argocd-notifications.labels" . | nindent 4 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ required ".Values.upstream.serviceAccount.name is required" .Values.upstream.serviceAccount.name }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: {{ .Values.name }}-pod-runner
+  apiGroup: rbac.authorization.k8s.io
