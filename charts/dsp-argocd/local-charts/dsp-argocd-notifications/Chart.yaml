@@ -4,8 +4,8 @@ version: 0.0.1
 description: Helm chart for deploying the DSP ArgoCD notifications instance
 type: application
 maintainers:
-  - name: Chelsea Hoover
-    email: chelsea@broadinstitute.org
+  - name: DSP DevOps
+    email: dsp-devops@broadinstitute.org
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd-notifications
 dependencies:
