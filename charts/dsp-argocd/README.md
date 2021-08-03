@@ -20,6 +20,11 @@ Authenticate to the dsp-tools cluster:
 
     gcloud container clusters get-credentials dsp-tools --project=dsp-tools-k8s
 
+Update dependencies (this should be re-run any time you update the chart):
+
+    helm dependency build local-charts/dsp-argocd-notifications
+    helm dependency build
+
 Compare local copy of the chart to the deployed version of the chart:
 
     helm diff upgrade ap-argocd . --namespace=ap-argocd

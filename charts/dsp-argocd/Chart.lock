@@ -2,5 +2,8 @@ dependencies:
 - name: argo-cd
   repository: https://argoproj.github.io/argo-helm
   version: 2.9.2
-digest: sha256:7ee5e905ab0703bcf5797a97e11bda7ed48b5b9b5e912bc4188c77dd20ee672d
-generated: "2020-12-09T10:03:26.427384-05:00"
+- name: dsp-argocd-notifications
+  repository: file://local-charts/dsp-argocd-notifications
+  version: 0.0.1
+digest: sha256:7a2325e80402b383d908b9bb91f510de1e9e0018bbd310db8dea65756d738f77
+generated: "2021-08-03T11:36:23.527538-04:00"
