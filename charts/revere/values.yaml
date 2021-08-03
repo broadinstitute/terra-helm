@@ -1,0 +1,2 @@
+# -- (string) K8s SA to run Revere
+serviceAccountName: revere-sa
