@@ -1,7 +1,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ index .Values "actions-runner-controller" "nameOverride" }}-psp
+  name: {{ index .Values "actions-runner-controller" "nameOverride" }}-runner-psp
   labels:
     {{- include "dsp-gha-runner.labels" . | nindent 4 }}
   annotations:
