@@ -7,5 +7,5 @@ app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/component: dsp-gha-runner
-app.kubernetes.io/part-of: dsp-tools
+app.kubernetes.io/part-of: dsp-ci
 {{- end -}}
