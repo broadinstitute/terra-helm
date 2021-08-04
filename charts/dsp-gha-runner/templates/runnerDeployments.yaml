@@ -9,11 +9,32 @@ metadata:
   labels: 
     {{- include "dsp-gha-runner.labels" $ | nindent 4 }}
 spec:
-  replicas: {{ .replicas | default $.Values.defaultReplicas }}
   template:
     spec:
       repository: {{ .repository }}
-      {{- if $runnerSpec -}}
+      {{ if $runnerSpec }}
       {{- $runnerSpec | toYaml | nindent 6 }}
-      {{- end -}}
+      {{ end }}
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: {{ index $.Values "actions-runner-controller" "nameOverride" }}-{{ .name }}-autoscaler
+  labels: 
+    {{- include "dsp-gha-runner.labels" $ | nindent 4 }}
+spec:
+  scaleTargetRef:
+    name: {{ index $.Values "actions-runner-controller" "nameOverride" }}-{{ .name }}-deployment
+  minReplicas: {{ .minReplicas | default $.Values.defaultMinReplicas }}
+  maxReplicas: {{ .maxReplicas | default $.Values.defaultMaxReplicas }}
+  metrics:
+  - type: PercentageRunnersBusy
+    scaleUpThreshold: '0.75'
+    scaleDownThreshold: '0.3'
+    scaleUpAdjustment: 2
+    scaleDownAdjustment: 1
+  scheduledOverrides:
+  - startTime: {{ $.Values.weekendStart | quote }}
+    endTime: {{ $.Values.weekendEnd | quote }}
+    minReplicas: {{ .weekendMinReplicas | default $.Values.weekendMinReplicas }}
 {{- end }}
