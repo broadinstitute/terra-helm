@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: dsp-ci
+spec:
+  description: CI runners in the broad-dsp-ci cluster; this project managed via dsp-argocd Helm chart
+  destinations:
+  - namespace: {{ .Values.apps.ghaRunner.namespace }}
+    server: {{ .Values.projects.dspCi.cluster }}
+  sourceRepos:
+    - https://github.com/broadinstitute/terra-helm
+    - https://github.com/broadinstitute/terra-helm-definitions
+    - https://kubernetes-charts.storage.googleapis.com
+    - https://broadinstitute.github.io/datarepo-helm
