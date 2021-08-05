@@ -6,4 +6,4 @@ metadata:
   {{ include "externalcreds.labels" . | indent 4 }}
 data:
 prometheusJmx.yaml: |
-{{ include "externalcreds.config.allowed-jwks" . | indent 4 }}
+{{ include "externalcreds.allowed-jwks" . | indent 4 }}
