@@ -1,0 +1,16 @@
+apiVersion: v2
+name: dsp-gha-runner-controller
+version: 0.1.0
+description: Controller for self-hosted GHA runner CRDs from dsp-gha-runner-instances
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - github
+  - runner
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+dependencies:
+  - name: actions-runner-controller
+    version: 0.12.7
+    repository: https://actions-runner-controller.github.io/actions-runner-controller

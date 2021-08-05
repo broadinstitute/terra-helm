@@ -1,0 +1,43 @@
+{{- range .Values.runners }}
+{{ $defaultSpec := $.Values.runnerSpecOverrides | default dict }}
+{{ $runnerSpec := $defaultSpec | deepCopy | mustMerge (.specOverrides | default dict) }}
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: {{ .name }}
+  labels: 
+    {{- include "dsp-gha-runner-instances.labels" $ | nindent 4 }}
+spec:
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    spec:
+      repository: {{ .repository }}
+      {{ if $runnerSpec }}
+      {{- $runnerSpec | toYaml | nindent 6 }}
+      {{ end }}
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: {{ .name }}-autoscaler
+  labels: 
+    {{- include "dsp-gha-runner-instances.labels" $ | nindent 4 }}
+spec:
+  scaleTargetRef:
+    name: {{ .name }}
+  minReplicas: {{ .minReplicas | default $.Values.defaultMinReplicas }}
+  maxReplicas: {{ .maxReplicas | default $.Values.defaultMaxReplicas }}
+  metrics:
+  - type: PercentageRunnersBusy
+    scaleUpThreshold: '0.75'
+    scaleDownThreshold: '0.3'
+    scaleUpAdjustment: 2
+    scaleDownAdjustment: 1
+  scheduledOverrides:
+  - startTime: {{ $.Values.weekendStart | quote }}
+    endTime: {{ $.Values.weekendEnd | quote }}
+    minReplicas: {{ .weekendMinReplicas | default $.Values.weekendMinReplicas }}
+{{- end }}
