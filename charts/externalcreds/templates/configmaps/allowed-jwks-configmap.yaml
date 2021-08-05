@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-allowed-jwks
+  labels:
+  {{ include "externalcreds.labels" . | indent 4 }}
+data:
+prometheusJmx.yaml: |
+{{ include "externalcreds.config.allowed-jwks" . | indent 4 }}
