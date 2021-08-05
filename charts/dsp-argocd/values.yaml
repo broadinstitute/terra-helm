@@ -108,7 +108,7 @@ projects:
 
 apps:
   ghaRunner:
-    notiticationChannel: ap-k8s-monitor
+    notificationChannel: ap-k8s-monitor
     namespace: gha-runner
     controller:
       chart: dsp-gha-runner-controller

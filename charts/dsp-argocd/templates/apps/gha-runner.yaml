@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: gha-runner-controller
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notiticationChannel }}
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notificationChannel }}
 spec:
   destination:
     namespace: {{ .Values.apps.ghaRunner.namespace }}
@@ -30,7 +30,7 @@ kind: Application
 metadata:
   name: gha-runner-instances
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notiticationChannel }}
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notificationChannel }}
 spec:
   destination:
     namespace: {{ .Values.apps.ghaRunner.namespace }}
