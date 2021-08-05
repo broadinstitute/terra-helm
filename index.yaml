@@ -10659,6 +10659,26 @@ entries:
     version: 0.1.0-424.1627483615.54d42c
   dsp-gha-runner-controller:
   - apiVersion: v2
+    created: "2021-08-05T18:30:03.285989955Z"
+    dependencies:
+    - name: actions-runner-controller
+      repository: https://actions-runner-controller.github.io/actions-runner-controller
+      version: 0.12.7
+    description: Controller for self-hosted GHA runner CRDs from dsp-gha-runner-instances
+    digest: 1945d62a1583abac100e895f3e16185daf0b0f13e7d5620c84eb2f3141c3bbc9
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner-controller
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-controller-0.2.0/dsp-gha-runner-controller-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2021-08-05T15:22:38.200565373Z"
     dependencies:
     - name: actions-runner-controller
@@ -10679,6 +10699,22 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-controller-0.1.0-431.1628176951.4a8367/dsp-gha-runner-controller-0.1.0-431.1628176951.4a8367.tgz
     version: 0.1.0-431.1628176951.4a8367
   dsp-gha-runner-instances:
+  - apiVersion: v2
+    created: "2021-08-05T18:30:03.409700651Z"
+    description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
+    digest: b6a3af46cafdb4e060238e381e410de9081ff78c523ed2321c5683193c257d64
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner-instances
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.2.0/dsp-gha-runner-instances-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v2
     created: "2021-08-05T15:22:38.286543115Z"
     description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
