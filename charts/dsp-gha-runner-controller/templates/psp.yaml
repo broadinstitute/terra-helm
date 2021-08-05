@@ -3,7 +3,7 @@ kind: PodSecurityPolicy
 metadata:
   name: {{ index .Values "actions-runner-controller" "nameOverride" }}-runner-psp
   labels:
-    {{- include "dsp-gha-runner.labels" . | nindent 4 }}
+    {{- include "dsp-gha-runner-controller.labels" . | nindent 4 }}
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
 spec:

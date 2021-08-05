@@ -5,11 +5,14 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: {{ index $.Values "actions-runner-controller" "nameOverride" }}-{{ .name }}-deployment
+  name: {{ .name }}
   labels: 
-    {{- include "dsp-gha-runner.labels" $ | nindent 4 }}
+    {{- include "dsp-gha-runner-instances.labels" $ | nindent 4 }}
 spec:
   template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       repository: {{ .repository }}
       {{ if $runnerSpec }}
@@ -19,12 +22,12 @@ spec:
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
 metadata:
-  name: {{ index $.Values "actions-runner-controller" "nameOverride" }}-{{ .name }}-autoscaler
+  name: {{ .name }}-autoscaler
   labels: 
-    {{- include "dsp-gha-runner.labels" $ | nindent 4 }}
+    {{- include "dsp-gha-runner-instances.labels" $ | nindent 4 }}
 spec:
   scaleTargetRef:
-    name: {{ index $.Values "actions-runner-controller" "nameOverride" }}-{{ .name }}-deployment
+    name: {{ .name }}
   minReplicas: {{ .minReplicas | default $.Values.defaultMinReplicas }}
   maxReplicas: {{ .maxReplicas | default $.Values.defaultMaxReplicas }}
   metrics:

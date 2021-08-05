@@ -3,7 +3,7 @@ kind: ClusterRoleBinding
 metadata:
   name: {{ index .Values "actions-runner-controller" "nameOverride" }}-runner-psp-role-binding
   labels:
-    {{- include "dsp-gha-runner.labels" . | nindent 4 }}
+    {{- include "dsp-gha-runner-controller.labels" . | nindent 4 }}
 roleRef:
   kind: ClusterRole
   name: {{ index .Values "actions-runner-controller" "nameOverride" }}-runner-psp-role

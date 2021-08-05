@@ -37,39 +37,3 @@ vault:
       tokenField: token
       # -- (string) Encoding of field values, either `text` or `base64`
       encoding: text
-
-# -- (number) Default number of runners to always allocate for a given repository
-defaultMinReplicas: 3
-
-# -- (number) Default nmaximum number of runners to allocate for a given repository (autoscales)
-defaultMaxReplicas: 6
-
-# -- (number) Overrides .defaultMinReplicas on weekends
-defaultWeekendMinReplicas: 1
-
-# -- (string) Weekend start time, recurs weekly
-weekendStart: "2021-05-01T00:00:00+09:00"
-
-# -- (string) Weekend end time, recurs weekly
-weekendEnd: "2021-05-03T00:00:00+09:00"
-
-# -- (object) Default overrides for the runner spec, documented at
-# https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks
-runnerSpecOverrides:
-
-# -- (list) Sets of runners to create
-runners:
-    # (string) required; used in K8s resource names
-  - name: example
-    # (string) required; should be organization/repository
-    repository: broadinstitute/example-repo
-    # (number) optional; overrides .defaultMinReplicas if provided
-    minReplicas: 2
-    # (number) optional; overrides .defaultMaxReplicas if provided
-    maxReplicas: 4
-    # (number) optional; overrides .defaultWeekendMinReplicas if provided
-    weekendMinReplicas: 1
-    # (object) optional; like .runnerSpecOverrides but takes precedence
-    specOverrides:
-      # dockerEnabled is true by default, changed here for demo
-      dockerEnabled: false

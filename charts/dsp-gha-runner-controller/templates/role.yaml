@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata:
   name: {{ index .Values "actions-runner-controller" "nameOverride" }}-runner-psp-role
   labels:
-    {{- include "dsp-gha-runner.labels" . | nindent 4 }}
+    {{- include "dsp-gha-runner-controller.labels" . | nindent 4 }}
 rules:
 - apiGroups: ["extensions"]
   resources: ["podsecuritypolicies"]
