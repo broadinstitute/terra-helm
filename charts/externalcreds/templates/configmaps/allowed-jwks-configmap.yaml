@@ -5,5 +5,5 @@ metadata:
   labels:
   {{ include "externalcreds.labels" . | indent 4 }}
 data:
-prometheusJmx.yaml: |
-{{ include "externalcreds.allowed-jwks" . | indent 4 }}
+allowed-jwks.yaml:
+{{ .Values.allowed-jwks | indent 4 }}
