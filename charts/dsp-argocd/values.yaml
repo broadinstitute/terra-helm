@@ -99,3 +99,20 @@ argo-cd:
 # Path in Vault where ArgoCD secrets live
 vault:
   pathPrefix: secret/suitable/argocd
+
+## DRY for projects/apps
+
+projects:
+  dspCi:
+    cluster: https://104.197.236.29
+
+apps:
+  ghaRunner:
+    notificationChannel: ap-k8s-monitor
+    namespace: gha-runner
+    controller:
+      chart: dsp-gha-runner-controller
+      version: 0.2.0
+    instances:
+      chart: dsp-gha-runner-instances
+      version: 0.2.0
