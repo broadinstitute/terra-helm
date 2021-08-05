@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gha-runner-controller
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notiticationChannel }}
+spec:
+  destination:
+    namespace: {{ .Values.apps.ghaRunner.namespace }}
+    server: {{ .Values.projects.dspCi.cluster }}
+  project: dsp-ci
+  source:
+    path: dsp-tools/{{ .Values.apps.ghaRunner.controller.chart }}
+    plugin:
+      name: helm-values
+      env:
+        - name: HELM_CHART_NAME
+          value: {{ .Values.apps.ghaRunner.controller.chart }}
+        - name: HELM_CHART_VERSION
+          value: {{ .Values.apps.ghaRunner.controller.version }}
+        - name: HELM_CHART_VALUES_FILES
+          value: values.yaml
+    repoURL: https://github.com/broadinstitute/terra-helm-definitions
+  syncPolicy:
+    automated:
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gha-runner-instances
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notiticationChannel }}
+spec:
+  destination:
+    namespace: {{ .Values.apps.ghaRunner.namespace }}
+    server: {{ .Values.projects.dspCi.cluster }}
+  project: dsp-ci
+  source:
+    path: dsp-tools/{{ .Values.apps.ghaRunner.instances.chart }}
+    plugin:
+      name: helm-values
+      env:
+        - name: HELM_CHART_NAME
+          value: {{ .Values.apps.ghaRunner.instances.chart }}
+        - name: HELM_CHART_VERSION
+          value: {{ .Values.apps.ghaRunner.instances.version }}
+        - name: HELM_CHART_VALUES_FILES
+          value: values.yaml
+    repoURL: https://github.com/broadinstitute/terra-helm-definitions
+  syncPolicy:
+    automated:
+      selfHeal: true
