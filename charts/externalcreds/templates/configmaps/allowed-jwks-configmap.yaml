@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-allowed-jwks
   labels:
-  {{ include "externalcreds.labels" . | indent 4 }}
+{{ include "externalcreds.labels" . | indent 4 }}
 data:
 allowed-jwks.yaml:
   externalcreds:
