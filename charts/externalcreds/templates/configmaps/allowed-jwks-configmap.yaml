@@ -7,4 +7,4 @@ metadata:
 data:
 allowed-jwks.yaml:
   externalcreds:
-    allowed-jwks-uris: [{{ range $.Values.allowedJwks }}{{ . }},{{ end }}]
+    allowed-jwks-uris: [{{ join "," .Values.allowedJwks }}]
