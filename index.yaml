@@ -34757,6 +34757,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.0.0/sam-0.0.0.tgz
     version: 0.0.0
+  sysbox:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2021-08-09T20:22:30.098596589Z"
+    description: Installation Helm chart for nestybox/sysbox
+    digest: 4099ea2b6a083e8ae358ecaafa7d53130e88b9e8b242c429e0a5a132007ba382
+    keywords:
+    - dsp
+    - broadinstitute
+    - sysbox
+    name: sysbox
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/nestybox/sysbox
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sysbox-0.0.1-434.1628540544.7e2ec3/sysbox-0.0.1-434.1628540544.7e2ec3.tgz
+    version: 0.0.1-434.1628540544.7e2ec3
   terra-ap-prometheus-operator:
   - apiVersion: v1
     appVersion: 0.36.0
