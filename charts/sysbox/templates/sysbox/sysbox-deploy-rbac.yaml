@@ -1,5 +1,5 @@
 ---
-# CHANGES
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/rbac/sysbox-deploy-rbac.yaml
 # metadata.labels added
 apiVersion: v1
 kind: ServiceAccount
@@ -9,7 +9,7 @@ metadata:
   labels:
     {{- include "sysbox.labels" . | nindent 4 }}
 ---
-# CHANGES
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/rbac/sysbox-deploy-rbac.yaml
 # metadata.labels added
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
@@ -22,7 +22,7 @@ rules:
   resources: ["nodes"]
   verbs: ["get", "patch"]
 ---
-# CHANGES
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/rbac/sysbox-deploy-rbac.yaml
 # metadata.labels added
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1

@@ -1,5 +1,5 @@
 ---
-# CHANGES
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/daemonset/sysbox-deploy-k8s.yaml
 # metadata.labels added
 apiVersion: apps/v1
 kind: DaemonSet
