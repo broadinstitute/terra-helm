@@ -35029,6 +35029,23 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.4.0
+    created: "2021-08-10T15:07:54.245622322Z"
+    description: Installation Helm chart for nestybox/sysbox
+    digest: bb274787fe25b40f6d3f4f48a200deac8c4dfb7687f911199420c9ee882418ff
+    keywords:
+    - dsp
+    - broadinstitute
+    - sysbox
+    name: sysbox
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/nestybox/sysbox
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sysbox-0.1.0-437.1628608068.24ec68/sysbox-0.1.0-437.1628608068.24ec68.tgz
+    version: 0.1.0-437.1628608068.24ec68
+  - apiVersion: v2
+    appVersion: 0.4.0
     created: "2021-08-09T21:11:53.802156752Z"
     description: Installation Helm chart for nestybox/sysbox
     digest: a8e8106a1165c01e3deb50ea172885568248e6558884785cec1add311f5b0c8b
