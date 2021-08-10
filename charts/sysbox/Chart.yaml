@@ -1,6 +1,6 @@
 apiVersion: v2
 name: sysbox
-version: 0.2.0
+version: 0.3.0
 appVersion: 0.4.0
 description: Installation Helm chart for nestybox/sysbox
 type: application
