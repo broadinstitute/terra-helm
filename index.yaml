@@ -9378,6 +9378,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.15.0/dsp-argocd-0.15.0.tgz
     version: 0.15.0
   - apiVersion: v2
+    created: "2021-08-10T18:15:25.257839673Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.9.2
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 48a1b618399a92c806f899893f6bdb7eb4091566793d94a984dcbbda38b38723
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.15.0-439.1628619317.86e698/dsp-argocd-0.15.0-439.1628619317.86e698.tgz
+    version: 0.15.0-439.1628619317.86e698
+  - apiVersion: v2
     created: "2021-08-10T14:53:11.107462003Z"
     dependencies:
     - name: argo-cd
@@ -35117,6 +35139,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/sysbox-0.2.0/sysbox-0.2.0.tgz
     version: 0.2.0
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2021-08-10T18:15:25.349877554Z"
+    description: Installation Helm chart for nestybox/sysbox
+    digest: 45ba85f9569db1234296e7fce2378290c986d6a4782c1af930447a69d5aaad3b
+    keywords:
+    - dsp
+    - broadinstitute
+    - sysbox
+    name: sysbox
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/nestybox/sysbox
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sysbox-0.2.0-439.1628619318.86e698/sysbox-0.2.0-439.1628619318.86e698.tgz
+    version: 0.2.0-439.1628619318.86e698
   - apiVersion: v2
     appVersion: 0.4.0
     created: "2021-08-10T17:25:28.768055959Z"
