@@ -83,7 +83,8 @@ spec:
         command: ["/bin/bash"]
         args:
         - '-c'
-        - >-
+        - >- # Sleep 30 seconds to allow CloudSQL proxy time to start up. See DDO-1352
+          sleep {{ .Values.startupSleep }} &&
           java ${JAVA_OPTS}
           {{- if .Values.prometheus.enabled }}
           ${PROMETHEUS_ARGS}
