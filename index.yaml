@@ -19087,6 +19087,29 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-09-15-20-120.1600181187.32a2cb/leonardo-09-15-20-120.1600181187.32a2cb.tgz
     version: 09-15-20-120.1600181187.32a2cb
   - apiVersion: v2
+    created: "2021-08-10T15:19:39.085891896Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 1f5ff9104bf5c01e3351ad9756af96a970a2bc13567279f27159348b11d540d6
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.49.0/leonardo-0.49.0.tgz
+    version: 0.49.0
+  - apiVersion: v2
     created: "2021-07-20T15:32:10.032547302Z"
     dependencies:
     - condition: migration.enabled
@@ -44970,6 +44993,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   thurloe:
+  - apiVersion: v2
+    created: "2021-08-10T15:19:39.182536734Z"
+    description: Chart for Thurloe service in Terra
+    digest: 0d1d2840e9532edabb9301e5ec89599edc13ce0db3e5b6a3081ef7d2d48e9f75
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.6.0/thurloe-0.6.0.tgz
+    version: 0.6.0
   - apiVersion: v2
     created: "2021-07-26T13:57:27.333028147Z"
     description: Chart for Thurloe service in Terra
