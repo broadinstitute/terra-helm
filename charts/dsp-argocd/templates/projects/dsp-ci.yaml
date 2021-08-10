@@ -5,6 +5,8 @@ metadata:
 spec:
   description: CI runners in the broad-dsp-ci cluster; this project managed via dsp-argocd Helm chart
   destinations:
+  - namespace: kube-system
+    server: {{ .Values.projects.dspCi.cluster }}
   - namespace: {{ .Values.apps.ghaRunner.namespace }}
     server: {{ .Values.projects.dspCi.cluster }}
   sourceRepos:

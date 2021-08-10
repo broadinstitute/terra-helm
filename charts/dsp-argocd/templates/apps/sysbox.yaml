@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sysbox
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.sysbox.notificationChannel }}
+spec:
+  destination:
+    namespace: {{ .Values.apps.sysbox.namespace }}
+    server: {{ .Values.projects.dspCi.cluster }}
+  project: dsp-ci
+  source:
+    path: dsp-ci/{{ .Values.apps.sysbox.installer.chart }}
+    plugin:
+      name: helm-values
+      env:
+        - name: HELM_CHART_NAME
+          value: {{ .Values.apps.sysbox.installer.chart }}
+        - name: HELM_CHART_VERSION
+          value: {{ .Values.apps.sysbox.installer.version }}
+        - name: HELM_CHART_VALUES_FILES
+          value: values.yaml
+    repoURL: https://github.com/broadinstitute/terra-helm-definitions
+  syncPolicy:
+    automated:
+      selfHeal: true

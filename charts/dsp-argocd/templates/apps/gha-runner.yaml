@@ -10,7 +10,7 @@ spec:
     server: {{ .Values.projects.dspCi.cluster }}
   project: dsp-ci
   source:
-    path: dsp-tools/{{ .Values.apps.ghaRunner.controller.chart }}
+    path: dsp-ci/{{ .Values.apps.ghaRunner.controller.chart }}
     plugin:
       name: helm-values
       env:
@@ -37,7 +37,7 @@ spec:
     server: {{ .Values.projects.dspCi.cluster }}
   project: dsp-ci
   source:
-    path: dsp-tools/{{ .Values.apps.ghaRunner.instances.chart }}
+    path: dsp-ci/{{ .Values.apps.ghaRunner.instances.chart }}
     plugin:
       name: helm-values
       env:
