@@ -54,6 +54,9 @@ resources:
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 8Gi
 
+# Allows CloudSQL proxy time to start up. See DDO-1352
+startupSleep: 30
+
 probes:
   readiness:
     # probes.readiness.enable -- Whether to configure a readiness probe

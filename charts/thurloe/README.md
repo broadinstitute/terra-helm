@@ -37,12 +37,21 @@ Chart for Thurloe service in Terra
 | probes.readiness.spec.periodSeconds | int | `10` |  |
 | probes.readiness.spec.successThreshold | int | `1` |  |
 | probes.readiness.spec.timeoutSeconds | int | `5` |  |
+| probes.startup.enabled | bool | `true` |  |
+| probes.startup.spec.failureThreshold | int | `1080` |  |
+| probes.startup.spec.httpGet.path | string | `"/status"` |  |
+| probes.startup.spec.httpGet.port | int | `8000` |  |
+| probes.startup.spec.periodSeconds | int | `10` |  |
+| probes.startup.spec.successThreshold | int | `1` |  |
+| probes.startup.spec.timeoutSeconds | int | `5` |  |
 | prometheus.enabled | bool | `true` |  |
 | prometheus.initContainerImage | string | `"alpine:3.12.0"` |  |
 | prometheus.jmxJarRepo | string | `"https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent"` |  |
 | prometheus.jmxJarVersion | string | `"0.13.0"` |  |
+| proxyImage | string | `"broadinstitute/openidc-proxy:tcell_3_1_0"` |  |
 | replicas | int | `0` |  |
 | resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"8Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"8Gi"` | Memory to request for the deployment |
+| startupSleep | int | `30` |  |
