@@ -21,6 +21,24 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-08-10T14:11:59.037605791Z"
+    description: Chart for Agora service in Terra
+    digest: c310d9a65ccd881435ffc14b5f11596e1d9140fa944531b0cf07add554c405aa
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.7.0-415.1628604709.485d88/agora-0.7.0-415.1628604709.485d88.tgz
+    version: 0.7.0-415.1628604709.485d88
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-24T13:35:30.178020542Z"
     description: Chart for Agora service in Terra
     digest: 6a255710b71b516d87484eb05dbd318af720e0b1686a702f72b913ccee2a8634
@@ -5980,6 +5998,24 @@ entries:
     version: 0.10.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-08-10T14:11:59.173778578Z"
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 5c9df78c930ca3c35ecf34c427c74877bda7be4e7dd6ccc480129b74d367691d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.10.0-415.1628604710.485d88/cromiam-0.10.0-415.1628604710.485d88.tgz
+    version: 0.10.0-415.1628604710.485d88
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-23T21:25:39.716012652Z"
     description: Chart for cromiam service in Terra [WIP]
     digest: 6f725e553f30b8fe663964636b4520a34f49a1f80a9aefade17ea5bcedf1ebed
@@ -6860,6 +6896,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.21.0/cromwell-0.21.0.tgz
     version: 0.21.0
+  - apiVersion: v2
+    created: "2021-08-10T14:11:59.28925087Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 4f7e2190a4634f4712545270d64d0f1f47da90b51a428f68c0b0e091de680ccf
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.21.0-415.1628604710.485d88/cromwell-0.21.0-415.1628604710.485d88.tgz
+    version: 0.21.0-415.1628604710.485d88
   - apiVersion: v2
     created: "2021-07-14T18:59:14.312592244Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
@@ -9347,6 +9400,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.13.0-435.1628544660.b56af8/dsp-argocd-0.13.0-435.1628544660.b56af8.tgz
     version: 0.13.0-435.1628544660.b56af8
   - apiVersion: v2
+    created: "2021-08-10T14:11:59.397300892Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.9.2
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 7a2b5fb80db0b93c834e28c72688eb89b2807c94d62b3db80976ad9446318947
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.13.0-415.1628604710.485d88/dsp-argocd-0.13.0-415.1628604710.485d88.tgz
+    version: 0.13.0-415.1628604710.485d88
+  - apiVersion: v2
     created: "2021-08-03T17:45:52.596288777Z"
     dependencies:
     - name: argo-cd
@@ -10436,6 +10511,30 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-1.1.0/dsp-cert-manager-1.1.0.tgz
     version: 1.1.0
+  - apiVersion: v2
+    created: "2021-08-10T14:11:59.492197589Z"
+    dependencies:
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.4
+    description: Installs cert-manager, configures psps and creates Let's encrypt
+      cluster issuers
+    digest: 01184f5c41b1cb0318262f6548bb1a81cbf29c0821bf0ef0f51f6f0d08cf42c5
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - tools
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: dsp-cert-manager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-1.1.0-415.1628604709.485d88/dsp-cert-manager-1.1.0-415.1628604709.485d88.tgz
+    version: 1.1.0-415.1628604709.485d88
   - apiVersion: v2
     created: "2021-07-30T20:38:04.191099453Z"
     dependencies:
