@@ -19110,6 +19110,29 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.48.0/leonardo-0.48.0.tgz
     version: 0.48.0
   - apiVersion: v2
+    created: "2021-08-10T15:15:30.327664108Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 058594dc686e6b387b992ad40b0dbf791b441198c9c61c3064870493955a356a
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.48.0-436.1628608521.e23453/leonardo-0.48.0-436.1628608521.e23453.tgz
+    version: 0.48.0-436.1628608521.e23453
+  - apiVersion: v2
     created: "2021-08-10T14:57:05.708866544Z"
     dependencies:
     - condition: migration.enabled
@@ -44947,6 +44970,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.5.0/thurloe-0.5.0.tgz
     version: 0.5.0
+  - apiVersion: v2
+    created: "2021-08-10T15:15:30.450606201Z"
+    description: Chart for Thurloe service in Terra
+    digest: 007eeda40445f5b925cd8e18b1eb39db2b00bed8d767578bd3a6d07625c68bb8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.5.0-436.1628608522.e23453/thurloe-0.5.0-436.1628608522.e23453.tgz
+    version: 0.5.0-436.1628608522.e23453
   - apiVersion: v2
     created: "2021-08-10T14:57:05.810687611Z"
     description: Chart for Thurloe service in Terra
