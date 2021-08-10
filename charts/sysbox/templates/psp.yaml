@@ -1,7 +1,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: sysbox-daemonset-psp
+  name: sysbox-psp
   labels:
     {{- include "sysbox.labels" . | nindent 4 }}
   annotations:
@@ -17,4 +17,6 @@ spec:
   fsGroup:
     rule: RunAsAny
   volumes:
+  - '*'
+  allowedHostPaths:
   - '*'
