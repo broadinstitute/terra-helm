@@ -97,6 +97,14 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        command: ["/bin/bash"]
+        args:
+        - '-c'
+        - >- # Sleep 30 seconds to allow CloudSQL proxy time to start up. See DDO-1284 / BT-296
+          sleep {{ $settings.startupSleep }} &&
+          java ${JAVA_OPTS}
+          -jar /cromwell/cromwell.jar server
+        - '--'
         volumeMounts:
         - mountPath: /etc/cromwell.conf
           subPath: cromwell.conf

@@ -83,6 +83,15 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        command: ["/bin/bash"]
+        args:
+        - '-c'
+        - >- # Sleep 30 seconds to allow CloudSQL proxy time to start up. See DDO-1284 / BT-296
+          sleep {{ .Values.startupSleep }} &&
+          java ${JAVA_OPTS}
+          -Dconfig.file=/etc/agora.conf
+          -jar /agora/agora.jar
+        - '--'
         volumeMounts:
         - mountPath: /etc/agora.conf
           subPath: agora.conf

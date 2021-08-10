@@ -9,7 +9,8 @@ imageRepository: gcr.io/broad-dsp-gcr-public/agora
 imageTag: null
 # replicas -- Number of replicas for the deployment
 replicas: 3
-
+# Allows CloudSQL proxy time to start up. See DDO-1352
+startupSleep: 30
 # deploymentDefaults.proxyImage -- Image that the OIDC proxy uses
 proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 

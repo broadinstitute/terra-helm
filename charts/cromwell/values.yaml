@@ -29,6 +29,8 @@ deploymentDefaults:
   serviceAllowedAddresses: {}
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
+  # Allows CloudSQL proxy time to start up. See DDO-1352
+  startupSleep: 30
   legacyResourcePrefix: null
   # deploymentDefaults.nodeSelector -- (object) Optional nodeSelector map
   nodeSelector: null
