@@ -1,6 +1,10 @@
 {{- range .Values.runners }}
-{{ $defaultSpec := $.Values.runnerSpecOverrides | default dict }}
-{{ $runnerSpec := $defaultSpec | deepCopy | mustMerge (.specOverrides | default dict) }}
+{{ $defaultConfigValues := $.Values.runnerDefaults | default dict | deepCopy }}
+{{ $dockerConfigValues := .dockerConfig | default $.Values.defaultDockerConfig | index $.Values.dockerConfigs | deepCopy }}
+{{ $runnerConfigValues := .configOverrides | default dict }}
+{{ $mergedConfigValues := $defaultConfigValues | mustMerge $dockerConfigValues | mustMerge $runnerConfigValues }}
+{{ $configMetadata := index $mergedConfigValues "metadata" }}
+{{ $configSpec := index $mergedConfigValues "spec" }}
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
@@ -11,12 +15,13 @@ metadata:
 spec:
   template:
     metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      {{ if $configMetadata }}
+      {{- $configMetadata | toYaml | nindent 6 }}
+      {{ end }}
     spec:
       repository: {{ .repository }}
-      {{ if $runnerSpec }}
-      {{- $runnerSpec | toYaml | nindent 6 }}
+      {{ if $configSpec }}
+      {{- $configSpec | toYaml | nindent 6 }}
       {{ end }}
 ---
 apiVersion: actions.summerwind.dev/v1alpha1

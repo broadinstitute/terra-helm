@@ -1,3 +1,10 @@
+#
+#
+#   Autoscaling defaults and global configuration
+#
+#
+
+
 # -- (number) Default number of runners to always allocate for a given repository
 defaultMinReplicas: 3
 
@@ -13,9 +20,78 @@ weekendStart: "2021-05-01T00:00:00+09:00"
 # -- (string) Weekend end time, recurs weekly
 weekendEnd: "2021-05-03T00:00:00+09:00"
 
-# -- (object) Default overrides for the runner spec, documented at
+
+#
+#
+#   Runner defaults and global configuration
+#
+#
+
+
+# -- (object) Default runner metadata and spec overrides, see
 # https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks
-runnerSpecOverrides:
+runnerDefaults:
+  metadata:
+  spec:
+
+# -- (object) Lists/configures "shortcuts" to metadata/spec configurations
+# for different docker configurations
+dockerConfigs:
+  # 'sysboxDockerInDocker' uses the sysbox OCI runtime to run docker-in-docker
+  # without any privileged containers.
+  # This requires additional setup per https://github.com/nestybox/sysbox/blob/master/docs/user-guide/install-k8s.md.
+  sysboxDockerInDocker:
+    metadata:
+      annotations:
+        # Configure user namespace for the pod
+        # - https://github.com/nestybox/sysbox#using-sysbox
+        # - https://frasertweedale.github.io/blog-redhat/posts/2020-12-01-openshift-crio-userns.html#computing-the-gid-range
+        io.kubernetes.cri-o.userns-mode: 'auto:size=65536'
+    spec:
+      # From the controller's perspective, don't provide any privileges, assume no Docker
+      dockerEnabled: false
+      dockerdWithinRunnerContainer: false
+      # From the container's perspective, use Docker-in-Docker like normal
+      image: 'summerwind/actions-runner-dind:latest'
+      # Run these pods on a specific pool and runtime class
+      nodeSelector:
+        cloud.google.com/gke-nodepool: sysbox-v1
+      runtimeClassName: sysbox-runc
+  
+  # 'privilegedDockerInDocker' INSECURELY uses a privileged container to run
+  # docker-in-docker. Must be privileged to use Docker socket on host node.
+  privilegedDockerInDocker:
+    metadata:
+    spec:
+      dockerEnabled: false
+      dockerdWithinRunnerContainer: true
+  
+  # 'privilegedSidecar' INSECURELY uses a privileged sidecar container to run
+  # docker-out-of-docker. Must be privileged to disable seccomp, app armor, and
+  # mount masks.
+  privilegedSidecar:
+    metadata:
+    spec:
+      dockerEnabled: true
+      dockerdWithinRunnerContainer: false
+  
+  # 'none' provides no docker support whatsoever.
+  none:
+    metadata:
+    spec:
+      dockerEnabled: false
+      dockerdWithinRunnerContainer: false
+
+# -- (string) Name of a key on .dockerConfigs to use for docker configuration
+defaultDockerConfig: sysboxDockerInDocker
+
+
+#
+#
+#   Per-runner configuration, overriding any of the above
+#
+#
+
 
 # -- (list) Sets of runners to create
 runners:
@@ -29,8 +105,19 @@ runners:
     maxReplicas: 4
     # (number) optional; overrides .defaultWeekendMinReplicas if provided
     weekendMinReplicas: 1
-    # (object) optional; like .runnerSpecOverrides but takes precedence
-    specOverrides:
-      # any spec modifications are valid, runner GitHub labels here for example
-      labels:
-        - my-special-runner-label
+    # (string) optional; overrides .defaultDockerConfig if provided
+    dockerConfig: none
+    # (object) optional; overrides .runnerDefaults and .dockerConfigs[dockerConfig] if provided
+    configOverrides:
+      # e.g.
+      metadata:
+        annotations:
+          my-annotation: "foo"
+      spec:
+        resources:
+          limits:
+            cpu: "8.0"
+            memory: "32Gi"
+          requests:
+            cpu: "4.0"
+            memory: "16Gi"
