@@ -59,7 +59,8 @@ dockerConfigs:
       runtimeClassName: sysbox-runc
   
   # 'privilegedDockerInDocker' INSECURELY uses a privileged container to run
-  # docker-in-docker. Must be privileged to use Docker socket on host node.
+  # docker-in-docker via internal dockerd
+  # - https://github.com/actions-runner-controller/actions-runner-controller#runner-with-dind
   privilegedDockerInDocker:
     metadata:
     spec:
@@ -67,15 +68,16 @@ dockerConfigs:
       dockerdWithinRunnerContainer: true
   
   # 'privilegedSidecar' INSECURELY uses a privileged sidecar container to run
-  # docker-out-of-docker. Must be privileged to disable seccomp, app armor, and
-  # mount masks.
+  # docker-out-of-docker
+  # - https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks
   privilegedSidecar:
     metadata:
     spec:
       dockerEnabled: true
       dockerdWithinRunnerContainer: false
   
-  # 'none' provides no docker support whatsoever.
+  # 'none' provides no docker support whatsoever
+  # - https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks
   none:
     metadata:
     spec:
