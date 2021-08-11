@@ -9378,6 +9378,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.16.0/dsp-argocd-0.16.0.tgz
     version: 0.16.0
   - apiVersion: v2
+    created: "2021-08-11T22:57:56.419857256Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.9.2
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 35f19d5b200d79b3bf235d3310955009ba396cc5f4b84bfbcca91f622878343c
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.16.0-441.1628722668.845c82/dsp-argocd-0.16.0-441.1628722668.845c82.tgz
+    version: 0.16.0-441.1628722668.845c82
+  - apiVersion: v2
     created: "2021-08-10T17:09:07.23040071Z"
     dependencies:
     - name: argo-cd
@@ -35636,6 +35658,20 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.4.0/terra-argocd-app-0.4.0.tgz
     version: 0.4.0
+  - apiVersion: v2
+    created: "2021-08-11T22:57:56.544265134Z"
+    dependencies:
+    - name: terra-argocd-templates
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.0.4
+    description: A Helm chart for generating ArgoCD resources for a Terra app in an
+      environment
+    digest: 82c13e4e6ac9d76fadc74afd67ae2473fa78bc1dced7e792980d0ac30994fdb4
+    name: terra-argocd-app
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.4.0-441.1628722668.845c82/terra-argocd-app-0.4.0-441.1628722668.845c82.tgz
+    version: 0.4.0-441.1628722668.845c82
   - apiVersion: v2
     created: "2021-08-11T22:32:29.080575731Z"
     dependencies:
