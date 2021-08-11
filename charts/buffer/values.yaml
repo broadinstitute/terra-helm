@@ -96,6 +96,9 @@ ingress:
   # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
   timeoutSec: 120
 
+  backend:
+    servicePort: 443
+
   domain:
     # domain.hostname -- Hostname of this deployment
     hostname: buffer
@@ -123,9 +126,9 @@ ingress:
       enabled: true
       cert:
         # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
-        path: null
+        path: "hello/today/is/great"
         # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
-        secretKey: null
+        secretKey: 'foo'
       key:
         # ingress.cert.vault.key.path -- (string) Path to secret containing .key
         path: null
@@ -145,6 +148,18 @@ ingress:
       renewBefore: 720h0m0s
       issuerName: cert-manager-letsencrypt-prod
       issuerKind: ClusterIssuer
+
+  backendConfig:
+    healthCheck:
+      checkIntervalSec: 10
+      port: 8083
+      type: http
+      requestPath: /auth/health
+  ports:
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 443
 
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.

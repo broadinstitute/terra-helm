@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ingresslibchart
+description: A Helm chart for Ingress
+type: library
+version: 0.1.0
