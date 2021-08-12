@@ -52,6 +52,12 @@ spec:
       - name: app-swagger-client-id
         secret:
           secretName: {{ .Values.name }}-swagger-client-id
+      - name: app-allowed-jwks
+        configMap:
+          name: {{ .Values.name }}-allowed-jwks
+          items:
+            - key: allowed-jwks.yaml
+              path: allowed-jwks.yaml
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
@@ -152,6 +158,9 @@ spec:
         - name: app-swagger-client-id
           mountPath: /app/resources/rendered/swagger-client-id
           subPath: swagger-client-id
+        - name: app-allowed-jwks
+          mountPath: /app/resources/rendered/allowed_jwks.yaml
+          subPath: allowed-jwks.yaml
         {{- if .Values.prometheus.enabled }}
         - name: {{ .Values.name }}-prometheusjmx-config
           mountPath: /etc/{{ .Values.name }}-prometheusjmx-config
