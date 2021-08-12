@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dsp-argocd
-version: 0.16.0
+version: 0.17.0
 description: Helm Chart with extra resources for the DSP ArgoCD instance
 type: application
 maintainers:
