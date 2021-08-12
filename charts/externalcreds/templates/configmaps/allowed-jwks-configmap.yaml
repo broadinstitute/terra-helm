@@ -5,6 +5,5 @@ metadata:
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
 data:
-  allowed-jwks.yaml:
-    externalcreds:
-      allowed-jwks-uris: [{{ join "," .Values.allowedJwks }}]
+  allowed-jwks.yaml: |
+    externalcreds.allowed-jwks-uris: [{{ join "," .Values.allowedJwks }}]
