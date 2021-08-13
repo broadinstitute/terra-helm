@@ -36369,6 +36369,53 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.7.0/terra-cluster-0.7.0.tgz
     version: 0.7.0
   - apiVersion: v2
+    created: "2021-08-13T18:39:32.569674132Z"
+    dependencies:
+    - name: terra-cluster-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.6
+    - condition: terra-cluster-networking.enabled
+      name: terra-cluster-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    - condition: terra-prometheus.enabled
+      name: terra-prometheus
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.9.0
+    - condition: reloader.enabled
+      name: reloader
+      repository: https://stakater.github.io/stakater-charts
+      version: v0.0.69
+    - condition: terra-cluster-storage.enabled
+      name: terra-cluster-storage
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.3.0
+    - condition: diskmanager.enabled
+      name: diskmanager
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.1.0
+    description: A Helm chart to install cluster-wide resources for Terra
+    digest: a01c8bde68580b888b0ef9b8065fb2de1cada0a5a971a0a4e9a50cbdbe2f68a5
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.7.0-444.1628879962.f8330c/terra-cluster-0.7.0-444.1628879962.f8330c.tgz
+    version: 0.7.0-444.1628879962.f8330c
+  - apiVersion: v2
     created: "2021-08-13T18:30:02.294957116Z"
     dependencies:
     - name: terra-cluster-psps
