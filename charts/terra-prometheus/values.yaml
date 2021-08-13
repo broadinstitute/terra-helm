@@ -95,6 +95,10 @@ kube-prometheus-stack:
 
 
     prometheusSpec:
+      # prometheus-operator.promethues.prometheusSpec.scrapeInterval -- (string) time to wait between consecutive scrapes of metrics endpoints
+      scrapeInterval: "60s"
+      # prometheus-operator.promethues.prometheusSpec.evaluationInterval -- (string) time to wait between consecutive evaluations of monitoring rules
+      evaluationInterval: "60s"
       # prometheus-operator.prometheus.prometheusSpec.externalUrl -- (string) URL at which prometheus UI will be available.
       externalUrl: 
       # prometheus-operator.prometheus.prometheusSpec.containers -- ([object]) Used to inject the stackdriver exporter into prometheus pods.
