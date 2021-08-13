@@ -51,8 +51,9 @@ dockerConfigs:
       # From the controller's perspective, don't provide any privileges, assume no Docker
       dockerEnabled: false
       dockerdWithinRunnerContainer: false
-      # From the container's perspective, use Docker-in-Docker like normal
-      image: 'summerwind/actions-runner-dind:latest'
+      # Use our custom image that expects a sysbox runtime
+      # - https://github.com/broadinstitute/dsp-github-action-runner-image
+      image: 'us-central1-docker.pkg.dev/dsp-artifact-registry/dsp-github-action-runner/dsp-github-action-runner:nightly'
       # Run these pods on a specific pool and runtime class
       nodeSelector:
         cloud.google.com/gke-nodepool: sysbox-v1
