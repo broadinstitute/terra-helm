@@ -1,6 +1,6 @@
 # terra-prometheus
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a helm chart to deploy monitoring infrastructure
 
@@ -20,44 +20,6 @@ a helm chart to deploy monitoring infrastructure
 |------------|------|---------|
 | https://prometheus-community.github.io/helm-charts/ | kube-prometheus-stack | 9.3.4 |
 
-Putting the contents of the alermanager-conf.yaml here so it is version controlled.
-If a change is made for now the vault value must be manually updated.
-
-```
-global:
-  resolve_timeout: 5m
-  slack_api_url: ${SLACK_WEBHOOK_URL}
-route:
-  group_by: ['job']
-  group_wait: 30s
-  group_interval: 5m
-  repeat_interval: 12h
-  receiver: 'slack'
-  routes:
-  - match:
-      alertname: Watchdog
-    receiver: 'null'
-  - match:
-    receiver: 'slack'
-    continue: true
-receivers:
-- name: 'null'
-- name: 'slack'
-  slack_configs:
-  - channel: '#terra-prometheus-alerts'
-    send_resolved: true
-    title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
-    text: >-
-      {{ range .Alerts }}
-        *Alert:* `{{ .Labels.severity }}`
-        *Description:* {{ .Annotations.message }}
-        *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:> *Runbook:* <{{ .Annotations.runbook }}|:spiral_note_pad:>
-        *Details:*
-        {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-        {{ end }}
-      {{ end }}
-```
-
 ## Values
 
 | Key | Type | Default | Description |
@@ -76,7 +38,9 @@ receivers:
 | kube-prometheus-stack.prometheus.ingress.paths[0] | string | `"/*"` |  |
 | kube-prometheus-stack.prometheus.ingress.tls[0].secretName | string | `"terra-prometheus-cert"` |  |
 | kube-prometheus-stack.prometheus.prometheusSpec.containers | string | `nil` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.evaluationInterval | string | `"60s"` |  |
 | kube-prometheus-stack.prometheus.prometheusSpec.externalUrl | string | `nil` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.scrapeInterval | string | `"60s"` |  |
 | kube-prometheus-stack.prometheus.service.annotations."cloud.google.com/backend-config" | string | `nil` |  |
 | kube-prometheus-stack.prometheus.service.type | string | `"NodePort"` |  |
 | kube-prometheus-stack.prometheusOperator.createCustomResource | bool | `false` |  |
