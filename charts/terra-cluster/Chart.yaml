@@ -2,7 +2,7 @@ apiVersion: v2
 name: terra-cluster
 description: A Helm chart to install cluster-wide resources for Terra
 type: application
-version: 0.7.0
+version: 0.8.0
 keywords:
   - dsp
   - broadinstitute
