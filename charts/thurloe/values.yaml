@@ -40,6 +40,7 @@ imageConfig:
   tag:
   imagePullPolicy: Always
 
+# replicas -- Number of replicas for the deployment
 replicas: 3
 
 resources:
