@@ -174,10 +174,10 @@ spec:
           mountPath: /{{ .Values.name }}-prometheusjmx-jar
       {{- end }}
 ---
-apiVersion: batch/v1
+apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: hello
+  name: {{ .Values.name }}-cronjob
 spec:
   schedule: "*/1 * * * *"
   concurrencyPolicy: Forbid
