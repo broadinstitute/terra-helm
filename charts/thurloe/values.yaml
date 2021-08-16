@@ -40,7 +40,7 @@ imageConfig:
   tag:
   imagePullPolicy: Always
 
-replicas: 0
+replicas: 3
 
 resources:
   requests:
