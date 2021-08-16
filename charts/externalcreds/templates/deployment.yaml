@@ -191,7 +191,6 @@ spec:
               - "/app/resources:/app/classes:/app/libs/*"
               - "bio.terra.externalcreds.ExternalCredsCronApplication"
 {{ include "externalcreds.sqlproxy.container" . | indent 10 }}
-{{ include "externalcreds.init.containers" . | indent 8 }}
 ---
 {{- if .Values.postgres.enabled }}
 apiVersion: apps/v1
