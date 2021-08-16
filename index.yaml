@@ -9356,6 +9356,28 @@ entries:
     version: 0.0.0-288.1612980844.e4afc2
   dsp-argocd:
   - apiVersion: v2
+    created: "2021-08-16T20:10:34.038266923Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.9.2
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 4bed25eab759526fe03f018d72a59736607d409259d15d70e5a79d22275c38d5
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.19.0/dsp-argocd-0.19.0.tgz
+    version: 0.19.0
+  - apiVersion: v2
     created: "2021-08-13T19:17:11.071853655Z"
     dependencies:
     - name: argo-cd
@@ -11128,6 +11150,22 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-controller-0.1.0-431.1628176951.4a8367/dsp-gha-runner-controller-0.1.0-431.1628176951.4a8367.tgz
     version: 0.1.0-431.1628176951.4a8367
   dsp-gha-runner-instances:
+  - apiVersion: v2
+    created: "2021-08-16T20:10:34.242821288Z"
+    description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
+    digest: 79130a18bd411492055b3475d5ea680e57bf442bf31d3d7d703e2cff7ea150c1
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner-instances
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.4.0/dsp-gha-runner-instances-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     created: "2021-08-13T18:54:46.621391257Z"
     description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
