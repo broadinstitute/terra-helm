@@ -115,7 +115,7 @@ apps:
       version: 0.2.0
     instances:
       chart: dsp-gha-runner-instances
-      version: 0.3.0
+      version: 0.4.0
   sysbox:
     notificationChannel: ap-k8s-monitor
     namespace: kube-system
