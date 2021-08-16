@@ -1,4 +1,3 @@
-{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 {{- define "externalcreds.app.volumes" -}}
 - name: app-sa-creds
   secret:
@@ -33,6 +32,7 @@
 {{- end -}}
 
 {{- define "externalcreds.app.container" -}}
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 - name: {{ .Values.name }}
   image: "{{- if .Values.image -}}
       {{ .Values.image }}
