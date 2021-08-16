@@ -1,3 +1,4 @@
+{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 {{- define "externalcreds.app.volumes" -}}
 - name: app-sa-creds
   secret:
