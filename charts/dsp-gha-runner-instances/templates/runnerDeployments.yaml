@@ -44,5 +44,5 @@ spec:
   scheduledOverrides:
   - startTime: {{ $.Values.weekendStart | quote }}
     endTime: {{ $.Values.weekendEnd | quote }}
-    minReplicas: {{ .weekendMinReplicas | default $.Values.weekendMinReplicas }}
+    minReplicas: {{ .weekendMinReplicas | default $.Values.defaultWeekendMinReplicas }}
 {{- end }}
