@@ -161,25 +161,14 @@ spec:
         {{- end }}
       {{- end }}
       {{- if .Values.prometheus.enabled }}
-      initContainers:
-      - name: download-prometheus-jmx-jar
-        image: {{ .Values.prometheus.initContainerImage }}
-        command: [
-          "wget",
-          "-O",
-          "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
-        ]
-        volumeMounts:
-        - name: {{ .Values.name }}-prometheusjmx-jar
-          mountPath: /{{ .Values.name }}-prometheusjmx-jar
-      {{- end }}
+{{ include "externalcreds.init.containers" . | indent 6 }}
 ---
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ .Values.name }}-cronjob
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/5 * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     metadata:
@@ -202,6 +191,7 @@ spec:
               - "/app/resources:/app/classes:/app/libs/*"
               - "bio.terra.externalcreds.ExternalCredsCronApplication"
 {{ include "externalcreds.sqlproxy.container" . | indent 10 }}
+{{ include "externalcreds.init.containers" . | indent 10 }}
 ---
 {{- if .Values.postgres.enabled }}
 apiVersion: apps/v1

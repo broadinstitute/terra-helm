@@ -162,3 +162,19 @@
     readOnly: true
 {{- end }}
 {{- end -}}
+
+{{- define "externalcreds.init.containers" -}}
+{{- if .Values.prometheus.enabled }}
+initContainers:
+  - name: download-prometheus-jmx-jar
+    image: {{ .Values.prometheus.initContainerImage }}
+    command: [
+        "wget",
+        "-O",
+        "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+    ]
+    volumeMounts:
+      - name: {{ .Values.name }}-prometheusjmx-jar
+        mountPath: /{{ .Values.name }}-prometheusjmx-jar
+{{- end }}
+{{- end -}}
