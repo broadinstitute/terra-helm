@@ -160,7 +160,6 @@ spec:
           subPath: tcell-config.conf
         {{- end }}
       {{- end }}
-      {{- if .Values.prometheus.enabled }}
 {{ include "externalcreds.init.containers" . | indent 6 }}
 ---
 apiVersion: batch/v1beta1
@@ -191,6 +190,7 @@ spec:
               - "/app/resources:/app/classes:/app/libs/*"
               - "bio.terra.externalcreds.ExternalCredsCronApplication"
 {{ include "externalcreds.sqlproxy.container" . | indent 10 }}
+{{ include "externalcreds.init.containers" . | indent 10 }}
 ---
 {{- if .Values.postgres.enabled }}
 apiVersion: apps/v1
