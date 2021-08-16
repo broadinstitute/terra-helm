@@ -1,0 +1,98 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.name }}-networkpolicy
+  labels:
+    {{- include "revere.labels" . | nindent 4 }}
+spec:
+  policyTypes:
+  - Ingress
+  - Egress
+  podSelector:
+    matchLabels:
+      {{- include "revere.labels" . | nindent 6 }}
+  egress:
+  - to:
+    # Atlassian, per https://ip-ranges.atlassian.com/
+    - ipBlock:
+        cidr: 2600:1f18:2146:e300::/56
+    - ipBlock:
+        cidr: 52.41.219.63/32
+    - ipBlock:
+        cidr: 34.216.18.129/32
+    - ipBlock:
+        cidr: 13.236.8.128/25
+    - ipBlock:
+        cidr: 2406:da1c:1e0:a200::/56
+    - ipBlock:
+        cidr: 2a05:d014:f99:dd00::/56
+    - ipBlock:
+        cidr: 2a05:d018:34d:5800::/56
+    - ipBlock:
+        cidr: 18.246.31.128/25
+    - ipBlock:
+        cidr: 34.236.25.177/32
+    - ipBlock:
+        cidr: 185.166.140.0/22
+    - ipBlock:
+        cidr: 34.199.54.113/32
+    - ipBlock:
+        cidr: 2600:1f1c:cc5:2300::/56
+    - ipBlock:
+        cidr: 2600:1f14:824:300::/56
+    - ipBlock:
+        cidr: 35.155.178.254/32
+    - ipBlock:
+        cidr: 52.204.96.37/32
+    - ipBlock:
+        cidr: 2406:da18:809:e00::/56
+    - ipBlock:
+        cidr: 35.160.177.10/32
+    - ipBlock:
+        cidr: 52.203.14.55/32
+    - ipBlock:
+        cidr: 18.184.99.128/25
+    - ipBlock:
+        cidr: 2401:1d80:3000::/36
+    - ipBlock:
+        cidr: 52.215.192.128/25
+    - ipBlock:
+        cidr: 104.192.136.0/21
+    - ipBlock:
+        cidr: 18.205.93.0/27
+    - ipBlock:
+        cidr: 35.171.175.212/32
+    - ipBlock:
+        cidr: 18.136.214.0/25
+    - ipBlock:
+        cidr: 52.202.195.162/32
+    - ipBlock:
+        cidr: 13.52.5.0/25
+    - ipBlock:
+        cidr: 34.218.168.212/32
+    - ipBlock:
+        cidr: 18.234.32.128/25
+    - ipBlock:
+        cidr: 34.218.156.209/32
+    - ipBlock:
+        cidr: 52.54.90.98/32
+    - ipBlock:
+        cidr: 34.232.119.183/32
+    - ipBlock:
+        cidr: 34.232.25.90/32
+    # DNS
+    - namespaceSelector:
+        matchLabels:
+          networking/namespace: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+      # Atlassian
+      - port: 443
+        protocol: TCP
+      # DNS
+      - port: 53
+        protocol: TCP
+      - port: 53
+        protocol: UDP
