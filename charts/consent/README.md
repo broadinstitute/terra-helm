@@ -71,6 +71,7 @@ A Helm chart for DUOS Consent
 | sentryDsnPath | string | `nil` |  |
 | servicesLocalUrl | string | `nil` |  |
 | servicesOntologyUrl | string | `nil` |  |
+| servicesSamUrl | string | `nil` |  |
 | sslPolicy | string | `"tls12-ssl-policy"` |  |
 | vaultCertPath | string | `nil` |  |
 | vaultCertSecretKey | string | `nil` |  |

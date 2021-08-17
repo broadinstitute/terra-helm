@@ -106,6 +106,7 @@ sentryDsnKey:
 
 servicesLocalUrl:
 servicesOntologyUrl:
+servicesSamUrl:
 
 sslPolicy:  tls12-ssl-policy
 
