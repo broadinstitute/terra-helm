@@ -57,6 +57,7 @@ datasets:
 services:
   localURL: {{ .Values.servicesLocalUrl }}
   ontologyURL: {{ .Values.servicesOntologyUrl }}
+  samUrl: {{ .Values.servicesSamUrl }}
 mailConfiguration:
   activateEmailNotifications: {{ .Values.emailNotificationsEnabled }}
   googleAccount: duos@broadinstitute.org
