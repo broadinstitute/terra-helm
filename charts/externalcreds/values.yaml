@@ -203,9 +203,9 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 samplingProbability: 1.0
 
 appDeployments:
-  - name: frontend
-    replicas: 0
-    command: ""
-  - name: backend
-    replicas: 1
-    command: "java -cp /app/resources:/app/classes:/app/libs/* bio.terra.externalcreds.ExternalCredsCronApplication"
+- name: frontend
+  replicas: 0
+  command: ""
+- name: backend
+  replicas: 1
+  command: "java -cp /app/resources:/app/classes:/app/libs/* bio.terra.externalcreds.ExternalCredsCronApplication"

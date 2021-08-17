@@ -1,13 +1,13 @@
-{{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
-{{- range .Values.appDeployments }}
+{{- $imageTag := $.Values.imageConfig.tag | default $.Values.global.applicationVersion -}}
+{{- range $.Values.appDeployments }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-{{ .name }}-deployment
+  name: {{ $.Values.name }}-{{ .name }}-deployment
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
-  {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
+  {{- if and $.Values.proxy.enabled $.Values.proxy.reloadOnCertUpdate }}
   annotations:
     reloader.stakater.com/auto: "true"
   {{- end }}
@@ -21,133 +21,133 @@ spec:
   replicas: {{ .replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.name }}-deployment
+      deployment: {{ $.Values.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.name }}-deployment
+        deployment: {{ $.Values.name }}-deployment
 {{ include "externalcreds.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map changes: */}}
-        checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
-        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
-        {{- if .Values.postgres.enabled }}
-        checksum/{{ .Values.name }}-postgres-initdb: {{ include (print $.Template.BasePath "/configmaps/postgres-init-db-configmap.yaml") . | sha256sum }}
+        checksum/{{ $.Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
+        checksum/{{ $.Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
+        {{- if $.Values.postgres.enabled }}
+        checksum/{{ $.Values.name }}-postgres-initdb: {{ include (print $.Template.BasePath "/configmaps/postgres-init-db-configmap.yaml") . | sha256sum }}
         {{- end }}
-        {{- if .Values.prometheus.enabled }}
-        checksum/{{ .Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
+        {{- if $.Values.prometheus.enabled }}
+        checksum/{{ $.Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
         {{- end }}
     spec:
-      serviceAccountName: {{ .Values.name }}-service-sa
+      serviceAccountName: {{ $.Values.name }}-service-sa
       volumes:
-      {{- if not .Values.postgres.enabled }}
+      {{- if not $.Values.postgres.enabled }}
       - name: cloudsql-sa-creds
         secret:
-          secretName: {{ .Values.name }}-sqlproxy-sa
+          secretName: {{ $.Values.name }}-sqlproxy-sa
       {{- end }}
       - name: app-sa-creds
         secret:
-          secretName: {{ .Values.name }}-app-sa
+          secretName: {{ $.Values.name }}-app-sa
       - name: app-providers
         secret:
-          secretName: {{ .Values.name }}-providers
+          secretName: {{ $.Values.name }}-providers
       - name: app-swagger-client-id
         secret:
-          secretName: {{ .Values.name }}-swagger-client-id
+          secretName: {{ $.Values.name }}-swagger-client-id
       - name: app-allowed-jwks
         configMap:
-          name: {{ .Values.name }}-allowed-jwks
+          name: {{ $.Values.name }}-allowed-jwks
           items:
             - key: allowed-jwks.yaml
               path: allowed-jwks.yaml
-      {{- if .Values.proxy.enabled }}
+      {{- if $.Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
-          name: {{ .Values.name }}-proxy-configmap
+          name: {{ $.Values.name }}-proxy-configmap
           items:
           - key: apache-httpd-proxy-config
-            path: {{ .Values.name }}-proxy.conf
+            path: {{ $.Values.name }}-proxy.conf
       - name: cert
         secret:
-          secretName: {{ .Values.name }}-cert
-      {{- if .Values.proxy.tcell.enabled }}
+          secretName: {{ $.Values.name }}-cert
+      {{- if $.Values.proxy.tcell.enabled }}
       - name: tcell-config
         configMap:
-          name: {{ .Values.name }}-tcell-configmap
+          name: {{ $.Values.name }}-tcell-configmap
           items:
           - key: tcell-config
             path: tcell-config.conf
       {{- end }}
       {{- end }}
-      {{- if .Values.prometheus.enabled }}
-      - name: {{ .Values.name }}-prometheusjmx-config
+      {{- if $.Values.prometheus.enabled }}
+      - name: {{ $.Values.name }}-prometheusjmx-config
         configMap:
-          name: {{ .Values.name }}-prometheus-configmap
-      - name: {{ .Values.name }}-prometheusjmx-jar
+          name: {{ $.Values.name }}-prometheus-configmap
+      - name: {{ $.Values.name }}-prometheusjmx-jar
         emptyDir: {}
       {{- end }}
       containers:
-      - name: {{ .Values.name }}
-        image: "{{- if .Values.image -}}
-            {{ .Values.image }}
+      - name: {{ $.Values.name }}
+        image: "{{- if $.Values.image -}}
+            {{ $.Values.image }}
           {{- else -}}
-            {{ .Values.imageConfig.repository }}:{{ $imageTag }}
+            {{ $.Values.imageConfig.repository }}:{{ $imageTag }}
           {{- end }}"
-        imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+        imagePullPolicy: {{ $.Values.imageConfig.imagePullPolicy }}
         ports:
         - name: status
           containerPort: 8080
           protocol: TCP
-        {{- if .Values.prometheus.enabled }}
+        {{- if $.Values.prometheus.enabled }}
         - name: metrics
           containerPort: 9090
           protocol: TCP
         {{- end }}
         resources:
-{{ toYaml .Values.resources | indent 10 }}
+{{ toYaml $.Values.resources | indent 10 }}
         env:
-        {{- if .Values.prometheus.enabled }}
+        {{- if $.Values.prometheus.enabled }}
         - name: JAVA_TOOL_OPTIONS
-          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ .Values.name }}-prometheusjmx-config/prometheusJmx.yaml"
+          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ $.Values.name }}-prometheusjmx-config/prometheusJmx.yaml"
         {{- end }}
-        {{- if not .Values.postgres.enabled }}
+        {{- if not $.Values.postgres.enabled }}
         - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-postgres-db-creds
+              name: {{ $.Values.name }}-postgres-db-creds
               key: username
         - name: DATABASE_USER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-postgres-db-creds
+              name: {{ $.Values.name }}-postgres-db-creds
               key: password
         - name: DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-postgres-db-creds
+              name: {{ $.Values.name }}-postgres-db-creds
               key: db
         {{- else }}
         - name: DATABASE_HOSTNAME
-          value: {{ .Values.name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
+          value: {{ $.Values.name }}-postgres-service.{{ $.Release.Namespace }}.svc.cluster.local
         - name: DATABASE_USER
           value: postgres
         - name: DATABASE_USER_PASSWORD
-          value: {{ .Values.postgres.password }}
+          value: {{ $.Values.postgres.password }}
         - name: DATABASE_NAME
-          value: {{ index .Values.postgres.dbs 0 }}
+          value: {{ index $.Values.postgres.dbs 0 }}
         {{- end }}
-        {{- if .Values.initDB }}
+        {{- if $.Values.initDB }}
         - name: INIT_DB
           value: 'true'
         {{- end }}
         - name: SAM_ADDRESS
-          value: {{ .Values.samAddress }}
+          value: {{ $.Values.samAddress }}
         - name: SAMPLING_PROBABILITY
-          value: "{{ .Values.samplingProbability }}"
+          value: "{{ $.Values.samplingProbability }}"
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /secrets/app/service-account.json
         - name: CLOUD_TRACE_ENABLED
-          value: "{{ .Values.cloudTraceEnabled }}"
+          value: "{{ $.Values.cloudTraceEnabled }}"
         - name: EXTERNALCREDS_INGRESS_DOMAIN_NAME
           value: "{{ template "externalcreds.fqdn" . }}"
         volumeMounts:
@@ -163,26 +163,26 @@ spec:
         - name: app-allowed-jwks
           mountPath: /app/resources/rendered/allowed_jwks.yaml
           subPath: allowed-jwks.yaml
-        {{- if .Values.prometheus.enabled }}
-        - name: {{ .Values.name }}-prometheusjmx-config
-          mountPath: /etc/{{ .Values.name }}-prometheusjmx-config
-        - name: {{ .Values.name }}-prometheusjmx-jar
+        {{- if $.Values.prometheus.enabled }}
+        - name: {{ $.Values.name }}-prometheusjmx-config
+          mountPath: /etc/{{ $.Values.name }}-prometheusjmx-config
+        - name: {{ $.Values.name }}-prometheusjmx-jar
           mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
         {{- end }}
-        {{- if .Values.probes.readiness.enabled }}
+        {{- if $.Values.probes.readiness.enabled }}
         readinessProbe:
-          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+          {{- toYaml $.Values.probes.readiness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.liveness.enabled }}
+        {{- if $.Values.probes.liveness.enabled }}
         livenessProbe:
-          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
+          {{- toYaml $.Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
-        {{- if .Values.probes.startup.enabled }}
+        {{- if $.Values.probes.startup.enabled }}
         startupProbe:
-          {{- toYaml .Values.probes.startup.spec | nindent 10 }}
+          {{- toYaml $.Values.probes.startup.spec | nindent 10 }}
         {{- end }}
-      {{- if not .Values.postgres.enabled }}
+      {{- if not $.Values.postgres.enabled }}
         command: {{ .command }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
@@ -190,17 +190,17 @@ spec:
         - name: SQL_INSTANCE_PROJECT
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-cloudsql-postgres-instance
+              name: {{ $.Values.name }}-cloudsql-postgres-instance
               key: project
         - name: SQL_INSTANCE_REGION
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-cloudsql-postgres-instance
+              name: {{ $.Values.name }}-cloudsql-postgres-instance
               key: region
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-cloudsql-postgres-instance
+              name: {{ $.Values.name }}-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
                   "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
@@ -213,74 +213,74 @@ spec:
           mountPath: /secrets/cloudsql
           readOnly: true
       {{- end }}
-      {{- if .Values.proxy.enabled }}
+      {{- if $.Values.proxy.enabled }}
       - name: oidc-proxy
-        image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
+        image: "{{ $.Values.proxy.image.repository }}:{{ $.Values.proxy.image.version }}"
         env:
         - name: AOU_PREPROD_ALLOWLIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-allowlist
+              name: {{ $.Values.name }}-proxy-oauth-allowlist
               key: aou-preprod
         - name: AOU_PERF_ALLOWLIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-allowlist
+              name: {{ $.Values.name }}-proxy-oauth-allowlist
               key: aou-perf
         - name: AOU_PROD_ALLOWLIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-allowlist
+              name: {{ $.Values.name }}-proxy-oauth-allowlist
               key: aou-prod
         - name: AOU_DEV_ALLOWLIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-allowlist
+              name: {{ $.Values.name }}-proxy-oauth-allowlist
               key: aou-dev
         - name: AOU_STABLE_ALLOWLIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-allowlist
+              name: {{ $.Values.name }}-proxy-oauth-allowlist
               key: aou-stable
         - name: AOU_STAGING_ALLOWLIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-allowlist
+              name: {{ $.Values.name }}-proxy-oauth-allowlist
               key: aou-staging
         - name: TERRA_ID_ALLOWLIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-allowlist
+              name: {{ $.Values.name }}-proxy-oauth-allowlist
               key: terra
         - name: REMOTE_USER_CLAIM
           value: sub
-        {{- if .Values.proxy.ldap.enabled }}
+        {{- if $.Values.proxy.ldap.enabled }}
         - name: LDAP_BASE_DOMAIN
-          value: {{ .Values.proxy.ldap.baseDomain }}
+          value: {{ $.Values.proxy.ldap.baseDomain }}
         - name: AUTH_LDAP_URL2
-          value: 'AuthLDAPURL "ldaps://{{ .Values.proxy.ldap.url }}/ou=people,{{ .Values.proxy.ldap.baseDomain }}?googleSubjectId?sub?(objectClass=*)"'
+          value: 'AuthLDAPURL "ldaps://{{ $.Values.proxy.ldap.url }}/ou=people,{{ $.Values.proxy.ldap.baseDomain }}?googleSubjectId?sub?(objectClass=*)"'
         - name: AUTH_LDAP_GROUP_ATTR2
           value: 'AuthLDAPGroupAttribute member'
         - name: AUTH_LDAP_BIND_DN2
-          value: 'AuthLDAPBindDN "cn=proxy-ro,ou=people,{{ .Values.proxy.ldap.baseDomain }}"'
+          value: 'AuthLDAPBindDN "cn=proxy-ro,ou=people,{{ $.Values.proxy.ldap.baseDomain }}"'
         - name: AUTH_REQUIRE2
-          value: 'Require ldap-group cn=enabled-users,ou=groups,{{ .Values.proxy.ldap.baseDomain }}'
+          value: 'Require ldap-group cn=enabled-users,ou=groups,{{ $.Values.proxy.ldap.baseDomain }}'
         - name: PROXY_LDAP_BIND_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-ldap-bind-password
+              name: {{ $.Values.name }}-proxy-ldap-bind-password
               key: password
         {{- end }}
-        {{- if .Values.proxy.tcell.enabled }}
+        {{- if $.Values.proxy.tcell.enabled }}
         - name: TCELL_AGENT_APP_ID
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-tcell-secrets
+              name: {{ $.Values.name }}-proxy-tcell-secrets
               key: app-id
         - name: TCELL_AGENT_API_KEY
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-tcell-secrets
+              name: {{ $.Values.name }}-proxy-tcell-secrets
               key: api-key
         - name: ENABLE_TCELL
           value: 'yes'
@@ -291,7 +291,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/apache2/sites-available/site.conf
           name: apache-httpd-proxy-config
-          subPath: {{ .Values.name }}-proxy.conf
+          subPath: {{ $.Values.name }}-proxy.conf
         - mountPath: /etc/ssl/certs/server.crt
           subPath: tls.crt
           name: cert
@@ -300,38 +300,38 @@ spec:
           subPath: tls.key
           name: cert
           readOnly: true
-        {{- if .Values.ingress.cert.vault.enabled}}
+        {{- if $.Values.ingress.cert.vault.enabled}}
         - mountPath: /etc/ssl/certs/ca-bundle.crt
           subPath: ca-bundle.crt
           name: cert
           readOnly: true
         {{- end }}
-        {{- if .Values.proxy.tcell.enabled }}
+        {{- if $.Values.proxy.tcell.enabled }}
         - mountPath: /etc/apache2/tcell_agent.config
           name: tcell-config
           subPath: tcell-config.conf
         {{- end }}
       {{- end }}
-      {{- if .Values.prometheus.enabled }}
+      {{- if $.Values.prometheus.enabled }}
       initContainers:
       - name: download-prometheus-jmx-jar
-        image: {{ .Values.prometheus.initContainerImage }}
+        image: {{ $.Values.prometheus.initContainerImage }}
         command: [
           "wget",
           "-O",
-          "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+          "/{{ $.Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ $.Values.prometheus.jmxJarRepo }}/{{ $.Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ $.Values.prometheus.jmxJarVersion }}.jar"
         ]
         volumeMounts:
-        - name: {{ .Values.name }}-prometheusjmx-jar
-          mountPath: /{{ .Values.name }}-prometheusjmx-jar
+        - name: {{ $.Values.name }}-prometheusjmx-jar
+          mountPath: /{{ $.Values.name }}-prometheusjmx-jar
       {{- end }}
 {{- end }}
 ---
-{{- if .Values.postgres.enabled }}
+{{- if $.Values.postgres.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-postgres-deployment
+  name: {{ $.Values.name }}-postgres-deployment
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
 {{- include "postgres.deployment.tpl" . }}
