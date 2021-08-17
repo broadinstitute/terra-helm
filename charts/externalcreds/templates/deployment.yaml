@@ -149,7 +149,7 @@ spec:
         - name: CLOUD_TRACE_ENABLED
           value: "{{ $.Values.cloudTraceEnabled }}"
         - name: EXTERNALCREDS_INGRESS_DOMAIN_NAME
-          value: "{{ template "externalcreds.fqdn" . }}"
+          value: "{{ template "externalcreds.fqdn" $ }}"
         volumeMounts:
         - name: app-sa-creds
           mountPath: /secrets/app
