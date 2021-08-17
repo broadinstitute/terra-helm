@@ -6,7 +6,7 @@ kind: Deployment
 metadata:
   name: {{ $.Values.name }}-{{ .name }}-deployment
   labels:
-{{ include "externalcreds.labels" . | indent 4 }}
+{{ include "externalcreds.labels" $ | indent 4 }}
   {{- if and $.Values.proxy.enabled $.Values.proxy.reloadOnCertUpdate }}
   annotations:
     reloader.stakater.com/auto: "true"
@@ -26,7 +26,7 @@ spec:
     metadata:
       labels:
         deployment: {{ $.Values.name }}-deployment
-{{ include "externalcreds.labels" . | indent 8 }}
+{{ include "externalcreds.labels" $ | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map changes: */}}
         checksum/{{ $.Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
