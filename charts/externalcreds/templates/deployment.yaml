@@ -1,8 +1,10 @@
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
+{{- range .Values.appDeployments }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-deployment
+  name: {{ .Values.name }}-{{ .name }}-deployment
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
   {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
@@ -16,7 +18,7 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .replicas }}
   selector:
     matchLabels:
       deployment: {{ .Values.name }}-deployment
@@ -181,6 +183,7 @@ spec:
           {{- toYaml .Values.probes.startup.spec | nindent 10 }}
         {{- end }}
       {{- if not .Values.postgres.enabled }}
+        command: {{ .command }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
@@ -322,6 +325,7 @@ spec:
         - name: {{ .Values.name }}-prometheusjmx-jar
           mountPath: /{{ .Values.name }}-prometheusjmx-jar
       {{- end }}
+{{- end }}
 ---
 {{- if .Values.postgres.enabled }}
 apiVersion: apps/v1
