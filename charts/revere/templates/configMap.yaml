@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.name }}-cm
+  labels:
+    {{- include "revere.labels" . | nindent 4 }}
+data:
+  revere.yaml: |
+    {{- .Values.config | toYaml | nindent 4 }}
