@@ -12,3 +12,8 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/DataBiosphere/consent
+dependencies:
+- name: ingress-library
+  condition: ingress.enabled
+  version: 0.1.0
+  repository: file://../ingresslibchart
