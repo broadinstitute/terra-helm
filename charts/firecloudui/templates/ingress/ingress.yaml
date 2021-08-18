@@ -1,3 +1,3 @@
-{{- include "libchart.ingress" (list . "frecloudui.ingress" )  -}}
-{{- define "frecloudui.ingress" -}}
+{{- include "libchart.ingress" (list . "firecloudui.ingress" )  -}}
+{{- define "firecloudui.ingress" -}}
 {{- end }}

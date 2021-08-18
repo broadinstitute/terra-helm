@@ -1,1 +1,3 @@
-{{- include "ingresslibchart.ingress" . }}
+{{- include "libchart.ingress" (list . "workspacemanager.ingress" )  -}}
+{{- define "workspacemanager.ingress" -}}
+{{- end }}
