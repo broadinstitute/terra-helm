@@ -5,7 +5,7 @@ This takes an array of three values:
 - the template name of the overrides (destination)
 - the template name of the base (source)
 */}}
-{{- define "ingresslibchart.util.merge" -}}
+{{- define "libchart.util.merge" -}}
 {{- $top := first . -}}
 {{- $overrides := fromYaml (include (index . 1) $top) | default (dict ) -}}
 {{- $tpl := fromYaml (include (index . 2) $top) | default (dict ) -}}
@@ -17,8 +17,8 @@ Common labels
 */}}
 {{- define "helm.labels" -}}
 helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-app.kubernetes.io/name: {{ .Chart.Name }}
-app.kubernetes.io/instance: {{ .Values.name | quote }}
+app.kubernetes.io/name: {{ .Release.Name }}
+app.kubernetes.io/instance: {{ .Release.Name | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/component: {{ .Chart.Name }}
 app.kubernetes.io/part-of: terra
