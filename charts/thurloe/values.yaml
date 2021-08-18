@@ -13,10 +13,10 @@ ingress:
   sslPolicy: null
   # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
   timeoutSec: 120
-  # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
-  preSharedCerts: []
   cert:
     # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
+    # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
     # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
     #   certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
     vault:
