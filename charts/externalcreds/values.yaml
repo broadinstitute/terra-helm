@@ -203,14 +203,14 @@ appDeployments:
 - name: frontend
   replicas: 3
   command:
-    - "java"
-    - "-cp"
-    - "/app/resources:/app/classes:/app/libs/*"
-    - "bio.terra.externalcreds.ExternalCredsWebApplication"
+    - '"java"'
+    - '"-cp"'
+    - '"/app/resources:/app/classes:/app/libs/*"'
+    - '"bio.terra.externalcreds.ExternalCredsWebApplication"'
 - name: backend
   replicas: 1
   command:
-    - "java"
-    - "-cp"
-    - "/app/resources:/app/classes:/app/libs/*"
-    - "bio.terra.externalcreds.ExternalCredsCronApplication"
+    - '"java"'
+    - '"-cp"'
+    - '"/app/resources:/app/classes:/app/libs/*"'
+    - '"bio.terra.externalcreds.ExternalCredsCronApplication"'
