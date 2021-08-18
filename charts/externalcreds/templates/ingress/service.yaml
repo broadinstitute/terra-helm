@@ -15,7 +15,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    deployment: {{ .Values.name }}-deployment
+    deployment: {{ .Values.name }}-frontend-deployment
   ports:
   - name: https
     protocol: TCP
