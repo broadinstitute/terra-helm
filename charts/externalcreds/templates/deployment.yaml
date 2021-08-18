@@ -18,7 +18,7 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ (eq .name "frontend") | ternary $.Values.replicas 1 }}
+  replicas: {{ if .name "frontend" }}{{ $.Values.replicas }}{{ else }}1{{ end }}
   selector:
     matchLabels:
       deployment: {{ $.Values.name }}-{{ .name }}-deployment
