@@ -16,3 +16,7 @@ dependencies:
     condition: postgres.enabled
     version: 0.1.0
     repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+  - name: ingresslibchart
+    condition: ingress.enabled
+    version: 0.1.0
+    repository: file://../ingresslibchart
