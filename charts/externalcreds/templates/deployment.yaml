@@ -183,10 +183,10 @@ spec:
           {{- toYaml $.Values.probes.startup.spec | nindent 10 }}
         {{- end }}
       {{- if not $.Values.postgres.enabled }}
-        command: |-
-            {{- range .command }}
-          - {{ . | quote }}
-            {{- end }}
+        command:
+          {{- range .command }}
+        - {{ . | quote }}
+          {{- end }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
