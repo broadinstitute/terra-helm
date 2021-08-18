@@ -1,7 +1,3 @@
-{{- include "ingresslibchart.ingress" . }}
----
-{{- include "ingresslibchart.frontendconfig" .}}
----
-{{- include "ingresslibchart.backendConfig" .}}
----
-{{- include "ingresslibchart.service" .}}
+{{- include "libchart.ingress" (list . "buffer.ingress" )  -}}
+{{- define "buffer.ingress" -}}
+{{- end }}
