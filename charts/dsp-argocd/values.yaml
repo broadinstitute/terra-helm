@@ -23,6 +23,7 @@ argo-cd:
       accounts.fcprod-jenkins: apiKey
       accounts.local-notsuitable: login
       accounts.local-suitable: login
+      accounts.wsmtest-sync: apiKey
       configManagementPlugins: |
         - name: legacy-configs
           generate:
@@ -66,6 +67,8 @@ argo-cd:
         p, role:terra-ci, applications, sync, */*, allow
         p, role:terra-ci, applications, action/apps/Deployment/restart, */*, allow
         g, terra-ci, role:terra-ci
+        p, role:wsmtest-sync, applications, sync, terra-wsmtest/workspacemanager-wsmtest, allow
+        g, wsmtest-sync, role:wsmtest-sync
   controller:
     extraArgs:
     - --repo-server-timeout-seconds=180
