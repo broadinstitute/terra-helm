@@ -18,7 +18,7 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ .name == "frontend" ? $.Values.replicas : 1 }}
+  replicas: {{ (eq .name "frontend") | ternary $.Values.replicas 1 }}
   selector:
     matchLabels:
       deployment: {{ $.Values.name }}-{{ .name }}-deployment
@@ -182,7 +182,7 @@ spec:
         startupProbe:
           {{- toYaml $.Values.probes.startup.spec | nindent 10 }}
         {{- end }}
-        {{- if .name == "backend"  }}
+        {{- if eq .name "backend" }}
         command: ["java",
                   "-cp",
                   "/app/resources:/app/classes:/app/libs/*",
