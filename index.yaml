@@ -1372,6 +1372,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.23.0/buffer-0.23.0.tgz
     version: 0.23.0
   - apiVersion: v2
+    created: "2021-08-18T18:02:48.582863686Z"
+    dependencies:
+    - name: ingresslibchart
+      repository: file://../../ingresslibchart
+      version: 0.1.0
+    description: Chart for Resource Buffering Service
+    digest: c3a1d377c373adf768c305f0af671d816aced26d130fac63ec5946b9b1bb9f7d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.23.0-422.1629309754.f016de/buffer-0.23.0-422.1629309754.f016de.tgz
+    version: 0.23.0-422.1629309754.f016de
+  - apiVersion: v2
     created: "2021-08-18T17:59:16.041086905Z"
     dependencies:
     - name: ingresslibchart
@@ -18834,6 +18855,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.3.0/firecloudui-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2021-08-18T18:02:48.844974594Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Firecloud UI service in Terra
+    digest: ed4d463e26780c1d1cfa62f1441de98c36d3bde1813fdd8707b36bd637b0b67e
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.3.0-422.1629309754.f016de/firecloudui-0.3.0-422.1629309754.f016de.tgz
+    version: 0.3.0-422.1629309754.f016de
+  - apiVersion: v2
     created: "2021-08-18T17:59:16.212901983Z"
     dependencies:
     - condition: ingress.enabled
@@ -19832,6 +19875,15 @@ entries:
     version: 0.0.0
   ingress-library:
   - apiVersion: v2
+    created: "2021-08-18T18:02:49.094761447Z"
+    description: A libary Helm chart for Ingress
+    digest: ff33aa2233c9ae79197c4db3c5812d5dd3d1924a4965e0980123a66a7dfe1a26
+    name: ingress-library
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingress-library-0.1.0-422.1629309754.f016de/ingress-library-0.1.0-422.1629309754.f016de.tgz
+    version: 0.1.0-422.1629309754.f016de
+  - apiVersion: v2
     created: "2021-08-18T17:59:16.368260058Z"
     description: A libary Helm chart for Ingress
     digest: f174a90fdf239658c4bfce6ffd0d878f1359b503403bd9ad776c61b70d7c4e5b
@@ -19879,6 +19931,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.5.0/jobmanager-0.5.0.tgz
     version: 0.5.0
+  - apiVersion: v2
+    created: "2021-08-18T18:02:49.34803726Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Job Manager service in Terra
+    digest: 64dd417be45cd4387560efd042e8242adbea9e482633e6f19745ef0b7a515c36
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.5.0-422.1629309754.f016de/jobmanager-0.5.0-422.1629309754.f016de.tgz
+    version: 0.5.0-422.1629309754.f016de
   - apiVersion: v2
     created: "2021-08-18T17:59:16.534974187Z"
     dependencies:
@@ -46789,6 +46863,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.7.0/thurloe-0.7.0.tgz
     version: 0.7.0
   - apiVersion: v2
+    created: "2021-08-18T18:02:49.594513152Z"
+    dependencies:
+    - name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Thurloe service in Terra
+    digest: 0d22afad7f2029020354143871dcb59fddbccdd1ef51765903765d4e73194e58
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.7.0-422.1629309755.f016de/thurloe-0.7.0-422.1629309755.f016de.tgz
+    version: 0.7.0-422.1629309755.f016de
+  - apiVersion: v2
     created: "2021-08-18T17:59:16.682119862Z"
     dependencies:
     - name: ingress-library
@@ -47496,6 +47591,32 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.33.0/workspacemanager-0.33.0.tgz
     version: 0.33.0
+  - apiVersion: v2
+    created: "2021-08-18T18:02:49.860522914Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 170d28283f1d541f477685892195150500a072189e3116277deabacb8d19544a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.33.0-422.1629309755.f016de/workspacemanager-0.33.0-422.1629309755.f016de.tgz
+    version: 0.33.0-422.1629309755.f016de
   - apiVersion: v2
     created: "2021-08-18T17:59:16.840218971Z"
     dependencies:
