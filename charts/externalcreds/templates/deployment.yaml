@@ -18,7 +18,7 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ .replicas }}
+  replicas: {{ .name == "frontend" ? $.Values.replicas : 1 }}
   selector:
     matchLabels:
       deployment: {{ $.Values.name }}-{{ .name }}-deployment
@@ -182,8 +182,13 @@ spec:
         startupProbe:
           {{- toYaml $.Values.probes.startup.spec | nindent 10 }}
         {{- end }}
+        {{- if .name == "backend"  }}
+        command: ["java",
+                  "-cp",
+                  "/app/resources:/app/classes:/app/libs/*",
+                  "bio.terra.externalcreds.ExternalCredsCronApplication"]
+        {{- end }}
       {{- if not $.Values.postgres.enabled }}
-        command: [{{ join "," .command }}]
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         env:
