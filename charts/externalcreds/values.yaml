@@ -201,3 +201,7 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 
 # samplingProbability -- the frequency with which calls should be traced.
 samplingProbability: 1.0
+
+appDeployments:
+- name: frontend
+- name: backend

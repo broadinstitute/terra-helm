@@ -1,5 +1,5 @@
 {{- $imageTag := $.Values.imageConfig.tag | default $.Values.global.applicationVersion -}}
-{{- range frontend backend }}
+{{- range $.Values.appDeployments }}
 ---
 apiVersion: apps/v1
 kind: Deployment
