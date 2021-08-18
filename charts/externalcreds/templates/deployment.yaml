@@ -21,11 +21,11 @@ spec:
   replicas: {{ .replicas }}
   selector:
     matchLabels:
-      deployment: {{ $.Values.name }}-deployment
+      deployment: {{ $.Values.name }}-{{ .name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ $.Values.name }}-deployment
+        deployment: {{ $.Values.name }}-{{ .name }}-deployment
 {{ include "externalcreds.labels" $ | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map changes: */}}
