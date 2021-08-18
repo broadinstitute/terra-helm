@@ -1,25 +1,26 @@
-{{- define "ingresslibchart.ingress" -}}
+{{- define "libchart.ingress.tpl" -}}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: {{ .Values.name }}-ingress
+  name: {{ .Chart.Name }}-ingress
   labels:
     {{- include "helm.labels" . | nindent 4 }}
   annotations:
     networking.gke.io/v1beta1.FrontendConfig: "{{ .Chart.Name }}-ingress-frontendconfig"
-    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: {{ required "ingress.staticIpName value is required" .Values.ingress.staticIpName | quote }}
 {{- if not (empty .Values.ingress.cert.preSharedCerts) }}
     ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
 {{- end }}
-    {{- range $key, $value := .Values.ingress.annotations }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
+    kubernetes.io/ingress.allow-http: "false"
+  {{- with .Values.ingress.annotations }}
+      {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   backend:
     serviceName: {{ .Chart.Name }}-service
-    servicePort: {{ .Values.ingress.servicePort }}
-
+    servicePort: 443
 {{- end -}}
-# {{- define "ingresslibchart.configmap" -}}
-# # {{- include "ingresslibchart.util.merge" (append . "ingresslibchart.configmap.tpl") -}}
-# {{- end -}}
+
+{{- define "libchart.ingress" -}}
+{{- include "libchart.util.merge" (append . "libchart.ingress.tpl") -}}
+{{- end -}}
