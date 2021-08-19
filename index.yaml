@@ -21,6 +21,29 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-08-19T13:02:25.498926282Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Agora service in Terra
+    digest: 14057da50f75899025ce0bee452938d1e0b932942845d97dcf7be994e5575267
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.7.0-422.1629378129.a3fd51/agora-0.7.0-422.1629378129.a3fd51.tgz
+    version: 0.7.0-422.1629378129.a3fd51
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-08-19T13:01:57.386640116Z"
     dependencies:
     - condition: ingress.enabled
@@ -1394,6 +1417,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.23.0/buffer-0.23.0.tgz
     version: 0.23.0
+  - apiVersion: v2
+    created: "2021-08-19T13:02:25.597977305Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Resource Buffering Service
+    digest: a63a87c12da838c85102e2c13812b858908a1e5a000bb86fecf3c95b2e674b49
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.23.0-422.1629378129.a3fd51/buffer-0.23.0-422.1629378129.a3fd51.tgz
+    version: 0.23.0-422.1629378129.a3fd51
   - apiVersion: v2
     created: "2021-08-19T13:01:57.555480871Z"
     dependencies:
@@ -3334,6 +3379,29 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.16.0/consent-0.16.0.tgz
     version: 0.16.0
+  - apiVersion: v2
+    created: "2021-08-19T13:02:25.691929195Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: A Helm chart for DUOS Consent
+    digest: 3f73a72ed7eaee99ea8dc7d6287eec5719a3fbcea9f2d0c8a635418e7a206ef9
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.16.0-422.1629378129.a3fd51/consent-0.16.0-422.1629378129.a3fd51.tgz
+    version: 0.16.0-422.1629378129.a3fd51
   - apiVersion: v2
     created: "2021-08-19T13:01:57.734712196Z"
     dependencies:
@@ -6277,6 +6345,29 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.10.0/cromiam-0.10.0.tgz
     version: 0.10.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-08-19T13:02:25.789839111Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for cromiam service in Terra [WIP]
+    digest: dbb7637723abe6dacee335464709c5f54fa9297b72a90674ea1ee78217c2a052
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.10.0-422.1629378129.a3fd51/cromiam-0.10.0-422.1629378129.a3fd51.tgz
+    version: 0.10.0-422.1629378129.a3fd51
   - apiVersion: v2
     appVersion: latest
     created: "2021-08-19T13:01:57.889440907Z"
@@ -16617,6 +16708,32 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.41.0-446.1629136571.adc0e3/externalcreds-0.41.0-446.1629136571.adc0e3.tgz
     version: 0.41.0-446.1629136571.adc0e3
   - apiVersion: v2
+    created: "2021-08-19T13:02:25.894210467Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Terra External Credentials Manager
+    digest: 3b7568fffd49d9241b813798636caf24afcf62b0d72319926b4da8848eee368a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.41.0-422.1629378129.a3fd51/externalcreds-0.41.0-422.1629378129.a3fd51.tgz
+    version: 0.41.0-422.1629378129.a3fd51
+  - apiVersion: v2
     created: "2021-08-19T13:01:58.058219965Z"
     dependencies:
     - condition: postgres.enabled
@@ -17872,6 +17989,30 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.8.0/firecloudorch-0.8.0.tgz
     version: 0.8.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-08-19T13:02:26.04415701Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for firecloud-orchestration service in Terra
+    digest: de89d231d7d6f35ceb00a7455b608ddd3305074e34f63e623a8f6b757ec478d9
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.8.0-422.1629378131.a3fd51/firecloudorch-0.8.0-422.1629378131.a3fd51.tgz
+    version: 0.8.0-422.1629378131.a3fd51
   - apiVersion: v2
     appVersion: latest
     created: "2021-08-19T13:01:58.227441797Z"
@@ -19150,6 +19291,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.3.0/firecloudui-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2021-08-19T13:02:26.132553366Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Firecloud UI service in Terra
+    digest: d37ca5b66c97f0ca0790503d4d82615a803d74abe3b0e56002552071112eeaed
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.3.0-422.1629378131.a3fd51/firecloudui-0.3.0-422.1629378131.a3fd51.tgz
+    version: 0.3.0-422.1629378131.a3fd51
+  - apiVersion: v2
     created: "2021-08-19T13:01:58.389041091Z"
     dependencies:
     - condition: ingress.enabled
@@ -20192,6 +20355,15 @@ entries:
     version: 0.0.0
   ingress-library:
   - apiVersion: v2
+    created: "2021-08-19T13:02:26.230791784Z"
+    description: A libary Helm chart for Ingress
+    digest: bd5e421cde1644f890cbe4597046b055472564e142bb3332f1467e4e29e2062b
+    name: ingress-library
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingress-library-0.1.0-422.1629378131.a3fd51/ingress-library-0.1.0-422.1629378131.a3fd51.tgz
+    version: 0.1.0-422.1629378131.a3fd51
+  - apiVersion: v2
     created: "2021-08-19T13:01:58.55551549Z"
     description: A libary Helm chart for Ingress
     digest: 7eb8424327f6c6c979f06737dbad1fd848500d085defa82e128a573a2c1f4ba1
@@ -20257,6 +20429,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.5.0/jobmanager-0.5.0.tgz
     version: 0.5.0
+  - apiVersion: v2
+    created: "2021-08-19T13:02:26.345168203Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Job Manager service in Terra
+    digest: 979f4422a6c6a63bbfd40b4d1f98e9da0588954df571053b9f4f30e7eb9c0345
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.5.0-422.1629378131.a3fd51/jobmanager-0.5.0-422.1629378131.a3fd51.tgz
+    version: 0.5.0-422.1629378131.a3fd51
   - apiVersion: v2
     created: "2021-08-19T13:01:58.697632566Z"
     dependencies:
@@ -47235,6 +47429,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.7.0/thurloe-0.7.0.tgz
     version: 0.7.0
   - apiVersion: v2
+    created: "2021-08-19T13:02:26.440773704Z"
+    dependencies:
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Thurloe service in Terra
+    digest: f4b29c1e2426041c2dd16452fa30d518eb1492b5e86247bb35296b3bc286130f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.7.0-422.1629378131.a3fd51/thurloe-0.7.0-422.1629378131.a3fd51.tgz
+    version: 0.7.0-422.1629378131.a3fd51
+  - apiVersion: v2
     created: "2021-08-19T13:01:59.017367065Z"
     dependencies:
     - condition: ingress.enabled
@@ -47985,6 +48201,32 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.33.0/workspacemanager-0.33.0.tgz
     version: 0.33.0
+  - apiVersion: v2
+    created: "2021-08-19T13:02:26.525879239Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    - condition: ingress.enabled
+      name: ingress-library
+      repository: file://../ingresslibchart
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 0e9f27f5607e9b00a437526adf2600a4349715ba2cafde78fdd6ea069abcbadb
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.33.0-422.1629378131.a3fd51/workspacemanager-0.33.0-422.1629378131.a3fd51.tgz
+    version: 0.33.0-422.1629378131.a3fd51
   - apiVersion: v2
     created: "2021-08-19T13:01:59.166372523Z"
     dependencies:
