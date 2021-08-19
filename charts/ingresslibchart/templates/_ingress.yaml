@@ -12,9 +12,6 @@ metadata:
     ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
 {{- end }}
     kubernetes.io/ingress.allow-http: "false"
-  {{- with .Values.ingress.annotations }}
-      {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
   backend:
     serviceName: {{ .Chart.Name }}-service
