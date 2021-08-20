@@ -1,5 +1,5 @@
 {{- define "libchart.ingress.tpl" -}}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Chart.Name }}-ingress
@@ -12,9 +12,6 @@ metadata:
     ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
 {{- end }}
     kubernetes.io/ingress.allow-http: "false"
-  {{- with .Values.ingress.annotations }}
-      {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
   backend:
     serviceName: {{ .Chart.Name }}-service

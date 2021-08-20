@@ -1,5 +1,5 @@
 {{- /*
-ingresslibchart.util.merge will merge two YAML templates and output the result.
+libchart.util.merge will merge two YAML templates and output the result.
 This takes an array of three values:
 - the top context
 - the template name of the overrides (destination)
