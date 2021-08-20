@@ -30,8 +30,6 @@ Chart for Revere - Terra's Status and Uptime Reporting Service
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
 | probes.readiness.enabled | bool | `false` | (boolean) If the readiness probe should be enabled |
 | probes.readiness.spec | object | `nil` | Spec for the readiness probe |
-| probes.startup.enabled | bool | `false` | (boolean) If the startup probe should be enabled |
-| probes.startup.spec | object | `nil` | Spec for the startup probe |
 | replicas | int | `3` | (number) Number of replicas for the deployment |
 | resources.limits.cpu | string | `"500m"` | (string) Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"4Gi"` | (string) Memory to limit the deployment to |

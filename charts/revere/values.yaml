@@ -50,11 +50,6 @@ probes:
     enabled: false
     # -- (object) Spec for the liveness probe
     spec:
-  startup:
-    # -- (boolean) If the startup probe should be enabled
-    enabled: false
-    # -- (object) Spec for the startup probe
-    spec:
 
 secrets:
   gcpServiceAccount:
