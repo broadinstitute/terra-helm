@@ -37,6 +37,7 @@ Chart for Revere - Terra's Status and Uptime Reporting Service
 | resources.limits.memory | string | `"4Gi"` | (string) Memory to limit the deployment to |
 | resources.requests.cpu | string | `"500m"` | (string) Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"4Gi"` | (string) Memory to request for the deployment |
+| runtimeClassName | string | `nil` | Optional override for the pod's runtimeClass |
 | secrets.gcpServiceAccount.secretsManager.enabled | bool | `false` | (boolean) If secretsManager should be used for the GCP SA |
 | secrets.gcpServiceAccount.secretsManager.sourceEncoding | string | `"base64"` | (string) Encoding of the Vault field (either `text` or `base64`) |
 | secrets.gcpServiceAccount.secretsManager.vaultKey | string | `nil` | Field name within the secret for the SA's key |

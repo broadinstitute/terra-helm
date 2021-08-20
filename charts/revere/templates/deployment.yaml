@@ -29,6 +29,10 @@ spec:
     spec:
       serviceAccountName: {{ .Values.name }}-sa
 
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName }}
+      {{- end }}
+
       volumes:
       - name: {{ .Values.name }}-cm
         configMap:

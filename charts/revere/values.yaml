@@ -24,6 +24,9 @@ replicas: 3
 # -- (map) Annotations for application pods
 annotations: {}
 
+# -- (string) Optional override for the pod's runtimeClass
+runtimeClassName:
+
 resources:
   requests:
     # -- (string) Number of CPU units to request for the deployment
