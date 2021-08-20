@@ -6,16 +6,42 @@ metadata:
     {{- include "revere.labels" . | nindent 4 }}
 spec:
   policyTypes:
+  {{- if .Values.networkPolicy.ingress.enabled }}
   - Ingress
+  {{- end }}
+  {{- if .Values.networkPolicy.egress.enabled }}
   - Egress
+  {{- end }}
   podSelector:
     matchLabels:
       {{- include "revere.labels" . | nindent 6 }}
-  egress:
-  - to:
-    {{- range .Values.egressCidrAllowList }}
+
+  {{- if .Values.networkPolicy.ingress.enabled }}
+  ingress:
+  - from:
+    {{- range .Values.networkPolicy.ingress.cidrAllowList }}
     - ipBlock:
         cidr: {{ . }}
+    {{- end }}
+    ports:
+      {{- range .Values.networkPolicy.ingress.portAllowList }}
+      - {{- range $k, $v := .}}
+        {{ $k }}: {{ $v }}
+        {{- end }}
+      {{- end }}
+  {{- end }}
+
+  {{- if .Values.networkPolicy.egress.enabled }}
+  egress:
+  - to:
+    {{- range .Values.networkPolicy.egress.cidrAllowList }}
+    - ipBlock:
+        cidr: {{ . }}
+    {{- end }}
+    {{- if .Values.secrets.gcpServiceAccount.workloadIdentity.enabled }}
+    # GKE Metadata Server
+    - ipBlock:
+        cidr: 127.0.0.1/32
     {{- end }}
     # DNS
     - namespaceSelector:
@@ -25,11 +51,19 @@ spec:
         matchLabels:
           k8s-app: kube-dns
     ports:
-      # HTTPS
-      - port: 443
+      {{- range .Values.networkPolicy.egress.portAllowList }}
+      - {{- range $k, $v := . }}
+        {{ $k }}: {{ $v }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.secrets.gcpServiceAccount.workloadIdentity.enabled }}
+      # GKE Metadata Server
+      - port: 988
         protocol: TCP
+      {{- end }}
       # DNS
       - port: 53
         protocol: TCP
       - port: 53
         protocol: UDP
+  {{- end }}
