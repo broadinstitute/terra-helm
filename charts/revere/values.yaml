@@ -59,14 +59,14 @@ probes:
 secrets:
   gcpServiceAccount:
     workloadIdentity:
-      # -- (boolean) If workloadIdentity should be used for the GCP SA
+      # -- (boolean) If workload identity should be used for the GCP SA
       enabled: false
       # -- (string) ID of the GCP SA to use
       accountName:
       # -- (string) ID (not the number) of the GCP project the SA is in
       projectId:
     secretsManager:
-      # -- (boolean) If secretsManager should be used for the GCP SA
+      # -- (boolean) If secrets-manager (Vault) should be used for the GCP SA
       enabled: false
       # -- (string) Path within Vault where the SA's key is stored
       vaultPath:
@@ -76,7 +76,7 @@ secrets:
       sourceEncoding: base64
   statuspageApiKey:
     secretsManager:
-      # -- (boolean) If secretsManager should be used for the API key
+      # -- (boolean) If secrets-manager (Vault) should be used for the API key
       enabled: false
       # -- (string) Path within Vault where the API key is stored
       vaultPath:

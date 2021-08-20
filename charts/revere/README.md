@@ -38,14 +38,14 @@ Chart for Revere - Terra's Status and Uptime Reporting Service
 | resources.requests.cpu | string | `"500m"` | (string) Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"4Gi"` | (string) Memory to request for the deployment |
 | runtimeClassName | string | `nil` | Optional override for the pod's runtimeClass |
-| secrets.gcpServiceAccount.secretsManager.enabled | bool | `false` | (boolean) If secretsManager should be used for the GCP SA |
+| secrets.gcpServiceAccount.secretsManager.enabled | bool | `false` | (boolean) If secrets-manager (Vault) should be used for the GCP SA |
 | secrets.gcpServiceAccount.secretsManager.sourceEncoding | string | `"base64"` | (string) Encoding of the Vault field (either `text` or `base64`) |
 | secrets.gcpServiceAccount.secretsManager.vaultKey | string | `nil` | Field name within the secret for the SA's key |
 | secrets.gcpServiceAccount.secretsManager.vaultPath | string | `nil` | Path within Vault where the SA's key is stored |
 | secrets.gcpServiceAccount.workloadIdentity.accountName | string | `nil` | ID of the GCP SA to use |
-| secrets.gcpServiceAccount.workloadIdentity.enabled | bool | `false` | (boolean) If workloadIdentity should be used for the GCP SA |
+| secrets.gcpServiceAccount.workloadIdentity.enabled | bool | `false` | (boolean) If workload identity should be used for the GCP SA |
 | secrets.gcpServiceAccount.workloadIdentity.projectId | string | `nil` | ID (not the number) of the GCP project the SA is in |
-| secrets.statuspageApiKey.secretsManager.enabled | bool | `false` | (boolean) If secretsManager should be used for the API key |
+| secrets.statuspageApiKey.secretsManager.enabled | bool | `false` | (boolean) If secrets-manager (Vault) should be used for the API key |
 | secrets.statuspageApiKey.secretsManager.sourceEncoding | string | `"text"` | (string) Encoding of the Vault field (either `text` or `base64`) |
 | secrets.statuspageApiKey.secretsManager.vaultKey | string | `nil` | Field name within the secret for the API key |
 | secrets.statuspageApiKey.secretsManager.vaultPath | string | `nil` | Path within Vault where the API key is stored |
