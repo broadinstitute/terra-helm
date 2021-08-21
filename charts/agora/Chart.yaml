@@ -16,4 +16,4 @@ dependencies:
 - name: ingress-library
   condition: ingress.enabled
   version: 0.1.0
-  repository: file://../ingresslibchart
+  repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
