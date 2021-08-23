@@ -5715,6 +5715,23 @@ entries:
     version: 0.1.0-154.1602610956.52ab06
   crljanitor:
   - apiVersion: v2
+    created: "2021-08-23T19:27:28.133022432Z"
+    description: Chart for Cloud Resource Manager Janitor
+    digest: 42886aefa5e25308e12aeb7e34b9fac427d14ed6a6bbd07887266c7d1796399b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.3.0/crljanitor-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2021-01-04T16:44:23.632783522Z"
     description: Chart for Cloud Resource Manager Janitor
     digest: fef11bffa0e740dc9ecb2cdf71b55ce54605bdf5442f4ec7880cec769b7ae2d9
@@ -20819,6 +20836,23 @@ entries:
     version: 0.0.0-327.1615917522.5b8bc6
   hydra:
   - apiVersion: v2
+    created: "2021-08-23T19:27:28.218088538Z"
+    description: Chart for the Hydra deployment used by Identity Concentrator in Terra
+    digest: 36de72bb0e5dcf5ffc068669e5d82eced6f6b5bd1013532fc4ae1c9264aff5d7
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - hydra
+    name: hydra
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/hydra-0.1.0/hydra-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
     created: "2020-05-28T20:36:10.008250822Z"
     description: Chart for the Hydra deployment used by Identity Concentrator in Terra
     digest: 4524da2444b10fa9dac9ea14479eac2d7b906c55aa987b1c0d04bf926546c6fb
@@ -20922,6 +20956,24 @@ entries:
     version: 0.0.0
   icdemo:
   - apiVersion: v2
+    created: "2021-08-23T19:27:28.312695006Z"
+    description: Chart for the Identity Concentrator demo/test
+    digest: 6e5de1bdf26bb885b14d9e18d355487f9dea7be4f64db0a471f15218adfb5db6
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - identityconcentrator
+    - demo
+    name: icdemo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/icdemo-0.1.0/icdemo-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
     created: "2020-05-28T20:36:10.168229537Z"
     description: Chart for the Identity Concentrator demo/test
     digest: 751ab12b9e3c9a9b01f699300205c2761b3ea0c0598d89566011a80b29dcc50a
@@ -20994,6 +21046,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/icdemo-0.0.0/icdemo-0.0.0.tgz
     version: 0.0.0
   identityconcentrator:
+  - apiVersion: v2
+    created: "2021-08-23T19:27:28.403725563Z"
+    description: Chart for the Identity Concentrator deployment used by Terra
+    digest: ef37bd95d2725ccbbc8bab4d8b000693bc6a8d70cf7f13328018dcb6cbfd1b5b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - identityconcentrator
+    name: identityconcentrator
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/identityconcentrator-0.1.0/identityconcentrator-0.1.0.tgz
+    version: 0.1.0
   - apiVersion: v2
     created: "2020-05-28T20:36:10.256929569Z"
     description: Chart for the Identity Concentrator deployment used by Terra
@@ -32771,6 +32840,26 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.0/opendj-0.0.0.tgz
     version: 0.0.0
   poc:
+  - apiVersion: v2
+    created: "2021-08-23T19:27:28.523510913Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    description: Chart for a POC Terra app
+    digest: 787465f6ce481ea62029614b1733cb450e89191833836d1fef63ec453c056fea
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.7.0/poc-0.7.0.tgz
+    version: 0.7.0
   - apiVersion: v2
     created: "2020-09-30T18:02:58.887735194Z"
     dependencies:
