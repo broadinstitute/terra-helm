@@ -23,3 +23,11 @@ app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/component: {{ .Chart.Name }}
 app.kubernetes.io/part-of: terra
 {{- end }}
+
+{{/*
+Selector labels
+*/}}
+{{- define "helm.selectorLabels" -}}
+app.kubernetes.io/name: {{ .Chart.Name }}
+app.kubernetes.io/instance: {{ .Values.name | quote }}
+{{- end }}
