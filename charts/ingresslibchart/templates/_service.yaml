@@ -15,7 +15,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    deployment: {{ .Chart.Name }}-deployment
+    {{- include "helm.selectorLabels" . | nindent 4 }}
   ports:
   - name: https
     protocol: TCP
