@@ -1,8 +1,8 @@
 # image is used for local/Skaffold deploys
 # image: gcr.io/terra-kernel-k8s/hcls-fa-gke-ic
 
-# appVerion is set by Helmfile
-# appVersion: 0.0.0
+# global.applicationVersion is set by Helmfile
+# global.applicationVersion: 0.0.0
 
 imageConfig:
   repository: gcr.io/terra-kernel-k8s/hcls-fa-gke-hydra-ic
