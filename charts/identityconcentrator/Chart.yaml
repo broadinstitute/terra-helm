@@ -1,16 +1,13 @@
 apiVersion: v2
 name: identityconcentrator
-version: 0.0.3
-
+version: 0.1.0
 description: Chart for the Identity Concentrator deployment used by Terra
 type: application
-
 keywords:
-- dsp
-- broadinstitute
-- terra
-- identityconcentrator
-
+  - dsp
+  - broadinstitute
+  - terra
+  - identityconcentrator
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/master/charts
-- https://github.com/DataBiosphere/healthcare-federated-access-services
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/DataBiosphere/healthcare-federated-access-services
