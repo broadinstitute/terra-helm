@@ -1,6 +1,9 @@
 global:
   # global.applicationVersion -- What version of the Leonardo application to deploy
   applicationVersion: latest
+# Use a k8s instance of mysql for database, used for preview environments.
+localMysql: 
+  enabled: false
 # Leonardo can be run in multiple deployments. This key contains default
 # settings for all deployments configured under the `deployments` key.
 deploymentDefaults:
