@@ -21,6 +21,24 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-08-25T14:57:49.570290661Z"
+    description: Chart for Agora service in Terra
+    digest: 65086205d8ca0d55260fa5199a1e09036486e428841aaf1840b7130aa6eb30ea
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.7.0-458.1629903458.27f88b/agora-0.7.0-458.1629903458.27f88b.tgz
+    version: 0.7.0-458.1629903458.27f88b
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-08-23T18:20:31.36278936Z"
     dependencies:
     - condition: ingress.enabled
@@ -7743,6 +7761,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.21.0/cromwell-0.21.0.tgz
     version: 0.21.0
+  - apiVersion: v2
+    created: "2021-08-25T14:57:49.673728691Z"
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: b7ce54c2bf96dd17fea142c06130c89ec004de68638d930f50b8c63badbb98d4
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.21.0-458.1629903458.27f88b/cromwell-0.21.0-458.1629903458.27f88b.tgz
+    version: 0.21.0-458.1629903458.27f88b
   - apiVersion: v2
     created: "2021-08-18T17:52:10.77628268Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
@@ -22111,6 +22146,29 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.49.0/leonardo-0.49.0.tgz
     version: 0.49.0
+  - apiVersion: v2
+    created: "2021-08-25T14:57:49.788178288Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: cf125eb1d2371e79f982c0b0fb50bb2f12b65037d340610c16ab2117cbc43c7c
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.49.0-458.1629903458.27f88b/leonardo-0.49.0-458.1629903458.27f88b.tgz
+    version: 0.49.0-458.1629903458.27f88b
   - apiVersion: v2
     created: "2021-07-20T15:32:10.032547302Z"
     dependencies:
@@ -49407,6 +49465,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.33.0/workspacemanager-0.33.0.tgz
     version: 0.33.0
+  - apiVersion: v2
+    created: "2021-08-25T14:57:49.884534253Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: a543e46d293b0db1189dc75ef756014089fbb1a2dfd2bead19a7ddaff51c0557
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.33.0-458.1629903460.27f88b/workspacemanager-0.33.0-458.1629903460.27f88b.tgz
+    version: 0.33.0-458.1629903460.27f88b
   - apiVersion: v2
     created: "2021-08-23T18:20:32.655668511Z"
     dependencies:
