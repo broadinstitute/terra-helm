@@ -18,7 +18,7 @@ spec:
       serviceAccountName: terra-crl-janitor-service-sa
       containers:
       - name: cloudsql-proxy
-        image: gcr.io/cloudsql-docker/gce-proxy:1.18-alpine
+        image: gcr.io/cloudsql-docker/gce-proxy:1.18.0-alpine
         lifecycle:
           postStart:
             exec:
