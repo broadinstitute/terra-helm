@@ -17,6 +17,38 @@ spec:
     spec:
       serviceAccountName: terra-crl-janitor-service-sa
       containers:
+      - name: cloudsql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.18-alpine
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "sleep {{ .Values.startupSleep }}"]
+        env:
+        - name: SQL_INSTANCE_PROJECT
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-cloudsql-postgres-instance
+              key: project
+        - name: SQL_INSTANCE_REGION
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-cloudsql-postgres-instance
+              key: region
+        - name: SQL_INSTANCE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-cloudsql-postgres-instance
+              key: name
+        command: ["/cloud_sql_proxy",
+                  "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/service-account.json"]
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: cloudsql-sa-creds
+          mountPath: /secrets/cloudsql
+          readOnly: true
       - name: terra-crl-janitor
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
@@ -93,34 +125,6 @@ spec:
           - name: app-sa-creds
             mountPath: /secrets/app
             readOnly: true
-      - name: cloudsql-proxy
-        image: gcr.io/cloudsql-docker/gce-proxy:1.16
-        env:
-        - name: SQL_INSTANCE_PROJECT
-          valueFrom:
-            secretKeyRef:
-              name: crl-janitor-cloudsql-postgres-instance
-              key: project
-        - name: SQL_INSTANCE_REGION
-          valueFrom:
-            secretKeyRef:
-              name: crl-janitor-cloudsql-postgres-instance
-              key: region
-        - name: SQL_INSTANCE_NAME
-          valueFrom:
-            secretKeyRef:
-              name: crl-janitor-cloudsql-postgres-instance
-              key: name
-        command: ["/cloud_sql_proxy",
-                  "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
-                  "-credential_file=/secrets/cloudsql/service-account.json"]
-        securityContext:
-          runAsUser: 2  # non-root user
-          allowPrivilegeEscalation: false
-        volumeMounts:
-        - name: cloudsql-sa-creds
-          mountPath: /secrets/cloudsql
-          readOnly: true
       {{- if .Values.proxy.enabled }}
       - name: oidc-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}"
