@@ -16,3 +16,7 @@ dependencies:
     condition: migration.enabled
     version: 0.2.0
     repository: https://broadinstitute.github.io/terra-helm/
+  - name: mysql
+    condition: localMysql.enabled
+    version: 0.1.0-461.1630012760.fea8cb
+    repository: https://broadinstitute.github.io/terra-helm/
