@@ -28225,6 +28225,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/mongodb-0.0.1-152.1602098503.69881c/mongodb-0.0.1-152.1602098503.69881c.tgz
     version: 0.0.1-152.1602098503.69881c
+  mysql:
+  - apiVersion: v2
+    created: "2021-08-26T21:19:27.047264308Z"
+    description: |
+      A Helm Chart for Mysql
+      This chart is customized for Terra preview environments
+    digest: 8d251c1c1884370941414e21e9c9f5f5ba704154d962187e43484c6b3e4e5071
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - mysql
+    name: mysql
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/mysql-0.1.0-461.1630012760.fea8cb/mysql-0.1.0-461.1630012760.fea8cb.tgz
+    version: 0.1.0-461.1630012760.fea8cb
   ncbiaccess:
   - apiVersion: v2
     created: "2021-06-23T13:14:03.562717107Z"
