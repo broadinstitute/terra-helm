@@ -1,4 +1,4 @@
-# mongodb
+# mysql
 
 A Helm Chart for Mysql
 This chart is customized for Terra preview environments
