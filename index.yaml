@@ -22329,6 +22329,33 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.49.0/leonardo-0.49.0.tgz
     version: 0.49.0
   - apiVersion: v2
+    created: "2021-08-26T22:00:19.86373253Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    - condition: localMysql.enabled
+      name: mysql
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0-461.1630012760.fea8cb
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 14747d59a4550ea8b78d784b51f8f0f66af7f945dfca118942a195a6890b1d0b
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.49.0-462.1630015210.0d45a2/leonardo-0.49.0-462.1630015210.0d45a2.tgz
+    version: 0.49.0-462.1630015210.0d45a2
+  - apiVersion: v2
     created: "2021-08-25T17:59:32.393855308Z"
     dependencies:
     - condition: migration.enabled
@@ -28226,6 +28253,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/mongodb-0.0.1-152.1602098503.69881c/mongodb-0.0.1-152.1602098503.69881c.tgz
     version: 0.0.1-152.1602098503.69881c
   mysql:
+  - apiVersion: v2
+    created: "2021-08-26T22:00:20.038836463Z"
+    description: |
+      A Helm Chart for Mysql
+      This chart is customized for Terra preview environments
+    digest: fe7fa8178197b4bf64c58e2d877b55ede8a9f3ca20cb8381bf012234aa41ded3
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - mysql
+    name: mysql
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/mysql-0.1.0-462.1630015213.0d45a2/mysql-0.1.0-462.1630015213.0d45a2.tgz
+    version: 0.1.0-462.1630015213.0d45a2
   - apiVersion: v2
     created: "2021-08-26T21:19:27.047264308Z"
     description: |
