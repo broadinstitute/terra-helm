@@ -4,6 +4,10 @@
 metadata:
   labels:
     app: {{ .Chart.Name }}
+  annotations: kubernetes.io/ingress.global-static-ip-name: {{ required "a valid gcp resource name for the ingress ip is required" .Values.ingressIpName }}
+{{- if not (empty .Values.ingress.cert.preSharedCerts) }}
+    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
+{{- end }}
 spec:
   tls:
   - secretName: {{ .Chart.Name }}-cert
