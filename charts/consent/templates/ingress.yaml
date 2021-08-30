@@ -12,7 +12,7 @@ spec:
   tls:
   - secretName: {{ .Chart.Name }}-cert
   backend:
-    serviceName: concent
+    serviceName: consent
 {{- end }}
 ---
 apiVersion: networking.gke.io/v1beta1
