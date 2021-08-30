@@ -29801,6 +29801,24 @@ entries:
     version: 0.0.1-152.1602098503.69881c
   mysql:
   - apiVersion: v2
+    created: "2021-08-30T19:14:48.897574513Z"
+    description: |
+      A Helm Chart for Mysql
+      This chart is customized for Terra preview environments
+    digest: 4b48733400f5928b92c5a9a33d254ad3b6fd09129e95be75fb5442195010b5e3
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - mysql
+    name: mysql
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/mysql-0.2.0/mysql-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2021-08-26T22:00:20.038836463Z"
     description: |
       A Helm Chart for Mysql
