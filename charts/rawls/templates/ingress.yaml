@@ -1,10 +1,6 @@
 ---
 {{- include "libchart.ingress" (list . "rawls.ingress" )  -}}
 {{- define "rawls.ingress" -}}
-metadata:
-  annotations:
-    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.preSharedCerts | join "," | quote }}
-    kubernetes.io/ingress.allow-http: "false"
 spec:
   backend:
     serviceName: {{ .Values.ingress.serviceName }}
