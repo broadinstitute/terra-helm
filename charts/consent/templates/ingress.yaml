@@ -11,6 +11,7 @@ metadata:
 spec:
   tls:
   - secretName: {{ .Chart.Name }}-cert
+  backend: concent
 {{- end }}
 ---
 apiVersion: networking.gke.io/v1beta1
