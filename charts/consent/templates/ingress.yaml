@@ -1,9 +1,10 @@
 ---
-{{- include "libchart.ingress" (list . "consent.ingress" )  -}}
-{{- define "consent.ingress" -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
 metadata:
+  name: {{ .Chart.Name }}-ingress
   labels:
-    app: {{ .Chart.Name }}
+{{ include "consent.labels" . | indent 4 }}
   annotations:
     networking.gke.io/v1beta1.FrontendConfig: {{ .Chart.Name }}-frontend-config
     kubernetes.io/ingress.global-static-ip-name: {{ required "a valid gcp resource name for the ingress ip is required" .Values.ingressIpName }}
@@ -12,8 +13,8 @@ spec:
   tls:
   - secretName: {{ .Chart.Name }}-cert
   backend:
-    serviceName: consent
-{{- end }}
+    serviceName: {{ .Chart.Name }}
+    servicePort: 443
 ---
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
