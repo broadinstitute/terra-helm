@@ -1,3 +1,8 @@
 {{- include "libchart.ingress" (list . "firecloudui.ingress" )  -}}
 {{- define "firecloudui.ingress" -}}
+spec:
+{{- if empty .Values.ingress.cert.preSharedCerts }}
+  tls:
+  - secretName: {{ .Values.name }}-cert
+{{- end }}
 {{- end }}
