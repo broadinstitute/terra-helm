@@ -64,7 +64,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "sleep {{ $settngs.startupSleep }}"]
+              command: ["/bin/sh", "-c", "sleep {{ $settings.startupSleep }}"]
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-sqlproxy-env
