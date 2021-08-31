@@ -1,0 +1,13 @@
+apiVersion: v2
+name: revere
+version: 0.1.0
+description: Chart for Revere - Terra's Status and Uptime Reporting Service
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - revere
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/broadinstitute/revere
