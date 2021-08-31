@@ -27,6 +27,8 @@ deploymentDefaults:
   serviceIP: null
   # deploymentDefaults.serviceAllowedAddresses -- What source IPs to whitelist for access to the service
   serviceAllowedAddresses: {}
+  # Allows CloudSQL proxy time to start up. See DDO-1352
+  startupSleep: 30
   # deploymentDefaults.legacyResourcePrefix -- What prefix to use to refer to secrets rendered from firecloud-develop
   # @default deploymentDefaults.name
   legacyResourcePrefix: null
