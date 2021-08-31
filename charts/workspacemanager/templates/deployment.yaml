@@ -78,7 +78,7 @@ spec:
       containers:
       {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
-        image: gcr.io/cloudsql-docker/gce-proxy:1.18.0-alpine
+        image: gcr.io/cloudsql-docker/gce-proxy:1.24.0-buster
         lifecycle:
           postStart:
             exec:
