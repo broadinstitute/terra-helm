@@ -12,3 +12,8 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/broadinstitute/agora
+dependencies:
+- name: ingresslib
+  condition: ingress.enabled
+  version: 0.3.0
+  repository: https://broadinstitute.github.io/terra-helm/
