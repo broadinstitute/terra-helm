@@ -1,7 +1,8 @@
 {{- include "libchart.ingress" (list . "buffer.ingress" )  -}}
+{{- define "buffer.ingress" -}}
 spec:
 {{- if empty .Values.ingress.cert.preSharedCerts }}
   tls:
   - secretName: {{ .Values.name }}-cert
 {{- end }}
-{{- define "buffer.ingress" -}}
+{{- end }}
