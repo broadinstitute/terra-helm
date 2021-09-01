@@ -25,9 +25,6 @@ imageConfig:
   tag: null
   imagePullPolicy: Always
 
-# Allows CloudSQL proxy time to start up. See DDO-1352
-startupSleep: 30
-
 # replicas -- Number of replicas for the deployment
 replicas: 0
 

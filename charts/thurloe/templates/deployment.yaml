@@ -55,20 +55,6 @@ spec:
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
       containers:
-      - name: {{ .Values.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_20180808
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "sleep {{ .Values.startupSleep }}"]
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
@@ -97,7 +83,8 @@ spec:
         command: ["/bin/bash"]
         args:
         - '-c'
-        - >- 
+        - >- # Sleep 30 seconds to allow CloudSQL proxy time to start up. See DDO-1352
+          sleep {{ .Values.startupSleep }} &&
           java ${JAVA_OPTS}
           {{- if .Values.prometheus.enabled }}
           ${PROMETHEUS_ARGS}
@@ -172,6 +159,16 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ .Values.name }}-proxy-security-logs
+      - name: {{ .Values.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
       {{- if .Values.prometheus.enabled }}
       initContainers:
       - name: download-prometheus-jmx-jar

@@ -59,20 +59,6 @@ spec:
         configMap:
           name: {{ $settings.name }}-cm
       containers:
-      - name: {{ $settings.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_20180808
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "sleep {{ $settngs.startupSleep }}"]
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
         resources:
@@ -99,7 +85,8 @@ spec:
         command: ["/bin/bash"]
         args:
         - '-c'
-        - >-
+        - >- # Sleep 30 seconds to allow CloudSQL proxy time to start up. See DDO-1284 / BT-296
+          sleep 30 &&
           java ${JAVA_OPTS}
           ${PROMETHEUS_ARGS}
           -jar $(find /rawls -name 'rawls*.jar')
@@ -142,6 +129,16 @@ spec:
         startupProbe:
           {{- toYaml $settings.probes.startup.spec | nindent 10 }}
         {{- end }}
+      - name: {{ $settings.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
       - name: {{ $settings.name }}-proxy
         image: {{ $settings.proxyImage }}
         ports:
