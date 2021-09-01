@@ -60,20 +60,6 @@ spec:
       - name: cromwell-prometheusjmx-jar
         emptyDir: {}
       containers:
-      - name: {{ $settings.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_2018117
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "sleep {{ $settings.startupSleep }}"]
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       - name: {{ $settings.name }}-app
         image: "broadinstitute/cromwell:{{ $imageTag }}"
         ports:
@@ -181,6 +167,16 @@ spec:
         - mountPath: /etc/apache2/conf-enabled/mpm_event.conf
           subPath: mpm_event.conf
           name: proxy-ctmpls
+          readOnly: true
+      - name: {{ $settings.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_2018117
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
           readOnly: true
       initContainers:
       - name: download-prometheusjmx-jar

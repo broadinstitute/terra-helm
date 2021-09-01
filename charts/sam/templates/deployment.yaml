@@ -56,20 +56,6 @@ spec:
         emptyDir: {}
       {{- end }}
       containers:
-      - name: {{ .Values.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_2018117
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "sleep {{ .Values.startupSleep }}"]
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
@@ -141,6 +127,16 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
+      - name: {{ .Values.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_2018117
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
       - name: {{ .Values.name }}-proxy
         image: {{ .Values.proxyImage }}
         ports:
