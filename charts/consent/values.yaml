@@ -77,25 +77,6 @@ probes:
       periodSeconds: 10
       failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
       successThreshold: 1
-
-ingress:
-  # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig
-  enabled: true
-  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
-  staticIpName: null
-  cert:
-    # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
-    # If preSharedCerts is not empty, its contents are used for the GKE ingress. Otherwise a secret with the cert is expected.
-    # The cert secret is required if the OIDC proxy is enabled.
-    # This secret can be
-    #   - synced from Vault
-    #   - created/managed with cert-manager
-    #   - created manually before the chart is applied
-
-    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
-    preSharedCerts: []
-
-
 # GKE ingress requires certificate in a slightly different format from the apache proxy
 # This is used to set tls for the GKE ingress
 ingressCert:
