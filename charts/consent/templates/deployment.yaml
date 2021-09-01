@@ -27,6 +27,35 @@ spec:
             - app
             - sqlproxy
       containers:
+        - name: {{ .Chart.Name }}-sqlproxy
+          image: broadinstitute/cloudsqlproxy:1.11_20191120
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "sleep {{ .Values.startupSleep }}"]
+          env:
+            - name: CLOUDSQL_CREDENTIAL_FILE
+              value: /etc/service-account.json
+            - name: GOOGLE_PROJECT
+              value: {{ .Values.googleProject }}
+            - name: CLOUDSQL_ZONE
+              value: {{ .Values.googleProjectZone }}
+            - name: CLOUDSQL_INSTANCE
+              value: {{ .Values.cloudSqlInstance }}
+            - name: CLOUDSQL_MAXCONNS
+              value: '300'
+            - name: PORT
+              value: '5432'
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: app-secrets
+              mountPath: /etc/service-account.json
+              subPath: service-account.json
+              readOnly: true
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
         - name: {{ .Chart.Name }}-app
           image: "{{- if .Values.image -}}
           {{ .Values.image }}
@@ -139,31 +168,6 @@ spec:
               subPath: ca-bundle.crt
               name: proxy-secrets
               readOnly: true
-        - name: {{ .Chart.Name }}-sqlproxy
-          image: broadinstitute/cloudsqlproxy:1.11_20191120
-          env:
-            - name: CLOUDSQL_CREDENTIAL_FILE
-              value: /etc/service-account.json
-            - name: GOOGLE_PROJECT
-              value: {{ .Values.googleProject }}
-            - name: CLOUDSQL_ZONE
-              value: {{ .Values.googleProjectZone }}
-            - name: CLOUDSQL_INSTANCE
-              value: {{ .Values.cloudSqlInstance }}
-            - name: CLOUDSQL_MAXCONNS
-              value: '300'
-            - name: PORT
-              value: '5432'
-          ports:
-            - containerPort: 5432
-          volumeMounts:
-            - name: app-secrets
-              mountPath: /etc/service-account.json
-              subPath: service-account.json
-              readOnly: true
-          securityContext:
-            runAsUser: 2  # non-root user
-            allowPrivilegeEscalation: false
       volumes:
         - name: configs
           configMap:
