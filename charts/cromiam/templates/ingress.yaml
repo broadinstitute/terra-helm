@@ -1,2 +1,3 @@
 {{- include "libchart.ingress" (list . "cromiam.ingress" )  -}}
 {{- define "cromiam.ingress" -}}
+{{- end }}
