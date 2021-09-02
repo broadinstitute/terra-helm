@@ -2,7 +2,7 @@
 
 A Helm chart for DUOS Consent
 
-![Version: 0.20.0](https://img.shields.io/badge/Version-0.20.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.21.0](https://img.shields.io/badge/Version-0.21.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Values
 
@@ -33,6 +33,11 @@ A Helm chart for DUOS Consent
 | image | string | `nil` |  |
 | imageRepository | string | `nil` |  |
 | imageTag | string | `nil` |  |
+| ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
+| ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
+| ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
+| ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
+| ingress.timeoutSec | int | `120` | Load balancer backend timeout |
 | ingressCert.cert.path | string | `nil` | Path to secret containing .crt |
 | ingressCert.cert.secretKey | string | `nil` | Key in secret containing .crt |
 | ingressCert.key.path | string | `nil` | Path to secret containing .key |
