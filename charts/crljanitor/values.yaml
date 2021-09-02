@@ -20,7 +20,13 @@ imageConfig:
   # @default -- The chart's appVersion value will be used
   tag:
   imagePullPolicy: Always
+
 replicas: 1
+
+
+# Allows CloudSQL proxy time to start up. See DDO-1352
+startupSleep: 30
+
 vault:
   # vault.enabled -- When enabled, syncs required secrets from Vault
   enabled: true

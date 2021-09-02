@@ -1,6 +1,6 @@
 # crljanitor
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Cloud Resource Manager Janitor
 
@@ -37,6 +37,7 @@ Chart for Cloud Resource Manager Janitor
 | serviceAllowedAddresses | object | `{}` | A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceIP | string | `nil` | External IP of the service. Required. |
+| startupSleep | int | `30` |  |
 | trackResourcePubsubEnabled | bool | `true` | Whether to enable using pubsub to receive new tracked resources. |
 | vault.adminUserFilePath | string | `"config/terra/crl-janitor/common/iam"` | (string) Vault path prefix for admin user list. Required if vault.enabled. Use the same users as admin for all env by default. Override if needed in helmfile repo. |
 | vault.configPathPrefix | string | `nil` | Vault path prefix for configs. Required if vault.enabled. |
