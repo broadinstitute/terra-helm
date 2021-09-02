@@ -2,6 +2,12 @@
 
 Chart for Agora service in Terra
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.3.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -10,8 +16,8 @@ Chart for Agora service in Terra
 | global.applicationVersion | string | `"latest"` | What version of the agora application to deploy |
 | imageRepository | string | `"gcr.io/broad-dsp-gcr-public/agora"` | Image repo to pull agora images from |
 | imageTag | string | `nil` | Image tag to be used when deploying Pods @default global.applicationVersion |
+| ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
-| ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
@@ -33,11 +39,12 @@ Chart for Agora service in Terra
 | probes.readiness.spec.timeoutSeconds | int | `5` |  |
 | probes.startup.enabled | bool | `true` |  |
 | probes.startup.spec.failureThreshold | int | `1080` |  |
-| probes.startup.spec.httpGet.path | string | `"/version"` |  |
-| probes.startup.spec.httpGet.port | int | `8080` |  |
+| probes.startup.spec.httpGet.path | string | `"/status"` |  |
+| probes.startup.spec.httpGet.port | int | `8000` |  |
 | probes.startup.spec.periodSeconds | int | `10` |  |
 | probes.startup.spec.successThreshold | int | `1` |  |
 | probes.startup.spec.timeoutSeconds | int | `5` |  |
+| proxyImage | string | `"broadinstitute/openidc-proxy:tcell_3_1_0"` |  |
 | replicas | int | `3` | Number of replicas for the deployment |
 | resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"15Gi"` | Memory to limit the deployment to |
