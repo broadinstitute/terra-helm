@@ -13,6 +13,10 @@ metadata:
 {{- end }}
     kubernetes.io/ingress.allow-http: "false"
 spec:
+{{- if empty .Values.ingress.cert.preSharedCerts }}
+  tls:
+  - secretName: {{ .Values.name }}-cert
+{{- end }}
   backend:
     serviceName: {{ .Chart.Name }}-service
     servicePort: 443
