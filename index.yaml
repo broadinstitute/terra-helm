@@ -23807,6 +23807,15 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.3.0/ingresslib-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2021-09-02T17:15:26.08564581Z"
+    description: A libary Helm chart for Ingress
+    digest: 37b9548b27b0d42833c2cb270793a7d574253b1f7866b303f49fdd6cdb3a520b
+    name: ingresslib
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.3.0-470.1630602919.430f10/ingresslib-0.3.0-470.1630602919.430f10.tgz
+    version: 0.3.0-470.1630602919.430f10
+  - apiVersion: v2
     created: "2021-08-23T17:56:53.376742484Z"
     description: A libary Helm chart for Ingress
     digest: fc628e0e74ed4518e438528ddac9270c6f027f6140386c5e89e96f71cabc7204
