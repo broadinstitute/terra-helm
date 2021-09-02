@@ -2,6 +2,12 @@
 
 Chart for Agora service in Terra
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.3.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -10,8 +16,8 @@ Chart for Agora service in Terra
 | global.applicationVersion | string | `"latest"` | What version of the agora application to deploy |
 | imageRepository | string | `"gcr.io/broad-dsp-gcr-public/agora"` | Image repo to pull agora images from |
 | imageTag | string | `nil` | Image tag to be used when deploying Pods @default global.applicationVersion |
+| ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
-| ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
