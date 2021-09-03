@@ -49,7 +49,7 @@ Chart for Thurloe service in Terra
 | prometheus.jmxJarRepo | string | `"https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent"` |  |
 | prometheus.jmxJarVersion | string | `"0.13.0"` |  |
 | proxyImage | string | `"broadinstitute/openidc-proxy:tcell_3_1_0"` |  |
-| replicas | int | `0` |  |
+| replicas | int | `3` | Number of replicas for the deployment |
 | resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"8Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
