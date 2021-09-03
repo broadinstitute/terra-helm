@@ -1,4 +1,4 @@
-{{- with .Values -}}
+{{- if eq .Values.releaseType "app" -}}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

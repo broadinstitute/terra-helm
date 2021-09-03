@@ -1,35 +1,36 @@
-{{- with .Values -}}
-{{- if .legacyConfigsEnabled -}}
+{{- if eq .Values.releaseType "app" | and .Values.legacyConfigsEnabled -}}
+{{ $app := required .Values.releaseName "releaseName is required" }}
+{{ $env := required .Values.targetName "targetName is required "}}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .app }}-configs-{{ .environment }}
+  name: {{ $app }}-configs-{{ $env }}
   labels:
-    app: {{ quote .app }} # These labels are used as selectors in the UI and for argocd CLI calls
-    env: {{ quote .environment }}
-    cluster: {{ quote .clusterName }}
+    app: {{ quote $app }} # These labels are used as selectors in the UI and for argocd CLI calls
+    env: {{ quote $env }}
+    cluster: {{ required .Values.clusterName "clusterName is required" | quote }}
     type: legacy-configs
-    jenkins-sync-enabled: {{ quote .jenkinsSyncEnabled }}
-  {{- if .purgeDeployedResourcesOnDelete }}
+    jenkins-sync-enabled: {{ quote .Values.jenkinsSyncEnabled }}
+  {{- if .Values.purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
 spec:
-  project: {{ include "terra-argocd.projectName" . }}
+  project: {{ required .Values.projectName "projectName is required" }}
   destination:
-    namespace: {{ include "terra-argocd.destinationNamespace" . }}
-    server: {{ quote .clusterAddress }}
+    namespace: {{ required .Values.namespace "namespace is required" }}
+    server: {{ required .Values.clusterAddress "clusterAddress is required" | quote }}
   source:
-    repoURL: {{ quote .legacyConfigsRepo }}
-    targetRevision: {{ quote .legacyConfigsRepoRef }}
+    repoURL: {{ required .Values.legacyConfigsRepo "legacyConfigsRepo is required" | quote }}
+    targetRevision: {{ required .Values.legacyConfigsRepoRef "legacyConfigRepoRef is required" | quote }}
     path: .
     plugin:
       name: legacy-configs
       env:
-      {{- $instanceTypes := .legacyConfigsInstanceTypes | join "," -}}
-      {{- $envVars := merge .legacyConfigsEnv (dict "ENV" .environment "APP_NAME" .app "INSTANCE_TYPES" $instanceTypes ) -}}
+      {{- $instanceTypes := .Values.legacyConfigsInstanceTypes | join "," -}}
+      {{- $envVars := merge .Values.legacyConfigsEnv (dict "ENV" .environment "APP_NAME" .app "INSTANCE_TYPES" $instanceTypes ) -}}
       {{- range $name, $value := $envVars }}
       - name: {{ quote $name }}
         value: {{ quote $value }}
       {{- end -}}
-{{- end -}}{{- end -}}
+{{- end -}}
