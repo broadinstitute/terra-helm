@@ -1,7 +1,4 @@
 argo-cd:
-  global:
-    image:
-      tag: v1.7.7 # TODO this must be removed the next time we update ArgoCD
   server:
     extraArgs:
     - --insecure # Required to enable TLS termination at Ingress/LB
@@ -79,7 +76,7 @@ argo-cd:
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
-      tag: main-b514df5
+      tag: ch-DDO-1274-35132c8
     env:
       - name: VAULT_ADDR
         value: https://clotho.broadinstitute.org:8200
