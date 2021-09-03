@@ -52425,6 +52425,23 @@ entries:
     version: 0.0.0
   thurloe:
   - apiVersion: v2
+    created: "2021-09-03T14:06:02.145176966Z"
+    description: Chart for Thurloe service in Terra
+    digest: fc17e32ece38d78f88c60faefdaa16ace35a2c905998ede384dde45ab545683f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.12.0/thurloe-0.12.0.tgz
+    version: 0.12.0
+  - apiVersion: v2
     created: "2021-09-01T13:52:38.939863361Z"
     description: Chart for Thurloe service in Terra
     digest: 18e753a341633dde2aae8b5a628c0f14e09379adb8d42257e71f8a84c80ac0e7
