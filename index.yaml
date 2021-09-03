@@ -11827,6 +11827,28 @@ entries:
     version: 0.0.0-288.1612980844.e4afc2
   dsp-argocd:
   - apiVersion: v2
+    created: "2021-09-03T18:47:43.464968908Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 0700f0a005707f1c45966e8d47c9acb35804ea0665b5bc09e29189864cc8a9cb
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.21.0-476.1630694857.baf43d/dsp-argocd-0.21.0-476.1630694857.baf43d.tgz
+    version: 0.21.0-476.1630694857.baf43d
+  - apiVersion: v2
     created: "2021-08-18T19:03:52.213018982Z"
     dependencies:
     - name: argo-cd
