@@ -40,7 +40,8 @@ imageConfig:
   tag:
   imagePullPolicy: Always
 
-replicas: 0
+# replicas -- Number of replicas for the deployment
+replicas: 3
 
 resources:
   requests:
@@ -53,6 +54,9 @@ resources:
     cpu: 4
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 8Gi
+
+# Allows CloudSQL proxy time to start up. See DDO-1352
+startupSleep: 30
 
 probes:
   readiness:

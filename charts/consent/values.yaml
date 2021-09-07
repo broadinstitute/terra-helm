@@ -39,6 +39,9 @@ image:
 imageRepository:
 imageTag:
 
+# Allows CloudSQL proxy time to start up. See DDO-1352
+startupSleep: 30
+
 probes:
   readiness:
     # probes.readiness.enable -- Whether to configure a readiness probe
@@ -106,6 +109,7 @@ sentryDsnKey:
 
 servicesLocalUrl:
 servicesOntologyUrl:
+servicesSamUrl:
 
 sslPolicy:  tls12-ssl-policy
 

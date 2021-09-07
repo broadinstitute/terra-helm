@@ -1,0 +1,16 @@
+apiVersion: v2
+name: mysql
+version: 0.2.0
+type: application
+description: >
+  A Helm Chart for Mysql
+
+  This chart is customized for Terra preview environments
+
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - mysql
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts

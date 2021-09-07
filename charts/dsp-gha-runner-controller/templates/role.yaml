@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ index .Values "actions-runner-controller" "nameOverride" }}-runner-psp-role
+  labels:
+    {{- include "dsp-gha-runner-controller.labels" . | nindent 4 }}
+rules:
+- apiGroups: ["extensions"]
+  resources: ["podsecuritypolicies"]
+  verbs: ["use"]
+  resourceNames:
+  - {{ index .Values "actions-runner-controller" "nameOverride" }}-runner-psp

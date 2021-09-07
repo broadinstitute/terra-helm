@@ -26,12 +26,12 @@ spec:
 {{- end }}
     path: .
     plugin:
-      name: helmfile
+      name: terra-helmfile-app
       env:
-      - name: HELMFILE_ENV
+      - name: TERRA_ENV
         value: {{ quote .environment }}
-      - name: HELMFILE_SELECTOR
-        value: "group=terra,app={{ .app }}"
+      - name: TERRA_APP
+        value: {{ quote .app }}
 {{- if .syncPolicy }}
     syncPolicy:
 {{ .syncPolicy | toYaml | indent 6 }}

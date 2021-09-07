@@ -1,7 +1,4 @@
 argo-cd:
-  global:
-    image:
-      tag: v1.7.7 # TODO this must be removed the next time we update ArgoCD
   server:
     extraArgs:
     - --insecure # Required to enable TLS termination at Ingress/LB
@@ -23,6 +20,7 @@ argo-cd:
       accounts.fcprod-jenkins: apiKey
       accounts.local-notsuitable: login
       accounts.local-suitable: login
+      accounts.wsmtest-sync: apiKey
       configManagementPlugins: |
         - name: legacy-configs
           generate:
@@ -54,7 +52,7 @@ argo-cd:
       tls:
       - hosts:
         - ap-argocd.dsp-devops.broadinstitute.org
-        secretName: dsp-argocd-cert
+        secretName: dsp-argocd-cert # This is populated by certificate-manager (see certificate.yaml)
       annotations:
         kubernetes.io/ingress.global-static-ip-name: ap-argocd-server
         kubernetes.io/ingress.allow-http: "false" # https only
@@ -66,6 +64,8 @@ argo-cd:
         p, role:terra-ci, applications, sync, */*, allow
         p, role:terra-ci, applications, action/apps/Deployment/restart, */*, allow
         g, terra-ci, role:terra-ci
+        p, role:wsmtest-sync, applications, sync, terra-wsmtest/workspacemanager-wsmtest, allow
+        g, wsmtest-sync, role:wsmtest-sync
   controller:
     extraArgs:
     - --repo-server-timeout-seconds=180
@@ -76,7 +76,7 @@ argo-cd:
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
-      tag: main-4baefee
+      tag: main-d817dbd
     env:
       - name: VAULT_ADDR
         value: https://clotho.broadinstitute.org:8200
@@ -96,3 +96,29 @@ argo-cd:
       requests:
         cpu: 3.2
         memory: 4Gi
+# Path in Vault where ArgoCD secrets live
+vault:
+  pathPrefix: secret/suitable/argocd
+
+## DRY for projects/apps
+
+projects:
+  dspCi:
+    cluster: https://104.197.236.29
+
+apps:
+  ghaRunner:
+    notificationChannel: ap-k8s-monitor
+    namespace: gha-runner
+    controller:
+      chart: dsp-gha-runner-controller
+      version: 0.2.0
+    instances:
+      chart: dsp-gha-runner-instances
+      version: 0.4.0
+  sysbox:
+    notificationChannel: ap-k8s-monitor
+    namespace: kube-system
+    installer:
+      chart: sysbox
+      version: 0.3.0

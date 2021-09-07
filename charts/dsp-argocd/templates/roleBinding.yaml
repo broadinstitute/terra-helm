@@ -3,10 +3,7 @@ kind: RoleBinding
 metadata:
   name: dsp-argocd-pod-runner-binding
   labels:
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    helm.sh/chart: {{ .Chart.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/part-of: {{ .Chart.Name }}
+    {{- include "dsp-argocd.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: argocd-server

@@ -91,6 +91,14 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        command: ["/bin/bash"]
+        args:
+        - '-c'
+        - >- # Sleep 30 seconds to allow CloudSQL proxy time to start up.
+          sleep {{ $settings.startupSleep }} &&
+          java $JAVA_OPTS
+          -jar $(find /leonardo -name 'leonardo*.jar')
+        - '--'
         volumeMounts:
         - mountPath: /etc/leonardo.conf
           subPath: leonardo.conf

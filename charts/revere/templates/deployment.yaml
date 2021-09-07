@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  labels:
+    {{- include "revere.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      deployment: {{ .Values.name }}-deployment
+  template:
+    metadata:
+      labels:
+        deployment: {{ .Values.name }}-deployment
+        {{- include "revere.labels" . | nindent 8 }}
+      annotations:
+        {{- /* Automatically restart deployments on config map change: */}}
+        checksum/{{ .Values.name }}-cm: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
+        {{- range $key, $value := .Values.annotations }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-sa
+
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName }}
+      {{- end }}
+
+      volumes:
+      - name: {{ .Values.name }}-cm
+        configMap:
+          name: {{ .Values.name }}-cm
+      {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
+      - name: {{ .Values.name }}-gcp-sa
+        secret:
+          secretName: {{ .Values.name }}-gcp-sa
+      {{- end }}
+
+      containers:
+      - name: {{ .Values.name }}-app
+        image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag | default .Values.global.applicationVersion }}"
+        imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+
+        env:
+        - name: REVERE_STATUSPAGE_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-statuspage-api-key
+              key: statuspageApiKey
+        {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /etc/revere-sa/serviceAccount.json
+        {{- end }}
+
+        volumeMounts:
+        - mountPath: /etc/revere/revere.yaml
+          name: {{ .Values.name }}-cm
+          readOnly: true
+          subPath: revere.yaml
+        {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
+        - mountPath: /etc/revere-sa/
+          name: {{ .Values.name }}-gcp-sa
+          readOnly: true
+        {{- end }}
+
+        {{- if .Values.probes.readiness.enabled }}
+        readinessProbe:
+          {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
+        {{- end }}
+        {{- if .Values.probes.liveness.enabled }}
+        livenessProbe:
+          {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
+        {{- end }}

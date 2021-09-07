@@ -1,0 +1,16 @@
+{{- define "libchart.frontendconfig.tpl" -}}
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: {{ .Chart.Name  }}-ingress-frontendconfig
+  labels:
+    {{- include "helm.labels" . | nindent 4 }}
+{{- if .Values.ingress.sslPolicy }}
+spec:
+  sslPolicy: {{ .Values.ingress.sslPolicy }}
+{{- end }}
+{{- end -}}
+
+{{- define "libchart.frontendconfig" -}}
+{{- include "libchart.util.merge" (append . "libchart.frontendconfig.tpl") -}}
+{{- end -}}

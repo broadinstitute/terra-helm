@@ -1,0 +1,40 @@
+---
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/rbac/sysbox-deploy-rbac.yaml
+# metadata.labels added
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sysbox-label-node
+  namespace: kube-system
+  labels:
+    {{- include "sysbox.labels" . | nindent 4 }}
+---
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/rbac/sysbox-deploy-rbac.yaml
+# metadata.labels added
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sysbox-node-labeler
+  labels:
+    {{- include "sysbox.labels" . | nindent 4 }}
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get", "patch"]
+---
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/rbac/sysbox-deploy-rbac.yaml
+# metadata.labels added
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sysbox-label-node-rb
+  labels:
+    {{- include "sysbox.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sysbox-node-labeler
+subjects:
+- kind: ServiceAccount
+  name: sysbox-label-node
+  namespace: kube-system

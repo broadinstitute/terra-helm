@@ -1,0 +1,100 @@
+# -- (object) Required; contents of revere.yaml to be given to the application
+config:
+
+# Global values used by this chart
+global:
+  # -- (string) What version of the application to deploy
+  applicationVersion: latest
+
+# name -- A name for the deployment that will be substituted into resource definitions
+name: revere
+
+imageConfig:
+  # -- (string) Image repository
+  repository: us-central1-docker.pkg.dev/dsp-artifact-registry/revere/revere
+  # -- (string) Image tag
+  # @default -- global.applicationVersion
+  tag: null
+  # -- (string) When to pull images
+  imagePullPolicy: Always
+
+# -- (number) Number of replicas for the deployment
+replicas: 3
+
+# -- (map) Annotations for application pods
+annotations: {}
+
+# -- (string) Optional override for the pod's runtimeClass
+runtimeClassName:
+
+resources:
+  requests:
+    # -- (string) Number of CPU units to request for the deployment
+    cpu: 500m
+    # -- (string) Memory to request for the deployment
+    memory: 4Gi
+  limits:
+    # -- (string) Number of CPU units to limit the deployment to
+    cpu: 500m
+    # -- (string) Memory to limit the deployment to
+    memory: 4Gi
+
+probes:
+  readiness:
+    # -- (boolean) If the readiness probe should be enabled
+    enabled: false
+    # -- (object) Spec for the readiness probe
+    spec:
+  liveness:
+    # -- (boolean) If the liveness probe should be enabled
+    enabled: false
+    # -- (object) Spec for the liveness probe
+    spec:
+
+secrets:
+  gcpServiceAccount:
+    workloadIdentity:
+      # -- (boolean) If workload identity should be used for the GCP SA
+      enabled: false
+      # -- (string) ID of the GCP SA to use
+      accountName:
+      # -- (string) ID (not the number) of the GCP project the SA is in
+      projectId:
+    secretsManager:
+      # -- (boolean) If secrets-manager (Vault) should be used for the GCP SA
+      enabled: false
+      # -- (string) Path within Vault where the SA's key is stored
+      vaultPath:
+      # -- (string) Field name within the secret for the SA's key
+      vaultKey:
+      # -- (string) Encoding of the Vault field (either `text` or `base64`)
+      sourceEncoding: base64
+  statuspageApiKey:
+    secretsManager:
+      # -- (boolean) If secrets-manager (Vault) should be used for the API key
+      enabled: false
+      # -- (string) Path within Vault where the API key is stored
+      vaultPath:
+      # -- (string) Field name within the secret for the API key
+      vaultKey:
+      # -- (string) Encoding of the Vault field (either `text` or `base64`)
+      sourceEncoding: text
+
+networkPolicy:
+  ingress:
+    # -- (boolean) If the NetworkPolicy should be enabled for ingress
+    enabled: false
+    # -- (list) CIDR ranges to permit for ingress
+    cidrAllowList:
+    # -- (list) Posts/protocols to permit for ingress
+    portAllowList:
+  egress:
+    # -- (boolean) If the NetworkPolicy should be enabled for egress
+    enabled: false
+    # -- (list) CIDR ranges to permit for egress
+    cidrAllowList:
+    # -- (list) Posts/protocols to permit for egress
+    portAllowList:
+    # HTTPS
+    - port: 443
+      protocol: TCP

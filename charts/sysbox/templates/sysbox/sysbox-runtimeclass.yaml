@@ -1,0 +1,12 @@
+# CHANGES to https://github.com/nestybox/sysbox/blob/master/sysbox-k8s-manifests/runtime-class/sysbox-runtimeclass.yaml
+# metadata.labels added
+apiVersion: node.k8s.io/v1beta1
+kind: RuntimeClass
+metadata:
+  name: sysbox-runc
+  labels:
+    {{- include "sysbox.labels" . | nindent 4 }}
+handler: sysbox-runc
+scheduling:
+  nodeSelector:
+    sysbox-runtime: running

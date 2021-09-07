@@ -1,4 +1,4 @@
-# Manual steps:  
+# Manual steps:   
 #  - clone https://github.com/tuenti/secrets-manager, run:
 #      kubectl apply -f crd.yaml
 #  - kubectl create secret generic secret-manager-approle --from-literal=role-id=*** --from-literal=secret-id=***

@@ -45,7 +45,7 @@ spec:
           protocol: TCP
         livenessProbe:
           tcpSocket:
-            port: 389
+            port: 636
           initialDelaySeconds: 60
           periodSeconds: 10
           failureThreshold: 30
