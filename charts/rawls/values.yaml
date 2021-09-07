@@ -40,6 +40,8 @@ deploymentDefaults:
   enabled: true
   # deploymentDefaults.name -- A name for the deployment that will be substituted into resource definitions.
   # Example: `"rawls1-reader"`
+  buffer:
+    enabled: true
   name: null
   # arbitraty metadata
   # Example: bio.terra.linter/replicas_exception: true
