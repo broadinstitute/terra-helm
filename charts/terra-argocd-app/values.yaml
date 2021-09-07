@@ -1,29 +1,32 @@
-# projectName -- Name of the project this ArgoCD application belongs to. Eg. "terra-dev", "terra-cluster-dev"
+# projectName -- Required. Name of the project this ArgoCD application belongs to. Eg. "terra-dev", "terra-cluster-dev"
 projectName: null
 
-# description -- Description for this app. Eg. "Applications for Leo in Terra's dev environment"
+# description -- Optional. Description for this app. Eg. "Applications for Leo in Terra's dev environment"
 description: null
 
-# clusterName -- The name of the cluster that is being deployed to. Eg. terra-dev
+# clusterName -- Required. The name of the cluster (as defined in ArgoCD) that is being deployed to. Eg. terra-dev
 clusterName: null
 
-# clusterAddress -- The address of the cluster that is being deployed to. Eg. "https://35.238.186.116"
+# clusterAddress -- Required. The control plane address of the cluster that is being deployed to. Eg. "https://35.238.186.116"
 clusterAddress: null
 
-# releaseType -- The type of release. Either "app" or "cluster"
+# releaseType -- Required. The type of release. Either "app" or "cluster"
 releaseType: null
 
-# releaseName -- The name of the Helm chart that is being deployed. Eg. "leonardo", "diskmanager"
+# releaseName -- Required. The name of the Helm chart that is being deployed. Eg. "leonardo", "diskmanager"
 releaseName: null
 
-# targetName -- The name of the Terra environment or cluster that is being deployed to. Eg. "dev", "terra-prod"
+# targetName -- Required. The name of the Terra environment or cluster that is being deployed to. Eg. "dev", "terra-prod"
 targetName: null
 
-# namespace -- The namespace where the release is being deployed to. Eg. "terra-dev"
+# namespace -- Required. The namespace where the release is being deployed to. Eg. "terra-dev"
 namespace: null
 
-# jenkinsSyncEnabled -- Whether to sync this app on Jenkins environment deploys
-jenkinsSyncEnabled: true
+# jenkinsSyncGroup -- Optional. Add this to the group of apps Jenkins syncs during a deploy. Eg. "dev", "alpha", "prod"
+jenkinsSyncGroup: null
+
+# jenkinsSyncEnabled -- Deprecated. Enable Jenkins-triggered syncs during monolith release promotions.
+jenkinsSyncEnabled: false
 
 # syncPolicy -- Optional: Sync policy for the ArgoCD app.
 # See https://argoproj.github.io/argo-cd/user-guide/auto_sync/

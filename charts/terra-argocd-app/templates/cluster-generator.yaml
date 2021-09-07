@@ -1,0 +1,45 @@
+{{- if .Values.releaseType | eq "cluster" }}
+# Generates an ArgoCD application for a Terra cluster release
+{{- $release := required "releaseName is required" .Values.releaseName }}
+{{- $cluster := required "targetName is required" .Values.targetName }}
+{{- if not ( .Values.targetName | eq .Values.clusterName ) }}
+{{- fail "Cluster name and target name should be identical!" }}
+{{- end }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ required "A valid releaseName is required" .Values.releaseName }}-{{ required "A valid targetName is required" .Values.targetName }}"
+  labels:
+    release: {{ $release | quote }} # These labels are used as selectors in the UI and for argocd CLI calls
+    cluster: {{ required "A valid clusterName is required ".Values.clusterName | quote }}
+    type: cluster
+    {{- if .Values.jenkinsSyncGroup }}
+    jenkins-sync-group: {{ .Values.jenkinsSyncGroup | quote }}
+    {{- end }}
+  {{- if .Values.purgeDeployedResourcesOnDelete }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  project: {{ required "A valid projectName is required" .Values.projectName | quote }}
+  destination:
+    namespace: {{ required "A valid namespace is required" .Values.namespace | quote }}
+    server: {{ required "A valid clusterAddress is required" .Values.clusterAddress | quote }}
+  source:
+    repoURL: {{ .Values.helmfileRepo | quote }}
+    {{- if .Values.helmfileRepoRevision }}
+    targetRevision: {{ .Values.helmfileRepoRevision | quote }}
+    {{- end }}
+    path: .
+    plugin:
+      name: terra-helmfile-cluster
+      env:
+      - name: TERRA_CLUSTER
+        value: {{ $cluster | quote }}
+      - name: RELEASE_NAME
+        value: {{ $release | quote }}
+    {{- if .Values.syncPolicy }}
+    syncPolicy: {{ .Values.syncPolicy | toYaml | nindent 6 }}
+    {{- end }}
+{{- end -}}
+{{- end }}
