@@ -1,8 +1,0 @@
-# clusterAddresses -- A list of cluster addresses that this environment is deployed to. Eg. "https://35.238.186.116"
-clusterAddresses: []
-
-# environment -- The Terra environment this project is for. Eg. `dev`
-environment: null
-
-# requireSuitable -- Whether this environment requires a user to be suitable to make changes.
-requireSuitable: false
