@@ -11,7 +11,7 @@ metadata:
   name: "{{ required "A valid releaseName is required" .Values.releaseName }}-{{ required "A valid targetName is required" .Values.targetName }}"
   labels:
     release: {{ $release | quote }} # These labels are used as selectors in the UI and for argocd CLI calls
-    cluster: {{ required "A valid clusterName is required ".Values.clusterName | quote }}
+    cluster: {{ required "A valid clusterName is required" .Values.clusterName | quote }}
     type: cluster
     {{- if .Values.jenkinsSyncGroup }}
     jenkins-sync-group: {{ .Values.jenkinsSyncGroup | quote }}
@@ -41,5 +41,4 @@ spec:
     {{- if .Values.syncPolicy }}
     syncPolicy: {{ .Values.syncPolicy | toYaml | nindent 6 }}
     {{- end }}
-{{- end -}}
 {{- end }}

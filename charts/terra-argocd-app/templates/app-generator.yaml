@@ -10,7 +10,7 @@ metadata:
     app: {{ $app | quote }} # These labels are used as selectors in the UI and for argocd CLI calls
     release: {{ $app | quote }}
     env: {{ $env | quote }}
-    cluster: {{ required "A valid clusterName is required ".Values.clusterName | quote }}
+    cluster: {{ required "A valid clusterName is required" .Values.clusterName | quote }}
     type: app
     has-legacy-configs: {{ .Values.legacyConfigsEnabled | quote }}
     jenkins-sync-enabled: {{ .Values.jenkinsSyncEnabled | quote }} # Deprecated in favor of jenkins-sync-group
