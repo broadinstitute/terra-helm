@@ -27,11 +27,11 @@ Update dependencies (this should be re-run any time you update the chart):
 
 Compare local copy of the chart to the deployed version of the chart:
 
-    helm diff upgrade ap-argocd . --namespace=ap-argocd
+    helm diff upgrade ap-argocd . --namespace=ap-argocd -f values.yaml
 
 If everything looks as expected, perform the upgrade:
 
-    helm upgrade ap-argocd . --namespace=ap-argocd
+    helm upgrade ap-argocd . --namespace=ap-argocd -f values.yaml
 
 Be sure to commit any changes you make back to master!
 

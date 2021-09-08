@@ -108,6 +108,12 @@ spec:
           subPath: billing-account.pem
           name: app-ctmpls
           readOnly: true
+        {{- if $settings.buffer.enabled }}
+        - mountPath: /etc/buffer-account.json
+          subPath: buffer-account.json
+          name: app-ctmpls
+          readOnly: true
+        {{- end }}
         - mountPath: /var/log/gc
           name: {{ $settings.name }}-gc-logs
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
