@@ -1816,6 +1816,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.27.0-479.1631116197.03c5b4/buffer-0.27.0-479.1631116197.03c5b4.tgz
     version: 0.27.0-479.1631116197.03c5b4
   - apiVersion: v2
+    created: "2021-09-09T15:21:32.258029239Z"
+    description: Chart for Resource Buffering Service
+    digest: a1212f53ec92f82c0f5e5251991a50ccbd4e472ba4776800566313211f604708
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.27.0-468.1631200875.918aa8/buffer-0.27.0-468.1631200875.918aa8.tgz
+    version: 0.27.0-468.1631200875.918aa8
+  - apiVersion: v2
     created: "2021-09-02T11:58:13.373350162Z"
     dependencies:
     - condition: ingress.enabled
@@ -6789,6 +6806,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.5.0/crljanitor-0.5.0.tgz
     version: 0.5.0
+  - apiVersion: v2
+    created: "2021-09-09T15:21:32.413621331Z"
+    description: Chart for Cloud Resource Manager Janitor
+    digest: 7e0ac34b20bd86d2fc9729758487fd4990ce359f8deecd883b4ffa3806feecb5
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.5.0-468.1631200875.918aa8/crljanitor-0.5.0-468.1631200875.918aa8.tgz
+    version: 0.5.0-468.1631200875.918aa8
   - apiVersion: v2
     created: "2021-09-02T12:12:06.114096523Z"
     description: Chart for Cloud Resource Manager Janitor
@@ -11899,6 +11933,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.22.0/dsp-argocd-0.22.0.tgz
     version: 0.22.0
+  - apiVersion: v2
+    created: "2021-09-09T15:21:32.578850216Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 06eb5b0e1c7f3257e7e80cdb47189b3457ab9db39ba740951453927db91a4308
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.22.0-468.1631200876.918aa8/dsp-argocd-0.22.0-468.1631200876.918aa8.tgz
+    version: 0.22.0-468.1631200876.918aa8
   - apiVersion: v2
     created: "2021-09-03T18:59:59.788867254Z"
     dependencies:
@@ -18224,6 +18280,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.46.0/externalcreds-0.46.0.tgz
     version: 0.46.0
   - apiVersion: v2
+    created: "2021-09-09T15:21:32.754422394Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra External Credentials Manager
+    digest: 12fc855184b64200d4216c278c5bb302fd06cd18f3f680d965c49f8523eb5f5f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.46.0-468.1631200876.918aa8/externalcreds-0.46.0-468.1631200876.918aa8.tgz
+    version: 0.46.0-468.1631200876.918aa8
+  - apiVersion: v2
     created: "2021-09-01T13:52:38.25930639Z"
     dependencies:
     - condition: postgres.enabled
@@ -24086,6 +24164,15 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.4.0/ingresslib-0.4.0.tgz
     version: 0.4.0
+  - apiVersion: v2
+    created: "2021-09-09T15:21:32.929370072Z"
+    description: A libary Helm chart for Ingress
+    digest: 0c746f9541ad25ced558b67dde25a0e69af021442788b3c384852c10e0dab78b
+    name: ingresslib
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.4.0-468.1631200879.918aa8/ingresslib-0.4.0-468.1631200879.918aa8.tgz
+    version: 0.4.0-468.1631200879.918aa8
   - apiVersion: v2
     created: "2021-08-23T18:00:01.473376716Z"
     description: A libary Helm chart for Ingress
@@ -37013,6 +37100,29 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.18.0/rawls-0.18.0.tgz
     version: 0.18.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-09-09T15:21:33.108657747Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: Chart for Rawls service in Terra
+    digest: 59d51f01135f20c74998cceed5f65478a5860a86c1124ce915630893e8f7e904
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.18.0-468.1631200879.918aa8/rawls-0.18.0-468.1631200879.918aa8.tgz
+    version: 0.18.0-468.1631200879.918aa8
   - apiVersion: v2
     appVersion: latest
     created: "2021-09-01T13:52:38.67386712Z"
@@ -52703,6 +52813,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.12.0/thurloe-0.12.0.tgz
     version: 0.12.0
+  - apiVersion: v2
+    created: "2021-09-09T15:21:33.282667926Z"
+    description: Chart for Thurloe service in Terra
+    digest: a8b0651de42039814a55ecbce684b8c802f4e4e5c32b767e8ffc6732240196f5
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.12.0-468.1631200880.918aa8/thurloe-0.12.0-468.1631200880.918aa8.tgz
+    version: 0.12.0-468.1631200880.918aa8
   - apiVersion: v2
     created: "2021-09-01T13:52:38.939863361Z"
     description: Chart for Thurloe service in Terra
