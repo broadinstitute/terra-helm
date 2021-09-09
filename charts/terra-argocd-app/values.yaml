@@ -26,7 +26,7 @@ namespace: null
 jenkinsSyncGroup: null
 
 # jenkinsSyncEnabled -- Deprecated. Enable Jenkins-triggered syncs during monolith release promotions.
-jenkinsSyncEnabled: false
+jenkinsSyncEnabled: true
 
 # syncPolicy -- Optional: Sync policy for the ArgoCD app.
 # See https://argoproj.github.io/argo-cd/user-guide/auto_sync/
