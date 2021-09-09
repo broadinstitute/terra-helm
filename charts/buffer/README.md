@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.19.0](https://img.shields.io/badge/Version-0.19.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.27.0](https://img.shields.io/badge/Version-0.27.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -42,15 +42,15 @@ Chart for Resource Buffering Service
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
 | name | string | `"buffer"` | A name for the deployment that will be substituted into resuorce definitions |
+| probes.liveness.enabled | bool | `true` |  |
+| probes.liveness.spec.failureThreshold | int | `30` |  |
+| probes.liveness.spec.httpGet.path | string | `"/status"` |  |
+| probes.liveness.spec.httpGet.port | int | `8080` |  |
+| probes.liveness.spec.initialDelaySeconds | int | `15` |  |
+| probes.liveness.spec.periodSeconds | int | `10` |  |
+| probes.liveness.spec.successThreshold | int | `1` |  |
+| probes.liveness.spec.timeoutSeconds | int | `5` |  |
 | probes.readiness.enabled | bool | `true` |  |
-| probes.readiness.liveness.enabled | bool | `true` |  |
-| probes.readiness.liveness.spec.failureThreshold | int | `30` |  |
-| probes.readiness.liveness.spec.httpGet.path | string | `"/status"` |  |
-| probes.readiness.liveness.spec.httpGet.port | int | `8080` |  |
-| probes.readiness.liveness.spec.initialDelaySeconds | int | `15` |  |
-| probes.readiness.liveness.spec.periodSeconds | int | `10` |  |
-| probes.readiness.liveness.spec.successThreshold | int | `1` |  |
-| probes.readiness.liveness.spec.timeoutSeconds | int | `5` |  |
 | probes.readiness.spec.failureThreshold | int | `6` |  |
 | probes.readiness.spec.httpGet.path | string | `"/status"` |  |
 | probes.readiness.spec.httpGet.port | int | `8080` |  |
@@ -58,13 +58,13 @@ Chart for Resource Buffering Service
 | probes.readiness.spec.periodSeconds | int | `10` |  |
 | probes.readiness.spec.successThreshold | int | `1` |  |
 | probes.readiness.spec.timeoutSeconds | int | `5` |  |
-| probes.readiness.startup.enabled | bool | `true` |  |
-| probes.readiness.startup.spec.failureThreshold | int | `1080` |  |
-| probes.readiness.startup.spec.httpGet.path | string | `"/status"` |  |
-| probes.readiness.startup.spec.httpGet.port | int | `8080` |  |
-| probes.readiness.startup.spec.periodSeconds | int | `10` |  |
-| probes.readiness.startup.spec.successThreshold | int | `1` |  |
-| probes.readiness.startup.spec.timeoutSeconds | int | `5` |  |
+| probes.startup.enabled | bool | `true` |  |
+| probes.startup.spec.failureThreshold | int | `1080` |  |
+| probes.startup.spec.httpGet.path | string | `"/status"` |  |
+| probes.startup.spec.httpGet.port | int | `8080` |  |
+| probes.startup.spec.periodSeconds | int | `10` |  |
+| probes.startup.spec.successThreshold | int | `1` |  |
+| probes.startup.spec.timeoutSeconds | int | `5` |  |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"tcell_3_1_0"` | Proxy image tag |
