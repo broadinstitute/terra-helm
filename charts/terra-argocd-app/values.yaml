@@ -14,6 +14,9 @@ app: null
 # jenkinsSyncEnabled -- Whether to sync this app on Jenkins environment deploys
 jenkinsSyncEnabled: true
 
+# jenkinsSyncGroup -- Set to "prod" to deploy during Jenkins prod deploy, etc.
+jenkinsSyncGroup: null
+
 # syncPolicy -- Optional: Sync policy for the app.
 # See https://argoproj.github.io/argo-cd/user-guide/auto_sync/
 # @default -- No sync policy (manual)

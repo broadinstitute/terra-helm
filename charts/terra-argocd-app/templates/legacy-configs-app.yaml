@@ -1,23 +1,27 @@
 {{- with .Values -}}
 {{- if .legacyConfigsEnabled -}}
+# Generates an ArgoCD application for Terra apps that pull configuration from firecloud-develop
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .app }}-configs-{{ .environment }}
+  name: "{{ .app }}-configs-{{ .environment }}"
   labels:
     app: {{ quote .app }} # These labels are used as selectors in the UI and for argocd CLI calls
     env: {{ quote .environment }}
     cluster: {{ quote .clusterName }}
     type: legacy-configs
     jenkins-sync-enabled: {{ quote .jenkinsSyncEnabled }}
+    {{- if .jenkinsSyncGroup }}
+    jenkins-sync-group: {{ quote .jenkinsSyncGroup }}
+    {{- end }}
   {{- if .purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
 spec:
-  project: {{ include "terra-argocd.projectName" . }}
+  project: "{{ include "terra-argocd.projectName" . }}"
   destination:
-    namespace: {{ include "terra-argocd.destinationNamespace" . }}
+    namespace: "{{ include "terra-argocd.destinationNamespace" . }}"
     server: {{ quote .clusterAddress }}
   source:
     repoURL: {{ quote .legacyConfigsRepo }}

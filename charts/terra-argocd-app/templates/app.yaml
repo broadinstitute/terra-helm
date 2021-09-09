@@ -1,23 +1,28 @@
 {{- with .Values -}}
+# Generates an ArgoCD application for a Terra application release
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ required "A valid app name is required" .app }}-{{ required "A valid environment is required" .environment }}
+  name: "{{ required "A valid app name is required" .app }}-{{ required "A valid environment is required" .environment }}"
   labels:
     app: {{ quote .app }} # These labels are used as selectors in the UI and for argocd CLI calls
+    release: {{ quote .app }}
     env: {{ quote .environment }}
     cluster: {{ quote .clusterName }}
     type: app
     has-legacy-configs: {{ quote .legacyConfigsEnabled }}
     jenkins-sync-enabled: {{ quote .jenkinsSyncEnabled }}
+    {{- if .jenkinsSyncGroup }}
+    jenkins-sync-group: {{ quote .jenkinsSyncGroup }}
+    {{- end }}
   {{- if .purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
 spec:
-  project: {{ include "terra-argocd.projectName" . }}
+  project: "{{ include "terra-argocd.projectName" . }}"
   destination:
-    namespace: {{ include "terra-argocd.destinationNamespace" . }}
+    namespace: "{{ include "terra-argocd.destinationNamespace" . }}"
     server: {{ quote .clusterAddress }}
   source:
     repoURL: {{ quote .helmfileRepo }}
