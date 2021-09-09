@@ -13,6 +13,7 @@ metadata:
     release: {{ $release | quote }} # These labels are used as selectors in the UI and for argocd CLI calls
     cluster: {{ required "A valid clusterName is required" .Values.clusterName | quote }}
     type: cluster
+    jenkins-sync-enabled: {{ .Values.jenkinsSyncEnabled | quote }}
     {{- if .Values.jenkinsSyncGroup }}
     jenkins-sync-group: {{ .Values.jenkinsSyncGroup | quote }}
     {{- end }}

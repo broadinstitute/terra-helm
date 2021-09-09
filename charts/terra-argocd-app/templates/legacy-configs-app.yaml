@@ -12,6 +12,9 @@ metadata:
     cluster: {{ required "clusterName is required" .Values.clusterName  | quote }}
     type: legacy-configs
     jenkins-sync-enabled: {{ .Values.jenkinsSyncEnabled | quote }}
+    {{- if .Values.jenkinsSyncGroup }}
+    jenkins-sync-group: {{ .Values.jenkinsSyncGroup | quote }}
+    {{- end }}
   {{- if .Values.purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io

@@ -13,7 +13,7 @@ metadata:
     cluster: {{ required "A valid clusterName is required" .Values.clusterName | quote }}
     type: app
     has-legacy-configs: {{ .Values.legacyConfigsEnabled | quote }}
-    jenkins-sync-enabled: {{ .Values.jenkinsSyncEnabled | quote }} # Deprecated in favor of jenkins-sync-group
+    jenkins-sync-enabled: {{ .Values.jenkinsSyncEnabled | quote }}
     {{- if .Values.jenkinsSyncGroup }}
     jenkins-sync-group: {{ .Values.jenkinsSyncGroup | quote }}
     {{- end }}
