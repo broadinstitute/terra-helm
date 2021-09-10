@@ -19,7 +19,7 @@ spec:
 {{- end }}
   defaultBackend:
     service:
-      name: { .Values.name }}-service
+      name: {{ .Values.name }}-service
       port:
         number: 443
 {{- end }}
