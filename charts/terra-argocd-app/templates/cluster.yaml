@@ -1,17 +1,18 @@
 {{- if .Values.releaseType | eq "cluster" }}
 # Generates an ArgoCD application for a Terra cluster release
-{{- $release := required "releaseName is required" .Values.releaseName }}
-{{- $cluster := required "targetName is required" .Values.targetName }}
-{{- if not ( .Values.targetName | eq .Values.clusterName ) }}
-{{- fail "Cluster name and target name should be identical!" }}
+{{- $release := required "A valid releaseName is required" .Values.releaseName }}
+{{- $cluster := required "A valid targetName is required" .Values.targetName }}
+{{- $_ := required "A valid clusterName is required" .Values.clusterName }}
+{{- if not ( $cluster | eq .Values.clusterName ) }}
+{{-   fail "clusterName and targetName values should be identical for cluster releases!" }}
 {{- end }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "{{ required "A valid releaseName is required" .Values.releaseName }}-{{ required "A valid targetName is required" .Values.targetName }}"
+  name: "{{ $release }}-{{ $cluster }}"
   labels:
     release: {{ $release | quote }} # These labels are used as selectors in the UI and for argocd CLI calls
-    cluster: {{ required "A valid clusterName is required" .Values.clusterName | quote }}
+    cluster: {{ $cluster | quote }}
     type: cluster
     jenkins-sync-enabled: {{ .Values.jenkinsSyncEnabled | quote }}
     {{- if .Values.jenkinsSyncGroup }}
