@@ -1,35 +1,40 @@
-{{- with .Values -}}
-{{- if .legacyConfigsEnabled -}}
+{{- if eq .Values.releaseType "app" | and .Values.legacyConfigsEnabled -}}
+# Generates an ArgoCD application for Terra apps that pull configuration from firecloud-develop
+{{- $app := required "releaseName is required" .Values.releaseName }}
+{{- $env := required "targetName is required " .Values.targetName }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .app }}-configs-{{ .environment }}
+  name: "{{ $app }}-configs-{{ $env }}"
   labels:
-    app: {{ quote .app }} # These labels are used as selectors in the UI and for argocd CLI calls
-    env: {{ quote .environment }}
-    cluster: {{ quote .clusterName }}
+    app: {{ $app | quote }} # These labels are used as selectors in the UI and for argocd CLI calls
+    env: {{ $env | quote }}
+    cluster: {{ required "clusterName is required" .Values.clusterName  | quote }}
     type: legacy-configs
-    jenkins-sync-enabled: {{ quote .jenkinsSyncEnabled }}
-  {{- if .purgeDeployedResourcesOnDelete }}
+    jenkins-sync-enabled: {{ .Values.jenkinsSyncEnabled | quote }}
+    {{- if .Values.jenkinsSyncGroup }}
+    jenkins-sync-group: {{ .Values.jenkinsSyncGroup | quote }}
+    {{- end }}
+  {{- if .Values.purgeDeployedResourcesOnDelete }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
 spec:
-  project: {{ include "terra-argocd.projectName" . }}
+  project: {{ required "projectName is required" .Values.projectName | quote }}
   destination:
-    namespace: {{ include "terra-argocd.destinationNamespace" . }}
-    server: {{ quote .clusterAddress }}
+    namespace: {{ required "namespace is required" .Values.namespace | quote }}
+    server: {{ required "clusterAddress is required" .Values.clusterAddress | quote }}
   source:
-    repoURL: {{ quote .legacyConfigsRepo }}
-    targetRevision: {{ quote .legacyConfigsRepoRef }}
+    repoURL: {{ required "legacyConfigsRepo is required" .Values.legacyConfigsRepo | quote }}
+    targetRevision: {{ required "legacyConfigRepoRef is required" .Values.legacyConfigsRepoRef | quote }}
     path: .
     plugin:
       name: legacy-configs
       env:
-      {{- $instanceTypes := .legacyConfigsInstanceTypes | join "," -}}
-      {{- $envVars := merge .legacyConfigsEnv (dict "ENV" .environment "APP_NAME" .app "INSTANCE_TYPES" $instanceTypes ) -}}
+      {{- $instanceTypes := .Values.legacyConfigsInstanceTypes | join "," -}}
+      {{- $envVars := merge .Values.legacyConfigsEnv (dict "ENV" $env "APP_NAME" $app "INSTANCE_TYPES" $instanceTypes ) -}}
       {{- range $name, $value := $envVars }}
       - name: {{ quote $name }}
         value: {{ quote $value }}
       {{- end -}}
-{{- end -}}{{- end -}}
+{{- end -}}

@@ -1,0 +1,11 @@
+# projectName -- Name of this project. Eg. "terra-dev", "terra-cluster-dev"
+projectName: null
+
+# description -- Description for this project. Eg. "Applications for Terra dev environment"
+description: null
+
+# destinations -- An array of destinations to which this project can deploy, in the form [{ namespace: "target-namespace", server: "https://master-api-address"}]
+destinations: []
+
+# requireSuitable -- Whether this environment or cluster requires a user to be suitable to make changes.
+requireSuitable: false
