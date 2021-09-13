@@ -2,4 +2,4 @@ apiVersion: v2
 name: terra-argocd-project
 description: A Helm chart for generating Terra ArgoCD projects
 type: application
-version: 0.0.1
+version: 0.1.0
