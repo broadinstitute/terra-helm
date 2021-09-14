@@ -12014,6 +12014,28 @@ entries:
     version: 0.0.0-288.1612980844.e4afc2
   dsp-argocd:
   - apiVersion: v2
+    created: "2021-09-14T18:31:30.844203039Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 6ff777b1bf4a01e9df24b1fdf54c58c21258ddaae6917bf83873272f393d04f0
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.24.0/dsp-argocd-0.24.0.tgz
+    version: 0.24.0
+  - apiVersion: v2
     created: "2021-09-14T07:25:48.224183828Z"
     dependencies:
     - name: argo-cd
@@ -42572,6 +42594,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.0.0/sam-0.0.0.tgz
     version: 0.0.0
   sysbox:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2021-09-14T18:31:30.975008828Z"
+    description: Installation Helm chart for nestybox/sysbox
+    digest: fa5d93517246325fc44a14bb0d7ac4f337f2f06d11339cfccfcf6d8cb1ebfc3a
+    keywords:
+    - dsp
+    - broadinstitute
+    - sysbox
+    name: sysbox
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/nestybox/sysbox
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sysbox-0.4.0/sysbox-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     appVersion: 0.4.0
     created: "2021-08-10T18:49:45.448155566Z"
