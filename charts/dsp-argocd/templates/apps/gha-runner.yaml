@@ -4,6 +4,7 @@ metadata:
   name: gha-runner-controller
   annotations:
     notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notificationChannel }}
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: {{ .Values.apps.ghaRunner.notificationChannel }}
 spec:
   destination:
     namespace: {{ .Values.apps.ghaRunner.namespace }}
@@ -31,6 +32,7 @@ metadata:
   name: gha-runner-instances
   annotations:
     notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.ghaRunner.notificationChannel }}
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: {{ .Values.apps.ghaRunner.notificationChannel }}
 spec:
   destination:
     namespace: {{ .Values.apps.ghaRunner.namespace }}

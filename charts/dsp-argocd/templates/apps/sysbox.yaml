@@ -4,6 +4,7 @@ metadata:
   name: sysbox
   annotations:
     notifications.argoproj.io/subscribe.on-sync-failed.slack: {{ .Values.apps.sysbox.notificationChannel }}
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: {{ .Values.apps.sysbox.notificationChannel }}
 spec:
   destination:
     namespace: {{ .Values.apps.sysbox.namespace }}
