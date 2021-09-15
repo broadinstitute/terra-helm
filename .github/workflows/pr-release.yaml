@@ -35,6 +35,7 @@ jobs:
         uses: databiosphere/github-actions/actions/chart-releaser@ch-DDO-1530
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
+          GCS_PUBLISHING_ENABLED: true
 
       - name: Set up GCS Google Service Account
         if: ${{ always() }}
