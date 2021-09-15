@@ -24,7 +24,7 @@ imageConfig:
 replicas: 1
 
 
-# Allows CloudSQL proxy time to start up. See DDO-1352
+# startupSleep -- Allows CloudSQL proxy time to start up. See DDO-1352
 startupSleep: 30
 
 vault:

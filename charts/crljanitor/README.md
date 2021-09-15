@@ -37,7 +37,7 @@ Chart for Cloud Resource Manager Janitor
 | serviceAllowedAddresses | object | `{}` | A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceIP | string | `nil` | External IP of the service. Required. |
-| startupSleep | int | `30` |  |
+| startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | trackResourcePubsubEnabled | bool | `true` | Whether to enable using pubsub to receive new tracked resources. |
 | vault.adminUserFilePath | string | `"config/terra/crl-janitor/common/iam"` | (string) Vault path prefix for admin user list. Required if vault.enabled. Use the same users as admin for all env by default. Override if needed in helmfile repo. |
 | vault.configPathPrefix | string | `nil` | Vault path prefix for configs. Required if vault.enabled. |
