@@ -33,9 +33,7 @@ jobs:
         run: echo '${{ secrets.HELM_GCP_PUBLISH_KEY }}' > helm_service_account.json
 
       - name: Run chart-releaser
-        # TODO: Revert back to image after merging github-actions PR
-        # uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
-        uses: databiosphere/github-actions/actions/chart-releaser@ch-DDO-1530
+        uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
           GCS_PUBLISHING_ENABLED: true
