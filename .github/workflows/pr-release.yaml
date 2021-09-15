@@ -30,7 +30,9 @@ jobs:
           git config user.email "broadbot@broadinstitute.org"
 
       - name: Run chart-releaser
-        uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
+        # TODO: Revert back to image after merging github-actions PR
+        # uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
+        uses: databiosphere/github-actions/actions/chart-releaser@ch-DDO-1530
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
 
