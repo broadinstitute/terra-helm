@@ -29,6 +29,9 @@ jobs:
           git config user.name "broadbot"
           git config user.email "broadbot@broadinstitute.org"
 
+      - name: Set up Helm Publish SA
+        run: echo '${{ secrets.HELM_GCP_PUBLISH_KEY }}' > helm_service_account.json
+
       - name: Run chart-releaser
         # TODO: Revert back to image after merging github-actions PR
         # uses: docker://us-central1-docker.pkg.dev/dsp-artifact-registry/github-actions-public/chart-releaser:latest
@@ -36,7 +39,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
           GCS_PUBLISHING_ENABLED: true
-          GCS_SA_KEY: "${{ secrets.HELM_GCP_PUBLISH_KEY }}"
+          GCS_SA_KEY_FILE: "./helm_service_account.json"
 
       - name: Set up GCS Google Service Account
         if: ${{ always() }}
