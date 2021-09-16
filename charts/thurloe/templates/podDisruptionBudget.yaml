@@ -3,7 +3,8 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ .Values.name }}-pdb
 spec:
-  minAvailable: 10%
+  # don't reduce serving capacity by more than 30%
+  minAvailable: 30%
   selector:
     matchLabels:
       deployment: {{ .Values.name }}-deployment
