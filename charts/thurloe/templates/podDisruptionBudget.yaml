@@ -3,8 +3,9 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ .Values.name }}-pdb
 spec:
-  # 33% of pods must still be available after the eviction,
+  # 65% of pods must still be available after the eviction,
   # even in the absence of the evicted pod.
+  # https://v1-20.docs.kubernetes.io/docs/tasks/run-application/configure-pdb/#rounding-logic-when-specifying-percentages
   minAvailable: 65%
   selector:
     matchLabels:
