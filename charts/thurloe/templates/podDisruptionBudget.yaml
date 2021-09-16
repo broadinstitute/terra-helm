@@ -3,7 +3,8 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ .Values.name }}-pdb
 spec:
-  # don't reduce serving capacity by more than 30%
+  # 30% of pods must still be available after the eviction,
+  # even in the absence of the evicted pod.
   minAvailable: 30%
   selector:
     matchLabels:
