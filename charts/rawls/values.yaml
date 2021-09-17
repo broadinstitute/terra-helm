@@ -16,8 +16,6 @@ resources:
     # resources.limits.memory -- Memory to limit the deployment to
     memory: 16Gi
 
-# startupSleep -- Allows CloudSQL proxy time to start up. See DDO-1352
-startupSleep: 30
 
 ingress:
   # ingress.staticIpName -- (string) Required. GCP resource name for ingress static ip
