@@ -99,6 +99,7 @@ Chart for Terra Workspace Manager
 | serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
 | spendBillingAccountId | string | `nil` | the Google Billing account Id for WSM to use for workspace projects. |
 | spendProfileId | string | `nil` | the Spend Profile Id to associate with the billing account. |
+| startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | terraDataRepoUrl | string | `"https://jade.datarepo-dev.broadinstitute.org"` | corresponding data repo instance for the environment |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
