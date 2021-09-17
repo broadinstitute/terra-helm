@@ -1,6 +1,6 @@
 # rawls
 
-![Version: 0.8.1](https://img.shields.io/badge/Version-0.8.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
+![Version: 0.18.0](https://img.shields.io/badge/Version-0.18.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
 
 Chart for Rawls service in Terra
 
@@ -9,16 +9,23 @@ Chart for Rawls service in Terra
 * <https://github.com/broadinstitute/terra-helm/tree/master/charts>
 * <https://github.com/broadinstitute/rawls>
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | liquibase-migration | 0.2.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| deploymentDefaults.annotation | object | `nil` | Additational metadata to attach |
+| deploymentDefaults.annotations | object | `{}` |  |
+| deploymentDefaults.buffer.enabled | bool | `true` |  |
 | deploymentDefaults.enabled | bool | `true` | Whether a declared deployment is enabled. If false, no resources will be created |
 | deploymentDefaults.expose | bool | `false` | Whether to create a Service for this deployment |
 | deploymentDefaults.imageTag | string | `nil` | Image tag to be used when deploying Pods @default global.applicationVersion |
 | deploymentDefaults.legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default deploymentDefaults.name |
-| deploymentDefaults.name | string | `nil` | A name for the deployment that will be substituted into resuorce definitions. Example: `"rawls1-reader"` |
+| deploymentDefaults.name | string | `nil` | A name for the deployment that will be substituted into resource definitions. Example: `"rawls1-reader"` |
 | deploymentDefaults.probes.liveness.enabled | bool | `true` |  |
 | deploymentDefaults.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/status","port":8080},"initialDelaySeconds":20,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the liveness probe to deploy, if enabled |
 | deploymentDefaults.probes.readiness.enabled | bool | `true` |  |
@@ -30,6 +37,7 @@ Chart for Rawls service in Terra
 | deploymentDefaults.probes.startup.spec.periodSeconds | int | `10` |  |
 | deploymentDefaults.probes.startup.spec.successThreshold | int | `1` |  |
 | deploymentDefaults.probes.startup.spec.timeoutSeconds | int | `5` |  |
+| deploymentDefaults.proxyImage | string | `"broadinstitute/openidc-proxy:tcell_3_1_0"` | Image that the OIDC proxy uses |
 | deploymentDefaults.replicas | int | `0` | Number of replicas for the deployment |
 | deploymentDefaults.serviceIP | string | `nil` | Static IP to use for the Service. If set, service will be of type LoadBalancer |
 | deploymentDefaults.serviceName | string | `nil` | What to call the Service |
@@ -39,17 +47,16 @@ Chart for Rawls service in Terra
 | ingress.sslPolicy | string | `"tls12-ssl-policy"` | (string) Name of an existing google ssl policy to associate with an ingress frontend-config |
 | ingress.staticIpName | string | `nil` | Required. GCP resource name for ingress static ip |
 | ingress.timeoutSec | int | `120` | Number of seconds to timeout on requests to the ingress |
-| migration.dryRun | bool | `true` | When true, merely print migration SQL; when false, execute it |
-| migration.enabled | bool | `false` | Whether to run a Liquibase migration job pre-sync |
-| migration.failBasedOnLiquibase | bool | `true` | When true, fail the job (and ArgoCD sync!) if the Liquibase command fails |
-| migration.imageTag | string | `nil` | Override the image tag to run the migration on @default global.applicationVersion WARNING: App may behave unexpectedly if its database has been migrated to a different version than the app |
-| migration.secretPrefix | string | `"rawls-backend"` | Prefix for ctmpl and env secrets NOTE: Generally equals some deploymentDefaults.name, as secrets are per-deployment but migrations are per-namespace |
-| migration.serviceAccount | string | `"rawls-sa"` | Name of the k8s SA to use for the job |
-| migration.syncWave | string | `"-1"` | Wave to run migration as a sync hook (presumably after SA's RBAC wave) NOTE: Sync hook, not PreSync, so that SA/RBAC can be made normally via an earlier wave |
+| migration.enabled | bool | `false` | (bool) Whether to run a Liquibase migration during sync |
+| migration.imageName | string | `"gcr.io/broad-dsp-gcr-public/rawls"` | (string) Required full app image name, without trailing tag |
+| migration.jarLocation | string | `"$(find /rawls -name 'rawls*.jar')"` | (string) Required jar location in app image, expanded by migration.appContainerShell |
+| migration.liquibaseCommand | string | `"updateSQL"` | (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run |
+| migration.secretPrefix | string | `"rawls-backend"` | (string) Required prefix of -app-ctmpls, -sqlproxy-ctmpls, -sqlproxy-env secrets |
 | resources.limits.cpu | int | `8` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"16Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `8` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"16Gi"` | Memory to request for the deployment |
+| startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | vault.migration.dbPasswordKey | string | `"slick_db_password"` |  |
 | vault.migration.dbUsernameKey | string | `"slick_db_user"` | Key in Vault secret to DB username |
 | vault.migration.path | string | `nil` | Vault path to secret containing DB credentials |
