@@ -59,6 +59,20 @@ spec:
         configMap:
           name: {{ $settings.name }}-cm
       containers:
+      - name: {{ $settings.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "sleep {{ $settings.startupSleep }}"]
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
       - name: {{ $settings.name }}-app
         image: "gcr.io/broad-dsp-gcr-public/rawls:{{ $imageTag }}"
         resources:
@@ -135,16 +149,6 @@ spec:
         startupProbe:
           {{- toYaml $settings.probes.startup.spec | nindent 10 }}
         {{- end }}
-      - name: {{ $settings.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_20180808
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       - name: {{ $settings.name }}-proxy
         image: {{ $settings.proxyImage }}
         ports:
