@@ -6,7 +6,7 @@ Chart for Terra Workspace Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm.storage.googleapis.com | postgres | 0.1.0 |
+| https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy | postgres | 0.1.0 |
 
 ## Values
 

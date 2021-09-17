@@ -1,24 +1,23 @@
-# terra-cluster
+terra-cluster
+=============
 
 A Helm chart to install cluster-wide resources for Terra
 
-## Requirements
+## Chart Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://broadinstitute.github.io/datarepo-helm/ | install-secrets-manager | 0.0.6 |
+| https://broadinstitute.github.io/terra-helm/ | terra-cluster-networking | 0.0.1 |
+| https://broadinstitute.github.io/terra-helm/ | terra-cluster-psps | 0.1.0 |
+| https://broadinstitute.github.io/terra-helm/ | terra-prometheus | 0.6.0 |
+| https://broadinstitute.github.io/terra-helm | terra-cluster-storage | 0.2.0 |
 | https://stakater.github.io/stakater-charts | reloader | v0.0.69 |
-| https://terra-helm.storage.googleapis.com | diskmanager | 0.1.0 |
-| https://terra-helm.storage.googleapis.com | terra-cluster-networking | 0.0.1 |
-| https://terra-helm.storage.googleapis.com | terra-cluster-psps | 0.1.0 |
-| https://terra-helm.storage.googleapis.com | terra-cluster-storage | 0.3.0 |
-| https://terra-helm.storage.googleapis.com | terra-prometheus | 0.9.0 |
 
-## Values
+## Chart Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| diskmanager.enabled | bool | `true` |  |
 | install-secrets-manager.enabled | bool | `true` |  |
 | install-secrets-manager.existingRoleIdKey | string | `"role-id"` |  |
 | install-secrets-manager.existingSecret | string | `"secret-manager-approle"` |  |
@@ -53,7 +52,6 @@ A Helm chart to install cluster-wide resources for Terra
 | terra-prometheus.kube-prometheus-stack.defaultRules.rules.kubernetesSystem | bool | `false` |  |
 | terra-prometheus.kube-prometheus-stack.defaultRules.rules.prometheus | bool | `false` |  |
 | terra-prometheus.kube-prometheus-stack.defaultRules.rules.prometheusOperator | bool | `false` |  |
-| terra-prometheus.kube-prometheus-stack.grafana.namespaceOverride | string | `"monitoring"` |  |
 | terra-prometheus.kube-prometheus-stack.grafana.serviceMonitor.metricRelabelings[0].replacement | string | `"false"` |  |
 | terra-prometheus.kube-prometheus-stack.grafana.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | terra-prometheus.kube-prometheus-stack.grafana.serviceMonitor.metricRelabelings[0].targetLabel | string | `"sd_export"` |  |
@@ -62,7 +60,6 @@ A Helm chart to install cluster-wide resources for Terra
 | terra-prometheus.kube-prometheus-stack.kubeApiServer.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | terra-prometheus.kube-prometheus-stack.kubeApiServer.serviceMonitor.metricRelabelings[0].targetLabel | string | `"sd_export"` |  |
 | terra-prometheus.kube-prometheus-stack.kubeControllerManager.enabled | bool | `false` |  |
-| terra-prometheus.kube-prometheus-stack.kubeDns.enabled | bool | `true` |  |
 | terra-prometheus.kube-prometheus-stack.kubeDns.serviceMonitor.metricRelabelings[0].replacement | string | `"false"` |  |
 | terra-prometheus.kube-prometheus-stack.kubeDns.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | terra-prometheus.kube-prometheus-stack.kubeDns.serviceMonitor.metricRelabelings[0].targetLabel | string | `"sd_export"` |  |
@@ -83,9 +80,7 @@ A Helm chart to install cluster-wide resources for Terra
 | terra-prometheus.kube-prometheus-stack.prometheus.serviceMonitor.metricRelabelings[0].replacement | string | `"false"` |  |
 | terra-prometheus.kube-prometheus-stack.prometheus.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | terra-prometheus.kube-prometheus-stack.prometheus.serviceMonitor.metricRelabelings[0].targetLabel | string | `"sd_export"` |  |
-| terra-prometheus.kube-prometheus-stack.prometheusOperator.admissionWebhooks.enabled | bool | `false` |  |
 | terra-prometheus.kube-prometheus-stack.prometheusOperator.serviceMonitor.metricRelabelings[0].replacement | string | `"false"` |  |
 | terra-prometheus.kube-prometheus-stack.prometheusOperator.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | terra-prometheus.kube-prometheus-stack.prometheusOperator.serviceMonitor.metricRelabelings[0].targetLabel | string | `"sd_export"` |  |
-| terra-prometheus.kube-prometheus-stack.prometheusOperator.tlsProxy.enabled | bool | `false` |  |
 | terra-prometheus.namespaceOverride | string | `"monitoring"` |  |

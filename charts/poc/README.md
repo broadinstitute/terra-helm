@@ -6,7 +6,7 @@ Chart for a POC Terra app
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm.storage.googleapis.com/ | postgres | 0.1.0 |
+| https://broadinstitute.github.io/terra-helm/ | postgres | 0.1.0 |
 
 ## Values
 
