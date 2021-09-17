@@ -18571,6 +18571,28 @@ entries:
     version: 0.0.0-256.1610483351.e3b327
   externalcreds:
   - apiVersion: v2
+    created: "2021-09-17T13:26:30.720937799Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    description: Chart for Terra External Credentials Manager
+    digest: bcef2c2915302071e5a1460b5919b32347790262b23035b85631074c52fdcb5f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.47.0/externalcreds-0.47.0.tgz
+    version: 0.47.0
+  - apiVersion: v2
     created: "2021-09-08T20:01:36.097281318Z"
     dependencies:
     - condition: postgres.enabled
@@ -25549,6 +25571,29 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-09-15-20-120.1600181187.32a2cb/leonardo-09-15-20-120.1600181187.32a2cb.tgz
     version: 09-15-20-120.1600181187.32a2cb
+  - apiVersion: v2
+    created: "2021-09-17T13:26:30.803511547Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.2.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 1ffbd047b31903515dd301a075d95d1931c98d306cf84a40f88747a2d8a7a447
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.54.0/leonardo-0.54.0.tgz
+    version: 0.54.0
   - apiVersion: v2
     created: "2021-09-01T13:52:38.544587502Z"
     dependencies:
@@ -36902,6 +36947,26 @@ entries:
     version: 0.0.0
   poc:
   - apiVersion: v2
+    created: "2021-09-17T13:26:30.890492196Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.1.0
+    description: Chart for a POC Terra app
+    digest: 054c277323724954e48c86b2fe6d2314a3be9ef1446fbf9da1a86c09fc77eae7
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.10.0/poc-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
     created: "2021-09-15T20:45:08.064801164Z"
     dependencies:
     - condition: postgres.enabled
@@ -44195,6 +44260,53 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-templates-0.0.1/terra-argocd-templates-0.0.1.tgz
     version: 0.0.1
   terra-cluster:
+  - apiVersion: v2
+    created: "2021-09-17T13:26:30.999738954Z"
+    dependencies:
+    - name: terra-cluster-psps
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.6
+    - condition: terra-cluster-networking.enabled
+      name: terra-cluster-networking
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.0.1
+    - condition: terra-prometheus.enabled
+      name: terra-prometheus
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.9.0
+    - condition: reloader.enabled
+      name: reloader
+      repository: https://stakater.github.io/stakater-charts
+      version: v0.0.69
+    - condition: terra-cluster-storage.enabled
+      name: terra-cluster-storage
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    - condition: diskmanager.enabled
+      name: diskmanager
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    description: A Helm chart to install cluster-wide resources for Terra
+    digest: 2c6109724f655e57002bf01c1b50488eea912312c25df1bf200523847f23ba42
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.9.0/terra-cluster-0.9.0.tgz
+    version: 0.9.0
   - apiVersion: v2
     created: "2021-08-13T18:43:23.777123969Z"
     dependencies:
@@ -54980,6 +55092,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.0.0-296.1613670260.1d08f2/thurloe-0.0.0-296.1613670260.1d08f2.tgz
     version: 0.0.0-296.1613670260.1d08f2
   workspacemanager:
+  - apiVersion: v2
+    created: "2021-09-17T13:26:31.096592221Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 98f29b0515a28a624f05e41ca0533ff05f9449cac081f2e05138d4eb55cc48d0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.38.0/workspacemanager-0.38.0.tgz
+    version: 0.38.0
   - apiVersion: v2
     created: "2021-09-01T13:52:39.068932876Z"
     dependencies:
