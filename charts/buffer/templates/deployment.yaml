@@ -59,7 +59,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ .Values.name }}-cloudsql-proxy
-        image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        image: gcr.io/cloudsql-docker/gce-proxy:1.24.0-buster
         lifecycle:
           postStart:
             exec:
