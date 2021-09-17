@@ -1,6 +1,0 @@
-dependencies:
-- name: liquibase-migration
-  repository: https://terra-helm.storage.googleapis.com/
-  version: 0.2.0
-digest: sha256:8de800a40a894e9f036ac5260b9e5bc2afe90e6ee043fe55cb4aa86a5e7604f2
-generated: "2021-09-17T07:42:19.382053-04:00"
