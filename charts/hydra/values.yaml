@@ -11,6 +11,10 @@ imageConfig:
   # tag: latest
   imagePullPolicy: Always
 replicas: 1
+
+# startupSleep -- Allows CloudSQL proxy time to start up. See DDO-1352
+startupSleep: 30
+
 vault:
   enabled: true
   # pathPrefix is required if Vault secret sync is enabled

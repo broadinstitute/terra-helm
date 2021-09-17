@@ -18,6 +18,21 @@ spec:
     spec:
       serviceAccountName: hydra-sa
       containers:
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.24.0-buster
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "sleep {{ .Values.startupSleep }}"]
+          env:
+            - name: SQL_INSTANCE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: hydra-cloudsql-postgres-instance-name
+                  key: name
+          command: ["/cloud_sql_proxy",
+                    "-instances=terra-kernel-k8s:us-central1:$(SQL_INSTANCE_NAME)=tcp:5432",
+                    "-credential_file=/secrets/sa/service-account.json"]
         - name: hydra
           image: "{{- if .Values.image -}}
               {{ .Values.image }}
@@ -52,17 +67,6 @@ spec:
             httpGet:
               port: 4444
               path: /health/ready
-        - name: cloudsql-proxy
-          image: gcr.io/cloudsql-docker/gce-proxy:1.16
-          env:
-            - name: SQL_INSTANCE_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: hydra-cloudsql-postgres-instance-name
-                  key: name
-          command: ["/cloud_sql_proxy",
-                    "-instances=terra-kernel-k8s:us-central1:$(SQL_INSTANCE_NAME)=tcp:5432",
-                    "-credential_file=/secrets/sa/service-account.json"]
           securityContext:
             runAsUser: 2  # non-root user
             allowPrivilegeEscalation: false
