@@ -54,6 +54,20 @@ spec:
       - name: prometheusjmx-jar
         emptyDir: {}
       containers:
+      - name: {{ .Chart.Name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "sleep {{ .Values.startupSleep }}"]
+        envFrom:
+        - secretRef:
+            name: {{ .Chart.Name }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
       - name: {{ .Chart.Name }}-app
         image: "{{ .Values.imageRepository }}:{{ .Values.imageTag | default .Values.global.applicationVersion }}"
         ports:
@@ -149,16 +163,6 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ .Chart.Name }}-modsecurity-logs
-      - name: {{ .Chart.Name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_20180808
-        envFrom:
-        - secretRef:
-            name: {{ .Chart.Name }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       initContainers:
       - name: download-prometheusjmx-jar
         image: alpine:3.12.0

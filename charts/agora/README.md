@@ -33,13 +33,15 @@ Chart for Agora service in Terra
 | probes.readiness.spec.timeoutSeconds | int | `5` |  |
 | probes.startup.enabled | bool | `true` |  |
 | probes.startup.spec.failureThreshold | int | `1080` |  |
-| probes.startup.spec.httpGet.path | string | `"/version"` |  |
-| probes.startup.spec.httpGet.port | int | `8080` |  |
+| probes.startup.spec.httpGet.path | string | `"/status"` |  |
+| probes.startup.spec.httpGet.port | int | `8000` |  |
 | probes.startup.spec.periodSeconds | int | `10` |  |
 | probes.startup.spec.successThreshold | int | `1` |  |
 | probes.startup.spec.timeoutSeconds | int | `5` |  |
+| proxyImage | string | `"broadinstitute/openidc-proxy:tcell_3_1_0"` |  |
 | replicas | int | `3` | Number of replicas for the deployment |
 | resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"15Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"15Gi"` | Memory to request for the deployment |
+| startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
