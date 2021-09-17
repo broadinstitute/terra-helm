@@ -1,6 +1,0 @@
-dependencies:
-- name: ingresslib
-  repository: file://../ingresslibchart
-  version: 0.3.0
-digest: sha256:52b08e7d291bd7f21f628bff7e8598ca174e9c2ae51fec89299182c329b8c891
-generated: "2021-08-23T10:13:03.529598-04:00"
