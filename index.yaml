@@ -18642,6 +18642,28 @@ entries:
     version: 0.0.0-256.1610483351.e3b327
   externalcreds:
   - apiVersion: v2
+    created: "2021-09-17T20:32:35.112905916Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra External Credentials Manager
+    digest: e3cb6f82c22e8cdaa47022b020f6dbd6a8c4eb6699e649c42cd0d2e79b1dc2f4
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.48.0/externalcreds-0.48.0.tgz
+    version: 0.48.0
+  - apiVersion: v2
     created: "2021-09-17T13:26:30.720937799Z"
     dependencies:
     - condition: postgres.enabled
@@ -25703,6 +25725,29 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-09-15-20-120.1600181187.32a2cb/leonardo-09-15-20-120.1600181187.32a2cb.tgz
     version: 09-15-20-120.1600181187.32a2cb
+  - apiVersion: v2
+    created: "2021-09-17T20:32:35.238470263Z"
+    dependencies:
+    - condition: migration.enabled
+      name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: d1db3abd0362ee227cfec04d5709e39a59f02ac8e1ca50cb8d0a1bb66e604d93
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.55.0/leonardo-0.55.0.tgz
+    version: 0.55.0
   - apiVersion: v2
     created: "2021-09-17T13:26:30.803511547Z"
     dependencies:
@@ -37125,6 +37170,26 @@ entries:
     version: 0.0.0
   poc:
   - apiVersion: v2
+    created: "2021-09-17T20:32:35.324667093Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    description: Chart for a POC Terra app
+    digest: a28345efb0435def48a2b33d36e798f0449c5fd68ffdcf9e71b3b9d7d93a73e6
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.11.0/poc-0.11.0.tgz
+    version: 0.11.0
+  - apiVersion: v2
     created: "2021-09-17T13:26:30.890492196Z"
     dependencies:
     - condition: postgres.enabled
@@ -44567,6 +44632,53 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-templates-0.0.1/terra-argocd-templates-0.0.1.tgz
     version: 0.0.1
   terra-cluster:
+  - apiVersion: v2
+    created: "2021-09-17T20:32:35.451924062Z"
+    dependencies:
+    - name: terra-cluster-psps
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: install-secrets-manager.enabled
+      name: install-secrets-manager
+      repository: https://broadinstitute.github.io/datarepo-helm/
+      version: 0.0.6
+    - condition: terra-cluster-networking.enabled
+      name: terra-cluster-networking
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.0.1
+    - condition: terra-prometheus.enabled
+      name: terra-prometheus
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.9.0
+    - condition: reloader.enabled
+      name: reloader
+      repository: https://stakater.github.io/stakater-charts
+      version: v0.0.69
+    - condition: terra-cluster-storage.enabled
+      name: terra-cluster-storage
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.3.0
+    - condition: diskmanager.enabled
+      name: diskmanager
+      repository: https://broadinstitute.github.io/terra-helm
+      version: 0.1.0
+    description: A Helm chart to install cluster-wide resources for Terra
+    digest: c663defe7958dd35341cfc9caa2ffd89e08bcfa8bef96dd9e30a96831e2072a2
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    maintainers:
+    - email: gmalkov@broadinstitute.org
+      name: Greg Malkov
+    name: terra-cluster
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-cluster-0.10.0/terra-cluster-0.10.0.tgz
+    version: 0.10.0
   - apiVersion: v2
     created: "2021-09-17T13:26:30.999738954Z"
     dependencies:
@@ -55446,6 +55558,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.0.0-296.1613670260.1d08f2/thurloe-0.0.0-296.1613670260.1d08f2.tgz
     version: 0.0.0-296.1613670260.1d08f2
   workspacemanager:
+  - apiVersion: v2
+    created: "2021-09-17T20:32:35.53635477Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+      version: 0.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 5a94f7c83edd00d0dec7191cbc6db16ef5fe18530966dc80d62288562372ecd6
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.40.0/workspacemanager-0.40.0.tgz
+    version: 0.40.0
   - apiVersion: v2
     created: "2021-09-17T18:40:15.641676973Z"
     dependencies:
