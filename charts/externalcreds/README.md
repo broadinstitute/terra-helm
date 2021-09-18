@@ -1,6 +1,6 @@
 # externalcreds
 
-![Version: 0.34.0](https://img.shields.io/badge/Version-0.34.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.46.0](https://img.shields.io/badge/Version-0.46.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Terra External Credentials Manager
 
@@ -13,12 +13,14 @@ Chart for Terra External Credentials Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy | postgres | 0.1.0 |
+| https://terra-helm.storage.googleapis.com | postgres | 0.1.0 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| appDeployments[0].name | string | `"frontend"` |  |
+| appDeployments[1].name | string | `"backend"` |  |
 | cloudTraceEnabled | bool | `true` | Whether to enable gcp cloud trace |
 | global.applicationVersion | string | `"latest"` | What version of the application to deploy |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
@@ -91,9 +93,9 @@ Chart for Terra External Credentials Manager
 | proxy.tcell.hostIdentifier | string | `nil` | Identifier used for logging to TCell. Required if proxy.tcell.enabled is true |
 | proxy.tcell.vaultPrefix | string | `nil` | Prefix for TCell secrets in vault. Required if proxy.tcell.enabled is true. |
 | replicas | int | `0` | Number of replicas for the deployment |
-| resources.limits.cpu | int | `1` | Number of CPU units to limit the deployment to |
+| resources.limits.cpu | int | `4` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"8Gi"` | Memory to limit the deployment to |
-| resources.requests.cpu | int | `1` | Number of CPU units to request for the deployment |
+| resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"8Gi"` | Memory to request for the deployment |
 | samAddress | string | `"https://sam.dsde-dev.broadinstitute.org/"` | Address of SAM instance this deploy will talk to |
 | samplingProbability | float | `1` | the frequency with which calls should be traced. |
