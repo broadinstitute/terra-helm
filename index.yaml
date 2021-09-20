@@ -24071,6 +24071,23 @@ entries:
     version: 0.0.0-327.1615917522.5b8bc6
   hydra:
   - apiVersion: v2
+    created: "2021-09-20T13:46:15.101300486Z"
+    description: Chart for the Hydra deployment used by Identity Concentrator in Terra
+    digest: 17d9423a80ca6e7d57336c71cf0709af4087bffc6cdacc578c4cf2eec8d43c3c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - hydra
+    name: hydra
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/hydra-0.4.0/hydra-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     created: "2021-09-01T13:52:38.379327078Z"
     description: Chart for the Hydra deployment used by Identity Concentrator in Terra
     digest: 12bae0761241d3627ed58e05080e2526938360c221964094441deb36daa15ce3
