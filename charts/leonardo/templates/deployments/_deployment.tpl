@@ -62,6 +62,20 @@ spec:
       - name: prometheusjmx-jar
         emptyDir: {}
       containers:
+      - name: {{ $settings.name }}-sqlproxy
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "sleep {{ $settings.startupSleep }}"]
+        envFrom:
+        - secretRef:
+            name: {{ $legacyResourcePrefix }}-sqlproxy-env
+        volumeMounts:
+        - mountPath: /etc/sqlproxy-service-account.json
+          subPath: sqlproxy-service-account.json
+          name: sqlproxy-ctmpls
+          readOnly: true
       - name: {{ $settings.name }}-app
         image: "{{ $settings.imageRepository }}:{{ $imageTag }}"
         ports:
@@ -94,8 +108,7 @@ spec:
         command: ["/bin/bash"]
         args:
         - '-c'
-        - >- # Sleep 30 seconds to allow CloudSQL proxy time to start up.
-          sleep {{ $settings.startupSleep }} &&
+        - >-
           java $JAVA_OPTS
           -jar $(find /leonardo -name 'leonardo*.jar')
         - '--'
@@ -207,16 +220,6 @@ spec:
           readOnly: true
         - mountPath: /var/log/modsecurity
           name: {{ $settings.name }}-modsecurity-logs
-      - name: {{ $settings.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_20180808
-        envFrom:
-        - secretRef:
-            name: {{ $legacyResourcePrefix }}-sqlproxy-env
-        volumeMounts:
-        - mountPath: /etc/sqlproxy-service-account.json
-          subPath: sqlproxy-service-account.json
-          name: sqlproxy-ctmpls
-          readOnly: true
       initContainers:
       - name: download-prometheusjmx-jar
         image: alpine:3.12.0
