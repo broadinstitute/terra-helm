@@ -1,6 +1,6 @@
 # hydra
 
-![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for the Hydra deployment used by Identity Concentrator in Terra
 
@@ -19,6 +19,7 @@ Chart for the Hydra deployment used by Identity Concentrator in Terra
 | ingress.istioGatewayName | string | `"template-gateway"` |  |
 | ingress.istioGatewayNamespace | string | `"istio-system"` |  |
 | replicas | int | `1` |  |
+| startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | vault.enabled | bool | `true` |  |
 
 ----------------------------------------------
