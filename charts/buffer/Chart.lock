@@ -1,0 +1,6 @@
+dependencies:
+- name: ingresslib
+  repository: https://broadinstitute.github.io/terra-helm/
+  version: 0.5.0
+digest: sha256:ec1cd708b7793ee2f7ad9c4e0000643dfde63c1fe655dfea96376045dd5a84ca
+generated: "2021-09-21T17:57:35.8315211Z"

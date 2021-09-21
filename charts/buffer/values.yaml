@@ -24,6 +24,9 @@ imageConfig:
 # replicas -- Number of replicas for the deployment
 replicas: 0
 
+# requestPath -- Request path to which the probe system should connect
+requestPath: /status
+
 resources:
   requests:
     # resources.requests.cpu -- Number of CPU units to request for the deployment
