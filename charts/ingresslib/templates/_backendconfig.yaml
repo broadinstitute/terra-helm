@@ -15,6 +15,10 @@ spec:
     type: HTTPS
     port: 443
     requestPath: {{ .Values.ingress.requestPath }}
+{{- if .Values.ingress.securityPolicy }}
+  securityPolicy:
+    name: {{ .Values.ingress.securityPolicy }}
+{{- end }}
 {{- end }}
 
 {{- define "libchart.backendconfig" -}}
