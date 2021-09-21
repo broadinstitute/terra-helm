@@ -3,8 +3,4 @@
 metadata:
   name: {{ .Values.name }}-ingress-backendconfig
 spec:
-{{- if .Values.ingress.securityPolicy }}
-  securityPolicy:
-    name: {{ .Values.ingress.securityPolicy }}
-{{- end }}
 {{- end }}
