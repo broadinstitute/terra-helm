@@ -17,9 +17,11 @@ spec:
   tls:
   - secretName: {{ .Values.name }}-cert
 {{- end }}
-  backend:
-    serviceName: {{ .Chart.Name }}-service
-    servicePort: 443
+  defaultBackend:
+    service:
+      name: {{ .Values.name }}-service
+      port:
+        number: 443
 {{- end -}}
 
 {{- define "libchart.ingress" -}}
