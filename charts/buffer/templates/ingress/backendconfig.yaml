@@ -1,4 +1,4 @@
-{{- include "libchart.service" (list . "buffer.ingress" )  -}}
+{{- include "libchart.backendconfig" (list . "buffer.backendconfig" )  -}}
 {{- define "buffer.backendconfig" -}}
 metadata:
   name: {{ .Values.name }}-ingress-backendconfig
