@@ -8,10 +8,10 @@ metadata:
   annotations:
     networking.gke.io/v1beta1.FrontendConfig: "{{ .Chart.Name }}-ingress-frontendconfig"
     kubernetes.io/ingress.global-static-ip-name: {{ required "ingress.staticIpName value is required" .Values.ingress.staticIpName | quote }}
+    kubernetes.io/ingress.allow-http: "false"
 {{- if not (empty .Values.ingress.cert.preSharedCerts) }}
     ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
 {{- end }}
-    kubernetes.io/ingress.allow-http: "false"
 spec:
 {{- if empty .Values.ingress.cert.preSharedCerts }}
   tls:
