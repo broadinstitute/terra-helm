@@ -1,6 +1,3 @@
 {{- include "libchart.backendconfig" (list . "buffer.backendconfig" )  -}}
 {{- define "buffer.backendconfig" -}}
-metadata:
-  name: {{ .Values.name }}-ingress-backendconfig
-spec:
 {{- end }}

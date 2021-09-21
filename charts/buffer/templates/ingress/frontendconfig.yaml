@@ -1,5 +1,3 @@
 {{- include "libchart.frontendconfig" (list . "buffer.frontendconfig" )}}
 {{- define "buffer.frontendconfig" -}}
-metadata:
-  name: {{ .Values.name }}-ingress-frontendconfig
 {{- end }}
