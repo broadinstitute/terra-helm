@@ -74,7 +74,8 @@ defaults:
     secretName: null
     # -- The full mount path of the file, ending with the file itself
     mountFilePath: "/etc/liquibase.properties"
-  # -- Controls for setting up database authentication, one sub-object must be provided
+  # -- Controls for setting up database authentication, one sub-object must be provided;
+  # existingKubernetesSecret takes precedence if provided
   # @default -- None
   migrationDatabaseCredentials:
     # -- Use an existing Kubernetes secret for credentials directly

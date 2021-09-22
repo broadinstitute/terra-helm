@@ -1,13 +1,6 @@
 {{- range .Values.enumerated }}
 
-{{- /*
-Assemble the config for this migration: we can't use merge because that's deep,
-and we want to completely overwrite default keys if present in the emurated config
-*/}}
-{{- $config := $.Values.defaults | deepCopy }}
-{{- range $key, $val := . }}
-  {{- $_ := set $config $key $val }}
-{{- end }}
+{{- $config := $.Values.defaults | deepCopy | mustMerge . }}
 
 {{- if $config.enabled }}
 
@@ -40,7 +33,7 @@ Imperative validation for gotchas
 {{- /*
 Create secret for database credentials if required
 */}}
-{{- if (dig "migrationDatabaseCredentials" "fromVaultSecret" "path" "" $config) }}
+{{- if and (dig "migrationDatabaseCredentials" "fromVaultSecret" "path" "" $config) (dig "migrationDatabaseCredentials" "existingKubernetesSecret" "name" "" $config | not) }}
 apiVersion: secrets-manager.tuenti.io/v1alpha1
 kind: SecretDefinition
 metadata:
@@ -145,7 +138,7 @@ spec:
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
-              {{- if (dig "migrationDatabaseCredentials" "fromVaultSecret" "path" "" $config) }}
+              {{- if and (dig "migrationDatabaseCredentials" "fromVaultSecret" "path" "" $config) (dig "migrationDatabaseCredentials" "existingKubernetesSecret" "name" "" $config | not) }}
               name: {{ $config.name }}-migration-sql-secrets
               key: db-username
               {{- end }}
@@ -156,7 +149,7 @@ spec:
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              {{- if (dig "migrationDatabaseCredentials" "fromVaultSecret" "path" "" $config) }}
+              {{- if and (dig "migrationDatabaseCredentials" "fromVaultSecret" "path" "" $config) (dig "migrationDatabaseCredentials" "existingKubernetesSecret" "name" "" $config | not) }}
               name: {{ $config.name }}-migration-sql-secrets
               key: db-password
               {{- end }}
