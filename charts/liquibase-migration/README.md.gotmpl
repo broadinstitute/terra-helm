@@ -5,8 +5,6 @@
 
 {{ template "chart.description" . }}
 
-> When `migration.enable` is `true`, all values below that default to `nil` must also be set.
-
 {{ template "chart.homepageLine" . }}
 
 {{ template "chart.maintainersSection" . }}
@@ -14,5 +12,7 @@
 {{ template "chart.sourcesSection" . }}
 
 {{ template "chart.requirementsSection" . }}
+
+helm-docs can't parse all the comments in the values file, [see it for more detail](./values.yaml).
 
 {{ template "chart.valuesSection" . }}
