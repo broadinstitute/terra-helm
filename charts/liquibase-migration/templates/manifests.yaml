@@ -39,7 +39,7 @@ kind: SecretDefinition
 metadata:
   name: {{ $config.name | required "Name is required" }}-migration-secretdef
   {{- if $config.k8sLabelRef }}
-  labels: {{- include $config.k8sLabelRef . | nindent 4 }}
+  labels: {{- include $config.k8sLabelRef $ | nindent 4 }}
   {{- end }}
   annotations:
     argocd.argoproj.io/sync-wave: {{ $config.k8sSyncWave | quote }}
@@ -65,7 +65,7 @@ kind: Job
 metadata:
   name: {{ $config.name }}-liquibase-migration
   {{- if $config.k8sLabelRef }}
-  labels: {{- include $config.k8sLabelRef . | nindent 4 }}
+  labels: {{- include $config.k8sLabelRef $ | nindent 4 }}
   {{- end }}
   annotations:
     argocd.argoproj.io/hook: Sync
@@ -77,7 +77,7 @@ spec:
     metadata:
       name: {{ $config.name }}-liquibase-migration
       {{- if $config.k8sLabelRef }}
-      labels: {{- include $config.k8sLabelRef . | nindent 8 }}
+      labels: {{- include $config.k8sLabelRef $ | nindent 8 }}
       {{- end }}
     spec:
       # Allow migration-liquibase to kill migration-sqlproxy's process
