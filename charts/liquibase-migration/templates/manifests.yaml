@@ -92,12 +92,12 @@ spec:
       {{- if or (($config.proxyCredentialFileMount).secretName) (($config.migrationConfigFileMount).secretName) }}
       volumes:
       {{- if (($config.proxyCredentialFileMount).secretName) }}
-      - name: proxyCredentials
+      - name: proxy-credentials-volume
         secret:
           secretName: {{ $config.proxyCredentialFileMount.secretName }}
       {{- end }}
       {{- if (($config.migrationConfigFileMount).secretName) }}
-      - name: migrationConfigs
+      - name: migration-configs-volume
         secret:
           secretName: {{ $config.migrationConfigFileMount.secretName }}
       {{- end }}
@@ -109,7 +109,7 @@ spec:
         volumeMounts:
         - mountPath: {{ $config.proxyCredentialFileMount.mountFilePath | required "proxyCredentialFileMount.mountFilePath required if proxyCredentialFileMount.secretName provided"}}
           subPath: {{ $config.proxyCredentialFileMount.mountFilePath | splitList "/" | last }}
-          name: proxyCredentials
+          name: proxy-credentials-volume
           readOnly: true
         {{- end }}
         {{- if $config.proxyContainerConfig }}
@@ -131,7 +131,7 @@ spec:
         volumeMounts:
         - mountPath: {{ $config.migrationConfigFileMount.mountFilePath | required "migrationConfigFileMount.mountFilePath required if migrationConfigFileMount.secretName provided"}}
           subPath: {{ $config.migrationConfigFileMount.mountFilePath | splitList "/" | last }}
-          name: migrationConfigs
+          name: migration-configs-volume
           readOnly: true
         {{- end }}
         env:
