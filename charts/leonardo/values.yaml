@@ -126,7 +126,7 @@ liquibase-migration:
   # ```
   # liquibase-migration:   
   #   enumerated:
-  #     - name: "leonardo-db"
+  #     - name: "leonardo"
   #       migrationDatabaseCredentials:
   #         fromVaultSecret:
   #           path: "secret/path/in/vault"

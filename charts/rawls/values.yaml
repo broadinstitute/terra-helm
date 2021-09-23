@@ -106,7 +106,7 @@ liquibase-migration:
   # ```
   # liquibase-migration:   
   #   enumerated:
-  #     - name: "rawls-db"
+  #     - name: "rawls"
   #       migrationDatabaseCredentials:
   #         fromVaultSecret:
   #           path: "secret/path/in/vault"
