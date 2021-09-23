@@ -115,7 +115,7 @@ spec:
         {{- if $config.proxyContainerConfig }}
         {{- $config.proxyContainerConfig | toYaml | nindent 8 }}
         {{- end }}
-        command: {{ $config.proxyShell }}
+        command: {{ $config.proxyShell | toYaml | nindent 10 }}
         args:
         - >-
           /cloud_sql_proxy 
@@ -157,7 +157,7 @@ spec:
               name: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.name }}
               key: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.passwordKey | required "existingKubernetesSecret.passwordKey required if existingKubernetesSecret.name passed"}}
               {{- end }}
-        command: {{ $config.migrationShell }}
+        command: {{ $config.migrationShell | toYaml | nindent 10 }}
         args:
         - >-
           {{- if $config.migrationDelay }}
