@@ -117,13 +117,13 @@ spec:
         {{- end }}
         command: {{ $config.proxyShell | toYaml | nindent 10 }}
         args:
-        - >-
-          /cloud_sql_proxy 
-            -verbose
-            -max_connections={{ $config.proxyArgsMaxConnections }}
-            -instances={{ $config.proxyArgsInstances }}
+        - |-
+          /cloud_sql_proxy \
+            -verbose \
+            -max_connections={{ $config.proxyArgsMaxConnections }} \
+            -instances={{ $config.proxyArgsInstances }} \
             {{- if (($config.proxyCredentialFileMount).secretName) }}
-            -credential_file={{ $config.proxyCredentialFileMount.mountFilePath }}
+            -credential_file={{ $config.proxyCredentialFileMount.mountFilePath }} \
             {{- end }}
       - name: {{ $config.name }}-migration-liquibase
         image: {{ $config.migrationImage | required "migrationImage required" }}:{{ $config.migrationImageTag }}
@@ -159,32 +159,32 @@ spec:
               {{- end }}
         command: {{ $config.migrationShell | toYaml | nindent 10 }}
         args:
-        - >-
+        - |-
           {{- if $config.migrationDelay }}
-          sleep {{ $config.migrationDelay }} &&
+          sleep {{ $config.migrationDelay }} && \
           {{- end }}
-          java -cp {{ $config.migrationArgsJarLocation | required "Jar location required" }} liquibase.integration.commandline.Main
-            --classpath={{ $config.migrationArgsJarLocation }}
-            --username="$DB_USERNAME"
-            --password="$DB_PASSWORD"
+          java -cp {{ $config.migrationArgsJarLocation | required "Jar location required" }} liquibase.integration.commandline.Main \
+            --classpath={{ $config.migrationArgsJarLocation }} \
+            --username="$DB_USERNAME" \
+            --password="$DB_PASSWORD" \
             {{- if (($config.migrationConfigFileMount).secretName) }}
-            --defaultsFile={{ $config.migrationConfigFileMount.mountFilePath }}
+            --defaultsFile={{ $config.migrationConfigFileMount.mountFilePath }} \
             {{- end }}
             {{- if $config.migrationArgsConfigChangelog }}
-            --changelog={{ $config.migrationArgsConfigChangelog }}
+            --changelog={{ $config.migrationArgsConfigChangelog }} \
             {{- end }}
             {{- if $config.migrationArgsConfigDriver }}
-            --driver={{ $config.migrationArgsConfigDriver }}
+            --driver={{ $config.migrationArgsConfigDriver }} \
             {{- end }}
             {{- if $config.migrationArgsConfigUrl }}
-            --url={{ $config.migrationArgsConfigUrl }}
+            --url={{ $config.migrationArgsConfigUrl }} \
             {{- end }}
             {{- if $config.migrationsArgsAdditional }}
-            {{ $config.migrationsArgsAdditional }}
+            {{ $config.migrationsArgsAdditional }} \
             {{- end }}
-            {{ $config.migrationArgsLiquibaseCommand }};
-          EXIT=$?;
-          pkill -SIGTERM cloud_sql_proxy;
+            {{ $config.migrationArgsLiquibaseCommand }}; \
+          EXIT=$?; \
+          pkill -SIGTERM cloud_sql_proxy; \
           exit $EXIT
 ---
 {{- end }}
