@@ -120,7 +120,6 @@ vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
 
-
 liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
   # ```
@@ -150,4 +149,3 @@ liquibase-migration:
         path: null
         usernameKey: "db_user"
         passwordKey: "db_password"
-
