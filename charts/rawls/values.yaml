@@ -101,24 +101,33 @@ deploymentDefaults:
         failureThreshold: 1080 # 3 hours before restarted, to prevent liveness probes from interrupting long-running liquibase migrations
         successThreshold: 1
 
-vault:
-  # Migration credentials only referenced if migration.enabled == true
-  migration:
-    # vault.migration.path -- Vault path to secret containing DB credentials
-    path: null
-    # vault.migration.dbUsernameKey -- Key in Vault secret to DB username
-    dbUsernameKey: "slick_db_user"
-    # vault.migration.DbPasswordKey -- Key in Vault secret to DB password
-    dbPasswordKey: "slick_db_password"
+liquibase-migration:
+  # Disabled by default, in an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:   
+  #   enumerated:
+  #     - name: "rawls-db"
+  #       enabled: true
+  #       migrationDatabaseCredentials:
+  #         fromVaultSecret:
+  #           path: "secret/path/in/vault"
+  # ```
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
 
-migration:
-  # migration.enabled -- (bool) Whether to run a Liquibase migration during sync
-  enabled: false
-  # migration.liquibaseCommand -- (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run
-  liquibaseCommand: "updateSQL"
-  # migration.imageName -- (string) Required full app image name, without trailing tag
-  imageName: "gcr.io/broad-dsp-gcr-public/rawls"
-  # migration.jarLocation -- (string) Required jar location in app image, expanded by migration.appContainerShell
-  jarLocation: "$(find /rawls -name 'rawls*.jar')"
-  # migration.secretPrefix -- (string) Required prefix of -app-ctmpls, -sqlproxy-ctmpls, -sqlproxy-env secrets
-  secretPrefix: "rawls-backend"
+  defaults:
+    enabled: false
+    proxyCredentialFileMount:
+      secretName: "rawls-backend-sqlproxy-ctmpls"
+    proxyContainerConfig:
+      envFrom:
+        - secretRef:
+            name: "rawls-backend-sqlproxy-env"
+    migrationImage: "gcr.io/broad-dsp-gcr-public/rawls"
+    migrationArgsJarLocation: "$(find /rawls -name 'rawls*.jar')"
+    migrationConfigFileMount:
+      secretName: "rawls-backend-app-ctmpls"
+    migrationDatabaseCredentials:
+      fromVaultSecret:
+        path: null
+        usernameKey: "slick_db_user"
+        passwordKey: "slick_db_password"
