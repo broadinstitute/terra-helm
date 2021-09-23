@@ -87,6 +87,9 @@ defaults:
       usernameKey: null
       # -- (string) Key of the password within the Kubernetes secret
       passwordKey: null
+      # -- (string) Optional key of a database name in the Kubernetes secret, available as $DB_NAME in the migration container
+      # @default -- If null, $DB_NAME remains unset
+      variableDatabaseKey: null
     # -- Create a Kubernetes secret via secrets-manager from a Vault secret
     # @default -- With the Vault secret path omitted, no Vault secret will be accessed
     fromVaultSecret:
@@ -96,3 +99,7 @@ defaults:
       usernameKey: null
       # -- (string) Key of the password within the Vault secret
       passwordKey: null
+      # -- (string) Optional key of a database name in the Vault secret, available as $DB_NAME in the migration container
+      # @default -- If null, $DB_NAME remains unset
+      variableDatabaseKey: null
+

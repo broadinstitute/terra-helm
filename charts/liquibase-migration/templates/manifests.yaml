@@ -54,6 +54,12 @@ spec:
       key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.passwordKey | required "fromVaultSecret.passwordKey required if using Vault" }}
       path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
       encoding: text
+    {{- if $config.migrationDatabaseCredentials.fromVaultSecret.variableDatabaseKey }}
+    db-name:
+      key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.variableDatabaseKey }}
+      path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
+      encoding: text
+    {{- end }}
 ---
 {{- end }}
 
@@ -107,7 +113,7 @@ spec:
         image: {{ $config.proxyImage }}:{{ $config.proxyImageTag }}
         {{- if (($config.proxyCredentialFileMount).secretName) }}
         volumeMounts:
-        - mountPath: {{ $config.proxyCredentialFileMount.mountFilePath | required "proxyCredentialFileMount.mountFilePath required if proxyCredentialFileMount.secretName provided"}}
+        - mountPath: {{ $config.proxyCredentialFileMount.mountFilePath | required "proxyCredentialFileMount.mountFilePath required if proxyCredentialFileMount.secretName provided" }}
           subPath: {{ $config.proxyCredentialFileMount.mountFilePath | splitList "/" | last }}
           name: proxy-credentials-volume
           readOnly: true
@@ -129,7 +135,7 @@ spec:
         image: {{ $config.migrationImage | required "migrationImage required" }}:{{ $config.migrationImageTag }}
         {{- if (($config.migrationConfigFileMount).secretName) }}
         volumeMounts:
-        - mountPath: {{ $config.migrationConfigFileMount.mountFilePath | required "migrationConfigFileMount.mountFilePath required if migrationConfigFileMount.secretName provided"}}
+        - mountPath: {{ $config.migrationConfigFileMount.mountFilePath | required "migrationConfigFileMount.mountFilePath required if migrationConfigFileMount.secretName provided" }}
           subPath: {{ $config.migrationConfigFileMount.mountFilePath | splitList "/" | last }}
           name: migration-configs-volume
           readOnly: true
@@ -144,7 +150,7 @@ spec:
               {{- end }}
               {{- if ((($config.migrationDatabaseCredentials).existingKubernetesSecret).name) }}
               name: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.name }}
-              key: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.usernameKey | required "existingKubernetesSecret.usernameKey required if existingKubernetesSecret.name passed"}}
+              key: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.usernameKey | required "existingKubernetesSecret.usernameKey required if existingKubernetesSecret.name passed" }}
               {{- end }}
         - name: DB_PASSWORD
           valueFrom:
@@ -155,8 +161,21 @@ spec:
               {{- end }}
               {{- if ((($config.migrationDatabaseCredentials).existingKubernetesSecret).name) }}
               name: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.name }}
-              key: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.passwordKey | required "existingKubernetesSecret.passwordKey required if existingKubernetesSecret.name passed"}}
+              key: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.passwordKey | required "existingKubernetesSecret.passwordKey required if existingKubernetesSecret.name passed" }}
               {{- end }}
+        {{- if or ((($config.migrationDatabaseCredentials).fromVaultSecret).variableDatabaseKey) ((($config.migrationDatabaseCredentials).existingKubernetesSecret).variableDatabaseKey) }}
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              {{- if and ((($config.migrationDatabaseCredentials).fromVaultSecret).path) (not ((($config.migrationDatabaseCredentials).existingKubernetesSecret).name)) }}
+              name: {{ $config.name }}-migration-sql-secrets
+              key: db-name
+              {{- end }}
+              {{- if ((($config.migrationDatabaseCredentials).existingKubernetesSecret).name) }}
+              name: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.name }}
+              key: {{ $config.migrationDatabaseCredentials.existingKubernetesSecret.variableDatabaseKey }}
+              {{- end }}
+        {{- end }}
         command: {{ $config.migrationShell | toYaml | nindent 10 }}
         args:
         - |-
