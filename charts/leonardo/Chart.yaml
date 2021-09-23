@@ -13,5 +13,5 @@ sources:
   - https://github.com/broadinstitute/leonardo-cron-jobs
 dependencies:
   - name: liquibase-migration
-    version: 1.0.0-503.1632424398.76c6bd
+    version: 1.0.0-503.1632428783.91f8ca
     repository: https://broadinstitute.github.io/terra-helm/
