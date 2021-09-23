@@ -14,5 +14,5 @@ sources:
   - https://github.com/broadinstitute/rawls
 dependencies:
   - name: liquibase-migration
-    version: 1.0.0-503.1632422112.911c88
+    version: 1.0.0-503.1632424398.76c6bd
     repository: https://broadinstitute.github.io/terra-helm/

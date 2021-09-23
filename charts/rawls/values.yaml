@@ -102,12 +102,11 @@ deploymentDefaults:
         successThreshold: 1
 
 liquibase-migration:
-  # Disabled by default, in an env-specific file use something like the following to fully enable:
+  # In an env-specific file use something like the following to fully enable:
   # ```
   # liquibase-migration:   
   #   enumerated:
   #     - name: "rawls-db"
-  #       enabled: true
   #       migrationDatabaseCredentials:
   #         fromVaultSecret:
   #           path: "secret/path/in/vault"
@@ -115,7 +114,7 @@ liquibase-migration:
   # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
 
   defaults:
-    enabled: false
+    enabled: true
     proxyCredentialFileMount:
       secretName: "rawls-backend-sqlproxy-ctmpls"
     proxyContainerConfig:
