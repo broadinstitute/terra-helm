@@ -25937,6 +25937,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-09-15-20-120.1600181187.32a2cb/leonardo-09-15-20-120.1600181187.32a2cb.tgz
     version: 09-15-20-120.1600181187.32a2cb
   - apiVersion: v2
+    created: "2021-09-23T19:35:34.878518648Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 1.0.0-503.1632424398.76c6bd
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 8dcf074eeca0dd8f221fd71663d8c08306b26560b1c51b97158c14da0751240f
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.57.0-504.1632425724.b34448/leonardo-0.57.0-504.1632425724.b34448.tgz
+    version: 0.57.0-504.1632425724.b34448
+  - apiVersion: v2
     created: "2021-09-23T19:32:55.551983048Z"
     dependencies:
     - name: liquibase-migration
@@ -38427,6 +38449,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.0.0-80.1595262188.e7eeab/postgres-0.0.0-80.1595262188.e7eeab.tgz
     version: 0.0.0-80.1595262188.e7eeab
   rawls:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-09-23T19:35:34.954360453Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 1.0.0-503.1632424398.76c6bd
+    description: Chart for Rawls service in Terra
+    digest: 6b827669f85a33414239b139bbad8cbd7abf0bcbbcfe3fdfbd9a7691afd2c9e7
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.21.0-504.1632425725.b34448/rawls-0.21.0-504.1632425725.b34448.tgz
+    version: 0.21.0-504.1632425725.b34448
   - apiVersion: v2
     appVersion: latest
     created: "2021-09-23T19:32:55.632115484Z"
