@@ -116,6 +116,10 @@ zombieMonitorCron:
   imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
   imageTag: 79854b1
   enabled: false
+vault:
+  # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
+  pathPrefix:
+
 
 liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
