@@ -1,6 +1,6 @@
 apiVersion: v2
 name: leonardo
-version: 0.56.0
+version: 0.57.0
 type: application
 description: A Helm chart for Leonardo, a Terra service for interactive analysis applications
 keywords:
@@ -13,6 +13,5 @@ sources:
   - https://github.com/broadinstitute/leonardo-cron-jobs
 dependencies:
   - name: liquibase-migration
-    condition: migration.enabled
-    version: 0.2.0
+    version: 1.0.0-503.1632424398.76c6bd
     repository: https://broadinstitute.github.io/terra-helm/
