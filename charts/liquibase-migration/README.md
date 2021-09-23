@@ -14,7 +14,7 @@ helm-docs can't parse all the comments in the values file, [see it for more deta
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| defaults | object | See sub-keys | Baseline configuration used for each enumerated migration; any key here will be fully overridden by a same-name key in an enumerated configuration (required values can be omitted here if always overridden) |
+| defaults | object | See sub-keys | Baseline config merged under each enumerated one to form the full configuration for that particular migration |
 | defaults.enabled | bool | `false` | Whether to enable migrations by default |
 | defaults.k8sAppName | string | `nil` | Name of the application being deployed |
 | defaults.k8sLabelRef | string | `nil` | Template reference to use to obtain resource labels, set to empty to disable |
@@ -29,7 +29,7 @@ helm-docs can't parse all the comments in the values file, [see it for more deta
 | defaults.migrationConfigFileMount | object | With the secret name omitted, no configuration file will be mounted or passed | Controls for mounting and passing a Liquibase.properties file (necessary unless all other migrationConfigArgs* values passed) |
 | defaults.migrationConfigFileMount.mountFilePath | string | `"/etc/liquibase.properties"` | The full mount path of the file, ending with the file itself |
 | defaults.migrationConfigFileMount.secretName | string | `nil` | The exact name of a Kubernetes secret containing the desired file under a file-named key |
-| defaults.migrationDatabaseCredentials | object | None | Controls for setting up database authentication, one sub-object must be provided |
+| defaults.migrationDatabaseCredentials | object | None | Controls for setting up database authentication, one sub-object must be provided; existingKubernetesSecret takes precedence if provided |
 | defaults.migrationDatabaseCredentials.existingKubernetesSecret | object | With the secret name omitted, no existing Kubernetes secret will be accessed | Use an existing Kubernetes secret for credentials directly |
 | defaults.migrationDatabaseCredentials.existingKubernetesSecret.name | string | `nil` | Name of the existing Kubernetes secret to use |
 | defaults.migrationDatabaseCredentials.existingKubernetesSecret.passwordKey | string | `nil` | Key of the password within the Kubernetes secret |
@@ -51,5 +51,5 @@ helm-docs can't parse all the comments in the values file, [see it for more deta
 | defaults.proxyImage | string | `"gcr.io/cloudsql-docker/gce-proxy"` | Image to use for the Cloud SQL Proxy |
 | defaults.proxyImageTag | string | `"1.25.0-alpine"` | Image tag to use for the Cloud SQL Proxy |
 | defaults.proxyShell | list | `["sh","-c"]` | Docker command directive to invoke a shell in the container, to expand proxyArgs* values |
-| enumerated | list | None by default, one entry here required per migration | Specific migrations to run; each configuration key fully overrides any same-name key in the defaults |
+| enumerated | list | None by default, one entry here required per migration | Specific migrations to run; each config merged over the defaults to form the full configuration |
 | enumerated[0].name | string | `nil` | Required name of this specific migration |

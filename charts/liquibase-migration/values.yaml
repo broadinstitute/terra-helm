@@ -1,11 +1,11 @@
-# -- Specific migrations to run; each configuration key fully overrides any same-name key in the defaults
+# -- Specific migrations to run; each config merged over the defaults to form the full configuration
 # @default -- None by default, one entry here required per migration
 enumerated:
   - # -- (string) Required name of this specific migration
     name:
     # Keys from the defaults may be given here to override them for this specific migration
 
-# -- Baseline configuration used for each enumerated migration; any key here will be fully overridden by a same-name key in an enumerated configuration (required values can be omitted here if always overridden)
+# -- Baseline config merged under each enumerated one to form the full configuration for that particular migration
 # @default -- See sub-keys
 defaults:
 
