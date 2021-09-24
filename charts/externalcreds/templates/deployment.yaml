@@ -177,7 +177,7 @@ spec:
         - name: SAM_ADDRESS
           value: {{ $.Values.samAddress }}
         - name: SERVICE_GOOGLE_PROJECT
-          value: { { $.Values.serviceGoogleProject } }
+          value: {{ $.Values.serviceGoogleProject }}
         - name: SAMPLING_PROBABILITY
           value: "{{ $.Values.samplingProbability }}"
         - name: GOOGLE_APPLICATION_CREDENTIALS
