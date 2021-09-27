@@ -207,6 +207,10 @@ liquibase-migration:
       existingKubernetesSecret:
         name: "buffer-stairway-db-creds"
 
+  # Template definition buffer.labels attempt to read .Values.name from within liquibase-migration.
+  # Either we must pass the name again, move it to globals, or disable liquibase-migration labels.
+  name: "buffer"
+
   defaults:
     enabled: false
     proxyCredentialFileMount:
