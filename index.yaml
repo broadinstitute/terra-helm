@@ -37825,6 +37825,22 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.0/opendj-0.0.0.tgz
     version: 0.0.0
+  pdb-lib:
+  - apiVersion: v2
+    created: "2021-09-27T18:40:00.372578307Z"
+    description: A libary Helm chart for Pod Disruption Budgets
+    digest: 9efc4e3996c67dff10951eea3ea8c0c96834a854ccaa30aff98257eda132f26c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: pdb-lib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/pdb-lib-0.0.0-507.1632767991.e0d434/pdb-lib-0.0.0-507.1632767991.e0d434.tgz
+    version: 0.0.0-507.1632767991.e0d434
   poc:
   - apiVersion: v2
     created: "2021-09-17T20:32:35.324667093Z"
