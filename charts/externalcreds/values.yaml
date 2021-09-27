@@ -206,7 +206,7 @@ samAddress: https://sam.dsde-dev.broadinstitute.org/
 serviceGoogleProject: broad-dsde-dev
 
 # authorizationChangeEventsEnabled -- only enable google pubsub topic for live envs
-  authorizationChangeEventsEnabled: true
+authorizationChangeEventsEnabled: true
 
 # samplingProbability -- the frequency with which calls should be traced.
 samplingProbability: 1.0
