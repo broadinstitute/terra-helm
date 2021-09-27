@@ -24,6 +24,7 @@ helm-docs can't parse all the comments in the values file, [see it for more deta
 | defaults.migrationArgsConfigChangelog | string | `nil` | Java classpath location of the Liquibase changelog file, expanded by migrationShell |
 | defaults.migrationArgsConfigDriver | string | `nil` | Java class name of the JDBC driver to use, expanded by migrationShell |
 | defaults.migrationArgsConfigUrl | string | `nil` | JDBC URL of the database, expanded by migrationShell |
+| defaults.migrationArgsExtraClasspath | list | `[]` | Additional `.jar` files to add to the class path, in addition to the `.jar` containing Liquibase |
 | defaults.migrationArgsJarLocation | string | `nil` | Path within the migration image to the `.jar` containing Liquibase |
 | defaults.migrationArgsLiquibaseCommand | string | `"update"` | If the Kubernetes job should always succeed regardless of the Liquibase command's exit status |
 | defaults.migrationConfigFileMount | object | With the secret name omitted, no configuration file will be mounted or passed | Controls for mounting and passing a Liquibase.properties file (necessary unless all other migrationConfigArgs* values passed) |

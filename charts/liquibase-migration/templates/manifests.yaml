@@ -183,7 +183,7 @@ spec:
           sleep {{ $config.migrationDelay }} && \
           {{- end }}
           java -cp {{ $config.migrationArgsJarLocation | required "Jar location required" }} liquibase.integration.commandline.Main \
-            --classpath={{ $config.migrationArgsJarLocation }} \
+            --classpath={{ mustPrepend ($config.migrationArgsExtraClasspath | default list) $config.migrationArgsJarLocation | mustUniq | mustCompact | join ":" }} \
             --username="$DB_USERNAME" \
             --password="$DB_PASSWORD" \
             {{- if (($config.migrationConfigFileMount).secretName) }}

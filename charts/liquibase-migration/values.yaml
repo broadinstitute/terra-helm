@@ -57,6 +57,8 @@ defaults:
   migrationDelay: "15s"
   # -- (string) Path within the migration image to the `.jar` containing Liquibase
   migrationArgsJarLocation:
+  # -- Additional `.jar` files to add to the class path, in addition to the `.jar` containing Liquibase
+  migrationArgsExtraClasspath: []
   # -- If the Kubernetes job should always succeed regardless of the Liquibase command's exit status
   migrationArgsLiquibaseCommand: "update"
   # -- (string) Java classpath location of the Liquibase changelog file, expanded by migrationShell
