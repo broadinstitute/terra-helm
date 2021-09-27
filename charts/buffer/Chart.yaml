@@ -13,5 +13,5 @@ sources:
   - https://github.com/DataBiosphere/terra-resource-buffer
 dependencies:
   - name: liquibase-migration
-    version: 1.0.0-503.1632761480.f6330a
+    version: 1.0.0-503.1632772978.e52a4b
     repository: https://broadinstitute.github.io/terra-helm/
