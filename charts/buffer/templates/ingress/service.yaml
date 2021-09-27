@@ -1,3 +1,6 @@
 {{- include "libchart.service" (list . "buffer.service" )  -}}
+
+{{ if .Values.ingress.enabled -}}
 {{- define "buffer.service" -}}
+{{- end }}
 {{- end }}
