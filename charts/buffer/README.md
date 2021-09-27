@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.29.0](https://img.shields.io/badge/Version-0.29.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -8,6 +8,12 @@ Chart for Resource Buffering Service
 
 * <https://github.com/broadinstitute/terra-helm/tree/master/charts>
 * <https://github.com/DataBiosphere/terra-resource-buffer>
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | liquibase-migration | 1.0.0-503.1632773568.0fec2e |
 
 ## Values
 
@@ -41,6 +47,35 @@ Chart for Resource Buffering Service
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
+| liquibase-migration.defaults.enabled | bool | `false` |  |
+| liquibase-migration.defaults.k8sServiceAccount | string | `"buffer-service-sa"` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[0] | string | `"app/libs/*"` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[1] | string | `"app/resources/"` |  |
+| liquibase-migration.defaults.migrationArgsConfigDriver | string | `"org.postgresql.Driver"` |  |
+| liquibase-migration.defaults.migrationArgsConfigUrl | string | `"jdbc:postgresql://127.0.0.1:5432/${DB_NAME}"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.existingKubernetesSecret.passwordKey | string | `"password"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.existingKubernetesSecret.usernameKey | string | `"username"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.existingKubernetesSecret.variableDatabaseKey | string | `"db"` |  |
+| liquibase-migration.defaults.migrationImage | string | `"gcr.io/terra-kernel-k8s/terra-resource-buffer"` |  |
+| liquibase-migration.defaults.proxyArgsInstances | string | `"$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[0].name | string | `"SQL_INSTANCE_PROJECT"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[0].valueFrom.secretKeyRef.key | string | `"project"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[0].valueFrom.secretKeyRef.name | string | `"buffer-cloudsql-postgres-instance"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[1].name | string | `"SQL_INSTANCE_REGION"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[1].valueFrom.secretKeyRef.key | string | `"region"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[1].valueFrom.secretKeyRef.name | string | `"buffer-cloudsql-postgres-instance"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[2].name | string | `"SQL_INSTANCE_NAME"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[2].valueFrom.secretKeyRef.key | string | `"name"` |  |
+| liquibase-migration.defaults.proxyContainerConfig.env[2].valueFrom.secretKeyRef.name | string | `"buffer-cloudsql-postgres-instance"` |  |
+| liquibase-migration.defaults.proxyCredentialFileMount.mountFilePath | string | `"/secrets/cloudsql/service-account.json"` |  |
+| liquibase-migration.defaults.proxyCredentialFileMount.secretName | string | `"buffer-cloudsql-sa"` |  |
+| liquibase-migration.enumerated[0].migrationArgsConfigChangelog | string | `"db/changelog.xml"` |  |
+| liquibase-migration.enumerated[0].migrationDatabaseCredentials.existingKubernetesSecret.name | string | `"buffer-postgres-db-creds"` |  |
+| liquibase-migration.enumerated[0].name | string | `"buffer"` |  |
+| liquibase-migration.enumerated[1].migrationArgsConfigChangelog | string | `"stairway/db/changelog.xml"` |  |
+| liquibase-migration.enumerated[1].migrationDatabaseCredentials.existingKubernetesSecret.name | string | `"buffer-stairway-db-creds"` |  |
+| liquibase-migration.enumerated[1].name | string | `"buffer-stairway"` |  |
+| liquibase-migration.name | string | `"buffer"` |  |
 | name | string | `"buffer"` | A name for the deployment that will be substituted into resuorce definitions |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
