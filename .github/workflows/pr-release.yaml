@@ -38,7 +38,7 @@ jobs:
         uses: databiosphere/github-actions/actions/chart-releaser@ch-DDO-1530-1
         env:
           GITHUB_TOKEN: "${{ secrets.CR_TOKEN }}"
-          GCS_PUBLISHING_ENABLED: false
+          GCS_PUBLISHING_ENABLED: true
           GCS_SA_KEY_FILE: "./helm_service_account.json"
 
       - name: Set up GCS Google Service Account
