@@ -1,0 +1,11 @@
+apiVersion: v2
+name: pdb-lib
+description: A libary Helm chart for Pod Disruption Budgets
+type: library
+version: 0.0.0
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
