@@ -213,6 +213,7 @@ liquibase-migration:
 
   defaults:
     enabled: false
+    k8sServiceAccount: "buffer-service-sa"
     proxyCredentialFileMount:
       secretName: "buffer-cloudsql-sa"
       mountFilePath: "/secrets/cloudsql/service-account.json"
