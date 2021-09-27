@@ -189,7 +189,7 @@ spec:
             --defaultsFile={{ $config.migrationConfigFileMount.mountFilePath }} \
             {{- end }}
             {{- if $config.migrationArgsConfigChangelog }}
-            --changelog={{ $config.migrationArgsConfigChangelog }} \
+            --changeLogFile={{ $config.migrationArgsConfigChangelog }} \
             {{- end }}
             {{- if $config.migrationArgsConfigDriver }}
             --driver={{ $config.migrationArgsConfigDriver }} \
