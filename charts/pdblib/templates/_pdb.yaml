@@ -1,0 +1,13 @@
+{{- define "libchart.pdb" -}}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .Values.name }}-pdb
+spec:
+  # 65% of pods must still be available after the eviction
+  # https://v1-20.docs.kubernetes.io/docs/tasks/run-application/configure-pdb/#rounding-logic-when-specifying-percentages
+  minAvailable: 65%
+  selector:
+    matchLabels:
+      deployment: {{ .Values.name }}-deployment
+{{- end }}
