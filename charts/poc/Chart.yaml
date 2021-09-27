@@ -13,4 +13,4 @@ dependencies:
   - name: postgres
     condition: postgres.enabled
     version: 0.1.0
-    repository: https://broadinstitute.github.io/terra-helm/
+    repository: https://terra-helm.storage.googleapis.com/
