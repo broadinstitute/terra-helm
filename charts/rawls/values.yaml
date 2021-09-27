@@ -107,6 +107,7 @@ liquibase-migration:
   # liquibase-migration:   
   #   enumerated:
   #     - name: "rawls"
+  #       enabled: true
   #       migrationDatabaseCredentials:
   #         fromVaultSecret:
   #           path: "secret/path/in/vault"
@@ -114,7 +115,7 @@ liquibase-migration:
   # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
 
   defaults:
-    enabled: true
+    enabled: false
     proxyCredentialFileMount:
       secretName: "rawls-backend-sqlproxy-ctmpls"
     proxyContainerConfig:
