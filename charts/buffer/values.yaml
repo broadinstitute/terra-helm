@@ -183,3 +183,62 @@ buffer:
 
 # cleanupAfterHandout -- Whether to publish message to Janitor after resource is handed out.
 cleanupAfterHandout: false
+
+liquibase-migration:
+  # In an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:   
+  #   defaults:
+  #     enabled: true
+  # ```
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
+
+  enumerated:
+  - name: buffer
+    # on filesystem
+    migrationArgsConfigChangelog: "./app/resources/db/changelog.xml"
+    migrationDatabaseCredentials:
+      existingKubernetesSecret:
+        name: "buffer-postgres-db-creds"
+  - name: buffer-stairway
+    # inside stairway jar
+    migrationArgsConfigChangelog: "stairway/db/changelog.xml"
+    migrationDatabaseCredentials:
+      existingKubernetesSecret:
+        name: "buffer-stairway-db-creds"
+
+  defaults:
+    enabled: false
+    proxyCredentialFileMount:
+      secretName: "buffer-cloudsql-sa"
+      mountFilePath: "/secrets/cloudsql/service-account.json"
+    proxyArgsInstances: "$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"
+    proxyContainerConfig:
+      env:
+        - name: "SQL_INSTANCE_PROJECT"
+          valueFrom:
+            secretKeyRef:
+              name: "buffer-cloudsql-postgres-instance"
+              key: "project"
+        - name: "SQL_INSTANCE_REGION"
+          valueFrom:
+            secretKeyRef:
+              name: "buffer-cloudsql-postgres-instance"
+              key: "region"
+        - name: "SQL_INSTANCE_NAME"
+          valueFrom:
+            secretKeyRef:
+              name: "buffer-cloudsql-postgres-instance"
+              key: "name"
+    migrationImage: "gcr.io/terra-kernel-k8s/terra-resource-buffer"
+    migrationArgsJarLocation: "$(find /app/libs -name liquibase-core*.jar)"
+    migrationArgsExtraClasspath:
+      - $(find /app/libs -name stairway*.jar)
+      - $(find /app/libs -name postgresql*.jar)
+    migrationArgsConfigDriver: "org.postgresql.Driver"
+    migrationArgsConfigUrl: "jdbc:postgresql://127.0.0.1:5432/${DB_NAME}"
+    migrationDatabaseCredentials:
+      existingKubernetesSecret:
+        usernameKey: "username"
+        passwordKey: "password"
+        variableDatabaseKey: "db"
