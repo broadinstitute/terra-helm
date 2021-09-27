@@ -1925,6 +1925,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.30.0/buffer-0.30.0.tgz
     version: 0.30.0
   - apiVersion: v2
+    created: "2021-09-27T20:42:20.224623861Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 1.0.0-503.1632773568.0fec2e
+    description: Chart for Resource Buffering Service
+    digest: c446dd9c085ce11b6e3f23e3bf5210f11b104d43ddffbd5c9cff3713e75dbf6d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.30.0-504.1632775324.a88652/buffer-0.30.0-504.1632775324.a88652.tgz
+    version: 0.30.0-504.1632775324.a88652
+  - apiVersion: v2
     created: "2021-09-27T20:21:09.565695759Z"
     dependencies:
     - name: liquibase-migration
@@ -26248,6 +26269,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-09-15-20-120.1600181187.32a2cb/leonardo-09-15-20-120.1600181187.32a2cb.tgz
     version: 09-15-20-120.1600181187.32a2cb
   - apiVersion: v2
+    created: "2021-09-27T20:42:20.391628011Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 1.0.0-503.1632773568.0fec2e
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: f0fc1c21ba65ec2a358aa7c61e8af2bd27b21341e2d43eb8f8d033a0877c4332
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.57.0-504.1632775326.a88652/leonardo-0.57.0-504.1632775326.a88652.tgz
+    version: 0.57.0-504.1632775326.a88652
+  - apiVersion: v2
     created: "2021-09-27T20:21:09.662343056Z"
     dependencies:
     - name: liquibase-migration
@@ -39098,6 +39141,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.0.0-80.1595262188.e7eeab/postgres-0.0.0-80.1595262188.e7eeab.tgz
     version: 0.0.0-80.1595262188.e7eeab
   rawls:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-09-27T20:42:20.542639851Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 1.0.0-503.1632773568.0fec2e
+    description: Chart for Rawls service in Terra
+    digest: 0eb2feceea94c5f7ee9e4739a4671c05dd29481256cd17052598487f7eb25452
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.21.0-504.1632775327.a88652/rawls-0.21.0-504.1632775327.a88652.tgz
+    version: 0.21.0-504.1632775327.a88652
   - apiVersion: v2
     appVersion: latest
     created: "2021-09-27T20:21:09.751145863Z"
