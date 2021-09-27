@@ -122,7 +122,8 @@ liquibase-migration:
         - secretRef:
             name: "rawls-backend-sqlproxy-env"
     migrationImage: "gcr.io/broad-dsp-gcr-public/rawls"
-    migrationArgsJarLocation: "$(find /rawls -name 'rawls*.jar')"
+    migrationArgsClasspath:
+      - "$(find /rawls -name 'rawls*.jar')"
     migrationConfigFileMount:
       secretName: "rawls-backend-app-ctmpls"
     migrationDatabaseCredentials:

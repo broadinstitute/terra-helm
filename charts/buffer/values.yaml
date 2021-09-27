@@ -236,10 +236,8 @@ liquibase-migration:
               name: "buffer-cloudsql-postgres-instance"
               key: "name"
     migrationImage: "gcr.io/terra-kernel-k8s/terra-resource-buffer"
-    migrationArgsJarLocation: "$(find /app/libs -name liquibase-core*.jar)"
-    migrationArgsExtraClasspath:
-      - $(find /app/libs -name stairway*.jar)
-      - $(find /app/libs -name postgresql*.jar)
+    migrationArgsClasspath:
+      - "app/libs/*"
     migrationArgsConfigDriver: "org.postgresql.Driver"
     migrationArgsConfigUrl: "jdbc:postgresql://127.0.0.1:5432/${DB_NAME}"
     migrationDatabaseCredentials:

@@ -141,7 +141,8 @@ liquibase-migration:
         - secretRef:
             name: "leonardo-backend-sqlproxy-env"
     migrationImage: "gcr.io/broad-dsp-gcr-public/leonardo"
-    migrationArgsJarLocation: "$(find /leonardo -name 'leonardo*.jar')"
+    migrationArgsClasspath:
+      - "$(find /leonardo -name 'leonardo*.jar')"
     migrationConfigFileMount:
       secretName: "leonardo-backend-app-ctmpls"
     migrationDatabaseCredentials:
