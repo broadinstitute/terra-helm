@@ -56,8 +56,7 @@ defaults:
   # -- Time to wait before attempting to start Liquibase, to allow proxy to boot
   migrationDelay: "15s"
   # -- (list) Java classpath location(s) containing Liquibase, JDBC driver, any packaged changelogs, and all dependencies;
-  # if the app is packaged then its `.jar` is sufficient (be careful of bash expansion, you'll need to escape double quotes
-  # to use classpath wildcards)
+  # if the app is packaged then its `.jar` is sufficient (CLI argument wrapped in double quotes, bash expansion allowed)
   migrationArgsClasspath:
   # -- If the Kubernetes job should always succeed regardless of the Liquibase command's exit status
   migrationArgsLiquibaseCommand: "update"
