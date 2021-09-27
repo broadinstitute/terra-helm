@@ -196,7 +196,7 @@ liquibase-migration:
   enumerated:
   - name: buffer
     # on filesystem
-    migrationArgsConfigChangelog: "./app/resources/db/changelog.xml"
+    migrationArgsConfigChangelog: "db/changelog.xml"
     migrationDatabaseCredentials:
       existingKubernetesSecret:
         name: "buffer-postgres-db-creds"
@@ -238,6 +238,7 @@ liquibase-migration:
     migrationImage: "gcr.io/terra-kernel-k8s/terra-resource-buffer"
     migrationArgsClasspath:
       - "app/libs/*"
+      - "app/resources/*"
     migrationArgsConfigDriver: "org.postgresql.Driver"
     migrationArgsConfigUrl: "jdbc:postgresql://127.0.0.1:5432/${DB_NAME}"
     migrationDatabaseCredentials:
