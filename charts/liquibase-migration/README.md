@@ -21,11 +21,10 @@ helm-docs can't parse all the comments in the values file, [see it for more deta
 | defaults.k8sServiceAccount | string | `nil` | App's Kubernetes service account (selective sync may be necessary if the KSA isn't applied before k8sSyncWave) |
 | defaults.k8sSyncWave | string | `"-1"` | (string) Argo CD wave to apply resources in |
 | defaults.migrationArgsAdditional | string | `nil` | Optional arbitrary additional arguments to be passed, from https://docs.liquibase.com/commands/home.html |
+| defaults.migrationArgsClasspath | list | `nil` | Java classpath location(s) containing Liquibase, JDBC driver, any packaged changelogs, and all dependencies; if the app is packaged then its `.jar` is sufficient (be careful of bash expansion, you'll need to escape double quotes to use classpath wildcards) |
 | defaults.migrationArgsConfigChangelog | string | `nil` | Java classpath location of the Liquibase changelog file, expanded by migrationShell |
 | defaults.migrationArgsConfigDriver | string | `nil` | Java class name of the JDBC driver to use, expanded by migrationShell |
 | defaults.migrationArgsConfigUrl | string | `nil` | JDBC URL of the database, expanded by migrationShell |
-| defaults.migrationArgsExtraClasspath | list | `[]` | Additional `.jar` files to add to the class path, in addition to the `.jar` containing Liquibase |
-| defaults.migrationArgsJarLocation | string | `nil` | Path within the migration image to the `.jar` containing Liquibase |
 | defaults.migrationArgsLiquibaseCommand | string | `"update"` | If the Kubernetes job should always succeed regardless of the Liquibase command's exit status |
 | defaults.migrationConfigFileMount | object | With the secret name omitted, no configuration file will be mounted or passed | Controls for mounting and passing a Liquibase.properties file (necessary unless all other migrationConfigArgs* values passed) |
 | defaults.migrationConfigFileMount.mountFilePath | string | `"/etc/liquibase.properties"` | The full mount path of the file, ending with the file itself |

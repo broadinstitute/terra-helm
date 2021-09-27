@@ -55,10 +55,10 @@ defaults:
   migrationShell: ["bash", "-c"]
   # -- Time to wait before attempting to start Liquibase, to allow proxy to boot
   migrationDelay: "15s"
-  # -- (string) Path within the migration image to the `.jar` containing Liquibase
-  migrationArgsJarLocation:
-  # -- Additional `.jar` files to add to the class path, in addition to the `.jar` containing Liquibase
-  migrationArgsExtraClasspath: []
+  # -- (list) Java classpath location(s) containing Liquibase, JDBC driver, any packaged changelogs, and all dependencies;
+  # if the app is packaged then its `.jar` is sufficient (be careful of bash expansion, you'll need to escape double quotes
+  # to use classpath wildcards)
+  migrationArgsClasspath:
   # -- If the Kubernetes job should always succeed regardless of the Liquibase command's exit status
   migrationArgsLiquibaseCommand: "update"
   # -- (string) Java classpath location of the Liquibase changelog file, expanded by migrationShell
