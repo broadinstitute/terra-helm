@@ -12598,6 +12598,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.24.0/dsp-argocd-0.24.0.tgz
     version: 0.24.0
   - apiVersion: v2
+    created: "2021-09-28T13:53:14.073228315Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: ce1a46295ae68e38217fbe4e5813af0675ab9100bb5e43c90cf08d61e6830443
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.24.0-510.1632837183.1e20e4/dsp-argocd-0.24.0-510.1632837183.1e20e4.tgz
+    version: 0.24.0-510.1632837183.1e20e4
+  - apiVersion: v2
     created: "2021-09-28T13:22:24.320222025Z"
     dependencies:
     - name: argo-cd
@@ -45732,6 +45754,15 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.7.0/terra-argocd-app-0.7.0.tgz
     version: 0.7.0
   - apiVersion: v2
+    created: "2021-09-28T13:53:14.198975049Z"
+    description: A Helm chart for generating ArgoCD applications for Terra services
+    digest: 7eaff6dc3a422535e124d85f72123d8f6d6833c12da027592753d0a2248711a6
+    name: terra-argocd-app
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.7.0-510.1632837183.1e20e4/terra-argocd-app-0.7.0-510.1632837183.1e20e4.tgz
+    version: 0.7.0-510.1632837183.1e20e4
+  - apiVersion: v2
     created: "2021-09-28T13:22:24.403265005Z"
     description: A Helm chart for generating ArgoCD applications for Terra services
     digest: fb9ed6bf089d0af7af5e1bdec1da0bbd25aad10749c9a28083f63161e8c6f7de
@@ -46354,6 +46385,15 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-project-0.1.0/terra-argocd-project-0.1.0.tgz
     version: 0.1.0
+  - apiVersion: v2
+    created: "2021-09-28T13:53:14.301162257Z"
+    description: A Helm chart for generating Terra ArgoCD projects
+    digest: 5cfd05de261c82d45d603c97e62154b5b498f9184fe52ce3cfb47715fa007b13
+    name: terra-argocd-project
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-project-0.1.0-510.1632837183.1e20e4/terra-argocd-project-0.1.0-510.1632837183.1e20e4.tgz
+    version: 0.1.0-510.1632837183.1e20e4
   - apiVersion: v2
     created: "2021-09-09T19:56:39.043302521Z"
     dependencies:
