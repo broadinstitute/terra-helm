@@ -6,7 +6,7 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | liquibase-migration | 1.0.0-503.1632773568.0fec2e |
+| https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.0.0-503.1632773568.0fec2e |
 
 ## Values
 

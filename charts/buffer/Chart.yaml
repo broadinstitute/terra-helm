@@ -14,4 +14,4 @@ sources:
 dependencies:
   - name: liquibase-migration
     version: 1.0.0-503.1632850403.1458a2
-    repository: https://broadinstitute.github.io/terra-helm/
+    repository: https://terra-helm.storage.googleapis.com
