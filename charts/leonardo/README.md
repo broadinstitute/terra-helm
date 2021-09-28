@@ -6,7 +6,7 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.0.0-503.1632773568.0fec2e |
+| https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.1.0 |
 
 ## Values
 
@@ -52,8 +52,8 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.path | string | `nil` |  |
 | liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.usernameKey | string | `"db_user"` |  |
 | liquibase-migration.defaults.migrationImage | string | `"gcr.io/broad-dsp-gcr-public/leonardo"` |  |
-| liquibase-migration.defaults.proxyContainerConfig.envFrom[0].secretRef.name | string | `"leonardo-backend-sqlproxy-env"` |  |
-| liquibase-migration.defaults.proxyCredentialFileMount.secretName | string | `"leonardo-backend-sqlproxy-ctmpls"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"leonardo-backend-sqlproxy-env"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"leonardo-backend-sqlproxy-ctmpls"` |  |
 | monitoring.enabled | bool | `true` | Whether to enable Prometheus monitoring for Leonardo pods |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
 | zombieMonitorCron.enabled | bool | `false` |  |

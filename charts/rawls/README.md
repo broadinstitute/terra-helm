@@ -13,7 +13,7 @@ Chart for Rawls service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | liquibase-migration | 1.0.0-503.1632773568.0fec2e |
+| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 
 ## Values
 
@@ -54,8 +54,8 @@ Chart for Rawls service in Terra
 | liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.path | string | `nil` |  |
 | liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.usernameKey | string | `"slick_db_user"` |  |
 | liquibase-migration.defaults.migrationImage | string | `"gcr.io/broad-dsp-gcr-public/rawls"` |  |
-| liquibase-migration.defaults.proxyContainerConfig.envFrom[0].secretRef.name | string | `"rawls-backend-sqlproxy-env"` |  |
-| liquibase-migration.defaults.proxyCredentialFileMount.secretName | string | `"rawls-backend-sqlproxy-ctmpls"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"rawls-backend-sqlproxy-env"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"rawls-backend-sqlproxy-ctmpls"` |  |
 | resources.limits.cpu | int | `8` | Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"16Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `8` | Number of CPU units to request for the deployment |
