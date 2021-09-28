@@ -3,6 +3,7 @@ kind: AppProject
 metadata:
   name: {{ required "A project name is required" .Values.projectName  }}
 spec:
+  clusterResourceWhitelist: {{ .Values.clusterResourceWhitelist | toYaml | nindent 4 }}
   {{- if .Values.description }}
   description: {{ .Values.description | quote }}
   {{- end }}
