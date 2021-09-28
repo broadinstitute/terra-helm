@@ -1,11 +1,11 @@
 # -- Specific migrations to run; each config merged over the defaults to form the full configuration
 # @default -- None by default, one entry here required per migration
-enumerated:
+migrationJobs:
   - # -- (string) Required name of this specific migration
     name:
     # Keys from the defaults may be given here to override them for this specific migration
 
-# -- Baseline config merged under each enumerated one to form the full configuration for that particular migration
+# -- Baseline config merged under each migrationJobs one to form the full configuration for that particular migration
 # @default -- See sub-keys
 defaults:
 

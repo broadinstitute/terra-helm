@@ -1,4 +1,4 @@
-{{- range .Values.enumerated }}
+{{- range .Values.migrationJobs }}
 
 {{- $config := $.Values.defaults | deepCopy | mustMerge . }}
 
