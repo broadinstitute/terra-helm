@@ -116,9 +116,9 @@ liquibase-migration:
 
   defaults:
     enabled: false
-    proxyCredentialFileMount:
+    sqlproxyCredentialFileMount:
       secretName: "rawls-backend-sqlproxy-ctmpls"
-    proxyContainerConfig:
+    sqlproxyContainerConfig:
       envFrom:
         - secretRef:
             name: "rawls-backend-sqlproxy-env"

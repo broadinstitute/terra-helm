@@ -135,9 +135,9 @@ liquibase-migration:
 
   defaults:
     enabled: false
-    proxyCredentialFileMount:
+    sqlproxyCredentialFileMount:
       secretName: "leonardo-backend-sqlproxy-ctmpls"
-    proxyContainerConfig:
+    sqlproxyContainerConfig:
       envFrom:
         - secretRef:
             name: "leonardo-backend-sqlproxy-env"
