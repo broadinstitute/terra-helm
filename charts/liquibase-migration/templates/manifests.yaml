@@ -29,11 +29,11 @@ Database credential setup
 {{- if and (not ((($config.migrationDatabaseCredentials).fromVaultSecret).path)) (not ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name)) }}
   {{- fail "Either migrationDatabaseCredentials.fromVaultSecret or migrationDatabaseCredentials.fromKubernetesSecret must be provided" }}
 {{- end }}
-{{- $dbCredentialsK8sSecretConfig := $config.migrationDatabaseCredentials.fromKubernetesSecret }}
+{{- $dbCredentialsSecret := $config.migrationDatabaseCredentials.fromKubernetesSecret }}
 {{- if ((($config.migrationDatabaseCredentials).fromVaultSecret).path) }}
-  {{- $dbCredentialsK8sSecretConfig = dict "name" (printf "%s-migration-sql-secrets" $config.name) "usernameKey" "db-username" "passwordKey" "db-password" }}
+  {{- $dbCredentialsSecret = dict "name" (printf "%s-migration-sql-secrets" $config.name) "usernameKey" "db-username" "passwordKey" "db-password" }}
   {{- if $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
-    {{- $_ := set $dbCredentialsK8sSecretConfig "databaseNameKey" "db-name"}}
+    {{- $_ := set $dbCredentialsSecret "databaseNameKey" "db-name"}}
   {{- end }}
 {{- end }}
 
@@ -51,18 +51,18 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: {{ $config.k8sSyncWave | quote }}
 spec:
-  name: {{ $dbCredentialsK8sSecretConfig.name }}
+  name: {{ $dbCredentialsSecret.name }}
   keysMap:
-    {{ $dbCredentialsK8sSecretConfig.usernameKey }}:
+    {{ $dbCredentialsSecret.usernameKey }}:
       key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.usernameKey | required "fromVaultSecret.usernameKey required if using Vault" }}
       path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
       encoding: text
-    {{ $dbCredentialsK8sSecretConfig.passwordKey }}:
+    {{ $dbCredentialsSecret.passwordKey }}:
       key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.passwordKey | required "fromVaultSecret.passwordKey required if using Vault" }}
       path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
       encoding: text
     {{- if $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
-    {{ $dbCredentialsK8sSecretConfig.databaseNameKey }}:
+    {{ $dbCredentialsSecret.databaseNameKey }}:
       key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
       path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
       encoding: text
@@ -151,19 +151,19 @@ spec:
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: {{ $dbCredentialsK8sSecretConfig.name }}
-              key: {{ $dbCredentialsK8sSecretConfig.usernameKey | required "migration credentials usernameKey not present" }}
+              name: {{ $dbCredentialsSecret.name }}
+              key: {{ $dbCredentialsSecret.usernameKey | required "migration credentials usernameKey not present" }}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ $dbCredentialsK8sSecretConfig.name }}
-              key: {{ $dbCredentialsK8sSecretConfig.passwordKey | required "migration credentials passwordKey not present" }}
-        {{- if $dbCredentialsK8sSecretConfig.databaseNameKey }}
+              name: {{ $dbCredentialsSecret.name }}
+              key: {{ $dbCredentialsSecret.passwordKey | required "migration credentials passwordKey not present" }}
+        {{- if $dbCredentialsSecret.databaseNameKey }}
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ $dbCredentialsK8sSecretConfig.name }}
-              key: {{ $dbCredentialsK8sSecretConfig.databaseNameKey }}
+              name: {{ $dbCredentialsSecret.name }}
+              key: {{ $dbCredentialsSecret.databaseNameKey }}
         {{- end }}
         command: {{ $config.migrationShell | toYaml | nindent 10 }}
         args:
