@@ -37,7 +37,7 @@ spec:
       env:
       - name: TERRA_ENV
         value: {{ $env | quote }}
-      - name: TERRA_APP
+      - name: TERRA_RELEASE
         value: {{ $app | quote }}
     {{- if .Values.syncPolicy }}
     syncPolicy: {{ .Values.syncPolicy | toYaml | nindent 6 }}

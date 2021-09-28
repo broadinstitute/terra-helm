@@ -38,7 +38,7 @@ spec:
       env:
       - name: TERRA_CLUSTER
         value: {{ $cluster | quote }}
-      - name: RELEASE_NAME
+      - name: TERRA_RELEASE
         value: {{ $release | quote }}
     {{- if .Values.syncPolicy }}
     syncPolicy: {{ .Values.syncPolicy | toYaml | nindent 6 }}
