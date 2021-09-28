@@ -1,4 +1,5 @@
 {{- define "libchart.backendconfig.tpl" -}}
+{{ if .Values.ingress.enabled -}}
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
@@ -18,6 +19,7 @@ spec:
 {{- if .Values.ingress.securityPolicy }}
   securityPolicy:
     name: {{ .Values.ingress.securityPolicy }}
+{{- end }}
 {{- end }}
 {{- end }}
 
