@@ -1,5 +1,4 @@
 {{- include "libchart.frontendconfig" (list . "buffer.frontendconfig" )}}
 
-{{ if .Values.ingress.enabled -}}
 {{- define "buffer.frontendconfig" -}}
 {{- end }}
