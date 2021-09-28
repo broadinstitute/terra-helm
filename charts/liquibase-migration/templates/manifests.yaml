@@ -24,10 +24,17 @@ Imperative defaults that can't exist in the Values file
 {{- end }}
 
 {{- /*
-Imperative validation for gotchas
+Database credential setup
 */}}
 {{- if and (not ((($config.migrationDatabaseCredentials).fromVaultSecret).path)) (not ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name)) }}
   {{- fail "Either migrationDatabaseCredentials.fromVaultSecret or migrationDatabaseCredentials.fromKubernetesSecret must be provided" }}
+{{- end }}
+{{- $dbCredentialsK8sSecretConfig := $config.migrationDatabaseCredentials.fromKubernetesSecret }}
+{{- if ((($config.migrationDatabaseCredentials).fromVaultSecret).path) }}
+  {{- $dbCredentialsK8sSecretConfig = dict "name" (printf "%s-migration-sql-secrets" $config.name) "usernameKey" "db-username" "passwordKey" "db-password" }}
+  {{- if $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
+    {{- $_ := set $dbCredentialsK8sSecretConfig "databaseNameKey" "db-name"}}
+  {{- end }}
 {{- end }}
 
 {{- /*
@@ -44,18 +51,18 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: {{ $config.k8sSyncWave | quote }}
 spec:
-  name: {{ $config.name }}-migration-sql-secrets
+  name: {{ $dbCredentialsK8sSecretConfig.name }}
   keysMap:
-    db-username:
+    {{ $dbCredentialsK8sSecretConfig.usernameKey }}:
       key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.usernameKey | required "fromVaultSecret.usernameKey required if using Vault" }}
       path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
       encoding: text
-    db-password:
+    {{ $dbCredentialsK8sSecretConfig.passwordKey }}:
       key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.passwordKey | required "fromVaultSecret.passwordKey required if using Vault" }}
       path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
       encoding: text
     {{- if $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
-    db-name:
+    {{ $dbCredentialsK8sSecretConfig.databaseNameKey }}:
       key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
       path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
       encoding: text
@@ -144,37 +151,19 @@ spec:
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
-              {{- if and ((($config.migrationDatabaseCredentials).fromVaultSecret).path) (not ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name)) }}
-              name: {{ $config.name }}-migration-sql-secrets
-              key: db-username
-              {{- end }}
-              {{- if ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name) }}
-              name: {{ $config.migrationDatabaseCredentials.fromKubernetesSecret.name }}
-              key: {{ $config.migrationDatabaseCredentials.fromKubernetesSecret.usernameKey | required "fromKubernetesSecret.usernameKey required if fromKubernetesSecret.name passed" }}
-              {{- end }}
+              name: {{ $dbCredentialsK8sSecretConfig.name }}
+              key: {{ $dbCredentialsK8sSecretConfig.usernameKey | required "migration credentials usernameKey not present" }}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              {{- if and ((($config.migrationDatabaseCredentials).fromVaultSecret).path) (not ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name)) }}
-              name: {{ $config.name }}-migration-sql-secrets
-              key: db-password
-              {{- end }}
-              {{- if ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name) }}
-              name: {{ $config.migrationDatabaseCredentials.fromKubernetesSecret.name }}
-              key: {{ $config.migrationDatabaseCredentials.fromKubernetesSecret.passwordKey | required "fromKubernetesSecret.passwordKey required if fromKubernetesSecret.name passed" }}
-              {{- end }}
-        {{- if or ((($config.migrationDatabaseCredentials).fromVaultSecret).databaseNameKey) ((($config.migrationDatabaseCredentials).fromKubernetesSecret).databaseNameKey) }}
+              name: {{ $dbCredentialsK8sSecretConfig.name }}
+              key: {{ $dbCredentialsK8sSecretConfig.passwordKey | required "migration credentials passwordKey not present" }}
+        {{- if $dbCredentialsK8sSecretConfig.databaseNameKey }}
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              {{- if and ((($config.migrationDatabaseCredentials).fromVaultSecret).path) (not ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name)) }}
-              name: {{ $config.name }}-migration-sql-secrets
-              key: db-name
-              {{- end }}
-              {{- if ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name) }}
-              name: {{ $config.migrationDatabaseCredentials.fromKubernetesSecret.name }}
-              key: {{ $config.migrationDatabaseCredentials.fromKubernetesSecret.databaseNameKey }}
-              {{- end }}
+              name: {{ $dbCredentialsK8sSecretConfig.name }}
+              key: {{ $dbCredentialsK8sSecretConfig.databaseNameKey }}
         {{- end }}
         command: {{ $config.migrationShell | toYaml | nindent 10 }}
         args:
