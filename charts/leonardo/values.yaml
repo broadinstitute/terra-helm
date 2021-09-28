@@ -124,7 +124,7 @@ liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
   # ```
   # liquibase-migration:   
-  #   enumerated:
+  #   migrationJobs:
   #     - name: "leonardo"
   #       enabled: true
   #       migrationDatabaseCredentials:

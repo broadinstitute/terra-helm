@@ -193,7 +193,7 @@ liquibase-migration:
   # ```
   # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
 
-  enumerated:
+  migrationJobs:
   - name: buffer
     # on filesystem, on classpath via app/resources/
     migrationArgsConfigChangelog: "db/changelog.xml"
