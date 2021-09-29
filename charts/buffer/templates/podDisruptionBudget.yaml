@@ -1,5 +1,4 @@
 {{- include "libchart.pdb" . }}
-<<<<<<< HEAD
 
 {{- define "buffer.pdb" -}}
 spec:
@@ -7,5 +6,3 @@ spec:
     matchLabels:
       {{- include "buffer.selectorLabels" . | nindent 6 }}
 {{- end }}
-=======
->>>>>>> 0f8056c6 (* DDO-1578  Add pdb to Buffer (#518))
