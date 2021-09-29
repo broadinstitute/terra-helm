@@ -56781,6 +56781,27 @@ entries:
     version: 0.0.0
   thurloe:
   - apiVersion: v2
+    created: "2021-09-29T18:45:15.398698481Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    description: Chart for Thurloe service in Terra
+    digest: c52d75d4ca18dd8cf9a7647ec44cfb2ba4575bedabb03b8cbc0b1dfd377fcdab
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0/thurloe-0.14.0.tgz
+    version: 0.14.0
+  - apiVersion: v2
     created: "2021-09-16T16:54:07.430626827Z"
     description: Chart for Thurloe service in Terra
     digest: c61c2bbd3656b69ebb830b82b572eaad6070383acaf40d4daac462751f701c1f
