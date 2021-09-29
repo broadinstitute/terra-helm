@@ -24,9 +24,6 @@ replicas: 3
 # -- (map) Annotations for application pods
 annotations: {}
 
-# -- (string) Optional override for the pod's runtimeClass
-runtimeClassName:
-
 resources:
   requests:
     # -- (string) Number of CPU units to request for the deployment
@@ -79,22 +76,3 @@ secrets:
       vaultKey:
       # -- (string) Encoding of the Vault field (either `text` or `base64`)
       sourceEncoding: text
-
-networkPolicy:
-  ingress:
-    # -- (boolean) If the NetworkPolicy should be enabled for ingress
-    enabled: false
-    # -- (list) CIDR ranges to permit for ingress
-    cidrAllowList:
-    # -- (list) Posts/protocols to permit for ingress
-    portAllowList:
-  egress:
-    # -- (boolean) If the NetworkPolicy should be enabled for egress
-    enabled: false
-    # -- (list) CIDR ranges to permit for egress
-    cidrAllowList:
-    # -- (list) Posts/protocols to permit for egress
-    portAllowList:
-    # HTTPS
-    - port: 443
-      protocol: TCP
