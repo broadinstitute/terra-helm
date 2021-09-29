@@ -20,6 +20,7 @@ spec:
   selector:
     matchLabels:
       {{- include "buffer.selectorLabels" . | nindent 6 }}
+      deployment: {{ .Chart.Name }}-deployment
   template:
     metadata:
       name: {{ .Values.name }}-service
