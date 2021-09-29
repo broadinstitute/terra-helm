@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.29.0](https://img.shields.io/badge/Version-0.29.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -8,6 +8,12 @@ Chart for Resource Buffering Service
 
 * <https://github.com/broadinstitute/terra-helm/tree/master/charts>
 * <https://github.com/DataBiosphere/terra-resource-buffer>
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.1.0 |
 
 ## Values
 
