@@ -2019,6 +2019,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.30.0/buffer-0.30.0.tgz
     version: 0.30.0
   - apiVersion: v2
+    created: "2021-09-29T15:50:23.65941189Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    description: Chart for Resource Buffering Service
+    digest: 0a5e07bad7d22565ab02806cefa250569631cb8a9e81bd38e8d765044ab08ed2
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.30.0-518.1632930613.31fc86/buffer-0.30.0-518.1632930613.31fc86.tgz
+    version: 0.30.0-518.1632930613.31fc86
+  - apiVersion: v2
     created: "2021-09-28T20:36:00.926704624Z"
     dependencies:
     - name: liquibase-migration
