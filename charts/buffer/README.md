@@ -1,6 +1,10 @@
 # buffer
 
+<<<<<<< HEAD
 ![Version: 0.33.0](https://img.shields.io/badge/Version-0.33.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+=======
+![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+>>>>>>> 0f29e25d (Update read me)
 
 Chart for Resource Buffering Service
 
@@ -13,8 +17,12 @@ Chart for Resource Buffering Service
 
 | Repository | Name | Version |
 |------------|------|---------|
+<<<<<<< HEAD
 | https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.6.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
+=======
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.1.0 |
+>>>>>>> 0f29e25d (Update read me)
 
 ## Values
 
