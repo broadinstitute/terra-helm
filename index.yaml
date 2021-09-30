@@ -2002,6 +2002,23 @@ entries:
     version: 0.0.0-398.1623947395.3dab38
   buffer:
   - apiVersion: v2
+    created: "2021-09-30T14:27:23.803869468Z"
+    description: Chart for Resource Buffering Service
+    digest: 494e829f2b8b5df94bcb0152e2dd8500f9ff25e64c095a0a3511e2d873599157
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.32.0/buffer-0.32.0.tgz
+    version: 0.32.0
+  - apiVersion: v2
     created: "2021-09-29T19:00:30.044706865Z"
     dependencies:
     - name: pdb-lib
