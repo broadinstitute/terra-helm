@@ -176,6 +176,10 @@ spec:
         {{- end }}
         - name: SAM_ADDRESS
           value: {{ $.Values.samAddress }}
+        - name: AUTHORIZATION_CHANGE_EVENTS_ENABLED
+          value: {{ $.Values.authorizationChangeEventsEnabled }}
+        - name: SERVICE_GOOGLE_PROJECT
+          value: {{ $.Values.serviceGoogleProject }}
         - name: SAMPLING_PROBABILITY
           value: "{{ $.Values.samplingProbability }}"
         - name: GOOGLE_APPLICATION_CREDENTIALS
