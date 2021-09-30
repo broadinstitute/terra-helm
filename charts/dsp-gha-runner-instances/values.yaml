@@ -38,7 +38,7 @@ runnerDefaults:
 # for different docker configurations
 dockerConfigs:
   
-  # 'privilegedDockerInDocker' INSECURELY uses a privileged container to run
+  # 'privilegedDockerInDocker' uses a privileged container to run
   # docker-in-docker via internal dockerd
   # - https://github.com/actions-runner-controller/actions-runner-controller#runner-with-dind
   privilegedDockerInDocker:
@@ -47,7 +47,7 @@ dockerConfigs:
       dockerEnabled: false
       dockerdWithinRunnerContainer: true
   
-  # 'privilegedSidecar' INSECURELY uses a privileged sidecar container to run
+  # 'privilegedSidecar' uses a privileged sidecar container to run
   # docker-out-of-docker
   # - https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks
   privilegedSidecar:
