@@ -12930,6 +12930,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.25.0-523.1633029456.2e9625/dsp-argocd-0.25.0-523.1633029456.2e9625.tgz
     version: 0.25.0-523.1633029456.2e9625
   - apiVersion: v2
+    created: "2021-09-30T19:23:12.789488298Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: bdb481efcebdab39f256c1ead41e59b5146b9c1eaeaed6aa1908c5857f6f2ce9
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.25.0-522.1633029783.5ddf2e/dsp-argocd-0.25.0-522.1633029783.5ddf2e.tgz
+    version: 0.25.0-522.1633029783.5ddf2e
+  - apiVersion: v2
     created: "2021-09-30T19:13:34.698005796Z"
     dependencies:
     - name: argo-cd
@@ -15262,6 +15284,22 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.4.0-523.1633029457.2e9625/dsp-gha-runner-instances-0.4.0-523.1633029457.2e9625.tgz
     version: 0.4.0-523.1633029457.2e9625
+  - apiVersion: v2
+    created: "2021-09-30T19:23:12.882452739Z"
+    description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
+    digest: 53bb2df641642c2f212ef6bc39fe6412bdd72b5b9e4ec92f75cf4735bfda1329
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner-instances
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.4.0-522.1633029783.5ddf2e/dsp-gha-runner-instances-0.4.0-522.1633029783.5ddf2e.tgz
+    version: 0.4.0-522.1633029783.5ddf2e
   - apiVersion: v2
     created: "2021-09-30T19:13:34.782958992Z"
     description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
