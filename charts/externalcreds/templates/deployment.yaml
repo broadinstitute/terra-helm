@@ -177,7 +177,7 @@ spec:
         - name: SAM_ADDRESS
           value: {{ $.Values.samAddress }}
         - name: AUTHORIZATION_CHANGE_EVENTS_ENABLED
-          value: {{ $.Values.authorizationChangeEventsEnabled }}
+          value: "{{ $.Values.authorizationChangeEventsEnabled }}"
         - name: SERVICE_GOOGLE_PROJECT
           value: {{ $.Values.serviceGoogleProject }}
         - name: SAMPLING_PROBABILITY
