@@ -2023,6 +2023,30 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.33.0/buffer-0.33.0.tgz
     version: 0.33.0
   - apiVersion: v2
+    created: "2021-10-01T20:29:38.76453566Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.6.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    description: Chart for Resource Buffering Service
+    digest: be8af2e37cebfac00bf7c8917f49668cf70ae3c419a86ddafd73c171ff70c735
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.33.0-502.1633120167.c0cf77/buffer-0.33.0-502.1633120167.c0cf77.tgz
+    version: 0.33.0-502.1633120167.c0cf77
+  - apiVersion: v2
     created: "2021-10-01T20:01:44.478447737Z"
     dependencies:
     - name: ingresslib
