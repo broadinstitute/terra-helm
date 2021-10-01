@@ -1,0 +1,199 @@
+{{- range .Values.migrationJobs }}
+
+{{- $config := $.Values.defaults | deepCopy | mustMerge . }}
+
+{{- if $config.enabled }}
+
+{{- /*
+Imperative defaults that can't exist in the Values file
+*/}}
+{{- if not (hasKey $config "migrationImageTag") }}
+  {{- if not (($.Values.global).applicationVersion) }}
+    {{- fail ".Values.global.applicationVersion not set, so migrationImageTag must be passed"}}
+  {{- end }}
+  {{- $_ := set $config "migrationImageTag" $.Values.global.applicationVersion }}
+{{- end }}
+{{- if not (hasKey $config "k8sAppName") }}
+  {{- $_ := set $config "k8sAppName" $.Release.Name }}
+{{- end }}
+{{- if not (hasKey $config "k8sLabelRef") }}
+  {{- $_ := set $config "k8sLabelRef" (printf "%s.labels" $config.k8sAppName) }}
+{{- end }}
+{{- if not (hasKey $config "k8sServiceAccount") }}
+  {{- $_ := set $config "k8sServiceAccount" (printf "%s-sa" $config.k8sAppName) }}
+{{- end }}
+
+{{- /*
+Database credential setup
+*/}}
+{{- if and (not ((($config.migrationDatabaseCredentials).fromVaultSecret).path)) (not ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name)) }}
+  {{- fail "Either migrationDatabaseCredentials.fromVaultSecret or migrationDatabaseCredentials.fromKubernetesSecret must be provided" }}
+{{- end }}
+{{- $dbCredentialsSecret := $config.migrationDatabaseCredentials.fromKubernetesSecret }}
+{{- if ((($config.migrationDatabaseCredentials).fromVaultSecret).path) }}
+  {{- $dbCredentialsSecret = dict "name" (printf "%s-migration-sql-secrets" $config.name) "usernameKey" "db-username" "passwordKey" "db-password" }}
+  {{- if $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
+    {{- $_ := set $dbCredentialsSecret "databaseNameKey" "db-name"}}
+  {{- end }}
+{{- end }}
+
+{{- /*
+Create secret for database credentials if required
+*/}}
+{{- if and ((($config.migrationDatabaseCredentials).fromVaultSecret).path) (not ((($config.migrationDatabaseCredentials).fromKubernetesSecret).name)) }}
+apiVersion: secrets-manager.tuenti.io/v1alpha1
+kind: SecretDefinition
+metadata:
+  name: {{ $config.name | required "Name is required" }}-migration-secretdef
+  {{- if $config.k8sLabelRef }}
+  labels: {{- include $config.k8sLabelRef $ | nindent 4 }}
+  {{- end }}
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ $config.k8sSyncWave | quote }}
+spec:
+  name: {{ $dbCredentialsSecret.name }}
+  keysMap:
+    {{ $dbCredentialsSecret.usernameKey }}:
+      key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.usernameKey | required "fromVaultSecret.usernameKey required if using Vault" }}
+      path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
+      encoding: text
+    {{ $dbCredentialsSecret.passwordKey }}:
+      key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.passwordKey | required "fromVaultSecret.passwordKey required if using Vault" }}
+      path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
+      encoding: text
+    {{- if $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
+    {{ $dbCredentialsSecret.databaseNameKey }}:
+      key: {{ $config.migrationDatabaseCredentials.fromVaultSecret.databaseNameKey }}
+      path: {{ $config.migrationDatabaseCredentials.fromVaultSecret.path }}
+      encoding: text
+    {{- end }}
+---
+{{- end }}
+
+{{- /*
+Create migration job
+*/}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ $config.name }}-liquibase-migration
+  {{- if $config.k8sLabelRef }}
+  labels: {{- include $config.k8sLabelRef $ | nindent 4 }}
+  {{- end }}
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: {{ $config.k8sSyncWave | quote }}
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: {{ $config.name }}-liquibase-migration
+      {{- if $config.k8sLabelRef }}
+      labels: {{- include $config.k8sLabelRef $ | nindent 8 }}
+      {{- end }}
+    spec:
+      # Allow migration-liquibase to kill migration-sqlproxy's process
+      shareProcessNamespace: true
+      restartPolicy: Never
+      serviceAccountName: {{ $config.k8sServiceAccount }}
+      # Most apps reference "127.0.0.1" in DB URL but some expect "sqlproxy"
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - sqlproxy
+      {{- if or (($config.sqlproxyCredentialFileMount).secretName) (($config.migrationConfigFileMount).secretName) }}
+      volumes:
+      {{- if (($config.sqlproxyCredentialFileMount).secretName) }}
+      - name: sqlproxy-credentials-volume
+        secret:
+          secretName: {{ $config.sqlproxyCredentialFileMount.secretName }}
+      {{- end }}
+      {{- if (($config.migrationConfigFileMount).secretName) }}
+      - name: migration-configs-volume
+        secret:
+          secretName: {{ $config.migrationConfigFileMount.secretName }}
+      {{- end }}
+      {{- end }}
+      containers:
+      - name: {{ $config.name }}-migration-sqlproxy
+        image: {{ $config.sqlproxyImage }}:{{ $config.sqlproxyImageTag }}
+        {{- if (($config.sqlproxyCredentialFileMount).secretName) }}
+        volumeMounts:
+        - mountPath: {{ $config.sqlproxyCredentialFileMount.mountFilePath | required "sqlproxyCredentialFileMount.mountFilePath required if sqlproxyCredentialFileMount.secretName provided" }}
+          subPath: {{ $config.sqlproxyCredentialFileMount.mountFilePath | splitList "/" | last }}
+          name: sqlproxy-credentials-volume
+          readOnly: true
+        {{- end }}
+        {{- if $config.sqlproxyContainerConfig }}
+        {{- $config.sqlproxyContainerConfig | toYaml | nindent 8 }}
+        {{- end }}
+        command: {{ $config.sqlproxyShell | toYaml | nindent 10 }}
+        args:
+        - |-
+          /cloud_sql_proxy \
+            -verbose \
+            -max_connections={{ $config.sqlproxyArgsMaxConnections }} \
+            -instances={{ $config.sqlproxyArgsInstances }} \
+            {{- if (($config.sqlproxyCredentialFileMount).secretName) }}
+            -credential_file={{ $config.sqlproxyCredentialFileMount.mountFilePath }} \
+            {{- end }}
+      - name: {{ $config.name }}-migration-liquibase
+        image: {{ $config.migrationImage | required "migrationImage required" }}:{{ $config.migrationImageTag }}
+        {{- if (($config.migrationConfigFileMount).secretName) }}
+        volumeMounts:
+        - mountPath: {{ $config.migrationConfigFileMount.mountFilePath | required "migrationConfigFileMount.mountFilePath required if migrationConfigFileMount.secretName provided" }}
+          subPath: {{ $config.migrationConfigFileMount.mountFilePath | splitList "/" | last }}
+          name: migration-configs-volume
+          readOnly: true
+        {{- end }}
+        env:
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ $dbCredentialsSecret.name }}
+              key: {{ $dbCredentialsSecret.usernameKey | required "migration credentials usernameKey not present" }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ $dbCredentialsSecret.name }}
+              key: {{ $dbCredentialsSecret.passwordKey | required "migration credentials passwordKey not present" }}
+        {{- if $dbCredentialsSecret.databaseNameKey }}
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ $dbCredentialsSecret.name }}
+              key: {{ $dbCredentialsSecret.databaseNameKey }}
+        {{- end }}
+        command: {{ $config.migrationShell | toYaml | nindent 10 }}
+        args:
+        - |-
+          {{- if $config.migrationDelay }}
+          sleep {{ $config.migrationDelay }} && \
+          {{- end }}
+          java -cp {{ $config.migrationArgsClasspath | required "Classpath required" | mustUniq | mustCompact | join ":" | quote }} liquibase.integration.commandline.Main \
+            --username="$DB_USERNAME" \
+            --password="$DB_PASSWORD" \
+            {{- if (($config.migrationConfigFileMount).secretName) }}
+            --defaultsFile={{ $config.migrationConfigFileMount.mountFilePath }} \
+            {{- end }}
+            {{- if $config.migrationArgsConfigChangelog }}
+            --changeLogFile={{ $config.migrationArgsConfigChangelog }} \
+            {{- end }}
+            {{- if $config.migrationArgsConfigDriver }}
+            --driver={{ $config.migrationArgsConfigDriver }} \
+            {{- end }}
+            {{- if $config.migrationArgsConfigUrl }}
+            --url={{ $config.migrationArgsConfigUrl }} \
+            {{- end }}
+            {{- if $config.migrationsArgsAdditional }}
+            {{ $config.migrationsArgsAdditional }} \
+            {{- end }}
+            {{ $config.migrationArgsLiquibaseCommand }}; \
+          EXIT=$?; \
+          pkill -SIGTERM cloud_sql_proxy; \
+          exit $EXIT
+---
+{{- end }}
+
+{{- end }}

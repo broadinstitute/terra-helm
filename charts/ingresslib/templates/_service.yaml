@@ -1,4 +1,5 @@
 {{- define "libchart.service.tpl" -}}
+{{ if .Values.ingress.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -21,6 +22,7 @@ spec:
     protocol: TCP
     port: 443
     targetPort: 443
+{{- end }}
 {{- end }}
 
 {{- define "libchart.service" -}}

@@ -6,7 +6,7 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | liquibase-migration | 0.2.0 |
+| https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.1.0 |
 
 ## Values
 
@@ -45,15 +45,16 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | janitorCron.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/janitor"` |  |
 | janitorCron.imageTag | string | `"79854b1"` |  |
 | janitorCron.name | string | `"leonardo-janitor-cronjob"` |  |
-| migration.enabled | bool | `false` | (bool) Whether to run a Liquibase migration during sync (when enabled, creates K8s resources) |
-| migration.imageName | string | `"gcr.io/broad-dsp-gcr-public/leonardo"` | (string) Required full app image name, without trailing tag |
-| migration.jarLocation | string | `"$(find /leonardo -name 'leonardo*.jar')"` | (string) Required jar location in app image, expanded by migration.appContainerShell |
-| migration.liquibaseCommand | string | `"update"` | (string) Liquibase CLI command, can be "updateSQL" for a no-op dry-run, "update" for normal operation See https://docs.liquibase.com/commands/home.html |
-| migration.secretPrefix | string | `"leonardo-backend"` | (string) Required prefix of -app-ctmpls, -sqlproxy-ctmpls, -sqlproxy-env secrets |
+| liquibase-migration.defaults.enabled | bool | `false` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[0] | string | `"$(find /leonardo -name 'leonardo*.jar')"` |  |
+| liquibase-migration.defaults.migrationConfigFileMount.secretName | string | `"leonardo-backend-app-ctmpls"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.passwordKey | string | `"db_password"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.path | string | `nil` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.usernameKey | string | `"db_user"` |  |
+| liquibase-migration.defaults.migrationImage | string | `"gcr.io/broad-dsp-gcr-public/leonardo"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"leonardo-backend-sqlproxy-env"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"leonardo-backend-sqlproxy-ctmpls"` |  |
 | monitoring.enabled | bool | `true` | Whether to enable Prometheus monitoring for Leonardo pods |
-| vault.migration.dbPasswordKey | string | `"db_password"` |  |
-| vault.migration.dbUsernameKey | string | `"db_user"` | Key in Vault secret to DB username |
-| vault.migration.path | string | `nil` | Vault path to secret containing DB credentials |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
 | zombieMonitorCron.enabled | bool | `false` |  |
 | zombieMonitorCron.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/zombie-monitor"` |  |

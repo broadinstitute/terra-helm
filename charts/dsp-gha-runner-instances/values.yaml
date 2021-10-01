@@ -37,29 +37,8 @@ runnerDefaults:
 # -- (object) Lists/configures "shortcuts" to metadata/spec configurations
 # for different docker configurations
 dockerConfigs:
-  # 'sysboxDockerInDocker' uses the sysbox OCI runtime to run docker-in-docker
-  # without any privileged containers.
-  # This requires additional setup per https://github.com/nestybox/sysbox/blob/master/docs/user-guide/install-k8s.md.
-  sysboxDockerInDocker:
-    metadata:
-      annotations:
-        # Configure user namespace for the pod
-        # - https://github.com/nestybox/sysbox#using-sysbox
-        # - https://frasertweedale.github.io/blog-redhat/posts/2020-12-01-openshift-crio-userns.html#computing-the-gid-range
-        io.kubernetes.cri-o.userns-mode: 'auto:size=65536'
-    spec:
-      # From the controller's perspective, don't provide any privileges, assume no Docker
-      dockerEnabled: false
-      dockerdWithinRunnerContainer: false
-      # Use our custom image that expects a sysbox runtime
-      # - https://github.com/broadinstitute/dsp-github-action-runner-image
-      image: 'us-central1-docker.pkg.dev/dsp-artifact-registry/dsp-github-action-runner/dsp-github-action-runner:nightly'
-      # Run these pods on a specific pool and runtime class
-      nodeSelector:
-        cloud.google.com/gke-nodepool: sysbox-v1
-      runtimeClassName: sysbox-runc
   
-  # 'privilegedDockerInDocker' INSECURELY uses a privileged container to run
+  # 'privilegedDockerInDocker' uses a privileged container to run
   # docker-in-docker via internal dockerd
   # - https://github.com/actions-runner-controller/actions-runner-controller#runner-with-dind
   privilegedDockerInDocker:
@@ -68,7 +47,7 @@ dockerConfigs:
       dockerEnabled: false
       dockerdWithinRunnerContainer: true
   
-  # 'privilegedSidecar' INSECURELY uses a privileged sidecar container to run
+  # 'privilegedSidecar' uses a privileged sidecar container to run
   # docker-out-of-docker
   # - https://github.com/actions-runner-controller/actions-runner-controller#additional-tweaks
   privilegedSidecar:
@@ -86,7 +65,7 @@ dockerConfigs:
       dockerdWithinRunnerContainer: false
 
 # -- (string) Name of a key on .dockerConfigs to use for docker configuration
-defaultDockerConfig: sysboxDockerInDocker
+defaultDockerConfig: privilegedDockerInDocker
 
 
 #

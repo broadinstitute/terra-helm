@@ -186,3 +186,67 @@ buffer:
 
 # cleanupAfterHandout -- Whether to publish message to Janitor after resource is handed out.
 cleanupAfterHandout: false
+
+liquibase-migration:
+  # In an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:   
+  #   defaults:
+  #     enabled: true
+  # ```
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
+
+  migrationJobs:
+  - name: buffer
+    # on filesystem, on classpath via app/resources/
+    migrationArgsConfigChangelog: "db/changelog.xml"
+    migrationDatabaseCredentials:
+      fromKubernetesSecret:
+        name: "buffer-postgres-db-creds"
+  - name: buffer-stairway
+    # inside stairway jar, on classpath via app/libs/*
+    migrationArgsConfigChangelog: "stairway/db/changelog.xml"
+    migrationDatabaseCredentials:
+      fromKubernetesSecret:
+        name: "buffer-stairway-db-creds"
+
+  # Template definition buffer.labels attempts to read .Values.name from within liquibase-migration.
+  # Either we must pass the name again, move it to globals, or disable liquibase-migration labels.
+  name: "buffer"
+
+  defaults:
+    enabled: false
+    k8sServiceAccount: "buffer-service-sa"
+    sqlproxyCredentialFileMount:
+      secretName: "buffer-cloudsql-sa"
+      mountFilePath: "/secrets/cloudsql/service-account.json"
+    sqlproxyArgsInstances: "$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"
+    sqlproxyContainerConfig:
+      env:
+        - name: "SQL_INSTANCE_PROJECT"
+          valueFrom:
+            secretKeyRef:
+              name: "buffer-cloudsql-postgres-instance"
+              key: "project"
+        - name: "SQL_INSTANCE_REGION"
+          valueFrom:
+            secretKeyRef:
+              name: "buffer-cloudsql-postgres-instance"
+              key: "region"
+        - name: "SQL_INSTANCE_NAME"
+          valueFrom:
+            secretKeyRef:
+              name: "buffer-cloudsql-postgres-instance"
+              key: "name"
+    migrationImage: "gcr.io/terra-kernel-k8s/terra-resource-buffer"
+    migrationArgsClasspath:
+      - "app/libs/*"
+      - "app/resources/"
+    migrationArgsConfigDriver: "org.postgresql.Driver"
+    migrationArgsConfigUrl: "jdbc:postgresql://127.0.0.1:5432/${DB_NAME}"
+    migrationDatabaseCredentials:
+      fromKubernetesSecret:
+        usernameKey: "username"
+        passwordKey: "password"
+        databaseNameKey: "db"
+

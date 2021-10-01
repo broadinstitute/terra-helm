@@ -1,6 +1,6 @@
 apiVersion: v2
 name: externalcreds
-version: 0.49.0
+version: 0.51.0
 description: Chart for Terra External Credentials Manager
 type: application
 keywords:
@@ -15,4 +15,4 @@ dependencies:
   - name: postgres
     condition: postgres.enabled
     version: 0.1.0
-    repository: https://broadinstitute.jfrog.io/broadinstitute/terra-helm-proxy
+    repository: https://terra-helm.storage.googleapis.com

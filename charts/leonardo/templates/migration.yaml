@@ -1,5 +1,0 @@
-{{- if .Values.migration.enabled -}}
-{{ template "liquibase-migration.secretDefinition" . }}
----
-{{ template "liquibase-migration.job" . }}
-{{- end -}}
