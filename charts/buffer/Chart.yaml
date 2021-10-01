@@ -11,3 +11,7 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/DataBiosphere/terra-resource-buffer
+dependencies:
+  - name: liquibase-migration
+    version: 1.1.0
+    repository: https://terra-helm.storage.googleapis.com
