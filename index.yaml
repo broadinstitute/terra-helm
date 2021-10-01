@@ -2002,6 +2002,27 @@ entries:
     version: 0.0.0-398.1623947395.3dab38
   buffer:
   - apiVersion: v2
+    created: "2021-10-01T16:24:51.365735401Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    description: Chart for Resource Buffering Service
+    digest: e27a7a847b966f402c6b3058ab506d9c879b18f67d6a1b8cb0254ad276fbb10e
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.33.0/buffer-0.33.0.tgz
+    version: 0.33.0
+  - apiVersion: v2
     created: "2021-09-30T14:27:23.803869468Z"
     description: Chart for Resource Buffering Service
     digest: 494e829f2b8b5df94bcb0152e2dd8500f9ff25e64c095a0a3511e2d873599157
