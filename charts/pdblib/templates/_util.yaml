@@ -13,6 +13,6 @@ An error will be thrown if the top context does not provide values for
 {{- $overrides := fromYaml (include (index . 1) $top) | default (dict ) -}}
 {{- $tpl := fromYaml (include (index . 2) $top) | default (dict ) -}}
 {{- $mergedmanifest := merge $overrides $tpl -}}
-{{ required "spec.selector.matchLabels are required." $mergedmanifest.spec.selector.matchLabels }}
+{{ $_ := required "spec.selector.matchLabels are required." $mergedmanifest.spec.selector.matchLabels }}
 {{- toYaml $mergedmanifest -}}
 {{- end -}}
