@@ -39146,6 +39146,21 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/pdb-lib-0.1.0/pdb-lib-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
+    created: "2021-10-01T14:43:48.743422638Z"
+    description: A libary Helm chart for Pod Disruption Budgets
+    digest: 6741909cd6264ce2ef5a783f57c311a31836a02f2ba441d3e14ccda2702633f0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: pdb-lib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/pdb-lib-0.1.0-525.1633099420.eeae6f/pdb-lib-0.1.0-525.1633099420.eeae6f.tgz
+    version: 0.1.0-525.1633099420.eeae6f
+  - apiVersion: v2
     created: "2021-09-27T18:40:00.372578307Z"
     description: A libary Helm chart for Pod Disruption Budgets
     digest: 9efc4e3996c67dff10951eea3ea8c0c96834a854ccaa30aff98257eda132f26c
