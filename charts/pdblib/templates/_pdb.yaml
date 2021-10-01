@@ -8,7 +8,8 @@ spec:
   # https://v1-20.docs.kubernetes.io/docs/tasks/run-application/configure-pdb/#rounding-logic-when-specifying-percentages
   minAvailable: 65%
   selector:
-    matchLabels: {}
+    # Expects value to be filled by inheriting charts
+    matchLabels:
 {{- end }}
 
 {{- define "libchart.pdb" -}}
