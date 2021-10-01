@@ -1,5 +1,4 @@
 {{- include "libchart.ingress" (list . "buffer.ingress" )}}
-{{- end -}}
 
 {{- define "buffer.ingress" -}}
 {{- end }}
