@@ -148,6 +148,8 @@ ingress:
       renewBefore: 720h0m0s
       issuerName: cert-manager-letsencrypt-prod
       issuerKind: ClusterIssuer
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
@@ -187,7 +189,7 @@ cleanupAfterHandout: false
 liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
   # ```
-  # liquibase-migration:   
+  # liquibase-migration:
   #   defaults:
   #     enabled: true
   # ```
@@ -246,4 +248,3 @@ liquibase-migration:
         usernameKey: "username"
         passwordKey: "password"
         databaseNameKey: "db"
-

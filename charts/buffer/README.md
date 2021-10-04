@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.33.0](https://img.shields.io/badge/Version-0.33.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -13,6 +13,7 @@ Chart for Resource Buffering Service
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.6.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 
 ## Values
@@ -43,6 +44,7 @@ Chart for Resource Buffering Service
 | ingress.domain.namespaceEnv | bool | `true` |  |
 | ingress.domain.suffix | string | `"integ.envs.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.requestPath | string | `"/status"` |  |
 | ingress.securityPolicy | string | `nil` | Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
