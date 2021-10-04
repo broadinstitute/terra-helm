@@ -2,5 +2,6 @@
 
 {{- define "buffer.backendconfig" -}}
 spec:
-  checkIntervalSec: 10
+  healthCheck:
+    checkIntervalSec: 10
 {{- end }}
