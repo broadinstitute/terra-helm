@@ -1,4 +1,6 @@
 {{- include "libchart.backendconfig" (list . "buffer.backendconfig" )  -}}
 
 {{- define "buffer.backendconfig" -}}
+spec:
+  checkIntervalSec: 10
 {{- end }}
