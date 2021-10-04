@@ -1,4 +1,4 @@
-{{- include "libchart.pdb" . }}
+{{- include "libchart.pdb" (list . "buffer.pdb" ) }}
 
 {{- define "buffer.pdb" -}}
 spec:
