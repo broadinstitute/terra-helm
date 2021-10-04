@@ -18,3 +18,6 @@ dependencies:
   - name: liquibase-migration
     version: 1.1.0
     repository: https://terra-helm.storage.googleapis.com
+  - name: pdb-lib
+    version: 0.2.0
+    repository: https://broadinstitute.github.io/terra-helm/

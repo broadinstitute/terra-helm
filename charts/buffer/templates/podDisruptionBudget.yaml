@@ -1,0 +1,8 @@
+{{- include "libchart.pdb" (list . "buffer.pdb" ) }}
+
+{{- define "buffer.pdb" -}}
+spec:
+  selector:
+    matchLabels:
+      {{- include "buffer.selectorLabels" . | nindent 6 }}
+{{- end }}
