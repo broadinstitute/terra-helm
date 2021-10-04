@@ -119,9 +119,6 @@ ingress:
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
     preSharedCerts: []
 
-  # requestPath -- Request path to which the probe system should connect
-  requestPath: /status
-
     # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
     #   certificate from Vault to a k8s secret.
     vault:
@@ -151,6 +148,8 @@ ingress:
       renewBefore: 720h0m0s
       issuerName: cert-manager-letsencrypt-prod
       issuerKind: ClusterIssuer
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
