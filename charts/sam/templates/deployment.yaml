@@ -13,7 +13,7 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ .Values.replicas }} # TODO: this needs to be 1 not 4
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       {{- include "sam.selectorLabels" . | nindent 6 }}
