@@ -85,6 +85,7 @@ ingress:
     preSharedCerts: []
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
+  requestPath: /status
   # ingress.timeoutSec -- Load balancer backend timeout
   timeoutSec: 120
 
