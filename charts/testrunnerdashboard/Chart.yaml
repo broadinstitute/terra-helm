@@ -1,0 +1,13 @@
+apiVersion: v2
+name: testrunnerdashboard
+version: 0.1.0
+description: Chart for TestRunner Dashbaord
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+  - testrunnerdashboard
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/DataBiosphere/terra-test-runner-dashboard
