@@ -1,3 +1,7 @@
 {{- include "libchart.ingress" (list . "agora.ingress" )  -}}
 {{- define "agora.ingress" -}}
+spec:
+  defaultBackend:
+    service:
+      name: {{ .Chart.Name }}-service
 {{- end }}
