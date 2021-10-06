@@ -21,6 +21,28 @@ entries:
     version: 0.12.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-06T17:06:39.568402595Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.6.0
+    description: Chart for Agora service in Terra
+    digest: 6aecace7a91e46d2bec63ab152d27497b911885ac237a648a44923edb33dc28c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.12.0-530.1633539990.095f49/agora-0.12.0-530.1633539990.095f49.tgz
+    version: 0.12.0-530.1633539990.095f49
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-06T17:04:05.666788633Z"
     dependencies:
     - name: ingresslib
