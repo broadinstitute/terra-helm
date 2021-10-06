@@ -20,7 +20,7 @@ spec:
 {{- end }}
   defaultBackend:
     service:
-      name: {{ .Chart.name }}-service
+      name: {{ .Chart.Name }}-service
       port:
         number: 443
 {{- end -}}
