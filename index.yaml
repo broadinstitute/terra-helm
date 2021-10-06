@@ -26338,6 +26338,21 @@ entries:
     version: 0.1.0-422.1629309543.d956a0
   ingresslib:
   - apiVersion: v2
+    created: "2021-10-06T19:30:51.098430472Z"
+    description: A libary Helm chart for Ingress
+    digest: 0bbeba5579fd5dd369d28bc18275b95d11ddae9213f510834d44d1a389d61261
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: ingresslib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.8.0/ingresslib-0.8.0.tgz
+    version: 0.8.0
+  - apiVersion: v2
     created: "2021-10-06T18:50:25.037936258Z"
     description: A libary Helm chart for Ingress
     digest: 4eddf7444f421c8d067bb2588dcf893979d55e9923dbcf75923afc9ca797d0e0
@@ -39674,6 +39689,21 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/opendj-0.0.0/opendj-0.0.0.tgz
     version: 0.0.0
   pdb-lib:
+  - apiVersion: v2
+    created: "2021-10-06T19:30:51.246150234Z"
+    description: A libary Helm chart for Pod Disruption Budgets
+    digest: 6931bcfcacb04a68cfaf07a7697f7b982db75a27c41bfc97ce4128f3207e9736
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: pdb-lib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/pdb-lib-0.4.0/pdb-lib-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     created: "2021-10-06T18:50:25.113902402Z"
     description: A libary Helm chart for Pod Disruption Budgets
