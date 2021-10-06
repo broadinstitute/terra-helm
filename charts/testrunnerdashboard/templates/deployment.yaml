@@ -6,7 +6,7 @@ kind: Deployment
 metadata:
   name: {{ $.Values.name }}-deployment
   labels:
-  {{ include "testrunnerdashboard.labels" $ | indent 4 }}
+{{ include "testrunnerdashboard.labels" $ | indent 4 }}
   {{- if and $.Values.proxy.enabled $.Values.proxy.reloadOnCertUpdate }}
 annotations:
   reloader.stakater.com/auto: "true"

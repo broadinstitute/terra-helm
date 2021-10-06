@@ -66,13 +66,4 @@ secrets:
       vaultKey:
       # -- (string) Encoding of the Vault field (either `text` or `base64`)
       sourceEncoding: base64
-  statuspageApiKey:
-    secretsManager:
-      # -- (boolean) If secrets-manager (Vault) should be used for the API key
-      enabled: false
-      # -- (string) Path within Vault where the API key is stored
-      vaultPath:
-      # -- (string) Field name within the secret for the API key
-      vaultKey:
-      # -- (string) Encoding of the Vault field (either `text` or `base64`)
-      sourceEncoding: text
+

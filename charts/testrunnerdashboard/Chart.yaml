@@ -7,7 +7,7 @@ keywords:
   - dsp
   - broadinstitute
   - terra
-  - testrunnerdashboard
+  - testrunner
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/DataBiosphere/terra-test-runner-dashboard
