@@ -103,3 +103,6 @@ prometheus:
 # Proxy configuration (overwrites values from fc-develop)
 proxy:
   logLevel: warn
+
+# Set whether this chart is being rendered for a preview environment.
+previewEnv: false

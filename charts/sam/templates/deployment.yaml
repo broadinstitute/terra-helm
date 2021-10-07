@@ -56,6 +56,7 @@ spec:
         emptyDir: {}
       {{- end }}
       containers:
+{{- if not .Values.previewEnv }}
       - name: {{ .Values.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_2018117
         lifecycle:
@@ -70,6 +71,7 @@ spec:
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
           readOnly: true
+{{- end }}
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
