@@ -1,16 +1,11 @@
 {{- $imageTag := $.Values.imageConfig.tag | default $.Values.global.applicationVersion -}}
-  {{- range $.Values.appDeployments }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $.Values.name }}-deployment
-  labels:
-{{ include "testrunnerdashboard.labels" $ | indent 4 }}
-  {{- if and $.Values.proxy.enabled $.Values.proxy.reloadOnCertUpdate }}
-annotations:
-  reloader.stakater.com/auto: "true"
-  {{- end }}
+  namespace: {{ $.Values.name }}
+  labels: {{ include "testrunnerdashboard.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -18,120 +13,45 @@ spec:
     rollingUpdate:
       maxSurge: 0
       maxUnavailable: 1
-  replicas: {{ if eq .name "frontend" }}{{ $.Values.replicas }}{{ else }}1{{ end }}
+  replicas: {{ $.Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ $.Values.name }}-{{ .name }}-deployment
+      deployment: {{ $.Values.name }}-deployment
   template:
     metadata:
+      namespace: {{ $.Values.name }}
       labels:
-        deployment: {{ $.Values.name }}-{{ .name }}-deployment
-  {{ include "testrunnerdashboard.labels" $ | indent 8 }}
-annotations:
-  {{- /* Automatically restart deployments on config map changes: */}}
-  checksum/{{ $.Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") $ | sha256sum }}
-  checksum/{{ $.Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") $ | sha256sum }}
-  {{- if $.Values.postgres.enabled }}
-  checksum/{{ $.Values.name }}-postgres-initdb: {{ include (print $.Template.BasePath "/configmaps/postgres-init-db-configmap.yaml") $ | sha256sum }}
-  {{- end }}
-  {{- if $.Values.prometheus.enabled }}
-  checksum/{{ $.Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") $ | sha256sum }}
-  {{- end }}
-spec:
-  serviceAccountName: {{ $.Values.name }}-service-sa
-  volumes:
-  {{- if not $.Values.postgres.enabled }}
-  - name: cloudsql-sa-creds
-    secret:
-      secretName: {{ $.Values.name }}-sqlproxy-sa
-  {{- end }}
-  - name: app-sa-creds
-  secret:
-    secretName: {{ $.Values.name }}-app-sa
-  - name: app-providers
-  secret:
-    secretName: {{ $.Values.name }}-providers
-  - name: app-swagger-client-id
-  secret:
-    secretName: {{ $.Values.name }}-swagger-client-id
-  - name: app-allowed-jwks
-  configMap:
-    name: {{ $.Values.name }}-allowed-jwks
-    items:
-        - key: allowed-jwks.yaml
-          path: allowed-jwks.yaml
-  {{- if $.Values.proxy.enabled }}
-  - name: apache-httpd-proxy-config
-    configMap:
-      name: {{ $.Values.name }}-proxy-configmap
-      items:
-        - key: apache-httpd-proxy-config
-          path: {{ $.Values.name }}-proxy.conf
-  - name: cert
-  secret:
-    secretName: {{ $.Values.name }}-cert
-  {{- if $.Values.proxy.tcell.enabled }}
-  - name: tcell-config
-  configMap:
-    name: {{ $.Values.name }}-tcell-configmap
-    items:
-      - key: tcell-config
-        path: tcell-config.conf
-  {{- end }}
-  {{- end }}
-  {{- if $.Values.prometheus.enabled }}
-  - name: {{ $.Values.name }}-prometheusjmx-config
-    configMap:
-      name: {{ $.Values.name }}-prometheus-configmap
-  - name: {{ $.Values.name }}-prometheusjmx-jar
-  emptyDir: {}
-  {{- end }}
-  containers:
-  {{- if not $.Values.postgres.enabled }}
-  - name: cloudsql-proxy
-    image: gcr.io/cloudsql-docker/gce-proxy:1.24.0-buster
-    lifecycle:
-      postStart:
-        exec:
-          command: ["/bin/sh", "-c", "sleep {{ $.Values.startupSleep }}"]
-    env:
-      - name: SQL_INSTANCE_PROJECT
-        valueFrom:
-          secretKeyRef:
-            name: {{ $.Values.name }}-cloudsql-postgres-instance
-            key: project
-      - name: SQL_INSTANCE_REGION
-        valueFrom:
-          secretKeyRef:
-            name: {{ $.Values.name }}-cloudsql-postgres-instance
-            key: region
-      - name: SQL_INSTANCE_NAME
-        valueFrom:
-          secretKeyRef:
-            name: {{ $.Values.name }}-cloudsql-postgres-instance
-            key: name
-    command: ["/cloud_sql_proxy",
-              "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
-              "-credential_file=/secrets/cloudsql/service-account.json"]
-    securityContext:
-      runAsUser: 2  # non-root user
-      allowPrivilegeEscalation: false
-    volumeMounts:
-      - name: cloudsql-sa-creds
-        mountPath: /secrets/cloudsql
-        readOnly: true
-  {{- end }}
-  - name: {{ $.Values.name }}
-    image: "{{- if $.Values.image -}}
-            {{ $.Values.image }}
-          {{- else -}}
-            {{ $.Values.imageConfig.repository }}:{{ $imageTag }}
-          {{- end }}"
-    imagePullPolicy: {{ $.Values.imageConfig.imagePullPolicy }}
-    ports:
-      - name: status
-        containerPort: 8080
-        protocol: TCP
+        deployment: {{ $.Values.name }}-deployment
+{{ include "testrunnerdashboard.labels" . | indent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.name }}-service-ksa
+      containers:
+      - name: {{ $.Values.name }}-app
+        image: {{ $.Values.imageConfig.repository }}:{{ $imageTag }}
+        imagePullPolicy: {{ $.Values.imageConfig.imagePullPolicy }}
+        ports:
+        - name: dashboard
+          containerPort: 8050
+          protocol: TCP
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        - name: ssl
+          containerPort: 443
+          protocol: TCP
+        volumeMounts:
+          - mountPath: /etc/ssl/certs/server.crt
+            subPath: server.crt
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/ssl/private/server.key
+            subPath: server.key
+            name: app-ctmpls
+            readOnly: true
+          - mountPath: /etc/ssl/certs/ca-bundle.crt
+            subPath: ca-bundle.crt
+            name: app-ctmpls
+            readOnly: true
     {{- if $.Values.prometheus.enabled }}
     - name: metrics
       containerPort: 9090
