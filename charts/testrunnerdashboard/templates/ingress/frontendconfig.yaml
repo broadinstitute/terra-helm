@@ -4,8 +4,10 @@ kind: FrontendConfig
 metadata:
   name: {{ .Values.name }}-ingress-frontendconfig
   labels: {{ include "testrunnerdashboard.labels" . | nindent 4 }}
-{{- if .Values.ingress.sslPolicy }}
 spec:
+  redirectToHttps:
+    enabled: true
+{{- if .Values.ingress.sslPolicy }}
   sslPolicy: {{ .Values.ingress.sslPolicy }}
 {{- end }}
 {{- end }}

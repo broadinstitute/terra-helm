@@ -1,3 +1,8 @@
+# This ingress is configured to expose the underlying service through a global static IP address
+# (see static IP annotation kubernetes.io/ingress.global-static-ip-name).
+# The ingress sets up both HTTP, HTTP(S) Load Balancers to redirect traffic to the underlying service.
+# The GKE ingress controller is configured to redirect HTTP traffic to the HTTP(S) Load Balancer
+# (see frontend config annotation networking.gke.io/v1beta1.FrontendConfig).
 {{ if .Values.ingress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -7,7 +12,6 @@ metadata:
   annotations:
     networking.gke.io/v1beta1.FrontendConfig: "{{ .Values.name }}-ingress-frontendconfig"
     kubernetes.io/ingress.global-static-ip-name: {{ required "ingress.staticIpName value is required" .Values.ingress.staticIpName | quote }}
-    kubernetes.io/ingress.allow-http: "false"
 {{- if not (empty .Values.ingress.cert.preSharedCerts) }}
     ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.ingress.cert.preSharedCerts | join "," | quote }}
 {{- end }}

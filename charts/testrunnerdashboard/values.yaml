@@ -22,6 +22,14 @@ ingress:
   # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
   timeoutSec: 120
 
+  domain:
+    # domain.hostname -- Hostname of this deployment
+    hostname: testrunnerdashboard
+    # domain.namespaceEnv -- If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix
+    namespaceEnv: true
+    # domain.suffix -- Domain suffix
+    suffix: integ.envs.broadinstitute.org
+
   cert:
     # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
     # If preSharedCerts is not empty, its contents are used for the GKE ingress. Otherwise a secret with the cert is expected.
@@ -123,4 +131,3 @@ secrets:
       vaultKey:
       # -- (string) Encoding of the Vault field (either `text` or `base64`)
       sourceEncoding: base64
-
