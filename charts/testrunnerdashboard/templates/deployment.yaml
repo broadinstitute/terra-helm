@@ -31,19 +31,6 @@ spec:
         - name: {{ $.Values.name }}-port
           containerPort: 8050
           protocol: TCP
-        volumeMounts:
-        - mountPath: /etc/ssl/certs/server.crt
-          subPath: server.crt
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/ssl/private/server.key
-          subPath: server.key
-          name: app-ctmpls
-          readOnly: true
-        - mountPath: /etc/ssl/certs/ca-bundle.crt
-          subPath: ca-bundle.crt
-          name: app-ctmpls
-          readOnly: true
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for
         # the Ingress / GCP load balancer in the Ingress's backendConfig
