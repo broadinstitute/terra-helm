@@ -25,6 +25,28 @@ entries:
     version: 0.13.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-08T13:35:50.482981384Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.9.0
+    description: Chart for Agora service in Terra
+    digest: 11957196012d2c30e3e57d2ef6bc5ebf180644c0c46279baa6bcc7d70c4afc0a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.13.0-535.1633700136.ad1013/agora-0.13.0-535.1633700136.ad1013.tgz
+    version: 0.13.0-535.1633700136.ad1013
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-09-27T22:26:22.328367082Z"
     description: Chart for Agora service in Terra
     digest: 28d576d30c78708eb2c436a97799568817fd3b2fead0e220af47dc61afcc537e
@@ -2160,6 +2182,33 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.35.0/buffer-0.35.0.tgz
     version: 0.35.0
+  - apiVersion: v2
+    created: "2021-10-08T13:35:50.652707853Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.9.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: Chart for Resource Buffering Service
+    digest: 36e812e1fadf6cbfcc77d4528ee92fddcc5026779dd15124e53a93da8c2a206b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.35.0-535.1633700138.ad1013/buffer-0.35.0-535.1633700138.ad1013.tgz
+    version: 0.35.0-535.1633700138.ad1013
   - apiVersion: v2
     created: "2021-10-04T14:16:49.658499917Z"
     dependencies:
