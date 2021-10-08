@@ -25,6 +25,28 @@ entries:
     version: 0.13.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-08T17:11:07.995208635Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.9.0
+    description: Chart for Agora service in Terra
+    digest: 0672776669ad9f8da7f679d2d6fff87063f27eb6d5bfd2eab912ab5fa5133ed6
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.13.0-536.1633713053.97da91/agora-0.13.0-536.1633713053.97da91.tgz
+    version: 0.13.0-536.1633713053.97da91
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-08T13:35:50.482981384Z"
     dependencies:
     - name: ingresslib
@@ -2182,6 +2204,33 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.35.0/buffer-0.35.0.tgz
     version: 0.35.0
+  - apiVersion: v2
+    created: "2021-10-08T17:11:08.091158456Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.9.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: Chart for Resource Buffering Service
+    digest: e8c794d6bcc6d3756e21aad9de482aa81b79faa840256754d1116a677f90eb80
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.35.0-536.1633713055.97da91/buffer-0.35.0-536.1633713055.97da91.tgz
+    version: 0.35.0-536.1633713055.97da91
   - apiVersion: v2
     created: "2021-10-08T13:35:50.652707853Z"
     dependencies:
