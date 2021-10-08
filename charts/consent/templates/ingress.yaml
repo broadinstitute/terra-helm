@@ -8,7 +8,7 @@ metadata:
 ---
 ---
 {{- include "libchart.frontendconfig" (list . "consent.frontendconfig" )  -}}
-{{- define "consent.frontentconfig" -}}
+{{- define "consent.frontendconfig" -}}
 matadata:
   labels:
     app: {{ .Chart.Name }}
