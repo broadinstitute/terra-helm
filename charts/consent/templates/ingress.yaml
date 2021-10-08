@@ -4,34 +4,19 @@
 metadata:
   labels:
     app: {{ .Chart.Name }}
-spec:
-  tls:
-  - secretName: {{ .Chart.Name }}-cert
-  backend:
-    serviceName: {{ .Chart.Name }}
 {{- end }}
 ---
 ---
-apiVersion: networking.gke.io/v1beta1
-kind: FrontendConfig
-metadata:
-  name: {{ .Chart.Name }}-frontend-config
-spec:
-  sslPolicy: {{ .Values.sslPolicy }}
----
-apiVersion: cloud.google.com/v1
-kind: BackendConfig
-metadata:
-  name: {{ .Chart.Name }}-ingress-backendconfig
+{{- include "libchart.frontendConfig" (list . "consent.frontendConfig" )  -}}
+{{- define "consent.frontendConfig" -}}
+matadata:
   labels:
-{{ include "consent.labels" . | indent 4 }}
-spec:
-  timeoutSec: {{ .Values.ingressTimeout }}
-  healthCheck:
-    checkIntervalSec: 5
-    timeoutSec: 5
-    healthyThreshold: 2
-    unhealthyThreshold: 2
-    type: HTTPS
-    port: 443
-    requestPath: /status
+    app: {{ .Chart.Name }}
+{{- end }}
+---
+{{- include "libchart.backendconfig" (list . "consent.backendconfig" )  -}}
+{{- define "consent.backendconfig" -}}
+metadata:
+  labels:
+    app: {{ .Chart.Name }}
+{{- end }}
