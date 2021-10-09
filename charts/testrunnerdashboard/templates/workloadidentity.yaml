@@ -15,7 +15,7 @@ metadata:
   name: {{ .Values.name }}-iampolicy-member
   labels: {{- include "testrunnerdashboard.labels" . | nindent 4 }}
 spec:
-  member: serviceAccount:{{ .Values.secrets.gcpServiceAccount.workloadIdentity.projectId }}.svc.id.goog[{{ .Values.name }}/{{ .Values.name }}-service-ksa]
+  member: serviceAccount:{{ .Values.secrets.gcpServiceAccount.workloadIdentity.projectId }}.svc.id.goog[{{ .Release.Namespace }}/{{ .Values.name }}-service-ksa]
   role: roles/iam.workloadIdentityUser
   resourceRef:
     apiVersion: iam.cnrm.cloud.google.com/v1beta1
