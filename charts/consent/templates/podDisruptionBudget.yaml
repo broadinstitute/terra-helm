@@ -1,1 +1,10 @@
 {{- include "libchart.pdb" . }}
+
+{{ define "consent.pdbd" -}}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+      app.kubernetes.io/component: {{ .Chart.Name }}
+      deployment: {{ .Chart.Name }}-deployment
+{{- end }}
