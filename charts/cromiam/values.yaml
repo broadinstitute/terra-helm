@@ -77,6 +77,8 @@ ingress:
 
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
     preSharedCerts: []
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /engine/latest/version
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
