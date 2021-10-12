@@ -1,0 +1,8 @@
+{{- include "libchart.pdb" (list . "firecloudorch.pdb" ) }}
+
+{{ define "firecloudorch.pdb" -}}
+spec:
+  selector:
+    matchLabels:
+      deployment: {{ .Values.name }}-deployment
+{{- end }}
