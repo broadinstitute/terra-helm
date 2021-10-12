@@ -36087,6 +36087,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.13.0/ontology-0.13.0.tgz
     version: 0.13.0
   - apiVersion: v2
+    created: "2021-10-12T13:09:59.348409945Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: 6149ac9efed77b5cfd54bf9023fef07c54b375a71332cd82662cb18c17b8d496
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.13.0-545.1634044189.db208a/ontology-0.13.0-545.1634044189.db208a.tgz
+    version: 0.13.0-545.1634044189.db208a
+  - apiVersion: v2
     created: "2021-10-12T13:09:02.881211016Z"
     dependencies:
     - name: pdb-lib
