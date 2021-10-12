@@ -20377,6 +20377,31 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.52.0/externalcreds-0.52.0.tgz
     version: 0.52.0
   - apiVersion: v2
+    created: "2021-10-12T12:41:54.296031857Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    description: Chart for Terra External Credentials Manager
+    digest: b8cc406fcd935bad07af1b8d04bd5e0e15b1e159140ce4d758d477d3261fdc90
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.52.0-539.1634042505.2a54bf/externalcreds-0.52.0-539.1634042505.2a54bf.tgz
+    version: 0.52.0-539.1634042505.2a54bf
+  - apiVersion: v2
     created: "2021-10-12T12:39:06.594518925Z"
     dependencies:
     - condition: postgres.enabled
@@ -58289,23 +58314,6 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-stackdriver-0.0.0/terra-stackdriver-0.0.0.tgz
     version: 0.0.0
   testrunnerdashboard:
-  - apiVersion: v2
-    created: "2021-10-12T12:41:29.218541293Z"
-    description: Chart for TestRunner Dashbaord
-    digest: 42674fbe11cfb52ce8eb3c9d7e6c37c6e8f3b1120c0ceb5a7e7272552aebd3a0
-    keywords:
-    - dsp
-    - broadinstitute
-    - terra
-    - testrunner
-    name: testrunnerdashboard
-    sources:
-    - https://github.com/broadinstitute/terra-helm/tree/master/charts
-    - https://github.com/DataBiosphere/terra-test-runner-dashboard
-    type: application
-    urls:
-    - https://github.com/broadinstitute/terra-helm/releases/download/testrunnerdashboard-0.1.0-529.1634042480.b949ce/testrunnerdashboard-0.1.0-529.1634042480.b949ce.tgz
-    version: 0.1.0-529.1634042480.b949ce
   - apiVersion: v2
     created: "2021-10-09T21:40:17.900939861Z"
     description: Chart for TestRunner Dashbaord
