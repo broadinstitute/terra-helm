@@ -41622,6 +41622,31 @@ entries:
   rawls:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-12T18:10:40.37004234Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    description: Chart for Rawls service in Terra
+    digest: 9ccbeaf0d952ea39a5144af230c09b9e6788ddf7f591a6331ca76de58d89e6ba
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.22.0/rawls-0.22.0.tgz
+    version: 0.22.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-07T16:52:15.9855769Z"
     dependencies:
     - name: liquibase-migration
