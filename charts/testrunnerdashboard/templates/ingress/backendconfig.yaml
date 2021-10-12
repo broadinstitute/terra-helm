@@ -13,7 +13,7 @@ spec:
     unhealthyThreshold: 2
     type: HTTPS
     port: 443
-    requestPath: /status
+    requestPath: /
   securityPolicy:
     name: {{ quote .Values.ingress.securityPolicy }}
 {{- end }}
