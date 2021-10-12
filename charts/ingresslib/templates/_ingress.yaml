@@ -16,11 +16,11 @@ metadata:
 spec:
 {{- if empty .Values.ingress.cert.preSharedCerts }}
   tls:
-  - secretName: {{ .Values.name }}-cert
+  - secretName: {{ .Chart.Name }}-cert
 {{- end }}
   defaultBackend:
     service:
-      name: {{ .Values.name }}-service
+      name: {{ .Chart.Name }}-service
       port:
         number: 443
 {{- end -}}

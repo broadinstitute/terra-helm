@@ -2,7 +2,7 @@ apiVersion: v2
 name: pdb-lib
 description: A libary Helm chart for Pod Disruption Budgets
 type: library
-version: 0.2.0
+version: 0.4.0
 keywords:
   - dsp
   - broadinstitute
