@@ -5648,6 +5648,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.21.0/consent-0.21.0.tgz
     version: 0.21.0
   - apiVersion: v2
+    created: "2021-10-12T18:23:02.755136962Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.10.0
+    description: A Helm chart for DUOS Consent
+    digest: 327d696df5a2f09678996ad3b1714bf6e74e677df4e1229d6fc61c61c4c3fa3b
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.21.0-537.1634062972.8ae301/consent-0.21.0-537.1634062972.8ae301.tgz
+    version: 0.21.0-537.1634062972.8ae301
+  - apiVersion: v2
     created: "2021-10-12T13:25:39.822324929Z"
     dependencies:
     - name: ingresslib
@@ -26903,6 +26925,21 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.9.0-538.1634042020.62a241/ingresslib-0.9.0-538.1634042020.62a241.tgz
     version: 0.9.0-538.1634042020.62a241
+  - apiVersion: v2
+    created: "2021-10-12T18:23:02.862067125Z"
+    description: A libary Helm chart for Ingress
+    digest: 906b83aea66f7c80b2ba2cf7615e76641f50b96486ac66d5cabb19075133da4a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: ingresslib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.9.0-537.1634062973.8ae301/ingresslib-0.9.0-537.1634062973.8ae301.tgz
+    version: 0.9.0-537.1634062973.8ae301
   - apiVersion: v2
     created: "2021-10-06T19:30:51.098430472Z"
     description: A libary Helm chart for Ingress
