@@ -58290,6 +58290,23 @@ entries:
     version: 0.0.0
   testrunnerdashboard:
   - apiVersion: v2
+    created: "2021-10-12T12:41:29.218541293Z"
+    description: Chart for TestRunner Dashbaord
+    digest: 42674fbe11cfb52ce8eb3c9d7e6c37c6e8f3b1120c0ceb5a7e7272552aebd3a0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - testrunner
+    name: testrunnerdashboard
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-test-runner-dashboard
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/testrunnerdashboard-0.1.0-529.1634042480.b949ce/testrunnerdashboard-0.1.0-529.1634042480.b949ce.tgz
+    version: 0.1.0-529.1634042480.b949ce
+  - apiVersion: v2
     created: "2021-10-09T21:40:17.900939861Z"
     description: Chart for TestRunner Dashbaord
     digest: c1b896c274689f2aaffbf57660167022c8d2fcb2706d41937aab03e567423674
