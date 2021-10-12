@@ -27087,6 +27087,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.7.0/jobmanager-0.7.0.tgz
     version: 0.7.0
   - apiVersion: v2
+    created: "2021-10-12T12:57:24.746564097Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    description: Chart for Job Manager service in Terra
+    digest: 726372909449db9874e7a6551772bdbf92f3f03f9196843bfb7e38e6553bef37
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.7.0-543.1634043434.953aa2/jobmanager-0.7.0-543.1634043434.953aa2.tgz
+    version: 0.7.0-543.1634043434.953aa2
+  - apiVersion: v2
     created: "2021-08-31T20:16:22.398128304Z"
     dependencies:
     - condition: ingress.enabled
