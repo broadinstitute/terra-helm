@@ -8,6 +8,6 @@ roleRef:
   name: {{ .Values.name }}-service-role
   apiGroup: rbac.authorization.k8s.io
 subjects:
-  # Authorize specific service accounts:
-  - kind: ServiceAccount
-    name: {{ .Values.name }}-service-ksa
+# Authorize specific service accounts:
+- kind: ServiceAccount
+  name: {{ .Values.name }}-service-ksa
