@@ -29,7 +29,7 @@ Chart for TestRunner Dashbaord
 | ingress.cert.vault.cert.secretKey | string | `nil` | Key in secret containing .crt |
 | ingress.cert.vault.chain.path | string | `nil` | Path to secret containing intermediate .crt |
 | ingress.cert.vault.chain.secretKey | string | `nil` | Key in secret containing intermediate .crt |
-| ingress.cert.vault.enabled | bool | `true` | Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager) |
+| ingress.cert.vault.enabled | bool | `false` | Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager) |
 | ingress.cert.vault.key.path | string | `nil` | Path to secret containing .key |
 | ingress.cert.vault.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingress.domain.hostname | string | `"testrunnerdashboard"` |  |
@@ -45,6 +45,8 @@ Chart for TestRunner Dashbaord
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
 | probes.readiness.enabled | bool | `false` | (boolean) If the readiness probe should be enabled |
 | probes.readiness.spec | object | `nil` | Spec for the readiness probe |
+| probes.startup.enabled | bool | `false` | (boolean) If the liveness probe should be enabled |
+| probes.startup.spec | object | `nil` | Spec for the startUp probe |
 | replicas | int | `0` | (number) Number of replicas for the deployment |
 | resources.limits.cpu | int | `4` | (string) Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"8Gi"` | (string) Memory to limit the deployment to |
