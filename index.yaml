@@ -9492,6 +9492,28 @@ entries:
     version: 0.12.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-12T18:17:53.14629584Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.10.0
+    description: Chart for cromiam service in Terra [WIP]
+    digest: cc9ac7491b442967b97d438fb9945e2d06553038dd0a30a608406a5336c1a960
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.12.0-548.1634062663.1051b6/cromiam-0.12.0-548.1634062663.1051b6.tgz
+    version: 0.12.0-548.1634062663.1051b6
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-12T18:16:47.349263338Z"
     dependencies:
     - condition: ingress.enabled
