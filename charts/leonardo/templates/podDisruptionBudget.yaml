@@ -4,5 +4,5 @@
 spec:
   selector:
     matchLabels:
-      deployment: {{ $settings.name }}-deployment
+      deployment: leonardo-frontend-deployment
 {{- end }}
