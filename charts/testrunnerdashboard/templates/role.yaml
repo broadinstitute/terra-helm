@@ -4,9 +4,8 @@ metadata:
   name: {{ .Values.name }}-service-role
   labels: {{ include "testrunnerdashboard.labels" . | nindent 4 }}
 rules:
-  - apiGroups: ['policy']
-    resources: ['podsecuritypolicies']
-    verbs:     ['use']
-    resourceNames:
-      - terra-default-psp
-
+- apiGroups: ['policy']
+  resources: ['podsecuritypolicies']
+  verbs:     ['use']
+  resourceNames:
+  - terra-default-psp
