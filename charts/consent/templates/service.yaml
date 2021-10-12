@@ -3,4 +3,7 @@
 metadata:
   labels:
     app: {{ .Chart.Name }}
+spec:
+  selector:
+    app: {{ .Chart.Name }}
 {{- end }}
