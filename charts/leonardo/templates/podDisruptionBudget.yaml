@@ -1,0 +1,8 @@
+{{- include "libchart.pdb" (list . "leonardo.pdb" ) }}
+
+{{- define "leonardo.pdb" -}}
+spec:
+  selector:
+    matchLabels:
+      deployment: {{ $settings.name }}-deployment
+{{- end }}
