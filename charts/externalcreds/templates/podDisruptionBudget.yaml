@@ -1,0 +1,8 @@
+{{- include "libchart.pdb" (list . "externalcreds.pdb" ) }}
+
+{{- define "externalcreds.pdb" -}}
+spec:
+  selector:
+    matchLabels:
+      deployment: {{ $.Values.name }}-{{ .name }}-deployment
+{{- end }}
