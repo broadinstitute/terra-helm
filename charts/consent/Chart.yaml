@@ -14,5 +14,5 @@ sources:
   - https://github.com/DataBiosphere/consent
 dependencies:
   - name: ingresslib
-    version: 0.9.0
+    version: 0.10.0
     repository: https://broadinstitute.github.io/terra-helm/
