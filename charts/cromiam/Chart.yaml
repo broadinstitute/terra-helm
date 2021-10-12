@@ -14,6 +14,5 @@ sources:
   - https://github.com/broadinstitute/cromiam
 dependencies:
   - name: ingresslib
-    condition: ingress.enabled
     version: 0.10.0
     repository: https://broadinstitute.github.io/terra-helm/
