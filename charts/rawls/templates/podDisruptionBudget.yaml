@@ -4,5 +4,5 @@
 spec:
   selector:
     matchLabels:
-      deployment: {{ $settings.name}}
+      deployment: rawls-frontend
 {{- end }}
