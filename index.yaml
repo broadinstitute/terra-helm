@@ -28083,6 +28083,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.58.0/leonardo-0.58.0.tgz
     version: 0.58.0
   - apiVersion: v2
+    created: "2021-10-12T13:09:02.731559604Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 1.1.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: f56475553a65cb1c27a220849a22fc4b07639504441478a266fa46cd2b5b13bc
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.58.0-545.1634044131.182419/leonardo-0.58.0-545.1634044131.182419.tgz
+    version: 0.58.0-545.1634044131.182419
+  - apiVersion: v2
     created: "2021-10-12T13:07:33.435211359Z"
     dependencies:
     - name: liquibase-migration
@@ -36064,6 +36086,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.13.0/ontology-0.13.0.tgz
     version: 0.13.0
+  - apiVersion: v2
+    created: "2021-10-12T13:09:02.881211016Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: ec18b21d6d3c6a040175141b57bed8099f0d50011a50a1a3406a3e6bde8bbb3e
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.13.0-545.1634044132.182419/ontology-0.13.0-545.1634044132.182419.tgz
+    version: 0.13.0-545.1634044132.182419
   - apiVersion: v2
     created: "2021-10-12T13:07:33.530795281Z"
     dependencies:
