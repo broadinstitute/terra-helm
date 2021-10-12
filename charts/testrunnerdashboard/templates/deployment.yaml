@@ -28,7 +28,7 @@ spec:
         image: {{ $.Values.imageConfig.repository }}:{{ $imageTag }}
         imagePullPolicy: {{ $.Values.imageConfig.imagePullPolicy }}
         ports:
-        - name: {{ $.Values.name }}-port
+        - name: main
           containerPort: 8050
           protocol: TCP
         # Note: These readiness settings only apply to Kubernetes' internal load
@@ -42,3 +42,9 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
+        {{- if $.Values.probes.startup.enabled }}
+        startupProbe:
+          {{- toYaml $.Values.probes.startup.spec | nindent 10 }}
+        {{- end }}
+        command: ["python",
+                  "dashboard.py"]
