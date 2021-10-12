@@ -1,0 +1,8 @@
+{{- include "libchart.pdb" (list . "rawls.pdb" ) }}
+
+{{ define "rawls.pdb" -}}
+spec:
+  selector:
+    matchLabels:
+      deployment: rawls-frontend
+{{- end }}
