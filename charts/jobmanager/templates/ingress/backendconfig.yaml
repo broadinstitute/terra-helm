@@ -1,17 +1,4 @@
-{{ if .Values.ingress.enabled -}}
-apiVersion: cloud.google.com/v1
-kind: BackendConfig
-metadata:
-  name: {{ .Values.name }}-ingress-backendconfig
-  labels: {{- include "jobmanager.labels" . | nindent 4 }}
-spec:
-  timeoutSec: {{ .Values.ingress.timeoutSec }}
-  healthCheck:
-    checkIntervalSec: 5
-    timeoutSec: 5
-    healthyThreshold: 2
-    unhealthyThreshold: 2
-    type: HTTPS
-    port: 443
-    requestPath: /health
+{{- include "libchart.backendconfig" (list . "jobmanager.backendconfig" )}}
+
+{{- define "jobmanager.backendconfig" -}}
 {{- end }}
