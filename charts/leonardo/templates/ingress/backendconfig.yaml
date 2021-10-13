@@ -1,18 +1,4 @@
-{{ if .Values.ingress.enabled -}}
-apiVersion: cloud.google.com/v1
-kind: BackendConfig
-metadata:
-  name: {{ .Chart.Name }}-ingress-backendconfig
-  labels:
-{{ include "leonardo.labels" . | indent 4 }}
-spec:
-  timeoutSec: {{ .Values.ingress.timeoutSec }}
-  healthCheck:
-    checkIntervalSec: 5
-    timeoutSec: 5
-    healthyThreshold: 2
-    unhealthyThreshold: 2
-    type: HTTPS
-    port: 443
-    requestPath: /status
+{{- include "libchart.backendconfig" (list . "leonardo.backendconfig" )}}
+
+{{- define "leonardo.backendconfig" -}}
 {{- end }}
