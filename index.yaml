@@ -20739,6 +20739,31 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.53.0/externalcreds-0.53.0.tgz
     version: 0.53.0
   - apiVersion: v2
+    created: "2021-10-13T13:34:06.075255751Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    description: Chart for Terra External Credentials Manager
+    digest: fae8aabd523f33401dbb03564bfb1c47503adacecd9dc533affa30ffd9baeb52
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.53.0-550.1634132035.8d0030/externalcreds-0.53.0-550.1634132035.8d0030.tgz
+    version: 0.53.0-550.1634132035.8d0030
+  - apiVersion: v2
     created: "2021-10-01T20:02:15.211945159Z"
     dependencies:
     - condition: postgres.enabled
@@ -27178,6 +27203,21 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.10.0/ingresslib-0.10.0.tgz
     version: 0.10.0
+  - apiVersion: v2
+    created: "2021-10-13T13:34:06.177992198Z"
+    description: A libary Helm chart for Ingress
+    digest: 7dfd029b532cb9213a74ec6f1ab49edf3c14526898d3fdd27e9f33a20f873ae0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: ingresslib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.10.0-550.1634132036.8d0030/ingresslib-0.10.0-550.1634132036.8d0030.tgz
+    version: 0.10.0-550.1634132036.8d0030
   - apiVersion: v2
     created: "2021-10-08T13:26:55.969705773Z"
     description: A libary Helm chart for Ingress
