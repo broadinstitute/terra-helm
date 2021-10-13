@@ -2,6 +2,13 @@
 
 Chart for Firecloud UI service in Terra
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.10.0 |
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -24,8 +31,8 @@ Chart for Firecloud UI service in Terra
 | ingress.cert.vault.key.path | string | `nil` | Path to secret containing .key |
 | ingress.cert.vault.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
-| ingress.healthCheck.requestPath | string | `"/health"` |  |
 | ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
+| ingress.requestPath | string | `"/health"` |  |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
