@@ -1,6 +1,6 @@
 {{- include "libchart.pdb" (list . "consent.pdb" ) }}
 
-{{ define "consent.pdbd" -}}
+{{ define "consent.pdd" -}}
 spec:
   selector:
     matchLabels:
