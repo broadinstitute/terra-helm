@@ -16,7 +16,7 @@ metadata:
 spec:
 {{- if empty .Values.ingress.cert.preSharedCerts }}
   tls:
-  - secretName: {{ .Values.name }}-cert
+  - secretName: {{ .Chart.Name }}-cert
 {{- end }}
   defaultBackend:
     service:
