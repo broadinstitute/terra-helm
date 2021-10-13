@@ -14,12 +14,18 @@ ingress:
   enabled: true
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
-  # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
-  preSharedCerts: []
+  cert:
+    # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    # certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
   timeoutSec: 120
+  # ingress.requestPath -- Request path to which the probe system should connect
+  requestPath: /health
 
 # TODO - At the time we migrated from VMs to GKE, Job Manager's API and UI containers were deployed to the same VM, with the UI acting as a frontend for the API.
 #        To minimize changes during the migration, this chart deploys both containers as part of the same pod. Eventually we should think about breaking them into separate deployments with separate ingresses.

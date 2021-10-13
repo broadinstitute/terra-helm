@@ -1,15 +1,19 @@
-jobmanager
-==========
+# jobmanager
 
 Chart for Job Manager service in Terra
 
+## Requirements
 
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.10.0 |
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
 
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| api.image.repository | string | `"databiosphere/job-manager-api-cromwell"` | Image repository |
+| api.image.repository | string | `"us.gcr.io/broad-dsp-gcr-public/job-manager-api-cromwell"` | Image repository |
 | api.image.tag | string | global.applicationVersion | Image tag. |
 | api.probes.liveness.enabled | bool | `true` |  |
 | api.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/api/v1/health","port":8190},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for liveness probe |
@@ -20,8 +24,9 @@ Chart for Job Manager service in Terra
 | api.resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | api.resources.requests.memory | string | `"3.6Gi"` | Memory to request for the deployment |
 | global.applicationVersion | string | `"latest"` | What version of the jobmanager application to deploy |
+| ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
-| ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
+| ingress.requestPath | string | `"/health"` | Request path to which the probe system should connect |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
@@ -29,7 +34,7 @@ Chart for Job Manager service in Terra
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Image repository |
 | proxy.image.tag | string | `"modsecurity_2_9_2"` | (string) Image tag. |
 | replicas | int | `3` | Number of API replicas to spin up in the deployment |
-| ui.image.repository | string | `"databiosphere/job-manager-ui"` | Image repository |
+| ui.image.repository | string | `"us.gcr.io/broad-dsp-gcr-public/job-manager-ui"` | Image repository |
 | ui.image.tag | string | global.applicationVersion | Image tag. |
 | ui.probes.liveness.enabled | bool | `true` |  |
 | ui.probes.liveness.spec | object | `{"failureThreshold":30,"httpGet":{"path":"/health","port":8000},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Kubernetes spec for liveness probe |
