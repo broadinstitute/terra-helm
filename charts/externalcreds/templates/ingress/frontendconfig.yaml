@@ -1,12 +1,3 @@
-{{ if .Values.ingress.enabled -}}
-apiVersion: networking.gke.io/v1beta1
-kind: FrontendConfig
-metadata:
-  name: {{ .Values.name }}-ingress-frontendconfig
-  labels:
-{{ include "externalcreds.labels" . | indent 4 }}
-{{- if .Values.ingress.sslPolicy }}
-spec:
-  sslPolicy: {{ .Values.ingress.sslPolicy }}
-{{- end }}
+{{- include "libchart.frontendconfig" (list . "externalcreds.frontendconfig" )  -}}
+{{- define "externalcreds.frontendconfig" -}}
 {{- end }}
