@@ -1,11 +1,4 @@
-{{- if .Values.ingress.enabled }}
-apiVersion: networking.gke.io/v1beta1
-kind: FrontendConfig
-metadata:
-  name: {{ .Values.name }}-ingress-frontendconfig
-  labels:
-{{ include "firecloudui.labels" . | nindent 4 }}
-spec:
-  sslPolicy: {{ .Values.ingress.sslPolicy }}
+{{- include "libchart.frontendconfig" (list . "firecloudui.frontendconfig" )}}
 
+{{- define "firecloudui.frontendconfig" -}}
 {{- end }}
