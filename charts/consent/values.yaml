@@ -100,7 +100,7 @@ proxyLogLevel:
 proxyImageRepository:
 proxyImageVersion:
 
-replicas: 1
+replicas: 3
 
 sendgridApiKey:
 
