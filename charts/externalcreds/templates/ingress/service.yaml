@@ -1,11 +1,13 @@
 {{- include "libchart.backendconfig" (list . "externalcreds.backendconfig" )  -}}
+---
+{{- include "libchart.backendconfig" (list . "externalcredspostgres.backendconfig" )  -}}
+
 {{- define "externalcreds.backendconfig" -}}
 spec:
   selector:
     deployment: {{ .Values.name }}-frontend-deployment
 {{- end }}
 
----
 {{- define "externalcredspostgres.backendconfig" -}}
 {{- if .Values.postgres.enabled }}
 metadata:
