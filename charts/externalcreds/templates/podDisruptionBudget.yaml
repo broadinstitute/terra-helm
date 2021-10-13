@@ -1,8 +1,11 @@
-{{- include "libchart.pdb" (list . "externalcreds.pdb" ) }}
+{{- range $.Values.appDeployments }}
 
-{{- define "externalcreds.pdb" -}}
+{{- include "libchart.pdb" (list {- template "externalcreds.pdbmatchlabels" . -} ) }}
+{{- end }}
+
+{{- define "externalcreds.pdbmatchlabels" -}}
 spec:
   selector:
     matchLabels:
-      deployment: {{ $.Values.name }}-{{ .name }}-deployment
-{{- end }}
+      deployment: externalcreds-frontend-deployment
+{{- end -}}
