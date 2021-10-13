@@ -101,6 +101,8 @@ ingress:
     namespaceEnv: true
     # domain.suffix -- Domain suffix
     suffix: integ.envs.broadinstitute.org
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 
   cert:
     # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
