@@ -25478,6 +25478,30 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.6.0/firecloudui-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v2
+    created: "2021-10-13T17:37:06.16371658Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.10.0
+    description: Chart for Firecloud UI service in Terra
+    digest: a365e3f222f2f02599e7663f89717f65d6e560f77628ffaa9b8101034598b03b
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.6.0-553.1634146616.846e20/firecloudui-0.6.0-553.1634146616.846e20.tgz
+    version: 0.6.0-553.1634146616.846e20
+  - apiVersion: v2
     created: "2021-09-01T13:47:23.607066918Z"
     description: Chart for Firecloud UI service in Terra
     digest: 0b81b6d0a60eb4038e9168d44a01ed6e08b5831219546187b3a550295d5ef17b
