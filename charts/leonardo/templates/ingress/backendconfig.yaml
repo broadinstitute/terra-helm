@@ -1,6 +1,9 @@
 {{- include "libchart.backendconfig" (list . "leonardo.backendconfig" )}}
 
 {{- define "leonardo.backendconfig" -}}
+<<<<<<< HEAD
 spec:
   timeoutSec: {{ .Values.ingress.timeoutSec }}
+=======
+>>>>>>> cb57531d (Use ingress library)
 {{- end }}
