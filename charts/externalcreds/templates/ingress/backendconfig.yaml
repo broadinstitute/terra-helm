@@ -1,3 +1,6 @@
 {{- include "libchart.backendconfig" (list . "externalcreds.backendconfig" )  -}}
 {{- define "externalcreds.backendconfig" -}}
+spec:
+  securityPolicy:
+    name: {{ quote .Values.ingress.securityPolicy }}
 {{- end }}
