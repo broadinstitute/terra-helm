@@ -13,6 +13,6 @@ spec:
 metadata:
   name: {{ .Values.name }}-postgres-service
   labels:
-{{- include "postgres.service.tpl" . }}
+    {{- include "postgres.service.tpl" . }}
 {{- end }}
 {{- end }}
