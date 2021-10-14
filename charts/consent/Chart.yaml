@@ -17,5 +17,5 @@ dependencies:
     version: 0.4.0
     repository: https://broadinstitute.github.io/terra-helm/
   - name: ingresslib
-    version: 0.10.0
+    version: 0.11.0
     repository: https://broadinstitute.github.io/terra-helm/
