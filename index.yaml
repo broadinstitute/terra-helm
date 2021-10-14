@@ -23801,6 +23801,32 @@ entries:
     version: 0.11.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-14T13:53:02.182448562Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.10.0
+    description: Chart for firecloud-orchestration service in Terra
+    digest: 53443f3af75de29d8718d56696f69cfddce45e42bc3f446181863c9067733341
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.11.0-552.1634219570.3d7873/firecloudorch-0.11.0-552.1634219570.3d7873.tgz
+    version: 0.11.0-552.1634219570.3d7873
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-09-01T13:47:23.510194505Z"
     description: Chart for firecloud-orchestration service in Terra
     digest: cc51054be374756c8e76414426e233d6921870d1d7bfc0014ced28e16f2e3289
