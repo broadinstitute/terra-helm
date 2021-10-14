@@ -1,4 +1,4 @@
-{{- include "libchart.pbd" (list . "externalcreds.pdb" )  -}}
+{{- include "libchart.pdb" (list . "externalcreds.pdb" )  -}}
 
 
 {{- define "externalcreds.pdb" -}}
