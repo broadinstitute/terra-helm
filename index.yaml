@@ -5724,6 +5724,31 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.23.0/consent-0.23.0.tgz
     version: 0.23.0
   - apiVersion: v2
+    created: "2021-10-14T16:02:08.023852904Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.10.0
+    description: A Helm chart for DUOS Consent
+    digest: 4c2df4c573c822761a6a1a308c608b00844778ad8658428cca9595b817d6f00a
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.23.0-537.1634227315.d1e066/consent-0.23.0-537.1634227315.d1e066.tgz
+    version: 0.23.0-537.1634227315.d1e066
+  - apiVersion: v2
     created: "2021-10-13T13:32:03.71742092Z"
     dependencies:
     - name: pdb-lib
@@ -27551,6 +27576,21 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.10.0-550.1634132036.8d0030/ingresslib-0.10.0-550.1634132036.8d0030.tgz
     version: 0.10.0-550.1634132036.8d0030
+  - apiVersion: v2
+    created: "2021-10-14T16:02:08.180348176Z"
+    description: A libary Helm chart for Ingress
+    digest: ecf8ec7c1c14f68ecac3bbc2463ecfc5102dff75706f7d28f5e85c9d410c8359
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: ingresslib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.10.0-537.1634227318.d1e066/ingresslib-0.10.0-537.1634227318.d1e066.tgz
+    version: 0.10.0-537.1634227318.d1e066
   - apiVersion: v2
     created: "2021-10-08T13:26:55.969705773Z"
     description: A libary Helm chart for Ingress
