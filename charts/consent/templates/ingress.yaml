@@ -10,7 +10,6 @@ spec:
       name: consent
 {{- end }}
 ---
----
 {{- include "libchart.frontendconfig" (list . "consent.frontendconfig" )  -}}
 {{- define "consent.frontendconfig" -}}
 metadata:
