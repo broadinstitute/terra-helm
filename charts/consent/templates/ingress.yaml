@@ -13,7 +13,7 @@ spec:
 ---
 {{- include "libchart.frontendconfig" (list . "consent.frontendconfig" )  -}}
 {{- define "consent.frontendconfig" -}}
-matadata:
+metadata:
   labels:
     app: {{ .Chart.Name }}
 {{- end }}
