@@ -1,0 +1,58 @@
+# -- (object) Required; contents of revere.yaml to be given to the application
+config:
+
+# Global values used by this chart
+global:
+  # -- (string) What version of the application to deploy
+  applicationVersion: latest
+
+imageConfig:
+  # -- (string) Image repository
+  repository: us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/sherlock
+  # -- (string) Image tag
+  # @default -- global.applicationVersion
+  tag: null
+  # -- (string) When to pull images
+  imagePullPolicy: Always
+
+annotations: {}
+
+probes:
+  readiness:
+    # -- (boolean) If the readiness probe should be enabled
+    enabled: false
+    # -- (object) Spec for the readiness probe
+    spec:
+  liveness:
+    # -- (boolean) If the liveness probe should be enabled
+    enabled: false
+    # -- (object) Spec for the liveness probe
+    spec:
+
+resources:
+  requests:
+    # -- (string) Number of CPU units to request for the deployment
+    cpu: 500m
+    # -- (string) Memory to request for the deployment
+    memory: 4Gi
+  limits:
+    # -- (string) Number of CPU units to limit the deployment to
+    cpu: 500m
+    # -- (string) Memory to limit the deployment to
+    memory: 4Gi
+
+vault:
+  enabled: true
+  pathPrefix: ""
+  
+name: sherlock
+replicas: 1
+startupSleep: "10"
+sqlproxy:
+  version: latest
+secrets:
+  gcpServiceAccount:
+    workloadIdentity:
+      enabled: true
+      accountName: ""
+      projectID: ""
