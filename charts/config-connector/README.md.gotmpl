@@ -1,0 +1,24 @@
+{{ template "chart.header" . }}
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.badgesSection" . }}
+
+{{ template "chart.description" . }}
+
+This chart does not enable Config Connector on its own! The only step it can do is make the configuration file
+that Google requires **once Config Connector has already been enabled in the cluster**.
+
+In other words, this is step three (["Configuring Config Connector"](https://cloud.google.com/config-connector/docs/how-to/install-upgrade-uninstall#addon-configuring))
+of the [installation instructions](https://cloud.google.com/config-connector/docs/how-to/install-upgrade-uninstall#addon-install).
+The terra-cluster module in ap-deployments can handle the first two steps and the last step is namespace annotations
+([which must be done manually](https://github.com/helm/helm/issues/3503)).
+
+{{ template "chart.homepageLine" . }}
+
+{{ template "chart.maintainersSection" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
