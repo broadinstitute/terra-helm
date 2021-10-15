@@ -1,0 +1,12 @@
+apiVersion: v2
+name: config-connector
+version: 1.0.0
+description: Chart to add the Google Config Connector configuration file
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - terra
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://cloud.google.com/config-connector/docs/how-to/install-upgrade-uninstall#addon-configuring
