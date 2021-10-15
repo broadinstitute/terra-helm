@@ -1,6 +1,8 @@
 {{- include "libchart.ingress" (list . "consent.ingress" )  -}}
 {{- define "consent.ingress" -}}
 metadata:
+  annotations:
+    networking.gke.io/v1beta1.FrontendConfig: consent-ingress-frontendconfig
   labels:
     app: {{ .Chart.Name }}
 spec:
