@@ -5752,6 +5752,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/calhoun-0.1.0-370.1620141671.bccde5/calhoun-0.1.0-370.1620141671.bccde5.tgz
     version: 0.1.0-370.1620141671.bccde5
+  config-connector:
+  - apiVersion: v2
+    created: "2021-10-15T11:51:25.405416252Z"
+    description: Chart to add the Google Config Connector configuration file
+    digest: eedc78dbb9a596a09de517f6c3cea78d1064147ffefe06f6561165d4bd9b6ee6
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: config-connector
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://cloud.google.com/config-connector/docs/how-to/install-upgrade-uninstall#addon-configuring
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/config-connector-1.0.0-559.1634298677.c2b9b5/config-connector-1.0.0-559.1634298677.c2b9b5.tgz
+    version: 1.0.0-559.1634298677.c2b9b5
   consent:
   - apiVersion: v2
     created: "2021-10-14T16:16:14.225403622Z"
