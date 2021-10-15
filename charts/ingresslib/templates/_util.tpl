@@ -29,5 +29,5 @@ Selector labels
 */}}
 {{- define "helm.selectorLabels" -}}
 app.kubernetes.io/name: {{ .Chart.Name }}
-app.kubernetes.io/instance: {{ .Chart.name | quote }}
+app.kubernetes.io/instance: {{ .Chart.Name | quote }}
 {{- end }}
