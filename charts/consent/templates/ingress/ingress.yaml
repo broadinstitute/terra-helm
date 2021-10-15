@@ -1,4 +1,3 @@
----
 {{- include "libchart.ingress" (list . "consent.ingress" )  -}}
 {{- define "consent.ingress" -}}
 metadata:
@@ -8,18 +7,4 @@ spec:
   defaultBackend:
     service:
       name: consent
-{{- end }}
----
-{{- include "libchart.frontendconfig" (list . "consent.frontendconfig" )  -}}
-{{- define "consent.frontendconfig" -}}
-metadata:
-  labels:
-    app: {{ .Chart.Name }}
-{{- end }}
----
-{{- include "libchart.backendconfig" (list . "consent.backendconfig" )  -}}
-{{- define "consent.backendconfig" -}}
-metadata:
-  labels:
-    app: {{ .Chart.Name }}
 {{- end }}
