@@ -49424,6 +49424,24 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.0.0/sam-0.0.0.tgz
     version: 0.0.0
+  sherlock:
+  - apiVersion: v2
+    created: "2021-10-15T20:38:08.761865863Z"
+    description: Chart for Sherlock - DSP's environment tracking and management service
+    digest: fcfee05d1fcbd000835529f59edf749a2aa801fcd9ab775a32aac2a2489eabf2
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sherlock
+    name: sherlock
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-0.0.0-561.1634330279.712d95/sherlock-0.0.0-561.1634330279.712d95.tgz
+    version: 0.0.0-561.1634330279.712d95
   sysbox:
   - apiVersion: v2
     appVersion: 0.4.0
