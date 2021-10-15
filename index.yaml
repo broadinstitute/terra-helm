@@ -27921,6 +27921,21 @@ entries:
     version: 0.1.0-422.1629309543.d956a0
   ingresslib:
   - apiVersion: v2
+    created: "2021-10-15T16:42:01.962005731Z"
+    description: A libary Helm chart for Ingress
+    digest: 3a9743346fa1eec9f983525638ed72a6119fa1c9d69c336bca5cc2c16b881da5
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: ingresslib
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ingresslib-0.12.0/ingresslib-0.12.0.tgz
+    version: 0.12.0
+  - apiVersion: v2
     created: "2021-10-14T16:16:14.407028854Z"
     description: A libary Helm chart for Ingress
     digest: cdb24f31b4d91a3f1d4ec7d14c2c767366df60df81bc165ca0212d2fa02001e7
