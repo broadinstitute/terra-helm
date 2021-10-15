@@ -1,6 +1,0 @@
-{{- include "libchart.frontendconfig" (list . "consent.frontendconfig" )  -}}
-{{- define "consent.frontendconfig" -}}
-metadata:
-  labels:
-    app: {{ .Chart.Name }}
-{{- end }}
