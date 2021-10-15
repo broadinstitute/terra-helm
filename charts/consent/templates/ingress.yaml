@@ -6,24 +6,22 @@
 
 {{- define "consent.ingress" -}}
 metadata:
-  annotations:
-    networking.gke.io/v1beta1.FrontendConfig: consent-ingress-frontendconfig
   labels:
     app: {{ .Chart.Name }}
 spec:
   defaultBackend:
     service:
       name: consent
-{{- end -}}
+{{- end }}
 
 {{- define "consent.frontendconfig" -}}
 metadata:
   labels:
     app: {{ .Chart.Name }}
-{{- end -}}
+{{- end }}
 
 {{- define "consent.backendconfig" -}}
 metadata:
   labels:
     app: {{ .Chart.Name }}
-{{- end -}}
+{{- end }}
