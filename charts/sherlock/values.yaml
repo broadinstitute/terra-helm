@@ -8,7 +8,7 @@ global:
 
 imageConfig:
   # -- (string) Image repository
-  repository: us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/sherlock
+  repository: us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/server
   # -- (string) Image tag
   # @default -- global.applicationVersion
   tag: null
@@ -54,6 +54,10 @@ ingress:
   timeoutSec: 120
   # ingress.requestPath -- (string) url path to use for load balancer health checks
   requestPath: /api/v1/metrics
+
+  cert:
+    # ingress.cert.preSharedCerts -- (list) pre provisioned tls certs to use on the load balancer
+    preSharedCerts: []
 
   certmanager:
     # ingress.certmanager.enabled -- (bool) Whether to use cert-manager for tls credentials
