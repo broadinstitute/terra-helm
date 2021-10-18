@@ -10,5 +10,5 @@ app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/instance: {{ .Values.name | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/component: testrunnerdashboard
-app.kubernetes.io/part-of: terra
+app.kubernetes.io/part-of: tools
 {{- end -}}
