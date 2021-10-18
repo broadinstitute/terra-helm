@@ -9,12 +9,6 @@ Chart for Sherlock - DSP's environment tracking and management service
 * <https://github.com/broadinstitute/terra-helm/tree/master/charts>
 * <https://github.com/broadinstitute/sherlock>
 
-## Requirements
-
-| Repository | Name | Version |
-|------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.11.0 |
-
 ## Values
 
 | Key | Type | Default | Description |
@@ -23,13 +17,14 @@ Chart for Sherlock - DSP's environment tracking and management service
 | config | object | `nil` | Required; contents of revere.yaml to be given to the application |
 | global.applicationVersion | string | `"latest"` | (string) What version of the application to deploy |
 | imageConfig.imagePullPolicy | string | `"Always"` | (string) When to pull images |
-| imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/sherlock"` | (string) Image repository |
+| imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/server"` | (string) Image repository |
 | imageConfig.tag | string | `nil` | Image tag |
+| ingress.cert.preSharedCerts | list | `[]` | (list) pre provisioned tls certs to use on the load balancer |
 | ingress.certmanager.enabled | bool | `true` | (bool) Whether to use cert-manager for tls credentials |
 | ingress.domain.hostname | string | `"sherlock"` |  |
 | ingress.domain.suffix | string | `"dsp-devops.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
-| ingress.requestPath | string | `"/environments"` | (string) url path to use for load balancer health checks |
+| ingress.requestPath | string | `"/api/v1/metrics"` | (string) url path to use for load balancer health checks |
 | ingress.securityPolicy | string | `nil` | Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
