@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dsp-cert-manager
-version: 1.1.0
+version: 2.0.0
 keywords:
   - dsp
   - broadinstitute
@@ -9,8 +9,8 @@ keywords:
 description: Installs cert-manager, configures psps and creates Let's encrypt cluster issuers
 type: application
 maintainers:
-  - name: Michael Flinn
-    email: mflinn@broadinstitute.org
+  - name: DSP DevOps
+    email: dsp-devops@broadinstitute.org
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
 dependencies:
