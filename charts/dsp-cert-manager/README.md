@@ -36,10 +36,10 @@ or via a key added to a Kubernetes secret, see below.
 |-----|------|---------|-------------|
 | cert-manager.extraArgs[0] | string | `"--enable-certificate-owner-ref=true"` |  |
 | cert-manager.global.podSecurityPolicy.enabled | bool | `true` |  |
-| dnsProject.id | string | `"foo"` | (string) ID of the project to create DNS records in, like dsp-devops |
-| dnsProject.serviceAccount | object | `{"secretKey":"baz","secretName":"bar"}` | If not using workload identity, a GCP SA's private key must exist in a k8s secret |
-| dnsProject.serviceAccount.secretKey | string | `"baz"` | (string) Field within the k8s secret containing a GCP SA key |
-| dnsProject.serviceAccount.secretName | string | `"bar"` | (string) Name of the k8s secret containing a GCP SA key |
+| dnsProject.id | string | `nil` | ID of the project to create DNS records in, like dsp-devops |
+| dnsProject.serviceAccount | object | `{"secretKey":null,"secretName":null}` | If not using workload identity, a GCP SA's private key must exist in a k8s secret |
+| dnsProject.serviceAccount.secretKey | string | `nil` | Field within the k8s secret containing a GCP SA key |
+| dnsProject.serviceAccount.secretName | string | `nil` | Name of the k8s secret containing a GCP SA key |
 | dnsProject.workloadIdentity | bool | `true` | If true, have cert-manager expect a GCP SA to be bound to its KSA via workload identity (set the workload identity annotation via cert-manager.serviceAccount.annotations) |
 | issuerAccountEmail | string | `"dsp-devops@broadinstitute.org"` |  |
 

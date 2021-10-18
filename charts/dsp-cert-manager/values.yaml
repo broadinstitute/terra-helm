@@ -17,14 +17,14 @@ cert-manager:
 issuerAccountEmail: dsp-devops@broadinstitute.org
 dnsProject:
   # -- (string) ID of the project to create DNS records in, like dsp-devops
-  id: foo
+  id:
   # -- If true, have cert-manager expect a GCP SA to be bound to its KSA via workload identity
   # (set the workload identity annotation via cert-manager.serviceAccount.annotations)
   workloadIdentity: true
   # -- If not using workload identity, a GCP SA's private key must exist in a k8s secret
   serviceAccount:
     # -- (string) Name of the k8s secret containing a GCP SA key
-    secretName: bar
+    secretName:
     # -- (string) Field within the k8s secret containing a GCP SA key
-    secretKey: baz
+    secretKey:
  
