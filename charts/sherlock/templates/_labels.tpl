@@ -12,3 +12,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/component: sherlock
 app.kubernetes.io/part-of: dsp
 {{- end -}}
+Selector labels
+*/}}
+{{- define "sherlock.selectorLabels" -}}
+app.kubernetes.io/name: {{ .Chart.Name }}
+app.kubernetes.io/instance: {{ .Values.name | quote }}
+{{- end }}

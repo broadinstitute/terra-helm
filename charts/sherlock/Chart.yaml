@@ -11,7 +11,3 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/broadinstitute/sherlock
-dependencies:
-  - name: ingresslib
-    version: 0.11.0
-    repository: https://broadinstitute.github.io/terra-helm/
