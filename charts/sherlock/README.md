@@ -25,9 +25,11 @@ Chart for Sherlock - DSP's environment tracking and management service
 | imageConfig.imagePullPolicy | string | `"Always"` | (string) When to pull images |
 | imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/sherlock"` | (string) Image repository |
 | imageConfig.tag | string | `nil` | Image tag |
+| ingress.certmanager.enabled | bool | `true` | (bool) Whether to use cert-manager for tls credentials |
 | ingress.domain.hostname | string | `"sherlock"` |  |
 | ingress.domain.suffix | string | `"dsp-devops.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.requestPath | string | `"/environments"` | (string) url path to use for load balancer health checks |
 | ingress.securityPolicy | string | `nil` | Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |

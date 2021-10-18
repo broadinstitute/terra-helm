@@ -52,6 +52,12 @@ ingress:
   securityPolicy: null
   # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
   timeoutSec: 120
+  # ingress.requestPath -- (string) url path to use for load balancer health checks
+  requestPath: /environments
+
+  certmanager:
+    # ingress.certmanager.enabled -- (bool) Whether to use cert-manager for tls credentials
+    enabled : true
 
   domain:
     # domain.hostname -- Hostname of this deployment
