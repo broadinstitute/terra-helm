@@ -7,12 +7,24 @@ cert-manager:
   extraArgs:
   - --enable-certificate-owner-ref=true
 
+  # If enabling workload identity, the following can be used to add the necessary annotation to the KSA
+  #serviceAccount:
+  #  annotations:
+  #    iam.gke.io/gcp-service-account:
+
 # Email that will be used to register issuer with lets encrypt
 # Will receive communications from lets encrypt here
 issuerAccountEmail: dsp-devops@broadinstitute.org
 dnsProject:
-  # id: GOOGLE_PROJECT_ID
-  serviceAccount: 
-    # secretName: SA_CREDENTIAL_SECRET_NAME
-    # secretKey: SA_CREDENTIAL_SECRET_KEY
+  # -- (string) ID of the project to create DNS records in, like dsp-devops
+  id: foo
+  # -- If true, have cert-manager expect a GCP SA to be bound to its KSA via workload identity
+  # (set the workload identity annotation via cert-manager.serviceAccount.annotations)
+  workloadIdentity: true
+  # -- If not using workload identity, a GCP SA's private key must exist in a k8s secret
+  serviceAccount:
+    # -- (string) Name of the k8s secret containing a GCP SA key
+    secretName: bar
+    # -- (string) Field within the k8s secret containing a GCP SA key
+    secretKey: baz
  

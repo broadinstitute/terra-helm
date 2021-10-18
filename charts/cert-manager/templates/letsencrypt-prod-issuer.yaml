@@ -3,7 +3,7 @@ kind: ClusterIssuer
 metadata:
   name: {{ .Release.Name }}-letsencrypt-prod
   labels:
-    {{- template "certManager.labels" . }}
+    {{- include "certManager.labels" . | indent 4 }}
 spec:
   acme:
     email: {{ required "A valid email that will be used to register a letsencrypt account for this isuser" .Values.issuerAccountEmail }}
@@ -17,7 +17,4 @@ spec:
         cloudDNS:
           # Id for project that handles dns provisioning
           project: {{ required "projectid for GCP project managing dns records" .Values.dnsProject.id }}
-          #used to access dns-solver service-account in GCP
-          serviceAccountSecretRef:
-            name: {{ required "A valid .Values.dnsProject.serviceAccount.secretName value is required" .Values.dnsProject.serviceAccount.secretName }}
-            key: {{ required "A valid .Values.dnsProject.serviceAccount.secretKey is required" .Values.dnsProject.serviceAccount.secretKey }}
+          {{- include "certManager.auth" . | indent 10 }}
