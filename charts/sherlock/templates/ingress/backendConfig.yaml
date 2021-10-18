@@ -1,0 +1,7 @@
+{{- include "libchart.backendconfig" (list . "sherlock.backendconfig" )  -}}
+
+{{- define "sherlock.backendconfig" -}}
+spec:
+  healthCheck:
+    checkIntervalSec: 10
+{{- end }}

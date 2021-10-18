@@ -41,18 +41,47 @@ resources:
     # -- (string) Memory to limit the deployment to
     memory: 4Gi
 
-vault:
+ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
   enabled: true
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingress.securityPolicy -- (string) Name of a GCP Cloud Armor security policy
+  securityPolicy: null
+  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
+  timeoutSec: 120
+
+  domain:
+    # domain.hostname -- Hostname of this deployment
+    hostname: sherlock
+    # domain.suffix -- Domain suffix
+    suffix: dsp-devops.broadinstitute.org
+
+vault:
+  # -- (bool) Whether to use vault/secrets-manager to secrets
+  enabled: true
+  # -- (string) base path in vault containing sherlock's secrets
   pathPrefix: ""
   
+# -- (string) Name of the application being deployed to template into manifests
 name: sherlock
+# -- (number) Number of sherlock pods to run
 replicas: 1
+# -- (string) Length of sleep to account for sqlproxy startup
 startupSleep: "10"
+
 sqlproxy:
+  # -- (string) Version of the GCP cloudsql proxy to use
   version: latest
+
 secrets:
   gcpServiceAccount:
     workloadIdentity:
+      # -- (bool) Whether to use WI for auth to google apis
       enabled: true
+      # -- (string) ID of the GCP SA to use
       accountName: ""
+      # -- (string) ID of GCP project containing WI SA.
       projectID: ""

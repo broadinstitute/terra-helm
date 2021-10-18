@@ -1,0 +1,4 @@
+{{- include "libchart.frontendconfig" (list . "sherlock.frontendconfig" )}}
+
+{{- define "sherlock.frontendconfig" -}}
+{{- end }}

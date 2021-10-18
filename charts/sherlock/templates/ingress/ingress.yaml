@@ -1,0 +1,4 @@
+{{- include "libchart.ingress" (list . "sherlock.ingress" )}}
+
+{{- define "sherlock.ingress" -}}
+{{- end }}
