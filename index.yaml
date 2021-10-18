@@ -49426,6 +49426,27 @@ entries:
     version: 0.0.0
   sherlock:
   - apiVersion: v2
+    created: "2021-10-18T16:11:24.306876899Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.11.0
+    description: Chart for Sherlock - DSP's environment tracking and management service
+    digest: 20a8fa8a98d83e8b6b421c1159f33d97de1b78ffa0fa24b20b69decc57ff25c4
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sherlock
+    name: sherlock
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-0.0.0-561.1634573475.4a78c6/sherlock-0.0.0-561.1634573475.4a78c6.tgz
+    version: 0.0.0-561.1634573475.4a78c6
+  - apiVersion: v2
     created: "2021-10-18T13:49:28.241925189Z"
     dependencies:
     - name: ingresslib
