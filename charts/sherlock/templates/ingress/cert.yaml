@@ -6,8 +6,8 @@ metadata:
   labels:
     {{- include "sherlock.labels" . | nindent 4 }}
 spec:
-  dnsNames: "{{ .Values.ingress.domain.hostname }}.{{ .Values.ingress.domain.suffix }}"
-  - argocd.dsp-devops.broadinstitute.org
+  dnsNames: 
+  - "{{ .Values.ingress.domain.hostname }}.{{ .Values.ingress.domain.suffix }}"
   duration: 2160h0m0s
   issuerRef:
     group: cert-manager.io
