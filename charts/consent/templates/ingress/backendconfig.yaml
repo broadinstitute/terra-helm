@@ -1,0 +1,6 @@
+{{- include "libchart.backendconfig" (list . "consent.backendconfig" )  -}}
+{{- define "consent.backendconfig" -}}
+metadata:
+  labels:
+    app: {{ .Chart.Name }}
+{{- end }}
