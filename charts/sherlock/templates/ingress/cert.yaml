@@ -13,7 +13,7 @@ spec:
     group: cert-manager.io
     kind: ClusterIssuer
     name: letsencrypt-prod
-  renewBefore: 720ah0m0s
+  renewBefore: 720h0m0s
   secretName: {{ .Chart.Name }}-cert
   subject:
     organizations:

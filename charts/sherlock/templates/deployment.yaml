@@ -28,6 +28,8 @@ spec:
         {{- end }}
     spec:
       serviceAccountName: {{ .Values.name }}-sa
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
       volumes:
       - name: {{ .Values.name }}-cm
         configMap:

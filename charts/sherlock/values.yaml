@@ -86,6 +86,13 @@ sqlproxy:
   # -- (string) Version of the GCP cloudsql proxy to use
   version: latest
 
+# nodeSelector -- nodeSelector map
+nodeSelector: {}
+# affinity -- affinity map
+affinity: {}
+# tolerations -- Array of tolerations
+tolerations: []
+
 secrets:
   gcpServiceAccount:
     workloadIdentity:
