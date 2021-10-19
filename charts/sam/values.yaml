@@ -103,3 +103,35 @@ prometheus:
 # Proxy configuration (overwrites values from fc-develop)
 proxy:
   logLevel: warn
+
+liquibase-migration:
+  # In an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:   
+  #   migrationJobs:
+  #     - name: "sam"
+  #       enabled: true
+  #       migrationDatabaseCredentials:
+  #         fromVaultSecret:
+  #           path: "secret/path/in/vault"
+  # ```
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
+
+  defaults:
+    enabled: false
+    sqlproxyCredentialFileMount:
+      secretName: "sam-sqlproxy-ctmpls"
+    sqlproxyContainerConfig:
+      envFrom:
+        - secretRef:
+            name: "sam-sqlproxy-env"
+    migrationImage: "gcr.io/broad-dsp-gcr-public/sam"
+    migrationArgsClasspath:
+      - "$(find /sam -name 'sam*.jar')"
+    migrationConfigFileMount:
+      secretName: "sam-app-ctmpls"
+    migrationDatabaseCredentials:
+      fromVaultSecret:
+        path: null
+        usernameKey: "username"
+        passwordKey: "password"

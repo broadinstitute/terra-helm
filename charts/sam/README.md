@@ -1,6 +1,6 @@
 # sam
 
-![Version: 0.14.0](https://img.shields.io/badge/Version-0.14.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.15.0](https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Sam, the Terra Identity and Access Management application
 
@@ -8,6 +8,12 @@ Chart for Sam, the Terra Identity and Access Management application
 
 * <https://github.com/broadinstitute/terra-helm/tree/master/charts>
 * <https://github.com/broadinstitute/sam>
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 
 ## Values
 
@@ -29,6 +35,15 @@ Chart for Sam, the Terra Identity and Access Management application
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
 | legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default .Chart.Name |
+| liquibase-migration.defaults.enabled | bool | `false` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[0] | string | `"$(find /sam -name 'sam*.jar')"` |  |
+| liquibase-migration.defaults.migrationConfigFileMount.secretName | string | `"sam-app-ctmpls"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.passwordKey | string | `"password"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.path | string | `nil` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.usernameKey | string | `"username"` |  |
+| liquibase-migration.defaults.migrationImage | string | `"gcr.io/broad-dsp-gcr-public/sam"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"sam-sqlproxy-env"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"sam-sqlproxy-ctmpls"` |  |
 | name | string | `"sam"` | A name for the deployment that will be substituted into resuorce definitions |
 | probes.liveness.enabled | bool | `false` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
