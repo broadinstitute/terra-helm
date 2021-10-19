@@ -44,7 +44,6 @@ A Helm chart for DUOS Consent
 | ingressCert.key.path | string | `nil` | Path to secret containing .key |
 | ingressCert.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingressIpName | string | `nil` |  |
-| ingressTimeout | int | `120` | (number) number of seconds requests on the https loadbalancer will time out after |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |
