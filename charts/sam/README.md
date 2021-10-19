@@ -44,6 +44,7 @@ Chart for Sam, the Terra Identity and Access Management application
 | liquibase-migration.defaults.migrationImage | string | `"gcr.io/broad-dsp-gcr-public/sam"` |  |
 | liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"sam-sqlproxy-env"` |  |
 | liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"sam-sqlproxy-ctmpls"` |  |
+| liquibase-migration.name | string | `"sam"` |  |
 | name | string | `"sam"` | A name for the deployment that will be substituted into resuorce definitions |
 | probes.liveness.enabled | bool | `false` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
