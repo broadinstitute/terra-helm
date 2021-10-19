@@ -117,6 +117,9 @@ liquibase-migration:
   # ```
   # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
 
+  # needed pending DDO-1579
+  name: "sam"
+
   defaults:
     enabled: false
     sqlproxyCredentialFileMount:
