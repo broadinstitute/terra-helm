@@ -10,14 +10,6 @@ spec:
       name: consent
 {{- end }}
 ---
----
-{{- include "libchart.frontendconfig" (list . "consent.frontendconfig" )  -}}
-{{- define "consent.frontendconfig" -}}
-metadata:
-  labels:
-    app: {{ .Chart.Name }}
-{{- end }}
----
 {{- include "libchart.backendconfig" (list . "consent.backendconfig" )  -}}
 {{- define "consent.backendconfig" -}}
 metadata:
