@@ -98,6 +98,7 @@ ingress:
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
   timeoutSec: 120
+  # requestPath -- Request path to which the probe system should connect
   requestPath: /status
 # GKE ingress requires certificate in a slightly different format from the apache proxy
 # This is used to set tls for the GKE ingress
@@ -115,8 +116,6 @@ ingressCert:
 
 # Resource name for the global static ip in google to be used for the ingress
 ingressIpName:
-# ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
-ingressTimeout: 120
 
 proxyLogLevel:
 proxyImageRepository:

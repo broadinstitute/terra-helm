@@ -1,0 +1,7 @@
+{{- include "libchart.backendconfig" (list . "consent.backendconfig" )  -}}
+{{- define "consent.backendconfig" -}}
+metadata:
+  name: {{ .Chart.Name }}-ingress-backendconfig
+  labels:
+    app: {{ .Chart.Name }}
+{{- end }}
