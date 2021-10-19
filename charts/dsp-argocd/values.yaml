@@ -71,8 +71,15 @@ argo-cd:
     - --repo-server-timeout-seconds=180
     resources:
       requests:
-        cpu: 3.2
-        memory: 4Gi
+        cpu: 6
+        memory: 8Gi
+    tolerations:
+      - key: "bio.terra/node-pool"
+        operator: "Equal"
+        value: "n2-standard-32"
+        effect: "NoSchedule"
+    nodeSelectors:
+      name: "n2-standard-32"
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
@@ -94,8 +101,16 @@ argo-cd:
         value: "false"
     resources:
       requests:
-        cpu: 3.2
-        memory: 4Gi
+        cpu: 24
+        memory: 16Gi
+    tolerations:
+      - key: "bio.terra/node-pool"
+        operator: "Equal"
+        value: "n2-standard-32"
+        effect: "NoSchedule"
+    nodeSelectors:
+      name: "n2-standard-32"
+
 # Path in Vault where ArgoCD secrets live
 vault:
   pathPrefix: secret/suitable/argocd
