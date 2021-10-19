@@ -13,7 +13,7 @@ spec:
     healthyThreshold: 2
     unhealthyThreshold: 2
     type: HTTP
-    port: 443
+    port: 8080
     requestPath: /metrics
 {{- if .Values.ingress.securityPolicy }}
   securityPolicy:
