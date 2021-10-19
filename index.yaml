@@ -49542,6 +49542,23 @@ entries:
     version: 0.0.0
   sherlock:
   - apiVersion: v2
+    created: "2021-10-19T17:19:49.726476207Z"
+    description: Chart for Sherlock - DSP's environment tracking and management service
+    digest: 731ebadfe371a83018cbf72e806de7fea040149161628af63ad9ffc8a57241f0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sherlock
+    name: sherlock
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-0.0.0-561.1634663981.de54fe/sherlock-0.0.0-561.1634663981.de54fe.tgz
+    version: 0.0.0-561.1634663981.de54fe
+  - apiVersion: v2
     created: "2021-10-19T17:16:16.327398872Z"
     description: Chart for Sherlock - DSP's environment tracking and management service
     digest: aca7798635d18ce0d864457784365ec2792fe70334e0e8fe18ac018e6ad46532
