@@ -13,6 +13,7 @@ Chart for Sherlock - DSP's environment tracking and management service
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| affinity | object | `{}` | affinity map |
 | annotations | object | `{}` |  |
 | config | object | `nil` | Required; contents of revere.yaml to be given to the application |
 | global.applicationVersion | string | `"latest"` | (string) What version of the application to deploy |
@@ -30,6 +31,7 @@ Chart for Sherlock - DSP's environment tracking and management service
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
 | name | string | `"sherlock"` | (string) Name of the application being deployed to template into manifests |
+| nodeSelector | object | `{}` | nodeSelector map |
 | probes.liveness.enabled | bool | `false` | (boolean) If the liveness probe should be enabled |
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
 | probes.readiness.enabled | bool | `false` | (boolean) If the readiness probe should be enabled |
@@ -44,6 +46,7 @@ Chart for Sherlock - DSP's environment tracking and management service
 | secrets.gcpServiceAccount.workloadIdentity.projectID | string | `""` | (string) ID of GCP project containing WI SA. |
 | sqlproxy.version | string | `"latest"` | (string) Version of the GCP cloudsql proxy to use |
 | startupSleep | string | `"10"` | (string) Length of sleep to account for sqlproxy startup |
+| tolerations | list | `[]` | Array of tolerations |
 | vault.enabled | bool | `true` | (bool) Whether to use vault/secrets-manager to secrets |
 | vault.pathPrefix | string | `""` | (string) base path in vault containing sherlock's secrets |
 
