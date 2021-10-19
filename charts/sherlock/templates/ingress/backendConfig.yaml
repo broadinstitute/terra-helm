@@ -12,7 +12,7 @@ spec:
     timeoutSec: 5
     healthyThreshold: 2
     unhealthyThreshold: 2
-    type: HTTPS
+    type: HTTP
     port: 443
     requestPath: /metrics
 {{- if .Values.ingress.securityPolicy }}
