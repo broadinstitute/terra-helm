@@ -3,7 +3,7 @@ kind: PodSecurityPolicy
 metadata: 
   name: cert-manager-psp
   labels:
-    {{- template "certManager.labels" . }}
+    {{- include "certManager.labels" . | indent 4 }}
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
 spec:

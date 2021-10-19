@@ -3,7 +3,7 @@ kind: ClusterRoleBinding
 metadata: 
   name: {{ .Release.Name }}-ClusterRoleBinding
   labels:
-    {{- template "certManager.labels" . }} 
+    {{- include "certManager.labels" . | indent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

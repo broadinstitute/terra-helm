@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata: 
   name: {{ .Release.Name }}-ClusterRole
   labels:
-    {{- template "certManager.labels" . }}
+    {{- include "certManager.labels" . | indent 4 }}
 rules:
 - apiGroups: ["extensions"]
   resources: ["podsecuritypolicies"]

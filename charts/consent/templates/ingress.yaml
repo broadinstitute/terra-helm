@@ -1,18 +1,34 @@
 ---
-{{- include "libchart.ingress" (list . "consent.ingress" )  -}}
-{{- define "consent.ingress" -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
 metadata:
+  name: {{ .Chart.Name }}-ingress
   labels:
-    app: {{ .Chart.Name }}
+{{ include "consent.labels" . | indent 4 }}
+  annotations:
+    networking.gke.io/v1beta1.FrontendConfig: {{ .Chart.Name }}-frontend-config
+    kubernetes.io/ingress.global-static-ip-name: {{ required "a valid gcp resource name for the ingress ip is required" .Values.ingressIpName }}
+    kubernetes.io/ingress.allow-http: "false"
 spec:
-  defaultBackend:
-    service:
-      name: consent
-{{- end }}
+  tls:
+  - secretName: {{ .Chart.Name }}-cert
+  backend:
+    serviceName: {{ .Chart.Name }}
+    servicePort: 443
 ---
-{{- include "libchart.backendconfig" (list . "consent.backendconfig" )  -}}
-{{- define "consent.backendconfig" -}}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
 metadata:
+  name: {{ .Chart.Name }}-ingress-backendconfig
   labels:
-    app: {{ .Chart.Name }}
-{{- end }}
+{{ include "consent.labels" . | indent 4 }}
+spec:
+  timeoutSec: {{ .Values.ingressTimeout }}
+  healthCheck:
+    checkIntervalSec: 5
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 2
+    type: HTTPS
+    port: 443
+    requestPath: /status
