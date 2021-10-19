@@ -16,13 +16,6 @@ spec:
     serviceName: {{ .Chart.Name }}
     servicePort: 443
 ---
-apiVersion: networking.gke.io/v1beta1
-kind: FrontendConfig
-metadata:
-  name: {{ .Chart.Name }}-frontend-config
-spec:
-  sslPolicy: {{ .Values.sslPolicy }}
----
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
