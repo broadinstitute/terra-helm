@@ -78,6 +78,10 @@ spec:
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag | default .Values.global.applicationVersion }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
+        ports:
+          - name: app
+            containerPort: 8080
+            protocol: TCP
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
 
