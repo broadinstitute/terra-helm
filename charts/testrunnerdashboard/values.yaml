@@ -127,6 +127,9 @@ secrets:
       accountName:
       # -- (string) ID (not the number) of the GCP project the SA is in
       projectId:
+      # -- (boolean) If Config Connector should be used for provisioning the workload identity SA
+      # -- If false, the workload identity SA will be provisioned by other means
+      useConfigConnect: false
     secretsManager:
       # -- (boolean) If secrets-manager (Vault) should be used for the GCP SA
       enabled: false
