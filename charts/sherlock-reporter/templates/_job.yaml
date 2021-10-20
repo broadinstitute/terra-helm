@@ -1,5 +1,5 @@
 {{- define "sherlock-reporter.job" -}}
-{{- if .Values.sherlock.enabled -}}
+{{- if .Values.sherlock.enabled }}
 {{- $appImageName := .Values.sherlock.appImageName | required "A valid sherlock.appImageName is required (without trailing tag)" -}}
 {{- $appName := .Values.sherlock.appName | default .Release.Name -}}
 {{- $labelRef := .Values.sherlock.labelRef | default (printf "%s.labels" $appName) -}}
