@@ -50450,6 +50450,23 @@ entries:
     version: 0.0.0-561.1634330279.712d95
   sherlock-reporter:
   - apiVersion: v2
+    created: "2021-10-20T20:24:27.93858878Z"
+    description: Library chart to report deploy events to sherlock (Terra environment
+      tracking service)
+    digest: 2f3ee15fcbb471be27967394aee72026d58166dd60ce7fa6eacf9abb7e1c9b10
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: sherlock-reporter
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-reporter-0.1.0-569.1634761455.5fadea/sherlock-reporter-0.1.0-569.1634761455.5fadea.tgz
+    version: 0.1.0-569.1634761455.5fadea
+  - apiVersion: v2
     created: "2021-10-20T20:22:33.321915429Z"
     description: Library chart to report deploy events to sherlock (Terra environment
       tracking service)
@@ -61799,6 +61816,31 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0/thurloe-0.14.0.tgz
     version: 0.14.0
+  - apiVersion: v2
+    created: "2021-10-20T20:24:28.025726863Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0-569.1634761341.ac54a4
+    description: Chart for Thurloe service in Terra
+    digest: 1bd5bd4c75e78e9b5b64788a172c0f87c9948a226b9482875f551266c28cd342
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0-569.1634761455.5fadea/thurloe-0.14.0-569.1634761455.5fadea.tgz
+    version: 0.14.0-569.1634761455.5fadea
   - apiVersion: v2
     created: "2021-10-20T20:22:33.409754781Z"
     dependencies:
