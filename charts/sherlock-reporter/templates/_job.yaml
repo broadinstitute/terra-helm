@@ -36,6 +36,7 @@ spec:
         - "{{ $appImageName }}:{{ $appImageTag }}"
         - --environment
         - {{ .Release.Namespace }}
-        - --service {{ $appName }}
+        - --service 
+        - {{ $appName }}
 {{- end -}}
 {{- end -}}
