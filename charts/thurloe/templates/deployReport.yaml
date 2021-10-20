@@ -1,6 +1,6 @@
 # The purpose of this file is to add a cronjob that
 # reports new deploy events to sherlock (Terra's environment tracking service)
 # after each argo sync
-{{- if .Values.sherlock.enabled -}}
+{{- if .Values.sherlock.enabled }}
 {{ template "sherlock-reporter.job" . }}
 {{- end -}}
