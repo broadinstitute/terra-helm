@@ -50450,6 +50450,23 @@ entries:
     version: 0.0.0-561.1634330279.712d95
   sherlock-reporter:
   - apiVersion: v2
+    created: "2021-10-20T21:12:53.984534121Z"
+    description: Library chart to report deploy events to sherlock (Terra environment
+      tracking service)
+    digest: 048f669bbe228b4db466b87e0f8f23cf913260946cb108681c91f0cddd8bc093
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: sherlock-reporter
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-reporter-0.1.0-569.1634764362.52862c/sherlock-reporter-0.1.0-569.1634764362.52862c.tgz
+    version: 0.1.0-569.1634764362.52862c
+  - apiVersion: v2
     created: "2021-10-20T21:08:24.232806994Z"
     description: Library chart to report deploy events to sherlock (Terra environment
       tracking service)
@@ -61884,6 +61901,31 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0/thurloe-0.14.0.tgz
     version: 0.14.0
+  - apiVersion: v2
+    created: "2021-10-20T21:12:54.086441669Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0-569.1634764091.407c87
+    description: Chart for Thurloe service in Terra
+    digest: 6788a8b7e9c4ff166f475b62d4099fb48f4882c14c6eaa03a2f4a97a1e6adabd
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0-569.1634764362.52862c/thurloe-0.14.0-569.1634764362.52862c.tgz
+    version: 0.14.0-569.1634764362.52862c
   - apiVersion: v2
     created: "2021-10-20T21:08:24.416119279Z"
     dependencies:
