@@ -50378,6 +50378,23 @@ entries:
     version: 0.0.0-561.1634330279.712d95
   sherlock-reporter:
   - apiVersion: v2
+    created: "2021-10-20T19:34:08.167711317Z"
+    description: Library chart to report deploy events to sherlock (Terra environment
+      tracking service)
+    digest: 1f1e389eb3946679a0c88a053b3d93236ca3b9dc08f6394641682255c35de289
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: sherlock-reporter
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-reporter-0.1.0-569.1634758436.adb02a/sherlock-reporter-0.1.0-569.1634758436.adb02a.tgz
+    version: 0.1.0-569.1634758436.adb02a
+  - apiVersion: v2
     created: "2021-10-20T19:29:35.096478029Z"
     description: Library chart to report deploy events to sherlock (Terra environment
       tracking service)
@@ -61625,6 +61642,31 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0/thurloe-0.14.0.tgz
     version: 0.14.0
+  - apiVersion: v2
+    created: "2021-10-20T19:34:08.257383045Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0-569.1634750836.82bb49
+    description: Chart for Thurloe service in Terra
+    digest: 23d0569aec7051cdb8e02b14ab7f047a427410ddb0276444d166b3e9d55f6bc9
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0-569.1634758436.adb02a/thurloe-0.14.0-569.1634758436.adb02a.tgz
+    version: 0.14.0-569.1634758436.adb02a
   - apiVersion: v2
     created: "2021-10-20T19:29:35.183074637Z"
     dependencies:
