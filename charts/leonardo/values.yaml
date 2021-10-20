@@ -90,6 +90,8 @@ ingress:
   # ingress.timeoutSec -- Load balancer backend timeout
   # (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665)
   timeoutSec: 28800
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 # Settings for Prometheus monitoring
 monitoring:
   # monitoring.enabled -- Whether to enable Prometheus monitoring for Leonardo pods
