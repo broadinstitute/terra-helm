@@ -29,7 +29,7 @@ spec:
       containers:
       - name: {{ $appName }}-sherlock-reporter
         image: "{{ $sherlockImageName }}:{{ $sherlockImageTag }}"
-        command: /bin/sherlock
+        command: ["/bin/sherlock"]
         args:
         - |-
           deploys create {{ $appImageName }}:{{ $appImageTag }} --environment {{ .Release.Namespace }} --service {{ $appName }}
