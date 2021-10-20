@@ -1,6 +1,6 @@
-{{- include "libchart.service" (list . "firecloudui.service" )}}
+{{- include "libchart.service" (list . "leonardo.service" )}}
 
-{{- define "firecloudui.service" -}}
+{{- define "leonardo.service" -}}
 spec:
   selector:
     deployment: {{ .Values.ingress.deployment }}-deployment
