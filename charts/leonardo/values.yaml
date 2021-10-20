@@ -123,7 +123,7 @@ vault:
 liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
   # ```
-  # liquibase-migration:   
+  # liquibase-migration:
   #   migrationJobs:
   #     - name: "leonardo"
   #       enabled: true
