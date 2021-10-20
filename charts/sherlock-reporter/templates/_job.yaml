@@ -31,7 +31,11 @@ spec:
         image: "{{ $sherlockImageName }}:{{ $sherlockImageTag }}"
         command: ["/bin/sherlock"]
         args:
-        - |-
-          deploys create {{ $appImageName }}:{{ $appImageTag }} --environment {{ .Release.Namespace }} --service {{ $appName }}
+        - deploys
+        - create
+        - "{{ $appImageName }}:{{ $appImageTag }}"
+        - --environment
+        - {{ .Release.Namespace}}
+        - --service {{ $appName }}
 {{- end -}}
 {{- end -}}
