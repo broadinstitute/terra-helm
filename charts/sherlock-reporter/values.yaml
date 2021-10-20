@@ -12,7 +12,7 @@ sherlock:
   enabled: false
   # sherlock.appImageName -- (string) Required full app image name, without trailing tag
   # Like "gcr.io/broad-dsp-gcr-public/rawls"
-  appimageName:
+  appImageName:
   # sherlock.appName -- (string) used to report the name of service being deployed to sherlock
   appName: null
   # sherlock.labelRef -- (string) Template reference to `include` in resource labels
@@ -22,7 +22,7 @@ sherlock:
   syncWave: "-1"
   # sherlock.appimageTag -- (string) version of the service being deployed to report to sherlock
   # @default -- Set to global.applicationVersion
-  appimageTag: null
+  appImageTag: null
   # sherlock.serviceAccount -- (string) App's k8s service account
   # @default -- Set to "${appName}-sa"
   serviceAccount: null
