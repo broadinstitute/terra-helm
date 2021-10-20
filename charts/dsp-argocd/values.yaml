@@ -47,6 +47,7 @@ argo-cd:
         cloud.google.com/backend-config: '{"default": "dsp-argocd-backendconfig"}'
     ingress:
       enabled: true
+      pathType: ImplementationSpecific
       paths:
         - /*
       tls:
