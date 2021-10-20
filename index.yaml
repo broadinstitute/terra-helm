@@ -50378,6 +50378,23 @@ entries:
     version: 0.0.0-561.1634330279.712d95
   sherlock-reporter:
   - apiVersion: v2
+    created: "2021-10-20T18:57:06.596674384Z"
+    description: Library chart to report deploy events to sherlock (Terra environment
+      tracking service)
+    digest: 3b5b61ed14e6b83e742ea57e860406587eb2541af85dc735342592806db4ee9f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: sherlock-reporter
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-reporter-0.1.0-569.1634756213.82e66e/sherlock-reporter-0.1.0-569.1634756213.82e66e.tgz
+    version: 0.1.0-569.1634756213.82e66e
+  - apiVersion: v2
     created: "2021-10-20T17:27:25.436782194Z"
     description: Library chart to report deploy events to sherlock (Terra environment
       tracking service)
@@ -61591,6 +61608,31 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0/thurloe-0.14.0.tgz
     version: 0.14.0
+  - apiVersion: v2
+    created: "2021-10-20T18:57:06.784746523Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0-569.1634750836.82bb49
+    description: Chart for Thurloe service in Terra
+    digest: d8e214d8eea6ba01792670449052724bf44cfc6224d834db5264d0f1ba23a94e
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0-569.1634756213.82e66e/thurloe-0.14.0-569.1634756213.82e66e.tgz
+    version: 0.14.0-569.1634756213.82e66e
   - apiVersion: v2
     created: "2021-09-16T16:54:07.430626827Z"
     description: Chart for Thurloe service in Terra
