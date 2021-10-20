@@ -2,7 +2,7 @@
 
 A Helm chart for DUOS Consent
 
-![Version: 0.21.0](https://img.shields.io/badge/Version-0.21.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.28.0](https://img.shields.io/badge/Version-0.28.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Values
 
@@ -35,6 +35,7 @@ A Helm chart for DUOS Consent
 | imageTag | string | `nil` |  |
 | ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
+| ingress.requestPath | string | `"/status"` |  |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
@@ -44,6 +45,16 @@ A Helm chart for DUOS Consent
 | ingressCert.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingressIpName | string | `nil` |  |
 | ingressTimeout | int | `120` | (number) number of seconds requests on the https loadbalancer will time out after |
+| liquibase-migration.defaults.enabled | bool | `false` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[0] | string | `"/opt/consent.jar"` |  |
+| liquibase-migration.defaults.migrationArgsConfigChangelog | string | `"changelog-master.xml"` |  |
+| liquibase-migration.defaults.migrationArgsConfigDriver | string | `"org.postgresql.Driver"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.name | string | `"consent-secrets"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.passwordKey | string | `"databasePassword"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.usernameKey | string | `"databaseUser"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].configMapRef.name | string | `"consent-sqlproxy-env"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.mountFilePath | string | `"/etc/service-account.json"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"app-secrets"` |  |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |
@@ -69,7 +80,7 @@ A Helm chart for DUOS Consent
 | proxyImageRepository | string | `nil` |  |
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |
-| replicas | int | `1` |  |
+| replicas | int | `3` |  |
 | sendgridApiKey | string | `nil` |  |
 | sendgridApiKeyKey | string | `nil` |  |
 | sentryDsnKey | string | `nil` |  |
