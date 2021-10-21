@@ -2324,6 +2324,33 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.36.0/buffer-0.36.0.tgz
     version: 0.36.0
   - apiVersion: v2
+    created: "2021-10-21T20:10:30.240385462Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.11.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.2.0
+    description: Chart for Resource Buffering Service
+    digest: aabc3fbf710ce246022bbf8fa6352e7937ccb13de19e3092c098c99b0647d8ac
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.36.0-579.1634847016.a63f02/buffer-0.36.0-579.1634847016.a63f02.tgz
+    version: 0.36.0-579.1634847016.a63f02
+  - apiVersion: v2
     created: "2021-10-14T16:24:00.84347802Z"
     dependencies:
     - name: ingresslib
@@ -30586,6 +30613,34 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.63.0/leonardo-0.63.0.tgz
     version: 0.63.0
+  - apiVersion: v2
+    created: "2021-10-21T20:10:30.322460736Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 6626271ea1b8bb39cc75a08432f7f120f4b6d1bb18447b6d9be9d79c662d58bb
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.63.0-579.1634847019.a63f02/leonardo-0.63.0-579.1634847019.a63f02.tgz
+    version: 0.63.0-579.1634847019.a63f02
   - apiVersion: v2
     created: "2021-10-21T18:49:39.779176891Z"
     dependencies:
