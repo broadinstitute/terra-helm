@@ -83,8 +83,12 @@ ingress:
   deployment: leonardo
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
+  # ingress.requestPath -- Request path to which the probe system should connect
+  requestPath: /status
   # ingress.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
   preSharedCerts: []
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /status
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
@@ -123,7 +127,7 @@ vault:
 liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
   # ```
-  # liquibase-migration:   
+  # liquibase-migration:
   #   migrationJobs:
   #     - name: "leonardo"
   #       enabled: true

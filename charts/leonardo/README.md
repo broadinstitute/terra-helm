@@ -6,6 +6,8 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.12.0 |
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
 | https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.1.0 |
 
 ## Values
@@ -38,6 +40,8 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | ingress.deployment | string | `"leonardo"` | Name of the deployment to associate with the Ingress (should correspond to the "name" field of a deployment, under the deployments key, above) |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
 | ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
+| ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
+| ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `28800` | Load balancer backend timeout (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665) |
