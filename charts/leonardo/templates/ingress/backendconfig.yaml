@@ -2,6 +2,6 @@
 
 {{- define "leonardo.backendconfig" -}}
 spec:
-  selector:
-    deployment: {{ .Values.ingress.deployment }}-deployment
+    # (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665)
+    timeoutSec: 28800
 {{- end }}
