@@ -52,9 +52,11 @@ A Helm chart for DUOS Consent
 | liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.name | string | `"consent-secrets"` |  |
 | liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.passwordKey | string | `"databasePassword"` |  |
 | liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.usernameKey | string | `"databaseUser"` |  |
+| liquibase-migration.defaults.migrationShell[0] | string | `"sh"` |  |
+| liquibase-migration.defaults.migrationShell[1] | string | `"-c"` |  |
 | liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].configMapRef.name | string | `"consent-sqlproxy-env"` |  |
 | liquibase-migration.defaults.sqlproxyCredentialFileMount.mountFilePath | string | `"/etc/service-account.json"` |  |
-| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"app-secrets"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"consent-secrets"` |  |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |
