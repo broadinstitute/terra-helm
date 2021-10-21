@@ -12,4 +12,4 @@ metadata:
 spec:
   backend:
     serviceName: {{ .Values.ingress.serviceName }}
-    servicePort: 44
+    servicePort: 443

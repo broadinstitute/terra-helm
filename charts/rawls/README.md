@@ -1,6 +1,6 @@
 # rawls
 
-![Version: 0.20.0](https://img.shields.io/badge/Version-0.20.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
+![Version: 0.22.0](https://img.shields.io/badge/Version-0.22.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
 
 Chart for Rawls service in Terra
 
@@ -13,6 +13,8 @@ Chart for Rawls service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.12.0 |
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 
 ## Values
@@ -43,6 +45,7 @@ Chart for Rawls service in Terra
 | deploymentDefaults.serviceName | string | `nil` | What to call the Service |
 | global.applicationVersion | string | `"latest"` | What version of the rawls application to deploy |
 | ingress.preSharedCerts | list | `[]` | (string) List of pre existing gcp certs to use on ingress |
+| ingress.requestPath | string | `"/status"` |  |
 | ingress.serviceName | string | `"rawls-frontend"` | (string) Name of the rawls service to associate with GKE ingress. |
 | ingress.sslPolicy | string | `"tls12-ssl-policy"` | (string) Name of an existing google ssl policy to associate with an ingress frontend-config |
 | ingress.staticIpName | string | `nil` | Required. GCP resource name for ingress static ip |
