@@ -84,7 +84,7 @@ imageConfig:
   imagePullPolicy: Always
 
 # -- (number) Number of replicas for the deployment
-replicas: 0
+replicas: 3
 
 # -- (map) Annotations for application pods
 annotations: {}
