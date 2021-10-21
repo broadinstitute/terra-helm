@@ -2,6 +2,5 @@
 
 {{- define "leonardo.backendconfig" -}}
 spec:
-    # (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665)
-    timeoutSec: 28800
+    timeoutSec: {{ .Values.ingress.timeoutSec }}
 {{- end }}

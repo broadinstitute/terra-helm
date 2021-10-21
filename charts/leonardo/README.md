@@ -43,6 +43,7 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | ingress.requestPath | string | `"/status"` |  |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
+| ingress.timeoutSec | int | `28800` | Load balancer backend timeout (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665) |
 | janitorCron.enabled | bool | `false` |  |
 | janitorCron.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/janitor"` |  |
 | janitorCron.imageTag | string | `"79854b1"` |  |
