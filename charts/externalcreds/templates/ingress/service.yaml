@@ -6,7 +6,11 @@ spec:
     deployment: {{ .Values.name }}-frontend-deployment
 {{- end }}
 ---
+{{- if .Values.postgres.enabled }}
 {{- include "libchart.service" (list . "externalcredspostgres.service" )  -}}
+{{- end }}
+
+
 {{- define "externalcredspostgres.service" -}}
 {{- if .Values.postgres.enabled }}
 metadata:
