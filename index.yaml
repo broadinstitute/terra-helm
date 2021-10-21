@@ -43176,6 +43176,26 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.12.0/poc-0.12.0.tgz
     version: 0.12.0
   - apiVersion: v2
+    created: "2021-10-21T14:33:50.747884194Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.1.0
+    description: Chart for a POC Terra app
+    digest: 151ec47e6948971c76dc85e8e5cc359e0c1eb0dcf955c5849de4a0b0dc4ed72c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: poc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/poc-0.12.0-576.1634826821.1cffdc/poc-0.12.0-576.1634826821.1cffdc.tgz
+    version: 0.12.0-576.1634826821.1cffdc
+  - apiVersion: v2
     created: "2021-09-17T20:32:35.324667093Z"
     dependencies:
     - condition: postgres.enabled
