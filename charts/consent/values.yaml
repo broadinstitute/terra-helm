@@ -163,7 +163,7 @@ liquibase-migration:
   defaults:
     enabled: false
     sqlproxyCredentialFileMount:
-      secretName: "app-secrets"
+      secretName: "consent-secrets"
       mountFilePath: "/etc/service-account.json"
     sqlproxyContainerConfig:
       envFrom:
