@@ -37,9 +37,9 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | deployments.standalone.name | string | `"leonardo"` | Name to use for the default standalone Leonardo deployment |
 | deployments.standalone.replicas | int | `1` | Number of replicas in the default standalone Leonardo deployment |
 | global.applicationVersion | string | `"latest"` | What version of the Leonardo application to deploy |
+| ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.deployment | string | `"leonardo"` | Name of the deployment to associate with the Ingress (should correspond to the "name" field of a deployment, under the deployments key, above) |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
-| ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
