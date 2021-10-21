@@ -1,0 +1,4 @@
+{{- include "libchart.frontendconfig" (list . "rawls.frontendconfig" )}}
+
+{{- define "rawls.frontendconfig" -}}
+{{- end }}

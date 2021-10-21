@@ -1,0 +1,6 @@
+{{- include "libchart.backendconfig" (list . "rawls.backendconfig" )  -}}
+
+{{- define "rawls.backendconfig" -}}
+spec:
+  timeoutSec: {{ .Values.ingress.timeoutSec }}
+{{- end }}

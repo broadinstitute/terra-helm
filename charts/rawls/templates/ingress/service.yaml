@@ -1,0 +1,15 @@
+{{- include "libchart.service" (list . "rawls.service" )  -}}
+
+{{- define "rawls.service" -}}
+metadata:
+  name: {{ .Values.serviceName | default { .Chart.Name  }}-service }}
+spec:
+  selector:
+    deployment: {{ .Values.name }}
+  {{- if .Values.serviceIP }}
+  type: LoadBalancer
+  loadBalancerIP: {{ .Values.serviceIP }}
+  {{- else }}
+  type: ClusterIP
+  {{- end -}}
+{{- end -}}

@@ -26,6 +26,8 @@ ingress:
 
   # ingress.timeoutSec -- Number of seconds to timeout on requests to the ingress
   timeoutSec: 120
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 
   # ingress.sslPolicy -- (string) Name of an existing google ssl policy to associate with an ingress frontend-config
   sslPolicy: tls12-ssl-policy
@@ -104,7 +106,7 @@ deploymentDefaults:
 liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
   # ```
-  # liquibase-migration:   
+  # liquibase-migration:
   #   migrationJobs:
   #     - name: "rawls"
   #       enabled: true
