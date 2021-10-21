@@ -13,6 +13,7 @@ Chart for firecloud-orchestration service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.12.0 |
 | https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
 
 ## Values
@@ -36,7 +37,7 @@ Chart for firecloud-orchestration service in Terra
 | ingress.cert.vault.key.path | string | `nil` | Path to secret containing .key |
 | ingress.cert.vault.key.secretKey | string | `nil` | Key in secret containing .key |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
-| ingress.requestPath | string | `"/status"` |  |
+| ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |

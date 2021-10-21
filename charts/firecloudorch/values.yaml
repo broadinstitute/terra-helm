@@ -31,6 +31,7 @@ ingress:
         secretKey: null
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
     preSharedCerts: []
+  # ingress.requestPath -- Request path to which the probe system should connect
   requestPath: /status
 proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 imageConfig:
