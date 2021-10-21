@@ -169,14 +169,14 @@ liquibase-migration:
       envFrom:
         - configMapRef:
             name: "consent-sqlproxy-env"
-    migrationShell: ["sh", "-c"]
-    migrationArgsClasspath:
-      - "/opt/consent.jar"
     migrationDatabaseCredentials:
       fromKubernetesSecret:
         name: "consent-secrets"
         usernameKey: "databaseUser"
         passwordKey: "databasePassword"
     # The following are hardcoded elsewhere, so we duplicate to match liquibase-migration's requirements
+    migrationShell: ["sh", "-c"]
+    migrationArgsClasspath:
+      - "/opt/consent.jar"
     migrationArgsConfigDriver: "org.postgresql.Driver"
     migrationArgsConfigChangelog: "changelog-master.xml"
