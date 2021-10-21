@@ -1,0 +1,4 @@
+vault:
+  pathPrefix: secret/dsde/terra/kernel/integration/wchamber
+
+serviceIP: 35.192.207.45

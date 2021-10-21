@@ -1,0 +1,4 @@
+vault:
+  pathPrefix: secret/dsde/terra/kernel/integration/gmalkov
+
+serviceIP: 34.70.83.9
