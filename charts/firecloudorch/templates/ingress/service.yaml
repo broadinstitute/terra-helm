@@ -3,5 +3,5 @@
 {{- define "firecloudorch.service" -}}
 spec:
   selector:
-    deployment: {{ .Values.name }}-deploymentt
+    deployment: {{ .Values.name }}-deployment
 {{- end }}
