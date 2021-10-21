@@ -64753,6 +64753,34 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.42.0/workspacemanager-0.42.0.tgz
     version: 0.42.0
   - apiVersion: v2
+    created: "2021-10-21T21:16:02.693464841Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    description: Chart for Terra Workspace Manager
+    digest: 0b925f45e2bbb11484e5518f4f4fff581c047ec84202a8181c9c59d1c024fa89
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.42.0-580.1634850951.fb6c5e/workspacemanager-0.42.0-580.1634850951.fb6c5e.tgz
+    version: 0.42.0-580.1634850951.fb6c5e
+  - apiVersion: v2
     created: "2021-09-27T22:37:35.320093726Z"
     dependencies:
     - condition: postgres.enabled
