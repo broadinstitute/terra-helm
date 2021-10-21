@@ -41,7 +41,6 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
 | ingress.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
-| ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `28800` | Load balancer backend timeout (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665) |
