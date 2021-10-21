@@ -169,6 +169,7 @@ liquibase-migration:
       envFrom:
         - configMapRef:
             name: "consent-sqlproxy-env"
+    migrationShell: ["sh", "-c"]
     migrationArgsClasspath:
       - "/opt/consent.jar"
     migrationDatabaseCredentials:
