@@ -149,6 +149,8 @@ ingress:
       renewBefore: 720h0m0s
       issuerName: cert-manager-letsencrypt-prod
       issuerKind: ClusterIssuer
+  # ingress.requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 
 proxy:
   # proxy.enable -- Enables OIDC proxy sidecar, used for TLS and TCell. Requires a certificate secret Either `certManager` or `vaultCert` must be enabled if the proxy is enabled.
