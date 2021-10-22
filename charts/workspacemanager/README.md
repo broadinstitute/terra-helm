@@ -6,6 +6,7 @@ Chart for Terra Workspace Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.12.0 |
 | https://terra-helm.storage.googleapis.com | postgres | 0.1.0 |
 
 ## Values
@@ -42,6 +43,7 @@ Chart for Terra Workspace Manager
 | ingress.domain.namespaceEnv | bool | `true` |  |
 | ingress.domain.suffix | string | `"integ.envs.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
 | ingress.securityPolicy | string | `""` | (string) Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
