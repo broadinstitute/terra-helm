@@ -1,4 +1,4 @@
-{{- include "libchart.backendconfig" (list . "workspacemanager.service")  -}}
+{{- include "libchart.service" (list . "workspacemanager.service")  -}}
 
 {{- define "workspacemanager.service" -}}
   selector:
@@ -6,7 +6,7 @@
 {{- end }}
 ---
 {{- if .Values.postgres.enabled }}
-{{- include "libchart.backendconfig" (list . "workspacemanagerpostgres.service")  -}}
+{{- include "libchart.service" (list . "workspacemanagerpostgres.service")  -}}
 {{- end }}
 
 {{- define "workspacemanagerpostgres.service" -}}
