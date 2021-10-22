@@ -13,7 +13,6 @@ Chart for Rawls service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 
 ## Values
