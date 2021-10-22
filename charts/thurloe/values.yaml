@@ -103,3 +103,35 @@ prometheus:
   initContainerImage: 'alpine:3.12.0'
   jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
   jmxJarVersion: '0.13.0'
+
+liquibase-migration:
+  # In an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:   
+  #   migrationJobs:
+  #     - name: "thurloe"
+  #       enabled: true
+  #       migrationDatabaseCredentials:
+  #         fromVaultSecret:
+  #           path: "secret/path/in/vault"
+  # ```
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
+
+  defaults:
+    enabled: false
+    sqlproxyCredentialFileMount:
+      secretName: "thurloe-sqlproxy-ctmpls"
+    sqlproxyContainerConfig:
+      envFrom:
+        - secretRef:
+            name: "thurloe-sqlproxy-env"
+    migrationImage: "gcr.io/broad-dsp-gcr-public/thurloe"
+    migrationArgsClasspath:
+      - "$(find /thurloe -name 'thurloe*.jar')"
+    migrationConfigFileMount:
+      secretName: "thurloe-app-ctmpls"
+    migrationDatabaseCredentials:
+      fromVaultSecret:
+        path: null
+        usernameKey: "username"
+        passwordKey: "password"
