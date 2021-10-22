@@ -266,7 +266,7 @@ liquibase-migration:
     enabled: false
     k8sServiceAccount: "workspacemanager-service-sa"
     sqlproxyCredentialFileMount:
-      secretName: "workspacemanager-cloudsql-sa"
+      secretName: "workspacemanager-sqlproxy-sa"
       mountFilePath: "/secrets/cloudsql/service-account.json"
     sqlproxyArgsInstances: "$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"
     sqlproxyContainerConfig:
