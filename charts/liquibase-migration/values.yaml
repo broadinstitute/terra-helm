@@ -53,8 +53,6 @@ defaults:
   migrationImageTag:
   # -- Docker command directive to invoke a shell in the container, to expand migrationArgs* values
   migrationShell: ["bash", "-c"]
-  # -- (string) Arbitrary shell code to run before the migration (does not need trailing `&& \`)
-  migrationPreflightShellCode: null
   # -- Time to wait before attempting to start Liquibase, to allow proxy to boot
   migrationDelay: "15s"
   # -- (list) Java classpath location(s) containing Liquibase, JDBC driver, any packaged changelogs, and all dependencies;

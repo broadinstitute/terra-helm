@@ -168,9 +168,6 @@ spec:
         command: {{ $config.migrationShell | toYaml | nindent 10 }}
         args:
         - |-
-          {{- if $config.migrationPreflightShellCode }}
-          {{- $config.migrationPreflightShellCode | nindent 10 }} && \
-          {{- end }}
           {{- if $config.migrationDelay }}
           sleep {{ $config.migrationDelay }} && \
           {{- end }}

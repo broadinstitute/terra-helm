@@ -43,7 +43,6 @@ helm-docs can't parse all the comments in the values file, [see it for more deta
 | defaults.migrationDelay | string | `"15s"` | Time to wait before attempting to start Liquibase, to allow proxy to boot |
 | defaults.migrationImage | string | `nil` | Image to use for the migration, usually the application image with bundled Liquibase |
 | defaults.migrationImageTag | string | `nil` | Image tag to use for the migration image; **warning** that setting this can cause inconsistent migrations (default recommended) |
-| defaults.migrationPreflightShellCode | string | `nil` | Arbitrary shell code to run before the migration (does not need trailing `&& \`) |
 | defaults.migrationShell | list | `["bash","-c"]` | Docker command directive to invoke a shell in the container, to expand migrationArgs* values |
 | defaults.sqlproxyArgsInstances | string | Mimics behavior of legacy broadinstitute/cloudsqlproxy image | Instances argument passed to the proxy executable, expanded by proxyShell |
 | defaults.sqlproxyArgsMaxConnections | string | Mimics behavior of legacy broadinstitute/cloudsqlproxy image | Max connections argument passed to the proxy executable, expanded by proxyShell |
