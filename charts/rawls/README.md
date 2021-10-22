@@ -13,7 +13,6 @@ Chart for Rawls service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.12.0 |
 | https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 
@@ -45,7 +44,6 @@ Chart for Rawls service in Terra
 | deploymentDefaults.serviceName | string | `nil` | What to call the Service |
 | global.applicationVersion | string | `"latest"` | What version of the rawls application to deploy |
 | ingress.preSharedCerts | list | `[]` | (string) List of pre existing gcp certs to use on ingress |
-| ingress.requestPath | string | `"/status"` |  |
 | ingress.serviceName | string | `"rawls-frontend"` | (string) Name of the rawls service to associate with GKE ingress. |
 | ingress.sslPolicy | string | `"tls12-ssl-policy"` | (string) Name of an existing google ssl policy to associate with an ingress frontend-config |
 | ingress.staticIpName | string | `nil` | Required. GCP resource name for ingress static ip |
