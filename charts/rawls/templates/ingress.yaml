@@ -24,7 +24,7 @@ metadata:
 {{ include "rawls.labels" . | indent 4 }}
 spec:
   sslPolicy: {{ .Values.ingress.sslPolicy }}
----
+--- 
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
