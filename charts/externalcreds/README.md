@@ -1,6 +1,6 @@
 # externalcreds
 
-![Version: 0.46.0](https://img.shields.io/badge/Version-0.46.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.53.0](https://img.shields.io/badge/Version-0.53.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Terra External Credentials Manager
 
@@ -13,6 +13,8 @@ Chart for Terra External Credentials Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.10.0 |
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
 | https://terra-helm.storage.googleapis.com | postgres | 0.1.0 |
 
 ## Values
@@ -21,6 +23,7 @@ Chart for Terra External Credentials Manager
 |-----|------|---------|-------------|
 | appDeployments[0].name | string | `"frontend"` |  |
 | appDeployments[1].name | string | `"backend"` |  |
+| authorizationChangeEventsEnabled | bool | `true` | only enable google pubsub topic for live envs |
 | cloudTraceEnabled | bool | `true` | Whether to enable gcp cloud trace |
 | global.applicationVersion | string | `"latest"` | What version of the application to deploy |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
@@ -45,6 +48,7 @@ Chart for Terra External Credentials Manager
 | ingress.domain.namespaceEnv | bool | `true` |  |
 | ingress.domain.suffix | string | `"integ.envs.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.requestPath | string | `"/status"` |  |
 | ingress.securityPolicy | string | `""` | (string) Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
@@ -99,6 +103,7 @@ Chart for Terra External Credentials Manager
 | resources.requests.memory | string | `"8Gi"` | Memory to request for the deployment |
 | samAddress | string | `"https://sam.dsde-dev.broadinstitute.org/"` | Address of SAM instance this deploy will talk to |
 | samplingProbability | float | `1` | the frequency with which calls should be traced. |
+| serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
