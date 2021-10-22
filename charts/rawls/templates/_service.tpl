@@ -25,4 +25,4 @@ spec:
   {{- else }}
   type: ClusterIP
   {{- end -}}
-{{- end -}} 
+{{- end -}}
