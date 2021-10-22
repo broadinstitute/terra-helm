@@ -44855,6 +44855,31 @@ entries:
     version: 0.22.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-22T16:31:02.406705868Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    description: Chart for Rawls service in Terra
+    digest: b602ac64edf7f9371505abc252ce5300e7c8a746a58b868d4cad5d25c302b367
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.22.0-582.1634920249.d2c004/rawls-0.22.0-582.1634920249.d2c004.tgz
+    version: 0.22.0-582.1634920249.d2c004
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-21T18:37:17.260851295Z"
     dependencies:
     - name: liquibase-migration
@@ -64848,6 +64873,34 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.42.0/workspacemanager-0.42.0.tgz
     version: 0.42.0
+  - apiVersion: v2
+    created: "2021-10-22T16:31:02.540703179Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    description: Chart for Terra Workspace Manager
+    digest: 4e2973ef341a93950984104da211cf75622d17bd73a53c88ba6bf05aa2811475
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.42.0-582.1634920251.d2c004/workspacemanager-0.42.0-582.1634920251.d2c004.tgz
+    version: 0.42.0-582.1634920251.d2c004
   - apiVersion: v2
     created: "2021-10-22T15:23:30.236795796Z"
     dependencies:
