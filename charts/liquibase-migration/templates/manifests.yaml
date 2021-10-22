@@ -168,6 +168,9 @@ spec:
         command: {{ $config.migrationShell | toYaml | nindent 10 }}
         args:
         - |-
+          {{- if $config.migrationPreflightShellCode }}
+          {{- $config.migrationPreflightShellCode | nindent 10 }} && \
+          {{- end }}
           {{- if $config.migrationDelay }}
           sleep {{ $config.migrationDelay }} && \
           {{- end }}
@@ -187,7 +190,7 @@ spec:
             --url={{ $config.migrationArgsConfigUrl }} \
             {{- end }}
             {{- if $config.migrationArgsAdditional }}
-            {{ $config.migrationArgsAdditional }} \
+            {{- $config.migrationArgsAdditional | nindent 12 }} \
             {{- end }}
             {{ $config.migrationArgsLiquibaseCommand }}; \
           EXIT=$?; \
