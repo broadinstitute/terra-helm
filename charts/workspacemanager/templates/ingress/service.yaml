@@ -1,8 +1,8 @@
 {{- include "libchart.service" (list . "workspacemanager.service")  -}}
 
 {{- define "workspacemanager.service" -}}
-  selector:
-    deployment: {{ .Values.name }}-deployment
+selector:
+  deployment: {{ .Values.name }}-deployment
 {{- end }}
 ---
 {{- if .Values.postgres.enabled }}
@@ -10,8 +10,6 @@
 {{- end }}
 
 {{- define "workspacemanagerpostgres.service" -}}
-apiVersion: v1
-kind: Service
 metadata:
   name: {{ .Values.name }}-postgres-service
 {{- include "postgres.service.tpl" . }}

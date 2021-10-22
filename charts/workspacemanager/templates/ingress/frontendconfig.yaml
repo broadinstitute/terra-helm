@@ -1,4 +1,4 @@
-{{- include "libchart.backendconfig" (list . "workspacemanager.frontendconfig")  -}}
+{{- include "libchart.frontendconfig" (list . "workspacemanager.frontendconfig")  -}}
 
 {{- define "workspacemanager.frontendconfig" -}}
 {{- end }}
