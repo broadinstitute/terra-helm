@@ -109,3 +109,6 @@ sherlock:
   appImageName: gcr.io/broad-dsp-gcr-public/thurloe
   appName: thurloe
   sherlockImageTag: v0.0.14
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
