@@ -68,6 +68,8 @@ ingress:
     hostname: sherlock
     # domain.suffix -- Domain suffix
     suffix: dsp-devops.broadinstitute.org
+  iap:
+    enabled: true
 
 vault:
   # -- (bool) Whether to use vault/secrets-manager to secrets
