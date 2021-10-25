@@ -90,3 +90,93 @@ deployments:
     expose: true
     # deployments.standalone.serviceName -- Name of the default standalone Cromwell service
     serviceName: cromwell
+
+# Liquibase migrations
+#   Argo CD can run pre-flight migrations for both logical Cromwell systems if enabled per-env like the following:
+# ```yaml
+# liquibase-migration-cromwell1:
+#   defaults:
+#     enabled: true
+#     migrationDatabaseCredentials:
+#       fromVaultSecret:
+#         path: secret/path/to/cromwell1/credentials
+#
+# liquibase-migration-cromwell2:
+#   defaults:
+#     enabled: true
+#     migrationDatabaseCredentials:
+#       fromVaultSecret:
+#         path: secret/path/to/cromwell2/credentials
+# ```
+# Each enabled logical system will have both the engine and the metadata database migrations run in parallel.
+# 
+# For more information see https://github.com/broadinstitute/terra-helm/tree/master/charts/liquibase-migration
+
+# Migrations for cromwell1 deployment
+liquibase-migration-cromwell1:
+  migrationJobs:
+    - # Cromwell's engine component applies a standard migration; default table names made explicit for clarity
+      name: "cromwell1-engine"
+      migrationArgsConfigChangelog: "changelog.xml"
+      migrationArgsAdditional: |-
+        --databaseChangeLogTableName=DATABASECHANGELOG \
+        --databaseChangeLogLockTableName=DATABASECHANGELOGLOCK
+    - # Cromwell's metadata component applies a nonstandard migration against the same DB instance; table names
+      # overridden (as done in Cromwell itself) to avoid conflicts
+      name: "cromwell1-metadata"
+      migrationArgsConfigChangelog: "sql_metadata_changelog.xml"
+      migrationArgsAdditional: |-
+        --databaseChangeLogTableName=SQLMETADATADATABASECHANGELOG \
+        --databaseChangeLogLockTableName=SQLMETADATADATABASECHANGELOGLOCK
+
+  defaults:
+    enabled: false
+    sqlproxyCredentialFileMount:
+      secretName: "cromwell1-frontend-sqlproxy-ctmpls"
+    sqlproxyContainerConfig:
+      envFrom:
+        - secretRef:
+            name: "cromwell1-frontend-sqlproxy-env"
+    migrationImage: "broadinstitute/cromwell"
+    migrationArgsClasspath:
+      - "/app/cromwell.jar"
+    migrationConfigFileMount:
+      secretName: "cromwell1-frontend-app-ctmpls"
+    migrationDatabaseCredentials:
+      fromVaultSecret:
+        path: null
+        usernameKey: "db_user"
+        passwordKey: "db_password"
+
+# Migrations for cromwell2 deployment, same as above against a different DB instance
+liquibase-migration-cromwell2:
+  migrationJobs:
+    - name: "cromwell2-engine"
+      migrationArgsConfigChangelog: "changelog.xml"
+      migrationArgsAdditional: |-
+        --databaseChangeLogTableName=DATABASECHANGELOG \
+        --databaseChangeLogLockTableName=DATABASECHANGELOGLOCK
+    - name: "cromwell2-metadata"
+      migrationArgsConfigChangelog: "sql_metadata_changelog.xml"
+      migrationArgsAdditional: |-
+        --databaseChangeLogTableName=SQLMETADATADATABASECHANGELOG \
+        --databaseChangeLogLockTableName=SQLMETADATADATABASECHANGELOGLOCK
+
+  defaults:
+    enabled: false
+    sqlproxyCredentialFileMount:
+      secretName: "cromwell2-sqlproxy-ctmpls"
+    sqlproxyContainerConfig:
+      envFrom:
+        - secretRef:
+            name: "cromwell2-sqlproxy-env"
+    migrationImage: "broadinstitute/cromwell"
+    migrationArgsClasspath:
+      - "/app/cromwell.jar"
+    migrationConfigFileMount:
+      secretName: "cromwell2-app-ctmpls"
+    migrationDatabaseCredentials:
+      fromVaultSecret:
+        path: null
+        usernameKey: "db_user"
+        passwordKey: "db_password"

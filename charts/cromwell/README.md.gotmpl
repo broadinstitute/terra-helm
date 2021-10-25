@@ -4,4 +4,36 @@
 
 {{ template "chart.requirementsSection" . }}
 
+# Databases and Migrations
+
+Note that this chart makes fairly advanced usage of the liquibase-migration chart to perform
+preflight migrations in Argo CD. While a normal chart would pull in the chart, set some defaults,
+and leave it to env-specific values files to point it at one or more specific databases, Cromwell's
+usage is more complex.
+
+In some Cromwell deployments--that is, installations of this chart--there are two "logical systems"
+for Cromwell (effectively two instances of the app). Each logical system has its own configuration,
+secrets, and database, but they share the same K8s RBAC resources. These logical systems are usually
+called "cromwell1" and "cromwell2", but from some vantage points they are seen as "reader" and
+"legacy" respectively.
+
+Within each logical system, Cromwell runs two migrations in parallel: one for its internal engine
+service and one for its internal metadata service. *These migrations target the same database*.
+The engine migration is a standard migration targeting a `changelog.xml`, but the metadata
+migration is non-standard: beyond targeting a `sql_metadata_changelog.xml`, it uses custom
+names for the changelog and changelog lock tables, allowing it to run in parallel with the
+engine migration.
+
+> This removes a major guardrail from Liquibase, in that the two migrations will invalidate each
+> other if the changelogs themselves happen to overlap at any point. This is a developer decision,
+> though, and Cromwell itself does these migrations in parallel--DevOps's addition of migrations
+> in Kubernetes does not add new behavior.
+
+Two configure these migrations to happen preflight (before Cromwell starts) on Kubernetes, we
+actually pull in the liquibase-migration subchart twice, via an alias: once for each logical
+system. Each logical system then has its own defaults (pointing at that system's secrets and
+configuration) and its own set of two migrations (one for the engine and one for the metadata).
+This results in a total of four migrations. See the values file itself for information enabling/
+configuring the migrations.
+
 {{ template "chart.valuesSection" . }}
