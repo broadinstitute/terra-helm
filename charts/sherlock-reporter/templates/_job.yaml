@@ -27,9 +27,9 @@ spec:
       restartPolicy: Never
       serviceAccountName: {{ $serviceAccount }}
       volumes:
-      - name: {{ $appName }}-sherlock-credentials
+      - name: {{ $appName }}-sherlock-client-credentials
         secret:
-          secretName: {{ $appName }}-sherlock-credentials
+          secretName: {{ $appName }}-sherlock-client-credentials
       containers:
       - name: {{ $appName }}-sherlock-reporter
         image: "{{ $sherlockImageName }}:{{ $sherlockImageTag }}"
