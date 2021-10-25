@@ -2,5 +2,7 @@
 # reports new deploy events to sherlock (Terra's environment tracking service)
 # after each argo sync
 {{- if .Values.sherlock.enabled }}
+{{ template "sherlock-reporter.secret" . }}
+---
 {{ template "sherlock-reporter.job" . }}
 {{- end -}}
