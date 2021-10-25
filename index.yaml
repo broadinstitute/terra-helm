@@ -51642,6 +51642,23 @@ entries:
     version: 0.0.0-561.1634330279.712d95
   sherlock-reporter:
   - apiVersion: v2
+    created: "2021-10-25T20:33:11.773657859Z"
+    description: Library chart to report deploy events to sherlock (Terra environment
+      tracking service)
+    digest: 690f88d9d490c4ca3bb72e2830c486c6853eb14c6e7c39f944122056bbceac58
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: sherlock-reporter
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-reporter-0.1.0-569.1635193978.201416/sherlock-reporter-0.1.0-569.1635193978.201416.tgz
+    version: 0.1.0-569.1635193978.201416
+  - apiVersion: v2
     created: "2021-10-25T20:29:37.158616736Z"
     description: Library chart to report deploy events to sherlock (Terra environment
       tracking service)
@@ -63294,6 +63311,31 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0-583.1634920202.a2a6c9/thurloe-0.14.0-583.1634920202.a2a6c9.tgz
     version: 0.14.0-583.1634920202.a2a6c9
+  - apiVersion: v2
+    created: "2021-10-25T20:33:11.863013149Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0-569.1635193763.4bedfd
+    description: Chart for Thurloe service in Terra
+    digest: 79a70477e39d3e192af089c03c097b095c4ee66913f49640d53af793998f41d0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0-569.1635193978.201416/thurloe-0.14.0-569.1635193978.201416.tgz
+    version: 0.14.0-569.1635193978.201416
   - apiVersion: v2
     created: "2021-10-25T20:29:37.410538587Z"
     dependencies:
