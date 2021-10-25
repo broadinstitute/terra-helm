@@ -12365,6 +12365,32 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.23.0/cromwell-0.23.0.tgz
     version: 0.23.0
   - apiVersion: v2
+    created: "2021-10-25T20:58:28.784954952Z"
+    dependencies:
+    - alias: liquibase-migration-cromwell1
+      name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0-584.1634935238.b378e3
+    - alias: liquibase-migration-cromwell2
+      name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0-584.1634935238.b378e3
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: ee49c647391c5bf0729b9cbc65e48fdfd72579ee72bfa4f0a1374bddf50cf227
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.23.0-586.1635195499.6f2c54/cromwell-0.23.0-586.1635195499.6f2c54.tgz
+    version: 0.23.0-586.1635195499.6f2c54
+  - apiVersion: v2
     created: "2021-10-25T19:25:17.945498867Z"
     dependencies:
     - alias: liquibase-migration-cromwell1
