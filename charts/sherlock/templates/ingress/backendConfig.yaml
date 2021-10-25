@@ -18,6 +18,7 @@ spec:
 {{- if .Values.ingress.securityPolicy }}
   securityPolicy:
     name: {{ .Values.ingress.securityPolicy }}
+{{- end }}
 {{- if .Values.ingress.iap.enabled }}
   iap:
     enabled: true
