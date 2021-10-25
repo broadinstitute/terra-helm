@@ -13,9 +13,8 @@ usage is more complex.
 
 In some Cromwell deployments--that is, installations of this chart--there are two "logical systems"
 for Cromwell (effectively two instances of the app). Each logical system has its own configuration,
-secrets, and database, but they share the same K8s RBAC resources. These logical systems are usually
-called "cromwell1" and "cromwell2", but from some vantage points they are seen as "reader" and
-"legacy" respectively.
+secrets, and database, but they share the same K8s RBAC resources. These logical systems are called
+"cromwell1" and "cromwell2".
 
 Within each logical system, Cromwell runs two migrations in parallel: one for its internal engine
 service and one for its internal metadata service. *These migrations target the same database*.
