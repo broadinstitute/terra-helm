@@ -103,12 +103,3 @@ prometheus:
   initContainerImage: 'alpine:3.12.0'
   jmxJarRepo: 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent'
   jmxJarVersion: '0.13.0'
-
-sherlock:
-  enabled: true
-  appImageName: gcr.io/broad-dsp-gcr-public/thurloe
-  appName: thurloe
-  sherlockImageTag: v0.0.14
-
-  vault:
-    pathPrefix: secret/suitable/sherlock/prod
