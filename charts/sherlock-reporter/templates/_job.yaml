@@ -26,9 +26,24 @@ spec:
     spec:
       restartPolicy: Never
       serviceAccountName: {{ $serviceAccount }}
+      volumes:
+      - name: {{ $appName }}-sherlock-credentials
+        secet:
+          secretName: {{ $appName }}-sherlock-credentials
       containers:
       - name: {{ $appName }}-sherlock-reporter
         image: "{{ $sherlockImageName }}:{{ $sherlockImageTag }}"
+        volumeMounts:
+        - name: {{ $appName}}-sherlock-credentials
+          mountPath: /app/sherlock/client-sa.json
+          subPath: client-sa.json
+          readOnly: true
+        env:
+        - name: SHERLOCK_OAUTH_AUDIENCE
+          valueFrom:
+            secretKeyRef:
+              name: {{ $appName }}-sherlock-client-credentials
+              key: audience
         command: ["/bin/sherlock"]
         args:
         - deploys
@@ -38,5 +53,6 @@ spec:
         - {{ .Release.Namespace }}
         - --service 
         - {{ $appName }}
+        - --use-sa-auth
 {{- end -}}
 {{- end -}}
