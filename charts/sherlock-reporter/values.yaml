@@ -30,3 +30,7 @@ sherlock:
   sherlockImageName: null 
   # sherlock.sherlockImageTag -- (string) version of the sherlock cli image to use
   sherlockImageTag: 
+
+  vault:
+    # sherlock.vault.pathPrefix -- (string) path in vault containing credentials for oauth authentication as the sherlock-client SA
+    pathPrefix: null
