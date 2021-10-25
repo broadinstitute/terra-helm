@@ -28,7 +28,7 @@ spec:
       serviceAccountName: {{ $serviceAccount }}
       volumes:
       - name: {{ $appName }}-sherlock-credentials
-        secet:
+        secret:
           secretName: {{ $appName }}-sherlock-credentials
       containers:
       - name: {{ $appName }}-sherlock-reporter
