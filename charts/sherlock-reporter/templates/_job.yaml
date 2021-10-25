@@ -34,7 +34,7 @@ spec:
       - name: {{ $appName }}-sherlock-reporter
         image: "{{ $sherlockImageName }}:{{ $sherlockImageTag }}"
         volumeMounts:
-        - name: {{ $appName}}-sherlock-credentials
+        - name: {{ $appName}}-sherlock-client-credentials
           mountPath: /app/sherlock/client-sa.json
           subPath: client-sa.json
           readOnly: true
