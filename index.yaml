@@ -63528,6 +63528,31 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0/thurloe-0.14.0.tgz
     version: 0.14.0
   - apiVersion: v2
+    created: "2021-10-26T20:28:06.466974632Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Thurloe service in Terra
+    digest: d7bd1b5c77b1e3c0f8876a03fd91d49093194ba8038277da4bef49f4be77ebd9
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.14.0-587.1635280075.2333cb/thurloe-0.14.0-587.1635280075.2333cb.tgz
+    version: 0.14.0-587.1635280075.2333cb
+  - apiVersion: v2
     created: "2021-10-26T20:03:39.109851529Z"
     dependencies:
     - name: pdb-lib
