@@ -51668,6 +51668,23 @@ entries:
     version: 0.0.0-561.1634330279.712d95
   sherlock-reporter:
   - apiVersion: v2
+    created: "2021-10-26T13:55:28.412653221Z"
+    description: Library chart to report deploy events to sherlock (Terra environment
+      tracking service)
+    digest: 1daf17a7f25af2bd255b24660d0fe80d3be2ee899dc946f25f529615834f811f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: sherlock-reporter
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-reporter-0.2.0/sherlock-reporter-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2021-10-25T22:51:50.089788396Z"
     description: Library chart to report deploy events to sherlock (Terra environment
       tracking service)
