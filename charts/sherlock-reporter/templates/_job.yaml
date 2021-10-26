@@ -13,7 +13,7 @@ kind: Job
 metadata:
   name: {{ $appName }}-sherlock-reporter
   annotations:
-    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
     argocd.argoproj.io/sync-wave: {{ $syncWave | quote }}
   labels: {{- include $labelRef . | nindent 4 }}
