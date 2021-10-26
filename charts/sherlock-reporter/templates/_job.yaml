@@ -3,7 +3,7 @@
 {{- $appImageName := .Values.sherlock.appImageName | required "A valid sherlock.appImageName is required (without trailing tag)" -}}
 {{- $appName := .Values.sherlock.appName | default .Release.Name -}}
 {{- $labelRef := .Values.sherlock.labelRef | default (printf "%s.labels" $appName) -}}
-{{- $syncWave := .Values.sherlock.syncWave | default "-1" -}}
+{{- $syncWave := .Values.sherlock.syncWave | default "1" -}}
 {{- $appImageTag := .Values.sherlock.appImageTag | default .Values.global.applicationVersion -}}
 {{- $serviceAccount := .Values.sherlock.serviceAccount | default (printf "%s-sa" $appName) -}}
 {{- $sherlockImageName := .Values.sherlock.sherlockImageName | default "us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/cli" -}}

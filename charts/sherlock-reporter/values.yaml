@@ -18,8 +18,8 @@ sherlock:
   # sherlock.labelRef -- (string) Template reference to `include` in resource labels
   # @default -- Set to "${appName}.labels"
   labelRef: null
-  # sherlock.syncWave -- (string) ArgoCD wave to apply these resources in
-  syncWave: "-1"
+  # sherlock.syncWave -- (string) ArgoCD wave to apply these resources in. This should be the last resourse to sync
+  syncWave: "1"
   # sherlock.appimageTag -- (string) version of the service being deployed to report to sherlock
   # @default -- Set to global.applicationVersion
   appImageTag: null
