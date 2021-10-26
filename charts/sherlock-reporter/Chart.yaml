@@ -1,6 +1,6 @@
 apiVersion: v2
 name: sherlock-reporter
-version: 0.1.0
+version: 0.2.0
 description: Library chart to report deploy events to sherlock (Terra environment tracking service)
 type: library
 keywords:
