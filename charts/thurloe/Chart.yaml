@@ -17,5 +17,5 @@ dependencies:
     repository: https://broadinstitute.github.io/terra-helm/
   - name: sherlock-reporter
     condition: sherlock.enabled
-    version: 0.2.0-588.1635269219.80a4ca
+    version: 0.2.0-588.1635269552.2bcd90
     repository: https://broadinstitute.github.io/terra-helm/
