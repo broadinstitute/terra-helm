@@ -11,5 +11,6 @@
     "sam":              {"dev_only": false},
     "opendj":           {"dev_only": false},
     "buffer":           {"dev_only": false},
-    "workspacemanager": {"dev_only": false}
+    "workspacemanager": {"dev_only": false},
+    "thurloe":          {"dev_only": false}
 }
