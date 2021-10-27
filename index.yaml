@@ -32003,6 +32003,38 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.64.0/leonardo-0.64.0.tgz
     version: 0.64.0
   - apiVersion: v2
+    created: "2021-10-27T19:09:48.307406144Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: bd404cc46ba280163e45a310d583deee5c18e11f0ca940328489e38b410bd1fd
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.64.0-605.1635361777.e05094/leonardo-0.64.0-605.1635361777.e05094.tgz
+    version: 0.64.0-605.1635361777.e05094
+  - apiVersion: v2
     created: "2021-10-21T19:14:44.539639199Z"
     dependencies:
     - name: liquibase-migration
