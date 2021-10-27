@@ -11,3 +11,8 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/broadinstitute/cromwell
+dependencies:
+  - name: sherlock-reporter
+    condition: sherlock.enabled
+    version: 0.3.0
+    repository: https://terra-helm.storage.googleapis.com
