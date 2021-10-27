@@ -297,3 +297,12 @@ liquibase-migration:
         usernameKey: "username"
         passwordKey: "password"
         databaseNameKey: "db"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/terra-kernel-k8s/terra-workspace-manager
+  appName: workspacemanager
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

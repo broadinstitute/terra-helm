@@ -22,3 +22,7 @@ dependencies:
   - name: liquibase-migration
     version: 1.1.0
     repository: https://terra-helm.storage.googleapis.com
+  - name: sherlock-reporter
+    condition: sherlock.enabled
+    version: 0.3.0
+    repository: https://terra-helm.storage.googleapis.com
