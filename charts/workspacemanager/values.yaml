@@ -302,6 +302,7 @@ sherlock:
   enabled: true
   appImageName: gcr.io/terra-kernel-k8s/terra-workspace-manager
   appName: workspacemanager
+  serviceAccount: workspacemanager-service-sa
   sherlockImageTag: v0.0.15
 
   vault:
