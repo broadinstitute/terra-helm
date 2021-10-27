@@ -126,3 +126,12 @@ proxy:
     repository: broadinstitute/openidc-proxy
     # proxy.image.tag -- (string) Image tag.
     tag: modsecurity_2_9_2
+
+sherlock:
+  enabled: true
+  appImageName: us.gcr.io/broad-dsp-gcr-public/job-manager-ui
+  appName: jobmanager
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
