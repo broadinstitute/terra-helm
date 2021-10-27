@@ -20,4 +20,4 @@ dependencies:
   - name: sherlock-reporter
     condition: sherlock.enabled
     version: 0.3.0
-    respository: https://terra-helm.storage.googleapis.com
+    repository: https://terra-helm.storage.googleapis.com
