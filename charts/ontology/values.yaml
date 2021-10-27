@@ -66,3 +66,12 @@ vaultKeySecretKey:
 vaultChain:
 vaultChainPath:
 vaultChainSecretKey:
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/consent-ontology
+  appName: ontology
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

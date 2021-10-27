@@ -1,0 +1,8 @@
+# The purpose of this file is to create a k8s Job that reports
+# deploys of new application builds to sherlock (Terra's environment tracking service)
+# after each argo sync
+{{- if .Values.sherlock.enabled }}
+{{ template "sherlock-reporter.secret" . }}
+---
+{{ template "sherlock-reporter.job" . }}
+{{- end -}}
