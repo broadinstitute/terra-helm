@@ -180,3 +180,12 @@ liquibase-migration:
       - "/opt/consent.jar"
     migrationArgsConfigDriver: "org.postgresql.Driver"
     migrationArgsConfigChangelog: "changelog-master.xml"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/consent
+  appName: consent
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

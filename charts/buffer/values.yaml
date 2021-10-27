@@ -209,6 +209,7 @@ liquibase-migration:
       fromKubernetesSecret:
         name: "buffer-stairway-db-creds"
 
+
   # Template definition buffer.labels attempts to read .Values.name from within liquibase-migration.
   # Either we must pass the name again, move it to globals, or disable liquibase-migration labels.
   name: "buffer"
@@ -248,3 +249,13 @@ liquibase-migration:
         usernameKey: "username"
         passwordKey: "password"
         databaseNameKey: "db"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/terra-kernel-k8s/terra-resource-buffer
+  appName: buffer
+  serviceAccount: buffer-service-sa
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

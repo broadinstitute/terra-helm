@@ -19,4 +19,10 @@ spec:
   securityPolicy:
     name: {{ .Values.ingress.securityPolicy }}
 {{- end }}
+{{- if .Values.ingress.iap.enabled }}
+  iap:
+    enabled: true
+    oauthclientCredentials:
+      secretName: {{ .Values.name }}-iap-credentials
+{{- end }}
 {{- end }}

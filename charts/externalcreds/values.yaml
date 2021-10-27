@@ -101,6 +101,8 @@ ingress:
     namespaceEnv: true
     # domain.suffix -- Domain suffix
     suffix: integ.envs.broadinstitute.org
+  # requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 
   cert:
     # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
@@ -175,13 +177,6 @@ proxy:
   # proxy.reloadOnCertUpdate -- Whether to reload the deployment when the cert is updated. Requires stakater/Reloader service to be running in the cluster.
   reloadOnCertUpdate: true
 
-postgres:
-  # postgres.enabled -- Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options.
-  enabled: false
-  # postgres.dbs -- (array(string)) List of databases to create.
-  dbs:
-    - externalcreds
-
 # Requires deployment of Prometheus to cluster
 prometheus:
   enabled: true
@@ -214,3 +209,13 @@ samplingProbability: 1.0
 appDeployments:
 - name: frontend
 - name: backend
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/terra-external-credentials-manager
+  appName: externalcreds
+  serviceAccount: externalcreds-service-sa
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

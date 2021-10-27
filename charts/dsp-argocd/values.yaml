@@ -47,6 +47,7 @@ argo-cd:
         cloud.google.com/backend-config: '{"default": "dsp-argocd-backendconfig"}'
     ingress:
       enabled: true
+      pathType: ImplementationSpecific
       paths:
         - /*
       tls:
@@ -83,7 +84,7 @@ argo-cd:
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
-      tag: main-fd5b28a
+      tag: main-00fe213
     env:
       - name: VAULT_ADDR
         value: https://clotho.broadinstitute.org:8200

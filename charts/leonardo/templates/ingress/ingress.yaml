@@ -1,0 +1,4 @@
+{{- include "libchart.ingress" (list . "leonardo.ingress" )}}
+
+{{- define "leonardo.ingress" -}}
+{{- end }}
