@@ -186,8 +186,8 @@ spec:
             {{- if $config.migrationArgsConfigUrl }}
             --url={{ $config.migrationArgsConfigUrl }} \
             {{- end }}
-            {{- if $config.migrationsArgsAdditional }}
-            {{ $config.migrationsArgsAdditional }} \
+            {{- if $config.migrationArgsAdditional }}
+            {{- $config.migrationArgsAdditional | nindent 12 }} \
             {{- end }}
             {{ $config.migrationArgsLiquibaseCommand }}; \
           EXIT=$?; \
