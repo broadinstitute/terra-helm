@@ -26261,6 +26261,33 @@ entries:
     version: 0.11.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-27T17:41:46.282955388Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for firecloud-orchestration service in Terra
+    digest: 97d6ff8f8597714cf8ef31771021e974b7e53615417e1b6d753a95455cf5f712
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.11.0-600.1635356495.085a3d/firecloudorch-0.11.0-600.1635356495.085a3d.tgz
+    version: 0.11.0-600.1635356495.085a3d
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-21T15:20:09.509755032Z"
     dependencies:
     - name: pdb-lib
