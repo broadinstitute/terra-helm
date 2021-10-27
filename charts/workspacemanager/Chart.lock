@@ -1,6 +1,0 @@
-dependencies:
-- name: postgres
-  repository: https://terra-helm.storage.googleapis.com
-  version: 0.1.0
-digest: sha256:e4abea9098da0f00f5a5a0a151d36e35da3380b6c5e2acaad633bde301f9ea7f
-generated: "2021-09-17T07:46:13.743187-04:00"

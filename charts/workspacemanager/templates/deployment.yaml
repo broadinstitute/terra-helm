@@ -29,9 +29,6 @@ spec:
         {{- /* Automatically restart deployments on config map changes: */}}
         checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
         checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
-        {{- if .Values.postgres.enabled }}
-        checksum/{{ .Values.name }}-postgres-initdb: {{ include (print $.Template.BasePath "/configmaps/postgres-init-db-configmap.yaml") . | sha256sum }}
-        {{- end }}
         {{- if .Values.prometheus.enabled }}
         checksum/{{ .Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
         {{- end }}
@@ -41,11 +38,9 @@ spec:
     spec:
       serviceAccountName: {{ .Values.name }}-service-sa
       volumes:
-      {{- if not .Values.postgres.enabled }}
       - name: cloudsql-sa-creds
         secret:
           secretName: {{ .Values.name }}-sqlproxy-sa
-      {{- end }}
       - name: app-sa-creds
         secret:
           secretName: {{ .Values.name }}-app-sa
@@ -76,7 +71,6 @@ spec:
         emptyDir: {}
       {{- end }}
       containers:
-      {{- if not .Values.postgres.enabled }}
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.24.0-buster
         lifecycle:
@@ -109,7 +103,6 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
-      {{- end }}
       - name: {{ .Values.name }}
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
@@ -141,7 +134,6 @@ spec:
         - name: JAVA_TOOL_OPTIONS
           value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ .Values.name }}-prometheusjmx-config/prometheusJmx.yaml"
         {{- end }}
-        {{- if not .Values.postgres.enabled }}
         - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
@@ -172,22 +164,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.name }}-stairway-db-creds
               key: db
-        {{- else }}
-        - name: DATABASE_HOSTNAME
-          value: {{ .Values.name }}-postgres-service.{{ .Release.Namespace }}.svc.cluster.local
-        - name: DATABASE_USER
-          value: postgres
-        - name: DATABASE_USER_PASSWORD
-          value: {{ .Values.postgres.password }}
-        - name: DATABASE_NAME
-          value: {{ index .Values.postgres.dbs 0 }}
-        - name: STAIRWAY_DATABASE_USER
-          value: postgres
-        - name: STAIRWAY_DATABASE_USER_PASSWORD
-          value: {{ .Values.postgres.password }}
-        - name: STAIRWAY_DATABASE_NAME
-          value: {{ index .Values.postgres.dbs 1 }}
-        {{- end }}
         {{- if .Values.initDB }}
         - name: INIT_DB
           value: 'true'
@@ -364,13 +340,3 @@ spec:
         - name: {{ .Values.name }}-prometheusjmx-jar
           mountPath: /{{ .Values.name }}-prometheusjmx-jar
       {{- end }}
----
-{{- if .Values.postgres.enabled }}
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: {{ .Values.name }}-postgres-deployment
-  labels:
-{{ include "workspacemanager.labels" . | indent 4 }}
-{{- include "postgres.deployment.tpl" . }}
-{{- end }}
