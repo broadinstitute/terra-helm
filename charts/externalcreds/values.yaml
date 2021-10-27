@@ -177,6 +177,13 @@ proxy:
   # proxy.reloadOnCertUpdate -- Whether to reload the deployment when the cert is updated. Requires stakater/Reloader service to be running in the cluster.
   reloadOnCertUpdate: true
 
+postgres:
+  # postgres.enabled -- Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options.
+  enabled: false
+  # postgres.dbs -- (array(string)) List of databases to create.
+  dbs:
+    - externalcreds
+
 # Requires deployment of Prometheus to cluster
 prometheus:
   enabled: true
