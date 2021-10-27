@@ -18701,6 +18701,32 @@ entries:
     version: 0.0.0
   duos:
   - apiVersion: v2
+    created: "2021-10-27T17:56:43.127209297Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS
+    digest: d0ebadcac8578e5cabe0065710a65a740fa07959a87932d817bd1567902df62c
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: duos
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/duos-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.16.0/duos-0.16.0.tgz
+    version: 0.16.0
+  - apiVersion: v2
     created: "2021-10-27T17:45:02.086835397Z"
     dependencies:
     - name: pdb-lib
