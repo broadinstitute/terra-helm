@@ -10,6 +10,7 @@ name: firecloudui
 
 # Settings for Firecloud UI's Ingress & Service
 ingress:
+  
   # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig
   enabled: true
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress

@@ -92,3 +92,13 @@ ingress:
 # extraHostAliases -- An array of additional hostAliases to add to the pod. See https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
 # Currently this is used for replicating host aliases for MongoDB in Terra's dev environment (https://github.com/broadinstitute/dsp-puppet/blob/ba64214a81cf2abd9e0c5c21dc0294d3837481ce/hieradata/c.broad-dsde-dev.internal.eyaml#L308)
 extraHostAliases: []
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/agora
+  appName: agora
+  sherlockImageTag: v0.0.15
+
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
