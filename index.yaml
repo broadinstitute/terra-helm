@@ -12964,6 +12964,28 @@ entries:
     version: 0.0.1-216.1606844050.9cb410
   cromwell:
   - apiVersion: v2
+    created: "2021-10-27T16:38:04.516324933Z"
+    dependencies:
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 4ac9664e9a62fa39ffcf6ba5028d356f3cd41b00f0796513ce1ca25eb4fbc3fd
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.24.0/cromwell-0.24.0.tgz
+    version: 0.24.0
+  - apiVersion: v2
     created: "2021-09-01T13:52:38.12279747Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
     digest: 4f9bcfbe1b27748e4428f642b6f7e17360d49179600ff39143ed340a125c36e4
