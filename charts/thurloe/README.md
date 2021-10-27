@@ -2,6 +2,13 @@
 
 Chart for Thurloe service in Terra
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.1.0 |
+| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -20,6 +27,15 @@ Chart for Thurloe service in Terra
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
+| liquibase-migration.defaults.enabled | bool | `false` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[0] | string | `"$(find /thurloe -name 'thurloe*.jar')"` |  |
+| liquibase-migration.defaults.migrationConfigFileMount.secretName | string | `"thurloe-app-ctmpls"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.passwordKey | string | `"password"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.path | string | `nil` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromVaultSecret.usernameKey | string | `"username"` |  |
+| liquibase-migration.defaults.migrationImage | string | `"gcr.io/broad-dsp-gcr-public/thurloe"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"thurloe-sqlproxy-env"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"thurloe-sqlproxy-ctmpls"` |  |
 | name | string | `"thurloe"` |  |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
