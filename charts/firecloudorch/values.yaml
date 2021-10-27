@@ -16,7 +16,7 @@ ingress:
   cert:
     # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
     # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
-    #   certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
+    #  certificate from Vault to a k8s secret. Otherwise the secret is expected to already exist.
     vault:
       enabled: false
       cert:
@@ -31,6 +31,8 @@ ingress:
         secretKey: null
     # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
     preSharedCerts: []
+  # ingress.requestPath -- Request path to which the probe system should connect
+  requestPath: /status
 proxyImage: broadinstitute/openidc-proxy:tcell_3_1_0
 imageConfig:
   # imageConfig.repository -- Image repository
