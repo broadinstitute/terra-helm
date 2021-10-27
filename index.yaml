@@ -12959,6 +12959,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.23.0/cromwell-0.23.0.tgz
     version: 0.23.0
   - apiVersion: v2
+    created: "2021-10-27T16:20:22.862097108Z"
+    dependencies:
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: 9c42dac1285a2c315bf641baf3daa4de7327efc41cb6bbeb41fbbed534a04fb9
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.23.0-598.1635351614.3daf2a/cromwell-0.23.0-598.1635351614.3daf2a.tgz
+    version: 0.23.0-598.1635351614.3daf2a
+  - apiVersion: v2
     created: "2021-10-25T20:58:28.784954952Z"
     dependencies:
     - alias: liquibase-migration-cromwell1
