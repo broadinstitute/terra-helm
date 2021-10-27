@@ -1,6 +1,6 @@
 apiVersion: v2
 name: externalcreds
-version: 0.56.0
+version: 0.59.0
 description: Chart for Terra External Credentials Manager
 type: application
 keywords:
@@ -22,3 +22,7 @@ dependencies:
   - name: ingresslib
     version: 0.12.0
     repository: https://broadinstitute.github.io/terra-helm/
+  - name: sherlock-reporter
+    condition: sherlock.enabled
+    version: 0.3.0
+    repository: https://terra-helm.storage.googleapis.com

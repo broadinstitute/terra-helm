@@ -144,3 +144,48 @@ vaultKeySecretKey:
 vaultChain:
 vaultChainPath:
 vaultChainSecretKey:
+
+liquibase-migration:
+  # In an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:
+  #   migrationJobs:
+  #     - name: "consent"
+  #       enabled: true
+  #       migrationImage: "gcr.io/broad-dsp-gcr-public/consent"
+  #       migrationArgsConfigUrl: "jdbc:postgresql://sqlproxy:5432/consent"
+  # ```
+  # The migrationImage/migrationArgsConfigUrl values are configured per-env in terra-helmfile,
+  # so we match the same pattern even if duplication will still be required
+  #
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
+
+  defaults:
+    enabled: false
+    sqlproxyCredentialFileMount:
+      secretName: "consent-secrets"
+      mountFilePath: "/etc/service-account.json"
+    sqlproxyContainerConfig:
+      envFrom:
+        - configMapRef:
+            name: "consent-sqlproxy-env"
+    migrationDatabaseCredentials:
+      fromKubernetesSecret:
+        name: "consent-secrets"
+        usernameKey: "databaseUser"
+        passwordKey: "databasePassword"
+    # The following are hardcoded elsewhere, so we duplicate to match liquibase-migration's requirements
+    migrationShell: ["sh", "-c"]
+    migrationArgsClasspath:
+      - "/opt/consent.jar"
+    migrationArgsConfigDriver: "org.postgresql.Driver"
+    migrationArgsConfigChangelog: "changelog-master.xml"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/consent
+  appName: consent
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

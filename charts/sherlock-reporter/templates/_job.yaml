@@ -1,0 +1,58 @@
+{{- define "sherlock-reporter.job" -}}
+{{- if .Values.sherlock.enabled }}
+{{- $appImageName := .Values.sherlock.appImageName | required "A valid sherlock.appImageName is required (without trailing tag)" -}}
+{{- $appName := .Values.sherlock.appName | default .Release.Name -}}
+{{- $labelRef := .Values.sherlock.labelRef | default (printf "%s.labels" $appName) -}}
+{{- $syncWave := .Values.sherlock.syncWave | default "1" -}}
+{{- $appImageTag := .Values.sherlock.appImageTag | default .Values.global.applicationVersion -}}
+{{- $serviceAccount := .Values.sherlock.serviceAccount | default (printf "%s-sa" $appName) -}}
+{{- $sherlockImageName := .Values.sherlock.sherlockImageName | default "us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/cli" -}}
+{{- $sherlockImageTag := .Values.sherlock.sherlockImageTag | required "A valid sherlock.sherlockImageTag is required" -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ $appName }}-sherlock-reporter
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: {{ $syncWave | quote }}
+  labels: {{- include $labelRef . | nindent 4 }}
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: {{ $appName }}-sherlock-reporter
+      labels: {{- include $labelRef . | nindent 8 }}
+    spec:
+      restartPolicy: Never
+      serviceAccountName: {{ $serviceAccount }}
+      volumes:
+      - name: {{ $appName }}-sherlock-client-credentials
+        secret:
+          secretName: {{ $appName }}-sherlock-client-credentials
+      containers:
+      - name: {{ $appName }}-sherlock-reporter
+        image: "{{ $sherlockImageName }}:{{ $sherlockImageTag }}"
+        volumeMounts:
+        - name: {{ $appName}}-sherlock-client-credentials
+          mountPath: /app/sherlock/client-sa.json
+          subPath: client-sa.json
+          readOnly: true
+        env:
+        - name: SHERLOCK_OAUTH_AUDIENCE
+          valueFrom:
+            secretKeyRef:
+              name: {{ $appName }}-sherlock-client-credentials
+              key: audience
+        command: ["/bin/sherlock"]
+        args:
+        - deploys
+        - create
+        - "{{ $appImageName }}:{{ $appImageTag }}"
+        - --environment
+        - {{ .Release.Namespace }}
+        - --service 
+        - {{ $appName }}
+        - --use-sa-auth
+{{- end -}}
+{{- end -}}

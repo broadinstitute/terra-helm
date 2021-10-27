@@ -90,3 +90,12 @@ deployments:
     expose: true
     # deployments.standalone.serviceName -- Name of the default standalone Cromwell service
     serviceName: cromwell
+
+sherlock:
+  enabled: true
+  appImageName: broadinstitute/cromwell
+  appName: cromwell
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

@@ -109,3 +109,12 @@ elasticsearch:
       periodSeconds: 90
       failureThreshold: 3 # 270 seconds before restart
       successThreshold: 1
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/firecloud-orchestration
+  appName: firecloudorch
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

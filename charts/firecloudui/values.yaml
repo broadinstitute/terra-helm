@@ -10,6 +10,7 @@ name: firecloudui
 
 # Settings for Firecloud UI's Ingress & Service
 ingress:
+  
   # ingress.enabled -- Whether to create Ingress and associated Service, FrontendConfig and BackendConfig
   enabled: true
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
@@ -88,3 +89,13 @@ app:
         periodSeconds: 10
         failureThreshold: 30
         successThreshold: 1
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/firecloud-ui
+  appName: firecloudui
+  sherlockImageTag: v0.0.15
+
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

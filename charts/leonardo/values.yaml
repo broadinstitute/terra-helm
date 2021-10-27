@@ -162,3 +162,12 @@ liquibase-migration:
         path: null
         usernameKey: "db_user"
         passwordKey: "db_password"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/leonardo
+  appName: leonardo
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

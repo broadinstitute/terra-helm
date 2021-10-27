@@ -216,3 +216,13 @@ samplingProbability: 1.0
 appDeployments:
 - name: frontend
 - name: backend
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/terra-external-credentials-manager
+  appName: externalcreds
+  serviceAccount: externalcreds-service-sa
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod

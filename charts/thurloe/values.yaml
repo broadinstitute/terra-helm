@@ -135,3 +135,12 @@ liquibase-migration:
         path: null
         usernameKey: "username"
         passwordKey: "password"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/thurloe
+  appName: thurloe
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
