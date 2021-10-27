@@ -11375,6 +11375,32 @@ entries:
     version: 0.14.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-27T15:56:44.467181955Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 10202f71e761ef4b30d9a1f13234906e1ef2f08b038db04942b6163851b1bcb8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.14.0-597.1635350193.51d69d/cromiam-0.14.0-597.1635350193.51d69d.tgz
+    version: 0.14.0-597.1635350193.51d69d
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-13T14:44:58.343445319Z"
     dependencies:
     - name: ingresslib
