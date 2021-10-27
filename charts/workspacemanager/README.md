@@ -6,6 +6,8 @@ Chart for Terra Workspace Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 | https://terra-helm.storage.googleapis.com | postgres | 0.1.0 |
 
 ## Values
@@ -47,6 +49,35 @@ Chart for Terra Workspace Manager
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
 | initDB | bool | `false` | Whether the WSM and Stairway DBs should be initialized on startup. Used for preview environments. |
+| liquibase-migration.defaults.enabled | bool | `false` |  |
+| liquibase-migration.defaults.k8sServiceAccount | string | `"workspacemanager-service-sa"` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[0] | string | `"app/libs/*"` |  |
+| liquibase-migration.defaults.migrationArgsClasspath[1] | string | `"app/resources/"` |  |
+| liquibase-migration.defaults.migrationArgsConfigDriver | string | `"org.postgresql.Driver"` |  |
+| liquibase-migration.defaults.migrationArgsConfigUrl | string | `"jdbc:postgresql://127.0.0.1:5432/${DB_NAME}"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.databaseNameKey | string | `"db"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.passwordKey | string | `"password"` |  |
+| liquibase-migration.defaults.migrationDatabaseCredentials.fromKubernetesSecret.usernameKey | string | `"username"` |  |
+| liquibase-migration.defaults.migrationImage | string | `"gcr.io/terra-kernel-k8s/terra-workspace-manager"` |  |
+| liquibase-migration.defaults.sqlproxyArgsInstances | string | `"$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[0].name | string | `"SQL_INSTANCE_PROJECT"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[0].valueFrom.secretKeyRef.key | string | `"project"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[0].valueFrom.secretKeyRef.name | string | `"workspacemanager-cloudsql-postgres-instance"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[1].name | string | `"SQL_INSTANCE_REGION"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[1].valueFrom.secretKeyRef.key | string | `"region"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[1].valueFrom.secretKeyRef.name | string | `"workspacemanager-cloudsql-postgres-instance"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[2].name | string | `"SQL_INSTANCE_NAME"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[2].valueFrom.secretKeyRef.key | string | `"name"` |  |
+| liquibase-migration.defaults.sqlproxyContainerConfig.env[2].valueFrom.secretKeyRef.name | string | `"workspacemanager-cloudsql-postgres-instance"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.mountFilePath | string | `"/secrets/cloudsql/service-account.json"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"workspacemanager-cloudsql-sa"` |  |
+| liquibase-migration.migrationJobs[0].migrationArgsConfigChangelog | string | `"db/changelog.xml"` |  |
+| liquibase-migration.migrationJobs[0].migrationDatabaseCredentials.fromKubernetesSecret.name | string | `"workspacemanager-postgres-db-creds"` |  |
+| liquibase-migration.migrationJobs[0].name | string | `"workspacemanager"` |  |
+| liquibase-migration.migrationJobs[1].migrationArgsConfigChangelog | string | `"stairway/db/changelog.xml"` |  |
+| liquibase-migration.migrationJobs[1].migrationDatabaseCredentials.fromKubernetesSecret.name | string | `"workspacemanager-stairway-db-creds"` |  |
+| liquibase-migration.migrationJobs[1].name | string | `"workspacemanager-stairway"` |  |
+| liquibase-migration.name | string | `"workspacemanager"` |  |
 | name | string | `"workspacemanager"` | A name for the deployment that will be substituted into resuorce definitions |
 | postgres.dbs | list | `["workspace","stairway"]` | (array(string)) List of databases to create. |
 | postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |

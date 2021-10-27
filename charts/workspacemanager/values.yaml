@@ -223,3 +223,69 @@ terraDataRepoUrl: https://jade.datarepo-dev.broadinstitute.org
 spendBillingAccountId:
 # spendProfileId -- the Spend Profile Id to associate with the billing account.
 spendProfileId:
+
+###############################################################
+# End of values exposed to app via the env                    #
+###############################################################
+
+liquibase-migration:
+  # In an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:
+  #   defaults:
+  #     enabled: true
+  # ```
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
+
+  migrationJobs:
+  - name: workspacemanager
+    # on filesystem, on classpath via app/resources/
+    migrationArgsConfigChangelog: "db/changelog.xml"
+    migrationDatabaseCredentials:
+      fromKubernetesSecret:
+        name: "workspacemanager-postgres-db-creds"
+  - name: workspacemanager-stairway
+    # inside stairway jar, on classpath via app/libs/*
+    migrationArgsConfigChangelog: "stairway/db/changelog.xml"
+    migrationDatabaseCredentials:
+      fromKubernetesSecret:
+        name: "workspacemanager-stairway-db-creds"
+
+  # Workaround pending DDO-1579
+  name: "workspacemanager"
+
+  defaults:
+    enabled: false
+    k8sServiceAccount: "workspacemanager-service-sa"
+    sqlproxyCredentialFileMount:
+      secretName: "workspacemanager-sqlproxy-sa"
+      mountFilePath: "/secrets/cloudsql/service-account.json"
+    sqlproxyArgsInstances: "$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"
+    sqlproxyContainerConfig:
+      env:
+        - name: "SQL_INSTANCE_PROJECT"
+          valueFrom:
+            secretKeyRef:
+              name: "workspacemanager-cloudsql-postgres-instance"
+              key: "project"
+        - name: "SQL_INSTANCE_REGION"
+          valueFrom:
+            secretKeyRef:
+              name: "workspacemanager-cloudsql-postgres-instance"
+              key: "region"
+        - name: "SQL_INSTANCE_NAME"
+          valueFrom:
+            secretKeyRef:
+              name: "workspacemanager-cloudsql-postgres-instance"
+              key: "name"
+    migrationImage: "gcr.io/terra-kernel-k8s/terra-workspace-manager"
+    migrationArgsClasspath:
+      - "app/libs/*"
+      - "app/resources/"
+    migrationArgsConfigDriver: "org.postgresql.Driver"
+    migrationArgsConfigUrl: "jdbc:postgresql://127.0.0.1:5432/${DB_NAME}"
+    migrationDatabaseCredentials:
+      fromKubernetesSecret:
+        usernameKey: "username"
+        passwordKey: "password"
+        databaseNameKey: "db"
