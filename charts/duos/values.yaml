@@ -120,7 +120,7 @@ vaultChainSecretKey:
 sherlock:
   enabled: true
   appImageName: gcr.io/broad-dsp-gcr-public/duos
-  appName: duos-ui
+  appName: duos
   sherlockImageTag: v0.0.15
 
 
