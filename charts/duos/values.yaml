@@ -116,3 +116,13 @@ vaultKeySecretKey:
 vaultChain:
 vaultChainPath:
 vaultChainSecretKey:
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/duos
+  appName: duos-ui
+  sherlockImageTag: v0.0.15
+
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
