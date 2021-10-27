@@ -33,19 +33,9 @@ spec:
             postStart:
               exec:
                 command: ["/bin/sh", "-c", "sleep {{ .Values.startupSleep }}"]
-          env:
-            - name: CLOUDSQL_CREDENTIAL_FILE
-              value: /etc/service-account.json
-            - name: GOOGLE_PROJECT
-              value: {{ .Values.googleProject }}
-            - name: CLOUDSQL_ZONE
-              value: {{ .Values.googleProjectZone }}
-            - name: CLOUDSQL_INSTANCE
-              value: {{ .Values.cloudSqlInstance }}
-            - name: CLOUDSQL_MAXCONNS
-              value: '300'
-            - name: PORT
-              value: '5432'
+          envFrom:
+          - configMapRef:
+              name: {{ .Chart.Name }}-sqlproxy-env
           ports:
             - containerPort: 5432
           volumeMounts:
