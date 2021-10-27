@@ -138,3 +138,12 @@ liquibase-migration:
         path: null
         usernameKey: "username"
         passwordKey: "password"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/sam
+  appName: sam
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
