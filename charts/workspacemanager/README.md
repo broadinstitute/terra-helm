@@ -7,8 +7,6 @@ Chart for Terra Workspace Manager
 | Repository | Name | Version |
 |------------|------|---------|
 | https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
-| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
-| https://terra-helm.storage.googleapis.com | postgres | 0.1.0 |
 
 ## Values
 
@@ -79,8 +77,6 @@ Chart for Terra Workspace Manager
 | liquibase-migration.migrationJobs[1].name | string | `"workspacemanager-stairway"` |  |
 | liquibase-migration.name | string | `"workspacemanager"` |  |
 | name | string | `"workspacemanager"` | A name for the deployment that will be substituted into resuorce definitions |
-| postgres.dbs | list | `["workspace","stairway"]` | (array(string)) List of databases to create. |
-| postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |
