@@ -65147,6 +65147,34 @@ entries:
     version: 0.1.0-529.1633395060.426341
   thurloe:
   - apiVersion: v2
+    created: "2021-10-27T20:29:30.629663931Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.1.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Thurloe service in Terra
+    digest: 6b70ee28eb728a0424f104f7fad736839090fc01bad791b5cb5abb484bc349c3
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.16.0/thurloe-0.16.0.tgz
+    version: 0.16.0
+  - apiVersion: v2
     created: "2021-10-26T20:53:05.937662094Z"
     dependencies:
     - name: pdb-lib
