@@ -86,3 +86,13 @@ ingress:
   timeoutSec: 120
   # ingress.securityPolicy -- (string) Name of a GCP CloudArmor policy to associate with this Ingress
   securityPolicy: null
+
+sherlock:
+  enabled: true
+  appImageName: broadinstitute/cromiam
+  appName: cromiam
+  sherlockImageTag: v0.0.15
+
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
