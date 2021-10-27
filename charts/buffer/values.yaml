@@ -253,6 +253,7 @@ sherlock:
   enabled: true
   appImageName: gcr.io/terra-kernel-k8s/terra-resource-buffer
   appName: buffer
+  serviceAccount: buffer-service-sa
   sherlockImageTag: v0.0.15
 
   vault:
