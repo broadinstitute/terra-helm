@@ -99,5 +99,6 @@ sherlock:
   appName: agora
   sherlockImageTag: v0.0.15
 
+
   vault:
     pathPrefix: secret/suitable/sherlock/prod
