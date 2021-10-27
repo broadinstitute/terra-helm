@@ -3,6 +3,35 @@ entries:
   agora:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-27T12:50:21.928283302Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.11.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Agora service in Terra
+    digest: 20660a8590f70efa9dd87e0cd27edc7ef4a063763bcee4997910c5a63ea51a6f
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.16.0/agora-0.16.0.tgz
+    version: 0.16.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-12T18:52:05.26706868Z"
     dependencies:
     - name: ingresslib
