@@ -14,6 +14,7 @@ ingress:
   enabled: true
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
+  
   cert:
     # If preSharedCerts is not empty, they are used. Otherwise a secret with the cert is expected.
     # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
