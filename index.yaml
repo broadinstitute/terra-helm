@@ -40885,6 +40885,32 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.14.0/ontology-0.14.0.tgz
     version: 0.14.0
   - apiVersion: v2
+    created: "2021-10-27T19:58:08.665228247Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: http://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: 87aeb5748471159bbc3d2cc64e6dcc558c0f5ba8dce9a4ea65c0dd8f289f97e8
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.14.0-606.1635364677.7e2538/ontology-0.14.0-606.1635364677.7e2538.tgz
+    version: 0.14.0-606.1635364677.7e2538
+  - apiVersion: v2
     created: "2021-06-23T13:14:03.715671837Z"
     description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
     digest: 98c2ba2fe9683b0306accb16f92916e509ac47441a805f2b8c549acf2015b378
