@@ -1,0 +1,12 @@
+dependencies:
+- name: pdb-lib
+  repository: https://broadinstitute.github.io/terra-helm/
+  version: 0.4.0
+- name: ingresslib
+  repository: https://broadinstitute.github.io/terra-helm/
+  version: 0.12.0
+- name: sherlock-reporter
+  repository: https://terra-helm.storage.googleapis.com
+  version: 0.3.0
+digest: sha256:5be55b05ba13b9eaa59427c479a97ede3a06a4422e51ff7ae97312a71720095c
+generated: "2021-10-28T18:33:22.1451966Z"
