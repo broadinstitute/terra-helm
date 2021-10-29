@@ -9,7 +9,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/prometheus-operator/re
 kubectl apply -f https://raw.githubusercontent.com/coreos/prometheus-operator/release-0.37/example/prometheus-operator-crd/monitoring.coreos.com_thanosrulers.yaml
 
 # Ensures user has chart added to local helm repos 
-helm repo add terra-helm https://terra-helm.storage.googleapis.com
+helm repo add https://broadinstitute.github.io/terra-helm
 helm repo update
 
 helm install prometheus-stackdriver terra-helm/terra-ap-prometheus-operator -n monitoring --version=0.0.1 -f monitoring-configs.yaml --debug
