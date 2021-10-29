@@ -6,7 +6,9 @@ Chart for Terra Workspace Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com/ | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -68,7 +70,7 @@ Chart for Terra Workspace Manager
 | liquibase-migration.defaults.sqlproxyContainerConfig.env[2].valueFrom.secretKeyRef.key | string | `"name"` |  |
 | liquibase-migration.defaults.sqlproxyContainerConfig.env[2].valueFrom.secretKeyRef.name | string | `"workspacemanager-cloudsql-postgres-instance"` |  |
 | liquibase-migration.defaults.sqlproxyCredentialFileMount.mountFilePath | string | `"/secrets/cloudsql/service-account.json"` |  |
-| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"workspacemanager-cloudsql-sa"` |  |
+| liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"workspacemanager-sqlproxy-sa"` |  |
 | liquibase-migration.migrationJobs[0].migrationArgsConfigChangelog | string | `"db/changelog.xml"` |  |
 | liquibase-migration.migrationJobs[0].migrationDatabaseCredentials.fromKubernetesSecret.name | string | `"workspacemanager-postgres-db-creds"` |  |
 | liquibase-migration.migrationJobs[0].name | string | `"workspacemanager"` |  |
@@ -124,6 +126,12 @@ Chart for Terra Workspace Manager
 | samAddress | string | `"https://sam.dsde-dev.broadinstitute.org/"` | Address of SAM instance this deploy will talk to |
 | samplingProbability | float | `1` | the frequency with which calls should be traced. |
 | serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
+| sherlock.appImageName | string | `"gcr.io/terra-kernel-k8s/terra-workspace-manager"` |  |
+| sherlock.appName | string | `"workspacemanager"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.serviceAccount | string | `"workspacemanager-service-sa"` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | spendBillingAccountId | string | `nil` | the Google Billing account Id for WSM to use for workspace projects. |
 | spendProfileId | string | `nil` | the Spend Profile Id to associate with the billing account. |
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
