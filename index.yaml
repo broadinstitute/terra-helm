@@ -15835,6 +15835,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.30.0/dsp-argocd-0.30.0.tgz
     version: 0.30.0
   - apiVersion: v2
+    created: "2021-10-29T18:14:43.471240839Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: 6b4d61590f02dfc8457d2c76337f9efa8e7d38bab5d8ce571907c2635850e26a
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.30.0-613.1635531255.49bdfd/dsp-argocd-0.30.0-613.1635531255.49bdfd.tgz
+    version: 0.30.0-613.1635531255.49bdfd
+  - apiVersion: v2
     created: "2021-10-20T20:17:02.242751238Z"
     dependencies:
     - name: argo-cd
@@ -23076,6 +23098,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.59.0/externalcreds-0.59.0.tgz
     version: 0.59.0
+  - apiVersion: v2
+    created: "2021-10-29T18:14:43.597761188Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Terra External Credentials Manager
+    digest: 4612f0a6fa9ab0a2834ee6469d1a5976a8736a619d4e84d9c5bee1bea921a7bd
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.59.0-613.1635531256.49bdfd/externalcreds-0.59.0-613.1635531256.49bdfd.tgz
+    version: 0.59.0-613.1635531256.49bdfd
   - apiVersion: v2
     created: "2021-10-29T18:01:40.388522466Z"
     dependencies:
@@ -39154,6 +39208,30 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/mongodb-0.3.0/mongodb-0.3.0.tgz
     version: 0.3.0
+  - apiVersion: v2
+    created: "2021-10-29T18:14:43.732486831Z"
+    dependencies:
+    - alias: bitnami
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.5.1
+    description: |
+      A Helm chart for MongoDB, used by Terra's Agora application.
+      This chart is heavily customized to Terra's needs and is a thin wrapper around Bitnami's MongoDB Helm chart.
+    digest: dadbf2b9c9aa85844355a1eb186fd922e01d9f0203e623c066535e5755969297
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - mongodb
+    - agora
+    name: mongodb
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/mongodb-0.3.0-613.1635531260.49bdfd/mongodb-0.3.0-613.1635531260.49bdfd.tgz
+    version: 0.3.0-613.1635531260.49bdfd
   - apiVersion: v2
     created: "2021-08-19T13:01:58.851450733Z"
     dependencies:
@@ -62871,6 +62949,30 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.9.0/terra-prometheus-0.9.0.tgz
     version: 0.9.0
   - apiVersion: v2
+    created: "2021-10-29T18:14:43.87306264Z"
+    dependencies:
+    - name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts/
+      version: 9.3.4
+    description: a helm chart to deploy monitoring infrastructure
+    digest: 103aafc5962042e1fa5cf6ffd629961592f53a366bdc7dfeb850173251ada88f
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - monitoring
+    - prometheus
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: terra-prometheus
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-prometheus-0.9.0-613.1635531265.49bdfd/terra-prometheus-0.9.0-613.1635531265.49bdfd.tgz
+    version: 0.9.0-613.1635531265.49bdfd
+  - apiVersion: v2
     created: "2021-05-13T14:22:22.458931915Z"
     dependencies:
     - name: kube-prometheus-stack
@@ -67826,6 +67928,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.47.0/workspacemanager-0.47.0.tgz
     version: 0.47.0
+  - apiVersion: v2
+    created: "2021-10-29T18:14:44.008326489Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - name: pdb-lib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.4.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Terra Workspace Manager
+    digest: 9f8a62c50ae7a8343049f8e16ddaae4d6960ca7eb9736ac9edbf3a95bc63c24a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.47.0-613.1635531266.49bdfd/workspacemanager-0.47.0-613.1635531266.49bdfd.tgz
+    version: 0.47.0-613.1635531266.49bdfd
   - apiVersion: v2
     created: "2021-10-29T18:01:40.493845303Z"
     dependencies:
