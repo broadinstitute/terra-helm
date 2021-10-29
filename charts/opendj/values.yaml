@@ -29,7 +29,7 @@ resources:
 
 service:
   # service.staticIp -- e(string) External IP of the service. Required.
-  staticIp: hello
+  staticIp: null
   # service.firewallEnabled -- Whether to restrict access to the service to the IPs supplied via service.allowedAddresses
   firewallEnabled: true
   # service.allowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
