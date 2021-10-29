@@ -3,13 +3,7 @@ kind: Role
 metadata:
   name: opendj-service-role
   labels:
-    app.kubernetes.io/component: opendj
-    app.kubernetes.io/instance: opendj
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: opendj
-    app.kubernetes.io/part-of: terra
-    argocd.argoproj.io/instance: opendj-alpha
-    helm.sh/chart: opendj-0.15.0
+    {{- include "opendj.labels" . | nindent 4 }}
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
@@ -22,4 +16,4 @@ rules:
 - apiGroups: ["apps", "extensions"]
   resources: ["statefulsets"]
   resourceNames: ["opendj-statefulset"]
-  verbs: ["get", "patch"] 
+  verbs: ["get", "patch", "list", "watch"]
