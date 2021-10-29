@@ -12,21 +12,10 @@ metadata:
     cloud.google.com/neg: '{"ingress": true}'
     # Enable TLS between LB and apache proxy https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
-    {{- if .Values.previewEnv }}
-    # Enable ExternalDNS for this service.
-    external-dns.alpha.kubernetes.io/hostname: sam.{{ .Values.global.terraEnv }}.preview.envs-terra.bio
-    {{- end }}
 spec:
-  {{- if .Values.previewEnv }}
-  type: ExternalName
-  {{- else }}
   type: ClusterIP
-  {{- end }}
   selector:
     {{- include "sam.selectorLabels" . | nindent 4 }}
-  {{- if .Values.previewEnv }}
-  externalName: ingress.{{ .Values.global.terraEnv }}.preview.envs-terra.bio
-  {{- end }}
   ports:
   - name: https
     protocol: TCP
