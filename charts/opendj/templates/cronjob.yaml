@@ -1,0 +1,29 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Chart.Name }}-statefulset-restart
+  labels: {{ include "opendj.labels" . | nindent 4 }}
+spec:
+  # If it's time for a new job run and the previous job run hasn't finished yet, the cron job skips the new job run
+  concurrencyPolicy: Forbid
+  schedule: '0 02 * * *' # Run once a day at 2 am UTC / 10 pm EST
+  jobTemplate:
+    metadata:
+      labels: {{ include "opendj.labels" . | nindent 8 }}
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: {{ .Values.restart.timeoutSeconds }}
+      template:
+        spec:
+          serviceAccountName: {{ .Chart.Name }}-service-sa
+          # Prevents cronjobb from restarting on failure
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl
+              command:
+                - 'kubectl'
+                - 'rollout'
+                - 'restart'
+                - 'statefulset'
+                - {{ .Chart.Name }}-statefulset

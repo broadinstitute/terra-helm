@@ -28,8 +28,8 @@ resources:
     memory: 60Gi
 
 service:
-  # service.staticIp -- (string) External IP of the service. Required.
-  staticIp: null
+  # service.staticIp -- e(string) External IP of the service. Required.
+  staticIp: hello
   # service.firewallEnabled -- Whether to restrict access to the service to the IPs supplied via service.allowedAddresses
   firewallEnabled: true
   # service.allowedAddresses -- A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
@@ -64,6 +64,11 @@ snapshot:
   enable: true
   # snapshot.policy -- Name of the snapshot policy to use on data disk
   policy: terra-snapshot-policy
+
+
+restart:
+    # restart.timeoutSeconds -- How many seconds to wait before assuming job is hung and killing it
+    timeoutSeconds: 600 # 10 mins
 
 backup:
   # backup.enabled -- Whether to automatically back up OpenDJ nightly + copy to GCP bucket

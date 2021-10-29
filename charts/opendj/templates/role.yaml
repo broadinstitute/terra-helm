@@ -1,9 +1,15 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ .Values.name }}-service-role
+  name: opendj-service-role
   labels:
-    {{- include "opendj.labels" . | nindent 4 }}
+    app.kubernetes.io/component: opendj
+    app.kubernetes.io/instance: opendj
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: opendj
+    app.kubernetes.io/part-of: terra
+    argocd.argoproj.io/instance: opendj-alpha
+    helm.sh/chart: opendj-0.15.0
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
@@ -13,3 +19,7 @@ rules:
 - apiGroups: ['']
   resources: ['secrets']
   verbs: ['get', 'create']
+- apiGroups: ["apps", "extensions"]
+  resources: ["statefulsets"]
+  resourceNames: ["opendj-statefulset"]
+  verbs: ["get", "patch"] 
