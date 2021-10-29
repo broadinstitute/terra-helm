@@ -42,7 +42,7 @@ Chart for OpenDJ, used by Sam(Terra IAM service) as well as various Terra applic
 | service.ports.admin | bool | `false` | Whether to enable the admin(4444) port |
 | service.ports.ldap | bool | `false` | Whether to enable the LDAP(389) port |
 | service.ports.ldaps | bool | `true` | Whether to enable the LDAPS(636) port |
-| service.staticIp | string | `nil` | e(string) External IP of the service. Required. |
+| service.staticIp | string | `nil` | External IP of the service. Required. |
 | snapshot.enable | bool | `true` | Whether to enable a gcp snapshot policy for the data disk |
 | snapshot.policy | string | `"terra-snapshot-policy"` | Name of the snapshot policy to use on data disk |
 | tolerations | list | `[]` | Array of tolerations |
