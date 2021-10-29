@@ -13,3 +13,7 @@ rules:
 - apiGroups: ['']
   resources: ['secrets']
   verbs: ['get', 'create']
+- apiGroups: ["apps", "extensions"]
+  resources: ["statefulsets"]
+  resourceNames: ["opendj-statefulset"]
+  verbs: ["get", "patch", "list", "watch"]
