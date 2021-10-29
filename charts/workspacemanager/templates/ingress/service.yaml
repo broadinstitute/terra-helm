@@ -22,13 +22,3 @@ spec:
     port: 443
     targetPort: 443
 {{- end }}
-{{- if .Values.postgres.enabled }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.name }}-postgres-service
-  labels:
-{{ include "workspacemanager.labels" . | indent 4 }}
-{{- include "postgres.service.tpl" . }}
-{{- end }}

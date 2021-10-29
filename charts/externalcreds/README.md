@@ -1,6 +1,6 @@
 # externalcreds
 
-![Version: 0.53.0](https://img.shields.io/badge/Version-0.53.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.59.0](https://img.shields.io/badge/Version-0.59.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Terra External Credentials Manager
 
@@ -13,9 +13,9 @@ Chart for Terra External Credentials Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.10.0 |
-| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
-| https://terra-helm.storage.googleapis.com | postgres | 0.1.0 |
+| https://terra-helm.storage.googleapis.com/ | ingresslib | 0.12.0 |
+| https://terra-helm.storage.googleapis.com/ | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -55,8 +55,6 @@ Chart for Terra External Credentials Manager
 | ingress.timeoutSec | int | `120` |  |
 | initDB | bool | `false` | Whether the ECM should be initialized on startup. Used for preview environments. |
 | name | string | `"externalcreds"` | A name for the deployment that will be substituted into resuorce definitions |
-| postgres.dbs | list | `["externalcreds"]` | (array(string)) List of databases to create. |
-| postgres.enabled | bool | `false` | Whether to enable ephemeral Postgres container. Used for preview/test environments. See the postgres chart for more config options. |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |
@@ -104,6 +102,12 @@ Chart for Terra External Credentials Manager
 | samAddress | string | `"https://sam.dsde-dev.broadinstitute.org/"` | Address of SAM instance this deploy will talk to |
 | samplingProbability | float | `1` | the frequency with which calls should be traced. |
 | serviceGoogleProject | string | `"broad-dsde-dev"` | the id of the google project which the instance is associated with |
+| sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/terra-external-credentials-manager"` |  |
+| sherlock.appName | string | `"externalcreds"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.serviceAccount | string | `"externalcreds-service-sa"` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |

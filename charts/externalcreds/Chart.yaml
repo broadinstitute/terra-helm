@@ -12,16 +12,12 @@ sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
   - https://github.com/DataBiosphere/terra-external-credentials-manager
 dependencies:
-  - name: postgres
-    condition: postgres.enabled
-    version: 0.1.0
-    repository: https://terra-helm.storage.googleapis.com
   - name: pdb-lib
     version: 0.4.0
-    repository: https://broadinstitute.github.io/terra-helm/
+    repository: https://terra-helm.storage.googleapis.com/
   - name: ingresslib
     version: 0.12.0
-    repository: https://broadinstitute.github.io/terra-helm/
+    repository: https://terra-helm.storage.googleapis.com/
   - name: sherlock-reporter
     condition: sherlock.enabled
     version: 0.3.0
