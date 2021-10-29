@@ -32,6 +32,35 @@ entries:
     version: 0.17.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-29T20:20:05.896563842Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Agora service in Terra
+    digest: c6bb2550f72749b055b9662b8db4e7d285850fc19cb1e0c1aa6c303bd59f7635
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.17.0-615.1635538768.a3c8da/agora-0.17.0-615.1635538768.a3c8da.tgz
+    version: 0.17.0-615.1635538768.a3c8da
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-27T12:50:21.928283302Z"
     dependencies:
     - name: ingresslib
@@ -2501,6 +2530,37 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.40.0/buffer-0.40.0.tgz
     version: 0.40.0
+  - apiVersion: v2
+    created: "2021-10-29T20:20:06.000385468Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.2.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Resource Buffering Service
+    digest: 17ebe68426c86e3a484969a31d3d6510f41ac3b92d49ca0a468e7c7aa59c06ec
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.40.0-615.1635538770.a3c8da/buffer-0.40.0-615.1635538770.a3c8da.tgz
+    version: 0.40.0-615.1635538770.a3c8da
   - apiVersion: v2
     created: "2021-10-27T14:21:07.433853919Z"
     dependencies:
@@ -6294,6 +6354,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.30.0/consent-0.30.0.tgz
     version: 0.30.0
+  - apiVersion: v2
+    created: "2021-10-29T20:20:06.102447268Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS Consent
+    digest: a82ed90c4663d74fcc4f4f3ff1e123b2bb856184f4213baad8fd6df69d220aea
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.30.0-615.1635538772.a3c8da/consent-0.30.0-615.1635538772.a3c8da.tgz
+    version: 0.30.0-615.1635538772.a3c8da
   - apiVersion: v2
     created: "2021-10-27T13:36:24.937509757Z"
     dependencies:
@@ -11463,6 +11555,32 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.15.0/cromiam-0.15.0.tgz
     version: 0.15.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-10-29T20:20:06.212095711Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 871bd709ac30ec4ea247ad29cbf97ea12a33dd746d5957b0a0f86dbe87887990
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.15.0-615.1635538774.a3c8da/cromiam-0.15.0-615.1635538774.a3c8da.tgz
+    version: 0.15.0-615.1635538774.a3c8da
   - apiVersion: v2
     appVersion: latest
     created: "2021-10-27T14:21:07.63216171Z"
@@ -18812,6 +18930,32 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.16.0/duos-0.16.0.tgz
     version: 0.16.0
+  - apiVersion: v2
+    created: "2021-10-29T20:20:06.311435516Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS
+    digest: ef9663543cda3c3f5e1dbca6f9463f6055ebd4e2742dff17a027d22681238404
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: duos
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/duos-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.16.0-615.1635538775.a3c8da/duos-0.16.0-615.1635538775.a3c8da.tgz
+    version: 0.16.0-615.1635538775.a3c8da
   - apiVersion: v2
     created: "2021-10-27T17:45:02.086835397Z"
     dependencies:
@@ -26721,6 +26865,33 @@ entries:
     version: 0.12.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-29T20:20:06.428365579Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for firecloud-orchestration service in Terra
+    digest: e9de17e6187b8c100797a76c38748487d01cf0b1a459a98a3721f4a59eab4d43
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.12.0-615.1635538776.a3c8da/firecloudorch-0.12.0-615.1635538776.a3c8da.tgz
+    version: 0.12.0-615.1635538776.a3c8da
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-12T18:30:09.102283956Z"
     dependencies:
     - name: pdb-lib
@@ -28532,6 +28703,34 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.9.0/firecloudui-0.9.0.tgz
     version: 0.9.0
+  - apiVersion: v2
+    created: "2021-10-29T20:20:06.585226698Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Firecloud UI service in Terra
+    digest: 2dd1baebf1f84c3a66d8d561fb5525ef2fa96c5a029ee376ecf396c3f9bbc9d5
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.9.0-615.1635538777.a3c8da/firecloudui-0.9.0-615.1635538777.a3c8da.tgz
+    version: 0.9.0-615.1635538777.a3c8da
   - apiVersion: v2
     created: "2021-10-27T14:21:07.78271172Z"
     dependencies:
@@ -31141,6 +31340,34 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.11.0/jobmanager-0.11.0.tgz
     version: 0.11.0
   - apiVersion: v2
+    created: "2021-10-29T20:20:06.68214263Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Job Manager service in Terra
+    digest: 0ffc4b9cd659a6ce8e888f6d38be053fa98e3fd3673f16be195e8e69bc0cf2ee
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.11.0-615.1635538778.a3c8da/jobmanager-0.11.0-615.1635538778.a3c8da.tgz
+    version: 0.11.0-615.1635538778.a3c8da
+  - apiVersion: v2
     created: "2021-10-27T14:21:07.955881258Z"
     dependencies:
     - name: pdb-lib
@@ -32356,6 +32583,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.65.0/leonardo-0.65.0.tgz
     version: 0.65.0
+  - apiVersion: v2
+    created: "2021-10-29T20:20:06.781252019Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: b7f35cd765b54499f23b27fd14936ec63f06f95d590f1f81c167a161d7469f3f
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.65.0-615.1635538779.a3c8da/leonardo-0.65.0-615.1635538779.a3c8da.tgz
+    version: 0.65.0-615.1635538779.a3c8da
   - apiVersion: v2
     created: "2021-10-21T20:16:21.864784141Z"
     dependencies:
@@ -41158,6 +41417,32 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.15.0/ontology-0.15.0.tgz
     version: 0.15.0
   - apiVersion: v2
+    created: "2021-10-29T20:20:06.894044486Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: http://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
+    digest: de5d40f21758fede9dd146e06c87b1d4e9a9fa0d8587bf945b6fe27b4309b0c6
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: ontology
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent-ontology
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/ontology-0.15.0-615.1635538781.a3c8da/ontology-0.15.0-615.1635538781.a3c8da.tgz
+    version: 0.15.0-615.1635538781.a3c8da
+  - apiVersion: v2
     created: "2021-10-12T17:50:47.025581279Z"
     dependencies:
     - name: pdb-lib
@@ -46816,6 +47101,35 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.23.0/rawls-0.23.0.tgz
     version: 0.23.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-10-29T20:20:06.999575634Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Rawls service in Terra
+    digest: 79ce2bccf20fe9f33f609e68bb03205bd6a244857bdf556c1ffc8ac3ad7379c8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - rawls
+    name: rawls
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/rawls
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/rawls-0.23.0-615.1635538782.a3c8da/rawls-0.23.0-615.1635538782.a3c8da.tgz
+    version: 0.23.0-615.1635538782.a3c8da
   - apiVersion: v2
     appVersion: latest
     created: "2021-10-12T18:10:40.37004234Z"
@@ -54947,6 +55261,15 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.8.0/terra-argocd-app-0.8.0.tgz
     version: 0.8.0
+  - apiVersion: v2
+    created: "2021-10-29T20:20:07.088353484Z"
+    description: A Helm chart for generating ArgoCD applications for Terra services
+    digest: 53805cf9712e83f0a44cb76b07d43c090938af9a52c019e8a56dd0db95bbd15b
+    name: terra-argocd-app
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-argocd-app-0.8.0-615.1635538783.a3c8da/terra-argocd-app-0.8.0-615.1635538783.a3c8da.tgz
+    version: 0.8.0-615.1635538783.a3c8da
   - apiVersion: v2
     created: "2021-09-13T21:21:31.664279218Z"
     description: A Helm chart for generating ArgoCD applications for Terra services
@@ -65669,6 +65992,34 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.16.0/thurloe-0.16.0.tgz
     version: 0.16.0
+  - apiVersion: v2
+    created: "2021-10-29T20:20:07.192290618Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.1.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Thurloe service in Terra
+    digest: 114823d7a0cbf7214199e920f9243ccd335305202ce50ed246b8c0a4f30072b7
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - thurloe
+    name: thurloe
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/thurloe
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.16.0-615.1635538783.a3c8da/thurloe-0.16.0-615.1635538783.a3c8da.tgz
+    version: 0.16.0-615.1635538783.a3c8da
   - apiVersion: v2
     created: "2021-10-26T20:53:05.937662094Z"
     dependencies:
