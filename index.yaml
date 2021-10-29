@@ -23067,6 +23067,34 @@ entries:
     version: 0.0.0-256.1610483351.e3b327
   externalcreds:
   - apiVersion: v2
+    created: "2021-10-29T18:35:48.156989653Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Terra External Credentials Manager
+    digest: bc076f4716cf952a6ff2c26f5c0f51c0171cb01b5f91eed89e3066fe4d79d608
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.60.0/externalcreds-0.60.0.tgz
+    version: 0.60.0
+  - apiVersion: v2
     created: "2021-10-27T20:26:26.375340584Z"
     dependencies:
     - condition: postgres.enabled
@@ -67896,6 +67924,34 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.0.0-296.1613670260.1d08f2/thurloe-0.0.0-296.1613670260.1d08f2.tgz
     version: 0.0.0-296.1613670260.1d08f2
   workspacemanager:
+  - apiVersion: v2
+    created: "2021-10-29T18:35:48.29514538Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.4.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Terra Workspace Manager
+    digest: 4cd6c970d7b46688927588cc91099910bab10a984a7b5f89c0ee18da657d9692
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.48.0/workspacemanager-0.48.0.tgz
+    version: 0.48.0
   - apiVersion: v2
     created: "2021-10-27T22:07:33.602384281Z"
     dependencies:
