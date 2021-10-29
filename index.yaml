@@ -23077,6 +23077,34 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.59.0/externalcreds-0.59.0.tgz
     version: 0.59.0
   - apiVersion: v2
+    created: "2021-10-29T17:50:40.739740638Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Terra External Credentials Manager
+    digest: dbcca9cdd526675bd2387bde792b31dd5a5397ebccdb96dac07c8e7be00e6a93
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.59.0-612.1635529827.5b5cfe/externalcreds-0.59.0-612.1635529827.5b5cfe.tgz
+    version: 0.59.0-612.1635529827.5b5cfe
+  - apiVersion: v2
     created: "2021-10-27T18:21:27.638947035Z"
     dependencies:
     - name: pdb-lib
@@ -51346,6 +51374,31 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.17.0/sam-0.17.0.tgz
     version: 0.17.0
   - apiVersion: v2
+    created: "2021-10-29T17:50:40.815351372Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: d7baa2e69bf8075317b0796f7dc3f3578d4e32bcdcbea4f099f0a77f2b57bee0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.17.0-612.1635529828.5b5cfe/sam-0.17.0-612.1635529828.5b5cfe.tgz
+    version: 0.17.0-612.1635529828.5b5cfe
+  - apiVersion: v2
     created: "2021-10-27T17:51:51.565964083Z"
     dependencies:
     - name: liquibase-migration
@@ -67717,6 +67770,34 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.47.0/workspacemanager-0.47.0.tgz
     version: 0.47.0
+  - apiVersion: v2
+    created: "2021-10-29T17:50:40.900095358Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.4.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Terra Workspace Manager
+    digest: c311d880294fc66ff3e909fbba075a829f817407889bcdad190a14b7d820a172
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - workspacemanager
+    name: workspacemanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-workspace-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/workspacemanager-0.47.0-612.1635529829.5b5cfe/workspacemanager-0.47.0-612.1635529829.5b5cfe.tgz
+    version: 0.47.0-612.1635529829.5b5cfe
   - apiVersion: v2
     created: "2021-10-27T21:44:50.908883669Z"
     dependencies:
