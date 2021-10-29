@@ -10,7 +10,7 @@ Current chart version is `0.1.2`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm | terra-argocd-templates | 0.0.4 |
+| https://terra-helm.storage.googleapis.com | terra-argocd-templates | 0.0.4 |
 
 ## Chart Values
 

@@ -3,12 +3,12 @@ A helm repo for Terra from Broad Data Science Platforms Group
 
 ## How Do I install the repo?
 ```
-helm repo add terra-helm https://broadinstitute.github.io/terra-helm
+helm repo add terra-helm https://terra-helm.storage.googleapis.com
 helm repo update
 ```
 ## How Do I Install These Charts?
 
-Just `helm install terra-helm/<chart>`. This is the default repository for Helm which is located at https://broadinstitute.github.io/terra-helm/ and is installed by default.
+Just `helm install terra-helm/<chart>`. This is the default repository for Helm which is located at https://terra-helm.storage.googleapis.com and is installed by default.
 
 For more information on using Helm, refer to the [Helm documentation](https://github.com/kubernetes/helm#docs).
 

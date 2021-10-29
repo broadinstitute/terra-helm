@@ -6,8 +6,8 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.12.0 |
-| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com | ingresslib | 0.12.0 |
+| https://terra-helm.storage.googleapis.com | pdb-lib | 0.4.0 |
 | https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.1.0 |
 
 ## Values
