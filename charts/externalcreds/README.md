@@ -1,6 +1,6 @@
 # externalcreds
 
-![Version: 0.58.0](https://img.shields.io/badge/Version-0.58.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.59.0](https://img.shields.io/badge/Version-0.59.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Terra External Credentials Manager
 
@@ -13,8 +13,8 @@ Chart for Terra External Credentials Manager
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.12.0 |
-| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com/ | ingresslib | 0.12.0 |
+| https://terra-helm.storage.googleapis.com/ | pdb-lib | 0.4.0 |
 | https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
