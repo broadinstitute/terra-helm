@@ -26,4 +26,4 @@ spec:
                 - 'rollout'
                 - 'restart'
                 - 'statefulset'
-                - {{ .Chart.Name }}-statefulset
+                - "{{ .Chart.Name }}-statefulset"
