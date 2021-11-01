@@ -1,13 +1,4 @@
-{{ if .Values.ingress.enabled -}}
-apiVersion: networking.gke.io/v1beta1
-kind: FrontendConfig
-metadata:
-  name: {{ .Values.name }}-ingress-frontendconfig
-  labels: {{ include "testrunnerdashboard.labels" . | nindent 4 }}
-spec:
-  redirectToHttps:
-    enabled: true
-{{- if .Values.ingress.sslPolicy }}
-  sslPolicy: {{ .Values.ingress.sslPolicy }}
-{{- end }}
+{{- include "libchart.frontendconfig" (list . "testrunnerdashboard.frontendconfig" )}}
+
+{{- define "testrunnerdashboard.frontendconfig" -}}
 {{- end }}
