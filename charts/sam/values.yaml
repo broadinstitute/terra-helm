@@ -150,3 +150,6 @@ sherlock:
 
 # Set whether this chart is being rendered for a preview environment.
 previewEnv: false
+
+postgres:
+  enabled: true
