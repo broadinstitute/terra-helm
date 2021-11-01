@@ -1,17 +1,21 @@
 # appVersion -- (string) Service image version/tag
-appVersion: '12'
+appVersion: v1
+name: sam
+
+port: 5432
 
 imageConfig:
   # imageConfig.repository -- Image repository
   repository: postgres
   # imageConfig.tag -- (string) Image tag
-  # @default -- The chart's appVersion value will be used
-  tag:
-  # imageConfig.imagePullPolicy -- Image pull policy
-  imagePullPolicy: Always
+  tag: 9.6
 
-# password -- Default postgres user password
-password: postgres
-
-# dbs -- (array(string)) List of additional databases to create. 
-dbs: []
+env:
+  # db username
+  username: "sam"
+  # db password
+  password: "globochem"
+  # db name
+  db_name: "sam"
+  # db data path
+  data_path: /data/pgdata
