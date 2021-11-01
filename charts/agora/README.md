@@ -6,7 +6,7 @@ Chart for Agora service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.6.0 |
+| https://terra-helm.storage.googleapis.com | ingresslib | 0.6.0 |
 
 ## Values
 

@@ -13,9 +13,9 @@ Chart for Resource Buffering Service
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.6.0 |
+| https://terra-helm.storage.googleapis.com | ingresslib | 0.6.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0
-| https://broadinstitute.github.io/terra-helm/ | pdb-lib | 0.2.0
+| https://terra-helm.storage.googleapis.com | pdb-lib | 0.2.0
 
 ## Values
 
