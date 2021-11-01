@@ -62,6 +62,7 @@ mailConfiguration:
   activateEmailNotifications: {{ .Values.emailNotificationsEnabled }}
   googleAccount: duos@broadinstitute.org
   sendGridApiKey: foo {{/* Override on the command line */}}
+  sendGridStatusUrl: {{ .Values.sendGridStatusUrl }}
 freeMarkerConfiguration:
   templateDirectory: /freemarker
   defaultEncoding: UTF-8
