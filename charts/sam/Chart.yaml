@@ -19,3 +19,7 @@ dependencies:
     condition: sherlock.enabled
     version: 0.3.0
     repository: https://terra-helm.storage.googleapis.com
+  - name: postgres
+    condition: postgres.enabled
+    version: 0.1.0
+    repository: file:///Users/emay/git/terra-helm/charts/postgres
