@@ -9,6 +9,12 @@ Chart for TestRunner Dashbaord
 * <https://github.com/broadinstitute/terra-helm/tree/master/charts>
 * <https://github.com/DataBiosphere/terra-test-runner-dashboard>
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://broadinstitute.github.io/terra-helm/ | ingresslib | 0.12.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -32,10 +38,12 @@ Chart for TestRunner Dashbaord
 | ingress.cert.vault.enabled | bool | `false` | Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager) |
 | ingress.cert.vault.key.path | string | `nil` | Path to secret containing .key |
 | ingress.cert.vault.key.secretKey | string | `nil` | Key in secret containing .key |
+| ingress.deployment | string | `"testrunnerdashboard"` | Name of the deployment to associate with the Ingress (should correspond to the "name" key, above) |
 | ingress.domain.hostname | string | `"testrunnerdashboard"` |  |
 | ingress.domain.namespaceEnv | bool | `true` |  |
 | ingress.domain.suffix | string | `"integ.envs.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
 | ingress.securityPolicy | string | `""` | (string) Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
