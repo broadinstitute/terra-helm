@@ -47277,6 +47277,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
+    created: "2021-11-01T18:25:04.552835776Z"
+    description: Application chart for an ephemeral PostgreSQL database container
+      used for Sam
+    digest: 76c0f256d40981d68f188ae6d17e918ca0ae61677bd462a5960229038e357cb4
+    keywords:
+    - dsp
+    - broadinstitute
+    - database
+    - postgres
+    - sam
+    name: postgres
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.1.0-616.1635791094.529d94/postgres-0.1.0-616.1635791094.529d94.tgz
+    version: 0.1.0-616.1635791094.529d94
+  - apiVersion: v2
     created: "2020-09-30T17:39:00.41922707Z"
     description: Library chart for an ephemeral PostgreSQL database container
     digest: d39dc9fcf145db98c01d47a7603d15a193a14d13b26eaa7ef08c02b027f9976d
