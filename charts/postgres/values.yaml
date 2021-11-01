@@ -1,6 +1,6 @@
 # appVersion -- (string) Service image version/tag
 appVersion: v1
-name: sam
+name: postgres
 
 port: 5432
 
