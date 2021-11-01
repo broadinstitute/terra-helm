@@ -104,5 +104,49 @@ prometheus:
 proxy:
   logLevel: warn
 
+liquibase-migration:
+  # In an env-specific file use something like the following to fully enable:
+  # ```
+  # liquibase-migration:   
+  #   migrationJobs:
+  #     - name: "sam"
+  #       enabled: true
+  #       migrationDatabaseCredentials:
+  #         fromVaultSecret:
+  #           path: "secret/path/in/vault"
+  # ```
+  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
+
+  # needed pending DDO-1579
+  name: "sam"
+
+  defaults:
+    enabled: false
+    sqlproxyCredentialFileMount:
+      secretName: "sam-sqlproxy-ctmpls"
+    sqlproxyContainerConfig:
+      envFrom:
+        - secretRef:
+            name: "sam-sqlproxy-env"
+    migrationImage: "gcr.io/broad-dsp-gcr-public/sam"
+    migrationArgsClasspath:
+      - "$(find /sam -name 'sam*.jar')"
+    migrationConfigFileMount:
+      secretName: "sam-app-ctmpls"
+    migrationDatabaseCredentials:
+      fromVaultSecret:
+        path: null
+        usernameKey: "username"
+        passwordKey: "password"
+
+sherlock:
+  enabled: true
+  appImageName: gcr.io/broad-dsp-gcr-public/sam
+  appName: sam
+  sherlockImageTag: v0.0.15
+
+  vault:
+    pathPrefix: secret/suitable/sherlock/prod
+
 # Set whether this chart is being rendered for a preview environment.
 previewEnv: false
