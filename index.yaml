@@ -52387,6 +52387,31 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.17.0-612.1635529828.5b5cfe/sam-0.17.0-612.1635529828.5b5cfe.tgz
     version: 0.17.0-612.1635529828.5b5cfe
   - apiVersion: v2
+    created: "2021-11-01T18:43:25.044112667Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: b1f0d688daa5e29b051bdf6d4d2bd98d2d496d36bb0c43ec1ed86c306eeb3c75
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.17.0-527.1635792195.47a973/sam-0.17.0-527.1635792195.47a973.tgz
+    version: 0.17.0-527.1635792195.47a973
+  - apiVersion: v2
     created: "2021-10-29T18:53:50.195351341Z"
     dependencies:
     - name: liquibase-migration
