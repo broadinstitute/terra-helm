@@ -1,6 +1,6 @@
 apiVersion: v2
 name: postgres
-appVersion: 0.1.0
+version: 0.1.0
 
 description: Application chart for an ephemeral PostgreSQL database container used for Sam
 type: application
