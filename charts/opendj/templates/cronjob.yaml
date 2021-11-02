@@ -1,3 +1,4 @@
+{{- if .Values.restart.enabled -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -27,3 +28,4 @@ spec:
                 - 'restart'
                 - 'statefulset'
                 - "{{ .Chart.Name }}-statefulset"
+{{- end }}

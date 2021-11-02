@@ -1,6 +1,6 @@
 # opendj
 
-![Version: 0.15.0](https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.16.0](https://img.shields.io/badge/Version-0.16.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for OpenDJ, used by Sam(Terra IAM service) as well as various Terra applications' OIDC proxy deploys
 
@@ -36,6 +36,7 @@ Chart for OpenDJ, used by Sam(Terra IAM service) as well as various Terra applic
 | resources.limits.memory | string | `"60Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `64` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"60Gi"` | Memory to request for the deployment |
+| restart.enabled | bool | `false` | Whether the nightly OpenDJ restart should be enabled |
 | restart.timeoutSeconds | int | `600` | How many seconds to wait before assuming job is hung and killing it |
 | service.allowedAddresses | object | `{}` | A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | service.firewallEnabled | bool | `true` | Whether to restrict access to the service to the IPs supplied via service.allowedAddresses |
