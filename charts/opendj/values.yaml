@@ -67,6 +67,8 @@ snapshot:
 
 
 restart:
+  # restart.enabled -- Whether to automatically restart OpenDJ
+  enabled: false
   # restart.timeoutSeconds -- How many seconds to wait before assuming job is hung and killing it
   timeoutSeconds: 600 # 10 mins
 

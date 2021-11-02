@@ -1,3 +1,4 @@
+{{ if .Values.restart.enabled -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -6,7 +7,7 @@ metadata:
 spec:
   # If it's time for a new job run and the previous job run hasn't finished yet, the cron job skips the new job run
   concurrencyPolicy: Forbid
-  schedule: '0 02 * * *' # Run once a day at 2 am UTC / 10 pm EST
+  schedule: '0 10 * * *' # Run once a day at 10 am UTC / 6 AM EST
   jobTemplate:
     metadata:
       labels: {{ include "opendj.labels" . | nindent 8 }}
@@ -27,3 +28,4 @@ spec:
                 - 'restart'
                 - 'statefulset'
                 - "{{ .Chart.Name }}-statefulset"
+{{- end }}
