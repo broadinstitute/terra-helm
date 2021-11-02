@@ -85,6 +85,7 @@ A Helm chart for DUOS Consent
 | replicas | int | `3` |  |
 | sendgridApiKey | string | `nil` |  |
 | sendgridApiKeyKey | string | `nil` |  |
+| sendGridStatusUrl | string | `nil` |  |
 | sentryDsnKey | string | `nil` |  |
 | sentryDsnPath | string | `nil` |  |
 | servicesLocalUrl | string | `nil` |  |

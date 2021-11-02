@@ -125,6 +125,7 @@ proxyImageVersion:
 replicas: 3
 
 sendgridApiKey:
+sendGridStatusUrl:
 
 sentryDsnPath:
 sentryDsnKey:
