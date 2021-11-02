@@ -66223,6 +66223,27 @@ entries:
     version: 0.0.0
   testrunnerdashboard:
   - apiVersion: v2
+    created: "2021-11-02T15:41:19.760074995Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    description: Chart for TestRunner Dashbaord
+    digest: dc1083bc659820b85824f58406dc84f43d521250be781627707a973e8e3b545e
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - testrunner
+    name: testrunnerdashboard
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-test-runner-dashboard
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/testrunnerdashboard-0.1.0-529.1635867668.1593e8/testrunnerdashboard-0.1.0-529.1635867668.1593e8.tgz
+    version: 0.1.0-529.1635867668.1593e8
+  - apiVersion: v2
     created: "2021-11-01T14:41:48.237817535Z"
     dependencies:
     - name: ingresslib
