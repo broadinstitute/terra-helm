@@ -46,5 +46,6 @@ spec:
         startupProbe:
           {{- toYaml $.Values.probes.startup.spec | nindent 10 }}
         {{- end }}
-        command: ["python",
-                  "dashboard.py"]
+        command:
+          - python
+          - dashboard.py
