@@ -10,4 +10,4 @@ roleRef:
 subjects:
 # Authorize specific service accounts:
 - kind: ServiceAccount
-  name: {{ .Values.name }}-service-ksa
+  name: {{ .Values.name }}-sa

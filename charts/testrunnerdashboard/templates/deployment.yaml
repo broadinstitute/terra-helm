@@ -22,7 +22,7 @@ spec:
         deployment: {{ $.Values.name }}-deployment
 {{ include "testrunnerdashboard.labels" . | indent 8 }}
     spec:
-      serviceAccountName: {{ .Values.name }}-service-ksa
+      serviceAccountName: {{ .Values.name }}-sa
       containers:
       - name: {{ $.Values.name }}-app
         image: {{ $.Values.imageConfig.repository }}:{{ $imageTag }}
