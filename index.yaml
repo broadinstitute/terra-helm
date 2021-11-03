@@ -52416,6 +52416,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/revere-0.3.0/revere-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2021-11-03T20:01:19.457593866Z"
+    description: Chart for Revere - Terra's Status and Uptime Reporting Service
+    digest: 20bd5f8503997e06ed569bd4150483346cb04d5c7fcab3d24d9bf90bcd2e38d2
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - revere
+    name: revere
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/revere
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/revere-0.3.0-620.1635969670.a77e02/revere-0.3.0-620.1635969670.a77e02.tgz
+    version: 0.3.0-620.1635969670.a77e02
+  - apiVersion: v2
     created: "2021-08-31T17:38:09.408602123Z"
     description: Chart for Revere - Terra's Status and Uptime Reporting Service
     digest: 241aa88fa5ff9c62168f1f3be81e029c9aea8449bca3730cb4b6c53e94d2af6c
