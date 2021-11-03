@@ -18,9 +18,6 @@ imageConfig:
   # -- (string) When to pull images
   imagePullPolicy: Always
 
-# -- (number) Number of replicas for the deployment
-replicas: 3
-
 # -- (map) Annotations for application pods
 annotations: {}
 
@@ -29,10 +26,10 @@ resources:
     # -- (string) Number of CPU units to request for the deployment
     cpu: 500m
     # -- (string) Memory to request for the deployment
-    memory: 4Gi
+    memory: 2Gi
   limits:
     # -- (string) Number of CPU units to limit the deployment to
-    cpu: 500m
+    cpu: 1000m
     # -- (string) Memory to limit the deployment to
     memory: 4Gi
 

@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.name }}-job
+  labels:
+    {{- include "revere.labels" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      labels:
+        deployment: {{ .Values.name }}-deployment
+        {{- include "revere.labels" . | nindent 8 }}
+      {{- if .Values.annotations }}
+      annotations:
+        {{- range $key, $value := .Values.annotations }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+    spec:
+      {{- include "revere.podSpec" . | nindent 6 }}
+        args: ["prepare"]

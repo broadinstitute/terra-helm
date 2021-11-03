@@ -1,6 +1,6 @@
 # revere
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Revere - Terra's Status and Uptime Reporting Service
 
@@ -24,11 +24,10 @@ Chart for Revere - Terra's Status and Uptime Reporting Service
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
 | probes.readiness.enabled | bool | `false` | (boolean) If the readiness probe should be enabled |
 | probes.readiness.spec | object | `nil` | Spec for the readiness probe |
-| replicas | int | `3` | (number) Number of replicas for the deployment |
-| resources.limits.cpu | string | `"500m"` | (string) Number of CPU units to limit the deployment to |
+| resources.limits.cpu | string | `"1000m"` | (string) Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"4Gi"` | (string) Memory to limit the deployment to |
 | resources.requests.cpu | string | `"500m"` | (string) Number of CPU units to request for the deployment |
-| resources.requests.memory | string | `"4Gi"` | (string) Memory to request for the deployment |
+| resources.requests.memory | string | `"2Gi"` | (string) Memory to request for the deployment |
 | secrets.gcpServiceAccount.secretsManager.enabled | bool | `false` | (boolean) If secrets-manager (Vault) should be used for the GCP SA |
 | secrets.gcpServiceAccount.secretsManager.sourceEncoding | string | `"base64"` | (string) Encoding of the Vault field (either `text` or `base64`) |
 | secrets.gcpServiceAccount.secretsManager.vaultKey | string | `nil` | Field name within the secret for the SA's key |
