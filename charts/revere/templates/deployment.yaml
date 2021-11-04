@@ -4,6 +4,9 @@ metadata:
   name: {{ .Values.name }}-deployment
   labels:
     {{- include "revere.labels" . | nindent 4 }}
+  annotations:
+    # Delay this to run last--after the job and everything else
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   strategy:
     type: RollingUpdate

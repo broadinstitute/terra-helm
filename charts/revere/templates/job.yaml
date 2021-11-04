@@ -4,6 +4,10 @@ metadata:
   name: {{ .Values.name }}-job
   labels:
     {{- include "revere.labels" . | nindent 4 }}
+  annotations:
+    # Don't need to modify sync wave here because the deployment itself is specifically delayed
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
   template:
     metadata:
