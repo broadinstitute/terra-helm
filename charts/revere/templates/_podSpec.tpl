@@ -4,6 +4,18 @@ Abstract common yaml between deployment.yaml and job.yaml
 {{- define "revere.podSpec" -}}
 serviceAccountName: {{ .Values.name }}-sa
 
+nodeSelector:
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- with .Values.affinity }}
+affinity:
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- with .Values.tolerations }}
+tolerations:
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+
 volumes:
 - name: {{ .Values.name }}-cm
   configMap:

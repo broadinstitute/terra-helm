@@ -18,8 +18,14 @@ imageConfig:
   # -- (string) When to pull images
   imagePullPolicy: Always
 
-# -- (map) Annotations for application pods
+# -- Annotations for application pods
 annotations: {}
+# -- nodeSelector map
+nodeSelector: {}
+# -- affinity map
+affinity: {}
+# -- Array of tolerations
+tolerations: []
 
 resources:
   requests:
