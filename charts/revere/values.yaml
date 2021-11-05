@@ -20,11 +20,11 @@ imageConfig:
 
 # -- Annotations for application pods
 annotations: {}
-# -- nodeSelector map
+# -- nodeSelector map for application pods
 nodeSelector: {}
-# -- affinity map
+# -- affinity map for application pods
 affinity: {}
-# -- Array of tolerations
+# -- Array of tolerations for application pods
 tolerations: []
 
 resources:
