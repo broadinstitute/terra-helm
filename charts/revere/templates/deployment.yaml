@@ -4,6 +4,9 @@ metadata:
   name: {{ .Values.name }}-deployment
   labels:
     {{- include "revere.labels" . | nindent 4 }}
+  annotations:
+    # Delay this to run last--after the job and everything else
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   strategy:
     type: RollingUpdate
@@ -11,7 +14,8 @@ spec:
       maxSurge: 0
       maxUnavailable: 1
   revisionHistoryLimit: 0
-  replicas: {{ .Values.replicas }}
+  # Revere currently uses an in-memory data store and requires a single replica
+  replicas: 1
   selector:
     matchLabels:
       deployment: {{ .Values.name }}-deployment
@@ -27,47 +31,8 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: {{ .Values.name }}-sa
-
-      volumes:
-      - name: {{ .Values.name }}-cm
-        configMap:
-          name: {{ .Values.name }}-cm
-      {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
-      - name: {{ .Values.name }}-gcp-sa
-        secret:
-          secretName: {{ .Values.name }}-gcp-sa
-      {{- end }}
-
-      containers:
-      - name: {{ .Values.name }}-app
-        image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag | default .Values.global.applicationVersion }}"
-        imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
-        resources:
-          {{- toYaml .Values.resources | nindent 10 }}
-
-        env:
-        - name: REVERE_STATUSPAGE_APIKEY
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.name }}-statuspage-api-key
-              key: statuspageApiKey
-        {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /etc/revere-sa/serviceAccount.json
-        {{- end }}
-
-        volumeMounts:
-        - mountPath: /etc/revere/revere.yaml
-          name: {{ .Values.name }}-cm
-          readOnly: true
-          subPath: revere.yaml
-        {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
-        - mountPath: /etc/revere-sa/
-          name: {{ .Values.name }}-gcp-sa
-          readOnly: true
-        {{- end }}
-
+      {{- include "revere.podSpec" . | nindent 6 }}
+      
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
@@ -76,3 +41,5 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
+
+        args: ["serve"]
