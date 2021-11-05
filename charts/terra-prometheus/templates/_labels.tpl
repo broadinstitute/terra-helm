@@ -10,3 +10,4 @@ app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/component: prometheus
 app.kubernetes.io/part-of: dsp-tools
 {{- end -}}
+
