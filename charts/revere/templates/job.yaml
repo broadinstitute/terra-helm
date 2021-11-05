@@ -21,5 +21,7 @@ spec:
         {{- end }}
       {{- end }}
     spec:
+      # Spin up an entirely new pod upon failure
+      restartPolicy: "Never"
       {{- include "revere.podSpec" . | nindent 6 }}
         args: ["prepare"]
