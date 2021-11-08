@@ -14,7 +14,7 @@ spec:
     unhealthyThreshold: 2
     type: HTTP
     port: 10902
-    requestPath: metrics
+    requestPath: /metrics
 {{- if .Values.thanos.ingress.securityPolicy }}
   securityPolicy:
     name: {{ .Values.thanos.ingress.securityPolicy }}
