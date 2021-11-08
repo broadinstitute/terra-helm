@@ -1,17 +1,15 @@
-mongodb
-=======
+# mongodb
 
 A Helm chart for MongoDB, used by Terra's Agora application.
 This chart is heavily customized to Terra's needs and is a thin wrapper around Bitnami's MongoDB Helm chart.
 
-
-## Chart Requirements
+## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | mongodb | 10.5.1 |
+| https://charts.bitnami.com/bitnami | bitnami(mongodb) | 10.5.1 |
 
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|

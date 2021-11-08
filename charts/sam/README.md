@@ -1,6 +1,6 @@
 # sam
 
-![Version: 0.15.0](https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.17.0](https://img.shields.io/badge/Version-0.17.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Sam, the Terra Identity and Access Management application
 
@@ -14,6 +14,7 @@ Chart for Sam, the Terra Identity and Access Management application
 | Repository | Name | Version |
 |------------|------|---------|
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -73,6 +74,11 @@ Chart for Sam, the Terra Identity and Access Management application
 | resources.limits.memory | string | `"16Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"16Gi"` | Memory to request for the deployment |
+| sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/sam"` |  |
+| sherlock.appName | string | `"sam"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 
 ----------------------------------------------

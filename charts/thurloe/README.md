@@ -6,8 +6,9 @@ Chart for Thurloe service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm.storage.googleapis.com | pdb-lib | 0.1.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
+| https://terra-helm.storage.googleapis.com | pdb-lib | 0.1.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -70,4 +71,9 @@ Chart for Thurloe service in Terra
 | resources.limits.memory | string | `"8Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"8Gi"` | Memory to request for the deployment |
+| sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/thurloe"` |  |
+| sherlock.appName | string | `"thurloe"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | startupSleep | int | `30` |  |

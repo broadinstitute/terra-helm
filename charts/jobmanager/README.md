@@ -6,8 +6,9 @@ Chart for Job Manager service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm.storage.googleapis.com | ingresslib | 0.10.0 |
+| https://terra-helm.storage.googleapis.com | ingresslib | 0.12.0 |
 | https://terra-helm.storage.googleapis.com | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -34,6 +35,11 @@ Chart for Job Manager service in Terra
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Image repository |
 | proxy.image.tag | string | `"modsecurity_2_9_2"` | (string) Image tag. |
 | replicas | int | `3` | Number of API replicas to spin up in the deployment |
+| sherlock.appImageName | string | `"us.gcr.io/broad-dsp-gcr-public/job-manager-ui"` |  |
+| sherlock.appName | string | `"jobmanager"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | ui.image.repository | string | `"us.gcr.io/broad-dsp-gcr-public/job-manager-ui"` | Image repository |
 | ui.image.tag | string | global.applicationVersion | Image tag. |
 | ui.probes.liveness.enabled | bool | `true` |  |

@@ -1,11 +1,8 @@
-postgres
-========
+# postgres
 
 Library chart for an ephemeral PostgreSQL database container
 
-
-
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|

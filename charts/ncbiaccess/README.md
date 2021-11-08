@@ -6,6 +6,7 @@ Chart for NCBI Access service in Terra
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| annotations | object | `{}` |  |
 | global.applicationVersion | string | `"latest"` | What version of the Sam application to deploy |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"broadinstitute/ncbiaccess"` | Image repo to use |

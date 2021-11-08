@@ -1,6 +1,6 @@
 # crljanitor
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Cloud Resource Manager Janitor
 
@@ -8,6 +8,12 @@ Chart for Cloud Resource Manager Janitor
 
 * <https://github.com/broadinstitute/terra-helm/tree/master/charts>
 * <https://github.com/DataBiosphere/terra-resource-janitor>
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -37,6 +43,12 @@ Chart for Cloud Resource Manager Janitor
 | serviceAllowedAddresses | object | `{}` | A map of addresses in the form `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | serviceFirewallEnabled | bool | `false` | Whether to restrict access to the service to the IPs supplied via serviceAllowedAddresses |
 | serviceIP | string | `nil` | External IP of the service. Required. |
+| sherlock.appImageName | string | `"gcr.io/terra-kernel-k8s/terra-resource-janitor"` |  |
+| sherlock.appName | string | `"crljanitor"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.serviceAccount | string | `"terra-crl-janitor-service-sa"` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | trackResourcePubsubEnabled | bool | `true` | Whether to enable using pubsub to receive new tracked resources. |
 | vault.adminUserFilePath | string | `"config/terra/crl-janitor/common/iam"` | (string) Vault path prefix for admin user list. Required if vault.enabled. Use the same users as admin for all env by default. Override if needed in helmfile repo. |

@@ -1,6 +1,6 @@
 # terra-prometheus
 
-![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.10.0](https://img.shields.io/badge/Version-0.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a helm chart to deploy monitoring infrastructure
 
@@ -56,7 +56,7 @@ receivers:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://prometheus-community.github.io/helm-charts/ | kube-prometheus-stack | 9.3.4 |
+| https://prometheus-community.github.io/helm-charts/ | kube-prometheus-stack | 19.2.3 |
 
 ## Values
 

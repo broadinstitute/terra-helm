@@ -6,7 +6,9 @@ Chart for Agora service in Terra
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm.storage.googleapis.com | ingresslib | 0.6.0 |
+| https://terra-helm.storage.googleapis.com | ingresslib | 0.12.0 |
+| https://terra-helm.storage.googleapis.com | pdb-lib | 0.4.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -51,4 +53,9 @@ Chart for Agora service in Terra
 | resources.limits.memory | string | `"15Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"15Gi"` | Memory to request for the deployment |
+| sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/agora"` |  |
+| sherlock.appName | string | `"agora"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |

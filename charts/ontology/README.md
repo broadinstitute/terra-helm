@@ -2,7 +2,7 @@
 
 A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
 
-![Version: 0.8.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.16.0](https://img.shields.io/badge/Version-0.16.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Values
 
@@ -21,7 +21,7 @@ A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
 | image | string | `nil` |  |
 | imageRepository | string | `nil` |  |
 | imageTag | string | `nil` |  |
-| probes.liveness.enabled | bool | `false` |  |
+| probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |
 | probes.liveness.spec.httpGet.port | int | `8080` |  |
@@ -43,6 +43,11 @@ A Helm chart for DUOS Ontology, the DUOS Algorithmic Matching System
 | sentryDsnKey | string | `nil` |  |
 | sentryDsnPath | string | `nil` |  |
 | serviceIP | string | `nil` | External IP of the service. Required. |
+| sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/consent-ontology"` |  |
+| sherlock.appName | string | `"ontology"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | vaultCertPath | string | `nil` |  |
 | vaultCertSecretKey | string | `nil` |  |
 | vaultChain | string | `nil` |  |

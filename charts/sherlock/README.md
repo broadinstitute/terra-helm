@@ -1,6 +1,6 @@
 # sherlock
 
-![Version: 0.0.0](https://img.shields.io/badge/Version-0.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Sherlock - DSP's environment tracking and management service
 
@@ -25,6 +25,7 @@ Chart for Sherlock - DSP's environment tracking and management service
 | ingress.domain.hostname | string | `"sherlock"` |  |
 | ingress.domain.suffix | string | `"dsp-devops.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
+| ingress.iap.enabled | bool | `true` |  |
 | ingress.requestPath | string | `"/api/v1/metrics"` | (string) url path to use for load balancer health checks |
 | ingress.securityPolicy | string | `nil` | Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
