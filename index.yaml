@@ -32,6 +32,35 @@ entries:
     version: 0.18.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-11-08T21:46:22.540058721Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Agora service in Terra
+    digest: a4aada1b9b6cb2890b4fd81ea3dc1f6a368a40b81c721fd9a26d1ecd959577ff
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - agora
+    name: agora
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/agora
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/agora-0.18.0-623.1636407921.9f6236/agora-0.18.0-623.1636407921.9f6236.tgz
+    version: 0.18.0-623.1636407921.9f6236
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-27T14:21:07.235701631Z"
     dependencies:
     - name: ingresslib
@@ -2559,6 +2588,37 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.41.0/buffer-0.41.0.tgz
     version: 0.41.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:22.724094222Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.2.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Resource Buffering Service
+    digest: 8d6c7da2c7984f1eabdfbc7648d32faa12827b3576467f83a16d82d9d2afd89c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.41.0-623.1636407924.9f6236/buffer-0.41.0-623.1636407924.9f6236.tgz
+    version: 0.41.0-623.1636407924.9f6236
   - apiVersion: v2
     created: "2021-10-27T14:42:52.820592413Z"
     dependencies:
@@ -6366,6 +6426,22 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/config-connector-1.1.0/config-connector-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:22.891187342Z"
+    description: Chart to add the Google Config Connector configuration file
+    digest: 7a628e15f6ae4dd12fc33c5e52dd1ee1af765d864fa8ff4b4876ade52c459717
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: config-connector
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://cloud.google.com/config-connector/docs/how-to/install-upgrade-uninstall#addon-configuring
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/config-connector-1.1.0-623.1636407926.9f6236/config-connector-1.1.0-623.1636407926.9f6236.tgz
+    version: 1.1.0-623.1636407926.9f6236
+  - apiVersion: v2
     created: "2021-10-15T11:51:25.405416252Z"
     description: Chart to add the Google Config Connector configuration file
     digest: eedc78dbb9a596a09de517f6c3cea78d1064147ffefe06f6561165d4bd9b6ee6
@@ -6414,6 +6490,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.32.0/consent-0.32.0.tgz
     version: 0.32.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:23.051875839Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS Consent
+    digest: 1b08747c77dcfe9cbde71a1b110d2cc731a29c8aab4b6af5755be085c6426058
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.32.0-623.1636407926.9f6236/consent-0.32.0-623.1636407926.9f6236.tgz
+    version: 0.32.0-623.1636407926.9f6236
   - apiVersion: v2
     created: "2021-11-02T12:30:05.130967247Z"
     dependencies:
@@ -10605,6 +10713,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.7.0/crljanitor-0.7.0.tgz
     version: 0.7.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:23.251120979Z"
+    dependencies:
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Cloud Resource Manager Janitor
+    digest: 8f975913d91c0b98acfc12147315df65c6cd26b6c4348d452a917faceb235e62
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.7.0-623.1636407928.9f6236/crljanitor-0.7.0-623.1636407928.9f6236.tgz
+    version: 0.7.0-623.1636407928.9f6236
+  - apiVersion: v2
     created: "2021-09-15T20:09:30.033338764Z"
     description: Chart for Cloud Resource Manager Janitor
     digest: 3be5d89d920c34ee84646ddb75fe87103656ed2ab85acfe233a538d9ad65647a
@@ -11775,6 +11905,32 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.16.0/cromiam-0.16.0.tgz
     version: 0.16.0
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-11-08T21:46:23.407209702Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for cromiam service in Terra [WIP]
+    digest: 4419853962074dee00377798d5ff99de13a629947ffe4d97cd751c9559934267
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromiam
+    name: cromiam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromiam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromiam-0.16.0-623.1636407929.9f6236/cromiam-0.16.0-623.1636407929.9f6236.tgz
+    version: 0.16.0-623.1636407929.9f6236
   - apiVersion: v2
     appVersion: latest
     created: "2021-10-27T16:38:39.863421168Z"
@@ -13439,6 +13595,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.24.0/cromwell-0.24.0.tgz
     version: 0.24.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:23.602562725Z"
+    dependencies:
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for Cromwell, the Terra Workflow Management System
+    digest: b6b66787a90550bbd2b877b926516b502d7f0b09613a1dcbc9fa01123717f57a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - cromwell
+    name: cromwell
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/cromwell
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/cromwell-0.24.0-623.1636407930.9f6236/cromwell-0.24.0-623.1636407930.9f6236.tgz
+    version: 0.24.0-623.1636407930.9f6236
   - apiVersion: v2
     created: "2021-09-01T13:52:38.12279747Z"
     description: A Helm chart for Cromwell, the Terra Workflow Management System
@@ -15802,6 +15980,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/diskmanager-0.1.0/diskmanager-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:23.752596154Z"
+    description: A helm chart to deploy a cronjob to manage backups of stateful set
+      persistent disks
+    digest: 1535f4f2b75a79cd50ca7f94d782dcf71942b741cb423c87b8a945bf05fce4cd
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - disk
+    - tools
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Mike Flinn
+    name: diskmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/disk-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/diskmanager-0.1.0-623.1636407930.9f6236/diskmanager-0.1.0-623.1636407930.9f6236.tgz
+    version: 0.1.0-623.1636407930.9f6236
+  - apiVersion: v2
     created: "2021-02-12T16:57:46.077401275Z"
     description: A helm chart to deploy a cronjob to manage backups of stateful set
       persistent disks
@@ -16198,6 +16398,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.30.0/dsp-argocd-0.30.0.tgz
     version: 0.30.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:23.928777614Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: d08b26271f91580909d500d7382d9397d5e339a2f9cbfc928c607af3bad1e72a
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.30.0-623.1636407931.9f6236/dsp-argocd-0.30.0-623.1636407931.9f6236.tgz
+    version: 0.30.0-623.1636407931.9f6236
   - apiVersion: v2
     created: "2021-10-29T18:14:43.471240839Z"
     dependencies:
@@ -17753,6 +17975,25 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.4.0/dsp-atlantis-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:24.102564279Z"
+    dependencies:
+    - name: atlantis
+      repository: https://runatlantis.github.io/helm-charts
+      version: 3.12.4
+    description: Chart for DSP Atlantis deployment
+    digest: 3d6c83d8ba909ea91a54ade33d871a83957a5fae3ae58ebda424118de5a52cf9
+    keywords:
+    - dsp
+    - broadinstitute
+    - atlantis
+    name: dsp-atlantis
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-atlantis-0.4.0-623.1636407931.9f6236/dsp-atlantis-0.4.0-623.1636407931.9f6236.tgz
+    version: 0.4.0-623.1636407931.9f6236
+  - apiVersion: v2
     created: "2021-06-02T19:46:55.569387824Z"
     dependencies:
     - name: atlantis
@@ -18367,6 +18608,30 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-2.1.0/dsp-cert-manager-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:24.274786217Z"
+    dependencies:
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.4
+    description: Installs cert-manager, configures psps and creates Let's encrypt
+      cluster issuers
+    digest: 72683807f50bc3e5fee493f87b23d34e403abd9ff0a01cee4dc0d66924ecfc4f
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - tools
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-cert-manager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-cert-manager-2.1.0-623.1636407932.9f6236/dsp-cert-manager-2.1.0-623.1636407932.9f6236.tgz
+    version: 2.1.0-623.1636407932.9f6236
+  - apiVersion: v2
     created: "2021-10-18T16:37:36.557972024Z"
     dependencies:
     - name: cert-manager
@@ -18865,6 +19130,26 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-controller-0.2.0/dsp-gha-runner-controller-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:24.444161923Z"
+    dependencies:
+    - name: actions-runner-controller
+      repository: https://actions-runner-controller.github.io/actions-runner-controller
+      version: 0.12.7
+    description: Controller for self-hosted GHA runner CRDs from dsp-gha-runner-instances
+    digest: 43c5766f260da8e42a36c2dfaa3d6eeec304be461038052a658416eb618aa6d7
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner-controller
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-controller-0.2.0-623.1636407932.9f6236/dsp-gha-runner-controller-0.2.0-623.1636407932.9f6236.tgz
+    version: 0.2.0-623.1636407932.9f6236
+  - apiVersion: v2
     created: "2021-08-05T15:22:38.200565373Z"
     dependencies:
     - name: actions-runner-controller
@@ -18901,6 +19186,22 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.5.0/dsp-gha-runner-instances-0.5.0.tgz
     version: 0.5.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:24.654633978Z"
+    description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
+    digest: 760d946560eaf4972e6ea30f883b1a95cdbab421877efe06588009d57a641584
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner-instances
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.5.0-623.1636407933.9f6236/dsp-gha-runner-instances-0.5.0-623.1636407933.9f6236.tgz
+    version: 0.5.0-623.1636407933.9f6236
   - apiVersion: v2
     created: "2021-08-16T20:10:34.242821288Z"
     description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
@@ -19176,6 +19477,32 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.17.0/duos-0.17.0.tgz
     version: 0.17.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:24.983758205Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS
+    digest: 4312c97bb79e60870d92b7477dc66d21a31a38f6a963d3b885720a5e949381fa
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: duos
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/duos-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/duos-0.17.0-623.1636407933.9f6236/duos-0.17.0-623.1636407933.9f6236.tgz
+    version: 0.17.0-623.1636407933.9f6236
   - apiVersion: v2
     created: "2021-10-27T17:56:43.127209297Z"
     dependencies:
@@ -21167,6 +21494,32 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/elasticsearch-0.11.0/elasticsearch-0.11.0.tgz
     version: 0.11.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:25.148423226Z"
+    dependencies:
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      version: 6.8.13
+    description: a helm chart to deploy monitoring infrastructure
+    digest: d8c1cc2c24e3f886b056e7b5487644cd47986f69999eefd12fc980c2e19796a9
+    keywords:
+    - dsp
+    - broad
+    - terra
+    - elasticsearch
+    - ontology
+    - consent
+    - firecloudorch
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Michael Flinn
+    name: elasticsearch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/elasticsearch-0.11.0-623.1636407934.9f6236/elasticsearch-0.11.0-623.1636407934.9f6236.tgz
+    version: 0.11.0-623.1636407934.9f6236
   - apiVersion: v2
     created: "2021-04-21T20:09:09.715963282Z"
     dependencies:
@@ -23510,6 +23863,34 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.60.0/externalcreds-0.60.0.tgz
     version: 0.60.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:25.320166025Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Terra External Credentials Manager
+    digest: c8d0d45d213cd555ec56301d88cb69a93b1db7cbb0f77e7a0c44386179fcf72e
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - externalcreds
+    name: externalcreds
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-external-credentials-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/externalcreds-0.60.0-623.1636407935.9f6236/externalcreds-0.60.0-623.1636407935.9f6236.tgz
+    version: 0.60.0-623.1636407935.9f6236
   - apiVersion: v2
     created: "2021-10-27T20:26:26.375340584Z"
     dependencies:
@@ -27137,6 +27518,33 @@ entries:
     version: 0.13.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-11-08T21:46:25.472685156Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for firecloud-orchestration service in Terra
+    digest: 307237a38b8c5827f522f9c7e1ded5ed076ec23bca9a7f06d0b06bb0514af193
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloud-orchestration
+    - firecloudorch
+    name: firecloudorch
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-orchestration
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudorch-0.13.0-623.1636407936.9f6236/firecloudorch-0.13.0-623.1636407936.9f6236.tgz
+    version: 0.13.0-623.1636407936.9f6236
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-10-27T18:06:30.567019635Z"
     dependencies:
     - name: pdb-lib
@@ -29003,6 +29411,34 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.10.0/firecloudui-0.10.0.tgz
     version: 0.10.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:25.631153873Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Firecloud UI service in Terra
+    digest: 1a2fe8148791d0cb5afbe8d3cce5fa2ebec7dcf2e84d6f3f1bd3b4e72f3402e8
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - firecloudui
+    name: firecloudui
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/firecloud-ui
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/firecloudui-0.10.0-623.1636407937.9f6236/firecloudui-0.10.0-623.1636407937.9f6236.tgz
+    version: 0.10.0-623.1636407937.9f6236
+  - apiVersion: v2
     created: "2021-10-27T19:15:42.892055573Z"
     dependencies:
     - name: pdb-lib
@@ -30495,6 +30931,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/hydra-0.4.0/hydra-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:25.790107329Z"
+    description: Chart for the Hydra deployment used by Identity Concentrator in Terra
+    digest: 1296c48da75b350143abb3406c36cf51ce8795c4a7dc451f6de756f55854e437
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - hydra
+    name: hydra
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/hydra-0.4.0-623.1636407938.9f6236/hydra-0.4.0-623.1636407938.9f6236.tgz
+    version: 0.4.0-623.1636407938.9f6236
+  - apiVersion: v2
     created: "2021-09-01T13:52:38.379327078Z"
     description: Chart for the Hydra deployment used by Identity Concentrator in Terra
     digest: 12bae0761241d3627ed58e05080e2526938360c221964094441deb36daa15ce3
@@ -30769,6 +31222,24 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/icdemo-0.1.0/icdemo-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
+    created: "2021-11-08T21:46:25.948616232Z"
+    description: Chart for the Identity Concentrator demo/test
+    digest: 7a766ca89d787f889fbd46f24dc144db13d1d7ea97c5c1fd1ca43e833393929e
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - identityconcentrator
+    - demo
+    name: icdemo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/icdemo-0.1.0-623.1636407939.9f6236/icdemo-0.1.0-623.1636407939.9f6236.tgz
+    version: 0.1.0-623.1636407939.9f6236
+  - apiVersion: v2
     created: "2020-05-28T20:36:10.168229537Z"
     description: Chart for the Identity Concentrator demo/test
     digest: 751ab12b9e3c9a9b01f699300205c2761b3ea0c0598d89566011a80b29dcc50a
@@ -30858,6 +31329,23 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/identityconcentrator-0.1.0/identityconcentrator-0.1.0.tgz
     version: 0.1.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:26.113654362Z"
+    description: Chart for the Identity Concentrator deployment used by Terra
+    digest: 7797363ff06c86e418703740740012b32092ae48724be0af5260889a14f557ad
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - identityconcentrator
+    name: identityconcentrator
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/healthcare-federated-access-services
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/identityconcentrator-0.1.0-623.1636407939.9f6236/identityconcentrator-0.1.0-623.1636407939.9f6236.tgz
+    version: 0.1.0-623.1636407939.9f6236
   - apiVersion: v2
     created: "2020-05-28T20:36:10.256929569Z"
     description: Chart for the Identity Concentrator deployment used by Terra
@@ -31637,6 +32125,26 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/istioconfig-0.0.1/istioconfig-0.0.1.tgz
     version: 0.0.1
+  - apiVersion: v2
+    created: "2021-11-08T21:46:26.268867592Z"
+    description: A Helm chart to setup Istio configs
+    digest: 2ea510eb81f8118bc28482a27b234b776bc810ea38ef736d92f6e31c42a90883
+    keywords:
+    - dsp
+    - broadinstitute
+    - kernel
+    - terra
+    - istio
+    maintainers:
+    - email: yyu@broadinstitute.org
+      name: Yonghao Yu
+    name: istioconfig
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/istioconfig-0.0.1-623.1636407939.9f6236/istioconfig-0.0.1-623.1636407939.9f6236.tgz
+    version: 0.0.1-623.1636407939.9f6236
   jobmanager:
   - apiVersion: v2
     created: "2021-11-01T14:47:21.902285064Z"
@@ -31666,6 +32174,34 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.12.0/jobmanager-0.12.0.tgz
     version: 0.12.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:26.415953961Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Job Manager service in Terra
+    digest: 0a8ea41f10a86425184c99e8c700ffa129f721109816f0dbeb71954c330e3ee0
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - jobmanager
+    name: jobmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/job-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/jobmanager-0.12.0-623.1636407939.9f6236/jobmanager-0.12.0-623.1636407939.9f6236.tgz
+    version: 0.12.0-623.1636407939.9f6236
   - apiVersion: v2
     created: "2021-10-27T19:25:39.151917568Z"
     dependencies:
@@ -32938,6 +33474,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.66.0/leonardo-0.66.0.tgz
     version: 0.66.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:26.575103011Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com/
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for Leonardo, a Terra service for interactive analysis
+      applications
+    digest: 70fd15cbecdfc85a4099d83c4ac46b4463ffff0a0b302cd7b3721b200853a251
+    keywords:
+    - dsp
+    - broadinstitute
+    - leonardo
+    name: leonardo
+    sources:
+    - https://github.com/broadinstitute/terra-helm/
+    - https://github.com/DataBiosphere/leonardo
+    - https://github.com/broadinstitute/leonardo-cron-jobs
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/leonardo-0.66.0-623.1636407940.9f6236/leonardo-0.66.0-623.1636407940.9f6236.tgz
+    version: 0.66.0-623.1636407940.9f6236
   - apiVersion: v2
     created: "2021-10-27T19:38:34.312851921Z"
     dependencies:
@@ -39467,6 +40035,21 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/liquibase-migration-1.2.0/liquibase-migration-1.2.0.tgz
     version: 1.2.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:26.721313109Z"
+    description: Chart to run Liquibase migrations before Terra app startup
+    digest: a342916d3bbb3407fa90563157871f623ceaaa4df6da29555017c4b1c1f8a3da
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: liquibase-migration
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/liquibase-migration-1.2.0-623.1636407942.9f6236/liquibase-migration-1.2.0-623.1636407942.9f6236.tgz
+    version: 1.2.0-623.1636407942.9f6236
   - apiVersion: v2
     created: "2021-09-28T18:11:41.602077324Z"
     description: Chart to run Liquibase migrations before Terra app startup
@@ -62818,6 +63401,25 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.4.0/terra-filebeat-0.4.0.tgz
     version: 0.4.0
+  - apiVersion: v2
+    created: "2021-11-08T21:46:26.896434359Z"
+    description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
+    digest: 9bd9746d9e69f465bde33f508c68925aa50ac1f4aaf924581c03b137f8082e52
+    keywords:
+    - dsp
+    - broadinstitute
+    - logs
+    - logging
+    - log
+    - filebeat
+    - kibana
+    name: terra-filebeat
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/terra-filebeat-0.4.0-623.1636407936.9f6236/terra-filebeat-0.4.0-623.1636407936.9f6236.tgz
+    version: 0.4.0-623.1636407936.9f6236
   - apiVersion: v2
     created: "2021-04-06T19:43:22.358293468Z"
     description: Chart for shipping logs to logit.io via filebeat in terra k8s clusters
