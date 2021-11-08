@@ -1,0 +1,28 @@
+{{ if .Values.thanos.ingress.enabled -}}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: thanos-ingress-backendconfig
+  labels:
+    {{- include "prometheus.labels" . | nindent 4 }}
+spec:
+  timeoutSec: {{ .Values.ingress.timeoutSec }}
+  healthCheck:
+    checkIntervalSec: 5
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 2
+    type: HTTP/2
+    port: 10901
+    requestPath: /
+{{- if .Values.thanos.ingress.securityPolicy }}
+  securityPolicy:
+    name: {{ .Values.thanos.ingress.securityPolicy }}
+{{- end }}
+{{- if .Values.thanos.ingress.iap.enabled }}
+  iap:
+    enabled: true
+    oauthclientCredentials:
+      secretName: {{ .Values.name }}-iap-credentials
+{{- end }}
+{{- end }}

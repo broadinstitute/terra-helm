@@ -54,6 +54,13 @@ prometheusToSD:
   # prometheusToSD.metricsSources -- (object) map of prometheus scrape targets to export to SD
   metricsSources: {}
     # kube-state-metrics: null
+
+thanos:
+  ingress:
+    enabled: false
+    securityPolicy: null
+    iap:
+      enabled: false
 # Promethues-Operator values
 kube-prometheus-stack:
   # promtheus-operator.fullnameOverride -- (string) Use the name of this chart rather than prometheus operator built in templating.
