@@ -12,9 +12,9 @@ spec:
     timeoutSec: 5
     healthyThreshold: 2
     unhealthyThreshold: 2
-    type: HTTP2
-    port: 10901
-    requestPath: /
+    type: HTTP
+    port: 10902
+    requestPath: metrics
 {{- if .Values.thanos.ingress.securityPolicy }}
   securityPolicy:
     name: {{ .Values.thanos.ingress.securityPolicy }}
