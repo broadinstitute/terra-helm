@@ -58,6 +58,7 @@ prometheusToSD:
 thanos:
   ingress:
     enabled: false
+    timeoutSec: 120
     securityPolicy: null
     iap:
       enabled: false

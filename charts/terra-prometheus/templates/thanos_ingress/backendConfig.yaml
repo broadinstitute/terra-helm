@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "prometheus.labels" . | nindent 4 }}
 spec:
-  timeoutSec: {{ .Values.ingress.timeoutSec }}
+  timeoutSec: {{ .Values.thanos.ingress.timeoutSec }}
   healthCheck:
     checkIntervalSec: 5
     timeoutSec: 5
