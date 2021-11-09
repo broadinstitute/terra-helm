@@ -57,7 +57,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ .Values.name }}-sqlproxy
-        image: broadinstitute/cloudsqlproxy:1.11_2018117
+        image: broadinstitute/cloudsqlproxy:1.11_20180808
         lifecycle:
           postStart:
             exec:
