@@ -1,15 +1,12 @@
 apiVersion: v2
 name: postgres
-version: 0.1.0
-
+version: 0.2.0
 description: Library chart for an ephemeral PostgreSQL database container
 type: library
-
 keywords:
-- dsp
-- broadinstitute
-- database
-- postgres
-
+  - dsp
+  - broadinstitute
+  - database
+  - postgres
 sources:
-- https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts

@@ -2,7 +2,7 @@ apiVersion: v2
 name: diskmanager
 description: A helm chart to deploy a cronjob to manage backups of stateful set persistent disks
 type: application
-version: 0.1.0
+version: 0.2.0
 keywords:
   - dsp
   - broadinstitute
