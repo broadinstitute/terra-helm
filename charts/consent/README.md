@@ -2,7 +2,7 @@
 
 A Helm chart for DUOS Consent
 
-![Version: 0.28.0](https://img.shields.io/badge/Version-0.28.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.32.0](https://img.shields.io/badge/Version-0.32.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Values
 
@@ -83,14 +83,19 @@ A Helm chart for DUOS Consent
 | proxyImageVersion | string | `nil` |  |
 | proxyLogLevel | string | `nil` |  |
 | replicas | int | `3` |  |
+| sendGridStatusUrl | string | `nil` |  |
 | sendgridApiKey | string | `nil` |  |
 | sendgridApiKeyKey | string | `nil` |  |
-| sendGridStatusUrl | string | `nil` |  |
 | sentryDsnKey | string | `nil` |  |
 | sentryDsnPath | string | `nil` |  |
 | servicesLocalUrl | string | `nil` |  |
 | servicesOntologyUrl | string | `nil` |  |
 | servicesSamUrl | string | `nil` |  |
+| sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/consent"` |  |
+| sherlock.appName | string | `"consent"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | sslPolicy | string | `"tls12-ssl-policy"` |  |
 | startupSleep | int | `30` |  |
 | vaultCertPath | string | `nil` |  |

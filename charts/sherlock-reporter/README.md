@@ -1,6 +1,6 @@
 # sherlock-reporter
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 
 Library chart to report deploy events to sherlock (Terra environment tracking service)
 
@@ -21,7 +21,7 @@ Library chart to report deploy events to sherlock (Terra environment tracking se
 | sherlock.serviceAccount | string | Set to "${appName}-sa" | App's k8s service account |
 | sherlock.sherlockImageName | string | `nil` | image repo for the sherlock cli |
 | sherlock.sherlockImageTag | string | `nil` | version of the sherlock cli image to use |
-| sherlock.syncWave | string | `"-1"` | (string) ArgoCD wave to apply these resources in |
+| sherlock.syncWave | string | `"1"` | (string) ArgoCD wave to apply these resources in. This should be the last resourse to sync |
 | sherlock.vault.pathPrefix | string | `nil` | path in vault containing credentials for oauth authentication as the sherlock-client SA |
 
 ----------------------------------------------

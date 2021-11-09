@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.33.0](https://img.shields.io/badge/Version-0.33.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.41.0](https://img.shields.io/badge/Version-0.41.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -13,9 +13,10 @@ Chart for Resource Buffering Service
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm.storage.googleapis.com | ingresslib | 0.6.0 |
-| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0
-| https://terra-helm.storage.googleapis.com | pdb-lib | 0.2.0
+| https://terra-helm.storage.googleapis.com | ingresslib | 0.12.0 |
+| https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
+| https://terra-helm.storage.googleapis.com | pdb-lib | 0.2.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -118,6 +119,12 @@ Chart for Resource Buffering Service
 | resources.limits.memory | string | `"4Gi"` | Memory to limit the deployment to |
 | resources.requests.cpu | string | `"500m"` | Number of CPU units to request for the deployment |
 | resources.requests.memory | string | `"4Gi"` | Memory to request for the deployment |
+| sherlock.appImageName | string | `"gcr.io/terra-kernel-k8s/terra-resource-buffer"` |  |
+| sherlock.appName | string | `"buffer"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.serviceAccount | string | `"buffer-service-sa"` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.janitorClientCredentialPath | string | `nil` | Vault path where Janitor client credential is stored. |

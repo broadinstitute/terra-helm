@@ -6,9 +6,10 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.1.0 |
 | https://terra-helm.storage.googleapis.com | ingresslib | 0.12.0 |
 | https://terra-helm.storage.googleapis.com | pdb-lib | 0.4.0 |
-| https://terra-helm.storage.googleapis.com/ | liquibase-migration | 1.1.0 |
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
 
@@ -58,6 +59,11 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"leonardo-backend-sqlproxy-env"` |  |
 | liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"leonardo-backend-sqlproxy-ctmpls"` |  |
 | monitoring.enabled | bool | `true` | Whether to enable Prometheus monitoring for Leonardo pods |
+| sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/leonardo"` |  |
+| sherlock.appName | string | `"leonardo"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
 | zombieMonitorCron.enabled | bool | `false` |  |
 | zombieMonitorCron.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/zombie-monitor"` |  |

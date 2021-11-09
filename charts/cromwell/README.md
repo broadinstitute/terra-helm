@@ -2,11 +2,17 @@
 
 A Helm chart for Cromwell, the Terra Workflow Management System
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| deploymentDefaults.annotation | object | `nil` | Additational metadata to attach |
+| deploymentDefaults.annotations | object | `{}` |  |
 | deploymentDefaults.enabled | bool | `true` | Whether a declared deployment is enabled. If false, no resources will be created |
 | deploymentDefaults.expose | bool | `false` | Whether to create a Service for this deployment |
 | deploymentDefaults.imageTag | string | `nil` | Image tag to be used when deploying Pods @defautl global.applicationVersion |
@@ -19,7 +25,7 @@ A Helm chart for Cromwell, the Terra Workflow Management System
 | deploymentDefaults.probes.readiness.spec | object | `{"failureThreshold":6,"httpGet":{"path":"/engine/latest/version","port":8000},"initialDelaySeconds":20,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the readiness probe to deploy, if enabled |
 | deploymentDefaults.probes.startup.enabled | bool | `true` | Whether to configure a startup probe |
 | deploymentDefaults.probes.startup.spec | object | `{"failureThreshold":1080,"httpGet":{"path":"/engine/latest/version","port":8000},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | k8s spec of the startup probe to deploy, if enabled |
-| deploymentDefaults.proxyImage | string | `"broadinstitute/openidc-proxy:tcell-mpm-big"` | Image that the OIDC proxy uses |
+| deploymentDefaults.proxyImage | string | `"broadinstitute/openidc-proxy:tcell_3_1_0"` |  |
 | deploymentDefaults.replicas | int | `0` | Number of replicas for the deployment |
 | deploymentDefaults.serviceAllowedAddresses | object | `{}` | What source IPs to whitelist for access to the service |
 | deploymentDefaults.serviceIP | string | `nil` | Static IP to use for the Service. If set, service will be of type LoadBalancer |
@@ -31,3 +37,8 @@ A Helm chart for Cromwell, the Terra Workflow Management System
 | deployments.standalone.serviceName | string | `"cromwell"` | Name of the default standalone Cromwell service |
 | global.applicationVersion | string | `"latest"` | What version of the Cromwell application to deploy |
 | global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
+| sherlock.appImageName | string | `"broadinstitute/cromwell"` |  |
+| sherlock.appName | string | `"cromwell"` |  |
+| sherlock.enabled | bool | `true` |  |
+| sherlock.sherlockImageTag | string | `"v0.0.15"` |  |
+| sherlock.vault.pathPrefix | string | `"secret/suitable/sherlock/prod"` |  |
