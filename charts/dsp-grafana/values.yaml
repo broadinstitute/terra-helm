@@ -14,6 +14,8 @@ grafana:
       - secretName: grafana-cert
     # -- (string) Name of static IP previously allocated in the project
     staticIpName:
+    # -- (string) Optionally, the name of a cloud armor security policy to apply to the ingress backend
+    securityPolicy:
     annotations:
       # We can template here, so insert name of frontendConfig.yaml this way
       networking.gke.io/v1beta1.FrontendConfig: '{{ .Values.global.name }}-ingress-frontendconfig'
