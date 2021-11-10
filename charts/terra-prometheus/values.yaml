@@ -41,6 +41,8 @@ vaultCert:
     # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
     secretKey: 
   fullChain:
+    # vaultCert.fullChain.path -- (string) Path to secret containing the full concated certificate chain
+    path: 
     # vaultCert.fullChain.secretKey -- Full concatenated certificate chain for the dsde-<env> wildcard certs. Thanos GRPC server requires full chain
     secretKey: 
 
