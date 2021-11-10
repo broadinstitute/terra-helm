@@ -1,0 +1,2 @@
+# We rollback via gitops and argo, not k8s
+revisionHistoryLimit: 0
