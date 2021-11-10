@@ -40,6 +40,9 @@ vaultCert:
     path: 
     # vaultCert.chain.secretKey -- (string) Key in secret containing intermediate .crt
     secretKey: 
+  fullChain:
+    # vaultCert.fullChain.secretKey -- Full concatenated certificate chain for the dsde-<env> wildcard certs. Thanos GRPC server requires full chain
+    secretKey: 
 
 # prometheus-to-sd values. Used specifically for sending kube state metrics to sd
 prometheusToSD:
