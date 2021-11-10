@@ -1,6 +1,6 @@
 # terra-prometheus
 
-![Version: 0.10.0](https://img.shields.io/badge/Version-0.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.11.0](https://img.shields.io/badge/Version-0.11.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a helm chart to deploy monitoring infrastructure
 
@@ -95,5 +95,7 @@ receivers:
 | vaultCert.chain.path | string | `nil` | Path to secret containing intermediate .crt |
 | vaultCert.chain.secretKey | string | `nil` | Key in secret containing intermediate .crt |
 | vaultCert.enabled | bool | `false` | Enable to sync certificate secret from Vault with secrets-manager |
+| vaultCert.fullChain.path | string | `nil` | Path to secret containing the full concated certificate chain |
+| vaultCert.fullChain.secretKey | string | `nil` | Full concatenated certificate chain for the dsde-<env> wildcard certs. Thanos GRPC server requires full chain |
 | vaultCert.key.path | string | `nil` | Path to secret containing .key |
 | vaultCert.key.secretKey | string | `nil` | Key in secret containing .key |
