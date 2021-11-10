@@ -1,0 +1,23 @@
+{{- if .Values.grafana.ingress.enabled }}
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: {{ .Values.global.name }}-certificate
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  dnsNames:
+  {{- range .Values.grafana.ingress.hosts }}
+    - {{ . }}
+  {{- end }}
+  duration: 2160h0m0s
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  renewBefore: 720h0m0s
+  secretName: {{ (index .Values.grafana.ingress.tls 0).secretName }}
+  subject:
+    organizations:
+    - broad-institute
+{{- end -}}

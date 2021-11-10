@@ -1,3 +1,33 @@
+global:
+  name: grafana
+
 grafana:
-  # We rollback via gitops and argo, not k8s
+  # -- Replicaset revisions not saved since we'd rollback via gitops or argo
   revisionHistoryLimit: 0
+
+  ingress:
+    enabled: true
+    # -- FQDNs to accept for ingress and allow via cert
+    hosts: []
+    tls:
+      # k8s secret that will be created by the wrapper and read by grafana itself
+      - secretName: grafana-cert
+    # -- (string) Name of static IP previously allocated in the project
+    staticIpName:
+    annotations:
+      # We can template here, so insert name of frontendConfig.yaml this way
+      networking.gke.io/v1beta1.FrontendConfig: '{{ .Values.global.name }}-ingress-frontendconfig'
+      # We can template here, so accept static IP name as a normal variable and insert in this way
+      kubernetes.io/ingress.global-static-ip-name: '{{ .Values.ingress.staticIpName }}'
+      # Disallow HTTP between client and LB
+      kubernetes.io/ingress.allow-http: 'false'
+  service:
+    annotations:
+      # Associate a backend config with the ingress: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#associating_backendconfig_with_your_ingress
+      # Value should match `{{ .Values.global.name }}-ingress-backendconfig` per backendConfig.yaml, but we can't template here
+      cloud.google.com/backend-config: '{"default": "grafana-ingress-backendconfig"}'
+      # Enable container-native load balancing https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing
+      cloud.google.com/neg: '{"ingress": true}'
+      # DISABLE TLS between LB and app https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb
+      # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
+      cloud.google.com/app-protocols: '{"service":"HTTP"}'
