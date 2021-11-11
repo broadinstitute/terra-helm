@@ -1,29 +1,35 @@
 global:
   name: grafana
 
+ingress:
+  # -- ENABLE this wrapper's simpler ingress config
+  enabled: true
+  # -- (string) Name of static IP previously allocated in the project
+  staticIpName:
+  # -- (string) Optionally, the name of a cloud armor security policy to apply to the ingress backend
+  securityPolicy: null
+  # -- Path to use for LB health checks
+  requestPath: /api/health
+  # -- Seconds before LB health check will time out
+  timeoutSec: 120
+  
+  cert:
+    # -- Previously provisioned certs to use on the LB
+    preSharedCerts: []
+  certmanager:
+    # -- If CertManager should be used to dynamically provision an LB cert
+    enabled: true
+    # -- FQDNs to allocate cert for
+    dnsNames: []
+
 grafana:
   # -- Replicaset revisions not saved since we'd rollback via gitops or argo
   revisionHistoryLimit: 0
 
   ingress:
-    enabled: true
-    hosts: []
-    # -- FQDNs to accept for ingress and allow via cert
-    dnsNames: []
-    tls:
-      # k8s secret that will be created by the wrapper and read by grafana itself
-      - secretName: grafana-cert
-    # -- (string) Name of static IP previously allocated in the project
-    staticIpName:
-    # -- (string) Optionally, the name of a cloud armor security policy to apply to the ingress backend
-    securityPolicy:
-    annotations:
-      # We can template here, so insert name of frontendConfig.yaml this way
-      networking.gke.io/v1beta1.FrontendConfig: '{{ .Values.global.name }}-ingress-frontendconfig'
-      # We can template here, so accept static IP name as a normal variable and insert in this way
-      kubernetes.io/ingress.global-static-ip-name: '{{ .Values.ingress.staticIpName }}'
-      # Disallow HTTP between client and LB
-      kubernetes.io/ingress.allow-http: 'false'
+    # -- DISABLE grafana's built-in ingress
+    enabled: false
+
   service:
     annotations:
       # Associate a backend config with the ingress: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#associating_backendconfig_with_your_ingress

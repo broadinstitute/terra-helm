@@ -1,12 +1,12 @@
-{{ if .Values.grafana.ingress.enabled -}}
+{{ if .Values.ingress.enabled -}}
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
   name: {{ .Values.global.name }}-ingress-frontendconfig
   labels:
     {{- include "grafana.labels" . | nindent 4 }}
-{{- if .Values.grafana.ingress.sslPolicy }}
+{{- if .Values.ingress.sslPolicy }}
 spec:
-  sslPolicy: {{ .Values.grafana.ingress.sslPolicy }}
+  sslPolicy: {{ .Values.ingress.sslPolicy }}
 {{- end }}
 {{- end }}
