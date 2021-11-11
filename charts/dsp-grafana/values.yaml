@@ -7,8 +7,9 @@ grafana:
 
   ingress:
     enabled: true
-    # -- FQDNs to accept for ingress and allow via cert
     hosts: []
+    # -- FQDNs to accept for ingress and allow via cert
+    dnsNames: []
     tls:
       # k8s secret that will be created by the wrapper and read by grafana itself
       - secretName: grafana-cert
