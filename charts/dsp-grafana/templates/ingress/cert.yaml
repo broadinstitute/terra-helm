@@ -7,7 +7,7 @@ metadata:
     {{- include "grafana.labels" . | nindent 4 }}
 spec:
   dnsNames:
-  {{- range .Values.grafana.ingress.hosts }}
+  {{- range .Values.grafana.ingress.dnsNames }}
     - {{ . }}
   {{- end }}
   duration: 2160h0m0s
