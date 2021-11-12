@@ -23,6 +23,18 @@ ingress:
     dnsNames: []
 
 secrets:
+  # -- A secret Grafana can use for its default Admin account
+  adminAccount:
+    # -- (string) Path within Vault to the desired Vault secret
+    vaultPath: 
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    usernameVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    usernameSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    passwordVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    passwordSourceEncoding:
   # -- (list) Secrets to be placed into environment variables in the grafana container
   containerEnv:
     - # -- (string) Name of the environment variable to create
@@ -44,6 +56,10 @@ grafana:
   ingress:
     # -- DISABLE grafana's built-in ingress
     enabled: false
+
+  admin:
+    # -- Derive the admin account credentials from a secret (created by secrets.AdminAccount)
+    existingSecret: grafana-admin-account
 
   service:
     # -- Port to run the (non-HTTPS) service over

@@ -20,6 +20,7 @@ Wrapper providing GKE ingress and DSP secrets around grafana
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | global.name | string | `"grafana"` |  |
+| grafana.admin.existingSecret | string | `"grafana-admin-account"` | Derive the admin account credentials from a secret (created by secrets.AdminAccount) |
 | grafana.envFromSecret | string | `"{{ .Values.global.name }}-container-env"` |  |
 | grafana.ingress.enabled | bool | `false` | DISABLE grafana's built-in ingress |
 | grafana.revisionHistoryLimit | int | `0` | Replicaset revisions not saved since we'd rollback via gitops or argo |
@@ -35,6 +36,12 @@ Wrapper providing GKE ingress and DSP secrets around grafana
 | ingress.securityPolicy | string | `nil` | Optionally, the name of a cloud armor security policy to apply to the ingress backend |
 | ingress.staticIpName | string | `nil` | Name of static IP previously allocated in the project |
 | ingress.timeoutSec | int | `120` | Seconds before LB health check will time out |
+| secrets.adminAccount | object | `{"passwordSourceEncoding":null,"passwordVaultKey":null,"usernameSourceEncoding":"text","usernameVaultKey":null,"vaultPath":null}` | A secret Grafana can use for its default Admin account |
+| secrets.adminAccount.passwordSourceEncoding | string | `nil` | Encoding of the secret value in vault (either `text` or `base64`) |
+| secrets.adminAccount.passwordVaultKey | string | `nil` | Key within the desired Vault secret to the desired individual secret value to use |
+| secrets.adminAccount.usernameSourceEncoding | string | `"text"` | (string) Encoding of the secret value in vault (either `text` or `base64`) |
+| secrets.adminAccount.usernameVaultKey | string | `nil` | Key within the desired Vault secret to the desired individual secret value to use |
+| secrets.adminAccount.vaultPath | string | `nil` | Path within Vault to the desired Vault secret |
 | secrets.containerEnv | list | `[{"envVar":null,"sourceEncoding":"text","vaultKey":null,"vaultPath":null}]` | (list) Secrets to be placed into environment variables in the grafana container |
 | secrets.containerEnv[0].envVar | string | `nil` | Name of the environment variable to create |
 | secrets.containerEnv[0].sourceEncoding | string | `"text"` | (string) Encoding of the secret value in vault (either `text` or `base64`) |
