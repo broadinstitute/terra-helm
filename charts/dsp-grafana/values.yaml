@@ -34,7 +34,23 @@ secrets:
     # -- (string) Key within the desired Vault secret to the desired individual secret value to use
     passwordVaultKey:
     # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
-    passwordSourceEncoding:
+    passwordSourceEncoding: text
+  # -- A secret containing database cert files to use for Grafana's persistence
+  databaseCerts:
+    # -- (string) Path within Vault to the desired Vault secret
+    vaultPath: 
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    serverCaVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    serverCaSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    clientCertVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    clientCertSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    clientKeyVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    clientKeySourceEncoding: text
   # -- (list) Secrets to be placed into environment variables in the grafana container
   containerEnv:
     - # -- (string) Name of the environment variable to create
@@ -74,3 +90,16 @@ grafana:
       # DISABLE TLS between LB and app https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb
       # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
       cloud.google.com/app-protocols: '{"service":"HTTP"}'
+
+  extraSecretMounts:
+    - name: database-cert-volume
+      mountPath: /dbcerts
+      readOnly: true
+      secretName: grafana-database-certs
+
+  grafana.ini:
+    database:
+      server_cert_name: grafana-k8s
+      ca_cert_path: /dbcerts/server-ca.pem
+      client_key_path: /dbcerts/client-key.pem
+      client_cert_path: /dbcerts/client-cert.pem
