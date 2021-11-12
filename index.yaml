@@ -19729,6 +19729,26 @@ entries:
     version: 0.1.0-431.1628176952.4a8367
   dsp-grafana:
   - apiVersion: v2
+    created: "2021-11-12T19:49:31.81782002Z"
+    dependencies:
+    - name: grafana
+      repository: https://terra-helm-thirdparty.storage.googleapis.com/
+      version: 6.17.5
+    description: Wrapper providing GKE ingress and DSP secrets around grafana
+    digest: b14243f75d94a744f848a8b642c1b18bcea21933550d87f563289d26bac25342
+    keywords:
+    - dsp
+    - broadinstitute
+    - grafana
+    name: dsp-grafana
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/grafana/helm-charts/tree/main/charts/grafana
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-grafana-1.0.0-626.1636746563.ceede6/dsp-grafana-1.0.0-626.1636746563.ceede6.tgz
+    version: 1.0.0-626.1636746563.ceede6
+  - apiVersion: v2
     created: "2021-11-12T19:04:19.908938061Z"
     dependencies:
     - name: grafana
