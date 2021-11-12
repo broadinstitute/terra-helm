@@ -4,4 +4,6 @@
 spec:
   selector:
     deployment: {{ .Values.ingress.deployment }}-deployment
+  ports:
+  - targetPort: 8050
 {{- end }}
