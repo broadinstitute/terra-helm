@@ -1,0 +1,146 @@
+# -- (object) Required; contents of testrunnerdashboard.yaml to be given to the application
+config:
+
+# Global values used by this chart
+global:
+  # -- (string) What version of the application to deploy
+  applicationVersion: latest
+
+# name -- A name for the deployment that will be substituted into resource definitions
+name: trdash
+
+# Settings for TestRunner Dashboard's Ingress & Service
+ingress:
+  # ingress.enabled -- Whether to create Ingress, Service and associated config resources
+  enabled: true
+  # ingress.deployment -- Name of the deployment to associate with the Ingress
+  # (should correspond to the "name" key, above)
+  deployment: trdash
+  # ingress.requestPath -- Request path to which the probe system should connect
+  requestPath: /
+  # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
+  staticIpName: null
+  # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
+  sslPolicy: null
+  # ingress.securityPolicy -- (string) Name of a GCP Cloud Armor security policy
+  securityPolicy: ""
+  # ingressTimeout -- (number) number of seconds requests on the https loadbalancer will time out after
+  timeoutSec: 120
+
+  domain:
+    # domain.hostname -- Hostname of this deployment
+    hostname: trdash
+    # domain.namespaceEnv -- If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix
+    namespaceEnv: false
+    # domain.suffix -- Domain suffix
+    suffix: dsp-eng-tools.broadinstitute.org
+
+  cert:
+    # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
+    # If preSharedCerts is not empty, its contents are used for the GKE ingress. Otherwise a secret with the cert is expected.
+    # The cert secret is required if the OIDC proxy is enabled.
+    # This secret can be
+    #   - synced from Vault
+    #   - created/managed with cert-manager
+    #   - created manually before the chart is applied
+
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
+
+    # If cert.vault is enabled, a secrets-manager SecretDefinition resource is created to sync the
+    #   certificate from Vault to a k8s secret.
+    vault:
+      # ingress.cert.vault.enabled -- Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager)
+      enabled: true
+      cert:
+        # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
+        path: null
+        # ingress.cert.vault.cert.secretKey -- (string) Key in secret containing .crt
+        secretKey: null
+      key:
+        # ingress.cert.vault.key.path -- (string) Path to secret containing .key
+        path: null
+        # ingress.cert.vault.key.secretKey -- (string) Key in secret containing .key
+        secretKey: null
+      chain:
+        # ingress.cert.vault.chain.path -- (string) Path to secret containing intermediate .crt
+        path:
+        # ingress.cert.vault.chain.secretKey -- (string) Key in secret containing intermediate .crt
+        secretKey:
+
+    # If cert.certManager is enabled, it is used to configure the certificate and populate the k8s secret. Requires [cert-manager](https://github.com/jetstack/cert-manager)
+    certManager:
+      # ingress.cert.certManager.enabled -- Enable creating certificate secret with cert-manager
+      enabled: false
+      # ingress.cert.certManager.duration -- Certificate duration. Defaults to 3 months.
+      duration: 2160h0m0s
+      # ingress.cert.certManager.renewBefore -- When to renew the cert. Defaults to 30 days before expiry.
+      renewBefore: 720h0m0s
+      issuerName: cert-manager-letsencrypt-prod
+      issuerKind: ClusterIssuer
+
+imageConfig:
+  # -- (string) Image repository
+  repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-test-runner-dashboard/terra-test-runner-dashboard
+  # -- (string) Image tag
+  # @default -- global.applicationVersion
+  tag: null
+  # -- (string) When to pull images
+  imagePullPolicy: Always
+
+# -- (number) Number of replicas for the deployment
+replicas: 3
+
+# -- (map) Annotations for application pods
+annotations: {}
+
+resources:
+  requests:
+    # -- (string) Number of CPU units to request for the deployment
+    cpu: 4
+    # -- (string) Memory to request for the deployment
+    memory: 8Gi
+  limits:
+    # -- (string) Number of CPU units to limit the deployment to
+    cpu: 4
+    # -- (string) Memory to limit the deployment to
+    memory: 8Gi
+
+probes:
+  readiness:
+    # -- (boolean) If the readiness probe should be enabled
+    enabled: false
+    # -- (object) Spec for the readiness probe
+    spec:
+  liveness:
+    # -- (boolean) If the liveness probe should be enabled
+    enabled: false
+    # -- (object) Spec for the liveness probe
+    spec:
+  startup:
+    # -- (boolean) If the liveness probe should be enabled
+    enabled: false
+    # -- (object) Spec for the startUp probe
+    spec:
+
+secrets:
+  gcpServiceAccount:
+    workloadIdentity:
+      # -- (boolean) If workload identity should be used for the GCP SA
+      enabled: false
+      # -- (string) ID of the GCP SA to use
+      accountName:
+      # -- (string) ID (not the number) of the GCP project the SA is in
+      projectId:
+      # -- (boolean) If Config Connector should be used for provisioning the workload identity SA
+      # -- If false, the workload identity SA will be provisioned by other means
+      useConfigConnect: false
+    secretsManager:
+      # -- (boolean) If secrets-manager (Vault) should be used for the GCP SA
+      enabled: false
+      # -- (string) Path within Vault where the SA's key is stored
+      vaultPath:
+      # -- (string) Field name within the secret for the SA's key
+      vaultKey:
+      # -- (string) Encoding of the Vault field (either `text` or `base64`)
+      sourceEncoding: base64
