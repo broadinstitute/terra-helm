@@ -91,6 +91,9 @@ grafana:
       # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
       cloud.google.com/app-protocols: '{"service":"HTTP"}'
 
+  initChownData:
+    enabled: false
+
   extraSecretMounts:
     - name: database-cert-volume
       mountPath: /dbcerts
