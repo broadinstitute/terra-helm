@@ -22,7 +22,22 @@ ingress:
     # -- FQDNs to allocate cert for
     dnsNames: []
 
+secrets:
+  # -- (list) Secrets to be placed into environment variables in the grafana container
+  containerEnv:
+    - # -- (string) Name of the environment variable to create
+      envVar:
+      # -- (string) Path within Vault to the desired Vault secret
+      vaultPath:
+      # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+      vaultKey:
+      # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+      sourceEncoding: text
+
 grafana:
+  # -- 
+  envFromSecret: '{{ .Values.global.name }}-container-env'
+
   # -- Replicaset revisions not saved since we'd rollback via gitops or argo
   revisionHistoryLimit: 0
 
