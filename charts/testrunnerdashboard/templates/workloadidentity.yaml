@@ -15,7 +15,7 @@ metadata:
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPolicyMember
 metadata:
-  name: {{ .Values.name }}-iampolicy-member
+  name: {{ .Chart.Name }}-iampolicy-member
   labels: {{- include "testrunnerdashboard.labels" . | nindent 4 }}
 spec:
   member: serviceAccount:{{ .Values.secrets.gcpServiceAccount.workloadIdentity.projectId }}.svc.id.goog[{{ .Release.Namespace }}/{{ .Values.name }}-sa]

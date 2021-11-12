@@ -1,4 +1,4 @@
-# testrunnerdashboard
+# trdash
 
 ![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
@@ -35,20 +35,20 @@ Chart for TestRunner Dashbaord
 | ingress.cert.vault.cert.secretKey | string | `nil` | Key in secret containing .crt |
 | ingress.cert.vault.chain.path | string | `nil` | Path to secret containing intermediate .crt |
 | ingress.cert.vault.chain.secretKey | string | `nil` | Key in secret containing intermediate .crt |
-| ingress.cert.vault.enabled | bool | `false` | Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager) |
+| ingress.cert.vault.enabled | bool | `true` | Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager) |
 | ingress.cert.vault.key.path | string | `nil` | Path to secret containing .key |
 | ingress.cert.vault.key.secretKey | string | `nil` | Key in secret containing .key |
-| ingress.deployment | string | `"testrunnerdashboard"` | Name of the deployment to associate with the Ingress (should correspond to the "name" key, above) |
-| ingress.domain.hostname | string | `"testrunnerdashboard"` |  |
-| ingress.domain.namespaceEnv | bool | `true` |  |
-| ingress.domain.suffix | string | `"integ.envs.broadinstitute.org"` |  |
+| ingress.deployment | string | `"trdash"` | Name of the deployment to associate with the Ingress (should correspond to the "name" key, above) |
+| ingress.domain.hostname | string | `"trdash"` |  |
+| ingress.domain.namespaceEnv | bool | `false` |  |
+| ingress.domain.suffix | string | `"dsp-eng-tools.broadinstitute.org"` |  |
 | ingress.enabled | bool | `true` | Whether to create Ingress, Service and associated config resources |
-| ingress.requestPath | string | `"/status"` | Request path to which the probe system should connect |
+| ingress.requestPath | string | `"/"` | Request path to which the probe system should connect |
 | ingress.securityPolicy | string | `""` | (string) Name of a GCP Cloud Armor security policy |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
-| name | string | `"testrunnerdashboard"` | A name for the deployment that will be substituted into resource definitions |
+| name | string | `"trdash"` | A name for the deployment that will be substituted into resource definitions |
 | probes.liveness.enabled | bool | `false` | (boolean) If the liveness probe should be enabled |
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
 | probes.readiness.enabled | bool | `false` | (boolean) If the readiness probe should be enabled |

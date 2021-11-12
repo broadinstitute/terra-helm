@@ -7,7 +7,7 @@ global:
   applicationVersion: latest
 
 # name -- A name for the deployment that will be substituted into resource definitions
-name: testrunnerdashboard
+name: trdash
 
 # Settings for TestRunner Dashboard's Ingress & Service
 ingress:
@@ -15,9 +15,9 @@ ingress:
   enabled: true
   # ingress.deployment -- Name of the deployment to associate with the Ingress
   # (should correspond to the "name" key, above)
-  deployment: testrunnerdashboard
+  deployment: trdash
   # ingress.requestPath -- Request path to which the probe system should connect
-  requestPath: /status
+  requestPath: /
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
@@ -29,11 +29,11 @@ ingress:
 
   domain:
     # domain.hostname -- Hostname of this deployment
-    hostname: testrunnerdashboard
+    hostname: trdash
     # domain.namespaceEnv -- If true, an extra level of namespacing (`global.terraEnv`) will be added between the hostname and suffix
-    namespaceEnv: true
+    namespaceEnv: false
     # domain.suffix -- Domain suffix
-    suffix: integ.envs.broadinstitute.org
+    suffix: dsp-eng-tools.broadinstitute.org
 
   cert:
     # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
@@ -51,7 +51,7 @@ ingress:
     #   certificate from Vault to a k8s secret.
     vault:
       # ingress.cert.vault.enabled -- Enable syncing certificate secret from Vault. Requires [secrets-manager](https://github.com/tuenti/secrets-manager)
-      enabled: false
+      enabled: true
       cert:
         # ingress.cert.vault.cert.path -- (string) Path to secret containing .crt
         path: null

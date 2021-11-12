@@ -2,5 +2,6 @@
 
 {{- define "testrunnerdashboard.backendconfig" -}}
 spec:
-  timeoutSec: {{ .Values.ingress.timeoutSec }}
+  healthCheck:
+    checkIntervalSec: 10
 {{- end }}
