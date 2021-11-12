@@ -96,7 +96,7 @@ grafana:
       mountPath: /dbcerts
       readOnly: true
       secretName: grafana-database-certs
-      defaultMode: 0600
+      defaultMode: "0600"
 
   grafana.ini:
     database:
