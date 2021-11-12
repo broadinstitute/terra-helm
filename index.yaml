@@ -71422,6 +71422,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/thurloe-0.0.0-296.1613670260.1d08f2/thurloe-0.0.0-296.1613670260.1d08f2.tgz
     version: 0.0.0-296.1613670260.1d08f2
+  trdash:
+  - apiVersion: v2
+    created: "2021-11-12T18:34:39.236974251Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    description: Chart for TestRunner Dashbaord
+    digest: 5a0ebf174d03fb2545be1a9b1e3b3f192c330379f9e89c46e3f1f2abd427ce7d
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - testrunner
+    name: trdash
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-test-runner-dashboard
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/trdash-0.1.0-529.1636742069.e6ce04/trdash-0.1.0-529.1636742069.e6ce04.tgz
+    version: 0.1.0-529.1636742069.e6ce04
   workspacemanager:
   - apiVersion: v2
     created: "2021-10-29T18:35:48.29514538Z"
