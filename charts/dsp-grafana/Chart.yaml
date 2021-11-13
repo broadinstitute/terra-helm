@@ -1,7 +1,7 @@
 apiVersion: v2
 name: dsp-grafana
 version: 1.0.0
-description: Wrapper providing GKE ingress and DSP secrets around grafana
+description: Wrapper providing GKE ingress, database SSL, and secrets around Grafana
 type: application
 keywords:
   - dsp
