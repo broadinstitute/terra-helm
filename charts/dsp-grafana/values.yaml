@@ -91,32 +91,36 @@ grafana:
       # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
       cloud.google.com/app-protocols: '{"service":"HTTP"}'
 
-#  extraInitContainers:
-#  - name: adjust-key-permissions
-#    image: alpine:3
-#    command: ["sh", "-c"]
-#    args:
-#      - |-
-#        ls -la /dbcerts; 
-#        chown -R 472:472 /dbcerts;
-#        ls -la /dbcerts; 
-#        chmod -R 600 /dbcerts;
-#        ls -la /dbcerts
-#    volumeMounts:
-#    - name: database-cert-volume
-#      mountPath: /dbcerts
-#      readOnly: false
-
-  securityContext: nil
-
-  extraSecretMounts:
+  extraInitContainers:
+  - name: adjust-key-permissions
+    image: alpine:3
+    command: ["sh", "-c"]
+    args:
+      - |-
+        ls -la /dbcerts-ro; 
+        cp /dbcerts-ro/* /dbcerts;
+        ls -la /dbcerts; 
+        chown -R 472:472 /dbcerts;
+        ls -la /dbcerts; 
+        chmod -R 600 /dbcerts;
+        ls -la /dbcerts
+    volumeMounts:
+    - name: database-cert-volume-ro
+      mountPath: /dbcerts-ro
+      readOnly: false
     - name: database-cert-volume
       mountPath: /dbcerts
+      readOnly: false
+
+  extraSecretMounts:
+    - name: database-cert-volume-ro
+      mountPath: /dbcerts-ro
       readOnly: true
       secretName: grafana-database-certs
-      defaultMode: 0600
 
-  # command: ["sh", "-c", "mkdir -p /dbcerts && cp /dbcerts-ro/* /dbcerts && chown -R 472:472 /dbcerts && chmod -R 0600 /dbcerts && /run.sh"]
+  extraEmptyDirMounts:
+    - name: database-cert-volume-rwx
+      mountPath: /dbcerts
 
   grafana.ini:
     database:
