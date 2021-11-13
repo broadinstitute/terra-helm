@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ .Chart.Name }}-service-role-binding
-  labels: {{- include "testrunnerdashboard.labels" . | nindent 4 }}
+  labels: {{ include "testrunnerdashboard.labels" . | nindent 4 }}
 roleRef:
   kind: Role
   name: {{ .Chart.Name }}-service-role
