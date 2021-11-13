@@ -1,0 +1,16 @@
+apiVersion: v2
+name: dsp-grafana
+version: 1.0.0
+description: Wrapper providing GKE ingress, database SSL, and secrets around Grafana
+type: application
+keywords:
+  - dsp
+  - broadinstitute
+  - grafana
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+  - https://github.com/grafana/helm-charts/tree/main/charts/grafana
+dependencies:
+  - name: grafana
+    version: 6.17.5
+    repository: https://terra-helm-thirdparty.storage.googleapis.com/

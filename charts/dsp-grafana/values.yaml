@@ -1,0 +1,148 @@
+global:
+  name: grafana
+
+ingress:
+  # -- ENABLE this wrapper's simpler ingress config
+  enabled: true
+  # -- (string) Name of static IP previously allocated in the project
+  staticIpName:
+  # -- (string) Optionally, the name of a cloud armor security policy to apply to the ingress backend
+  securityPolicy: null
+  # -- Path to use for LB health checks
+  requestPath: /api/health
+  # -- Seconds before LB health check will time out
+  timeoutSec: 120
+  
+  cert:
+    # -- Previously provisioned certs to use on the LB
+    preSharedCerts: []
+  certmanager:
+    # -- If CertManager should be used to dynamically provision an LB cert
+    enabled: true
+    # -- FQDNs to allocate cert for
+    dnsNames: []
+
+secrets:
+  # -- A secret Grafana can use for its default Admin account
+  adminAccount:
+    # -- (string) Path within Vault to the desired Vault secret
+    vaultPath: 
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    usernameVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    usernameSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    passwordVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    passwordSourceEncoding: text
+  # -- A secret containing database cert files to use for Grafana's persistence
+  databaseCerts:
+    # -- (string) Path within Vault to the desired Vault secret
+    vaultPath: 
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    serverCaVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    serverCaSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    clientCertVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    clientCertSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    clientKeyVaultKey:
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    clientKeySourceEncoding: text
+  # -- (list) Secrets to be placed into environment variables in the grafana container
+  containerEnv:
+    - # -- (string) Name of the environment variable to create
+      envVar:
+      # -- (string) Path within Vault to the desired Vault secret
+      vaultPath:
+      # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+      vaultKey:
+      # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+      sourceEncoding: text
+
+grafana:
+  # -- 
+  envFromSecret: '{{ .Values.global.name }}-container-env'
+
+  # -- Replicaset revisions not saved since we'd rollback via gitops or argo
+  revisionHistoryLimit: 0
+
+  ingress:
+    # -- DISABLE grafana's built-in ingress
+    enabled: false
+
+  admin:
+    # -- Derive the admin account credentials from a secret (created by secrets.AdminAccount)
+    existingSecret: grafana-admin-account
+
+  service:
+    # -- Port to run the (non-HTTPS) service over
+    port: 80
+
+    annotations:
+      # Associate a backend config with the ingress: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#associating_backendconfig_with_your_ingress
+      # Value should match `{{ .Values.global.name }}-ingress-backendconfig` per backendConfig.yaml, but we can't template here
+      cloud.google.com/backend-config: '{"default": "grafana-ingress-backendconfig"}'
+      # Enable container-native load balancing https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing
+      cloud.google.com/neg: '{"ingress": true}'
+      # DISABLE TLS between LB and app https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb
+      # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
+      cloud.google.com/app-protocols: '{"service":"HTTP"}'
+
+  #
+  # Explanation for the below:
+  #
+  #   1. Grafana uses PQ which requires strict unix permissions on key files
+  #      https://github.com/lib/pq/issues/825
+  #   2. Grafana's chart uses a security context with RunAsUser, which does not respect setting unix permissions
+  #      https://github.com/kubernetes/kubernetes/issues/57923
+  #   3. Grafana's docker image and the chart's PSP/RBAC fight against getting rid of RunAsUser
+  #      (We'd be very tightly coupled, and I couldn't get it working anyway)
+  #   4. Solution: init container copies files to an empty dir volume and sets permissions there
+  #      a. Why copy to an empty dir? Because K8s blocks writes to secrets
+  #         https://github.com/kubernetes/kubernetes/pull/58720
+  #
+  # The below is verbose, but the most idiomatic fix I could come up with.
+  #
+
+  extraSecretMounts:
+    - name: readonly-raw-db-certs
+      mountPath: /dbcerts-ro
+      readOnly: true
+      secretName: grafana-database-certs
+
+  extraEmptyDirMounts:
+    - name: permissioned-db-certs
+      mountPath: /dbcerts
+
+  # All of extraInitContainers is manual, so we must specifically mount the normally automatic
+  # mounts declared above
+  extraInitContainers:
+  - name: adjust-cert-permissions
+    image: alpine:3
+    command: ["sh", "-c"]
+    args:
+      - |-
+        ls -la /dbcerts-ro; 
+        cp /dbcerts-ro/* /dbcerts;
+        ls -la /dbcerts;
+        chmod 600 /dbcerts/*;
+        ls -la /dbcerts
+    volumeMounts:
+    - name: readonly-raw-db-certs
+      mountPath: /dbcerts-ro
+      readOnly: true
+    - name: permissioned-db-certs
+      mountPath: /dbcerts
+      readOnly: false
+
+  # We leave most of grafana.ini to the caller to configure, but do specify the options associated
+  # with the database certs
+  grafana.ini:
+    database:
+      server_cert_name: grafana-k8s
+      ca_cert_path: /dbcerts/server-ca.pem
+      client_key_path: /dbcerts/client-key.pem
+      client_cert_path: /dbcerts/client-cert.pem

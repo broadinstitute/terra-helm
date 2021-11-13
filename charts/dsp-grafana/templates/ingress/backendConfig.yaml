@@ -1,0 +1,23 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ .Values.global.name }}-ingress-backendconfig
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  timeoutSec: {{ .Values.ingress.timeoutSec }}
+  healthCheck:
+    checkIntervalSec: 5
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 2
+    type: HTTP
+    requestPath: {{ .Values.ingress.requestPath }}
+    # Supplied/configured by underlying chart
+    port: {{ .Values.grafana.service.targetPort }}
+{{- if .Values.ingress.securityPolicy }}
+  securityPolicy:
+    name: {{ .Values.ingress.securityPolicy }}
+{{- end }}
+{{- end }}
