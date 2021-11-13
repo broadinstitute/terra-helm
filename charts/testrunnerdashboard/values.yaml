@@ -127,7 +127,7 @@ secrets:
   gcpServiceAccount:
     workloadIdentity:
       # -- (boolean) If workload identity should be used for the GCP SA
-      enabled: false
+      enabled: true
       # -- (string) ID of the GCP SA to use
       accountName:
       # -- (string) ID (not the number) of the GCP project the SA is in
