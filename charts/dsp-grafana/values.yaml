@@ -94,7 +94,7 @@ grafana:
   extraInitContainers:
   - name: adjust-key-permissions
     image: alpine:3
-    command: ["bash", "-c"]
+    command: ["sh", "-c"]
     args:
       - |-
         ls -la /dbcerts; 
