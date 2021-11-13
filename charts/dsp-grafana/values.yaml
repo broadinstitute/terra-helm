@@ -91,28 +91,39 @@ grafana:
       # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
       cloud.google.com/app-protocols: '{"service":"HTTP"}'
 
-  extraInitContainers:
-  - name: adjust-key-permissions
-    image: alpine:3
-    command: ["sh", "-c"]
-    args:
-      - |-
-        ls -la /dbcerts; 
-        chown -R 472:472 /dbcerts;
-        ls -la /dbcerts; 
-        chmod -R 600 /dbcerts;
-        ls -la /dbcerts
-    volumeMounts:
-    - name: database-cert-volume
-      mountPath: /dbcerts
-      readOnly: false
+#  extraInitContainers:
+#  - name: adjust-key-permissions
+#    image: alpine:3
+#    command: ["sh", "-c"]
+#    args:
+#      - |-
+#        ls -la /dbcerts; 
+#        chown -R 472:472 /dbcerts;
+#        ls -la /dbcerts; 
+#        chmod -R 600 /dbcerts;
+#        ls -la /dbcerts
+#    volumeMounts:
+#    - name: database-cert-volume
+#      mountPath: /dbcerts
+#      readOnly: false
 
   extraSecretMounts:
     - name: database-cert-volume
-      mountPath: /dbcerts
+      mountPath: /dbcerts-ro
       readOnly: true
       secretName: grafana-database-certs
-      defaultMode: 256
+      defaultMode: 0777
+
+  command:
+    - sh
+    - -c
+    - |-
+      mkdir -p /dbcerts && \
+      cp -R /dbcerts-ro /dbcerts && \
+      chown -R $USER: /dbcerts && \
+      chmod -R 0600 /dbcerts && \
+      /run.sh
+
 
   grafana.ini:
     database:
