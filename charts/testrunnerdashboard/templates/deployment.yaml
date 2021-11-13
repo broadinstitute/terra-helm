@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}-deployment
-  labels: {{ include "testrunnerdashboard.labels" . | nindent 4 }}
+  labels: {{- include "testrunnerdashboard.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
   strategy:
@@ -20,7 +20,7 @@ spec:
     metadata:
       labels:
         deployment: {{ .Chart.Name }}-deployment
-{{ include "testrunnerdashboard.labels" . | indent 8 }}
+{{- include "testrunnerdashboard.labels" . | indent 8 }}
     spec:
       serviceAccountName: {{ .Chart.Name }}-sa
       containers:

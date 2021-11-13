@@ -6,6 +6,9 @@ global:
   # -- (string) What version of the application to deploy
   applicationVersion: latest
 
+# Emulate current Helm3 chart functionality, i.e., do not create the release namespace by default.
+createReleaseNamespace: false
+
 # name -- A name for the deployment that will be substituted into resource definitions
 name: trdash
 
