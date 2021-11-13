@@ -113,7 +113,7 @@ grafana:
         ls -la /dbcerts-ro; 
         cp /dbcerts-ro/* /dbcerts;
         ls -la /dbcerts;
-        chmod  600 /dbcerts/*;
+        chmod 600 /dbcerts/*;
         ls -la /dbcerts
     volumeMounts:
     - name: database-cert-volume-ro
