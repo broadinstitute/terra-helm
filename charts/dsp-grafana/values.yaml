@@ -115,9 +115,9 @@ grafana:
       defaultMode: 0777
 
   command:
-    - 'sh'
-    - '-c'
-    - 'mkdir -p /dbcerts && cp /dbcerts-ro/* /dbcerts && chown -R $USER: /dbcerts && chmod -R 0600 /dbcerts && /run.sh'
+    - "sh"
+    - "-c"
+    - "mkdir -p /dbcerts && cp /dbcerts-ro/* /dbcerts && chown -R $USER: /dbcerts && chmod -R 0600 /dbcerts && /run.sh"
 
   grafana.ini:
     database:
