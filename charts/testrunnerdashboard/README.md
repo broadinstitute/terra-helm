@@ -1,6 +1,6 @@
 # trdash
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for TestRunner Dashbaord
 
@@ -21,6 +21,7 @@ Chart for TestRunner Dashbaord
 |-----|------|---------|-------------|
 | annotations | object | `{}` | (map) Annotations for application pods |
 | config | object | `nil` | Required; contents of testrunnerdashboard.yaml to be given to the application |
+| createReleaseNamespace | bool | `false` | Emulate current Helm3 chart functionality, i.e., do not create the release namespace by default |
 | global.applicationVersion | string | `"latest"` | (string) What version of the application to deploy |
 | imageConfig.imagePullPolicy | string | `"Always"` | (string) When to pull images |
 | imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/terra-test-runner-dashboard/terra-test-runner-dashboard"` | (string) Image repository |
@@ -65,7 +66,7 @@ Chart for TestRunner Dashbaord
 | secrets.gcpServiceAccount.secretsManager.vaultKey | string | `nil` | Field name within the secret for the SA's key |
 | secrets.gcpServiceAccount.secretsManager.vaultPath | string | `nil` | Path within Vault where the SA's key is stored |
 | secrets.gcpServiceAccount.workloadIdentity.accountName | string | `nil` | ID of the GCP SA to use |
-| secrets.gcpServiceAccount.workloadIdentity.enabled | bool | `false` | (boolean) If workload identity should be used for the GCP SA |
+| secrets.gcpServiceAccount.workloadIdentity.enabled | bool | `true` | (boolean) If workload identity should be used for the GCP SA |
 | secrets.gcpServiceAccount.workloadIdentity.projectId | string | `nil` | ID (not the number) of the GCP project the SA is in |
 | secrets.gcpServiceAccount.workloadIdentity.useConfigConnect | bool | `false` | (boolean) If Config Connector should be used for provisioning the workload identity SA -- If false, the workload identity SA will be provisioned by other means |
 
