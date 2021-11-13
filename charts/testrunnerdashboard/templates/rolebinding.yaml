@@ -11,3 +11,4 @@ subjects:
 # Authorize specific service accounts:
 - kind: ServiceAccount
   name: {{ .Chart.Name }}-sa
+  namespace: {{ .Release.Namespace }}
