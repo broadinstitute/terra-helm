@@ -107,14 +107,16 @@ grafana:
 #      mountPath: /dbcerts
 #      readOnly: false
 
+  securityContext: nil
+
   extraSecretMounts:
     - name: database-cert-volume
-      mountPath: /dbcerts-ro
+      mountPath: /dbcerts
       readOnly: true
       secretName: grafana-database-certs
-      defaultMode: 0777
+      defaultMode: 0600
 
-  command: ["sh", "-c", "mkdir -p /dbcerts && cp /dbcerts-ro/* /dbcerts && chown -R 472:472 /dbcerts && chmod -R 0600 /dbcerts && /run.sh"]
+  # command: ["sh", "-c", "mkdir -p /dbcerts && cp /dbcerts-ro/* /dbcerts && chown -R 472:472 /dbcerts && chmod -R 0600 /dbcerts && /run.sh"]
 
   grafana.ini:
     database:
