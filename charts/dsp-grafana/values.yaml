@@ -108,7 +108,7 @@ grafana:
     - name: database-cert-volume-ro
       mountPath: /dbcerts-ro
       readOnly: false
-    - name: database-cert-volume
+    - name: database-cert-volume-rwx
       mountPath: /dbcerts
       readOnly: false
 
