@@ -113,7 +113,7 @@ grafana:
   command:
     - "/bin/sh"
     - "-c"
-    - "sleep 15; /run.sh"
+    - "sleep 5; /run.sh"
 
   grafana.ini:
     # Leave most config to the env but do set fields relating to the CloudSQL requirements
