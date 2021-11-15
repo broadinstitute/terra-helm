@@ -63,8 +63,11 @@ secrets:
       sourceEncoding: text
 
 grafana:
-  # -- 
+  # -- Reference the wrapper's secret to add to the grafana environment
   envFromSecret: '{{ .Values.global.name }}-container-env'
+
+  # -- Bump the default replicas since the wrapper's database persistence allows it
+  replicas: 3
 
   # -- Replicaset revisions not saved since we'd rollback via gitops or argo
   revisionHistoryLimit: 0
@@ -91,6 +94,11 @@ grafana:
       # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
       cloud.google.com/app-protocols: '{"service":"HTTP"}'
 
+  imageRenderer:
+    # -- Replicaset revisions not saved since we'd rollback via gitops or argo
+    revisionHistoryLimit: 0
+
+  # -- Include the cloud SQL proxy as a sidecar
   extraContainers: |-
     - name: cloudsql-proxy
       image: gcr.io/cloudsql-docker/gce-proxy:1.27.0
@@ -101,8 +109,15 @@ grafana:
         - "/cloud_sql_proxy"
         - "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"
   
-  # Make Grafana briefly sleep before starting to let the CloudSQL proxy come online
+  # -- Make Grafana briefly sleep before starting to let the CloudSQL proxy come online
   command:
     - "/bin/sh"
     - "-c"
     - "sleep 15; /run.sh"
+
+  grafana.ini:
+    # Leave most config to the env but do set fields relating to the CloudSQL requirements
+    database:
+      type: postgres
+      host: localhost:5432
+      ssl_mode: disable
