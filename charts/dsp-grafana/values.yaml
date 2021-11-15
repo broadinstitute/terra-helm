@@ -105,4 +105,4 @@ grafana:
   command:
     - "/bin/sh"
     - "-c"
-    - "sleep 15; ./run.sh"
+    - "sleep 15; /run.sh"
