@@ -2,15 +2,14 @@ apiVersion: v2
 name: postgres
 version: 0.1.0
 
-description: Application chart for an ephemeral PostgreSQL database container used for Sam
-type: application
+description: Library chart for an ephemeral PostgreSQL database container
+type: library
 
 keywords:
 - dsp
 - broadinstitute
 - database
 - postgres
-- sam
 
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
