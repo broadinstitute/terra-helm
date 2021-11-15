@@ -103,4 +103,4 @@ grafana:
   
   # Make Grafana briefly sleep before starting to let the CloudSQL proxy come online
   command:
-    - "sleep 15; /run.sh"
+    - "/bin/sleep 15; /run.sh"
