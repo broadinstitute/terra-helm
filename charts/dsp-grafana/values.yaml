@@ -82,6 +82,10 @@ secrets:
 githubTeamSync:
   # -- If broadinstitute/grafana-github-team-sync should be run as a cronjob
   enabled: false
+  # -- FQDN of the Grafana to target
+  grafanaHost:
+  # -- Protocol to use to communicate with grafanaHost
+  grafanaProtocol:
   # -- Image to use for the cronjob, pulled each time
   image: us-central1-docker.pkg.dev/dsp-artifact-registry/grafana-github-team-sync/grafana-github-team-sync:edge
   # -- A specific team to also be granted admin, like `broadinstitute/dsp-devops. Can be set to empty to have none.
@@ -90,10 +94,6 @@ githubTeamSync:
   targetGrafanaOrgId: 1
   # -- Comma separated list of exact usernames to never remove permissions from
   neverRemovePermissionsFrom: admin
-  # -- FQDN of the Grafana to target (can be internal DNS)
-  grafanaHost: dsp-grafana.grafana
-  # -- Protocol to use to communicate with grafanaHost
-  grafanaProtocol: http
   # -- Timeout for the cronjob
   timeoutSeconds: 900
   # -- The schedule to run the job on (14:00 UTC == 2:00PM UTC == 9:00AM ET, after BITS GitHub sync from 6-9am)

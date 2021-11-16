@@ -12,7 +12,7 @@ data:
   {{- end }}
   TARGET_GRAFANA_ORG_ID: {{ .targetGrafanaOrgId | quote }}
   NEVER_REMOVE_PERMISSIONS_FROM: {{ .neverRemovePermissionsFrom }}
-  GRAFANA_HOST: {{ .grafanaHost }}
-  GRAFANA_PROTOCOL: {{ .grafanaProtocol }}
+  GRAFANA_HOST: {{ .grafanaHost | required "grafanaHost is required for the github sync" }}
+  GRAFANA_PROTOCOL: {{ .grafanaProtocol | required "grafanaProtocol is required for the github sync" }}
   {{- end }}
 {{- end }}
