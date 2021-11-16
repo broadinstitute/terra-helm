@@ -72197,6 +72197,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/trdash-0.10.0/trdash-0.10.0.tgz
     version: 0.10.0
   - apiVersion: v2
+    created: "2021-11-16T01:10:23.079119052Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://broadinstitute.github.io/terra-helm/
+      version: 0.12.0
+    description: Chart for TestRunner Dashbaord
+    digest: cde1c191ee5a7f294b5903ae45a33b2b0126461d646021a9afb3d5a2b10b02cb
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - testrunner
+    name: trdash
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-test-runner-dashboard
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/trdash-0.10.0-636.1637025012.20c2c1/trdash-0.10.0-636.1637025012.20c2c1.tgz
+    version: 0.10.0-636.1637025012.20c2c1
+  - apiVersion: v2
     created: "2021-11-15T15:20:17.980992627Z"
     dependencies:
     - name: ingresslib
