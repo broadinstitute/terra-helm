@@ -4,9 +4,4 @@
 spec:
   selector:
     deployment: {{ .Values.ingress.deployment }}-deployment
-  ports:
-  - name: https
-    protocol: TCP
-    port: 443
-    targetPort: 8050
 {{- end }}

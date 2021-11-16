@@ -29,7 +29,7 @@ spec:
         imagePullPolicy: {{ $.Values.imageConfig.imagePullPolicy }}
         ports:
         - name: main
-          containerPort: 8050
+          containerPort: 443
           protocol: TCP
         # Note: These readiness settings only apply to Kubernetes' internal load
         # balancing mechanism -- there's a separate health check setting for

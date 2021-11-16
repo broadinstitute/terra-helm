@@ -4,6 +4,4 @@
 spec:
   healthCheck:
     checkIntervalSec: 10
-    type: HTTP
-    port: 8050
 {{- end }}
