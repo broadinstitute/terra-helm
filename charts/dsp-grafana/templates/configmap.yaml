@@ -10,7 +10,7 @@ data:
   {{- if .teamGrantingGrafanaAdmin }}
   TEAM_GRANTING_GRAFANA_ADMIN: {{ .teamGrantingGrafanaAdmin }}
   {{- end }}
-  TARGET_GRAFANA_ORG_ID: {{ .targetGrafanaOrgId }}
+  TARGET_GRAFANA_ORG_ID: {{ .targetGrafanaOrgId | quote }}
   NEVER_REMOVE_PERMISSIONS_FROM: {{ .neverRemovePermissionsFrom }}
   GRAFANA_HOST: {{ .grafanaHost }}
   GRAFANA_PROTOCOL: {{ .grafanaProtocol }}
