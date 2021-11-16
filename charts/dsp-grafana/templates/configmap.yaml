@@ -5,14 +5,12 @@ metadata:
   name: {{ .Values.global.name }}-github-team-sync-cm-env
   labels:
     {{- include "grafana.labels" . | nindent 4 }}
-spec:
-  name: {{ .Values.global.name }}-github-team-sync-cm-env
-  keysMap:
-    {{- with .Values.githubTeamSync }}
-    TEAM_GRANTING_GRAFANA_ADMIN: {{ .teamGrantingGrafanaAdmin }}
-    TARGET_GRAFANA_ORG_ID: {{ .targetGrafanaOrgId }}
-    NEVER_REMOVE_PERMISSIONS_FROM: {{ .neverRemovePermissionsFrom }}
-    GRAFANA_HOST: {{ .grafanaHost }}
-    GRAFANA_PROTOCOL: {{ .grafanaProtocol }}
-    {{- end }}
+data:
+  {{- with .Values.githubTeamSync }}
+  TEAM_GRANTING_GRAFANA_ADMIN: {{ .teamGrantingGrafanaAdmin }}
+  TARGET_GRAFANA_ORG_ID: {{ .targetGrafanaOrgId }}
+  NEVER_REMOVE_PERMISSIONS_FROM: {{ .neverRemovePermissionsFrom }}
+  GRAFANA_HOST: {{ .grafanaHost }}
+  GRAFANA_PROTOCOL: {{ .grafanaProtocol }}
+  {{- end }}
 {{- end }}

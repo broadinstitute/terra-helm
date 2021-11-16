@@ -20,10 +20,10 @@ spec:
             {{- include "grafana.labels" . | nindent 12 }}
         spec:
           serviceAccountName: {{ .Values.grafana.serviceAccount.name }}
-          imagePullPolicy: Always
           containers:
           - name: sync-cronjob
             image: {{ .Values.githubTeamSync.image }}
+            imagePullPolicy: Always
             envFrom:
             - secretRef:
                 name: {{ .Values.global.name }}-github-team-sync-secret-env
