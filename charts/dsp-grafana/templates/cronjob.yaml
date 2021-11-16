@@ -1,0 +1,33 @@
+{{- if .Values.githubTeamSync.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.global.name }}-github-team-sync
+  labels: 
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.githubTeamSync.schedule }}
+  concurrencyPolicy: Replace
+  jobTemplate:
+    metadata:
+      labels: 
+        {{- include "grafana.labels" . | nindent 8 }}
+    spec:
+      activeDeadlineSeconds: {{ .Values.githubTeamSync.timeoutSeconds }}
+      template:
+        metadata:
+          labels:
+            {{- include "grafana.labels" . | nindent 12 }}
+        spec:
+          serviceAccountName: {{ .Values.grafana.serviceAccount.name }}
+          imagePullPolicy: Always
+          containers:
+          - name: sync-cronjob
+            image: {{ .Values.githubTeamSync.image }}
+            envFrom:
+            - secretRef:
+                name: {{ .Values.global.name }}-github-team-sync-secret-env
+            - configMapRef:
+                name: {{ .Values.global.name }}-github-team-sync-cm-env
+          restartPolicy: OnFailure
+{{- end }}

@@ -61,6 +61,44 @@ secrets:
       vaultKey:
       # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
       sourceEncoding: text
+  githubTeamSync:
+    # -- (string) Path within Vault to the desired Vault secret
+    githubTokenVaultPath:
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    githubTokenVaultKey: token
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    githubTokenSourceEncoding: text
+    # -- (string) Path within Vault to the desired Vault secret
+    grafanaAuthVaultPath:
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    grafanaAuthUsernameVaultKey: username
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    grafanaAuthUsernameSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    grafanaAuthPasswordVaultKey: password
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    grafanaAuthPasswordSourceEncoding: text
+
+githubTeamSync:
+  # -- If broadinstitute/grafana-github-team-sync should be run as a cronjob
+  enabled: false
+  # -- Image to use for the cronjob, pulled each time
+  image: us-central1-docker.pkg.dev/dsp-artifact-registry/grafana-github-team-sync/grafana-github-team-sync:edge
+  # -- A specific team to also be granted admin, like `broadinstitute/dsp-devops
+  teamGrantingGrafanaAdmin: ''
+  # -- The numeric ID of the Grafana org to target
+  targetGrafanaOrgId: 1
+  # -- Comma separated list of exact usernames to never remove permissions from
+  neverRemovePermissionsFrom: admin
+  # -- FQDN of the Grafana to target (can be internal DNS)
+  grafanaHost: dsp-grafana.grafana
+  # -- Protocol to use to communicate with grafanaHost
+  grafanaProtocol: http
+  # -- Timeout for the cronjob
+  timeoutSeconds: 900
+  # -- The schedule to run the job on (14:00 UTC == 2:00PM UTC == 9:00AM ET, after BITS GitHub sync from 6-9am)
+  # https://broadinstitute.slack.com/archives/C4P1S6KB8/p1628173022001400?thread_ts=1628172949.001300&cid=C4P1S6KB8
+  schedule: 0 14 * * *
 
 grafana:
   # -- Reference the wrapper's secret to add to the grafana environment
@@ -75,6 +113,10 @@ grafana:
   ingress:
     # -- DISABLE grafana's built-in ingress
     enabled: false
+
+  serviceAccount:
+    # -- Set the SA name specifically so cronjobs can use it
+    name: grafana-sa
 
   admin:
     # -- Derive the admin account credentials from a secret (created by secrets.AdminAccount)
