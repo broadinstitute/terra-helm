@@ -13,8 +13,8 @@ spec:
     healthyThreshold: 2
     unhealthyThreshold: 2
     type: HTTP
-    port: 10902
-    requestPath: /-/ready
+    port: 8080
+    requestPath: /metrics
 {{- if .Values.ingress.securityPolicy }}
   securityPolicy:
     name: {{ .Values.ingress.securityPolicy }}

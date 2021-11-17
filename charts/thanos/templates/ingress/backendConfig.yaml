@@ -13,8 +13,8 @@ spec:
     healthyThreshold: 2
     unhealthyThreshold: 2
     type: HTTP
-    port: 9090
-    requestPath: /metrics
+    port: 10902
+    requestPath: /-/ready
 {{- if .Values.ingress.securityPolicy }}
   securityPolicy:
     name: {{ .Values.ingress.securityPolicy }}
