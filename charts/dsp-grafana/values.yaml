@@ -100,6 +100,13 @@ githubTeamSync:
   # https://broadinstitute.slack.com/archives/C4P1S6KB8/p1628173022001400?thread_ts=1628172949.001300&cid=C4P1S6KB8
   schedule: 0 14 * * *
 
+# -- Options supporting the use of the Grafana sidecar for importing JSON from K8s if the sidecar targets non-release namespaces
+sidecarFacilitation:
+  # -- If this chart should create namespaces the sidecar intends to search
+  createSearchedNamespaces: false
+  # -- A list of users (can be GCP SA emails) to grant narrow access to the namespaces
+  grantUsersNamespaceAccess: []
+
 grafana:
   # -- Reference the wrapper's secret to add to the grafana environment
   envFromSecret: '{{ .Values.global.name }}-container-env'
@@ -140,6 +147,20 @@ grafana:
     # -- Replicaset revisions not saved since we'd rollback via gitops or argo
     revisionHistoryLimit: 0
 
+  sidecar:
+    dashboards:
+      # -- Dashboards from configmaps disabled by default
+      enabled: false
+
+      # -- (list) Namespaces to look for configmaps in; if empty, use the release namespace
+      # Note: 'all' is theoretically supported here but not by `.Values.sidecarFacilitation`
+      # Note: empty causes `.Values.sidecarFacilitation` to have no effect
+      searchNamespace:
+
+      provider:
+        # -- Respect filesystem structure derived from the configmap annotations
+        foldersFromFileStructure: true
+
   # -- Include the cloud SQL proxy as a sidecar
   extraContainers: |-
     - name: cloudsql-proxy
@@ -158,7 +179,7 @@ grafana:
     - "sleep 5; /run.sh"
 
   grafana.ini:
-    # Leave most config to the env but do set fields relating to the CloudSQL requirements
+    # -- Leave most config to the env but do set fields relating to the CloudSQL requirements
     database:
       type: postgres
       host: localhost:5432
