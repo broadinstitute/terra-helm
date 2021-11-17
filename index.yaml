@@ -69622,6 +69622,27 @@ entries:
     version: 0.1.0-529.1633395060.426341
   thanos:
   - apiVersion: v2
+    created: "2021-11-17T18:57:06.472980649Z"
+    dependencies:
+    - name: thanos
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.0.3
+    description: Chart for deploying Thanos metrics system in dsp infrastructure
+    digest: fac716e32eb94c4729c7ba0f18f7e63af9910eb9f6cda21b6fecad48387f98e0
+    keywords:
+    - dsp
+    - broadinstitute
+    - thanos
+    - prometheus
+    - metrics
+    - monitoring
+    name: thanos
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thanos-0.0.0-638.1637175413.e04c26/thanos-0.0.0-638.1637175413.e04c26.tgz
+    version: 0.0.0-638.1637175413.e04c26
+  - apiVersion: v2
     created: "2021-11-17T18:21:12.2337345Z"
     dependencies:
     - name: thanos
