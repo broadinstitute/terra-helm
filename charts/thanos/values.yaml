@@ -1,5 +1,6 @@
 name: thanos
 ingress:
+  enabled: true
   timeoutSec: 120
   securityPolicy: ""
   iap:
@@ -11,6 +12,8 @@ ingress:
   staticIpName: Null
   cert:
     preSharedCerts: []
+  certmanager:
+    enabled: true
 
 
 thanos:
