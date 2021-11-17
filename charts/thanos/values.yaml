@@ -9,6 +9,8 @@ ingress:
     suffix: dsp-devops.broadinstitute.org
   sslPolicy: Null
   staticIpName: Null
+  cert:
+    preSharedCerts: []
 
 
 thanos:
