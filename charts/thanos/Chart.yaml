@@ -1,0 +1,17 @@
+apiVersion: v2
+name: thanos
+version: 0.0.0
+description: Chart for deploying Thanos metrics system in dsp infrastructure
+keywords:
+  - "dsp"
+  - "broadinstitute"
+  - "thanos"
+  - "prometheus"
+  - "metrics"
+  - "monitoring"
+sources:
+  - https://github.com/broadinstitute/terra-helm/tree/master/charts
+dependencies:
+  - name: thanos
+    version: 8.0.3
+    repository: https://charts.bitnami.com/bitnami
