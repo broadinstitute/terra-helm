@@ -1,11 +1,5 @@
 thanos:
   fullnameOverride: thanos
-  commonLabels:
-    app.kubernetes.io/name: thanos
-    app.kubernetes.io/instance: thanos
-    app.kubernetes.io/managed-by: dsp-devops
-    app.kubernetes.io/component: dsp-monitoring
-    app.kubernetes.io/part-of: dsp-tools
   query:
     enabled: true
     dnsDiscovery:
