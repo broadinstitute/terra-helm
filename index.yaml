@@ -56734,6 +56734,23 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-0.3.0/sherlock-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
+    created: "2021-11-17T20:30:51.416230361Z"
+    description: Chart for Sherlock - DSP's environment tracking and management service
+    digest: 39c0ac76883ab48fac6e4d36b2685e495c3c6189154eb4ff425c39abc5b0e791
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sherlock
+    name: sherlock
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sherlock
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sherlock-0.3.0-638.1637181035.7958c2/sherlock-0.3.0-638.1637181035.7958c2.tgz
+    version: 0.3.0-638.1637181035.7958c2
+  - apiVersion: v2
     created: "2021-10-25T16:56:14.365376969Z"
     description: Chart for Sherlock - DSP's environment tracking and management service
     digest: 7ebeecf7eff71d202cc4b6472dce4d7c2f043342d021c6f3328c911deec93c35
@@ -69621,6 +69638,27 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/testrunnerdashboard-0.1.0-529.1633395060.426341/testrunnerdashboard-0.1.0-529.1633395060.426341.tgz
     version: 0.1.0-529.1633395060.426341
   thanos:
+  - apiVersion: v2
+    created: "2021-11-17T20:30:51.546397067Z"
+    dependencies:
+    - name: thanos
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.0.3
+    description: Chart for deploying Thanos metrics system in dsp infrastructure
+    digest: 353f7bb8cb8b5509b6d177cd0a5f888e9e698175dd93d8051c718ed3841d676c
+    keywords:
+    - dsp
+    - broadinstitute
+    - thanos
+    - prometheus
+    - metrics
+    - monitoring
+    name: thanos
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/thanos-0.0.0-638.1637181035.7958c2/thanos-0.0.0-638.1637181035.7958c2.tgz
+    version: 0.0.0-638.1637181035.7958c2
   - apiVersion: v2
     created: "2021-11-17T19:35:23.164519175Z"
     dependencies:
