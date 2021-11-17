@@ -48,3 +48,42 @@ roleRef:
 ---
 {{- end }}
 {{- end }}
+
+{{- if (and (not (empty .Values.sidecarFacilitation.grantUsersNamespaceAccess)) .Values.sidecarFacilitation.allowGrantedUsersToRestart) }}
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: grafana-restarter-role
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "grafana.labels" $ | nindent 4 }}
+rules:
+  - apiGroups:
+      - apps
+      - extensions
+    resources:
+      - deployments
+    resourceNames:
+      - {{ .Values.grafana.fullnameOverride }}
+    verbs:
+      - get
+      - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-restarter-rolebinding
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "grafana.labels" $ | nindent 4 }}
+subjects:
+{{- range $_, $user := $.Values.sidecarFacilitation.grantUsersNamespaceAccess }}
+- kind: User
+  name: {{ $user }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
+roleRef:
+  kind: Role
+  name: grafana-restarter-role
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}

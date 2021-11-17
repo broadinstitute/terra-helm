@@ -106,8 +106,12 @@ sidecarFacilitation:
   createSearchedNamespaces: false
   # -- A list of users (can be GCP SA emails) to grant narrow access to the namespaces
   grantUsersNamespaceAccess: []
+  # -- Allow any users with namespace access to also rollout a grafana restart
+  allowGrantedUsersToRestart: true
 
 grafana:
+  fullnameOverride: dsp-grafana
+
   # -- Reference the wrapper's secret to add to the grafana environment
   envFromSecret: '{{ .Values.global.name }}-container-env'
 
