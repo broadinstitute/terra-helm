@@ -131,4 +131,4 @@ apps:
       version: 0.2.0
     instances:
       chart: dsp-gha-runner-instances
-      version: 0.6.0
+      version: 0.7.0
