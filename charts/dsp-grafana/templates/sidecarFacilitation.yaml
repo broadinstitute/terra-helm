@@ -24,7 +24,7 @@ metadata:
 rules:
   - apiGroups: [""]
     resources:
-      # NOT secrets! Secrets are via Helm using Argo's access
+      - secrets
       - configmaps
     verbs: ["*"]
 ---
@@ -68,6 +68,8 @@ rules:
     verbs:
       - get
       - patch
+      - watch
+      - list
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
