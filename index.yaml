@@ -19472,6 +19472,22 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.6.0/dsp-gha-runner-instances-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v2
+    created: "2021-11-18T16:46:16.453845277Z"
+    description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
+    digest: 1ce1d9578dab63f4ea3c4f44fe4fc5298f2ec070eba4df8d47f5b339a683709b
+    keywords:
+    - dsp
+    - broadinstitute
+    - github
+    - runner
+    name: dsp-gha-runner-instances
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-gha-runner-instances-0.6.0-639.1637253967.4beb70/dsp-gha-runner-instances-0.6.0-639.1637253967.4beb70.tgz
+    version: 0.6.0-639.1637253967.4beb70
+  - apiVersion: v2
     created: "2021-10-01T16:35:10.196027308Z"
     description: Self-hosted GHA runner instances relying on dsp-gha-runner-controller
     digest: f5d0a02c8a7e77eec6c6b68f71e15eeac6eeaeb2fb8a891eba5a6eb13eb7a526
