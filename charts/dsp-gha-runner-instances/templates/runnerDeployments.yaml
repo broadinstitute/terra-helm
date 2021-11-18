@@ -45,4 +45,6 @@ spec:
   - startTime: {{ $.Values.weekendStart | quote }}
     endTime: {{ $.Values.weekendEnd | quote }}
     minReplicas: {{ .weekendMinReplicas | default $.Values.defaultWeekendMinReplicas }}
+    recurrenceRule:
+      frequency: Weekly
 {{- end }}
