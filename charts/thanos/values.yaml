@@ -1,37 +1,54 @@
 name: thanos
 ingress:
+  # ingress.enabled -- Whether to create ingress and associated resources for thanos query
   enabled: true
+  # ingress.timeoutSec -- timeout for the ingress loadbalancer health check
   timeoutSec: 120
+  # ingress.securityPolicy -- name of cloud armor policy used to restrict access to thanos
   securityPolicy: ""
   iap:
+    # ingress.iap.enabled -- whether to use IAP as an oauth layer for access to thanos
     enabled: false
   domain:
+    # ingress.domain.hostname -- hostname to access thanos server
     hostname: thanos
+    # ingress.domain.suffix -- suffix of the dns zone thanos records are provisioned in
     suffix: dsp-devops.broadinstitute.org
+  # ingress.sslPolicy -- policy to restrict the tls versions or ciphers that can be used with thanos
   sslPolicy: Null
+  # ingress.staticIpName -- name of the global static ip to associate with the ingress
   staticIpName: Null
   cert:
+    # ingress.cert.preSharedCerts -- list of existing certificates in google to associate with the ingress
     preSharedCerts: []
   certmanager:
+    # ingress.certmanager.enabled -- whether to use certmanager to provision a lets encrypt cert for the ingress
     enabled: true
 
 
 thanos:
+  # thanos.fullNameOverride -- used to override complex name templating in bitnami thanos chart
   fullnameOverride: thanos
   query:
+    # thanos.query.enabled -- whether to run a thanos querier node
     enabled: true
     dnsDiscovery:
+      # thanos.query.dnsDiscovery.enabled -- whether to have the query attempt to automatically discover thanos sidecars
       enabled: false
-    # query.stores -- List of dns names of thanos story apis that can be queried. These consist of sidecars, store gateways and other queriers
+    # query.stores -- List of dns names of thanos store apis that can be queried. These consist of sidecars, store gateways and other queriers
     stores: []
     grpc:
       client:
         tls:
+          # thanos.query.grpc.client.tls.enabled -- whether to use tls when connecting to sidecars via gRPC
           enabled: true
     rbac:
+      # thanos.query.rbac.create -- whether to create role and rolebindings for the thanos query deployment
       create: true
+    # thanos.query.pspEnabled -- whether to use a pod security policy for the thanos query deployment
     pspEnabled: true
     service:
+      # thanos.query.service.annotations -- additional annotations to add on to thanos query service to make ingress function properly
       annotations:
         # Associate a backend config with the ingress: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#associating_backendconfig_with_your_ingress
         cloud.google.com/backend-config: '{"default": "thanos-ingress-backendconfig"}'
@@ -42,4 +59,5 @@ thanos:
   queryFrontend:
     enabled: false
   metrics:
+    # thanos.query.metrics.enabled -- whether to expose prometheus metrics for the query node itself
     enabled: true
