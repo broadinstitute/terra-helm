@@ -13,5 +13,10 @@ spec:
       app.kubernetes.io/component: sherlock
   endpoints:
     - port: http
+      interval: 2m
+      honorLabels: true
+      path: /metrics
+      scheme: http
+      scrapeTimeout: 30s
 {{- end }}
   
