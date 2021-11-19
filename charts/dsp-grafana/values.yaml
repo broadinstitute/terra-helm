@@ -36,21 +36,21 @@ secrets:
     # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
     passwordSourceEncoding: text
   # -- A secret containing database cert files to use for Grafana's persistence
-  databaseCerts:
+  databaseInstance:
     # -- (string) Path within Vault to the desired Vault secret
     vaultPath: 
     # -- (string) Key within the desired Vault secret to the desired individual secret value to use
-    serverCaVaultKey:
+    nameVaultKey: name
     # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
-    serverCaSourceEncoding: text
+    nameSourceEncoding: text
     # -- (string) Key within the desired Vault secret to the desired individual secret value to use
-    clientCertVaultKey:
+    regionVaultKey: region
     # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
-    clientCertSourceEncoding: text
+    regionSourceEncoding: text
     # -- (string) Key within the desired Vault secret to the desired individual secret value to use
-    clientKeyVaultKey:
+    projectVaultKey: project
     # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
-    clientKeySourceEncoding: text
+    projectSourceEncoding: text
   # -- (list) Secrets to be placed into environment variables in the grafana container
   containerEnv:
     - # -- (string) Name of the environment variable to create
@@ -61,10 +61,64 @@ secrets:
       vaultKey:
       # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
       sourceEncoding: text
+  githubTeamSync:
+    # -- (string) Path within Vault to the desired Vault secret
+    githubTokenVaultPath:
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    githubTokenVaultKey: token
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    githubTokenSourceEncoding: text
+    # -- (string) Path within Vault to the desired Vault secret
+    grafanaAuthVaultPath:
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    grafanaAuthUsernameVaultKey: username
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    grafanaAuthUsernameSourceEncoding: text
+    # -- (string) Key within the desired Vault secret to the desired individual secret value to use
+    grafanaAuthPasswordVaultKey: password
+    # -- (string) Encoding of the secret value in vault (either `text` or `base64`)
+    grafanaAuthPasswordSourceEncoding: text
+
+githubTeamSync:
+  # -- If broadinstitute/grafana-github-team-sync should be run as a cronjob
+  enabled: false
+  # -- FQDN of the Grafana to target
+  grafanaHost: dsp-grafana.grafana
+  # -- Protocol to use to communicate with grafanaHost
+  grafanaProtocol: http
+  # -- Optional port to use to communicate with grafanaHost
+  grafanaPort: 80
+  # -- Image to use for the cronjob, pulled each time
+  image: us-central1-docker.pkg.dev/dsp-artifact-registry/grafana-github-team-sync/grafana-github-team-sync:edge
+  # -- A specific team to also be granted admin, like `broadinstitute/dsp-devops. Can be set to empty to have none.
+  teamGrantingGrafanaAdmin:
+  # -- The numeric ID of the Grafana org to target
+  targetGrafanaOrgId: 1
+  # -- Comma separated list of exact usernames to never remove permissions from
+  neverRemovePermissionsFrom: admin
+  # -- Timeout for the cronjob
+  timeoutSeconds: 900
+  # -- The schedule to run the job on (14:00 UTC == 2:00PM UTC == 9:00AM ET, after BITS GitHub sync from 6-9am)
+  # https://broadinstitute.slack.com/archives/C4P1S6KB8/p1628173022001400?thread_ts=1628172949.001300&cid=C4P1S6KB8
+  schedule: 0 14 * * *
+
+# -- Options supporting the use of the Grafana sidecar for importing JSON from K8s if the sidecar targets non-release namespaces
+sidecarFacilitation:
+  # -- If this chart should create namespaces the sidecar intends to search
+  createSearchedNamespaces: false
+  # -- A list of users (can be GCP SA emails) to grant narrow access to the namespaces
+  grantUsersNamespaceAccess: []
+  # -- Allow any users with namespace access to also rollout a grafana restart
+  allowGrantedUsersToRestart: true
 
 grafana:
-  # -- 
+  fullnameOverride: dsp-grafana
+
+  # -- Reference the wrapper's secret to add to the grafana environment
   envFromSecret: '{{ .Values.global.name }}-container-env'
+
+  # -- Bump the default replicas since the wrapper's database persistence allows it
+  replicas: 3
 
   # -- Replicaset revisions not saved since we'd rollback via gitops or argo
   revisionHistoryLimit: 0
@@ -72,6 +126,10 @@ grafana:
   ingress:
     # -- DISABLE grafana's built-in ingress
     enabled: false
+
+  serviceAccount:
+    # -- Set the SA name specifically so cronjobs can use it
+    name: grafana-sa
 
   admin:
     # -- Derive the admin account credentials from a secret (created by secrets.AdminAccount)
@@ -91,58 +149,44 @@ grafana:
       # Key should match `{{ .Values.grafana.service.portName }}`, default of "service", but we can't template here
       cloud.google.com/app-protocols: '{"service":"HTTP"}'
 
-  #
-  # Explanation for the below:
-  #
-  #   1. Grafana uses PQ which requires strict unix permissions on key files
-  #      https://github.com/lib/pq/issues/825
-  #   2. Grafana's chart uses a security context with RunAsUser, which does not respect setting unix permissions
-  #      https://github.com/kubernetes/kubernetes/issues/57923
-  #   3. Grafana's docker image and the chart's PSP/RBAC fight against getting rid of RunAsUser
-  #      (We'd be very tightly coupled, and I couldn't get it working anyway)
-  #   4. Solution: init container copies files to an empty dir volume and sets permissions there
-  #      a. Why copy to an empty dir? Because K8s blocks writes to secrets
-  #         https://github.com/kubernetes/kubernetes/pull/58720
-  #
-  # The below is verbose, but the most idiomatic fix I could come up with.
-  #
+  imageRenderer:
+    # -- Replicaset revisions not saved since we'd rollback via gitops or argo
+    revisionHistoryLimit: 0
 
-  extraSecretMounts:
-    - name: readonly-raw-db-certs
-      mountPath: /dbcerts-ro
-      readOnly: true
-      secretName: grafana-database-certs
+  sidecar:
+    dashboards:
+      # -- Dashboards from configmaps disabled by default
+      enabled: false
 
-  extraEmptyDirMounts:
-    - name: permissioned-db-certs
-      mountPath: /dbcerts
+      # -- (list) Namespaces to look for configmaps in; if empty, use the release namespace
+      # Note: 'all' is theoretically supported here but not by `.Values.sidecarFacilitation`
+      # Note: empty causes `.Values.sidecarFacilitation` to have no effect
+      searchNamespace:
 
-  # All of extraInitContainers is manual, so we must specifically mount the normally automatic
-  # mounts declared above
-  extraInitContainers:
-  - name: adjust-cert-permissions
-    image: alpine:3
-    command: ["sh", "-c"]
-    args:
-      - |-
-        ls -la /dbcerts-ro; 
-        cp /dbcerts-ro/* /dbcerts;
-        ls -la /dbcerts;
-        chmod 600 /dbcerts/*;
-        ls -la /dbcerts
-    volumeMounts:
-    - name: readonly-raw-db-certs
-      mountPath: /dbcerts-ro
-      readOnly: true
-    - name: permissioned-db-certs
-      mountPath: /dbcerts
-      readOnly: false
+      provider:
+        # -- Respect filesystem structure derived from the configmap annotations
+        foldersFromFilesStructure: true
 
-  # We leave most of grafana.ini to the caller to configure, but do specify the options associated
-  # with the database certs
+  # -- Include the cloud SQL proxy as a sidecar
+  extraContainers: |-
+    - name: cloudsql-proxy
+      image: gcr.io/cloudsql-docker/gce-proxy:1.27.0
+      envFrom:
+        - secretRef:
+            name: {{ .Values.global.name }}-sqlproxy-env
+      command: 
+        - "/cloud_sql_proxy"
+        - "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"
+  
+  # -- Make Grafana briefly sleep before starting to let the CloudSQL proxy come online
+  command:
+    - "/bin/sh"
+    - "-c"
+    - "sleep 5; /run.sh"
+
   grafana.ini:
+    # -- Leave most config to the env but do set fields relating to the CloudSQL requirements
     database:
-      server_cert_name: grafana-k8s
-      ca_cert_path: /dbcerts/server-ca.pem
-      client_key_path: /dbcerts/client-key.pem
-      client_cert_path: /dbcerts/client-cert.pem
+      type: postgres
+      host: localhost:5432
+      ssl_mode: disable
