@@ -24,7 +24,7 @@ metadata:
 {{- end }}
 spec:
   tls:
-{{ if .Values.previewEnv }}
+{{- if .Values.previewEnv }}
   - hosts:
     - "*.fiab-{{ .Values.global.terraEnv }}.preview.envs-terra.bio"
     secretName: {{ .Values.certManager.tlsCertSecret }}
