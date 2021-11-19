@@ -49913,6 +49913,22 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.1.0-616.1635791094.529d94/postgres-0.1.0-616.1635791094.529d94.tgz
     version: 0.1.0-616.1635791094.529d94
   - apiVersion: v2
+    created: "2021-11-19T21:26:17.848339233Z"
+    description: Library chart for an ephemeral PostgreSQL database container
+    digest: ad09d0cd8b0306c64c88bf17968fd891ee0cd0bfb15dcf5e89a2c98ae3337e67
+    keywords:
+    - dsp
+    - broadinstitute
+    - database
+    - postgres
+    name: postgres
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: library
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.1.0-527.1637357165.2f37aa/postgres-0.1.0-527.1637357165.2f37aa.tgz
+    version: 0.1.0-527.1637357165.2f37aa
+  - apiVersion: v2
     created: "2021-11-19T20:36:56.919462117Z"
     description: Library chart for an ephemeral PostgreSQL database container
     digest: 0b2a2a29b0dbaa16e22247a6de2faeb52b9e98252c877f28a98568025adbbd57
@@ -55208,6 +55224,31 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.19.0/sam-0.19.0.tgz
     version: 0.19.0
+  - apiVersion: v2
+    created: "2021-11-19T21:26:17.937979497Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: ae73ce9594809917ff6e19e3f1526ff8a38a21766ccc1a981312e2ce49576004
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.19.0-527.1637357165.2f37aa/sam-0.19.0-527.1637357165.2f37aa.tgz
+    version: 0.19.0-527.1637357165.2f37aa
   - apiVersion: v2
     created: "2021-11-19T20:36:57.053012095Z"
     dependencies:
