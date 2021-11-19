@@ -14,7 +14,7 @@ metadata:
     cloud.google.com/app-protocols: '{"https":"HTTPS"}'
     {{- if .Values.previewEnv }}
     # Enable ExternalDNS for this service.
-    external-dns.alpha.kubernetes.io/hostname: sam.{{ .Values.global.terraEnv }}.preview.envs-terra.bio
+    external-dns.alpha.kubernetes.io/hostname: sam.fiab-{{ .Values.global.terraEnv }}.preview.envs-terra.bio
     {{- end }}
 spec:
   {{- if .Values.previewEnv }}
@@ -25,7 +25,7 @@ spec:
   selector:
     {{- include "sam.selectorLabels" . | nindent 4 }}
   {{- if .Values.previewEnv }}
-  externalName: ingress.{{ .Values.global.terraEnv }}.preview.envs-terra.bio
+  externalName: ingress.fiab-{{ .Values.global.terraEnv }}.preview.envs-terra.bio
   {{- end }}
   ports:
   - name: https
