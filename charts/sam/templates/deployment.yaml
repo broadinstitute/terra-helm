@@ -136,7 +136,7 @@ spec:
           subPath: prometheusjmx.jar
         {{- end }}
         {{- if .Values.previewEnv }}
-        - name: {{ .Values.certManager.tlsCertSecret }}
+        - name: {{ .Values.certManager.tlsCertSecret }}-mount
           secret:
             secretName: {{ .Values.certManager.tlsCertSecret }}
         {{- end}}
@@ -165,11 +165,11 @@ spec:
           value: {{ .Values.proxy.logLevel }}
         volumeMounts:
         {{- if .Values.previewEnv }}
-        - name: {{ .Values.certManager.tlsCertSecret }}
+        - name: {{ .Values.certManager.tlsCertSecret }}-mount
           mountPath: /etc/ssl/certs/server.crt
           subPath: tls.crt
           readOnly: true
-        - name: {{ .Values.certManager.tlsCertSecret }}
+        - name: {{ .Values.certManager.tlsCertSecret }}-mount
           mountPath: /etc/ssl/private/server.key
           subPath: tls.key
           readOnly: true
