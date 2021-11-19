@@ -1,0 +1,17 @@
+{{- if .Values.prometheus.scrape.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sherlock-service-monitor
+  labels: 
+    {{ include "sherlock.labels" . | nindent 4 }}
+    release: terra-prometheus
+spec:
+  jobLabel: {{ .Values.name }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: sherlock
+  endpoints:
+    - port: http
+{{- end }}
+  
