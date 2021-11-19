@@ -1,6 +1,6 @@
 # sherlock
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Sherlock - DSP's environment tracking and management service
 
@@ -37,6 +37,7 @@ Chart for Sherlock - DSP's environment tracking and management service
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
 | probes.readiness.enabled | bool | `false` | (boolean) If the readiness probe should be enabled |
 | probes.readiness.spec | object | `nil` | Spec for the readiness probe |
+| prometheus.scrape.enabled | bool | `true` | (bool) Whether to create a ServiceMonitor to enable prometheus scraping of metrics |
 | replicas | int | `1` | (number) Number of sherlock pods to run |
 | resources.limits.cpu | string | `"500m"` | (string) Number of CPU units to limit the deployment to |
 | resources.limits.memory | string | `"4Gi"` | (string) Memory to limit the deployment to |

@@ -104,3 +104,8 @@ secrets:
       accountName: ""
       # -- (string) ID of GCP project containing WI SA.
       projectID: ""
+
+prometheus:
+  scrape:
+    # -- (bool) Whether to create a ServiceMonitor to enable prometheus scraping of metrics
+    enabled: true
