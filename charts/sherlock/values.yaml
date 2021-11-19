@@ -105,6 +105,6 @@ secrets:
       # -- (string) ID of GCP project containing WI SA.
       projectID: ""
 
-promethues:
+prometheus:
   scrape:
     enabled: true
