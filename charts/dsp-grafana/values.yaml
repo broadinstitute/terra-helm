@@ -163,7 +163,7 @@ grafana:
 
       provider:
         # -- Respect filesystem structure derived from the configmap annotations
-        foldersFromFileStructure: true
+        foldersFromFilesStructure: true
 
   # -- Include the cloud SQL proxy as a sidecar
   extraContainers: |-
