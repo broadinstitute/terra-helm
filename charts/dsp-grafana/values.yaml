@@ -86,6 +86,8 @@ githubTeamSync:
   grafanaHost:
   # -- Protocol to use to communicate with grafanaHost
   grafanaProtocol:
+  # -- Optional port to use to communicate with grafanaHost
+  grafanaPort:
   # -- Image to use for the cronjob, pulled each time
   image: us-central1-docker.pkg.dev/dsp-artifact-registry/grafana-github-team-sync/grafana-github-team-sync:edge
   # -- A specific team to also be granted admin, like `broadinstitute/dsp-devops. Can be set to empty to have none.

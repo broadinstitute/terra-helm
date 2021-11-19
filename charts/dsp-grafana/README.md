@@ -20,22 +20,22 @@ Wrapper providing GKE ingress, CloudSQL sidecar, and secrets around Grafana
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | githubTeamSync.enabled | bool | `false` | If broadinstitute/grafana-github-team-sync should be run as a cronjob |
-| githubTeamSync.grafanaHost | string | `"dsp-grafana.grafana"` | FQDN of the Grafana to target (can be internal DNS) |
-| githubTeamSync.grafanaProtocol | string | `"http"` | Protocol to use to communicate with grafanaHost |
+| githubTeamSync.grafanaHost | string | `nil` | FQDN of the Grafana to target |
+| githubTeamSync.grafanaPort | string | `nil` | Optional port to use to communicate with grafanaHost |
+| githubTeamSync.grafanaProtocol | string | `nil` | Protocol to use to communicate with grafanaHost |
 | githubTeamSync.image | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/grafana-github-team-sync/grafana-github-team-sync:edge"` | Image to use for the cronjob, pulled each time |
 | githubTeamSync.neverRemovePermissionsFrom | string | `"admin"` | Comma separated list of exact usernames to never remove permissions from |
 | githubTeamSync.schedule | string | `"0 14 * * *"` | The schedule to run the job on (14:00 UTC == 2:00PM UTC == 9:00AM ET, after BITS GitHub sync from 6-9am) https://broadinstitute.slack.com/archives/C4P1S6KB8/p1628173022001400?thread_ts=1628172949.001300&cid=C4P1S6KB8 |
 | githubTeamSync.targetGrafanaOrgId | int | `1` | The numeric ID of the Grafana org to target |
-| githubTeamSync.teamGrantingGrafanaAdmin | string | `""` | A specific team to also be granted admin, like `broadinstitute/dsp-devops |
+| githubTeamSync.teamGrantingGrafanaAdmin | string | `nil` | A specific team to also be granted admin, like `broadinstitute/dsp-devops. Can be set to empty to have none. |
 | githubTeamSync.timeoutSeconds | int | `900` | Timeout for the cronjob |
 | global.name | string | `"grafana"` |  |
-| grafana."grafana.ini".database.host | string | `"localhost:5432"` |  |
-| grafana."grafana.ini".database.ssl_mode | string | `"disable"` |  |
-| grafana."grafana.ini".database.type | string | `"postgres"` |  |
+| grafana."grafana.ini".database | object | `{"host":"localhost:5432","ssl_mode":"disable","type":"postgres"}` | Leave most config to the env but do set fields relating to the CloudSQL requirements |
 | grafana.admin.existingSecret | string | `"grafana-admin-account"` | Derive the admin account credentials from a secret (created by secrets.AdminAccount) |
 | grafana.command | list | `["/bin/sh","-c","sleep 5; /run.sh"]` | Make Grafana briefly sleep before starting to let the CloudSQL proxy come online |
 | grafana.envFromSecret | string | `"{{ .Values.global.name }}-container-env"` | Reference the wrapper's secret to add to the grafana environment |
 | grafana.extraContainers | string | `"- name: cloudsql-proxy\n  image: gcr.io/cloudsql-docker/gce-proxy:1.27.0\n  envFrom:\n    - secretRef:\n        name: {{ .Values.global.name }}-sqlproxy-env\n  command: \n    - \"/cloud_sql_proxy\"\n    - \"-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432\""` | Include the cloud SQL proxy as a sidecar |
+| grafana.fullnameOverride | string | `"dsp-grafana"` |  |
 | grafana.imageRenderer.revisionHistoryLimit | int | `0` | Replicaset revisions not saved since we'd rollback via gitops or argo |
 | grafana.ingress.enabled | bool | `false` | DISABLE grafana's built-in ingress |
 | grafana.replicas | int | `3` | Bump the default replicas since the wrapper's database persistence allows it |
@@ -45,6 +45,9 @@ Wrapper providing GKE ingress, CloudSQL sidecar, and secrets around Grafana
 | grafana.service.annotations."cloud.google.com/neg" | string | `"{\"ingress\": true}"` |  |
 | grafana.service.port | int | `80` | Port to run the (non-HTTPS) service over |
 | grafana.serviceAccount.name | string | `"grafana-sa"` | Set the SA name specifically so cronjobs can use it |
+| grafana.sidecar.dashboards.enabled | bool | `false` | Dashboards from configmaps disabled by default |
+| grafana.sidecar.dashboards.provider.foldersFromFilesStructure | bool | `true` | Respect filesystem structure derived from the configmap annotations |
+| grafana.sidecar.dashboards.searchNamespace | list | `nil` | Namespaces to look for configmaps in; if empty, use the release namespace Note: 'all' is theoretically supported here but not by `.Values.sidecarFacilitation` Note: empty causes `.Values.sidecarFacilitation` to have no effect |
 | ingress.cert.preSharedCerts | list | `[]` | Previously provisioned certs to use on the LB |
 | ingress.certmanager.dnsNames | list | `[]` | FQDNs to allocate cert for |
 | ingress.certmanager.enabled | bool | `true` | If CertManager should be used to dynamically provision an LB cert |
@@ -80,6 +83,10 @@ Wrapper providing GKE ingress, CloudSQL sidecar, and secrets around Grafana
 | secrets.githubTeamSync.grafanaAuthUsernameSourceEncoding | string | `"text"` | (string) Encoding of the secret value in vault (either `text` or `base64`) |
 | secrets.githubTeamSync.grafanaAuthUsernameVaultKey | string | `"username"` | (string) Key within the desired Vault secret to the desired individual secret value to use |
 | secrets.githubTeamSync.grafanaAuthVaultPath | string | `nil` | Path within Vault to the desired Vault secret |
+| sidecarFacilitation | object | `{"allowGrantedUsersToRestart":true,"createSearchedNamespaces":false,"grantUsersNamespaceAccess":[]}` | Options supporting the use of the Grafana sidecar for importing JSON from K8s if the sidecar targets non-release namespaces |
+| sidecarFacilitation.allowGrantedUsersToRestart | bool | `true` | Allow any users with namespace access to also rollout a grafana restart |
+| sidecarFacilitation.createSearchedNamespaces | bool | `false` | If this chart should create namespaces the sidecar intends to search |
+| sidecarFacilitation.grantUsersNamespaceAccess | list | `[]` | A list of users (can be GCP SA emails) to grant narrow access to the namespaces |
 
 ----------------------------------------------
 Autogenerated from chart metadata using [helm-docs v1.5.0](https://github.com/norwoodj/helm-docs/releases/v1.5.0)
