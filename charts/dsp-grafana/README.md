@@ -20,9 +20,9 @@ Wrapper providing GKE ingress, CloudSQL sidecar, and secrets around Grafana
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | githubTeamSync.enabled | bool | `false` | If broadinstitute/grafana-github-team-sync should be run as a cronjob |
-| githubTeamSync.grafanaHost | string | `nil` | FQDN of the Grafana to target |
-| githubTeamSync.grafanaPort | string | `nil` | Optional port to use to communicate with grafanaHost |
-| githubTeamSync.grafanaProtocol | string | `nil` | Protocol to use to communicate with grafanaHost |
+| githubTeamSync.grafanaHost | string | `"dsp-grafana.grafana"` | FQDN of the Grafana to target |
+| githubTeamSync.grafanaPort | int | `80` | Optional port to use to communicate with grafanaHost |
+| githubTeamSync.grafanaProtocol | string | `"http"` | Protocol to use to communicate with grafanaHost |
 | githubTeamSync.image | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/grafana-github-team-sync/grafana-github-team-sync:edge"` | Image to use for the cronjob, pulled each time |
 | githubTeamSync.neverRemovePermissionsFrom | string | `"admin"` | Comma separated list of exact usernames to never remove permissions from |
 | githubTeamSync.schedule | string | `"0 14 * * *"` | The schedule to run the job on (14:00 UTC == 2:00PM UTC == 9:00AM ET, after BITS GitHub sync from 6-9am) https://broadinstitute.slack.com/archives/C4P1S6KB8/p1628173022001400?thread_ts=1628172949.001300&cid=C4P1S6KB8 |
