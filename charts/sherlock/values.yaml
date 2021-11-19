@@ -107,4 +107,5 @@ secrets:
 
 prometheus:
   scrape:
+    # -- (bool) Whether to create a ServiceMonitor to enable prometheus scraping of metrics
     enabled: true

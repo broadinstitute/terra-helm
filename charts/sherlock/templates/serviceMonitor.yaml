@@ -19,4 +19,3 @@ spec:
       scheme: http
       scrapeTimeout: 30s
 {{- end }}
-  
