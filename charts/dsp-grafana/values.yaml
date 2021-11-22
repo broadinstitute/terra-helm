@@ -112,6 +112,7 @@ sidecarFacilitation:
   allowGrantedUsersToRestart: true
 
 # -- Settings for Grafana subchart, use grafana.image.tag to override the subchart's default Grafana version
+# @default -- Baseline settings for subchart
 grafana:
   # -- Override the name used for the deployment and other resources (it gets interpolated to this otherwise but we want to reference it)
   fullnameOverride: dsp-grafana
