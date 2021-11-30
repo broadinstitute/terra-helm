@@ -33,7 +33,9 @@ spec:
       - ip: 127.0.0.1
         hostnames:
         - app
+        {{- if not .Values.previewEnv }}
         - sam-sqlproxy
+        {{- end }}
       volumes:
       - name: configs
         configMap:
@@ -44,9 +46,11 @@ spec:
       - name: proxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
+      {{- if not .Values.previewEnv }}
       - name: sqlproxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
+      {{- end }}
       - name: {{ .Values.name }}-gc-logs
         emptyDir: {}
       - name: {{ .Values.name }}-proxy-security-logs
