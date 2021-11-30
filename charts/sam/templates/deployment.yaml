@@ -64,7 +64,7 @@ spec:
       - name: {{ .Values.certManager.tlsCertSecret }}-mount
         secret:
           secretName: {{ .Values.certManager.tlsCertSecret }}
-      {{- end}}
+      {{- end }}
       containers:
       {{- if not .Values.previewEnv }}
       - name: {{ .Values.name }}-sqlproxy
