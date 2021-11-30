@@ -1,4 +1,3 @@
-# Change deployment chart comment to get things going.
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
 {{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Chart.Name -}}
 apiVersion: apps/v1
