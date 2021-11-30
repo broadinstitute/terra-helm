@@ -59,6 +59,11 @@ spec:
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
       {{- end }}
+      {{- if .Values.previewEnv }}
+      - name: {{ .Values.certManager.tlsCertSecret }}-mount
+        secret:
+          secretName: {{ .Values.certManager.tlsCertSecret }}
+      {{- end}}
       containers:
       {{- if not .Values.previewEnv }}
       - name: {{ .Values.name }}-sqlproxy
@@ -139,11 +144,6 @@ spec:
           mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
         {{- end }}
-        {{- if .Values.previewEnv }}
-        - name: {{ .Values.certManager.tlsCertSecret }}-mount
-          secret:
-            secretName: {{ .Values.certManager.tlsCertSecret }}
-        {{- end}}
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
