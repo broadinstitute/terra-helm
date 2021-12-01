@@ -37,11 +37,6 @@ thanos:
       enabled: false
     # query.stores -- List of dns names of thanos store apis that can be queried. These consist of sidecars, store gateways and other queriers
     stores: []
-    grpc:
-      client:
-        tls:
-          # thanos.query.grpc.client.tls.enabled -- whether to use tls when connecting to sidecars via gRPC
-          enabled: true
     rbac:
       # thanos.query.rbac.create -- whether to create role and rolebindings for the thanos query deployment
       create: true
