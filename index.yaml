@@ -2618,6 +2618,37 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.42.0/buffer-0.42.0.tgz
     version: 0.42.0
   - apiVersion: v2
+    created: "2021-12-01T21:58:37.633903494Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.2.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Resource Buffering Service
+    digest: 790b738aca7fc7892ddca0f4da57b4a817c807923408530c13d5a1b44712d6ff
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.42.0-647.1638395907.199854/buffer-0.42.0-647.1638395907.199854.tgz
+    version: 0.42.0-647.1638395907.199854
+  - apiVersion: v2
     created: "2021-12-01T19:31:17.706961898Z"
     dependencies:
     - name: ingresslib
