@@ -1,6 +1,6 @@
 # crljanitor
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Cloud Resource Manager Janitor
 
@@ -52,6 +52,7 @@ Chart for Cloud Resource Manager Janitor
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | trackResourcePubsubEnabled | bool | `true` | Whether to enable using pubsub to receive new tracked resources. |
 | vault.adminUserFilePath | string | `"config/terra/crl-janitor/common/iam"` | (string) Vault path prefix for admin user list. Required if vault.enabled. Use the same users as admin for all env by default. Override if needed in helmfile repo. |
+| vault.azureManagedAppPublisherPath | string | `"secret/dsde/azure/common/managed-app-publisher"` | (string) Vault path for Azure managed app publisher credentials. Uses the same path for all envs by default. Override if needed in helmfile repo. |
 | vault.configPathPrefix | string | `nil` | Vault path prefix for configs. Required if vault.enabled. |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
