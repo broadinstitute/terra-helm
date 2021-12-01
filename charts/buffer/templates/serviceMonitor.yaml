@@ -1,8 +1,27 @@
 {{- if .Values.prometheus.scrape.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-metrics-service
+  labels:
+    {{- include "buffer.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "buffer.selectorLabels" . | nindent 6 }}
+  ports:
+  - name: metrics
+    protocol: TCP
+    port: {{ .Values.prometheus.scrape.port }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: buffer-service-monitor
+  name: {{ .Values.name }}-service-monitor
   labels: 
     {{ include "buffer.labels" . | nindent 4 }}
     release: terra-prometheus
