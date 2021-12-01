@@ -39,7 +39,7 @@ vault:
   adminUserFilePath: config/terra/crl-janitor/common/iam
   # vault.azureManagedAppPublisherPath -- (string) Vault path for Azure managed app publisher credentials.
   # Uses the same path for all envs by default. Override if needed in helmfile repo.
-  azureManagedAppPublisherPath: secret/dsde/azure/common/managed-app-publisher
+  azureManagedAppPublisherPath: secret/dsde/terra/azure/common/managed-app-publisher
 
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
