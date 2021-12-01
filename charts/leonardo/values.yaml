@@ -86,6 +86,8 @@ ingress:
   # ingress.staticIpName -- (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress
   staticIpName: null
   cert:
+    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
+    preSharedCerts: []
     # A TLS certificate is used for the GKE ingress and the OIDC proxy sidecar.
     # If preSharedCerts is not empty, its contents are used for the GKE ingress. Otherwise a secret with the cert is expected.
     # The cert secret is required if the OIDC proxy is enabled.
@@ -93,9 +95,6 @@ ingress:
     #   - synced from Vault
     #   - created/managed with cert-manager
     #   - created manually before the chart is applied
-
-    # ingress.cert.preSharedCerts -- Array of pre-shared GCP SSL certificate names to associate with the Ingress
-    preSharedCerts: []
   # ingress.sslPolicy -- (string) Name of a GCP SSL policy to associate with the Ingress
   sslPolicy: null
   # ingress.timeoutSec -- Load balancer backend timeout
@@ -112,38 +111,25 @@ cronjob:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-resource-validator-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/resource-validator
-  imageTag: 79854b1
+  imageTag: 3695ba2
   googleProject:
   enabled: false
 janitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-janitor-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/janitor
-  imageTag: 79854b1
+  imageTag: 3695ba2
   enabled: false
 zombieMonitorCron:
   # deployments.standalone.name -- Name to use for the default standalone Leonardo deployment
   name: leonardo-zombie-monitor-cronjob
   imageRepository: us.gcr.io/broad-dsp-gcr-public/zombie-monitor
-  imageTag: 79854b1
+  imageTag: 3695ba2
   enabled: false
 vault:
   # vault.pathPrefix -- (string) Vault path prefix for secrets. Required if vault.enabled.
   pathPrefix:
-
 liquibase-migration:
-  # In an env-specific file use something like the following to fully enable:
-  # ```
-  # liquibase-migration:
-  #   migrationJobs:
-  #     - name: "leonardo"
-  #       enabled: true
-  #       migrationDatabaseCredentials:
-  #         fromVaultSecret:
-  #           path: "secret/path/in/vault"
-  # ```
-  # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
-
   defaults:
     enabled: false
     sqlproxyCredentialFileMount:
@@ -162,12 +148,21 @@ liquibase-migration:
         path: null
         usernameKey: "db_user"
         passwordKey: "db_password"
-
+        # In an env-specific file use something like the following to fully enable:
+        # ```
+        # liquibase-migration:
+        #   migrationJobs:
+        #     - name: "leonardo"
+        #       enabled: true
+        #       migrationDatabaseCredentials:
+        #         fromVaultSecret:
+        #           path: "secret/path/in/vault"
+        # ```
+        # See https://github.com/broadinstitute/terra-helm/blob/master/charts/liquibase-migration for more information
 sherlock:
   enabled: true
   appImageName: gcr.io/broad-dsp-gcr-public/leonardo
   appName: leonardo
   sherlockImageTag: v0.0.15
-
   vault:
     pathPrefix: secret/suitable/sherlock/prod
