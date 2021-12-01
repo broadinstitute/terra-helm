@@ -1,0 +1,21 @@
+{{- if .Values.prometheus.scrape.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: buffer-service-monitor
+  labels: 
+    {{ include "buffer.labels" . | nindent 4 }}
+    release: terra-prometheus
+spec:
+  jobLabel: {{ .Values.name }}
+  selector:
+    matchLabels:
+      {{ include "buffer.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: metrics
+      interval: {{ .Values.prometheus.scrape.interval }}
+      honorLabels: true
+      path: {{ .Values.prometheus.scrape.path }}
+      scheme: http
+      scrapeTimeout: 30s
+{{- end }}

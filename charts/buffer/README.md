@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.41.0](https://img.shields.io/badge/Version-0.41.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.42.0](https://img.shields.io/badge/Version-0.42.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -104,6 +104,10 @@ Chart for Resource Buffering Service
 | probes.startup.spec.periodSeconds | int | `10` |  |
 | probes.startup.spec.successThreshold | int | `1` |  |
 | probes.startup.spec.timeoutSeconds | int | `5` |  |
+| prometheus.scrape.enabled | bool | `false` | Whether to create a ServiceMonitor to enable prometheus scraping of metrics |
+| prometheus.scrape.interval | string | `"2m"` | Interval between scrape queries |
+| prometheus.scrape.path | string | `"/metrics"` | The URL route to scrape |
+| prometheus.scrape.port | int | `8081` | The port that Buffer is running the Prometheus endpoint on |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"tcell_3_1_0"` | Proxy image tag |
