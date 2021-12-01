@@ -8,6 +8,9 @@ metadata:
     release: terra-prometheus
 spec:
   jobLabel: {{ .Values.name }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
   selector:
     matchLabels:
       {{ include "buffer.selectorLabels" . | nindent 6 }}
