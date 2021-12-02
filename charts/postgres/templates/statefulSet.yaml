@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sam-postgres
+spec:
+  selector:
+    matchLabels:
+      {{- include "postgres.labels" . | nindent 4 }}
+  serviceName: "{{ .Values.serviceName }}"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "postgres.labels" . | nindent 4 }}
+    spec:
+      terminationGracePeriodSeconds: 20
+      containers:
+      - name: {{ .Values.name }}
+        image: {{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag }}
+        ports:
+        - name: access
+          containerPort: 5432
+          protocol: TCP
+        volumeMounts:
+        - name: db
+          mountPath: /data
+        env:
+        - name: POSTGRES_USER
+          value: "sam"
+        - name: POSTGRES_PASSWORD
+          value: "globochem"
+        - name: POSTGRES_DB
+          value: "sam"
+        - name: PGDATA
+          value: /data/pgdata
+  volumeClaimTemplates:
+  - metadata:
+      name: db
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: standard
+      volumeMode: Filesystem
+      resources:
+        requests:
+          storage: 10Gi

@@ -1,8 +1,8 @@
 apiVersion: v2
 name: postgres
-version: 0.2.0
-description: Library chart for an ephemeral PostgreSQL database container
-type: library
+version: 0.19.5
+description: Application chart for a Sam-specific PostgreSQL database container
+type: application
 keywords:
   - dsp
   - broadinstitute
