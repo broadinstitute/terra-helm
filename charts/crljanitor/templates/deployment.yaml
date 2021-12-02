@@ -112,6 +112,23 @@ spec:
             secretKeyRef:
               name: crl-janitor-admin-user-list
               key: admin-users
+        {{- if .Values.azureManagedApp.enabled }}
+        - name: AZURE_MANAGED_APP_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-azure-managed-app-creds
+              key: client-id
+        - name: AZURE_MANAGED_APP_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-azure-managed-app-creds
+              key: client-secret
+        - name: AZURE_MANAGED_APP_TENANT_ID
+          valueFrom:
+            secretKeyRef:
+              name: crl-janitor-azure-managed-app-creds
+              key: tenant-id
+        {{- end  }}
         # Environment variables for OpenCensus resource auto detection.
         - name: CONTAINER_NAME
           valueFrom:

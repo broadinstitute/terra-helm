@@ -1,6 +1,6 @@
 # crljanitor
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Cloud Resource Manager Janitor
 
@@ -19,6 +19,8 @@ Chart for Cloud Resource Manager Janitor
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| azureManagedApp.enabled | bool | `false` | Enables Janitor to process resources in an Azure managed app. |
+| azureManagedApp.vaultPath | string | `"secret/dsde/terra/azure/common/managed-app-publisher"` | (string) Vault path for Azure managed app publisher credentials. Uses the same path for all envs by default. Override if needed in helmfile repo. |
 | certManager.duration | string | `"2160h0m0s"` | Certificate duration. Defaults to 3 months. |
 | certManager.enabled | bool | `false` | Enable to create certificate secret with cert-manager |
 | certManager.issuerKind | string | `"ClusterIssuer"` |  |
