@@ -12,6 +12,13 @@ keywords:
 sources:
   - https://github.com/broadinstitute/terra-helm/tree/master/charts
 dependencies:
+  # Used to deploy a thanos querier that can communicate with remote sidecars over gRPC+TLS
   - name: thanos
     version: 8.0.3
     repository: https://charts.bitnami.com/bitnami
+    alias: thanos-remote
+  # Used to deploy a thanos querier for local communication within the dsp-tools cluster. 
+  - name: thanos
+    version: 8.0.3
+    repository: https://charts.bitnami.com/bitnami
+    alias: thanos-local
