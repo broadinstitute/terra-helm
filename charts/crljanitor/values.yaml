@@ -37,9 +37,6 @@ vault:
   # vault.adminUserFilePath -- (string) Vault path prefix for admin user list. Required if vault.enabled.
   # Use the same users as admin for all env by default. Override if needed in helmfile repo.
   adminUserFilePath: config/terra/crl-janitor/common/iam
-  # vault.azureManagedAppPublisherPath -- (string) Vault path for Azure managed app publisher credentials.
-  # Uses the same path for all envs by default. Override if needed in helmfile repo.
-  azureManagedAppPublisherPath: secret/dsde/terra/azure/common/managed-app-publisher
 
 # serviceIP -- (string) External IP of the service. Required.
 serviceIP:
@@ -113,3 +110,10 @@ sherlock:
   vault:
     pathPrefix: secret/suitable/sherlock/prod
 
+azureManagedApp:
+  # azureManagedApp.enabled -- Enables Janitor to process resources in an Azure managed app.
+  enabled: false
+
+  # azureManagedApp.vaultPath -- (string) Vault path for Azure managed app publisher credentials.
+  # Uses the same path for all envs by default. Override if needed in helmfile repo.
+  vaultPath: secret/dsde/terra/azure/common/managed-app-publisher

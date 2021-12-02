@@ -19,6 +19,8 @@ Chart for Cloud Resource Manager Janitor
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| azureManagedApp.enabled | bool | `false` | Enables Janitor to process resources in an Azure managed app. |
+| azureManagedApp.vaultPath | string | `"secret/dsde/terra/azure/common/managed-app-publisher"` | (string) Vault path for Azure managed app publisher credentials. Uses the same path for all envs by default. Override if needed in helmfile repo. |
 | certManager.duration | string | `"2160h0m0s"` | Certificate duration. Defaults to 3 months. |
 | certManager.enabled | bool | `false` | Enable to create certificate secret with cert-manager |
 | certManager.issuerKind | string | `"ClusterIssuer"` |  |
@@ -52,7 +54,6 @@ Chart for Cloud Resource Manager Janitor
 | startupSleep | int | `30` | Allows CloudSQL proxy time to start up. See DDO-1352 |
 | trackResourcePubsubEnabled | bool | `true` | Whether to enable using pubsub to receive new tracked resources. |
 | vault.adminUserFilePath | string | `"config/terra/crl-janitor/common/iam"` | (string) Vault path prefix for admin user list. Required if vault.enabled. Use the same users as admin for all env by default. Override if needed in helmfile repo. |
-| vault.azureManagedAppPublisherPath | string | `"secret/dsde/azure/common/managed-app-publisher"` | (string) Vault path for Azure managed app publisher credentials. Uses the same path for all envs by default. Override if needed in helmfile repo. |
 | vault.configPathPrefix | string | `nil` | Vault path prefix for configs. Required if vault.enabled. |
 | vault.enabled | bool | `true` | When enabled, syncs required secrets from Vault |
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
