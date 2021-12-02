@@ -10957,6 +10957,28 @@ entries:
     version: 0.1.0-154.1602610956.52ab06
   crljanitor:
   - apiVersion: v2
+    created: "2021-12-02T02:53:37.232762263Z"
+    dependencies:
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Cloud Resource Manager Janitor
+    digest: 09c174bbf405aa3cbe000f8a3f13ed93233b68e3db224085b93a346210a2d85e
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.9.0/crljanitor-0.9.0.tgz
+    version: 0.9.0
+  - apiVersion: v2
     created: "2021-11-09T15:22:04.410087061Z"
     dependencies:
     - condition: sherlock.enabled
