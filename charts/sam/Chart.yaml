@@ -21,5 +21,5 @@ dependencies:
     repository: https://terra-helm.storage.googleapis.com
   - name: postgres
     condition: postgres.enabled
-    version: 0.19.5
+    version: 0.19.6
     repository: https://terra-helm.storage.googleapis.com
