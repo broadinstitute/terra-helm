@@ -18,6 +18,6 @@ spec:
   - secretName: {{ .Values.name }}-cert
 {{- end }}
   backend:
-    serviceName: {{ .Values.name }}-query
+    serviceName: {{ .Values.name }}-local-query
     servicePort: 9090
 {{- end }}
