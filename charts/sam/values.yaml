@@ -149,7 +149,7 @@ sherlock:
     pathPrefix: secret/suitable/sherlock/prod
 
 # Set whether this chart is being rendered for a preview environment.
-previewEnv: false
+previewEnv: true
 
 postgres:
   enabled: true
