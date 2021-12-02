@@ -5,13 +5,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "postgres.labels" . | nindent 4 }}
+      {{- include "postgres.labels" . | nindent 6 }}
   serviceName: "{{ .Values.serviceName }}"
   replicas: 1
   template:
     metadata:
       labels:
-        {{- include "postgres.labels" . | nindent 4 }}
+        {{- include "postgres.labels" . | nindent 8 }}
     spec:
       terminationGracePeriodSeconds: 20
       containers:
