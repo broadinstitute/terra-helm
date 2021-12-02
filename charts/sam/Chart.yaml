@@ -22,4 +22,4 @@ dependencies:
   - name: postgres
     condition: postgres.enabled
     version: 0.19.5
-    repository: https://terra-helm.storage.googleapis.com
+    repository: repository: "file:///Users/emay/git/terra-helm/charts/postgres"
