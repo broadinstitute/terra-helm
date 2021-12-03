@@ -1,8 +1,7 @@
 global:
   # global.applicationVersion -- What version of the Thurloe application to deploy
   applicationVersion: latest
-
-name: thurloe
+  name: thurloe
 
 ingress:
   # ingress.enabled -- Whether to create Ingress, Service and associated config resources

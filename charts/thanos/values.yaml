@@ -1,4 +1,7 @@
-name: thanos
+global:
+  # global.name -- A name for the deployment that will be substituted into resource definitions
+  name: thanos
+
 ingress:
   # ingress.enabled -- Whether to create ingress and associated resources for thanos query
   enabled: true

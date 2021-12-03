@@ -5,9 +5,8 @@ global:
   # global.terraEnv -- (string) Terget Terra environment name. Required.
   # @default -- Is set by Helmfile on deploy
   terraEnv: null
-
-# name -- A name for the deployment that will be substituted into resuorce definitions
-name: externalcreds
+  # global.name -- A name for the deployment that will be substituted into resource definitions
+  name: externalcreds
 
 # replicas -- Number of replicas for the deployment
 replicas: 0
