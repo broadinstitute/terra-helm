@@ -3,7 +3,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Values.name }}-backup-cronjob
+  name: {{ .Values.global.name }}-backup-cronjob
   labels: {{ include "opendj.labels" . | nindent 4 }}
 spec:
   schedule: "0 10 * * *" # Run once a day at 10 am UTC / 5 am EST
@@ -17,9 +17,9 @@ spec:
         metadata:
           labels: {{ include "opendj.labels" . | nindent 12 }}
         spec:
-          serviceAccountName: {{ .Values.name }}-service-sa
+          serviceAccountName: {{ .Values.global.name }}-service-sa
           containers:
-          - name: {{ .Values.name }}-backup-upload
+          - name: {{ .Values.global.name }}-backup-upload
             image: {{ .Values.backup.cloudsdkImage.repository }}:{{ .Values.backup.cloudsdkImage.tag }}
             command: ['sh', '-c']
             args:
@@ -57,7 +57,7 @@ spec:
             emptyDir: {}
           - name: gcp-sa
             secret:
-              secretName: {{ .Values.name }}-secrets
+              secretName: {{ .Values.global.name }}-secrets
               items:
               - key: backup-credentials
                 path: sa-key.json

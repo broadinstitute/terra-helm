@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.name }}-tcell-configmap
+  name: {{ .Values.global.name }}-tcell-configmap
   labels:
 {{ include "workspacemanager.labels" . | indent 4 }}
 data:

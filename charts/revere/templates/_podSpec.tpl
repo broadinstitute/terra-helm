@@ -2,7 +2,7 @@
 Abstract common yaml between deployment.yaml and job.yaml
 */ -}}
 {{- define "revere.podSpec" -}}
-serviceAccountName: {{ .Values.name }}-sa
+serviceAccountName: {{ .Values.global.name }}-sa
 
 {{- with .Values.nodeSelector }}
 nodeSelector:
@@ -18,17 +18,17 @@ tolerations:
 {{- end }}
 
 volumes:
-- name: {{ .Values.name }}-cm
+- name: {{ .Values.global.name }}-cm
   configMap:
-    name: {{ .Values.name }}-cm
+    name: {{ .Values.global.name }}-cm
 {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
-- name: {{ .Values.name }}-gcp-sa
+- name: {{ .Values.global.name }}-gcp-sa
   secret:
-    secretName: {{ .Values.name }}-gcp-sa
+    secretName: {{ .Values.global.name }}-gcp-sa
 {{- end }}
 
 containers:
-- name: {{ .Values.name }}-app
+- name: {{ .Values.global.name }}-app
   image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag | default .Values.global.applicationVersion }}"
   imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
   resources:
@@ -38,7 +38,7 @@ containers:
   - name: REVERE_STATUSPAGE_APIKEY
     valueFrom:
       secretKeyRef:
-        name: {{ .Values.name }}-statuspage-api-key
+        name: {{ .Values.global.name }}-statuspage-api-key
         key: statuspageApiKey
   {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
   - name: GOOGLE_APPLICATION_CREDENTIALS
@@ -47,12 +47,12 @@ containers:
 
   volumeMounts:
   - mountPath: /etc/revere/revere.yaml
-    name: {{ .Values.name }}-cm
+    name: {{ .Values.global.name }}-cm
     readOnly: true
     subPath: revere.yaml
   {{- if .Values.secrets.gcpServiceAccount.secretsManager.enabled }}
   - mountPath: /etc/revere-sa/
-    name: {{ .Values.name }}-gcp-sa
+    name: {{ .Values.global.name }}-gcp-sa
     readOnly: true
   {{- end }}
 {{- end -}}

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.name }}-cm
+  name: {{ .Values.global.name }}-cm
   labels:
     {{- include "sherlock.labels" . | nindent 4 }}
 data:

@@ -1,9 +1,9 @@
 {{- $imageTag := .Values.imageConfig.tag | default .Values.global.applicationVersion -}}
-{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Values.name -}}
+{{- $legacyResourcePrefix := .Values.legacyResourcePrefix | default .Values.global.name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-deployment
+  name: {{ .Values.global.name }}-deployment
   labels:
 {{ include "firecloudorch.labels" . | indent 4 }}
 spec:
@@ -16,17 +16,17 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.name }}-deployment
+      deployment: {{ .Values.global.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.name }}-deployment
+        deployment: {{ .Values.global.name }}-deployment
 {{ include "firecloudorch.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ .Values.name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.global.name }}-configmap: {{ include (print $.Template.BasePath "/config/configmap.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: {{ .Values.name }}-sa
+      serviceAccountName: {{ .Values.global.name }}-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts
@@ -35,31 +35,31 @@ spec:
         hostnames:
         - app
       volumes:
-      - name: {{ .Values.name }}-cm
+      - name: {{ .Values.global.name }}-cm
         configMap:
-          name: {{ .Values.name }}-cm
+          name: {{ .Values.global.name }}-cm
       - name: app-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       - name: proxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
-      - name: {{ .Values.name}}-gc-logs
+      - name: {{ .Values.global.name}}-gc-logs
         emptyDir: {}
-      - name: {{ .Values.name }}-proxy-security-logs
+      - name: {{ .Values.global.name }}-proxy-security-logs
         emptyDir: {}
-      - name: {{ .Values.name }}-prometheusjmx-jar
+      - name: {{ .Values.global.name }}-prometheusjmx-jar
         emptyDir: {}
       {{- if .Values.elasticsearch.transportProbe.enabled }}
-      - name: {{ .Values.name }}-es-probe-tools
+      - name: {{ .Values.global.name }}-es-probe-tools
         emptyDir: {}
-      - name: {{ .Values.name }}-es-probe-cm
+      - name: {{ .Values.global.name }}-es-probe-cm
         configMap:
-          name: {{ .Values.name }}-es-probe-cm
+          name: {{ .Values.global.name }}-es-probe-cm
           defaultMode: 0555
       {{- end }}
       containers:
-      - name: {{ .Values.name }}-app
+      - name: {{ .Values.global.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
         - name: status
@@ -103,8 +103,8 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
-        - mountPath: /etc/{{ .Values.name }}-cm
-          name: {{ .Values.name }}-cm
+        - mountPath: /etc/{{ .Values.global.name }}-cm
+          name: {{ .Values.global.name }}-cm
           readOnly: true
         - mountPath: /etc/firecloud-orchestration.conf
           subPath: firecloud-orchestration.conf
@@ -135,17 +135,17 @@ spec:
           name: app-ctmpls
           readOnly: true
         - mountPath: /var/log/gc
-          name: {{ .Values.name }}-gc-logs
+          name: {{ .Values.global.name }}-gc-logs
         - mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
-          name: {{ .Values.name }}-prometheusjmx-jar
+          name: {{ .Values.global.name }}-prometheusjmx-jar
           readOnly: true
         - mountPath: /usr/bin/jq
           subPath: jq
-          name: {{ .Values.name }}-es-probe-tools
+          name: {{ .Values.global.name }}-es-probe-tools
         - mountPath: /etc/probe/probe.sh
           subPath: probe.sh
-          name: {{ .Values.name }}-es-probe-cm
+          name: {{ .Values.global.name }}-es-probe-cm
         {{- if .Values.probes.readiness.enabled }}
         readinessProbe:
           {{- toYaml .Values.probes.readiness.spec | nindent 10 }}
@@ -157,7 +157,7 @@ spec:
         livenessProbe:
           {{- toYaml .Values.probes.liveness.spec | nindent 10 }}
         {{- end }}
-      - name: {{ .Values.name }}-proxy
+      - name: {{ .Values.global.name }}-proxy
         image: {{ .Values.proxyImage }}
         ports:
           - containerPort: 443
@@ -196,7 +196,7 @@ spec:
           name: proxy-ctmpls
           readOnly: true
         - mountPath: /var/log/modsecurity
-          name: {{ .Values.name }}-proxy-security-logs
+          name: {{ .Values.global.name }}-proxy-security-logs
       {{- if .Values.prometheus.enabled }}
       initContainers:
       - name: download-prometheus-jmx-jar
@@ -204,11 +204,11 @@ spec:
         command: [
           "wget",
           "-O",
-          "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+          "/{{ .Values.global.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
         ]
         volumeMounts:
-        - name: {{ .Values.name }}-prometheusjmx-jar
-          mountPath: /{{ .Values.name }}-prometheusjmx-jar
+        - name: {{ .Values.global.name }}-prometheusjmx-jar
+          mountPath: /{{ .Values.global.name }}-prometheusjmx-jar
       {{- end }}
       {{- if .Values.elasticsearch.transportProbe.enabled }}
       - name: install-jq
@@ -219,9 +219,9 @@ spec:
         - |
           #!/usr/bin/env bash
           set -e
-          wget -O /{{ .Values.name }}-es-probe-tools/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-          chmod +x /{{ .Values.name }}-es-probe-tools/jq
+          wget -O /{{ .Values.global.name }}-es-probe-tools/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+          chmod +x /{{ .Values.global.name }}-es-probe-tools/jq
         volumeMounts:
-        - name: {{ .Values.name }}-es-probe-tools
-          mountPath: /{{ .Values.name }}-es-probe-tools
+        - name: {{ .Values.global.name }}-es-probe-tools
+          mountPath: /{{ .Values.global.name }}-es-probe-tools
       {{- end }}

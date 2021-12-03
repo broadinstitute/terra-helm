@@ -2,11 +2,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: {{ .Values.name }}-jvm-monitor
+  name: {{ .Values.global.name }}-jvm-monitor
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
 spec:
-  jobLabel: {{ .Values.name }}-jvm
+  jobLabel: {{ .Values.global.name }}-jvm
   selector:
     matchLabels:
       app.kubernetes.io/component: {{ .Chart.Name }}

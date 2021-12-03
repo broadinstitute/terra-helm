@@ -2,8 +2,8 @@ apiVersion: secrets-manager.tuenti.io/v1alpha1
 kind: SecretDefinition
 metadata:
   name: secretdefinition-{{ .Chart.Name }}-alertmanager-config
-  {{- if ne .Values.namespaceOverride "" }}
-  namespace: {{ .Values.namespaceOverride }}
+  {{- if ne .Values.global.namespaceOverride "" }}
+  namespace: {{ .Values.global.namespaceOverride }}
   {{- end }}
   labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:

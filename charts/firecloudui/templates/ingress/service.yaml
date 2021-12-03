@@ -3,5 +3,5 @@
 {{- define "firecloudui.service" -}}
 spec:
   selector:
-    deployment: {{ .Values.name }}-deployment
+    deployment: {{ .Values.global.name }}-deployment
 {{- end }}

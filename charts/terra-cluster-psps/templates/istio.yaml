@@ -30,7 +30,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: istio-clusterrole
-  namespace: {{ .Values.namespaces.istio }}
+  namespace: {{ .Values.global.namespaces.istio }}
   labels:
     name: clusterrole
     helm.sh/chart: {{ template "terra-cluster-psps.chart" . }}
@@ -47,7 +47,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
   name: istio-rolebinding
-  namespace: {{ .Values.namespaces.istio }}
+  namespace: {{ .Values.global.namespaces.istio }}
   labels:
     name: clusterrolebinding
     helm.sh/chart: {{ template "terra-cluster-psps.chart" . }}
@@ -63,5 +63,5 @@ subjects:
   {{- range .Values.serviceAccounts.istio }}
   - kind: ServiceAccount
     name: {{ . }}
-    namespace: {{ $root.Values.namespaces.istio }}
+    namespace: {{ $root.Values.global.namespaces.istio }}
   {{- end }}

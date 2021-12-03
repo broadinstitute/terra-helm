@@ -2,7 +2,7 @@
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: {{ .Values.name }}-ingress-backendconfig
+  name: {{ .Values.global.name }}-ingress-backendconfig
   labels:
     {{- include "sam.labels" . | nindent 4 }}
 spec:
