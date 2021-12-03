@@ -1,4 +1,7 @@
-name: atlantis
+global:
+  # global.name -- A name for the deployment that will be substituted into resource definitions
+  name: atlantis
+
 serviceAccount: atlantis
 cert:
   secretName: atlantis-cert

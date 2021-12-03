@@ -1,4 +1,5 @@
 global:
+  # global.name -- A name for the deployment that will be substituted into resource definitions
   name: grafana
 
 ingress:
