@@ -2227,6 +2227,24 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: latest
+    created: "2021-12-03T22:16:41.358624954Z"
+    description: Chart for azurepoc service in Terra
+    digest: faacbb6821954c6f48a617183d15da08caf5f7a5d22e6e249e483b2c618d8a58
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - azurepoc
+    name: azurepoc
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/databiosphere/azurepoc
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/azurepoc-0.1.0-649.1638569782.dccbb6/azurepoc-0.1.0-649.1638569782.dccbb6.tgz
+    version: 0.1.0-649.1638569782.dccbb6
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-06-24T13:39:43.159215697Z"
     description: Chart for azurepoc service in Terra
     digest: f4ed1ff8f2c7e899af292e005014401f95f4e85422b96afa3097c7d61c214471
@@ -2617,6 +2635,37 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.42.0/buffer-0.42.0.tgz
     version: 0.42.0
+  - apiVersion: v2
+    created: "2021-12-03T22:16:41.441830278Z"
+    dependencies:
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.2.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Resource Buffering Service
+    digest: 199cdd12881f23abc56b706a06946f44d3f1c20edf1030a70d7272e8f10f3b6c
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - buffer
+    name: buffer
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-buffer
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/buffer-0.42.0-649.1638569782.dccbb6/buffer-0.42.0-649.1638569782.dccbb6.tgz
+    version: 0.42.0-649.1638569782.dccbb6
   - apiVersion: v2
     created: "2021-12-01T22:38:14.486752481Z"
     dependencies:
@@ -6644,6 +6693,22 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/config-connector-1.2.0/config-connector-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v2
+    created: "2021-12-03T22:16:41.53367314Z"
+    description: Chart to add the Google Config Connector configuration file
+    digest: 84e4a0ee0e64aa5b0fa72c86c37291731b67536222bebf6d89158c6ce7032f1a
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    name: config-connector
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://cloud.google.com/config-connector/docs/how-to/install-upgrade-uninstall#addon-configuring
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/config-connector-1.2.0-649.1638569784.dccbb6/config-connector-1.2.0-649.1638569784.dccbb6.tgz
+    version: 1.2.0-649.1638569784.dccbb6
+  - apiVersion: v2
     created: "2021-10-15T13:47:18.38622786Z"
     description: Chart to add the Google Config Connector configuration file
     digest: 7c2f81fa65b0c8de675b6cab320ec5ba44239897580d06a3c1b38fa1974394bc
@@ -6724,6 +6789,38 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.33.0/consent-0.33.0.tgz
     version: 0.33.0
+  - apiVersion: v2
+    created: "2021-12-03T22:16:41.630267977Z"
+    dependencies:
+    - name: pdb-lib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.4.0
+    - name: ingresslib
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.12.0
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: A Helm chart for DUOS Consent
+    digest: 3dae432f0a3912725bfd89b0d4f67d99e5020cc786fe309cac0a937bf245f6e1
+    keywords:
+    - dsp
+    - broadinstitute
+    - duos
+    - consent
+    - ontology
+    name: consent
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/consent
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/consent-0.33.0-649.1638569784.dccbb6/consent-0.33.0-649.1638569784.dccbb6.tgz
+    version: 0.33.0-649.1638569784.dccbb6
   - apiVersion: v2
     created: "2021-11-02T17:54:59.074894966Z"
     dependencies:
@@ -10978,6 +11075,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.9.0/crljanitor-0.9.0.tgz
     version: 0.9.0
+  - apiVersion: v2
+    created: "2021-12-03T22:16:41.717916272Z"
+    dependencies:
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    description: Chart for Cloud Resource Manager Janitor
+    digest: 037a4900ecada4fa06cdec086979041cc7c495501d3cdcbf3b21d7fdcea22348
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - crl-janitor
+    name: crljanitor
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/DataBiosphere/terra-resource-janitor
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/crljanitor-0.9.0-649.1638569786.dccbb6/crljanitor-0.9.0-649.1638569786.dccbb6.tgz
+    version: 0.9.0-649.1638569786.dccbb6
   - apiVersion: v2
     created: "2021-11-09T15:22:04.410087061Z"
     dependencies:
@@ -16448,6 +16567,28 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/diskmanager-0.2.0/diskmanager-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
+    created: "2021-12-03T22:16:41.813662496Z"
+    description: A helm chart to deploy a cronjob to manage backups of stateful set
+      persistent disks
+    digest: 5637bf275510bf8c9f0de5a16b00e22d73ebfa67dbbd640ee399720dad5c3c8e
+    keywords:
+    - dsp
+    - broadinstitute
+    - devops
+    - disk
+    - tools
+    maintainers:
+    - email: mflinn@broadinstitute.org
+      name: Mike Flinn
+    name: diskmanager
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/disk-manager
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/diskmanager-0.2.0-649.1638569786.dccbb6/diskmanager-0.2.0-649.1638569786.dccbb6.tgz
+    version: 0.2.0-649.1638569786.dccbb6
+  - apiVersion: v2
     created: "2021-02-12T18:26:47.61724398Z"
     description: A helm chart to deploy a cronjob to manage backups of stateful set
       persistent disks
@@ -16888,6 +17029,28 @@ entries:
     urls:
     - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.33.0/dsp-argocd-0.33.0.tgz
     version: 0.33.0
+  - apiVersion: v2
+    created: "2021-12-03T22:16:41.915858322Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.12.1
+    - alias: notifications
+      name: dsp-argocd-notifications
+      repository: file://local-charts/dsp-argocd-notifications
+      version: 0.0.1
+    description: Helm Chart with extra resources for the DSP ArgoCD instance
+    digest: ef4c2b6361355c2f31fe3b5a9d5e6dbea45720daaf7166470ca9a61a2f70843d
+    maintainers:
+    - email: dsp-devops@broadinstitute.org
+      name: DSP DevOps
+    name: dsp-argocd
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts/dsp-argocd
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/dsp-argocd-0.33.0-649.1638569786.dccbb6/dsp-argocd-0.33.0-649.1638569786.dccbb6.tgz
+    version: 0.33.0-649.1638569786.dccbb6
   - apiVersion: v2
     created: "2021-11-18T19:23:23.571206532Z"
     dependencies:
