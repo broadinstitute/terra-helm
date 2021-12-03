@@ -19,7 +19,7 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | cronjob.enabled | bool | `false` |  |
 | cronjob.googleProject | string | `nil` |  |
 | cronjob.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/resource-validator"` |  |
-| cronjob.imageTag | string | `"79854b1"` |  |
+| cronjob.imageTag | string | `"3695ba2"` |  |
 | cronjob.name | string | `"leonardo-resource-validator-cronjob"` |  |
 | deploymentDefaults.annotations | object | `{}` |  |
 | deploymentDefaults.enabled | bool | `true` | Whether a declared deployment is enabled. If false, no resources will be created |
@@ -47,7 +47,7 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | ingress.timeoutSec | int | `28800` | Load balancer backend timeout (Leonardo has a large backend timeout to support long-lived websockets -- see DDO-132 / IA-1665) |
 | janitorCron.enabled | bool | `false` |  |
 | janitorCron.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/janitor"` |  |
-| janitorCron.imageTag | string | `"79854b1"` |  |
+| janitorCron.imageTag | string | `"3695ba2"` |  |
 | janitorCron.name | string | `"leonardo-janitor-cronjob"` |  |
 | liquibase-migration.defaults.enabled | bool | `false` |  |
 | liquibase-migration.defaults.migrationArgsClasspath[0] | string | `"$(find /leonardo -name 'leonardo*.jar')"` |  |
@@ -67,5 +67,5 @@ A Helm chart for Leonardo, a Terra service for interactive analysis applications
 | vault.pathPrefix | string | `nil` | Vault path prefix for secrets. Required if vault.enabled. |
 | zombieMonitorCron.enabled | bool | `false` |  |
 | zombieMonitorCron.imageRepository | string | `"us.gcr.io/broad-dsp-gcr-public/zombie-monitor"` |  |
-| zombieMonitorCron.imageTag | string | `"79854b1"` |  |
+| zombieMonitorCron.imageTag | string | `"3695ba2"` |  |
 | zombieMonitorCron.name | string | `"leonardo-zombie-monitor-cronjob"` |  |

@@ -1,6 +1,6 @@
 # dsp-argocd
 
-![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.33.0](https://img.shields.io/badge/Version-0.33.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Helm Chart with extra resources for the DSP ArgoCD instance
 
@@ -143,7 +143,7 @@ These steps will be migrated to a declarative configuration at some point, but f
 | apps.ghaRunner.controller.chart | string | `"dsp-gha-runner-controller"` |  |
 | apps.ghaRunner.controller.version | string | `"0.2.0"` |  |
 | apps.ghaRunner.instances.chart | string | `"dsp-gha-runner-instances"` |  |
-| apps.ghaRunner.instances.version | string | `"0.5.0"` |  |
+| apps.ghaRunner.instances.version | string | `"0.7.0"` |  |
 | apps.ghaRunner.namespace | string | `"gha-runner"` |  |
 | apps.ghaRunner.notificationChannel | string | `"ap-k8s-monitor"` |  |
 | argo-cd.controller.extraArgs[0] | string | `"--repo-server-timeout-seconds=180"` |  |
