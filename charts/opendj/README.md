@@ -1,6 +1,6 @@
 # opendj
 
-![Version: 0.17.0](https://img.shields.io/badge/Version-0.17.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.18.0](https://img.shields.io/badge/Version-0.18.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for OpenDJ, used by Sam(Terra IAM service) as well as various Terra applications' OIDC proxy deploys
 
@@ -22,12 +22,12 @@ Chart for OpenDJ, used by Sam(Terra IAM service) as well as various Terra applic
 | backup.nodeSelector | object | `{}` | NodeSelector for backup CronJob pods |
 | backup.timeoutSeconds | int | `7200` | How many seconds to wait before assuming job is hung and killing it |
 | backup.tolerations | list | `[]` | Tolerations for backup CronJob pods |
+| global.name | string | `"opendj"` | A name for the deployment that will be substituted into resource definitions |
 | global.trustedAddresses | object | `{}` | A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }` |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"broadinstitute/openam"` | Image repository |
 | imageConfig.tag | string | `"opendj_3"` | (string) Image tag. |
 | legacyResourcePrefix | string | `nil` | What prefix to use to refer to secrets rendered from firecloud-develop @default .Chart.Name |
-| name | string | `"opendj"` | A name for the deployment that will be substituted into resuorce definitions |
 | nodeSelector | object | `{}` | nodeSelector map |
 | persistence.capacity | string | `"200Gi"` | Capacity of persistent data volume |
 | persistence.storageClassName | string | `nil` | If not null, the volume will be restricted to the specified storage class |

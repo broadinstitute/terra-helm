@@ -24,7 +24,7 @@ Helm chart for deploying the DSP ArgoCD notifications instance
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| name | string | `"dsp-argocd-notifications"` |  |
+| global.name | string | `"dsp-argocd-notifications"` | A name for the deployment that will be substituted into resource definitions |
 | upstream.argocdUrl | string | `"https://ap-argocd.dsp-devops.broadinstitute.org/"` |  |
 | upstream.nameOverride | string | `"argocd-notifications"` |  |
 | upstream.secret.create | bool | `false` |  |

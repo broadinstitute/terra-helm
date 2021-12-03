@@ -1,6 +1,6 @@
 # diskmanager
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A helm chart to deploy a cronjob to manage backups of stateful set persistent disks
 
@@ -23,10 +23,10 @@ A helm chart to deploy a cronjob to manage backups of stateful set persistent di
 | config.region | string | `"us-central1"` | gcp region of cluster |
 | config.targetAnnotation | string | `"bio.terra/snapshot-policy"` | The annotation that must be present on pvcs in order to attach snapshot policy to the associated disk |
 | config.zone | string | `"us-central1-a"` | zone of cluster |
+| global.name | string | `"diskmanager"` | A name for the deployment that will be substituted into resource definitions |
 | imageConfig.pullPolicy | string | `"Always"` | determines if the image is pulled on pod startup or not |
 | imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/disk-manager/disk-manager"` | docker image repository hosting diskmanager images |
 | imageConfig.tag | string | `"main"` | image tag version of diskmanager to deploy |
-| name | string | `"diskmanager"` | A name for the deployment that will be substituted into resuorce definitions |
 | nodeSelector | object | `{}` | selector for node pool to run diskmanager cronjob on |
 | schedule | string | `"0 1 * * *"` | cron format schedule for the diskmanager cronjob, default is everyday at 01:00 |
 | tolerations | object | `{}` | tolerations to enable runnning on particular nodes |

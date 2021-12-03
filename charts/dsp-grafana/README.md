@@ -1,6 +1,6 @@
 # dsp-grafana
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Wrapper providing GKE ingress, CloudSQL sidecar, and secrets around Grafana
 
@@ -31,7 +31,7 @@ To update the version of Grafana used by this chart, set `grafana.image.tag` in 
 | githubTeamSync.targetGrafanaOrgId | int | `1` | The numeric ID of the Grafana org to target |
 | githubTeamSync.teamGrantingGrafanaAdmin | string | `nil` | A specific team to also be granted admin, like `broadinstitute/dsp-devops. Can be set to empty to have none. |
 | githubTeamSync.timeoutSeconds | int | `900` | Timeout for the cronjob |
-| global.name | string | `"grafana"` |  |
+| global.name | string | `"grafana"` | A name for the deployment that will be substituted into resource definitions |
 | grafana | object | Baseline settings for subchart | Settings for Grafana subchart, use grafana.image.tag to override the subchart's default Grafana version |
 | grafana."grafana.ini".database | object | `{"host":"localhost:5432","ssl_mode":"disable","type":"postgres"}` | Leave most config to the env but do set fields relating to the CloudSQL requirements |
 | grafana.admin.existingSecret | string | `"grafana-admin-account"` | Derive the admin account credentials from a secret (created by secrets.AdminAccount) |

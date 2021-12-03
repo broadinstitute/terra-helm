@@ -22,6 +22,7 @@ Chart for Terra Workspace Manager
 | cloudTraceEnabled | bool | `true` | Whether to enable gcp cloud trace |
 | env | object | `{}` |  |
 | global.applicationVersion | string | `"latest"` | What version of the application to deploy |
+| global.name | string | `"workspacemanager"` | A name for the deployment that will be substituted into resource definitions |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
@@ -77,8 +78,6 @@ Chart for Terra Workspace Manager
 | liquibase-migration.migrationJobs[1].migrationArgsConfigChangelog | string | `"stairway/db/changelog.xml"` |  |
 | liquibase-migration.migrationJobs[1].migrationDatabaseCredentials.fromKubernetesSecret.name | string | `"workspacemanager-stairway-db-creds"` |  |
 | liquibase-migration.migrationJobs[1].name | string | `"workspacemanager-stairway"` |  |
-| liquibase-migration.name | string | `"workspacemanager"` |  |
-| name | string | `"workspacemanager"` | A name for the deployment that will be substituted into resuorce definitions |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |
