@@ -22,7 +22,7 @@ metadata:
 spec:
   project: {{ required "projectName is required" .Values.projectName | quote }}
   destination:
-    namespace: {{ required "namespace is required" .Values.global.namespace | quote }}
+    namespace: {{ required "namespace is required" .Values.namespace | quote }}
     server: {{ required "clusterAddress is required" .Values.clusterAddress | quote }}
   source:
     repoURL: {{ required "legacyConfigsRepo is required" .Values.legacyConfigsRepo | quote }}

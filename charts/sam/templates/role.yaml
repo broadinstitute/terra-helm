@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ .Values.global.name }}-role
+  name: {{ .Values.name }}-role
   annotations:
     # Used by liquibase-migration during wave -1
     argocd.argoproj.io/sync-wave: "-1"

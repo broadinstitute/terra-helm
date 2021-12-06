@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.global.name }}-job
+  name: {{ .Values.name }}-job
   labels:
     {{- include "revere.labels" . | nindent 4 }}
   annotations:
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        deployment: {{ .Values.global.name }}-deployment
+        deployment: {{ .Values.name }}-deployment
         {{- include "revere.labels" . | nindent 8 }}
       {{- if .Values.annotations }}
       annotations:

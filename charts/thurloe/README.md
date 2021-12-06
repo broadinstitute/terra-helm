@@ -15,7 +15,6 @@ Chart for Thurloe service in Terra
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | global.applicationVersion | string | `"latest"` | What version of the Thurloe application to deploy |
-| global.name | string | `"thurloe"` |  |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/broad-dsp-gcr-public/thurloe"` | Image repository |
 | imageConfig.tag | string | global.applicationVersion | Image tag. |
@@ -38,6 +37,7 @@ Chart for Thurloe service in Terra
 | liquibase-migration.defaults.migrationImage | string | `"gcr.io/broad-dsp-gcr-public/thurloe"` |  |
 | liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"thurloe-sqlproxy-env"` |  |
 | liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"thurloe-sqlproxy-ctmpls"` |  |
+| name | string | `"thurloe"` |  |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |

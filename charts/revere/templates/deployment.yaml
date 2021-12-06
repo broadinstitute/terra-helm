@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.global.name }}-deployment
+  name: {{ .Values.name }}-deployment
   labels:
     {{- include "revere.labels" . | nindent 4 }}
   annotations:
@@ -18,15 +18,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      deployment: {{ .Values.global.name }}-deployment
+      deployment: {{ .Values.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.global.name }}-deployment
+        deployment: {{ .Values.name }}-deployment
         {{- include "revere.labels" . | nindent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ .Values.global.name }}-cm: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-cm: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
         {{- range $key, $value := .Values.annotations }}
         {{ $key }}: {{ $value }}
         {{- end }}

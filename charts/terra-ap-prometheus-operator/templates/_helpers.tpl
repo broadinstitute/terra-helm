@@ -1,7 +1,7 @@
 {{/* vim: set filetype=mustache: */}}
 {{/* Expand the name of the chart. This is suffixed with -alertmanager, which means subtract 13 from longest 63 available */}}
 {{- define "prometheus-operator.name" -}}
-{{- default .Chart.Name .Values.global.nameOverride | trunc 50 | trimSuffix "-" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 50 | trimSuffix "-" -}}
 {{- end }}
 
 {{/*
@@ -15,7 +15,7 @@ The longest name that gets created adds and extra 37 characters, so truncation s
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 26 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.global.nameOverride -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 26 | trimSuffix "-" -}}
 {{- else -}}

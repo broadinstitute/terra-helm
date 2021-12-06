@@ -5,8 +5,9 @@ global:
   # global.terraEnv -- (string) Terget Terra environment name. Required.
   # @default -- Is set by Helmfile on deploy
   terraEnv: null
-  # global.name -- A name for the deployment that will be substituted into resource definitions
-  name: buffer
+
+# name -- A name for the deployment that will be substituted into resuorce definitions
+name: buffer
 
 # image -- (string) Used for local Skaffold deploys
 # @default -- Is set by Skaffold on local deploys
@@ -207,6 +208,11 @@ liquibase-migration:
     migrationDatabaseCredentials:
       fromKubernetesSecret:
         name: "buffer-stairway-db-creds"
+
+
+  # Template definition buffer.labels attempts to read .Values.name from within liquibase-migration.
+  # Either we must pass the name again, move it to globals, or disable liquibase-migration labels.
+  name: "buffer"
 
   defaults:
     enabled: false

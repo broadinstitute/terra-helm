@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1alpha3
 kind: Certificate
 metadata:
-  name: {{ .Values.global.name }}-certificate
+  name: {{ .Values.name }}-certificate
   labels:
     {{- include "thanos.labels" . | nindent 4 }}
 spec:
@@ -14,7 +14,7 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt-prod
   renewBefore: 720h0m0s
-  secretName: {{ .Values.global.name }}-cert
+  secretName: {{ .Values.name }}-cert
   subject:
     organizations:
     - broad-institute

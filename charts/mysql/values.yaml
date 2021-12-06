@@ -5,8 +5,9 @@ global:
   storageClass: standard
   # global.applicationVersion -- What version of mysql to deploy
   applicationVersion: latest
-  # global.name -- A name for the statefulset that will be substituted into resource definitions
-  name: mysql
+
+# name -- A name for the statefulset that will be substituted into resource definitions
+name: mysql
 
 # serviceName -- name of the terra service for which this mysql is for, i.e. leonardo.
 # required, no default

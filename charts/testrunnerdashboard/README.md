@@ -1,6 +1,6 @@
 # trdash
 
-![Version: 0.12.0](https://img.shields.io/badge/Version-0.12.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for TestRunner Dashbaord
 
@@ -23,7 +23,6 @@ Chart for TestRunner Dashbaord
 | config | object | `nil` | Required; contents of testrunnerdashboard.yaml to be given to the application |
 | createReleaseNamespace | bool | `false` | Emulate current Helm3 chart functionality, i.e., do not create the release namespace by default |
 | global.applicationVersion | string | `"latest"` | (string) What version of the application to deploy |
-| global.name | string | `"trdash"` | A name for the deployment that will be substituted into resource definitions |
 | imageConfig.imagePullPolicy | string | `"Always"` | (string) When to pull images |
 | imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/terra-test-runner-dashboard/terra-test-runner-dashboard"` | (string) Image repository |
 | imageConfig.tag | string | `nil` | Image tag |
@@ -50,6 +49,7 @@ Chart for TestRunner Dashbaord
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
+| name | string | `"trdash"` | A name for the deployment that will be substituted into resource definitions |
 | probes.liveness.enabled | bool | `false` | (boolean) If the liveness probe should be enabled |
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
 | probes.readiness.enabled | bool | `false` | (boolean) If the readiness probe should be enabled |

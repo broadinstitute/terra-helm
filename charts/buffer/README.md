@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.42.0](https://img.shields.io/badge/Version-0.42.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.41.0](https://img.shields.io/badge/Version-0.41.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -25,7 +25,6 @@ Chart for Resource Buffering Service
 | buffer.pool.configPath | string | `nil` | The configuration files pools and resources. Currently all pool configs are inside Java binary under resources/ so the value is a relative path from resource/, for example: config/dev |
 | cleanupAfterHandout | bool | `false` | Whether to publish message to Janitor after resource is handed out. |
 | global.applicationVersion | string | `"latest"` | What version of the application to deploy |
-| global.name | string | `"buffer"` | A name for the deployment that will be substituted into resource definitions |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
@@ -80,6 +79,8 @@ Chart for Resource Buffering Service
 | liquibase-migration.migrationJobs[1].migrationArgsConfigChangelog | string | `"stairway/db/changelog.xml"` |  |
 | liquibase-migration.migrationJobs[1].migrationDatabaseCredentials.fromKubernetesSecret.name | string | `"buffer-stairway-db-creds"` |  |
 | liquibase-migration.migrationJobs[1].name | string | `"buffer-stairway"` |  |
+| liquibase-migration.name | string | `"buffer"` |  |
+| name | string | `"buffer"` | A name for the deployment that will be substituted into resuorce definitions |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |

@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.global.name }}-deployment
+  name: {{ .Values.name }}-deployment
   labels: {{ include "ncbiaccess.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
@@ -22,13 +22,13 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: {{ .Values.global.name }}-sa
+      serviceAccountName: {{ .Values.name }}-sa
       volumes:
       - name: app-ctmpls
         secret:
-          secretName: {{ .Values.global.name }}-app-ctmpls
+          secretName: {{ .Values.name }}-app-ctmpls
       containers:
-      - name: {{ .Values.global.name }}-app
+      - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         resources:
           {{- toYaml .Values.resources | nindent 10 }}

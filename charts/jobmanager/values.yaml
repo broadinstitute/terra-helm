@@ -1,12 +1,12 @@
 global:
   # global.applicationVersion -- What version of the jobmanager application to deploy
   applicationVersion: latest
-  # global.name -- Name for this deployment
-  name: jobmanager
 
 # replicas -- Number of API replicas to spin up in the deployment
 replicas: 3
 
+# name -- Name for this deployment
+name: jobmanager
 
 # Settings for Job Manager's Ingress & Service
 ingress:

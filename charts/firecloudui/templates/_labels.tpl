@@ -9,6 +9,6 @@ helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 app.kubernetes.io/name: {{ .Release.Name }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-app.kubernetes.io/component: {{ .Values.global.name }}
+app.kubernetes.io/component: {{ .Values.name }}
 app.kubernetes.io/part-of: terra
 {{- end -}}

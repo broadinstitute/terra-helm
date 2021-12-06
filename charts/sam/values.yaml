@@ -1,8 +1,9 @@
 global:
   # global.applicationVersion -- What version of the Sam application to deploy
   applicationVersion: latest
-  # global.name -- A name for the deployment that will be substituted into resource definitions
-  name: sam
+
+# name -- A name for the deployment that will be substituted into resuorce definitions
+name: sam
 
 imageConfig:
   # imageConfig.repository -- Image repository

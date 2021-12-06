@@ -5,8 +5,6 @@ config:
 global:
   # -- (string) What version of the application to deploy
   applicationVersion: latest
-  # -- (string) Name of the application being deployed to template into manifests
-  name: sherlock
 
 imageConfig:
   # -- (string) Image repository
@@ -78,7 +76,9 @@ vault:
   enabled: true
   # -- (string) base path in vault containing sherlock's secrets
   pathPrefix: ""
-
+  
+# -- (string) Name of the application being deployed to template into manifests
+name: sherlock
 # -- (number) Number of sherlock pods to run
 replicas: 1
 # -- (string) Length of sleep to account for sqlproxy startup

@@ -2,7 +2,7 @@
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
-  name: {{ .Values.global.name }}-ingress-frontendconfig
+  name: {{ .Values.name }}-ingress-frontendconfig
   labels:
 {{ include "firecloudorch.labels" . | indent 4 }}
 spec:

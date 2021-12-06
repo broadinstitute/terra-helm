@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "terra-cluster-psps.name" -}}
-{{- default .Chart.Name .Values.global.nameOverride | trunc 56 | trimSuffix "-" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 56 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*

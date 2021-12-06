@@ -6,7 +6,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.global.name }}-service
+  name: {{ .Values.name }}-service
   labels:
 {{ include "azurepoc.labels" . | indent 4 }}
 spec:
@@ -16,7 +16,7 @@ spec:
   # same concecpt as the selector block in deployment.yaml
   # determines which pods should serve requests received by this service
   selector:
-    deployment: {{ .Values.global.name }}-deployment
+    deployment: {{ .Values.name }}-deployment
   ports:
   - name: app
     protocol: TCP

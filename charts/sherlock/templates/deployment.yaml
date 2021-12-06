@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.global.name }}-deployment
+  name: {{ .Values.name }}-deployment
   labels:
     {{- include "sherlock.labels" . | nindent 4 }}
 spec:
@@ -14,20 +14,20 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.global.name }}-deployment
+      deployment: {{ .Values.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.global.name }}-deployment
+        deployment: {{ .Values.name }}-deployment
         {{- include "sherlock.labels" . | nindent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ .Values.global.name }}-cm: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-cm: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
         {{- range $key, $value := .Values.annotations }}
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: {{ .Values.global.name }}-sa
+      serviceAccountName: {{ .Values.name }}-sa
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -42,12 +42,12 @@ spec:
       {{- end }}
       
       volumes:
-      - name: {{ .Values.global.name }}-cm
+      - name: {{ .Values.name }}-cm
         configMap:
-          name: {{ .Values.global.name }}-cm
+          name: {{ .Values.name }}-cm
 
       containers:
-      - name: {{ .Values.global.name }}-sqlproxy
+      - name: {{ .Values.name }}-sqlproxy
         image: "gcr.io/cloudsql-docker/gce-proxy:{{ .Values.sqlproxy.version }}"
         lifecycle:
           postStart:
@@ -57,17 +57,17 @@ spec:
         - name: SQL_INSTANCE_PROJECT
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.global.name }}-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: project
         - name: SQL_INSTANCE_REGION
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.global.name }}-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: region
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.global.name }}-cloudsql-postgres-instance
+              name: {{ .Values.name }}-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
                   "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432"]
@@ -75,7 +75,7 @@ spec:
           runAsUser: 2  # non-root user
           allowPrivilegeEscalation: false
 
-      - name: {{ .Values.global.name }}-app
+      - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag | default .Values.global.applicationVersion }}"
         imagePullPolicy: {{ .Values.imageConfig.imagePullPolicy }}
         ports:
@@ -89,22 +89,22 @@ spec:
         - name: SHERLOCK_DBUSER
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.global.name }}-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: username
         - name: SHERLOCK_DBPASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.global.name }}-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: password
         - name: SHERLOCK_DBNAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.global.name }}-postgres-db-creds
+              name: {{ .Values.name }}-postgres-db-creds
               key: db
 
         volumeMounts:
         - mountPath: /etc/sherlock/sherlock.yaml
-          name: {{ .Values.global.name }}-cm
+          name: {{ .Values.name }}-cm
           readOnly: true
           subPath: sherlock.yaml
 

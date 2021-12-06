@@ -3,7 +3,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ .Values.global.name}}-ingress
+  name: {{ .Values.name}}-ingress
   labels: {{ include "azurepoc.labels" . | nindent 4 }}
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
@@ -31,7 +31,7 @@ spec:
       # the target service here, defined in service.yaml
       - path: /*
         backend:
-          serviceName: {{ .Values.global.name }}-service
+          serviceName: {{ .Values.name }}-service
           servicePort: 80
       
     

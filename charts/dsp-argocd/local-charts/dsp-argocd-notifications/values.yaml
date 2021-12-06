@@ -1,6 +1,4 @@
-global:
-  # global.name -- A name for the deployment that will be substituted into resource definitions
-  name: dsp-argocd-notifications
+name: dsp-argocd-notifications
 
 # Path in Vault where ArgoCD secrets live
 vault:
