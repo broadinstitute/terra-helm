@@ -1,6 +1,6 @@
 apiVersion: v2
 name: liquibase-migration
-version: 1.4.0
+version: 1.3.0
 description: Chart to run Liquibase migrations before Terra app startup
 type: application
 keywords:
