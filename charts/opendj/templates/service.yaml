@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.name }}-service
+  name: {{ .Values.global.name }}-service
   labels:
     {{- include "opendj.labels" . | nindent 4 }}
 spec:

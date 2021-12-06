@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Values.name }}-cronjob
+  name: {{ .Values.global.name }}-cronjob
   labels:
     {{- include "diskmanager.labels" . | nindent 4 }}
 spec:
@@ -18,26 +18,26 @@ spec:
           restartPolicy: Never
           nodeSelector: {{ .Values.nodeSelector | toYaml | nindent 12 }}
           tolerations: {{ .Values.tolerations | toYaml | nindent 12}}
-          serviceAccountName: {{ .Values.name }}-sa
+          serviceAccountName: {{ .Values.global.name }}-sa
           containers:
           - image: "{{ .Values.imageConfig.repository }}:{{ .Values.imageConfig.tag }}"
             imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
-            name: {{ .Values.name }}
+            name: {{ .Values.global.name }}
             env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /app/application_default_credentials.json
             volumeMounts:
             - mountPath: /etc/disk-manager/config.yaml
               subPath: config.yaml
-              name: {{ .Values.name }}-config
+              name: {{ .Values.global.name }}-config
               readOnly: true
             - mountPath: /app
-              name: {{ .Values.name }}-gcp-sa
+              name: {{ .Values.global.name }}-gcp-sa
               readOnly: true
           volumes:
-          - name: {{ .Values.name }}-config
+          - name: {{ .Values.global.name }}-config
             configMap:
-              name: {{ .Values.name }}-cm
-          - name: {{ .Values.name }}-gcp-sa
+              name: {{ .Values.global.name }}-cm
+          - name: {{ .Values.global.name }}-gcp-sa
             secret:
-              secretName: {{ .Values.name }}-gcp-sa
+              secretName: {{ .Values.global.name }}-gcp-sa

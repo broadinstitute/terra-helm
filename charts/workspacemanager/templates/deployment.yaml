@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-deployment
+  name: {{ .Values.global.name }}-deployment
   labels:
 {{ include "workspacemanager.labels" . | indent 4 }}
   {{- if and .Values.proxy.enabled .Values.proxy.reloadOnCertUpdate }}
@@ -19,55 +19,55 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.name }}-deployment
+      deployment: {{ .Values.global.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.name }}-deployment
+        deployment: {{ .Values.global.name }}-deployment
 {{ include "workspacemanager.labels" . | indent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map changes: */}}
-        checksum/{{ .Values.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
-        checksum/{{ .Values.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.global.name }}-proxy-configmap: {{ include (print $.Template.BasePath "/configmaps/proxy-apache-httpd-configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.global.name }}-tcell-configmap: {{ include (print $.Template.BasePath "/configmaps/tcell_configmap.yaml") . | sha256sum }}
         {{- if .Values.prometheus.enabled }}
-        checksum/{{ .Values.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.global.name }}-prometheus-configmap: {{ include (print $.Template.BasePath "/configmaps/prometheus-configmap.yaml") . | sha256sum }}
         {{- end }}
         {{- range $key, $value := .Values.annotations }}
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
-      serviceAccountName: {{ .Values.name }}-service-sa
+      serviceAccountName: {{ .Values.global.name }}-service-sa
       volumes:
       - name: cloudsql-sa-creds
         secret:
-          secretName: {{ .Values.name }}-sqlproxy-sa
+          secretName: {{ .Values.global.name }}-sqlproxy-sa
       - name: app-sa-creds
         secret:
-          secretName: {{ .Values.name }}-app-sa
+          secretName: {{ .Values.global.name }}-app-sa
       {{- if .Values.proxy.enabled }}
       - name: apache-httpd-proxy-config
         configMap:
-          name: {{ .Values.name }}-proxy-configmap
+          name: {{ .Values.global.name }}-proxy-configmap
           items:
           - key: apache-httpd-proxy-config
-            path: {{ .Values.name }}-proxy.conf
+            path: {{ .Values.global.name }}-proxy.conf
       - name: cert
         secret:
-          secretName: {{ .Values.name }}-cert
+          secretName: {{ .Values.global.name }}-cert
       {{- if .Values.proxy.tcell.enabled }}
       - name: tcell-config
         configMap:
-          name: {{ .Values.name }}-tcell-configmap
+          name: {{ .Values.global.name }}-tcell-configmap
           items:
           - key: tcell-config
             path: tcell-config.conf
       {{- end }}
       {{- end }}
       {{- if .Values.prometheus.enabled }}
-      - name: {{ .Values.name }}-prometheusjmx-config
+      - name: {{ .Values.global.name }}-prometheusjmx-config
         configMap:
-          name: {{ .Values.name }}-prometheus-configmap
-      - name: {{ .Values.name }}-prometheusjmx-jar
+          name: {{ .Values.global.name }}-prometheus-configmap
+      - name: {{ .Values.global.name }}-prometheusjmx-jar
         emptyDir: {}
       {{- end }}
       containers:
@@ -81,17 +81,17 @@ spec:
         - name: SQL_INSTANCE_PROJECT
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-cloudsql-postgres-instance
+              name: {{ .Values.global.name }}-cloudsql-postgres-instance
               key: project
         - name: SQL_INSTANCE_REGION
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-cloudsql-postgres-instance
+              name: {{ .Values.global.name }}-cloudsql-postgres-instance
               key: region
         - name: SQL_INSTANCE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-cloudsql-postgres-instance
+              name: {{ .Values.global.name }}-cloudsql-postgres-instance
               key: name
         command: ["/cloud_sql_proxy",
                   "-instances=$(SQL_INSTANCE_PROJECT):$(SQL_INSTANCE_REGION):$(SQL_INSTANCE_NAME)=tcp:5432",
@@ -103,7 +103,7 @@ spec:
         - name: cloudsql-sa-creds
           mountPath: /secrets/cloudsql
           readOnly: true
-      - name: {{ .Values.name }}
+      - name: {{ .Values.global.name }}
         image: "{{- if .Values.image -}}
             {{ .Values.image }}
           {{- else -}}
@@ -132,37 +132,37 @@ spec:
         env:
         {{- if .Values.prometheus.enabled }}
         - name: JAVA_TOOL_OPTIONS
-          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ .Values.name }}-prometheusjmx-config/prometheusJmx.yaml"
+          value: "-javaagent:/etc/prometheusjmx/prometheusjmx.jar=9090:/etc/{{ .Values.global.name }}-prometheusjmx-config/prometheusJmx.yaml"
         {{- end }}
         - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-postgres-db-creds
+              name: {{ .Values.global.name }}-postgres-db-creds
               key: username
         - name: DATABASE_USER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-postgres-db-creds
+              name: {{ .Values.global.name }}-postgres-db-creds
               key: password
         - name: DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-postgres-db-creds
+              name: {{ .Values.global.name }}-postgres-db-creds
               key: db
         - name: STAIRWAY_DATABASE_USER
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-stairway-db-creds
+              name: {{ .Values.global.name }}-stairway-db-creds
               key: username
         - name: STAIRWAY_DATABASE_USER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-stairway-db-creds
+              name: {{ .Values.global.name }}-stairway-db-creds
               key: password
         - name: STAIRWAY_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-stairway-db-creds
+              name: {{ .Values.global.name }}-stairway-db-creds
               key: db
         {{- if .Values.initDB }}
         - name: INIT_DB
@@ -201,7 +201,7 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: TERRA_COMMON_KUBERNETES_POD_NAME_FILTER
-          value: {{ .Values.name }}-deployment
+          value: {{ .Values.global.name }}-deployment
         - name: TERRA_COMMON_KUBERNETES_IN_KUBERNETES
           value: 'true'
         {{- end }}
@@ -210,9 +210,9 @@ spec:
           mountPath: /secrets/app
           readOnly: true
         {{- if .Values.prometheus.enabled }}
-        - name: {{ .Values.name }}-prometheusjmx-config
-          mountPath: /etc/{{ .Values.name }}-prometheusjmx-config
-        - name: {{ .Values.name }}-prometheusjmx-jar
+        - name: {{ .Values.global.name }}-prometheusjmx-config
+          mountPath: /etc/{{ .Values.global.name }}-prometheusjmx-config
+        - name: {{ .Values.global.name }}-prometheusjmx-jar
           mountPath: /etc/prometheusjmx/prometheusjmx.jar
           subPath: prometheusjmx.jar
         {{- end }}
@@ -235,37 +235,37 @@ spec:
         - name: AOU_PREPROD_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-whitelist
+              name: {{ .Values.global.name }}-proxy-oauth-whitelist
               key: aou-preprod
         - name: AOU_PERF_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-whitelist
+              name: {{ .Values.global.name }}-proxy-oauth-whitelist
               key: aou-perf
         - name: AOU_PROD_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-whitelist
+              name: {{ .Values.global.name }}-proxy-oauth-whitelist
               key: aou-prod
         - name: AOU_DEV_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-whitelist
+              name: {{ .Values.global.name }}-proxy-oauth-whitelist
               key: aou-dev
         - name: AOU_STABLE_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-whitelist
+              name: {{ .Values.global.name }}-proxy-oauth-whitelist
               key: aou-stable
         - name: AOU_STAGING_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-whitelist
+              name: {{ .Values.global.name }}-proxy-oauth-whitelist
               key: aou-staging
         - name: TERRA_ID_WHITELIST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-oauth-whitelist
+              name: {{ .Values.global.name }}-proxy-oauth-whitelist
               key: terra
         - name: REMOTE_USER_CLAIM
           value: sub
@@ -283,19 +283,19 @@ spec:
         - name: PROXY_LDAP_BIND_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-ldap-bind-password
+              name: {{ .Values.global.name }}-proxy-ldap-bind-password
               key: password
         {{- end }}
         {{- if .Values.proxy.tcell.enabled }}
         - name: TCELL_AGENT_APP_ID
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-tcell-secrets
+              name: {{ .Values.global.name }}-proxy-tcell-secrets
               key: app-id
         - name: TCELL_AGENT_API_KEY
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.name }}-proxy-tcell-secrets
+              name: {{ .Values.global.name }}-proxy-tcell-secrets
               key: api-key
         - name: ENABLE_TCELL
           value: 'yes'
@@ -306,7 +306,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/apache2/sites-available/site.conf
           name: apache-httpd-proxy-config
-          subPath: {{ .Values.name }}-proxy.conf
+          subPath: {{ .Values.global.name }}-proxy.conf
         - mountPath: /etc/ssl/certs/server.crt
           subPath: tls.crt
           name: cert
@@ -334,9 +334,9 @@ spec:
         command: [
           "wget",
           "-O",
-          "/{{ .Values.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
+          "/{{ .Values.global.name }}-prometheusjmx-jar/prometheusjmx.jar", "{{ .Values.prometheus.jmxJarRepo }}/{{ .Values.prometheus.jmxJarVersion }}/jmx_prometheus_javaagent-{{ .Values.prometheus.jmxJarVersion }}.jar"
         ]
         volumeMounts:
-        - name: {{ .Values.name }}-prometheusjmx-jar
-          mountPath: /{{ .Values.name }}-prometheusjmx-jar
+        - name: {{ .Values.global.name }}-prometheusjmx-jar
+          mountPath: /{{ .Values.global.name }}-prometheusjmx-jar
       {{- end }}

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-deployment
+  name: {{ .Values.global.name }}-deployment
   labels:
 {{ include "azurepoc.labels" . | indent 4 }}
 spec:
@@ -23,19 +23,19 @@ spec:
     # This is how the k8s deployment resource determines which pods it manages and monitors
     # any pods with the label below will be managed by this deployment
     matchLabels:
-      deployment: {{ .Values.name }}-deployment
+      deployment: {{ .Values.global.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.name }}-deployment # corresponding label on the pod from the selector section above
+        deployment: {{ .Values.global.name }}-deployment # corresponding label on the pod from the selector section above
 {{ include "azurepoc.labels" . | indent 8 }}
     spec:
       # defined in rbac.yaml
       # This is a k8s service account which is not the same as a GCP service account. 
       # It determines which k8s api resources/methods the pod has access to.
-      serviceAccountName: {{ .Values.name }}-sa
+      serviceAccountName: {{ .Values.global.name }}-sa
       containers:
-      - name: {{ .Values.name }}-app
+      - name: {{ .Values.global.name }}-app
         image: "{{ .Values.imageRepository }}:{{ .Values.imageTag | default .Values.global.applicationVersion }}"
         ports:
         - name: app

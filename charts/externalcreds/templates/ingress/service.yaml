@@ -3,5 +3,5 @@
 {{- define "externalcreds.service" -}}
 spec:
   selector:
-    deployment: {{ .Values.name }}-frontend-deployment
+    deployment: {{ .Values.global.name }}-frontend-deployment
 {{- end }}

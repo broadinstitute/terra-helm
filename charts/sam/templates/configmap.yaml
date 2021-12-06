@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.name }}-configmap
+  name: {{ .Values.global.name }}-configmap
   labels:
     {{- include "sam.labels" . | nindent 4 }}
 data:

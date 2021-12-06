@@ -2,11 +2,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.name }}-statefulset
+  name: {{ .Values.global.name }}-statefulset
   labels:
     {{- include "opendj.labels" . | nindent 4 }}
 spec:
-  serviceName: {{ .Values.name }}-service
+  serviceName: {{ .Values.global.name }}-service
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 3
   selector:
@@ -17,17 +17,17 @@ spec:
       labels:
         {{- include "opendj.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ .Values.name }}-service-sa
+      serviceAccountName: {{ .Values.global.name }}-service-sa
       volumes:
       - name: app-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-app-ctmpls
       - name: checks
         configMap:
-          name: {{ .Values.name }}-checks
+          name: {{ .Values.global.name }}-checks
           defaultMode: 0744
       containers:
-      - name: {{ .Values.name }}
+      - name: {{ .Values.global.name }}
         image: {{ .Values.imageConfig.repository }}:{{  .Values.imageConfig.tag }}
         imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
         envFrom:
@@ -61,7 +61,7 @@ spec:
           successThreshold: 1
         volumeMounts:
           - mountPath: /opt/opendj/data/
-            name: {{ .Values.name }}-data
+            name: {{ .Values.global.name }}-data
           - mountPath: /var/secrets/opendj/server.p12
             name: app-ctmpls
             subPath: server.p12
@@ -98,7 +98,7 @@ spec:
       {{- end }}
   volumeClaimTemplates:
   - metadata:
-      name: {{ .Values.name }}-data
+      name: {{ .Values.global.name }}-data
       labels:
         {{- include "opendj.selectorLabels" . | nindent 8 }}
       {{- if .Values.snapshot.enable }}

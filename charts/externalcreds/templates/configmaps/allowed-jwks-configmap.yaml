@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.name }}-allowed-jwks
+  name: {{ .Values.global.name }}-allowed-jwks
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
 data:
