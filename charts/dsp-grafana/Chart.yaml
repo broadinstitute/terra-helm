@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dsp-grafana
-version: 1.3.0
+version: 1.4.0
 description: Wrapper providing GKE ingress, CloudSQL sidecar, and secrets around Grafana
 type: application
 keywords:

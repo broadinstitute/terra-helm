@@ -2,7 +2,7 @@ apiVersion: v2
 name: terra-cluster-networking
 description: A Helm chart to configure cluster-wide networking for Terra clusters
 type: application
-version: 0.1.0
+version: 0.2.0
 keywords:
   - dsp
   - broadinstitute

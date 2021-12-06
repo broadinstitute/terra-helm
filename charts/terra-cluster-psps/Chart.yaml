@@ -2,7 +2,7 @@ apiVersion: v2
 name: terra-cluster-psps
 description: A Helm chart to deploy terra kernel pod security policies
 type: application
-version: 0.2.0
+version: 0.3.0
 keywords:
   - dsp
   - broadinstitute
