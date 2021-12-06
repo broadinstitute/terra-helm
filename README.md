@@ -31,11 +31,3 @@ brew install norwoodj/tap/helm-docs
 cd charts/[changed chart]
 helm-docs
 ```
-
-## Standards
-
-We have a lot of patterns for charts that we tend to follow, but the standards here are meant to be universal.
-
-This list may grow over time; for a standard to be added here it must already be universal (in other words, this section is a reference for "what is," not a recommendation for "what should be").
-
-1. Storing a name in `.Values.name` is disallowed. Instead, use `.Values.global.name` so names are available from subcharts. See [DDO-1579](https://broadworkbench.atlassian.net/browse/DDO-1579).
