@@ -1,12 +1,12 @@
 global:
   # global.applicationVersion -- What version of the firecloudui application to deploy
   applicationVersion: latest
-  # global.name -- Name for this deployment
-  name: firecloudui
 
 # replicas -- Number of replicas to spin up in the deployment
 replicas: 2
 
+# name -- Name for this deployment
+name: firecloudui
 
 # Settings for Firecloud UI's Ingress & Service
 ingress:

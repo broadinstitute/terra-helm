@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.global.name }}-es-probe-cm
+  name: {{ .Values.name }}-es-probe-cm
   labels: {{ include "firecloudorch.labels" . | nindent 4 }}
 data:
   probe.sh: |

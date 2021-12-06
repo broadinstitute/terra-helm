@@ -1,6 +1,6 @@
 # dsp-atlantis
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for DSP Atlantis deployment
 
@@ -39,7 +39,7 @@ Chart for DSP Atlantis deployment
 | cleanup.enabled | bool | `false` | Whether to automatically clear provider cache |
 | cleanup.saName | string | `"atlantis-cleanup-sa"` |  |
 | cleanup.timeoutSeconds | int | `3600` | How many seconds to wait before assuming job is hung and killing it |
-| global.name | string | `"atlantis"` | A name for the deployment that will be substituted into resource definitions |
+| name | string | `"atlantis"` |  |
 | serviceAccount | string | `"atlantis"` |  |
 | vault.azure.pathPrefix | string | `"/path/to/azure/secrets"` |  |
 | vault.cleanup.key | string | `nil` | Key in Vault where base64-encoded GCP service account key for pod cleanup is stored |

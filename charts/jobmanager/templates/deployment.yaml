@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.global.name }}-deployment
+  name: {{ .Values.name }}-deployment
   labels: {{- include "jobmanager.labels" . | nindent 4 }}
 spec:
   strategy:
@@ -13,17 +13,17 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      deployment: {{ .Values.global.name }}-deployment
+      deployment: {{ .Values.name }}-deployment
   template:
     metadata:
       labels:
-        deployment: {{ .Values.global.name }}-deployment
+        deployment: {{ .Values.name }}-deployment
         {{- include "jobmanager.labels" . | nindent 8 }}
       annotations:
         {{- /* Automatically restart deployments on config map change: */}}
-        checksum/{{ .Values.global.name }}-cm: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/{{ .Values.name }}-cm: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: {{ .Values.global.name }}-sa
+      serviceAccountName: {{ .Values.name }}-sa
       # Containers are configured to talk to each other by name
       # via docker-compose links; make corresponding aliases
       # to loopback in /etc/hosts
@@ -35,17 +35,17 @@ spec:
       volumes:
       - name: ui-ctmpls
         secret:
-          secretName: {{ .Values.global.name }}-ui-ctmpls
+          secretName: {{ .Values.name }}-ui-ctmpls
       - name: api-ctmpls
         secret:
-          secretName: {{ .Values.global.name }}-api-ctmpls
+          secretName: {{ .Values.name }}-api-ctmpls
       - name: proxy-ctmpls
         secret:
-          secretName: {{ .Values.global.name }}-proxy-ctmpls
-      - name: {{ .Values.global.name }}-modsecurity-logs
+          secretName: {{ .Values.name }}-proxy-ctmpls
+      - name: {{ .Values.name }}-modsecurity-logs
         emptyDir: {}
       containers:
-      - name: {{ .Values.global.name }}-api
+      - name: {{ .Values.name }}-api
         image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Values.global.applicationVersion }}"
         args: ["-b", ":8190", "-t", "60"]
         ports:
@@ -59,7 +59,7 @@ spec:
             memory: {{ .Values.api.resources.limits.memory }}
         envFrom:
         - secretRef:
-            name: {{ .Values.global.name }}-api-env
+            name: {{ .Values.name }}-api-env
         env:
         # Make node, pod name accessible to app as env vars
         - name: K8S_NODE_NAME
@@ -88,7 +88,7 @@ spec:
         livenessProbe:
           {{- toYaml .Values.api.probes.liveness.spec | nindent 10 }}
         {{- end }}
-      - name: {{ .Values.global.name }}-ui
+      - name: {{ .Values.name }}-ui
         image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Values.global.applicationVersion }}"
         ports:
         - containerPort: 8000
@@ -127,7 +127,7 @@ spec:
         livenessProbe:
           {{- toYaml .Values.ui.probes.liveness.spec | nindent 10 }}
         {{- end }}
-      - name: {{ .Values.global.name }}-proxy
+      - name: {{ .Values.name }}-proxy
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}"
         ports:
           - containerPort: 443
@@ -135,7 +135,7 @@ spec:
           - containerPort: 8888
         envFrom:
         - secretRef:
-            name: {{ .Values.global.name }}-proxy-env
+            name: {{ .Values.name }}-proxy-env
         volumeMounts:
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
@@ -159,4 +159,4 @@ spec:
           subPath: site.conf
           name: proxy-ctmpls
         - mountPath: /var/log/modsecurity
-          name: {{ .Values.global.name }}-modsecurity-logs
+          name: {{ .Values.name }}-modsecurity-logs

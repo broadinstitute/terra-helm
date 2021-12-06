@@ -3,5 +3,5 @@
 {{- define "jobmanager.service" -}}
 spec:
   selector:
-    deployment: {{ .Values.global.name }}-deployment
+    deployment: {{ .Values.name }}-deployment
 {{- end }}

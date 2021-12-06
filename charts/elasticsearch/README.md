@@ -1,6 +1,6 @@
 # elasticsearch
 
-![Version: 0.12.0](https://img.shields.io/badge/Version-0.12.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.11.0](https://img.shields.io/badge/Version-0.11.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a helm chart to deploy monitoring infrastructure
 
@@ -72,7 +72,7 @@ a helm chart to deploy monitoring infrastructure
 | elasticsearch.volumeClaimTemplate.storageClassName | string | `"terra-ssd-zonal"` |  |
 | expose | bool | `false` | If true will create a loadbalancer service for each pod, enables using the transport client from outside the cluster |
 | exposeIPs | list | `[]` | List of ips to associate with each ES pod |
-| global.name | string | `"elasticsearch"` | A name for the deployment that will be substituted into resource definitions |
+| name | string | `"elasticsearch"` |  |
 | replicaCount | int | `3` | number of elasticsearch replicas to expose. |
 | vault.pathPrefix | string | `nil` | path where elasticsearch secrets are stored in vault |
 

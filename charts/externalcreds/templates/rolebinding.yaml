@@ -1,14 +1,14 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ .Values.global.name }}-service-role-binding
+  name: {{ .Values.name }}-service-role-binding
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
 roleRef:
   kind: Role
-  name: {{ .Values.global.name }}-service-role
+  name: {{ .Values.name }}-service-role
   apiGroup: rbac.authorization.k8s.io
 subjects:
 # Authorize specific service accounts:
 - kind: ServiceAccount
-  name: {{ .Values.global.name }}-service-sa
+  name: {{ .Values.name }}-service-sa

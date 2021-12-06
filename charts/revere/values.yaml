@@ -5,8 +5,9 @@ config:
 global:
   # -- (string) What version of the application to deploy
   applicationVersion: latest
-  # -- A name for the deployment that will be substituted into resource definitions
-  name: revere
+
+# name -- A name for the deployment that will be substituted into resource definitions
+name: revere
 
 imageConfig:
   # -- (string) Image repository

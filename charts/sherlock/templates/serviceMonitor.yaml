@@ -7,7 +7,7 @@ metadata:
     {{ include "sherlock.labels" . | nindent 4 }}
     release: terra-prometheus
 spec:
-  jobLabel: {{ .Values.global.name }}
+  jobLabel: {{ .Values.name }}
   selector:
     matchLabels:
       app.kubernetes.io/component: sherlock

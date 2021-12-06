@@ -4,5 +4,5 @@
 spec:
   selector:
     matchLabels:
-      deployment: {{ .Values.global.name }}-deployment
+      deployment: {{ .Values.name }}-deployment
 {{- end }}

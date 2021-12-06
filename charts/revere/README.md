@@ -1,6 +1,6 @@
 # revere
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Revere - Terra's Status and Uptime Reporting Service
 
@@ -17,10 +17,10 @@ Chart for Revere - Terra's Status and Uptime Reporting Service
 | annotations | object | `{}` | Annotations for application pods |
 | config | object | `nil` | Required; contents of revere.yaml to be given to the application |
 | global.applicationVersion | string | `"latest"` | (string) What version of the application to deploy |
-| global.name | string | `"revere"` | A name for the deployment that will be substituted into resource definitions |
 | imageConfig.imagePullPolicy | string | `"Always"` | (string) When to pull images |
 | imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/revere/revere"` | (string) Image repository |
 | imageConfig.tag | string | `nil` | Image tag |
+| name | string | `"revere"` | A name for the deployment that will be substituted into resource definitions |
 | nodeSelector | object | `{}` | nodeSelector map for application pods |
 | probes.liveness.enabled | bool | `false` | (boolean) If the liveness probe should be enabled |
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |

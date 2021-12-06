@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.global.name }}-cm
+  name: {{ .Values.name }}-cm
   labels:
     {{- include "revere.labels" . | nindent 4 }}
 data:

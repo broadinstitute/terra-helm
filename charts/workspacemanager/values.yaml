@@ -5,8 +5,9 @@ global:
   # global.terraEnv -- (string) Terget Terra environment name. Required.
   # @default -- Is set by Helmfile on deploy
   terraEnv: null
-  # global.name -- A name for the deployment that will be substituted into resource definitions
-  name: workspacemanager
+
+# name -- A name for the deployment that will be substituted into resuorce definitions
+name: workspacemanager
 
 annotations: {}
 # image -- (string) Used for local Skaffold deploys
@@ -249,6 +250,9 @@ liquibase-migration:
     migrationDatabaseCredentials:
       fromKubernetesSecret:
         name: "workspacemanager-stairway-db-creds"
+
+  # Workaround pending DDO-1579
+  name: "workspacemanager"
 
   defaults:
     enabled: false

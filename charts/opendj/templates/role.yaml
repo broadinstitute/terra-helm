@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ .Values.global.name }}-service-role
+  name: {{ .Values.name }}-service-role
   labels:
     {{- include "opendj.labels" . | nindent 4 }}
 rules:

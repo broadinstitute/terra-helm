@@ -1,12 +1,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ .Values.global.name }}-sa-binding
+  name: {{ .Values.name }}-sa-binding
   labels: {{ include "mongodb.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.global.name }}-sa
+  name: {{ .Values.name }}-sa
 roleRef:
   kind: Role
-  name: {{ .Values.global.name }}-role
+  name: {{ .Values.name }}-role
   apiGroup: rbac.authorization.k8s.io

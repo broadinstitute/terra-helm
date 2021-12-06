@@ -1,6 +1,6 @@
 # firecloudorch
 
-![Version: 0.14.0](https://img.shields.io/badge/Version-0.14.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
+![Version: 0.13.0](https://img.shields.io/badge/Version-0.13.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
 
 Chart for firecloud-orchestration service in Terra
 
@@ -27,7 +27,6 @@ Chart for firecloud-orchestration service in Terra
 | elasticsearch.transportProbe.spec | object | `{"exec":{"command":["./etc/probe/probe.sh"]},"failureThreshold":3,"initialDelaySeconds":20,"periodSeconds":90,"successThreshold":1,"timeoutSeconds":5}` | Spec for the custom liveness probe |
 | elasticsearch.transportProbe.timeout | int | `10` | timeout in seconds for probe requests |
 | global.applicationVersion | string | `"latest"` | What version of the Cromwell application to deploy |
-| global.name | string | `"firecloudorch"` | A name for the deployment that will be substituted into resource definitions |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/broad-dsp-gcr-public/firecloud-orchestration"` | Image repository |
 | imageConfig.tag | string | global.applicationVersion | Image tag. |
@@ -41,6 +40,7 @@ Chart for firecloud-orchestration service in Terra
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
+| name | string | `"firecloudorch"` |  |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |

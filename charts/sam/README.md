@@ -1,6 +1,6 @@
 # sam
 
-![Version: 0.19.0](https://img.shields.io/badge/Version-0.19.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.17.0](https://img.shields.io/badge/Version-0.17.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Sam, the Terra Identity and Access Management application
 
@@ -21,7 +21,6 @@ Chart for Sam, the Terra Identity and Access Management application
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | global.applicationVersion | string | `"latest"` | What version of the Sam application to deploy |
-| global.name | string | `"sam"` | A name for the deployment that will be substituted into resource definitions |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"gcr.io/broad-dsp-gcr-public/sam"` | Image repository |
 | imageConfig.tag | string | global.applicationVersion | Image tag. |
@@ -47,6 +46,7 @@ Chart for Sam, the Terra Identity and Access Management application
 | liquibase-migration.defaults.sqlproxyContainerConfig.envFrom[0].secretRef.name | string | `"sam-sqlproxy-env"` |  |
 | liquibase-migration.defaults.sqlproxyCredentialFileMount.secretName | string | `"sam-sqlproxy-ctmpls"` |  |
 | liquibase-migration.name | string | `"sam"` |  |
+| name | string | `"sam"` | A name for the deployment that will be substituted into resuorce definitions |
 | probes.liveness.enabled | bool | `false` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |

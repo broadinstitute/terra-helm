@@ -16,7 +16,6 @@ Chart for azurepoc service in Terra
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | global.applicationVersion | string | `"latest"` |  |
-| global.name | string | `"azurepoc"` | name of the application to template into k8s resources |
 | imagePullSecret | string | `nil` | name of k8s secret containing credentials to authenticate to a private image repo |
 | imageRepository | string | `"gcr.io/terra-kernel-k8s/azurepoc"` | url for repo hosting the image deployed in this chart |
 | imageTag | string | `nil` |  |
@@ -24,6 +23,7 @@ Chart for azurepoc service in Terra
 | ingress.hostName | string | `"azurepoc.mflinn.azure.dev.envs-terra.bio"` | hostname for this application. Used for host based routing in the ingress |
 | ingress.tlsIssuer | string | `"letsencrypt-prod-issuer"` | when multiple CAs are configured for a cluster can be used to select a specfic one |
 | ingress.tlsSecretName | string | `"tls-secret"` | name of the k8s secret the tls cert will be stored in |
+| name | string | `"azurepoc"` | name of the application to template into k8s resources |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/status"` |  |

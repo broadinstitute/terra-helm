@@ -1,8 +1,9 @@
 global:
   # global.trustedAddresses -- A map of addresses that will be merged with serviceAllowedAddresses. Example: `{ "nickname": ["x.x.x.x/y", "x.x.x.x/y"] }`
   trustedAddresses: {}
-  # global.name -- A name for the deployment that will be substituted into resource definitions
-  name: opendj
+
+# name -- A name for the deployment that will be substituted into resuorce definitions
+name: opendj
 
 imageConfig:
   # imageConfig.repository -- Image repository

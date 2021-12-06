@@ -1,9 +1,9 @@
 global:
   # global.applicationVersion -- What version of the Sam application to deploy
   applicationVersion: latest
-  # global.name -- prefix for k8s resource names
-  name: ncbiaccess
 
+# name -- prefix for k8s resource names
+name: ncbiaccess
 # replicas -- number of pods to run
 replicas: 1
 

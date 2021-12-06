@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: {{ .Values.gateway.name }}
-  namespace: {{ .Values.global.namespaces.istio }}
+  namespace: {{ .Values.namespaces.istio }}
   labels:
     name: istiogateway
     helm.sh/chart: {{ template "terra-cluster-networking.chart" . }}

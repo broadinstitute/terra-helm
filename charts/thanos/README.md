@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square)
 
 Chart for deploying Thanos metrics system in dsp infrastructure
 
@@ -19,7 +19,6 @@ Chart for deploying Thanos metrics system in dsp infrastructure
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.name | string | `"thanos"` | A name for the deployment that will be substituted into resource definitions |
 | ingress.cert.preSharedCerts | list | `[]` | list of existing certificates in google to associate with the ingress |
 | ingress.certmanager.enabled | bool | `true` | whether to use certmanager to provision a lets encrypt cert for the ingress |
 | ingress.domain.hostname | string | `"thanos"` | hostname to access thanos server |
@@ -30,6 +29,7 @@ Chart for deploying Thanos metrics system in dsp infrastructure
 | ingress.sslPolicy | string | `nil` | policy to restrict the tls versions or ciphers that can be used with thanos |
 | ingress.staticIpName | string | `nil` | name of the global static ip to associate with the ingress |
 | ingress.timeoutSec | int | `120` | timeout for the ingress loadbalancer health check |
+| name | string | `"thanos"` |  |
 | thanos-local.fullnameOverride | string | `"thanos-local"` |  |
 | thanos-local.metrics.enabled | bool | `true` |  |
 | thanos-local.query.dnsDiscovery.enabled | bool | `false` | whether to have the query attempt to automatically discover thanos sidecars |

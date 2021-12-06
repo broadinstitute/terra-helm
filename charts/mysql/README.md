@@ -9,11 +9,11 @@ This chart is customized for Terra preview environments
 |-----|------|---------|-------------|
 | databaseName | string | `nil` | name of a default database that the service expects (if any) i.e. a new leonardo instance expects a 'leonardo' database to already exist |
 | global.applicationVersion | string | `"latest"` | What version of mysql to deploy |
-| global.name | string | `"mysql"` | A name for the statefulset that will be substituted into resource definitions |
 | global.storageClass | string | `"standard"` | Storage class to use when provisioning persistent disks |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
 | imageConfig.repository | string | `"mysql"` | Image repository |
 | imageConfig.tag | string | `nil` | Image tag. |
+| name | string | `"mysql"` | A name for the statefulset that will be substituted into resource definitions |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.exec.command[0] | string | `"mysqladmin"` |  |
 | probes.liveness.spec.exec.command[1] | string | `"ping"` |  |

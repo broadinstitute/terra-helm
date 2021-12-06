@@ -25,13 +25,13 @@ Chart for Job Manager service in Terra
 | api.resources.requests.cpu | int | `4` | Number of CPU units to request for the deployment |
 | api.resources.requests.memory | string | `"3.6Gi"` | Memory to request for the deployment |
 | global.applicationVersion | string | `"latest"` | What version of the jobmanager application to deploy |
-| global.name | string | `"jobmanager"` | Name for this deployment |
 | ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.enabled | bool | `true` | Whether to create Ingress and associated Service, FrontendConfig and BackendConfig |
 | ingress.requestPath | string | `"/health"` | Request path to which the probe system should connect |
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
+| name | string | `"jobmanager"` | Name for this deployment |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Image repository |
 | proxy.image.tag | string | `"modsecurity_2_9_2"` | (string) Image tag. |
 | replicas | int | `3` | Number of API replicas to spin up in the deployment |

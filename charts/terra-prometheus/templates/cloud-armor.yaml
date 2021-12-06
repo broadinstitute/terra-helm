@@ -2,8 +2,8 @@ apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: prometheus-cloud-armor
-  {{- if ne .Values.global.namespaceOverride "" }}
-  namespace: {{ .Values.global.namespaceOverride }}
+  {{- if ne .Values.namespaceOverride "" }}
+  namespace: {{ .Values.namespaceOverride }}
   {{- end }}
   labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
