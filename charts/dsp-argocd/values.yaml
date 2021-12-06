@@ -84,7 +84,7 @@ argo-cd:
   repoServer:
     image:
       repository: us-central1-docker.pkg.dev/dsp-artifact-registry/terra-helmfile-images/argocd-custom-image
-      tag: main-00fe213
+      tag: main-39788e3
     env:
       - name: VAULT_ADDR
         value: https://clotho.broadinstitute.org:8200
