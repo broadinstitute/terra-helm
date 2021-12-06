@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ .Values.name }}-backup-role
+  name: {{ .Values.global.name }}-backup-role
   labels: {{ include "elasticsearch.labels" . | nindent 4 }}
 rules: 
 - apiGroups: ['policy']

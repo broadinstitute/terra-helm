@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.name }}-proxy-configmap
+  name: {{ .Values.global.name }}-proxy-configmap
   labels:
 {{ include "externalcreds.labels" . | indent 4 }}
 data:

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-to-sd-deployment
-  namespace: {{ .Values.namespaceOverride }}
+  namespace: {{ .Values.global.namespaceOverride }}
   labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.prometheusToSD.replicaCount }}

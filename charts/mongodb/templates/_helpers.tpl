@@ -20,8 +20,8 @@ Craft a MongoDB replicaset connection url for use by backup job. Eg.
 */ -}}
 {{- define "_mongodb.backup.replicaset.url" -}}
   {{- $user := "root"                            -}}{{- /* user to connect as */ -}}
-  {{- $svc  := printf "%s-headless" .Values.name -}}{{- /* name of MongoDB headless service */ -}}
-  {{- $sts  := printf .Values.name               -}}{{- /* name of MongoDB statefulset */ -}}
+  {{- $svc  := printf "%s-headless" .Values.global.name -}}{{- /* name of MongoDB headless service */ -}}
+  {{- $sts  := printf .Values.global.name               -}}{{- /* name of MongoDB statefulset */ -}}
   {{- $port := 27017                             -}}{{- /* port MongoDB is listening */ -}}
   {{- $rs   := "rs0"                             -}}{{- /* replica set identifier */ -}}
 

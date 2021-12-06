@@ -26,6 +26,7 @@ Chart for Firecloud UI service in Terra
 | app.resources.requests.cpu | int | `1` | Number of CPU units to request for the deployment |
 | app.resources.requests.memory | string | `"3.75Gi"` | Memory to request for the deployment |
 | global.applicationVersion | string | `"latest"` | What version of the firecloudui application to deploy |
+| global.name | string | `"firecloudui"` | Name for this deployment |
 | ingress.cert.preSharedCerts | list | `[]` | Array of pre-shared GCP SSL certificate names to associate with the Ingress |
 | ingress.cert.vault.cert.path | string | `nil` | Path to secret containing .crt |
 | ingress.cert.vault.cert.secretKey | string | `nil` | Key in secret containing .crt |
@@ -37,7 +38,6 @@ Chart for Firecloud UI service in Terra
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `"nul"` | (string) Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` | Load balancer backend timeout |
-| name | string | `"firecloudui"` | Name for this deployment |
 | replicas | int | `2` | Number of replicas to spin up in the deployment |
 | sherlock.appImageName | string | `"gcr.io/broad-dsp-gcr-public/firecloud-ui"` |  |
 | sherlock.appName | string | `"firecloudui"` |  |

@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ .Values.name }}-service-role-binding
+  name: {{ .Values.global.name }}-service-role-binding
   annotations:
     # Used by liquibase-migration during wave -1
     argocd.argoproj.io/sync-wave: "-1"
@@ -9,9 +9,9 @@ metadata:
     {{- include "buffer.labels" . | nindent 4 }}
 roleRef:
   kind: Role
-  name: {{ .Values.name }}-service-role
+  name: {{ .Values.global.name }}-service-role
   apiGroup: rbac.authorization.k8s.io
 subjects:
 # Authorize specific service accounts:
 - kind: ServiceAccount
-  name: {{ .Values.name }}-service-sa
+  name: {{ .Values.global.name }}-service-sa

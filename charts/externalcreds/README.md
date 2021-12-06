@@ -1,6 +1,6 @@
 # externalcreds
 
-![Version: 0.60.0](https://img.shields.io/badge/Version-0.60.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.61.0](https://img.shields.io/badge/Version-0.61.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Terra External Credentials Manager
 
@@ -26,6 +26,7 @@ Chart for Terra External Credentials Manager
 | authorizationChangeEventsEnabled | bool | `true` | only enable google pubsub topic for live envs |
 | cloudTraceEnabled | bool | `true` | Whether to enable gcp cloud trace |
 | global.applicationVersion | string | `"latest"` | What version of the application to deploy |
+| global.name | string | `"externalcreds"` | A name for the deployment that will be substituted into resource definitions |
 | global.terraEnv | string | Is set by Helmfile on deploy | Terget Terra environment name. Required. |
 | image | string | Is set by Skaffold on local deploys | Used for local Skaffold deploys |
 | imageConfig.imagePullPolicy | string | `"Always"` |  |
@@ -54,7 +55,6 @@ Chart for Terra External Credentials Manager
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
 | initDB | bool | `false` | Whether the ECM should be initialized on startup. Used for preview environments. |
-| name | string | `"externalcreds"` | A name for the deployment that will be substituted into resuorce definitions |
 | probes.liveness.enabled | bool | `true` |  |
 | probes.liveness.spec.failureThreshold | int | `30` |  |
 | probes.liveness.spec.httpGet.path | string | `"/version"` |  |

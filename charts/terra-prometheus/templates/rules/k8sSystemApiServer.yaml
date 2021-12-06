@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: {{ .Chart.Name }}-system-apiserver-rules
-  namespace: {{ .Values.namespaceOverride }}
+  namespace: {{ .Values.global.namespaceOverride }}
   labels:
     app: {{ .Values.prometheusRuleSelector }}
 spec:

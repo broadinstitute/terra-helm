@@ -1,5 +1,6 @@
-# name -- A name for the deployment that will be substituted into resuorce definitions
-name: diskmanager
+global:
+  # global.name -- A name for the deployment that will be substituted into resource definitions
+  name: diskmanager
 
 config:
   # config.targetAnnotation -- The annotation that must be present on pvcs in order to attach snapshot policy to the associated disk

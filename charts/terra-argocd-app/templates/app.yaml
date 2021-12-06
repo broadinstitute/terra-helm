@@ -24,7 +24,7 @@ metadata:
 spec:
   project: {{ required "A valid projectName is required" .Values.projectName | quote }}
   destination:
-    namespace: {{ required "A valid namespace is required" .Values.namespace | quote }}
+    namespace: {{ required "A valid namespace is required" .Values.global.namespace | quote }}
     server: {{ required "A valid clusterAddress is required" .Values.clusterAddress | quote }}
   source:
     repoURL: {{ .Values.helmfileRepo | quote }}

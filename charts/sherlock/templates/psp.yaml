@@ -1,7 +1,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ .Values.name }}-psp
+  name: {{ .Values.global.name }}-psp
   labels:
     {{- include "sherlock.labels" . | nindent 4 }}
   annotations:

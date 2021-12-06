@@ -1,6 +1,6 @@
 # sherlock
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Sherlock - DSP's environment tracking and management service
 
@@ -17,6 +17,7 @@ Chart for Sherlock - DSP's environment tracking and management service
 | annotations | object | `{}` |  |
 | config | object | `nil` | Required; contents of revere.yaml to be given to the application |
 | global.applicationVersion | string | `"latest"` | (string) What version of the application to deploy |
+| global.name | string | `"sherlock"` | (string) Name of the application being deployed to template into manifests |
 | imageConfig.imagePullPolicy | string | `"Always"` | (string) When to pull images |
 | imageConfig.repository | string | `"us-central1-docker.pkg.dev/dsp-artifact-registry/sherlock/server"` | (string) Image repository |
 | imageConfig.tag | string | `nil` | Image tag |
@@ -31,7 +32,6 @@ Chart for Sherlock - DSP's environment tracking and management service
 | ingress.sslPolicy | string | `nil` | Name of a GCP SSL policy to associate with the Ingress |
 | ingress.staticIpName | string | `nil` | Required. Name of the static IP, allocated in GCP, to associate with the Ingress |
 | ingress.timeoutSec | int | `120` |  |
-| name | string | `"sherlock"` | (string) Name of the application being deployed to template into manifests |
 | nodeSelector | object | `{}` | nodeSelector map |
 | probes.liveness.enabled | bool | `false` | (boolean) If the liveness probe should be enabled |
 | probes.liveness.spec | object | `nil` | Spec for the liveness probe |
