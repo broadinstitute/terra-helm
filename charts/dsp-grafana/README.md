@@ -1,6 +1,6 @@
 # dsp-grafana
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Wrapper providing GKE ingress, CloudSQL sidecar, and secrets around Grafana
 
@@ -15,7 +15,7 @@ To update the version of Grafana used by this chart, set `grafana.image.tag` in 
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://terra-helm-thirdparty.storage.googleapis.com/ | grafana | 6.17.7 |
+| https://terra-helm-thirdparty.storage.googleapis.com/ | grafana | 6.18.1 |
 
 ## Values
 
