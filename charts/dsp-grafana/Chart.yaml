@@ -12,5 +12,5 @@ sources:
   - https://github.com/grafana/helm-charts/tree/main/charts/grafana
 dependencies:
   - name: grafana
-    version: 6.17.7
+    version: 6.18.1
     repository: https://terra-helm-thirdparty.storage.googleapis.com/
