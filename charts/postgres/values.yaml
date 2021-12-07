@@ -10,5 +10,3 @@ imageConfig:
   # imageConfig.tag -- (string) Image tag
   # @default -- The chart's appVersion value will be used
   tag: 9.6
-  # imageConfig.imagePullPolicy -- Image pull policy
-  imagePullPolicy: Always
