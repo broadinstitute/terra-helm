@@ -1,6 +1,6 @@
 # dsp-atlantis
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for DSP Atlantis deployment
 
@@ -20,8 +20,7 @@ Chart for DSP Atlantis deployment
 |-----|------|---------|-------------|
 | atlantis.fullnameOverride | string | `"atlantis"` |  |
 | atlantis.serviceAccount.name | string | `"atlantis"` |  |
-| azure.certificateFile | string | `"azure-cert.pfx"` |  |
-| azure.enabled | bool | `false` |  |
+| azure.enabled | bool | `false` | whether to mount the secrets containing atlantis' azure active directory credentials |
 | cert.dnsName | string | `"atlantis.dsp-devops.broadinstitute.org"` |  |
 | cert.duration | string | `"2160h0m0s"` |  |
 | cert.issuerGroup | string | `"cert-manager.io"` |  |
@@ -41,7 +40,7 @@ Chart for DSP Atlantis deployment
 | cleanup.timeoutSeconds | int | `3600` | How many seconds to wait before assuming job is hung and killing it |
 | name | string | `"atlantis"` |  |
 | serviceAccount | string | `"atlantis"` |  |
-| vault.azure.pathPrefix | string | `"/path/to/azure/secrets"` |  |
+| vault.azure.pathPrefix | string | `"/path/to/azure/secrets"` | path to location containing credentials for atlantis to authenticate with azure |
 | vault.cleanup.key | string | `nil` | Key in Vault where base64-encoded GCP service account key for pod cleanup is stored |
 | vault.cleanup.path | string | `nil` | Path in Vault where base64-encoded GCP service account key for pod cleanup is stored |
 | vault.github.keyName | string | `nil` |  |

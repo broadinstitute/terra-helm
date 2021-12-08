@@ -15,10 +15,11 @@ atlantis:
     name: atlantis
 
 azure:
+  # azure.enabled -- whether to mount the secrets containing atlantis' azure active directory credentials
   enabled: false
-  certificateFile: "azure-cert.pfx"
 vault:
   azure:
+    # vault.azure.pathPrefix -- path to location containing credentials for atlantis to authenticate with azure
     pathPrefix: /path/to/azure/secrets
   github:
     pathPrefix: #/path/to/github/secrets
