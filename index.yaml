@@ -50894,6 +50894,22 @@ entries:
     version: 0.0.0
   postgres:
   - apiVersion: v2
+    created: "2021-12-08T21:54:44.686669438Z"
+    description: Application chart for a Sam-specific PostgreSQL database container
+    digest: ad33f10ed39824d9edde4e6a491ad602b3cdaf8096b1bbfac412fb3c69c7947f
+    keywords:
+    - dsp
+    - broadinstitute
+    - database
+    - postgres
+    name: postgres
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/postgres-0.19.6-527.1639000471.eb9ead/postgres-0.19.6-527.1639000471.eb9ead.tgz
+    version: 0.19.6-527.1639000471.eb9ead
+  - apiVersion: v2
     created: "2021-12-02T19:12:22.93864532Z"
     description: Application chart for a Sam-specific PostgreSQL database container
     digest: 042927fe21a223cbb0f07527b9e38c92a81ab9ae4546be5f16daea5200dccc26
@@ -56264,6 +56280,35 @@ entries:
     - https://github.com/broadinstitute/terra-helm/releases/download/revere-0.1.0-454.1629488202.be714a/revere-0.1.0-454.1629488202.be714a.tgz
     version: 0.1.0-454.1629488202.be714a
   sam:
+  - apiVersion: v2
+    created: "2021-12-08T21:54:44.791563967Z"
+    dependencies:
+    - name: liquibase-migration
+      repository: https://terra-helm.storage.googleapis.com
+      version: 1.1.0
+    - condition: sherlock.enabled
+      name: sherlock-reporter
+      repository: https://terra-helm.storage.googleapis.com
+      version: 0.3.0
+    - condition: postgres.enabled
+      name: postgres
+      repository: file://../postgres
+      version: 0.19.6
+    description: Chart for Sam, the Terra Identity and Access Management application
+    digest: 5b5c3a7c9b12196b09e041c3b29da6a074e50807545c6bd83f47c82ca380b9c2
+    keywords:
+    - dsp
+    - broadinstitute
+    - terra
+    - sam
+    name: sam
+    sources:
+    - https://github.com/broadinstitute/terra-helm/tree/master/charts
+    - https://github.com/broadinstitute/sam
+    type: application
+    urls:
+    - https://github.com/broadinstitute/terra-helm/releases/download/sam-0.19.6-527.1639000471.eb9ead/sam-0.19.6-527.1639000471.eb9ead.tgz
+    version: 0.19.6-527.1639000471.eb9ead
   - apiVersion: v2
     created: "2021-12-02T19:12:23.032536189Z"
     dependencies:
