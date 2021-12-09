@@ -1,0 +1,23 @@
+apiVersion: yale.broadinstitute.org/v1
+kind: GcpSaKey
+metadata:
+  name: {{ .Chart.Name }}-gcp-app-sa
+spec:
+  gcpSaName: {{ .Values.yale.app.gcpSaName }}
+  secretName: {{ .Chart.Name }}-gcpsakey
+  secretDataKey: service-account.json
+  olderThanDays: {{ .Values.yale.olderThanDays }}
+  googleProject: {{ .Values.yale.googleProject }}
+  namespace: {{ .Values.yale.namespace }}
+---
+apiVersion: yale.broadinstitute.org/v1
+kind: GcpSaKey
+metadata:
+  name: {{ .Chart.Name }}-gcp-cloudsql-sa-creds
+spec:
+  gcpSaName: {{ .Values.yale.cloudsql.gcpSaName }}
+  secretName: {{ .Chart.Name }}-cloudsql-gcpsakey
+  secretDataKey: service-account.json
+  olderThanDays: {{ .Values.yale.olderThanDays }}
+  googleProject: {{ .Values.yale.googleProject }}
+  namespace: {{ .Values.yale.namespace }}

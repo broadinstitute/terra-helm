@@ -259,3 +259,17 @@ sherlock:
 
   vault:
     pathPrefix: secret/suitable/sherlock/prod
+
+yale:
+  app:
+    # yale.app.gcpSaName -- GCP SA name that's associated with app
+    gcpSaName: null
+  cloudsql:
+    # yale.cloudsql.gcpSaName -- GCP SA name that's associated with cloudsql
+    gcpSaName: null
+  # yale.namespace -- Namespace where secret is located
+  namespace: null
+  # yale.googleProject -- Google project gcp SA is associated with
+  googleProject: null
+  # yale.olderThanDays -- Length of time gcp sa key is valid
+  olderThanDays: 90
