@@ -186,17 +186,6 @@ buffer:
 # cleanupAfterHandout -- Whether to publish message to Janitor after resource is handed out.
 cleanupAfterHandout: false
 
-prometheus:
-  scrape:
-    # -- Whether to create a ServiceMonitor to enable prometheus scraping of metrics
-    enabled: false
-    # -- The URL route to scrape
-    path: /metrics
-    # -- The port that Buffer is running the Prometheus endpoint on
-    port: 8081
-    # -- Interval between scrape queries
-    interval: 2m
-
 liquibase-migration:
   # In an env-specific file use something like the following to fully enable:
   # ```
@@ -270,3 +259,8 @@ sherlock:
 
   vault:
     pathPrefix: secret/suitable/sherlock/prod
+
+prometheus:
+  enabled: false
+  service:
+    targetContainerPortNumber: 9098

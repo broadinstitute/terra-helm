@@ -102,7 +102,7 @@ spec:
           containerPort: 8080
           protocol: TCP
         - name: metrics
-          containerPort: {{ .Values.prometheus.scrape.port }}
+          containerPort: {{ .Values.prometheus.service.targetContainerPortNumber }}
           protocol: TCP
         resources:
           {{- toYaml .Values.resources | nindent 10 }}

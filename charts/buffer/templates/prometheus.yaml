@@ -1,0 +1,5 @@
+{{- if .Values.prometheus.enabled }}
+{{- include "scrape-prometheus-metrics.service" . }}
+---
+{{- include "scrape-prometheus-metrics.servicemonitor" . }}
+{{- end }}
