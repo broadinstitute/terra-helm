@@ -25,3 +25,7 @@ dependencies:
     condition: sherlock.enabled
     version: 0.3.0
     repository: https://terra-helm.storage.googleapis.com
+  - name: scrape-prometheus-metrics
+    condition: prometheus.enabled
+    version: 1.0.0
+    repository: https://terra-helm.storage.googleapis.com

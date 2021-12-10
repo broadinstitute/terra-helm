@@ -259,3 +259,8 @@ sherlock:
 
   vault:
     pathPrefix: secret/suitable/sherlock/prod
+
+prometheus:
+  enabled: false
+  service:
+    targetContainerPortNumber: 9098

@@ -1,6 +1,6 @@
 # buffer
 
-![Version: 0.41.0](https://img.shields.io/badge/Version-0.41.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.42.0](https://img.shields.io/badge/Version-0.42.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Chart for Resource Buffering Service
 
@@ -16,6 +16,7 @@ Chart for Resource Buffering Service
 | https://terra-helm.storage.googleapis.com | ingresslib | 0.12.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 | https://terra-helm.storage.googleapis.com | pdb-lib | 0.2.0 |
+| https://terra-helm.storage.googleapis.com | scrape-prometheus-metrics | 1.0.0 |
 | https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
@@ -104,6 +105,8 @@ Chart for Resource Buffering Service
 | probes.startup.spec.periodSeconds | int | `10` |  |
 | probes.startup.spec.successThreshold | int | `1` |  |
 | probes.startup.spec.timeoutSeconds | int | `5` |  |
+| prometheus.enabled | bool | `false` |  |
+| prometheus.service.targetContainerPortNumber | int | `9098` |  |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"tcell_3_1_0"` | Proxy image tag |

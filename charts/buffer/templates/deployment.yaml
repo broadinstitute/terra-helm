@@ -101,6 +101,9 @@ spec:
         - name: status
           containerPort: 8080
           protocol: TCP
+        - name: metrics
+          containerPort: {{ .Values.prometheus.service.targetContainerPortNumber }}
+          protocol: TCP
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
         env:
