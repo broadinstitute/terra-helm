@@ -16,6 +16,7 @@ Chart for Resource Buffering Service
 | https://terra-helm.storage.googleapis.com | ingresslib | 0.12.0 |
 | https://terra-helm.storage.googleapis.com | liquibase-migration | 1.1.0 |
 | https://terra-helm.storage.googleapis.com | pdb-lib | 0.2.0 |
+| https://terra-helm.storage.googleapis.com | scrape-prometheus-metrics | 1.0.0 |
 | https://terra-helm.storage.googleapis.com | sherlock-reporter | 0.3.0 |
 
 ## Values
@@ -104,10 +105,8 @@ Chart for Resource Buffering Service
 | probes.startup.spec.periodSeconds | int | `10` |  |
 | probes.startup.spec.successThreshold | int | `1` |  |
 | probes.startup.spec.timeoutSeconds | int | `5` |  |
-| prometheus.scrape.enabled | bool | `false` | Whether to create a ServiceMonitor to enable prometheus scraping of metrics |
-| prometheus.scrape.interval | string | `"2m"` | Interval between scrape queries |
-| prometheus.scrape.path | string | `"/metrics"` | The URL route to scrape |
-| prometheus.scrape.port | int | `8081` | The port that Buffer is running the Prometheus endpoint on |
+| prometheus.enabled | bool | `false` |  |
+| prometheus.service.targetContainerPortNumber | int | `9098` |  |
 | proxy.enabled | bool | `true` |  |
 | proxy.image.repository | string | `"broadinstitute/openidc-proxy"` | Proxy image repository |
 | proxy.image.version | string | `"tcell_3_1_0"` | Proxy image tag |
