@@ -33,7 +33,9 @@ spec:
       - ip: 127.0.0.1
         hostnames:
         - app
+        {{- if not .Values.previewEnv }}
         - sam-sqlproxy
+        {{- end }}
       volumes:
       - name: configs
         configMap:
@@ -44,9 +46,11 @@ spec:
       - name: proxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-proxy-ctmpls
+      {{- if not .Values.previewEnv }}
       - name: sqlproxy-ctmpls
         secret:
           secretName: {{ $legacyResourcePrefix }}-sqlproxy-ctmpls
+      {{- end }}
       - name: {{ .Values.name }}-gc-logs
         emptyDir: {}
       - name: {{ .Values.name }}-proxy-security-logs
@@ -55,7 +59,13 @@ spec:
       - name: {{ .Values.name }}-prometheusjmx-jar
         emptyDir: {}
       {{- end }}
+      {{- if .Values.previewEnv }}
+      - name: {{ .Values.certManager.tlsCertSecret }}-mount
+        secret:
+          secretName: {{ .Values.certManager.tlsCertSecret }}
+      {{- end }}
       containers:
+      {{- if not .Values.previewEnv }}
       - name: {{ .Values.name }}-sqlproxy
         image: broadinstitute/cloudsqlproxy:1.11_20180808
         lifecycle:
@@ -70,6 +80,7 @@ spec:
           subPath: sqlproxy-service-account.json
           name: sqlproxy-ctmpls
           readOnly: true
+      {{- end }}
       - name: {{ .Values.name }}-app
         image: "{{ .Values.imageConfig.repository }}:{{ $imageTag }}"
         ports:
@@ -145,8 +156,10 @@ spec:
         image: {{ .Values.proxyImage }}
         ports:
           - containerPort: 443
+          {{- if not .Values.previewEnv }}
           - containerPort: 80
           - containerPort: 8888
+          {{- end }}
         envFrom:
         - secretRef:
             name: {{ $legacyResourcePrefix }}-proxy-env
@@ -155,6 +168,16 @@ spec:
         - name: LOG_LEVEL
           value: {{ .Values.proxy.logLevel }}
         volumeMounts:
+        {{- if .Values.previewEnv }}
+        - name: {{ .Values.certManager.tlsCertSecret }}-mount
+          mountPath: /etc/ssl/certs/server.crt
+          subPath: tls.crt
+          readOnly: true
+        - name: {{ .Values.certManager.tlsCertSecret }}-mount
+          mountPath: /etc/ssl/private/server.key
+          subPath: tls.key
+          readOnly: true
+        {{- else }}
         - mountPath: /etc/ssl/certs/server.crt
           subPath: server.crt
           name: proxy-ctmpls
@@ -167,6 +190,7 @@ spec:
           subPath: ca-bundle.crt
           name: proxy-ctmpls
           readOnly: true
+        {{- end }}
         - mountPath: /etc/apache2/sites-available/site.conf
           subPath: site.conf
           name: proxy-ctmpls
