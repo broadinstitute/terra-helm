@@ -1,3 +1,0 @@
-{{- include "libchart.service" (list . "buffer.service" )  -}}
-{{- define "buffer.service" -}}
-{{- end }}
