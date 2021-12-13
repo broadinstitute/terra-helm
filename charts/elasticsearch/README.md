@@ -1,6 +1,6 @@
 # elasticsearch
 
-![Version: 0.11.0](https://img.shields.io/badge/Version-0.11.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.12.0](https://img.shields.io/badge/Version-0.12.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a helm chart to deploy monitoring infrastructure
 
@@ -34,7 +34,7 @@ a helm chart to deploy monitoring infrastructure
 | backup.tolerations | list | `[]` | Tolerations for backup Cronjob pods |
 | elasticsearch.clusterName | string | `"elasticsearch5a"` |  |
 | elasticsearch.esConfig."elasticsearch.yml" | string | `"http:\n  cors:\n    enabled: true\n    allow-origin: '*'\nxpack:\n  graph:\n    enabled: false\n  ml:\n    enabled: false\n  monitoring:\n    enabled: false\n  security:\n    enabled: false\n  watcher:\n    enabled: false\n"` |  |
-| elasticsearch.esJavaOpts | string | `"-Xms3500m -Xmx3500m"` |  |
+| elasticsearch.esJavaOpts | string | `"-Xms3500m -Xmx3500m -Dlog4j2.formatMsgNoLookups=true"` |  |
 | elasticsearch.extraVolumeMounts[0].mountPath | string | `"/usr/share/elasticsearch/config/snapshot_credentials.json"` |  |
 | elasticsearch.extraVolumeMounts[0].name | string | `"snapshot-sa"` |  |
 | elasticsearch.extraVolumeMounts[0].readOnly | bool | `true` |  |
