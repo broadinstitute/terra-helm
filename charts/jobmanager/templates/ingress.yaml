@@ -1,4 +1,0 @@
-{{- include "libchart.ingress" (list . "jobmanager.ingress" )}}
-
-{{- define "jobmanager.ingress" -}}
-{{- end }}

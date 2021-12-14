@@ -1,8 +1,0 @@
-{{- include "libchart.pdb" (list . "ontology.pdb" ) }}
-
-{{ define "ontology.pdb" -}}
-spec:
-  selector:
-    matchLabels:
-      app: {{ .Chart.Name }}
-{{- end }}
