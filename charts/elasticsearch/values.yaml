@@ -36,8 +36,8 @@ elasticsearch:
 
   clusterName: elasticsearch5a
 
-  image: "docker.io/broadinstitute/elasticsearch"
-  imageTag: 5.4.0_6
+  image: "gcr.io/broad-dsp-gcr-public/elasticsearch"
+  imageTag: 5.4.0_7
 
   nodeSelector:
     bio.terra/node-pool: elasticsearch
