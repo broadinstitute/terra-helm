@@ -1,6 +1,0 @@
-{{- include "libchart.backendconfig" (list . "leonardo.backendconfig" )}}
-
-{{- define "leonardo.backendconfig" -}}
-spec:
-  timeoutSec: {{ .Values.ingress.timeoutSec }}
-{{- end }}
