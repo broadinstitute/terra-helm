@@ -1,9 +1,0 @@
-{{- include "libchart.pdb" (list . "externalcreds.pdb" )  -}}
-
-
-{{- define "externalcreds.pdb" -}}
-spec:
-  selector:
-    matchLabels:
-      deployment: externalcreds-frontend-deployment
-{{- end -}}

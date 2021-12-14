@@ -1,7 +1,0 @@
-{{- include "libchart.service" (list . "firecloudui.service" )}}
-
-{{- define "firecloudui.service" -}}
-spec:
-  selector:
-    deployment: {{ .Values.name }}-deployment
-{{- end }}
