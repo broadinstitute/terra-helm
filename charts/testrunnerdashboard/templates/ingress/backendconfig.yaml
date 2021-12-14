@@ -1,7 +1,0 @@
-{{- include "libchart.backendconfig" (list . "testrunnerdashboard.backendconfig" )}}
-
-{{- define "testrunnerdashboard.backendconfig" -}}
-spec:
-  healthCheck:
-    checkIntervalSec: 10
-{{- end }}

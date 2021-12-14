@@ -1,4 +1,0 @@
-{{- include "libchart.frontendconfig" (list . "testrunnerdashboard.frontendconfig" )}}
-
-{{- define "testrunnerdashboard.frontendconfig" -}}
-{{- end }}

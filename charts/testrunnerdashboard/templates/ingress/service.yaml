@@ -1,7 +1,0 @@
-{{- include "libchart.service" (list . "testrunnerdashboard.service" )}}
-
-{{- define "testrunnerdashboard.service" -}}
-spec:
-  selector:
-    deployment: {{ .Values.ingress.deployment }}-deployment
-{{- end }}
