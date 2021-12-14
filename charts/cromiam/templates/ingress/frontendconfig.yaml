@@ -1,4 +1,0 @@
-{{- include "libchart.frontendconfig" (list . "cromiam.frontendconfig" )}}
-
-{{- define "cromiam.frontendconfig" -}}
-{{- end }}
