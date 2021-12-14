@@ -1,3 +1,10 @@
+# DEPRECATION NOTICE
+
+**This repository has been deprecated**. All charts in it have been migrated to [terra-helmfile](https://github.com/broadinstitute/terra-helmfile/tree/master/charts).
+
+Please post in [#dsp-devops-champions](https://broadinstitute.slack.com/archives/CADM7MZ35) if you have any questions!
+
+-----------
 # terra-helm
 A helm repo for Terra from Broad Data Science Platforms Group
 
