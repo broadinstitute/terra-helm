@@ -1,7 +1,0 @@
-{{- include "libchart.service" (list . "jobmanager.service" )}}
-
-{{- define "jobmanager.service" -}}
-spec:
-  selector:
-    deployment: {{ .Values.name }}-deployment
-{{- end }}

@@ -1,8 +1,0 @@
-{{- include "libchart.pdb" (list . "workspacemanager.pdb" ) }}
-
-{{ define "workspacemanager.pdb" -}}
-spec:
-  selector:
-    matchLabels:
-      deployment: {{ .Values.name }}-deployment
-{{- end }}

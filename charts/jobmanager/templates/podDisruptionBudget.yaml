@@ -1,8 +1,0 @@
-{{- include "libchart.pdb" (list . "jobmanager.pdb" ) }}
-
-{{- define "jobmanager.pdb" -}}
-spec:
-  selector:
-    matchLabels:
-      deployment: {{ .Values.name }}-deployment
-{{- end }}

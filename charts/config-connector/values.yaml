@@ -1,4 +1,0 @@
-# -- The name of the GSA in `googleProjectID` that's been set up for Config Connector
-googleServiceAccountName: config-connector
-# -- (string) The ID of the project to containing the `googleServiceAccountName`, e.g. broad-dsp-eng-tools
-googleProjectID:

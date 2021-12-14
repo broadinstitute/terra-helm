@@ -1,7 +1,0 @@
-{{- include "libchart.backendconfig" (list . "buffer.backendconfig" )  -}}
-
-{{- define "buffer.backendconfig" -}}
-spec:
-  healthCheck:
-    checkIntervalSec: 10
-{{- end }}

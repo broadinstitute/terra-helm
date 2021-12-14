@@ -1,4 +1,0 @@
-{{- include "libchart.backendconfig" (list . "firecloudui.backendconfig" )}}
-
-{{- define "firecloudui.backendconfig" -}}
-{{- end }}

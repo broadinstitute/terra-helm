@@ -1,7 +1,0 @@
----
-{{- include "libchart.service" (list . "externalcreds.service" )  -}}
-{{- define "externalcreds.service" -}}
-spec:
-  selector:
-    deployment: {{ .Values.name }}-frontend-deployment
-{{- end }}

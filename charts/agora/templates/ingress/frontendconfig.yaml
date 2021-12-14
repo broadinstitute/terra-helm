@@ -1,4 +1,0 @@
-{{- include "libchart.frontendconfig" (list . "agora.frontendconfig" )}}
-
-{{- define "agora.frontendconfig" -}}
-{{- end }}

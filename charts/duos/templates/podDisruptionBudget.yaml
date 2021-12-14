@@ -1,8 +1,0 @@
-{{- include "libchart.pdb" (list . "duos.pdb" ) }}
-
-{{- define "duos.pdb" -}}
-spec:
-  selector:
-    matchLabels:
-      app: {{ .Chart.Name }}
-{{- end }}

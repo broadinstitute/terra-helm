@@ -1,7 +1,0 @@
-{{- include "libchart.service" (list . "leonardo.service" )}}
-
-{{- define "leonardo.service" -}}
-spec:
-  selector:
-    deployment: {{ .Values.ingress.deployment }}-deployment
-{{- end }}

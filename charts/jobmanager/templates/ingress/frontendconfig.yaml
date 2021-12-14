@@ -1,4 +1,0 @@
-{{- include "libchart.frontendconfig" (list . "jobmanager.frontendconfig" )}}
-
-{{- define "jobmanager.frontendconfig" -}}
-{{- end }}

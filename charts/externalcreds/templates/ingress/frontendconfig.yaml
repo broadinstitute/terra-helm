@@ -1,3 +1,0 @@
-{{- include "libchart.frontendconfig" (list . "externalcreds.frontendconfig" )  -}}
-{{- define "externalcreds.frontendconfig" -}}
-{{- end }}

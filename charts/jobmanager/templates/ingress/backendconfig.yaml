@@ -1,4 +1,0 @@
-{{- include "libchart.backendconfig" (list . "jobmanager.backendconfig" )}}
-
-{{- define "jobmanager.backendconfig" -}}
-{{- end }}

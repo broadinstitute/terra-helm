@@ -1,8 +1,0 @@
-{{- include "libchart.pdb" (list . "agora.pdb" ) }}
-
-{{- define "agora.pdb" -}}
-spec:
-  selector:
-    matchLabels:
-      deployment: {{ .Chart.Name }}-deployment
-{{- end }}

@@ -1,7 +1,0 @@
-{{- include "libchart.service" (list . "cromiam.service" )}}
-
-{{- define "cromiam.service" -}}
-spec:
-  selector:
-    deployment: {{ .Chart.Name }}-deployment
-{{- end }}

@@ -1,7 +1,0 @@
-{{- include "libchart.service" (list . "agora.service" )  -}}
-
-{{- define "agora.service" -}}
-spec:
-  selector:
-    deployment: {{ .Chart.Name }}-deployment
-{{- end }}
