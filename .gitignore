@@ -2,3 +2,4 @@
 *.tgz
 *.idea
 *.un~
+*/Chart.lock
