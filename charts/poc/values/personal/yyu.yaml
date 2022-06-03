@@ -1,0 +1,4 @@
+vault:
+  pathPrefix: secret/dsde/terra/kernel/integration/yyu
+
+serviceIP: 35.193.155.3
